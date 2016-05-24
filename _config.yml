@@ -9,13 +9,12 @@
 title: 懒得起名的blog
 email: geekw@foxmail.com
 description: > # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
-baseurl: "" # the subpath of your site, e.g. /blog
+  这里是懒得起名的个人博客，闷骚，装备党，宅属性值已经点满。
+  喜欢动漫，看剧，热爱大自然，有点点强迫症，喜欢简单而美的人事物。
+baseurl: "/www" # the subpath of your site, e.g. /blog
 url: "http://weichao.info" # the base hostname & protocol for your site
-twitter_username: jekyllrb
-github_username:  jekyll
+github_username:  toolazytoname
+email: geekw@foxmail.com
 
 # Build settings
 markdown: kramdown
