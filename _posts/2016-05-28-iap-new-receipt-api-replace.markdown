@@ -1,9 +1,10 @@
 ---
 layout: post
-title:  "IAP new Receipt API Replace"
+title:  "IAP回执单新API"
 date:   2016-05-28 14:18:32 +0800
 categories: iOS
 ---
+
 
 
 项目一直用的是老的API，年前曾经替换成新的API，用如下的写法，但是会有偶发的问题，所以目前生产环境上用的还是老的API。苹果已经不建议使用了。为了尽早替换成新的API，彩琴做了一番研究，找了一下为啥用新的API，会偶发购买失败的原因。代码如下：可以看到做了版本控制。    
