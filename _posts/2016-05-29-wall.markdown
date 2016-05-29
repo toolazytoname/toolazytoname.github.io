@@ -1,0 +1,48 @@
+---
+layout: post
+title:  "科学上网"
+date:   2016-05-29 16:15:32 +0800
+categories: 黑技能
+---
+
+**目录**
+
+* [整体方案](#solution)
+* [购买一台海外的VPS](#buyVPS)
+* [配置VPS](#configVPS)
+* [配置Mac客户端](#configMac)
+* [配置iPhone客户端](#configiPhone)
+* [知其所以然](#underTheHood)
+
+
+买了个时空隧道用来科学上网，貌似最近跑路了，联系客服也没有反馈。想办法呗。无意间看到这个[优雅且靠谱](http://mp.weixin.qq.com/s?__biz=MzA3NTEzMTUwNA==&mid=210457598&idx=1&sn=5b700b7e2f07ddf77a5bf09b4ea98bec&scene=18#wechat_redirect)
+搞定了，从此接受付费咨询。
+
+
+<a name="solution"></a>整体方案
+===
+shadowsocks + 一台海外 VPS + Chrome(SwitchyOmega)/Firefox(AutoProxy)
+
+<a name="buyVPS"></a>购买一台海外的VPS
+===
+同样，不点名。没赶上20元人民币一年的好时候，做了一番对比，权衡，最终选了个10刀一年的套餐。图便宜，练个手先。
+
+<a name="configVPS"></a>配置VPS
+===
+我直接使用[这段优雅的脚本](http://www.vpsdaquan.cn/新手教程六：十分钟搭建shadowsocks科学上网服务器.html)  
+Enjoy it!
+
+<a name="configMac"></a>配置Mac客户端
+===
+
+brew search 一下关键字，install
+优雅
+
+<a name="configiPhone"></a>配置iPhone客户端
+===
+美国商店里面有客户端。  
+下载扫描桌面设置好以后，发现不管用，算了，后续自己搭一个VPN吧，看上去挺简单的。
+<a name="underTheHood"></a>知其所以然
+----
+改天可以结合源码看一下，我也没细看，先放着。
+[SSH forward](http://www.ibm.com/developerworks/cn/linux/l-cn-sshforward/index.html)
