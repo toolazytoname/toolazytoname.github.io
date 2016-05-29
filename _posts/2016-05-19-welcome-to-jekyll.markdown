@@ -10,7 +10,7 @@ categories: 黑技能
 * 配置参考[pages.github](https://pages.github.com)。搞定了可以直接访问 http://username.github.io.
     * GitHub 的配置。
     * Jekyll的配置
-* 购买域名，我在[godaddy](https://www.godaddy.com)买的
+* 购买域名，我在[godaddy](https://www.godaddy.com)买了一年，花了8元。
 * 域名服务设置，发现godaddy 也可以提供相应的服务，就直接在godaddy上面设置了
 
 
