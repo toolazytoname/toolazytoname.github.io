@@ -1,25 +1,24 @@
 ---
 layout: post
-title:  "Welcome to Jekyll!"
+title:  "Jekyll +  GitHub Pages建站流程"
 date:   2016-05-19 17:27:32 +0800
-categories: jekyll update
+categories: 黑技能
 ---
-You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 
-To add new posts, simply add a file in the `_posts` directory that follows the convention `YYYY-MM-DD-name-of-post.ext` and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.
+网上有些教程写得很细，比如[how-to-build-a-blog](http://cnfeat.com/blog/2014/05/10/how-to-build-a-blog/) 和[build-github-blog-page-08](http://www.pchou.info/ssgithubPage/2014-07-04-build-github-blog-page-08.html)
 
-Jekyll also offers powerful support for code snippets:
+* 配置参考[pages.github](https://pages.github.com)。搞定了可以直接访问 http://username.github.io.
+    * GitHub 的配置。
+    * Jekyll的配置
+* 购买域名，我在[godaddy](https://www.godaddy.com)买的
+* 域名服务设置，发现godaddy 也可以提供相应的服务，就直接在godaddy上面设置了
 
-{% highlight ruby %}
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
-{% endhighlight %}
 
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
 
-[jekyll-docs]: http://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
+
+TODO
+
+* 主题比较简单，不太好看。但是我看Jekyll 文档里面主题相关的设置还没有release，手工配置起来不太优雅。另外还没定一个的原因是，太多了，挑花眼了。
+* 404
+* Roberts协议
+
