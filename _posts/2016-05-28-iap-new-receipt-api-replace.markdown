@@ -15,6 +15,8 @@ categories: iOS
 	* [请求](#newRequest)
 	* [返回](#newResponse)
 * [sandboxReceipt文件解析](#sandboxReceiptParse)
+* [疑惑](#question)
+
 
 
 项目一直用的是老的API，年前曾经替换成新的API，用如下的写法，但是会有偶发的问题，所以目前生产环境上用的还是老的API。苹果已经不建议使用了。为了尽早替换成新的API，彩琴做了一番研究，找了一下为啥用新的API，会偶发购买失败的原因。代码如下：可以看到做了版本控制。    
@@ -45,6 +47,8 @@ categories: iOS
      "signing-status" = "0";
 }
 ~~~
+
+
 <a name="oldResponse"></a>返回
 ----
 
@@ -138,3 +142,7 @@ The in-app purchase receipt for a non-consumable product, auto-renewable subscri
 其实我在做的事情，就是本地验证，之前一直没有看这块内容。
 
 我把代码上传了：[toolazytoname/ReceiptValidation](https://github.com/toolazytoname/ReceiptValidation)
+
+<a name="question"></a>疑惑
+===
+consumable product or non-renewing subscription 一旦finish 了就会被删除， non-consumable product, auto-renewable subscription, or free subscription 会留着，但是我看product_id 有好多都是54，也没看，有没有别的，历史上的54应该是,被删了才是，怎么会有这么多。新建的帐号，也是有这么多54吗？
