@@ -146,3 +146,37 @@ The in-app purchase receipt for a non-consumable product, auto-renewable subscri
 <a name="question"></a>疑惑
 ===
 consumable product or non-renewing subscription 一旦finish 了就会被删除， non-consumable product, auto-renewable subscription, or free subscription 会留着，但是我看product_id 有好多都是54，也没看，有没有别的，历史上的54应该是,被删了才是，怎么会有这么多。新建的帐号，也是有这么多54吗？
+有人和我遇到了[一样的问题](https://forums.developer.apple.com/thread/45419?q=appStoreReceiptURL)
+
+素材：  
+官方文档  
+[ReceiptFields.html](https://developer.apple.com/library/ios/releasenotes/General/ValidateAppStoreReceipt/Chapters/ReceiptFields.html#//apple_ref/doc/uid/TP40010573-CH106-SW1) 中
+
+~~~
+In the JSON file, the value of this key is an array containing all in-app purchase receipts. In the ASN.1 file, there are multiple fields that all have type 17, each of which contains a single in-app purchase receipt.
+
+The in-app purchase receipt for a consumable product or non-renewing subscription is added to the receipt when the purchase is made. It is kept in the receipt until your app finishes that transaction. After that point, it is removed from the receipt the next time the receipt is updated—for example, when the user makes another purchase or if your app explicitly refreshes the receipt.
+
+The in-app purchase receipt for a non-consumable product, auto-renewable subscription, or free subscription remains in the receipt indefinitely.
+
+~~~
+
+
+[FAQ](https://developer.apple.com/library/ios/technotes/tn2413/_index.html#//apple_ref/doc/uid/DTS40016228-CH1-RECEIPT-MY_APP_VALIDATES_ITS_RECEIPT_WITH_THE_APP_STORE_VIA_PAYMENTQUEUE_UPDATEDTRANSACTIONS__AFTER_A_SUCCESSFUL_PURCHASE__HOWEVER__THE_RETURNED_RECEIPT_CONTAINS_AN_EMPTY_IN_APP_ARRAY_RATHER_THAN_THE_EXPECTED_PRODUCTS_)中
+
+~~~
+Important: Information about auto-renewable subscriptions, non-consumable products, and non-renewing subscriptions is added to the receipt when they are paid for and remains in the receipt indefinitely.
+~~~
+
+
+
+type                       |官方文档        | FAQ    |能否被Restore|
+---------------------------|---------------|--------|------------|
+consumable product         | <del>删除<del> |        |不能        |
+non-renewing subscription  | <del>删除<del> |永远留着的|不能        |
+non-consumable product     | 永远留着的      |永远留着的|能         |
+auto-renewable subscription| 永远留着的      |永远留着的|能         |
+free subscription          | 永远留着的      |        |能         |
+ 
+ 
+ 一定程度上回答了我的这个疑惑，不用管它，文档写错了呗。照理说，第一列和第三列应该是逻辑一致的，但是第二列的确是苹果打自己脸了。
