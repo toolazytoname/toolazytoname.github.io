@@ -45,5 +45,13 @@ brew search 一下关键字，install
 
 <a name="underTheHood"></a>知其所以然
 ===
-改天可以结合源码看一下，我也没细看，先放着。
+
 [SSH forward](http://www.ibm.com/developerworks/cn/linux/l-cn-sshforward/index.html)
+
+写得还是挺浅显易懂的一篇文章，SS应用的应该就是动态端口转发。最后的X协议转发这段，有点看不太明白。
+源码还未看，正好打算好好学学Python，可以结合这个项目看一下.
+
+
+[shadowsocks](https://github.com/shadowsocks/shadowsocks/tree/master)
+
+
