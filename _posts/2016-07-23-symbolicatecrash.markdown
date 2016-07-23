@@ -16,6 +16,7 @@ categories: iOS Debug 技巧
 	* [App的UUID](#AppUUID)
 	* [dSYM文件中的UUID](#dSYMUUID)
 	* [Crash文件中的UUID](#crashUUID)
+	* [dSYM是什么鬼](#dSYM)
 * [Reference](#reference)
 
 
@@ -98,6 +99,63 @@ Crash文件中的UUID<a name="crashUUID"></a>
 
 注意这三个50AD720C-A916-3F53-B233-2099A2D7D306是可以对应起来的
 
+dSYM是什么鬼<a name="dSYM"></a>
+----
+[定性认知](http://stackoverflow.com/questions/22460058/how-is-a-dsym-file-created)
+摘抄如下，说得很好：
+
+A dSYM file is a "debug symbols file". It is generated when the "Strip Debug Symbols" setting is enabled in the build settings of your project.
+
+When this setting is enabled, symbol names of your objects are removed from the resulting compiled binary (one of the many countermeasures to try and prevent would be hackers/crackers from reverse engineering your code, amongst other optimisations for binary size, etc.).
+
+dSYM files will likely change each time your app is compiled (probably every single time due to date stamping), and have nothing to do with the project settings.
+
+They are useful for re-symbolicating your crash reports. With a stripped binary, you won't be able to read any crash reports without first re-symbolicating them. Without the dSYM the crash report will just show memory addresses of objects and methods. Xcode uses the dSYM to put the symbols back into the crash report and allow you to read it properly.
+
+具体分析参照这篇文章[iOS dSYM文件结构剖析（上）
+](http://www.csdn.net/article/2015-08-04/2825369)
+
+也可以直接用 dwarfdump 解析整个dSYM文件看看,大概就是这个德行
+
+~~~
+----------------------------------------------------------------------
+ File: AppName.app.dSYM/Contents/Resources/DWARF/AppName (armv7)
+----------------------------------------------------------------------
+.debug_info contents:
+
+0x00000000: Compile Unit: length = 0x00004c46  version = 0x0002  abbr_offset = 0x00000000  addr_size = 0x04  (next CU at 0x00004c4a)
+
+0x0000000b: TAG_compile_unit [1] *
+             AT_producer( "Apple LLVM version 7.3.0 (clang-703.0.31)" )
+             AT_language( DW_LANG_ObjC )
+             AT_name( "/Users/userName/Documents/ios/iPadVideo/Class/PersonalCenter/SVZBar/SVZBarViewController.m" )
+             AT_stmt_list( 0x00000000 )
+             AT_comp_dir( "/Users/userName/Documents/ios/iPadVideo" )
+             AT_APPLE_major_runtime_vers( 0x02 )
+             AT_low_pc( 0x00008200 )
+             AT_high_pc( 0x0000cab0 )
+
+0x00000027:     TAG_pointer_type [2]
+                 AT_type( {0x0000002c} ( NSString ) )
+
+0x0000002c:     TAG_structure_type [3] *
+                 AT_name( "NSString" )
+                 AT_byte_size( 0x04 )
+                 AT_decl_file( "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSString.h" )
+                 AT_decl_line( 70 )
+                 AT_APPLE_runtime_class( 0x10 )
+
+0x00000035:         TAG_inheritance [4]
+                     AT_type( {0x0000004b} ( NSObject ) )
+                     AT_data_member_location( +0 )
+
+0x0000003d:         TAG_APPLE_Property [5]
+                     AT_APPLE_property_name( "length" )
+                     AT_type( {0x00000078} ( NSUInteger ) )
+                     AT_decl_file( "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSString.h" )
+                     AT_decl_line( 76 )
+                     AT_APPLE_property_attribute( 0x0101 ( DW_APPLE_PROPERTY_readonly )  )
+~~~
 
 
 Reference
