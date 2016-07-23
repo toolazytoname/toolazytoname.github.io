@@ -14,6 +14,7 @@ categories: iOS Debug 技巧
 * [Others](#others)
 	* [UUID的概念](#UUID)
 	* [App的UUID](#AppUUID)
+	* [dSYM文件中的UUID](#dSYMUUID)
 	* [Crash文件中的UUID](#crashUUID)
 * [Reference](#reference)
 
@@ -70,6 +71,23 @@ UUID: 7E78F43B-9659-304F-B77D-102EE2520FB6 (armv7) AppName.app/AppName
 UUID: 50AD720C-A916-3F53-B233-2099A2D7D306 (arm64) AppName.app/AppName
 ~~~
 
+dSYM文件中的UUID<a name="dSYMUUID">
+----
+
+~~~
+➜  inhouseCrash xcrun dwarfdump --uuid AppName.app.dSYM
+UUID: 7E78F43B-9659-304F-B77D-102EE2520FB6 (armv7) AppName.app.dSYM/Contents/Resources/DWARF/AppName
+UUID: 50AD720C-A916-3F53-B233-2099A2D7D306 (arm64) AppName.app.dSYM/Contents/Resources/DWARF/AppName
+~~~
+
+
+后来发现直接用dwarfdump就可以不用xcrun 也能得到想要的结果
+
+~~~
+➜  inhouseCrash dwarfdump --uuid AppName.app.dSYM
+~~~
+
+
 Crash文件中的UUID<a name="crashUUID"></a>
 ----
 
@@ -78,7 +96,9 @@ Crash文件中的UUID<a name="crashUUID"></a>
 {"app_name":"AppName","timestamp":"2016-07-22 16:32:22.22 +0800","app_version":"5.9","slice_uuid":"50ad720c-a916-3f53-b233-2099a2d7d306","adam_id":0,"build_version":"5.9.0.1","bundleID":"com.XXOOipad","share_with_app_devs":false,"is_first_party":false,"bug_type":"109","os_version":"iPhone OS 9.2 (13C75)","name":"AppName"}
 ~~~
 
-注意这两个50AD720C-A916-3F53-B233-2099A2D7D306是可以对应起来的
+注意这三个50AD720C-A916-3F53-B233-2099A2D7D306是可以对应起来的
+
+
 
 Reference
 ===
