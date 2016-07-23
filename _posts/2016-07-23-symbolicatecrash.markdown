@@ -28,6 +28,7 @@ categories: iOS Debug 技巧
 ~~~
 
 学会find命令，不变应万变。
+
 步骤二 设置DEVELOPER_DIR<a name="set"></a>
 ===
 ~~~
@@ -59,6 +60,7 @@ Others<a name="others"></a>
 UUID的概念<a name="UUID"></a>
 ----
 这里先介绍一个概念：UUID 。什么是UUID？每一个可执行程序都有一个build UUID来唯一标识。Crash日志包含发生crash的这个应用（app）的 build UUID以及crash发生的时候，应用加载的所有库文件的[build UUID]。
+
 App的UUID<a name="AppUUID"></a>
 ----
 
@@ -77,6 +79,7 @@ Crash文件中的UUID<a name="crashUUID"></a>
 ~~~
 
 注意这两个50AD720C-A916-3F53-B233-2099A2D7D306是可以对应起来的
+
 Reference
 ===
 - [分析iOS Crash文件：符号化iOS Crash文件的3种方法](http://www.cocoachina.com/industry/20140514/8418.html
