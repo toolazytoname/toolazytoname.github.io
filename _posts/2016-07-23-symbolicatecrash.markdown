@@ -163,5 +163,5 @@ Reference
 - [分析iOS Crash文件：符号化iOS Crash文件的3种方法](http://www.cocoachina.com/industry/20140514/8418.html
 )
 - [iOS Crash文件的解析（一）](http://www.cnblogs.com/smileEvday/p/Crash1.html)
-
+- [Understanding and Analyzing iOS Application Crash Reports](https://developer.apple.com/library/ios/technotes/tn2151/_index.html)
 
