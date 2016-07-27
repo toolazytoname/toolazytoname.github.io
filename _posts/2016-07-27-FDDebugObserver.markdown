@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "谁动了我的奶酪"
-date:   2016-05-19 17:27:32 +0800
+date:   2016-07-27 17:27:32 +0800
 categories: FDSDK
 ---
 
@@ -11,3 +11,5 @@ categories: FDSDK
 灵光一现，我写了个KVO去监听这个属性，谁动了它，我就把它的函数调用栈给打出来。复现即解决。😄
 
 事后，简单整理了一下，写了一个类，[FDDebugObserver](https://github.com/toolazytoname/FDDebugObserver)奉上。
+
+具体用法参考Demo 和 [README](https://github.com/toolazytoname/FDDebugObserver/blob/master/README.md)
