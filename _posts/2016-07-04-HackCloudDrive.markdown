@@ -10,9 +10,8 @@ categories: 无聊
 
 可以顺道看一下shell ，也是很有意思的，改进了一下输入的参数，使这个脚本更加强大，哈哈。
 
-
-#Where To Go From Here?
-
+Where To Go From Here?
+===
 
 
 - [Advanced Bash-Scripting Guide](http://tldp.org/LDP/abs/html/)
