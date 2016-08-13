@@ -12,7 +12,7 @@ categories: hack your life
 2. [ Start the FTP Server](#FTP)
 3. [ Enabling the SFTP Server](#SFTP)
 4. [ Disable FTP or SFTP Server](#distable)
-* [Reference](#reference)
+5. [Reference](#reference)
 
 
 1 为什么会想要搭建一个FTP服务器<a name="why"></a>
@@ -23,17 +23,18 @@ categories: hack your life
 
 2 Start the FTP Server<a name="FTP"></a>
 ===
+直接使用终端输入这行命令即可。
+
 ~~~
 sudo -s launchctl load -w /System/Library/LaunchDaemons/ftp.plist
 ~~~
 
-直接使用终端输入这行命令即可。还可以用
+还可以用试着登录一下。
 
 ~~~
 ftp localhost
 ~~~
 
-试一下
 
 3 Enabling the SFTP Server <a name="SFTP"></a>
 ===
