@@ -27,8 +27,10 @@ categories: 神兵
 content
 一开始用MindNode编写，然后用FreeMind导出成HTML。
 
-[HTML 文件]({{ site.url }}/assets/Git-Cheet-Sheet/freemind.html)
+点击[HTML 文件]({{ site.url }}/assets/Git-Cheet-Sheet/freemind.html)
+跳转到新页面查看。
 
-<iframe src="{{ site.url }}/assets/Git-Cheet-Sheet/freemind.html" width="400" height="300"></iframe>
+
+<iframe src="{{ site.url }}/assets/Git-Cheet-Sheet/freemind.html" ></iframe>
 
 
