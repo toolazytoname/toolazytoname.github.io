@@ -31,6 +31,6 @@ content
 跳转到新页面查看。
 
 
-<iframe src="{{ site.url }}/assets/Git-Cheet-Sheet/freemind.html" ></iframe>
+<iframe src="{{ site.url }}/assets/Git-Cheet-Sheet/freemind.html" width="100%" height="100%" ></iframe>
 
 
