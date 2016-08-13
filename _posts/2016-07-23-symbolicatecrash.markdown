@@ -22,19 +22,26 @@ categories: iOS Debug 技巧
 
 步骤一 find<a name="find"></a>
 ===
+
 因为不同的Xcode版本这个工具的位置经常会变，所以用下面这个命令来寻找
 
 ~~~
-➜  inhouseCrash find /Applications/Xcode.app -name symbolicatecrash -type f
+ find /Applications/Xcode.app -name symbolicatecrash -type f
+~~~
+
+我的结果是
+
+~~~
 /Applications/Xcode.app/Contents/SharedFrameworks/DVTFoundation.framework/Versions/A/Resources/symbolicatecrash
 ~~~
+
 
 学会find命令，不变应万变。
 
 步骤二 设置DEVELOPER_DIR<a name="set"></a>
 ===
 ~~~
-➜  inhouseCrash export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer
+export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer
 ~~~
 使用命令行工具symbolicatecrash
 
@@ -46,13 +53,13 @@ categories: iOS Debug 技巧
 注意这次用的是dSYM
 
 ~~~
-➜  inhouseCrash ./symbolicatecrash original.crash AppName.app.dSYM > dsym.crash
+ ./symbolicatecrash original.crash AppName.app.dSYM > dsym.crash
 ~~~
 
 发现用AppName.app当参数也能得到想要的结果
 
 ~~~
-➜  inhouseCrash ./symbolicatecrash original.crash AppName.app > app.crash
+ ./symbolicatecrash original.crash AppName.app > app.crash
 ~~~
 
 Others<a name="others"></a>
@@ -67,7 +74,7 @@ App的UUID<a name="AppUUID"></a>
 ----
 
 ~~~
-➜  inhouseCrash xcrun dwarfdump --uuid AppName.app/AppName
+xcrun dwarfdump --uuid AppName.app/AppName
 UUID: 7E78F43B-9659-304F-B77D-102EE2520FB6 (armv7) AppName.app/AppName
 UUID: 50AD720C-A916-3F53-B233-2099A2D7D306 (arm64) AppName.app/AppName
 ~~~
@@ -76,7 +83,7 @@ dSYM文件中的UUID<a name="dSYMUUID">
 ----
 
 ~~~
-➜  inhouseCrash xcrun dwarfdump --uuid AppName.app.dSYM
+xcrun dwarfdump --uuid AppName.app.dSYM
 UUID: 7E78F43B-9659-304F-B77D-102EE2520FB6 (armv7) AppName.app.dSYM/Contents/Resources/DWARF/AppName
 UUID: 50AD720C-A916-3F53-B233-2099A2D7D306 (arm64) AppName.app.dSYM/Contents/Resources/DWARF/AppName
 ~~~
@@ -85,7 +92,7 @@ UUID: 50AD720C-A916-3F53-B233-2099A2D7D306 (arm64) AppName.app.dSYM/Contents/Res
 后来发现直接用dwarfdump就可以不用xcrun 也能得到想要的结果
 
 ~~~
-➜  inhouseCrash dwarfdump --uuid AppName.app.dSYM
+dwarfdump --uuid AppName.app.dSYM
 ~~~
 
 
@@ -93,7 +100,7 @@ Crash文件中的UUID<a name="crashUUID"></a>
 ----
 
 ~~~
-➜  inhouseCrash grep "uuid" app.crash
+grep "uuid" app.crash
 {"app_name":"AppName","timestamp":"2016-07-22 16:32:22.22 +0800","app_version":"5.9","slice_uuid":"50ad720c-a916-3f53-b233-2099a2d7d306","adam_id":0,"build_version":"5.9.0.1","bundleID":"com.XXOOipad","share_with_app_devs":false,"is_first_party":false,"bug_type":"109","os_version":"iPhone OS 9.2 (13C75)","name":"AppName"}
 ~~~
 
