@@ -24,7 +24,6 @@ categories: 神兵
 2 思维导图<a name="map"></a>
 ===
 
-content
 一开始用MindNode编写，然后用FreeMind导出成HTML。
 
 点击[HTML 文件]({{ site.url }}/assets/Git-Cheet-Sheet/freemind.html)
