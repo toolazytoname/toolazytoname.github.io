@@ -11,7 +11,7 @@ categories: hack your life
 1. [ 为什么会想要搭建一个FTP服务器](#why)
 2. [ Start the FTP Server](#FTP)
 3. [ Enabling the SFTP Server](#SFTP)
-4. [ Disable FTP or SFTP Server](#distable)
+4. [ Disable FTP or SFTP Server](#disable)
 5. [Reference](#reference)
 
 
