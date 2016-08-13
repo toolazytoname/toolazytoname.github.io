@@ -19,6 +19,10 @@ categories: hack your life
 ===
 
 电脑的硬盘里面有些刚下的高清电影，有的时候在iPad上看，拷到设备上看太low了，于是就打算搭建一个服务器，然后在手机上就用带FTP功能的视频客户端去访问就可以了。目前来看，这套方案体验还是不错的。
+[知乎](https://www.zhihu.com/question/20581392)上还有人专门问过这个问题。
+
+
+我的方案是 Mac（FTP）＋iOS（nPlayer）。期待用上自己做的播放器客户端。
 
 
 2 Start the FTP Server<a name="FTP"></a>
