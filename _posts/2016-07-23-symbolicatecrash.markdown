@@ -43,7 +43,7 @@ categories: iOS Debug 技巧
 ~~~
 export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer
 ~~~
-使用命令行工具symbolicatecrash
+
 
 步骤三 使用symbolicatecrash<a name="use"></a>
 ===
