@@ -45,7 +45,7 @@ The reason the interactions are not working is that essentially the UIImageView 
 ~~~
 
 [UIButton can't be touched while animated with UIView animateWithDuration](http://stackoverflow.com/questions/8346100/uibutton-cant-be-touched-while-animated-with-uiview-animatewithduration/8346178#8346178)
-原来UIViewAnimationOptionAllowUserInteraction 这个参数，只能在final value from your animation位置触发。中间态还是无解的。
+原来UIViewAnimationOptionAllowUserInteraction 这个参数，只能在final value from your animation位置触发。中间态还是无效的。
 这篇文章的方法是，直接在对应的controller里面加上这段代码
 
 ~~~
