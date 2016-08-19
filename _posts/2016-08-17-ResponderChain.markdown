@@ -181,11 +181,12 @@ Reference
 
 没啥原创的东西，唯一自己实现的小工具，思想也是网上现成的。所以要感谢下面的文章。🙏
 
+写完这篇文章以后，再回头看了一下苹果的官方文档，确实还是有很多收获的。文章连接在最后。
+
 - [hit-testing-in-ios](http://smnh.me/hit-testing-in-ios/)
 - [Event handling for iOS - how hitTest:withEvent: and pointInside:withEvent: are related?](http://stackoverflow.com/questions/4961386/event-handling-for-ios-how-hittestwithevent-and-pointinsidewithevent-are-r)
 - [iOS事件机制(一)](http://ryantang.me/blog/2013/12/07/ios-event-dispatch-1/)
 - [Hacking the responder chain](http://bynomial.com/blog/?p=74)
 - [UIButton can't be touched while animated with UIView animateWithDuration](http://stackoverflow.com/questions/8346100/uibutton-cant-be-touched-while-animated-with-uiview-animatewithduration/8346178#8346178)
 - [iOS Events and Responder Chain](https://www.zybuluo.com/MicroCai/note/66142)
-
-
+- [Gesture Recognizers](https://developer.apple.com/library/ios/documentation/EventHandling/Conceptual/EventHandlingiPhoneOS/GestureRecognizer_basics/GestureRecognizer_basics.html#//apple_ref/doc/uid/TP40009541-CH2-SW4)
