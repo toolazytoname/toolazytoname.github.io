@@ -15,36 +15,36 @@ categories: FDTool
 
 ### 纯色椭圆
 
-<img src="https://github.com/toolazytoname/FDImageTool/blob/master/READMEImages/ellipse.png" width="300" height="300">
+![image]({{ site.url }}/assets/snip20161001_ellipse.png =300x300)
 
 
 
 ### 纯色矩形
 
 
-<img src="https://github.com/toolazytoname/FDImageTool/blob/master/READMEImages/rectangle.png" width="300" height="300">
+![image]({{ site.url }}/assets/snip20161001_rectangle.png =300x300)
 
 
 ### 一整段渐变色
 
 
 
-<img src="https://github.com/toolazytoname/FDImageTool/blob/master/READMEImages/leftToRight.png" width="300" height="300">
+![image]({{ site.url }}/assets/snip20161001_leftToRight.png =300x300)
 
 
 
 
-<img src="https://github.com/toolazytoname/FDImageTool/blob/master/READMEImages/topLeftToDownRight.png" width="300" height="300">
+![image]({{ site.url }}/assets/snip20161001_topLeftToDownRight.png =300x300)
 
 
 ### 分段渐变
 
 
 
-<img src="https://github.com/toolazytoname/FDImageTool/blob/master/READMEImages/Gradient.png" width="300" height="300">
+![image]({{ site.url }}/assets/snip20161001_Gradient.png =300x300)
 
 
-<img src="https://github.com/toolazytoname/FDImageTool/blob/master/READMEImages/Gradient2.png" width="300" height="300">
+![image]({{ site.url }}/assets/snip20161001_Gradient2.png =300x300)
 
 
 
