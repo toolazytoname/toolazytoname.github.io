@@ -11,41 +11,6 @@ categories: FDTool
 
 那个分段画的渐变色的方法是自己实现的，拿走不谢。
 
-## Demo
-
-### 纯色椭圆
-
-![image]({{ site.url }}/assets/snip20161001_ellipse.png =300x300)
-
-
-
-### 纯色矩形
-
-
-![image]({{ site.url }}/assets/snip20161001_rectangle.png =300x300)
-
-
-### 一整段渐变色
-
-
-
-![image]({{ site.url }}/assets/snip20161001_leftToRight.png =300x300)
-
-
-
-
-![image]({{ site.url }}/assets/snip20161001_topLeftToDownRight.png =300x300)
-
-
-### 分段渐变
-
-
-
-![image]({{ site.url }}/assets/snip20161001_Gradient.png =300x300)
-
-
-![image]({{ site.url }}/assets/snip20161001_Gradient2.png =300x300)
-
 
 
 Reference
