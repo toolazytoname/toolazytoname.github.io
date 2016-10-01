@@ -11,6 +11,46 @@ categories: FDTool
 
 那个分段画的渐变色的方法是自己实现的，拿走不谢。
 
+## Demo
+### 纯色椭圆
+
+<img src="https://github.com/toolazytoname/FDImageTool/blob/master/READMEImages/ellipse.png" width="300" height="300">
+
+
+
+### 纯色矩形
+
+
+<img src="https://github.com/toolazytoname/FDImageTool/blob/master/READMEImages/rectangle.png" width="300" height="300">
+
+
+### 一整段渐变色
+
+
+
+<img src="https://github.com/toolazytoname/FDImageTool/blob/master/READMEImages/leftToRight.png" width="300" height="300">
+
+
+
+
+<img src="https://github.com/toolazytoname/FDImageTool/blob/master/READMEImages/topLeftToDownRight.png" width="300" height="300">
+
+
+### 分段渐变
+
+
+
+<img src="https://github.com/toolazytoname/FDImageTool/blob/master/READMEImages/Gradient.png" width="300" height="300">
+
+
+
+~~~objective-c
+self.stepGradientImageImageView2.image = [FDImageTool rectangleGradientImageWithColors:@[[UIColor redColor],[UIColor yellowColor],[UIColor purpleColor],[UIColor redColor],[UIColor yellowColor],[UIColor purpleColor]] ranges:@[@(0),@(0.1),@(0.3),@(0.5),@(0.7),@(1)] gradientDirectionType:GradientDirectionTypeLeftToRight imageSize:self.stepGradientImageImageView2.frame.size];
+~~~
+
+<img src="https://github.com/toolazytoname/FDImageTool/blob/master/READMEImages/Gradient2.png" width="300" height="300">
+
+
 
 Reference
 ===
