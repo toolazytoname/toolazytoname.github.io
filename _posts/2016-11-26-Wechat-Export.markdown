@@ -20,12 +20,12 @@ categories: FDTool
 * [4 Reference](#reference)
 
 
-#0 简介<a name="brief"></a>
+# 0 简介<a name="brief"></a>
 想把微信聊天记录导出来，没找个太顺手的，我的手机也没有越狱，作为一个有追求的程序员，自己就瞎捣鼓了一个，简单的demo，木有UI，导出都是Hard Code，反正我就想导出一个人的聊天记录。
 源码奉上 [source](https://github.com/toolazytoname/WeChatExport)
 
 
-#1 系统版本<a name="version"></a>
+# 1 系统版本<a name="version"></a>
 
 都是此刻2016年11月25日能获取的最新版本
 
@@ -35,7 +35,7 @@ categories: FDTool
     4. Mac 10.12.1 
 
  
-#2 实现过程<a name="process"></a>
+# 2 实现过程<a name="process"></a>
 
 ## 1 备份<a name="backup"></a>
 	
@@ -90,7 +90,7 @@ silk格式
     
 简单写了个HTML，里面嵌上视频，音频，文字。我主要关注这几块内容，别的就懒得管了。自己能看就行，懒得整样式了。
     
-#3 待完善
+# 3 待完善
 
     1. 项目中很多Hard Code，可以做个UI完善一下。因为我自己的目的已经达到了，所以懒得做了
     2. 导出格式UI也可以完善一下，不做的理由同上。
@@ -98,12 +98,12 @@ silk格式
     4. ffmpeg 也是，集成源码，这样，本地就不一定非的安装ffmpeg 了。
 
     
-#4. 参考
+# 4 参考
 
    1. [一些业务微信内部的逻辑以及整体思路，内有C#源码，亏我还搞过C#，然而已经看不懂了。我猜是因为没装VS](https://zhuanlan.zhihu.com/p/22474033)
-    2. [微信内部业务逻辑的补充。](http://www.cnblogs.com/cxun/p/4338643.html#3548267)
-    3. [狗神的文章，主要参考这篇搞定音频的](http://bbs.iosre.com/t/topic/3199)
-    4. [他也是参考狗神的 ](https://zhuanlan.zhihu.com/p/21783890)
-    5. [顺道学习一下音频格式的一些基础知识  ](https://www.raywenderlich.com/69365/audio-tutorial-ios-file-data-formats-2014-edition)
-    6. [如何用Mac自带的命令行工具转换](https://www.raywenderlich.com/69367/audio-tutorial-ios-converting-recording-2014-edition)
+   2. [微信内部业务逻辑的补充。](http://www.cnblogs.com/cxun/p/4338643.html#3548267)
+   3. [狗神的文章，主要参考这篇搞定音频的](http://bbs.iosre.com/t/topic/3199)
+   4. [他也是参考狗神的 ](https://zhuanlan.zhihu.com/p/21783890)
+   5. [顺道学习一下音频格式的一些基础知识  ](https://www.raywenderlich.com/69365/audio-tutorial-ios-file-data-formats-2014-edition)
+   6. [如何用Mac自带的命令行工具转换](https://www.raywenderlich.com/69367/audio-tutorial-ios-converting-recording-2014-edition)
 
