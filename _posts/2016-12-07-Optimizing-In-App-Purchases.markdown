@@ -19,12 +19,12 @@ IAP掉单优化。
 * [7 Reference](#reference)
 
 
-#0 前言<a name="preface"></a>
+# 0 前言<a name="preface"></a>
 
 公司的IAP做得不太好，上次也写了一篇相关的文章[《IAP回执单新API》]({{ site.url }}/_posts/2016-05-28-iap-new-receipt-api-replace.markdown)。做苹果的IAP很容易会有掉单的情况发生，我认为微信淘宝支付很大程度上考验的是微信淘宝的技术水平，IAP考验的是咱们自己开发团队的能力，包括到服务端团队和客户端团队。
 
 
-#1 总体策略<a name="strategy"></a>
+# 1 总体策略<a name="strategy"></a>
 
 
 
@@ -40,7 +40,7 @@ IAP掉单优化。
     2. 请求回执单验证成功的接口一次没有成功，后续的重试是否会成功，开发一定要进行自测。
 
  
-#2 客户端<a name="client"></a>
+# 2 客户端<a name="client"></a>
 
 1. 替换成新的API
  
@@ -51,7 +51,7 @@ NSData *transactionReceipt = [NSData dataWithContentsOfURL:[[NSBundle mainBundle
 4. App客户端和App服务器之间的通信通道要加密。（未做）
 
 
-#3 服务端
+# 3 服务端
 
 1. 兼容新的API。
     1. 当利用App Receipt来验证IAP订单时，我们需要验证的是在App Reciept中所包含的IAP receipt列表（in_app节点）。与iOS 7.0之前的方式相比，这种方式的明显区别是：它包含一个IAP receipt列表而不是仅仅一个IAP receipt。这使它本身带有某种程度的自动修复的特性。如果用户某次支付没有被正确完成也没有后续被成功恢复，那么当他在同一个手机设备上产生下一次支付行为时，App Receipt中就会包含前后两次支付的IAP receipt，这就能让上次失败的订单一并恢复。
@@ -76,7 +76,7 @@ NSData *transactionReceipt = [NSData dataWithContentsOfURL:[[NSBundle mainBundle
     3. 如果要校验历史上有没有掉单的情况，是不是需要保存每笔交易的苹果transaction_id，看看有没有对应的历史交易记录存着。
 
 
-#4 计算掉单率<a name="calculate"></a>
+# 4 计算掉单率<a name="calculate"></a>
 1. 最好是用销量来统计，而不是销售额。
 2. 分子，用服务端访问苹果服务器，回执单上解析结果的时间。
 3. 分母，一定时间范围内苹果的销量。从报表获取https://reportingitc.apple.com/autoingestion.tft。
