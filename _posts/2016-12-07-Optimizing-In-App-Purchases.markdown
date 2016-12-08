@@ -21,7 +21,7 @@ IAP掉单优化。
 
 # 0 前言<a name="preface"></a>
 
-公司的IAP做得不太好，上次也写了一篇相关的文章[《IAP回执单新API》]({{ site.url }}/_posts/2016-05-28-iap-new-receipt-api-replace.markdown)。做苹果的IAP很容易会有掉单的情况发生，我认为微信淘宝支付很大程度上考验的是微信淘宝的技术水平，IAP考验的是咱们自己开发团队的能力，包括到服务端团队和客户端团队。
+公司的IAP做得不太好，上次也写了一篇相关的文章[《IAP回执单新API》]({{ site.url }}/ios/2016/05/28/iap-new-receipt-api-replace.html)。做苹果的IAP很容易会有掉单的情况发生，我认为微信淘宝支付很大程度上考验的是微信淘宝的技术水平，IAP考验的是咱们自己开发团队的能力，包括到服务端团队和客户端团队。
 
 
 # 1 总体策略<a name="strategy"></a>
@@ -55,7 +55,7 @@ NSData *transactionReceipt = [NSData dataWithContentsOfURL:[[NSBundle mainBundle
 
 1. 兼容新的API。
     1. 当利用App Receipt来验证IAP订单时，我们需要验证的是在App Reciept中所包含的IAP receipt列表（in_app节点）。与iOS 7.0之前的方式相比，这种方式的明显区别是：它包含一个IAP receipt列表而不是仅仅一个IAP receipt。这使它本身带有某种程度的自动修复的特性。如果用户某次支付没有被正确完成也没有后续被成功恢复，那么当他在同一个手机设备上产生下一次支付行为时，App Receipt中就会包含前后两次支付的IAP receipt，这就能让上次失败的订单一并恢复。
-    2. 之前也换过新的API，之所以不用等原因是，有一个测试账号，有五六百条记录，苹果会返回异常信息。详细可以参考上一篇文章[《IAP回执单新API》]({{ site.url }}/_posts/2016-05-28-iap-new-receipt-api-replace.markdown)。一般会员也不会产生如此多的购买记录。
+    2. 之前也换过新的API，之所以不用等原因是，有一个测试账号，有五六百条记录，苹果会返回异常信息。详细可以参考上一篇文章[《IAP回执单新API》]({{ site.url }}/ios/2016/05/28/iap-new-receipt-api-replace.html)。一般会员也不会产生如此多的购买记录。
 2. 关于退款的订单。
     1. 用户退款的订单有可能依然在App Receipt中出现，因此App服务器实现验证的时候需要能够识别出已经被退款的订单。被退款订单的唯一标识是：它带有一个[cancellation_date字段](https://developer.apple.com/library/content/releasenotes/General/ValidateAppStoreReceipt/Chapters/ReceiptFields.html#//apple_ref/doc/uid/TP40010573-CH106-SW1)。
 3. App客户端和App服务器之间的通信通道要加密。
