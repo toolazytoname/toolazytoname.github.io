@@ -96,6 +96,7 @@ WiiU 破解。
 用JNUSTool-MOD-v0.6.5.jar 或者 NUS Downloader .Net 去任天堂服务器下载。[JNUSTool-MOD的下载地址](https://github.com/Olmectron/JNUSTool/releases)需要安装java虚拟机，设置commonkey为D7B00402659BA2ABD2CB0DB27FA2B656 。然后就把title.tik文件拖到JNUSTool里面，注意拖动的时候，要把当前选中窗口放在JNUSTool上，然后再去拖，不然会出现输入不了Name。
 
 还有个NUS Downloader .Net[源码](https://github.com/huanfeng/NUS_Downloader_Net),需要安装[NDP46-KB3045557-x86-x64-AllOS-ENU.exe](http://down.tech.sina.com.cn/page/43589.html)从这里下的才可以。在官网下的dotNetFx40_Full_setup.exe下了半天不管用。
+
 ### 4 一张SD卡
 
 #### 1 格式化
@@ -117,7 +118,8 @@ Pack HBL,然后在里面放Pack HBL包http://pan.baidu.com/s/1hrW2at2 ，把wiiu
 必须保证里面有title.tik和title.cert,title.tmd。
 
 #### 5 整理结果
-结果整理如下，只要把游戏文件（.app, .h3）放倒install 里面。
+[结果整理]({{ site.url }}/assets/WiiUSDSimulator.zip)如下，只要把游戏文件（.app, .h3）放倒install 里面。
+
 
 
 
