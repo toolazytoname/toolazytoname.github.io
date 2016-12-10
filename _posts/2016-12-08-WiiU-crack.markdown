@@ -35,24 +35,23 @@ WiiU 破解。
 
 # 2 想玩的游戏<a name="games"></a>
 
-| 中文名  | 英文名  | 是否有ticket |
-|:------------- |:---------------:| -------------:|
-| 刺客信条 黑旗      | Assassin's Creed IV: Black Flag |         有 |
-| 猎天使魔女2  	  | Bayonetta  2                    |         有 |
+| 中文名  | 英文名  | 是否已下载 | titleID |
+|:------------- |:---------------:| -------------:| -------------:|
+| 刺客信条 黑旗      | Assassin's Creed IV: Black Flag |         有 |0005000010138800|
+| 猎天使魔女2  	  | Bayonetta  2                    |         有 |0005000010172700|
 | 零：濡鸦之巫女     | Fatal Frame: Maiden of Black Water   |     无 |
-| 超级马里奥3D世界   | Super Mario 3D World        |       有，已下载 |
-| 任天堂明星大乱斗   | Super Smash Bros.        |            有     |
-| 塞尔达传说：风之杖 | The Legend of Zelda Wind Waker HD  | 有      |
-| 塞尔达传说 无双   | 还没查        |            还没查              |
-| 皮克敏3          | Pikmin 3        |             有             |
-| 蝙蝠侠 阿甘城     | Batman        |           有                 |
-| 怪物猎人3G HD    | Monster Hunter         |          有          |
-| 雷曼：传奇        | Rayman Legends        |          有,已下载    |
+| 超级马里奥3D世界   | Super Mario 3D World        |       已下载 |0005000010145D00|
+| 任天堂明星大乱斗   | Super Smash Bros.        |            有     |0005000010145000|
+| 塞尔达传说：风之杖 | The Legend of Zelda Wind Waker HD  | 有      |0005000010143600|
+| 塞尔达传说 无双   | The Legend of Zelda Twilight Princess HD        |            有              |000500001019E600|
+| 皮克敏3          | Pikmin 3        |             有             |000500001012BE00|
+| 蝙蝠侠 阿甘城     | Batman Arkham City Armoured Edition        |           有                 |0005000010111300|
+| 怪物猎人3G HD    | Monster Hunter 3 Ultimate         |          有          |0005000010117200|
+| 雷曼：传奇        | Rayman Legends        |          已下载    |0005000010111400|
 | 光之子           | Child of Light        |            没有       |
-| 新超级马里奥兄弟U  | New Super Mario Bros. U        |    有       |
-| 马里奥赛车        | New Super Mario Bros. U        |    有       |
-| 新超级马里奥兄弟U  | Mario Kart 8        |    有，已下载           |
-| 大金刚：热带急冻   | Donkey Kong Country Tropical Freeze         |    有 |
+| 新超级马里奥兄弟U  | New Super Mario Bros. U        |    有       |0005000010101E00|
+| 马里奥赛车        | Mario Kart 8        |    有       |000500001010ED00|
+| 大金刚：热带急冻   | Donkey Kong Country Tropical Freeze         |    有 |0005000010138300|
 
 
  
