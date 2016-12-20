@@ -134,6 +134,22 @@ NSData *transactionReceipt = [NSData dataWithContentsOfURL:[[NSBundle mainBundle
 
 2. payment.applicationUsername 何时为空
 之前偶尔在苹果开发者论坛看到过未验证。说是初次进行内购的时候，第一次是我发起的，会带上这个字段信息。在用户输完手机号以后，苹果又会发起一次，这次就不会带这个字段了。返回时，也自然就空了。
+补充一个测试用例
+
+(1)有网下，购买会员，在购买过程中断网，提示：购买失败；
+![客户端提示购买失败]({{ site.url }}/assets/2016-12-07-Optimizing-In-App-Purchases1.png)
+
+(2)消费记录里提示未支付
+![消费记录未支付]({{ site.url }}/assets/2016-12-07-Optimizing-In-App-Purchases2.png)
+
+(3)联网再购买，提示
+
+![此项目将免费恢复]({{ site.url }}/assets/2016-12-07-Optimizing-In-App-Purchases3.png)
+
+![付费成功]({{ site.url }}/assets/2016-12-07-Optimizing-In-App-Purchases4.png)
+
+
+
 
     
 # 7 参考<a name="reference"></a>
