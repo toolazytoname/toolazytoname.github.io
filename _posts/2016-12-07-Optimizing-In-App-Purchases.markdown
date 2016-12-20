@@ -37,6 +37,7 @@ IAP掉单优化。
      ~~~ 
     - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions 
     ~~~
+    
     2. 请求回执单验证成功的接口一次没有成功，后续的重试是否会成功，开发一定要进行自测。
 
  
@@ -47,6 +48,7 @@ IAP掉单优化。
  ~~~
 NSData *transactionReceipt = [NSData dataWithContentsOfURL:[[NSBundle mainBundle] appStoreReceiptURL]];
 ~~~
+
 2. 把finishTransaction移到交验接口成功的回掉里面去。（未做）
 4. App客户端和App服务器之间的通信通道要加密。（未做）
 
@@ -70,6 +72,7 @@ NSData *transactionReceipt = [NSData dataWithContentsOfURL:[[NSBundle mainBundle
             payment.applicationUsername = self.orderSN;
         }
      ~~~
+     
 6. 解析苹果后的逻辑
     1. 如果是返回的错误码是21007，转到测试环境校验。
     2. bundle_id验证逻辑，验证是否是来自自家客户端，
@@ -123,9 +126,11 @@ NSData *transactionReceipt = [NSData dataWithContentsOfURL:[[NSBundle mainBundle
 在[这篇博客](http://blog.csdn.net/teng_ontheway/article/details/47023119)中
 里面有下面这段话，用户拿到的信息和开发拿到的信息能关联起来？？？
  
+ 
  ~~~
 这种情况在以往的经验中也会出现，常见的玩家和游戏运营商发生的纠纷。游戏客服向玩家索要游戏账号和appstore的收据单号，通过查询itunes-connect看是否确有这笔订单。如果订单存在，则要联系研发方去查询游戏服务器，看订单号与玩家名是否对应，并且是否已经被使用了，做这一点检查的目的是 为了防止恶意玩家利用已经使用过了的订单号进行欺骗(已验证的账单是可以再次请求验证的,曾经为了测试,将账单手动发给服务器处理并成功)，谎称自己没收到商品。这就是上面一节IAP Server Model中红字所提到的安全逻辑的目的。当然了，如果查不到这个订单号，就意味着这个订单确实还没使用过，手动给玩家补发商品即可。
 ~~~
+
 
 2. payment.applicationUsername 何时为空
 之前偶尔在苹果开发者论坛看到过未验证。说是初次进行内购的时候，第一次是我发起的，会带上这个字段信息。在用户输完手机号以后，苹果又会发起一次，这次就不会带这个字段了。返回时，也自然就空了。
