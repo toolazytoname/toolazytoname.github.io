@@ -249,10 +249,14 @@ mdfind "com_apple_xcode_dsym_uuids == <UUID>"
 填进参数，就能找到这个dSYM文件
 
 ~~~
-
 mdfind "com_apple_xcode_dsym_uuids == 3075C4BE-517B-30A7-8F98-CDB16E7BC4AC"
 /Desktop/crack/AppName.app.dSYM
+~~~
 
+补充一下，用下面这个命令，可以找到本地所有的dSYM。
+
+~~~
+mdfind "com_apple_xcode_dsym_uuids == *"
 ~~~
 
 
