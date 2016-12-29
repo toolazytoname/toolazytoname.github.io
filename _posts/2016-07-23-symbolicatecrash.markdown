@@ -11,12 +11,14 @@ categories: iOS Debug 技巧
 * [步骤一 find](#find)
 * [步骤二 设置DEVELOPER_DIR](#set)
 * [步骤三 使用symbolicatecrash](#use)
+* [步骤四 使用atos](#atos)
 * [Others](#others)
 	* [UUID的概念](#UUID)
 	* [App的UUID](#AppUUID)
 	* [dSYM文件中的UUID](#dSYMUUID)
 	* [Crash文件中的UUID](#crashUUID)
 	* [dSYM是什么鬼](#dSYM)
+	* [如何寻找dSYM](#finddSYM)
 * [Reference](#reference)
 
 
@@ -61,6 +63,45 @@ export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer
 ~~~
  ./symbolicatecrash original.crash AppName.app > app.crash
 ~~~
+
+步骤四 使用atos<a name="atos"></a>
+===
+用了上面的方法，可能只是部分符号化了。有的时候，需要手工解析一下。
+
+~~~
+Thread 0 name:  Dispatch queue: com.apple.main-thread
+Thread 0:
+0   libsystem_kernel.dylib        	0x0000000196220e0c 0x196220000 + 3596
+1   libsystem_kernel.dylib        	0x0000000196220c84 0x196220000 + 3204
+2   CoreFoundation                	0x000000018444f720 0x184370000 + 915232
+3   CoreFoundation                	0x000000018444d674 0x184370000 + 906868
+4   CoreFoundation                	0x00000001843792d0 0x184370000 + 37584
+5   GraphicsServices              	0x000000018da4f6f8 0x18da44000 + 46840
+6   UIKit                         	0x0000000188f3efa8 0x188ec8000 + 487336
+7   AppName                   	   	0x00000001000be2d4 main (main.m:13)
+8   libdyld.dylib                 	0x0000000196122a04 0x196120000 + 10756
+
+
+Binary Images:
+0x1000a8000 - 0x10203bfff AppName arm64  <3075c4be517b30a78f98cdb16e7bc4ac> /var/mobile/Containers/Bundle/Application/5AE5E4AA-11ED-4301-AC07-54ED50C72E7D/AppName.app/SOHUVideoHD
+
+~~~
+
+用这个方法可以符号化任何一个地址，前提是能找到对应的dSYM文件，文章后面有提到[如何寻找dSYM](#finddSYM)。
+
+参考格式
+
+~~~
+atos -arch <Binary Architecture> -o <Path to dSYM file>/Contents/Resources/DWARF/<binary image name> -l <load address> <address to symbolicate>
+
+~~~
+
+填进参数
+
+~~~
+atos -arch arm64 -o AppName.app.dSYM/Contents/Resources/DWARF/AppName -l 0x1000a8000 0x00000001000be2d4
+~~~
+
 
 Others<a name="others"></a>
 ===
@@ -163,6 +204,59 @@ They are useful for re-symbolicating your crash reports. With a stripped binary,
                      AT_decl_line( 76 )
                      AT_APPLE_property_attribute( 0x0101 ( DW_APPLE_PROPERTY_readonly )  )
 ~~~
+
+
+如何寻找dSYM<a name="finddSYM"></a>
+----
+
+用一下方法，如果本地有这个文件，就可以通过UUID找到。
+
+参数来源
+
+参考
+
+~~~
+$ grep --after-context=1000 "Binary Images:" <Path to Crash Report> | grep <Binary Name>
+
+~~~
+
+填进去参数。
+
+~~~
+grep --after-context=1000 "Binary Images:" original.crash | grep AppName
+0x1000a8000 - 0x10203bfff AppName arm64  <3075c4be517b30a78f98cdb16e7bc4ac> /var/mobile/Containers/Bundle/Application/5AE5E4AA-11ED-4301-AC07-54ED50C72E7D/AppName.app/AppName
+
+~~~
+
+可以先用spotlight试试搜索 
+
+~~~
+3075c4be517b30a78f98cdb16e7bc4ac
+~~~
+
+可以直接得到结果。
+
+
+
+另一种方法是把uuid拿出来，转成大写，用横杆分成五组，8-4-4-4-12 (XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX)
+
+用以下格式
+
+~~~
+mdfind "com_apple_xcode_dsym_uuids == <UUID>"
+~~~
+
+填进参数，就能找到这个dSYM文件
+
+~~~
+
+mdfind "com_apple_xcode_dsym_uuids == 3075C4BE-517B-30A7-8F98-CDB16E7BC4AC"
+/Desktop/crack/AppName.app.dSYM
+
+~~~
+
+
+
 
 
 Reference
