@@ -19,6 +19,8 @@ categories: iOS Debug 技巧
 	* [Crash文件中的UUID](#crashUUID)
 	* [dSYM是什么鬼](#dSYM)
 	* [如何寻找dSYM](#finddSYM)
+	* [频繁唤醒异常crash文件](#wakeup)
+	* [内存占用过多的crash文件](#memory)
 * [Reference](#reference)
 
 
@@ -260,8 +262,43 @@ mdfind "com_apple_xcode_dsym_uuids == *"
 ~~~
 
 
+频繁唤醒异常crash文件<a name="wakeup"></a>
+----
+关于这种异常，苹果[官方文档](https://developer.apple.com/library/content/technotes/tn2151/_index.html#//apple_ref/doc/uid/DTS40008184-CH1-STACKTRACE) 中有明确说明是Typically, this is caused by thread-to-thread communication
+
+~~~
+The exception subtype WAKEUPS indicates that threads in the process are being woken up too many times per second, which forces the CPU to wake up very often and consumes battery life.
+
+Typically, this is caused by thread-to-thread communication (generally using peformSelector:onThread: or dispatch_async) that is unwittingly happening far more often than it should be. Because the sort of communication that triggers this exception is happening so frequently, there will usually be multiple background threads with very similar Backtraces - indicating where the communication is originating.
+~~~
+这种异常，用symbolicatecrash也是可以解析出来的。
+
+![原始文件]({{ site.url }}/assets/symbolicatecrash_original.crash)
+
+![解析结果文件]({{ site.url }}/assets/symbolicatecrash_dsym.crash)
+
+项目名字已经批量替换成AppName，就这异常文件还能解析出来，着实让我很惊讶。
+
+内存占用过多的crash文件<a name="memory"></a>
+----
+苹果[官方文档](https://developer.apple.com/library/content/technotes/tn2151/_index.html#//apple_ref/doc/uid/DTS40008184-CH1-STACKTRACE) 也有详细说明。
+乍一看就是两个json。
+
+专门有一章就是讲述如何理解Understanding Low Memory Reports。我照着一个异常文件比对了一下。和别的异常文件这种异常no backtraces仔细看了一下我的Page Size字段。下面是一个进程列表，包括
+
+~~~
+This table lists all running processes, including system daemons, at the time the low memory report was generated.
+~~~
+
+通过 [reason]字段可以得到原因，
+我发现我们的App是因为这个原因被系统舍弃的。
+
+~~~
+[per-process-limit]: The process crossed its system-imposed memory limit. Per-process limits on resident memory are established by the system for all applications. Crossing this limit makes the process eligible for termination.
+~~~
 
 
+![内存文件]({{ site.url }}/assets/symbolicatecrash_memory.crash)
 
 Reference
 ===

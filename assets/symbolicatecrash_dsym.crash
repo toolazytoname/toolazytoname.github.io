@@ -1,0 +1,156 @@
+{"timestamp":"2017-01-04 12:08:08.82 +0800","bug_type":"142","os_version":"iPhone OS 10.2 (14C92)","incident_id":"4ECC0E24-B4C3-4FC0-8ABF-94F44F0FABFA"}
+Date/Time:      2017-01-04 12:05:41 +0800
+OS Version:      iPhone OS 10.2 (Build 14C92)
+Architecture:    arm64
+Report Version:  19
+
+Command:        AppName
+Path:            /var/containers/Bundle/Application/893427D4-1439-4984-BBBD-832CA6C876B6/AppName.app/AppName
+Version:        6.2 (6.2.0.1)
+Parent:          launchd [1]
+PID:            521
+
+Event:          wakeups
+Wakeups:        45004 wakeups over the last 148 seconds (305 wakeups per second average), exceeding limit of 150 wakeups per second over 300 seconds
+Duration:        147.68s
+Steps:          35
+
+Hardware model:  iPhone9,2
+Active cpus:    2
+
+
+Powerstats for:  AppName [5215]
+UUID:            36688CAB-F3B0-3262-9D5D-DA2675E8D2BB
+Start time:      2017-01-04 12:07:53 +0800
+End time:        2017-01-04 12:08:07 +0800
+Parent:          launchd
+Microstackshots: 35 samples (100%)
+Primary state:  15 samples Frontmost App, User mode, Effective Thread QoS Default, Requested Thread QoS Default, Override Thread QoS Unspecified
+User Activity:  0 samples Idle, 35 samples Active
+Power Source:    35 samples on Battery, 0 samples on AC
+24 _pthread_body + 0 (libsystem_pthread.dylib + 14176) [0x186b9d760]
+24 _pthread_body + 240 (libsystem_pthread.dylib + 14416) [0x186b9d850]
+8  tea_decode_video_thread (tea_media_player_engine.c:191 in AppName + 6572248) [0x1007008d8]
+8  tea_player_engine_decoder_state_machine (tea_player_engine_state_machine.c:5186 in AppName + 6616288) [0x10070b4e0]
+8  tea_hw_vdec_read (TeaVideoToolboxTool.m:258 in AppName + 6757064) [0x10072dac8]
+8  tea_hw_vdec_do_state_read (TeaVideoToolboxTool.m:108 in AppName + 6758016) [0x10072de80]
+8  tea_hw_vdec_do_normal_read (TeaVideoToolboxTool.m:82 in AppName + 6758380) [0x10072dfec]
+8  -[TeaVideoToolboxCodec readOutput:pts:evt:] (TeaVideoToolboxCodec.m:683 in AppName + 6672500) [0x100719074]
+8  -[TeaVideoToolboxCodec handleReadResult:pts:evt:buffer:] (TeaVideoToolboxCodec.m:1073 in AppName + 6674664) [0x1007198e8]
+8  -[TeaVideoToolboxCodec doAvSyncOutput:evt:buffer:] (TeaVideoToolboxCodec.m:1040 in AppName + 6674364) [0x1007197bc]
+5  _platform_memmove + 96 (libsystem_platform.dylib + 7776) [0x186b94e60]
+5  <Override Thread QoS Default>
+3  _platform_memmove + 112 (libsystem_platform.dylib + 7792) [0x186b94e70]
+8  tea_client_background_thread (tea_client_cache.c:1598 in AppName + 6686584) [0x10071c778]
+4  tea_client_start_download (tea_client_cache.c:1086 in AppName + 6682044) [0x10071b5bc]
+4  tea_client_download_file (tea_client_cache.c:936 in AppName + 6680388) [0x10071af44]
+4  tea_client_http_read_data (tea_client_cache.c:598 in AppName + 6678084) [0x10071a644]
+2  tea_http_read (tea_http.c:890 in AppName + 6569000) [0x1006ffc28]
+2  usleep + 64 (libsystem_c.dylib + 53628) [0x1869f517c]
+2  __semwait_signal + 8 (libsystem_kernel.dylib + 127764) [0x186ad7314]
+2  <Kernel mode>
+2  tea_http_read (tea_http.c:892 in AppName + 6569024) [0x1006ffc40]
+2  http_read (tea_http.c:604 in AppName + 6569316) [0x1006ffd64]
+2  http_get_line (tea_http.c:364 in AppName + 6570540) [0x10070022c]
+2  retry_transfer_wrapper (tea_tcp.c:547 in AppName + 6583304) [0x100703408]
+2  __recvfrom + 8 (libsystem_kernel.dylib + 127260) [0x186ad711c]
+2  <Kernel mode>
+4  tea_client_progress_download (tea_client_cache.c:1197 in AppName + 6682992) [0x10071b970]
+4  tea_client_download_file (tea_client_cache.c:936 in AppName + 6680388) [0x10071af44]
+4  tea_client_http_read_data (tea_client_cache.c:598 in AppName + 6678084) [0x10071a644]
+4  tea_http_read (tea_http.c:890 in AppName + 6569000) [0x1006ffc28]
+4  usleep + 64 (libsystem_c.dylib + 53628) [0x1869f517c]
+4  __semwait_signal + 8 (libsystem_kernel.dylib + 127764) [0x186ad7314]
+4  <Kernel mode>
+4  tea_decode_audio_thread (tea_media_player_engine.c:246 in AppName + 6572724) [0x100700ab4]
+4  tea_player_engine_decoder_state_machine (tea_player_engine_state_machine.c:4718 in AppName + 6617188) [0x10070b864]
+4  av_mallocz (mem.c:95 in AppName + 7294544) [0x1007b0e50]
+4  posix_memalign + 32 (libsystem_malloc.dylib + 27012) [0x186b10984]
+4  malloc_zone_memalign + 212 (libsystem_malloc.dylib + 18416) [0x186b0e7f0]
+4  ??? (libsystem_m.dylib + 189488) [0x186b0b430]
+4  large_malloc + 712 (libsystem_malloc.dylib + 25212) [0x186b1027c]
+2  CAPThread::Entry + 84 (AudioToolbox + 3756592) [0x18ac88230]
+2  GenericRunLoopThread::Entry + 164 (AudioToolbox + 1822924) [0x18aab00cc]
+2  CFRunLoopRunSpecific + 444 (CoreFoundation + 37560) [0x1879e22b8]
+2  __CFRunLoopRun + 1132 (CoreFoundation + 897516) [0x187ab41ec]
+2  __CFRunLoopServiceMachPort + 192 (CoreFoundation + 906704) [0x187ab65d0]
+2  mach_msg_trap + 8 (libsystem_kernel.dylib + 4488) [0x186ab9188]
+2  <Kernel mode, Effective Thread QoS Unspecified, Requested Thread QoS Unspecified>
+2  tea_engine_thread (tea_media_player_engine.c:66 in AppName + 6571828) [0x100700734]
+2  tea_ipc_post (tea_ipc.c:88 in AppName + 6758720) [0x10072e140]
+2  malloc + 32 (libsystem_malloc.dylib + 16896) [0x186b0e200]
+2  ??? (libsystem_m.dylib + 189100) [0x186b0b2ac]
+2  nano_malloc + 44 (libsystem_malloc.dylib + 76656) [0x186b1cb70]
+2  _nano_malloc_check_clear + 1308 (libsystem_malloc.dylib + 81760) [0x186b1df60]
+11 _pthread_wqthread + 1288 (libsystem_pthread.dylib + 4768) [0x186b9b2a0]
+11 _dispatch_worker_thread3 + 124 (libdispatch.dylib + 69804) [0x1869a20ac]
+11 _dispatch_root_queue_drain + 572 (libdispatch.dylib + 70476) [0x1869a234c]
+9  _dispatch_queue_invoke + 652 (libdispatch.dylib + 18852) [0x1869959a4]
+9  _dispatch_queue_serial_drain + 240 (libdispatch.dylib + 61740) [0x1869a012c]
+9  ??? (libcorecrypto.dylib + 405948) [0x1869921bc]
+9  ??? (libcorecrypto.dylib + 406012) [0x1869921fc]
+7  __16+[DDLog lt_log:]_block_invoke (DDLog.m:705 in AppName + 26578720) [0x101a14f20]
+3  -[DDFileLogger logMessage:] (DDFileLogger.m:1041 in AppName + 27477880) [0x101af0778]
+3  -[NSConcreteFileHandle writeData:] + 176 (Foundation + 719132) [0x1885c291c]
+3  -[NSData enumerateByteRangesUsingBlock:] + 88 (Foundation + 146836) [0x188536d94]
+3  __34-[NSConcreteFileHandle writeData:]_block_invoke + 72 (Foundation + 719284) [0x1885c29b4]
+3  write + 8 (libsystem_kernel.dylib + 11284) [0x186abac14]
+3  <Kernel mode>
+2  -[DDFileLogger logMessage:] (DDFileLogger.m:1028 in AppName + 27477552) [0x101af0630]
+2  -[SVDDLogFileFormatter formatLogMessage:] (SVDDLogFileFormatter.m:42 in AppName + 25703192) [0x10193f318]
+2  -[NSDateFormatter stringForObjectValue:] + 188 (Foundation + 31196) [0x18851a9dc]
+2  CFDateFormatterCreateStringWithAbsoluteTime + 164 (CoreFoundation + 404392) [0x187a3bba8]
+2  __cficu_udat_format + 64 (CoreFoundation + 1155784) [0x187af32c8]
+2  udat_format + 280 (libicucore.A.dylib + 1662548) [0x186d92e54]
+2  icu::DateFormat::format const + 128 (libicucore.A.dylib + 914032) [0x186cdc270]
+2  icu::SimpleDateFormat::format const + 72 (libicucore.A.dylib + 1481456) [0x186d66af0]
+2  icu::SimpleDateFormat::_format const + 424 (libicucore.A.dylib + 1481916) [0x186d66cbc]
+2  icu::SimpleDateFormat::subFormat const + 2776 (libicucore.A.dylib + 1485216) [0x186d679a0]
+2  icu::SimpleDateFormat::zeroPaddingNumber const + 128 (libicucore.A.dylib + 1488756) [0x186d68774]
+2  icu::DecimalFormat::format const + 28 (libicucore.A.dylib + 980108) [0x186cec48c]
+2  ??? (libicucore.A.dylib + 1000264) [0x186cf1348]
+2  ??? (libicucore.A.dylib + 1000348) [0x186cf139c]
+2  ??? (libicucore.A.dylib + 1000664) [0x186cf14d8]
+2  -[DDTTYLogger logMessage:] (DDTTYLogger.m:1266 in AppName + 25805224) [0x1019581a8]
+2  -[_NSAutoCalendar dealloc] + 56 (Foundation + 588728) [0x1885a2bb8]
+2  -[NSNotificationCenter removeObserver:name:object:] + 236 (Foundation + 26072) [0x1885195d8]
+2  _CFXNotificationRemoveObservers + 164 (CoreFoundation + 186896) [0x187a06a10]
+2  -[_CFXNotificationRegistrar match:object:observer:enumerator:] + 1376 (CoreFoundation + 1282760) [0x187b122c8]
+2  CFBasicHashGetElements + 124 (CoreFoundation + 36624) [0x1879e1f10]
+2  CFBasicHashGetBucket + 44 (CoreFoundation + 34204) [0x1879e159c]
+2  __vtdsr_dequeueAllPendingFramesAndCallbackClientForEach_block_invoke + 312 (VideoToolbox + 323080) [0x18a717e08]
+2  FigRemote_CreatePixelBufferFromSerializedAtomData + 168 (CoreMedia + 778264) [0x18a4d5018]
+2  FigRemote_CreatePixelBufferFromSerializedAtomDataAndSurface + 276 (CoreMedia + 778636) [0x18a4d518c]
+2  CVPixelBufferCreateWithIOSurface + 768 (CoreVideo + 39792) [0x18a16bb70]
+2  CVPixelBufferBacking::initWithPixelBufferDescription(void*, void const*), void (*)(void*, void const*, unsigned long, unsigned long, void const**), void*, __CFDictionary const*, __CFDictionary const*, __IOSurface*, int*) + 592 (CoreVideo + 69928) [0x18a173128]
+2  dictionaryIntValue + 28 (CoreVideo + 71800) [0x18a173878]
+2  CFDictionaryGetValue + 160 (CoreFoundation + 8496) [0x1879db130]
+2  CFBasicHashFindBucket + 356 (CoreFoundation + 8936) [0x1879db2e8]
+2  CFEqual + 384 (CoreFoundation + 26772) [0x1879df894]
+2  _dispatch_queue_override_invoke + 360 (libdispatch.dylib + 63704) [0x1869a08d8]
+2  _dispatch_queue_invoke + 652 (libdispatch.dylib + 18852) [0x1869959a4]
+2  _dispatch_queue_serial_drain + 928 (libdispatch.dylib + 62428) [0x1869a03dc]
+2  ??? (libcorecrypto.dylib + 405948) [0x1869921bc]
+2  ??? (libcorecrypto.dylib + 406012) [0x1869921fc]
+2  __40+[DDLog queueLogMessage:asynchronously:]_block_invoke (DDLog.m:323 in AppName + 26568968) [0x101a12908]
+2  +[DDLog lt_log:] (DDLog.m:709 in AppName + 26577984) [0x101a14c40]
+2  semaphore_wait_trap + 8 (libsystem_kernel.dylib + 4548) [0x186ab91c4]
+2  <Kernel mode, Effective Thread QoS User Initiated, Requested Thread QoS User Initiated, Override Thread QoS User Initiated>
+
+Binary Images:
+0x1000bc000 -                ???  ??? <36688CAB-F3B0-3262-9D5D-DA2675E8D2BB>  AppName
+0x18692f000 -        0x186992fff  libcorecrypto.dylib <056A6C20-1D3D-3696-B59F-0B264BA9B972> /usr/lib/system/libcorecrypto.dylib
+0x186991000 -        0x1869c0fff  libdispatch.dylib <FB1D0BAF-6423-37D1-BEA0-AF309586DF97> /usr/lib/system/libdispatch.dylib
+0x1869e8000 -        0x186a67fff  libsystem_c.dylib <8A5A190D-7056-3F3C-8D4C-E16CAB74F599> /usr/lib/system/libsystem_c.dylib
+0x186ab8000 -        0x186adffff  libsystem_kernel.dylib <9EC307FC-DD2F-3F72-8F37-EC6E0186DF20> /usr/lib/system/libsystem_kernel.dylib
+0x186add000 -        0x186b0cfff  libsystem_m.dylib <BA786894-A721-3D37-BAA9-9AAFC0EE5493> /usr/lib/system/libsystem_m.dylib
+0x186b0a000 -        0x186b25fff  libsystem_malloc.dylib <C57ECB4A-DA5C-3930-A580-B3D07583058A> /usr/lib/system/libsystem_malloc.dylib
+0x186b93000 -        0x186b9afff  libsystem_platform.dylib <518E18AD-FDFC-316E-9B4D-519F6E4B6A47> /usr/lib/system/libsystem_platform.dylib
+0x186b9a000 -        0x186ba5fff  libsystem_pthread.dylib <D8480FC3-A35D-3475-B0D1-2553C761D8CB> /usr/lib/system/libsystem_pthread.dylib
+0x186bfd000 -        0x186e18fff  libicucore.A.dylib <35FC5FA2-AAB8-3268-9708-1AB8416C497C> /usr/lib/libicucore.A.dylib
+0x1879d9000 -        0x187d60fff  com.apple.CoreFoundation 6.9 (1348.22) <DD9791D1-98EF-32EE-A133-5B8EBC9B3D55> /System/Library/Frameworks/CoreFoundation.framework/CoreFoundation
+0x188513000 -        0x1887e2fff  com.apple.Foundation 6.9 (1349.13) <7D40355E-6850-36CC-8034-55E5CBF6245F> /System/Library/Frameworks/Foundation.framework/Foundation
+0x18a162000 -        0x18a189fff  com.apple.CoreVideo 1.8 (235.2) <581F5F99-6792-3C49-83C1-373DFA23195B> /System/Library/Frameworks/CoreVideo.framework/CoreVideo
+0x18a417000 -        0x18a526fff  com.apple.CoreMedia 1.0 (1907.15.16.1) <98E94410-1D7B-3745-AE7B-C0E43A8B59CB> /System/Library/Frameworks/CoreMedia.framework/CoreMedia
+0x18a6c9000 -        0x18a758fff  com.apple.VideoToolbox 1.0 (1907.15.16.1) <D0BAEA03-26D1-3F66-AE86-23F19AA1AC76> /System/Library/Frameworks/VideoToolbox.framework/VideoToolbox
+0x18a8f3000 -        0x18ad56fff  com.apple.audio.toolbox.AudioToolbox 1.8 (1.8) <3EA60E00-D238-3AE4-9899-6690AB1FDBDD> /System/Library/Frameworks/AudioToolbox.framework/AudioToolbox
