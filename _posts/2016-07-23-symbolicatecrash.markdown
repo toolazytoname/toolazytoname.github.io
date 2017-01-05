@@ -273,9 +273,9 @@ Typically, this is caused by thread-to-thread communication (generally using pef
 ~~~
 这种异常，用symbolicatecrash也是可以解析出来的。
 
-![原始文件]({{ site.url }}/assets/symbolicatecrash_original.crash)
+[原始文件]({{ site.url }}/assets/symbolicatecrash_original.crash)
 
-![解析结果文件]({{ site.url }}/assets/symbolicatecrash_dsym.crash)
+[解析结果文件]({{ site.url }}/assets/symbolicatecrash_dsym.crash)
 
 项目名字已经批量替换成AppName，就这异常文件还能解析出来，着实让我很惊讶。
 
@@ -298,7 +298,7 @@ This table lists all running processes, including system daemons, at the time th
 ~~~
 
 
-![内存文件]({{ site.url }}/assets/symbolicatecrash_memory.crash)
+[内存文件]({{ site.url }}/assets/symbolicatecrash_memory.crash)
 
 Reference
 ===
