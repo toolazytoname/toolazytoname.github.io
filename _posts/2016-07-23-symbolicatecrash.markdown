@@ -21,6 +21,7 @@ categories: iOS Debug 技巧
 	* [如何寻找dSYM](#finddSYM)
 	* [频繁唤醒异常crash文件](#wakeup)
 	* [内存占用过多的crash文件](#memory)
+	* [内存分类](#memorytype)
 * [Reference](#reference)
 
 
@@ -290,15 +291,58 @@ Typically, this is caused by thread-to-thread communication (generally using pef
 This table lists all running processes, including system daemons, at the time the low memory report was generated.
 ~~~
 
-通过 [reason]字段可以得到原因，
-我发现我们的App是因为这个原因被系统舍弃的。
+通过 [reason]字段可以得到原因，我发现我们的App是因为这个原因被系统舍弃的。
 
 ~~~
 [per-process-limit]: The process crossed its system-imposed memory limit. Per-process limits on resident memory are established by the system for all applications. Crossing this limit makes the process eligible for termination.
 ~~~
 
+~~~
+"rpages" : 87862,
+   "states" : [
+     "audio",
+     "frontmost",
+     "resume"
+   ],
+   
+~~~
+占用内存87862*4K/1024=343M。这个算法，还得验证一下。
 
 [内存文件]({{ site.url }}/assets/symbolicatecrash_memory.crash)
+
+内存问题。解决办法，我目前知道的，有这么几个小点。以下内容展开可以单独开一篇文章了。
+
+1. 静态分析 Analyze
+2. 用instrument Leaks 工具可以查到Leaked memory。这个好查。
+3. 用Allocations 工具 Mark Generation方法。检测 Abandoned memory 。麻烦。具体可以看[苹果官方的介绍](https://developer.apple.com/library/content/documentation/DeveloperTools/Conceptual/InstrumentsUserGuide/FindingAbandonedMemory.html#//apple_ref/doc/uid/TP40004652-CH80-SW1)和[WeRead团队博客的介绍](http://wereadteam.github.io/2016/02/22/MLeaksFinder/)
+4. 有一些第三方工具，例如(FBAllocationTracker/FBMemoryProfiler/FBRetainCycleDetector)，MSLeakHunter，[MLeaksFinder](http://wereadteam.github.io/2016/02/22/MLeaksFinder/)，PLeakSniffer等等
+
+
+内存分类<a name="memorytype"></a>
+----
+我看别人的博客写着
+
+内存分三类,没看到官方的出处。
+
+1. Leaked memory: Memory unreferenced by your application that cannot be used again or freed (also detectable by using the Leaks instrument).
+2. Abandoned memory: Memory still referenced by your application that has no useful purpose.
+3. Cached memory: Memory still referenced by your application that might be used again for better performance.
+
+
+通过[苹果官方的文档](https://developer.apple.com/library/content/documentation/DeveloperTools/Conceptual/InstrumentsUserGuide/CommonMemoryProblems.html#//apple_ref/doc/uid/TP40004652-CH91-SW1)我看讲的比上面细。
+
+* Overall Memory Use. 
+	* Monitor at a high level how your app uses memory and compare it to the memory usage of other active processes on the system. Look for areas of large or unexpected memory growth. See Monitor Memory Usage.
+* Leaked Memory. 
+	* This is memory that was allocated at some point, but was never released and is no longer referenced by your app. Since there are no references to it, there’s now no way to release it and the memory can’t be used again. For example, suppose you’ve written an app that creates rectangle objects in a drawing, but never releases the objects when the drawing is closed. In this case, your app would leak more and more memory whenever a drawing containing rectangles is closed. To fix the leak, you need to figure out which object isn’t being released, and then update your app to release it at the appropriate time. See Find Memory Leaks.
+
+* Abandoned Memory. 
+	* This is memory that your app has allocated for some reason, but it’s not needed and won’t be referenced. For example, suppose your app adds images to a cache after they’ve already been cached—using double the memory for the same images. Or, maybe your app maintains an array of objects in case you need to access them later, but you never actually do. Unlike leaked memory, abandoned memory like this is still referenced somewhere in your app. It just serves no purpose. Since it’s still technically valid, it’s more difficult for Instruments to identify and requires more detective work on your part to find. See Find Abandoned Memory.
+* Zombies. 
+	* This is memory that has been released and is no longer needed, but your code still references it somewhere. For example, suppose your app contains an image cache. Once the cache has been cleared, your app shouldn’t attempt to refer to the images that it previously contained. Calls to these nonexistent images are considered zombies—references to objects that are no longer living. See Find Zombies.
+
+
+
 
 Reference
 ===
@@ -306,4 +350,10 @@ Reference
 )
 - [iOS Crash文件的解析（一）](http://www.cnblogs.com/smileEvday/p/Crash1.html)
 - [Understanding and Analyzing iOS Application Crash Reports](https://developer.apple.com/library/ios/technotes/tn2151/_index.html)
+- [MLeaksFinder：精准 iOS 内存泄露检测工具](http://wereadteam.github.io/2016/02/22/MLeaksFinder/)
+
+下面的文章，我目前也没好好看。看完了收获应该会很大。知识会比较系统成体系。
+
+- [FindingAbandonedMemory](https://developer.apple.com/library/content/documentation/DeveloperTools/Conceptual/InstrumentsUserGuide/FindingAbandonedMemory.html#//apple_ref/doc/uid/TP40004652-CH80-SW1)
+- [Advanced Memory Management Programming Guide.](https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/MemoryMgmt.html#//apple_ref/doc/uid/10000011i)
 
