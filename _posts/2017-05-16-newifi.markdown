@@ -1,0 +1,91 @@
+---
+layout: post
+title:  "联想newifi mini科学上网配置"
+date:   2017-05-16 22:29:32 +0800
+categories: 生活
+---
+
+这回自己整理了一个简单的脚本。希望可以做到一键安装。对于整体的原理，流程也有了一定的了解。和任何技术问题一样，过程很艰辛，但一旦搞定了，也是春风得意马蹄疾。
+
+
+**目录**
+
+* [0 前言](#preface)
+* [1 整体方案](#brief)
+* [2 过程](#process)
+* [3 我理解的原理](#underTheHood)
+* [4 FAQ](#FAQ)
+* [5 参考](#reference)
+
+
+# 0 前言<a name="preface"></a>
+
+
+之前配置照猫画虎稀里糊涂搞定过，后来不知道为什么不好使了，然后一直拖着没折腾，因为对Linux感兴趣，就当拿它练手了。
+这回自己整理了一个简单的脚本。希望可以做到一键安装。对于整体的原理，流程也有了一定的了解。和任何技术问题一样，过程很艰辛，但一旦搞定了，也是春风得意马蹄疾。
+
+
+
+# 1 整体方案<a name="brief"></a>
+
+shadowsocks + GFWlist
+
+# 2 过程<a name="process"></a>
+具体过程看脚本
+
+# 3 我理解的原理<a name="underTheHood"></a>
+
+
+# 4 FAQ<a name="FAQ"></a>
+如果发现不管用了，可以按照以下步骤简单检查一下
+
+1. ping 一下服务器
+2. 检查路由器上相应的服务 是否正常开启 ps
+3. ipset -L
+4. iptables -t nat —list
+5. nslookup 或者 dig
+6. nc 命令（这个还没试过）
+
+知识点
+
+1. 据说shadowsocks注意必须使用spec版本，非spec版本的shadowsocks不能和luci-app-shadowsocks配合使用，它会缺少/etc/init.d/shadowsocks。我安装的版本如下，确实之前安装了很多别的版本，也碰到过/etc/init.d/shadowsocks 文件比较奇怪。也碰到过明明安装了luci-app-shadowsocks-spec_1.3.2-1_all.ipk 却没有在界面上找到，应该是版本的关系。
+2. 根据依赖的SSL库又可分为OpenSSL和PolarSSL两个版本，OpenSSL版支持加密方式多，体积大，PolarSSL版体积小， 加密方式少
+3. ipset -L 可以查看建好的ip集合
+4. ss-rule 还会调用iptables为nat表建立转发规则，我们可以使用如下命令查看: iptables -t nat --list
+    * 我自己加了个iptables -t nat  --list  | grep 1080  
+5. ShadowSocks辅助做DNS解析
+    * 如果想让ShadowSocks辅助做Dns解析，可以勾选UDP Forward(本步骤是可选的，不勾选也能正常工作)，这样做的效果是将Dns解析请求通过ShadowSocks的隧道转发给ShadowSocks服务器，然后再让ShadowSocks服务器将DNS请求转发给你设置好的域名服务器(通过Forwarding Tunnel设置)，这样做的好处是你可以选择和你的ShadowSocks服务器最近的DNS服务器，这样DNS服务器解析的ip地址和你的ShadowSocks服务器最近，ShadowSocks服务器去做其他请求时会最快，这种方案也不用担心域名被污染。
+6. nslookup 或者 dig 命令
+    * nslookup www.baidu.com 192.168.1.1 这个命令我试了一下，在本机也是可以操作的
+    * dig @localhost -p 3210 google.com 
+7. ps | ss 查看
+    * 在路由器和服务器可以通过ps命令查看ss-redir命令的详细参数，可以干掉配置时自动启动的shadowsocks进程，然后再根据命令参数手动执行ss-redir命令和ss-server进程，注意不要添加-f参数，不然会以daemon形式运行，执行ss-redir命令时添加-v参数，这样在路由器和服务器上都可以看到详细的请求记录，我们就知道到底哪个环节出了问题
+8. 
+    * 客户端/
+    * └── usr/
+    *     └── bin/
+    *         ├── ss-local       // 提供 SOCKS 代理
+    *         ├── ss-redir       // 提供透明代理, 从 v2.2.0 开始支持 UDP
+    *         └── ss-tunnel      // 提供端口转发, 可用于 DNS 查询
+9. 不确定SS服务器是否支持UDP转发，有办法测试吗？(还没有尝试)
+    * /usr/bin/ss-tunnel -c /etc/shadowsocks.json  -l 5353 -L 8.8.8.8:53 -u
+    * nslookup www.youtube.com 127.0.0.1
+
+
+
+    
+# 4 参考<a name="reference"></a>
+
+
+   1. [Shadowsocks + GfwList 实现 OpenWRT / LEDE 路由器自动翻墙
+](https://cokebar.info/archives/962)
+   2. [如何让路由器科学上网](http://www.cloudchou.com/work/post-983.html
+)
+   3. [OpenWrt路由器为什么会翻墙失败或不稳定]( https://softwaredownload.gitbooks.io/openwrt-fanqiang/ebook/03.7.html
+)
+   4. [运行了一段时间Shadowsocks-libev for OpenWrt 发现 ss-redir 经常莫名的假死
+](https://github.com/shadowsocks/openwrt-shadowsocks/issues/106
+)
+   5. [OWSS (OpenWrt + ShadowSocks) FQ完全手册 (Linux工具)
+](https://blog.lutty.me/code/openwrt/2014-10/owss-fq-guide-linux-tool.html
+)
