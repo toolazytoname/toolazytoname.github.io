@@ -5,7 +5,7 @@ date:   2017-05-16 22:29:32 +0800
 categories: 生活
 ---
 
-这回自己整理了一个简单的脚本。希望可以做到一键安装。对于整体的原理，流程也有了一定的了解。和任何技术问题一样，过程很艰辛，但一旦搞定了，也是春风得意马蹄疾。
+
 
 
 **目录**
@@ -30,8 +30,62 @@ categories: 生活
 
 shadowsocks + GFWlist
 
+
 # 2 过程<a name="process"></a>
-具体过程看脚本
+
+
+具体过程看脚本和
+[相关配置文件]({{ site.url }}/assets/SS.zip)
+
+
+
+~~~
+
+#!/bin/bash
+#写了个脚本，希望可以尽量自动部署
+opkg update
+
+#ShadowSocks================================
+opkg list_installed | grep shadowsocks
+opkg remove shadowsocks-*
+#有人说必须使用spec版本，非spec版本的shadowsocks不能和luci-app-shadowsocks配合使用，它会缺少/etc/init.d/shadowsocks
+#下载地址 https://sourceforge.net/projects/openwrt-dist/files/shadowsocks-libev/2.4.8-8816fa1/ramips/
+
+#我安装的版本如下，确实之前安装了很多别的版本，碰到过/etc/init.d/shadowsocks 文件比较奇怪
+#也碰到过明明安装了luci-app-shadowsocks-spec_1.3.2-1_all.ipk 却没有在界面上找到，应该是版本的关系
+opkg install shadowsocks-libev_2.4.8-2_ramips_24kec.ipk
+#这里填写一些参数配置和服务器一致即可
+cp shadowsocks.json /etc/shadowsocks.json
+#开启了ss-redir，并且在这里设置了ipset和iptables
+cp shadowsocks    /etc/init.d/shadowsocks
+#shadowsocks 开机自动启动
+/etc/init.d/shadowsocks enable
+#shadowsocks 启动服务
+/etc/init.d/shadowsocks start
+
+#ipset======================================
+opkg install ipset
+
+#dnsmasq-full===============================
+opkg list_installed | grep dnsmasq
+opkg remove dnsmasq
+opkg install dnsmasq-full
+
+mkdir  /etc/dnsmasq.d
+#这个文件很重要，应该根据路由解析道方式来填写，我选择了某个公众DNS服务器。
+#原来这个文件是127.0.0.1#5353,应该是直接转给了ss-tunnel，到自己ss的服务器，然后再让ShadowSocks服务器将DNS请求转发给你设置好的域名服务器(通过Forwarding Tunnel设置)，这样做的好处是你可以选择和你的ShadowSocks服务器最近的DNS服务器，
+#这样DNS服务器解析的ip地址和你的ShadowSocks服务器最近，ShadowSocks服务器去做其他请求时会最快，这种方案也不用担心域名被污染。
+cp dnsmasq_list.conf /etc/dnsmasq.d/
+#增加一行设置conf-dir=/etc/dnsmasq.d ，
+#有人还在这里设置了 cache-size=1500      #修改dnsmasq缓存大小，默认为150。
+#min-cache-ttl=720    #修改DNS缓存最小有效期（秒）。仅适用于aa65535的dnsmasq-full版本。
+cp dnsmasq.conf  /etc/dnsmasq.conf
+/etc/init.d/dnsmasq enable
+/etc/init.d/dnsmasq start
+
+
+~~~
+
 
 # 3 我理解的原理<a name="underTheHood"></a>
 
@@ -74,7 +128,7 @@ shadowsocks + GFWlist
 
 
     
-# 4 参考<a name="reference"></a>
+# 5 参考<a name="reference"></a>
 
 
    1. [Shadowsocks + GfwList 实现 OpenWRT / LEDE 路由器自动翻墙
