@@ -100,6 +100,7 @@ cp dnsmasq.conf  /etc/dnsmasq.conf
 4. iptables -t nat —list
 5. nslookup 或者 dig
 6. nc 命令（这个还没试过）
+7. dmesg看日志（这个还没试过）
 
 知识点
 
@@ -122,9 +123,11 @@ cp dnsmasq.conf  /etc/dnsmasq.conf
     *         ├── ss-local       // 提供 SOCKS 代理
     *         ├── ss-redir       // 提供透明代理, 从 v2.2.0 开始支持 UDP
     *         └── ss-tunnel      // 提供端口转发, 可用于 DNS 查询
-9. 不确定SS服务器是否支持UDP转发，有办法测试吗？(还没有尝试)
+9. 不确定SS服务器是否支持UDP转发，有办法测试吗？（这个还没试过）
     * /usr/bin/ss-tunnel -c /etc/shadowsocks.json  -l 5353 -L 8.8.8.8:53 -u
     * nslookup www.youtube.com 127.0.0.1
+10. 听说加-v 参数，可以看输出日志（这个还没试过）
+
 
 
 
