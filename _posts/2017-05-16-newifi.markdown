@@ -89,6 +89,7 @@ cp dnsmasq.conf  /etc/dnsmasq.conf
 
 # 3 我理解的原理<a name="underTheHood"></a>
 
+![我理解的原理图]({{ site.url }}/assets/newifiCross.svg)
 
 # 4 FAQ<a name="FAQ"></a>
 如果发现不管用了，可以按照以下步骤简单检查一下
