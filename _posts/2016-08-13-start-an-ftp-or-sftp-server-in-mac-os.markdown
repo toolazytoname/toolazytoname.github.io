@@ -3,6 +3,8 @@ layout: post
 title:  "Mac上搭建FTP&SFTP服务"
 date:   2016-08-13 21:53:32 +0800
 categories: hack your life
+tags:
+  - hack your life
 ---
 
 
@@ -52,7 +54,7 @@ ftp localhost
 打开以后，也可以用以下命令跑一下试试。
 
 ~~~
-sftp localhost 
+sftp localhost
 ~~~
 
 4 Disable FTP or SFTP Server <a name="disable"></a>
@@ -76,5 +78,3 @@ sudo -s launchctl unload -w /System/Library/LaunchDaemons/ftp.plist
 
 - [Start an FTP or SFTP Server in Mac OS X](http://osxdaily.com/2011/09/29/start-an-ftp-or-sftp-server-in-mac-os-x-lion/
 )
-
-

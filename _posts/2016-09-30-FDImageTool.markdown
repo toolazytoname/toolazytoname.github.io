@@ -2,7 +2,9 @@
 layout: post
 title:  "生成渐变色图片工具类"
 date:   2016-09-30 23:14:32 +0800
-categories: FDTool
+categories: FDSDK
+tags:
+  - FDSDK
 ---
 
 这次项目UI大改版有好些渐变效果的图片，我一看其实可以用代码生成，这样可以少放点图片资源。自认为效果还是不错了，基本上达到了设计师的认可。

@@ -2,7 +2,9 @@
 layout: post
 title:  "ResponderChain 刨根问底"
 date:   2016-08-17 14:58:32 +0800
-categories: 心路
+categories: iOS
+tags:
+  - iOS
 ---
 
 一直以为以为对于手势，自己还是比较了解的，谁知道干起活来，也会有卡壳的时候。所以记录一下。

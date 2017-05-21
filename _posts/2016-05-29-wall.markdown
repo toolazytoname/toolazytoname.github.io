@@ -2,7 +2,9 @@
 layout: post
 title:  "科学上网"
 date:   2016-05-29 16:15:32 +0800
-categories: 黑技能
+categories: hack your life
+tags:
+  - hack your life
 ---
 
 **目录**
@@ -53,5 +55,3 @@ brew search 一下关键字，install
 
 
 [shadowsocks](https://github.com/shadowsocks/shadowsocks/tree/master)
-
-

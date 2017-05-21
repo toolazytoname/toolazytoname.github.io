@@ -2,7 +2,9 @@
 layout: post
 title:  "IAP掉单优化"
 date:   2016-12-07 13:27:32 +0800
-categories: FDTool
+categories: iOS
+tags:
+  - iOS
 ---
 
 IAP掉单优化。
@@ -35,11 +37,11 @@ IAP掉单优化。
     1. 包括在didFinishLaunchingWithOptions里面addTransactionObserver以后，下面这个方法返回上次没有finish的交易后有没有妥善处理。    
     2. 请求回执单验证成功的接口一次没有成功，后续的重试是否会成功，开发一定要进行自测。
 
-~~~ 
-    - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions 
+~~~
+    - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
 ~~~
 
- 
+
 # 2 客户端<a name="client"></a>
 
 1. 替换成新的API
@@ -68,7 +70,7 @@ NSData *transactionReceipt = [NSData dataWithContentsOfURL:[[NSBundle mainBundle
     2. bundle_id验证逻辑，验证是否是来自自家客户端，
     3. 如果要校验历史上有没有掉单的情况，是不是需要保存每笔交易的苹果transaction_id，看看有没有对应的历史交易记录存着。
 
-    
+
 ~~~
 //get applicationUsername
        SKMutablePayment *payment = [SKMutablePayment paymentWithProduct:product];
@@ -126,8 +128,8 @@ NSData *transactionReceipt = [NSData dataWithContentsOfURL:[[NSBundle mainBundle
 用户拿到的信息和开发拿到的信息能否关联起来？？？以应对投诉时去区分这个用户是否是恶意投诉
 在[这篇博客](http://blog.csdn.net/teng_ontheway/article/details/47023119)中
 里面有下面这段话，用户拿到的信息和开发拿到的信息能关联起来？？？
- 
- 
+
+
 ~~~
 这种情况在以往的经验中也会出现，常见的玩家和游戏运营商发生的纠纷。游戏客服向玩家索要游戏账号和appstore的收据单号，通过查询itunes-connect看是否确有这笔订单。如果订单存在，则要联系研发方去查询游戏服务器，看订单号与玩家名是否对应，并且是否已经被使用了，做这一点检查的目的是 为了防止恶意玩家利用已经使用过了的订单号进行欺骗(已验证的账单是可以再次请求验证的,曾经为了测试,将账单手动发给服务器处理并成功)，谎称自己没收到商品。这就是上面一节IAP Server Model中红字所提到的安全逻辑的目的。当然了，如果查不到这个订单号，就意味着这个订单确实还没使用过，手动给玩家补发商品即可。
 ~~~
@@ -152,6 +154,6 @@ NSData *transactionReceipt = [NSData dataWithContentsOfURL:[[NSBundle mainBundle
 
 
 
-    
+
 # 7 参考<a name="reference"></a>
    1. 这篇文章写得很好给了我很大的启发[苹果IAP开发中的那些坑和掉单问题](http://zhangtielei.com/posts/blog-iap.html)

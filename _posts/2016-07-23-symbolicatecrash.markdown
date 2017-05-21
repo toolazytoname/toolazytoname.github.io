@@ -2,7 +2,9 @@
 layout: post
 title:  "符号化 iOS Crash 文件"
 date:   2016-07-23 11:27:32 +0800
-categories: iOS Debug 技巧
+categories: iOS
+tags:
+  - iOS
 ---
 老生常谈，拾人牙慧，只是自己做个记录，方便以后查询。
 
@@ -231,7 +233,7 @@ grep --after-context=1000 "Binary Images:" original.crash | grep AppName
 
 ~~~
 
-可以先用spotlight试试搜索 
+可以先用spotlight试试搜索
 
 ~~~
 3075c4be517b30a78f98cdb16e7bc4ac
@@ -304,7 +306,7 @@ This table lists all running processes, including system daemons, at the time th
      "frontmost",
      "resume"
    ],
-   
+
 ~~~
 占用内存87862*4K/1024=343M。这个算法，还得验证一下。
 
@@ -331,14 +333,14 @@ This table lists all running processes, including system daemons, at the time th
 
 通过[苹果官方的文档](https://developer.apple.com/library/content/documentation/DeveloperTools/Conceptual/InstrumentsUserGuide/CommonMemoryProblems.html#//apple_ref/doc/uid/TP40004652-CH91-SW1)我看讲的比上面细。
 
-* Overall Memory Use. 
+* Overall Memory Use.
 	* Monitor at a high level how your app uses memory and compare it to the memory usage of other active processes on the system. Look for areas of large or unexpected memory growth. See Monitor Memory Usage.
-* Leaked Memory. 
+* Leaked Memory.
 	* This is memory that was allocated at some point, but was never released and is no longer referenced by your app. Since there are no references to it, there’s now no way to release it and the memory can’t be used again. For example, suppose you’ve written an app that creates rectangle objects in a drawing, but never releases the objects when the drawing is closed. In this case, your app would leak more and more memory whenever a drawing containing rectangles is closed. To fix the leak, you need to figure out which object isn’t being released, and then update your app to release it at the appropriate time. See Find Memory Leaks.
 
-* Abandoned Memory. 
+* Abandoned Memory.
 	* This is memory that your app has allocated for some reason, but it’s not needed and won’t be referenced. For example, suppose your app adds images to a cache after they’ve already been cached—using double the memory for the same images. Or, maybe your app maintains an array of objects in case you need to access them later, but you never actually do. Unlike leaked memory, abandoned memory like this is still referenced somewhere in your app. It just serves no purpose. Since it’s still technically valid, it’s more difficult for Instruments to identify and requires more detective work on your part to find. See Find Abandoned Memory.
-* Zombies. 
+* Zombies.
 	* This is memory that has been released and is no longer needed, but your code still references it somewhere. For example, suppose your app contains an image cache. Once the cache has been cleared, your app shouldn’t attempt to refer to the images that it previously contained. Calls to these nonexistent images are considered zombies—references to objects that are no longer living. See Find Zombies.
 
 
@@ -356,4 +358,3 @@ Reference
 
 - [FindingAbandonedMemory](https://developer.apple.com/library/content/documentation/DeveloperTools/Conceptual/InstrumentsUserGuide/FindingAbandonedMemory.html#//apple_ref/doc/uid/TP40004652-CH80-SW1)
 - [Advanced Memory Management Programming Guide.](https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/MemoryMgmt.html#//apple_ref/doc/uid/10000011i)
-

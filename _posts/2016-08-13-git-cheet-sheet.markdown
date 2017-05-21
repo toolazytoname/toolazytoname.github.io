@@ -2,7 +2,9 @@
 layout: post
 title:  "Git速查表"
 date:   2016-08-13 23:27:32 +0800
-categories: 神兵
+categories: tool
+tags:
+  - tool
 ---
 
 
@@ -31,5 +33,3 @@ categories: 神兵
 
 
 <iframe src="{{ site.url }}/assets/Git-Cheet-Sheet/freemind.html" width="100%" height="100%" ></iframe>
-
-

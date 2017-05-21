@@ -2,7 +2,9 @@
 layout: post
 title:  "联想newifi mini科学上网配置"
 date:   2017-05-16 22:29:32 +0800
-categories: 生活
+categories: hack your life
+tags:
+  - hack your life
 ---
 
 
@@ -113,10 +115,10 @@ cp dnsmasq.conf  /etc/dnsmasq.conf
     * 如果想让ShadowSocks辅助做Dns解析，可以勾选UDP Forward(本步骤是可选的，不勾选也能正常工作)，这样做的效果是将Dns解析请求通过ShadowSocks的隧道转发给ShadowSocks服务器，然后再让ShadowSocks服务器将DNS请求转发给你设置好的域名服务器(通过Forwarding Tunnel设置)，这样做的好处是你可以选择和你的ShadowSocks服务器最近的DNS服务器，这样DNS服务器解析的ip地址和你的ShadowSocks服务器最近，ShadowSocks服务器去做其他请求时会最快，这种方案也不用担心域名被污染。
 6. nslookup 或者 dig 命令
     * nslookup www.baidu.com 192.168.1.1 这个命令我试了一下，在本机也是可以操作的
-    * dig @localhost -p 3210 google.com 
+    * dig @localhost -p 3210 google.com
 7. ps | ss 查看
     * 在路由器和服务器可以通过ps命令查看ss-redir命令的详细参数，可以干掉配置时自动启动的shadowsocks进程，然后再根据命令参数手动执行ss-redir命令和ss-server进程，注意不要添加-f参数，不然会以daemon形式运行，执行ss-redir命令时添加-v参数，这样在路由器和服务器上都可以看到详细的请求记录，我们就知道到底哪个环节出了问题
-8. 
+8.
     * 客户端/
     * └── usr/
     *     └── bin/
@@ -131,7 +133,7 @@ cp dnsmasq.conf  /etc/dnsmasq.conf
 
 
 
-    
+
 # 5 参考<a name="reference"></a>
 
 

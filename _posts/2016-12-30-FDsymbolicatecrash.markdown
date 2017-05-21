@@ -2,7 +2,9 @@
 layout: post
 title:  "定制symbolicatecrash"
 date:   2016-12-30 19:50:32 +0800
-categories: FDTool
+categories: FDSDK
+tags:
+  - FDSDK
 ---
 
 定制symbolicatecrash
@@ -23,5 +25,3 @@ categories: FDTool
 
 1. 对于解析不出来的日志文件，可以再调用atos，逐行解析能解析的内容
 2. 可以比较一下dSYM文件的uuid和crash文件的uuid，如果发现不一样，可以做一个提示。
-
-

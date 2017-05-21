@@ -3,6 +3,8 @@ layout: post
 title:  "谁动了我的奶酪"
 date:   2016-07-27 16:51:32 +0800
 categories: FDSDK
+tags:
+  - FDSDK
 ---
 
 因为项目中集成了各个部门的不同模块，有一次调试偶发的bug，发现设备屏幕自动变暗了，明明设置了[UIApplication sharedApplication].idleTimerDisabled 这个属性了，猜测是集成的哪个别的部门的模块动了这个属性。

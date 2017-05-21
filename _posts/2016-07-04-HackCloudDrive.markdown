@@ -2,7 +2,9 @@
 layout: post
 title:  "脚本批量改变文件内容"
 date:   2016-07-04 14:33:32 +0800
-categories: 无聊
+categories: hack your life
+tags:
+  - hack your life
 ---
 受到知乎上一个问题的启发，打算写一个简单的脚本。
 

@@ -2,7 +2,9 @@
 layout: post
 title:  "WiiU 破解"
 date:   2016-12-08 16:35:32 +0800
-categories: fun
+categories: hack your life
+tags:
+  - hack your life
 ---
 
 WiiU 破解。
@@ -54,7 +56,7 @@ WiiU 破解。
 | 大金刚：热带急冻   | Donkey Kong Country Tropical Freeze         |    有 |0005000010138300|
 
 
- 
+
 # 3 用wup方式安装<a name="wup"></a>
 
 ## 1 限制<a name="wupLimit"></a>
@@ -127,7 +129,7 @@ Pack HBL,然后在里面放Pack HBL包http://pan.baidu.com/s/1hrW2at2 ，把wiiu
 2. 打开wiiu浏览器访问 wiiu.91wii.com
 3. WebExploits for 5.5.1
 4. PHP WebExploits for 5.5.1
-5. Homebrew Launcher 
+5. Homebrew Launcher
 6. 点完就如下图，点下一页最后一个wupinstaller mod，点load
 7. 进入加载页面，点X就安装在硬盘里了，（点a是安装到系统的64G内存里，更方便）
 8. 安装好会提示的，接着就愉快的玩了，再也不用每次开机都引导了，然后把install里的文件删了就可以再安装第二个游戏了
@@ -155,7 +157,7 @@ Pack HBL,然后在里面放Pack HBL包http://pan.baidu.com/s/1hrW2at2 ，把wiiu
 3. 尚未完全理解这几种方式 http://www.91wii.com/thread-74146-1-1.html
 4. 主要是想玩儿《零》，但是没有欧版的ticket，需要跨区。
 
-    
+
 # 6 参考<a name="reference"></a>
 0. [主要的信息只要从这里看就好了，大多数工具信息都是从这里看的 ](http://www.91wii.com/forum-117-1.html)
 1. [WIIU伪装教程 WUP Installer使用教程](http://www.paopaoche.net/tv/100192.html)

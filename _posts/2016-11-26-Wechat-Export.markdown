@@ -2,7 +2,9 @@
 layout: post
 title:  "微信聊天记录导出"
 date:   2016-11-25 23:14:32 +0800
-categories: FDTool
+categories: hack your life
+tags:
+  - hack your life
 ---
 闲来有事，自己搞一个自己用的小工具，凑活能用。
 
@@ -35,14 +37,14 @@ categories: FDTool
     1. iTunes 12.5.3.7
     2. iOS 10.1.1 未越狱
     3. WeChat 6.3.31
-    4. Mac 10.12.1 
+    4. Mac 10.12.1
 
- 
+
 # 2 实现过程<a name="process"></a>
 
 
 ## 1 备份<a name="backup"></a>
-	
+
 在iTunes中执行备份操作，不要加密，备份到本地。因为我的iOS设备没有越狱，所以只能通过这种方式访问微信沙盒中的文件。
 cd 到这个目录就可以看到所有设备的备份文件，如果有多台设备的备份，会有多个文件夹。
 
@@ -88,13 +90,13 @@ silk格式
 
 1. 文件前面加上#!AMR
 2. ffmpeg 转成 wav
- 
- 
+
+
 ## 5 导出
-    
-    
+
+
 简单写了个HTML，里面嵌上视频，音频，文字。我主要关注这几块内容，别的就懒得管了。自己能看就行，懒得整样式了。
-    
+
 # 3 待完善
 
 
@@ -106,7 +108,7 @@ silk格式
     6. 数据库的读取逻辑，可以优化一下
     7. 耗时操作可以放到后台线程去处理。
 
-    
+
 # 4 参考
 
    1. [一些业务微信内部的逻辑以及整体思路，内有C#源码，亏我还搞过C#，然而已经看不懂了。我猜是因为没装VS](https://zhuanlan.zhihu.com/p/22474033)
@@ -115,4 +117,3 @@ silk格式
    4. [他也是参考狗神的 ](https://zhuanlan.zhihu.com/p/21783890)
    5. [顺道学习一下音频格式的一些基础知识  ](https://www.raywenderlich.com/69365/audio-tutorial-ios-file-data-formats-2014-edition)
    6. [如何用Mac自带的命令行工具转换](https://www.raywenderlich.com/69367/audio-tutorial-ios-converting-recording-2014-edition)
-

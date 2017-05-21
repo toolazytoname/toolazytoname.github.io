@@ -3,6 +3,8 @@ layout: post
 title:  "IAP回执单新API"
 date:   2016-05-28 14:18:32 +0800
 categories: iOS
+tags:
+  - iOS
 ---
 
 **目录**
@@ -52,7 +54,7 @@ categories: iOS
 <a name="oldResponse"></a>返回
 ----
 
-  
+
 ~~~
 {
     receipt =    {
@@ -177,6 +179,6 @@ non-renewing subscription  | <del>删除<del> |永远留着的|不能        |
 non-consumable product     | 永远留着的      |永远留着的|能         |
 auto-renewable subscription| 永远留着的      |永远留着的|能         |
 free subscription          | 永远留着的      |        |能         |
- 
- 
+
+
  一定程度上回答了我的这个疑惑，不用管它，文档写错了呗。照理说，第一列和第三列应该是逻辑一致的，但是第二列的确是苹果打自己脸了。

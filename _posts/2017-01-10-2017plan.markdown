@@ -2,7 +2,9 @@
 layout: post
 title:  "2017新年计划"
 date:   2017-01-10 18:32:32 +0800
-categories: plan
+categories: life
+tags:
+  - life
 ---
 
 2017新年计划
@@ -75,7 +77,7 @@ categories: plan
 
 下面列一下，新的目标，尽量详细。
 
-1. linux 
+1. linux
 	1. Linux ，过完的那本《鸟哥的Linux私房菜基础篇》
 	2. 看完视频之前的Linux 培训视频
 	3. 熟练使用Vim
@@ -113,4 +115,3 @@ categories: plan
 下面我画个表吧，搞定了的打个够。在这一年时间里面，持续维护。
 神啊，希望我新年能把这些都给搞定了。
 TODO list
-
