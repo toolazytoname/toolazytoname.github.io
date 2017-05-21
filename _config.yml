@@ -47,7 +47,7 @@ kramdown:
 
 
 # Disqus settings
-#disqus_username: _your_disqus_short_name_
+disqus_username: toolazytoname
 
 # Duoshuo settings
 #duoshuo_username: huxblog
@@ -59,10 +59,10 @@ kramdown:
 
 # Analytics settings
 # Baidu Analytics
-ba_track_id:0c746f235961d52a0637e76673a3caa9
+ba_track_id: 0c746f235961d52a0637e76673a3caa9
 # Google Analytics
 ga_track_id: 'UA-99590899-1'            # Format: UA-xxxxxx-xx
-ga_domain: weichao.ren
+qga_domain: weichao.ren
 
 
 
