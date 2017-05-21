@@ -3,6 +3,7 @@ layout: post
 title:  "ResponderChain 刨根问底"
 date:   2016-08-17 14:58:32 +0800
 categories: iOS
+catalog: true
 tags:
   - iOS
 ---

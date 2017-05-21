@@ -3,6 +3,7 @@ layout: post
 title:  "2017新年计划"
 date:   2017-01-10 18:32:32 +0800
 categories: life
+catalog: true
 tags:
   - life
 ---

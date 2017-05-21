@@ -3,6 +3,7 @@ layout: post
 title:  "联想newifi mini科学上网配置"
 date:   2017-05-16 22:29:32 +0800
 categories: hack your life
+catalog:  true
 tags:
   - hack your life
 ---

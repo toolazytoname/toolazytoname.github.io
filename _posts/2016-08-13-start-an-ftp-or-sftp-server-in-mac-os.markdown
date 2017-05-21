@@ -3,6 +3,7 @@ layout: post
 title:  "Mac上搭建FTP&SFTP服务"
 date:   2016-08-13 21:53:32 +0800
 categories: hack your life
+catalog: true
 tags:
   - hack your life
 ---

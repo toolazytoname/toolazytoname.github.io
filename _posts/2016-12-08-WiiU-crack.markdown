@@ -3,6 +3,7 @@ layout: post
 title:  "WiiU 破解"
 date:   2016-12-08 16:35:32 +0800
 categories: hack your life
+catalog: true
 tags:
   - hack your life
 ---

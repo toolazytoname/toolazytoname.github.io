@@ -3,6 +3,7 @@ layout: post
 title:  "符号化 iOS Crash 文件"
 date:   2016-07-23 11:27:32 +0800
 categories: iOS
+catalog: true
 tags:
   - iOS
 ---
