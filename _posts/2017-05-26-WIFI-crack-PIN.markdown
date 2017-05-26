@@ -110,7 +110,7 @@ waiting for beacon from
 # 4 注意点
 
 1. 最后pin完最后会显示WPS PIN和WPA PSK。后期如果WPS功能没关，pin码没修改，无论怎样修改密码，都可以通过pin码获取wifi密码: reaver -i mon0 -b mac -p pin码，来再次得到密码。😄
-2. 现在的路由一般会有防pin措施，例如会有300秒pin限制，但这个是伪防pin,作用不是很大。根据它设置时间间隔，正好防止我们把路由器pin死。
+2. 现在的路由一般会有防pin措施，例如会有300秒pin限制。可以根据它设置时间间隔，正好防止我们把路由器pin死。
 
 
 
