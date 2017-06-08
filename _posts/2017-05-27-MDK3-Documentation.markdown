@@ -11,7 +11,8 @@ tags:
 
 英文原文：[MDK3 Documentation](https://svn.mdk3.aircrack-ng.org/mdk3/docs/Documentation_incomplete.html)
 
-译前备注：对网络知识一知半解，纰漏错误难免。如有错误请指正。geekw@foxmail.com
+译前备注：因为对很多相关知识内容不太理解，强心翻译觉得意义不大，所以先放着。
+
 
 MDK这个工具将IEEE 802.11这个协议的脆弱淋漓尽致地展现在人们面前。
 请确保无线网络的所有者同意你用MDK攻击攻击他的网络，你将为此承担全部责任。
