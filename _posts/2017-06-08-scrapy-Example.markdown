@@ -43,6 +43,8 @@ tags:
 
 1. [scrapy](https://doc.scrapy.org/en/latest/index.html)
 2. [知乎爬虫索引](https://www.zhihu.com/topic/19577498)
+3. [Dive Into Python 3](http://www.diveintopython3.net)
+4. [The Python Tutorial](https://docs.python.org/3/tutorial/)
 
 	
 
