@@ -1,0 +1,34 @@
+---
+layout: post
+title:  "GnuPG"
+date:   2017-06-16 19:44:32 +0800
+categories: hack your life
+catalog:  true
+tags:
+  - hack your life
+---
+
+
+
+今天用了GPG（GNU Privacy Guard）
+
+* [各平台下载地址](https://www.gnupg.org/download/index.html?data2=abmg07b)
+* [Mac 上GPG Suite下载地址](https://gpgtools.org)
+* [简单试用的一个文字教程](https://gpgtools.tenderapp.com/kb/how-to/first-steps-where-do-i-start-where-do-i-begin-setup-gpgtools-create-a-new-key-your-first-encrypted-mail)
+* [教学视频](https://gpgtools.tenderapp.com/kb/how-to/watch-screencast)
+* [一些命令行操作](https://www.gnupg.org/gph/en/manual.html#AEN136)  
+
+很有意思的一个软件，可以用来加密，解密，签名。估计应该是版本的缘故，没有与我的mail 绑定起来，不过，直接右键操作也是一样的。生成一对公钥和私钥，用来加密文本和字符串都没问题。
+
+
+学习非对称加密N年，还真是第一次实际使用。（苹果的那套就觉得挺麻烦的，其实原理一样）我的公钥公开的，所有想给我发消息的人都可以在平台服务器上下载到我的公钥，加密成密文以后，只有我自己手里握着的私钥才可以解开，别人截取了，也没有用。
+
+签名也是第一次尝试
+
+
+
+	
+
+	
+
+
