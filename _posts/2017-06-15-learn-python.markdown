@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "python入坑留念"
-date:   2017-06-015 17:50:32 +0800
+date:   2017-06-15 17:50:32 +0800
 categories: python
 catalog:  true
 tags:
