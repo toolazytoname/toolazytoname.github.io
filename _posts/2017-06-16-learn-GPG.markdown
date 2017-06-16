@@ -23,11 +23,60 @@ tags:
 
 学习非对称加密N年，还真是第一次实际使用。（苹果的那套就觉得挺麻烦的，其实原理一样）我的公钥公开的，所有想给我发消息的人都可以在平台服务器上下载到我的公钥，加密成密文以后，只有我自己手里握着的私钥才可以解开，别人截取了，也没有用。
 
-签名也是第一次尝试
+签名也是第一次尝试，签名用私钥来创建，然后对方收到以后用公钥来验证，看是否有篡改。用来tamper-resistant
+
+常用命令
+### Exporting a public key
 
 
+~~~bash
+alice% gpg --armor --export alice@cyb.org
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: GnuPG v0.9.7 (GNU/Linux)
+Comment: For info see http://www.gnupg.org
 
+[...]
+-----END PGP PUBLIC KEY BLOCK-----
+
+~~~
+
+###Make a digital signature
+
+~~~bash
+alice% gpg --output doc.sig --sign doc
+
+You need a passphrase to unlock the private key for
+user: "Alice (Judge) <alice@cyb.org>"
+1024-bit DSA key, ID BB7576AC, created 1999-06-04
+
+Enter passphrase: 
+
+
+alice% file doc.sig
+doc.sig: data
+~~~
+
+### Check the signature
+
+~~~bash
+alice% gpg --verify doc.sig
+~~~
+
+### Check the signature and recover the original document
+
+~~~bash
+blake% gpg --output doc --decrypt doc.sig
+~~~
 	
+	
+	
+### Clearsigned documents
+
+~~~bash
+alice% gpg --clearsign doc
+~~~
+
+
 
 	
 
