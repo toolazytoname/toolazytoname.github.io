@@ -40,7 +40,7 @@ Comment: For info see http://www.gnupg.org
 
 ~~~
 
-###Make a digital signature
+### Make a digital signature
 
 ~~~bash
 alice% gpg --output doc.sig --sign doc
