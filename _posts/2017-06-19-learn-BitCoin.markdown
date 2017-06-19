@@ -59,14 +59,7 @@ tags:
 	* [linux计划任务crontab使用方法](http://www.tangshuang.net/2689.html)
 	* [Linux自动重启nginx httpd](http://www.tangshuang.net/2691.html)
 
-8. 未完成
-	* 有三台设备的挖矿程序会有不明原因退出，汗颜，😓，人家用别人的设备都能挖，我用自己的设备竟然挖不了
-		* 我试了screen/nohup/setsid/&都不管用，
-		* ./cpuminer 重定向日志到文件也没啥东西打出来
-		* dmesg 日志没找到相关内容
-		* 差不多能撑的时间是一个ssh会话的时长。
-		* CPULimit 还没试过
-9. 波折
+8. 波折
 	* apt-get install zlib1g zlib1g.dev 这两个是我自己加上的，还是谷歌了一段时间才搞定的。
 	* 有三台设备的挖矿程序会有不明原因退出，汗颜，😓，人家用别人的设备都能挖，我用自己的设备竟然挖不了。
 	*  我试了screen/nohup/setsid/&都不管用，
@@ -76,7 +69,7 @@ tags:
 		* CPULimit 设置在50貌似还是不行，暂时没找到原因
 		* 加了个定时任务去检测挖矿程序是否挂掉，如果挂掉，那么重启
 	
-10. 黑暗森林
+9. 黑暗森林
 	* [比特币勒索攻击技术演进与趋势](https://mp.weixin.qq.com/s/-ZZU7REUdMgaxZ7TCV_vlA)
 
 	
@@ -120,7 +113,7 @@ tags:
 
 
 ~~~bash
-vi /opt/autorestartMiner.sh;
+vim /opt/autorestartMiner.sh;
 chmod 755 /opt/autorestartMiner.sh
 crontab -e
 */10 * * * * /opt/autorestartMiner.sh
@@ -137,7 +130,7 @@ ps -ef | grep cpuminer |grep -v grep > /dev/null
 if [ $? != 0 ]
 then
        (exec /root/cpuminer -a cryptonight -o stratum+tcp://xmr.pool.minergate.com:45560 -u Email -p x &> /dev/null &);
-		setsid cpulimit -l 50 -e cpuminer;
+		setsid cpulimit -l 70 -e cpuminer;
 fi
 ~~~
 
