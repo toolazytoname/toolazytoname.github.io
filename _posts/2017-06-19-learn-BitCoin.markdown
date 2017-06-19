@@ -65,6 +65,12 @@ tags:
 		* CPULimit 还没试过
 9. 波折
 	* apt-get install zlib1g zlib1g.dev 这两个是我自己加上的，还是谷歌了一段时间才搞定的。
+	* 有三台设备的挖矿程序会有不明原因退出，汗颜，😓，人家用别人的设备都能挖，我用自己的设备竟然挖不了。
+	*  我试了screen/nohup/setsid/&都不管用，
+		* ./cpuminer 重定向日志到文件也没啥东西打出来
+		* dmesg 日志没找到相关内容
+		* 差不多能撑的时间是一个ssh会话的时长。
+		* CPULimit 设置在50貌似可行了
 	
 10. 黑暗森林
 	* [比特币勒索攻击技术演进与趋势](https://mp.weixin.qq.com/s/-ZZU7REUdMgaxZ7TCV_vlA)
@@ -77,18 +83,18 @@ tags:
 	
 	
 ~~~bash
-
-	apt-get update;
-	apt-get install build-essential libcurl4-openssl-dev git automake libtool libjansson* libncurses5-dev libssl-dev zlib1g zlib1g.dev;
 	#cpuminer需要编译生成
+	apt-get update;
+	apt-get install build-essential libcurl4-openssl-dev git automake libtool libjansson* libncurses5-dev libssl-dev zlib1g zlib1g.dev cpulimit;
+
 	git clone --recursive https://github.com/tpruvot/cpuminer-multi.git;
 	cd cpuminer-multi;
 	git checkout linux;
 	./autogen.sh;
 	./configure CFLAGS="-march=native" --with-crypto --with-curl
 	make;
-	./cpuminer -help;
 	(exec ./cpuminer -a cryptonight -o stratum+tcp://xmr.pool.minergate.com:45560 -u Email -p x &> /dev/null &);
+	setsid cpulimit -l 50 -e cpuminer;
 	
 ~~~
  
@@ -98,13 +104,13 @@ tags:
  
  
  ~~~bash
-
+	#cpuminer现成
  	apt-get update;
-	apt-get install build-essential libcurl4-openssl-dev git automake libtool libjansson* libncurses5-dev libssl-dev zlib1g zlib1g.dev;
-	 #cpuminer现成
+	apt-get install build-essential libcurl4-openssl-dev git automake libtool libjansson* libncurses5-dev libssl-dev zlib1g zlib1g.dev cpulimit;
+
 	scp root@IP:/root/cpuminer-multi/cpuminer ./;
-	./cpuminer -help;
 	(exec ./cpuminer -a cryptonight -o stratum+tcp://xmr.pool.minergate.com:45560 -u Email -p x &> /dev/null &);
+	setsid cpulimit -l 50 -e cpuminer;
 
  ~~~
 
