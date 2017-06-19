@@ -45,6 +45,8 @@ tags:
 2. [知乎爬虫索引](https://www.zhihu.com/topic/19577498)
 3. [Dive Into Python 3](http://www.diveintopython3.net)
 4. [The Python Tutorial](https://docs.python.org/3/tutorial/)
+5. [【干货】高级架构师实战：如何用最小的代价完成爬虫需求 | 岂安低调分享](https://mp.weixin.qq.com/s/8F8jDf59zLx_vI_88ONCIw)
+5. [别让你的老板进监狱也别让你的用户受伤害，谈爬虫反爬虫套路](https://mp.weixin.qq.com/s/tdt0TQtGpiT_LcHkTXLa7A)
 
 	
 

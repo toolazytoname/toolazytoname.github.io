@@ -84,7 +84,7 @@ tags:
 
  ~~~
 9. 未完成
-	* 有三台设备的挖矿程序会有不明原因退出，
+	* 有三台设备的挖矿程序会有不明原因退出，汗颜，😓，人家用别人的设备都能挖，我用自己的设备竟然挖不了
 		* 我试了screen/nohup/setsid/&都不管用，
 		* ./cpuminer 重定向日志到文件也没啥东西打出来
 		* dmesg 日志没找到相关内容
@@ -92,6 +92,9 @@ tags:
 		* CPULimit 还没试过
 10. 波折
 	* apt-get install zlib1g zlib1g.dev 这两个是我自己加上的，还是谷歌了一段时间才搞定的。
+	
+11. 黑暗森林
+	* [比特币勒索攻击技术演进与趋势](https://mp.weixin.qq.com/s/-ZZU7REUdMgaxZ7TCV_vlA)
 
 
 
