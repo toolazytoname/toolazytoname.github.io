@@ -55,13 +55,32 @@ tags:
 	* 查看一个内容增长文件的内容 tail -f m.log
 	* pstree 可以看进程间的派生关系
 	* [Linux 技巧：让进程在后台可靠运行的几种方法](https://www.ibm.com/developerworks/cn/linux/l-cn-nohup/index.html)  
-	* [Centos中使用CPU limit限制CPU的使用率](http://www.ouvps.com/?p=570)
-8. Debian安装脚本
-	* cpuminer需要编译生成
+	* [Centos中使用CPU limit限制CPU的使用率](http://www.ouvps.com/?p=570) 
+8. 未完成
+	* 有三台设备的挖矿程序会有不明原因退出，汗颜，😓，人家用别人的设备都能挖，我用自己的设备竟然挖不了
+		* 我试了screen/nohup/setsid/&都不管用，
+		* ./cpuminer 重定向日志到文件也没啥东西打出来
+		* dmesg 日志没找到相关内容
+		* 差不多能撑的时间是一个ssh会话的时长。
+		* CPULimit 还没试过
+9. 波折
+	* apt-get install zlib1g zlib1g.dev 这两个是我自己加上的，还是谷歌了一段时间才搞定的。
 	
-	~~~bash
+10. 黑暗森林
+	* [比特币勒索攻击技术演进与趋势](https://mp.weixin.qq.com/s/-ZZU7REUdMgaxZ7TCV_vlA)
+
+	
+	
+	
+	
+	附：Debian安装脚本
+	
+	
+~~~bash
+
 	apt-get update;
 	apt-get install build-essential libcurl4-openssl-dev git automake libtool libjansson* libncurses5-dev libssl-dev zlib1g zlib1g.dev;
+	#cpuminer需要编译生成
 	git clone --recursive https://github.com/tpruvot/cpuminer-multi.git;
 	cd cpuminer-multi;
 	git checkout linux;
@@ -71,30 +90,24 @@ tags:
 	./cpuminer -help;
 	(exec ./cpuminer -a cryptonight -o stratum+tcp://xmr.pool.minergate.com:45560 -u Email -p x &> /dev/null &);
 	
- ~~~
+~~~
  
- * cpuminer现成
+ 
+ 
+ 
+ 
  
  ~~~bash
+
  	apt-get update;
 	apt-get install build-essential libcurl4-openssl-dev git automake libtool libjansson* libncurses5-dev libssl-dev zlib1g zlib1g.dev;
+	 #cpuminer现成
 	scp root@IP:/root/cpuminer-multi/cpuminer ./;
 	./cpuminer -help;
 	(exec ./cpuminer -a cryptonight -o stratum+tcp://xmr.pool.minergate.com:45560 -u Email -p x &> /dev/null &);
 
  ~~~
-9. 未完成
-	* 有三台设备的挖矿程序会有不明原因退出，汗颜，😓，人家用别人的设备都能挖，我用自己的设备竟然挖不了
-		* 我试了screen/nohup/setsid/&都不管用，
-		* ./cpuminer 重定向日志到文件也没啥东西打出来
-		* dmesg 日志没找到相关内容
-		* 差不多能撑的时间是一个ssh会话的时长。
-		* CPULimit 还没试过
-10. 波折
-	* apt-get install zlib1g zlib1g.dev 这两个是我自己加上的，还是谷歌了一段时间才搞定的。
-	
-11. 黑暗森林
-	* [比特币勒索攻击技术演进与趋势](https://mp.weixin.qq.com/s/-ZZU7REUdMgaxZ7TCV_vlA)
+
 
 
 
