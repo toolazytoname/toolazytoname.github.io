@@ -33,6 +33,53 @@ shadowsocks + 一台海外 VPS + Chrome(SwitchyOmega)/Firefox(AutoProxy)
 <a name="configVPS"></a>配置VPS
 ===
 我直接使用[这段优雅的脚本](http://www.vpsdaquan.cn/新手教程六：十分钟搭建shadowsocks科学上网服务器.html)  
+
+~~~bash
+wget –no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-go.sh
+chmod +x shadowsocks-go.sh
+./shadowsocks-go.sh 2>&1 | tee shadowsocks-go.log
+
+~~~
+
+卸载方法：
+使用 root 用户登录，运行以下命令：
+
+~~~bash
+./shadowsocks-go.sh uninstall
+~~~
+
+其他事项：
+安装完成后即已后台启动 shadowsocks-go ，运行：
+
+~~~bash
+/etc/init.d/shadowsocks status
+~~~
+
+可以查看 shadowsocks-go 进程是否已经启动。
+本脚本安装完成后，已将 shadowsocks-go 加入开机自启动。
+
+使用命令：
+启动：/etc/init.d/shadowsocks start
+停止：/etc/init.d/shadowsocks stop
+重启：/etc/init.d/shadowsocks restart
+状态：/etc/init.d/shadowsocks status
+
+多账号
+配置文件路径：/etc/shadowsocks/config.json
+{
+    "port_password":{
+         "8989":"password0",
+         "9001":"password1",
+         "9002":"password2",
+         "9003":"password3",
+         "9004":"password4"
+    },
+    "method":"aes-256-cfb",
+    "timeout":600
+}
+
+
+
 Enjoy it!
 
 <a name="configMac"></a>配置Mac客户端
