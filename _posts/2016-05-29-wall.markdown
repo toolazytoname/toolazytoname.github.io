@@ -59,13 +59,18 @@ chmod +x shadowsocks-go.sh
 本脚本安装完成后，已将 shadowsocks-go 加入开机自启动。
 
 使用命令：
+
+~~~bash
 启动：/etc/init.d/shadowsocks start
 停止：/etc/init.d/shadowsocks stop
 重启：/etc/init.d/shadowsocks restart
 状态：/etc/init.d/shadowsocks status
+~~~
 
 多账号
 配置文件路径：/etc/shadowsocks/config.json
+
+~~~
 {
     "port_password":{
          "8989":"password0",
@@ -77,6 +82,7 @@ chmod +x shadowsocks-go.sh
     "method":"aes-256-cfb",
     "timeout":600
 }
+~~~
 
 
 
