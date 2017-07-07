@@ -46,6 +46,8 @@ tags:
 3. [Dive Into Python 3](http://www.diveintopython3.net)
 4. [The Python Tutorial](https://docs.python.org/3/tutorial/)
 5. [【干货】高级架构师实战：如何用最小的代价完成爬虫需求 (岂安低调分享) ](https://mp.weixin.qq.com/s/8F8jDf59zLx_vI_88ONCIw)
+6. [航空公司与爬虫的战争：特价票的真相与内幕 | 岂安低调分享](https://mp.weixin.qq.com/s?__biz=MzIxNDE4MzA4OQ==&mid=2651025755&idx=1&sn=f42dee60ec66510ca2575301d9611b49&chksm=8c5cac85bb2b2593996258241a96a6448eb2c1682d300b6d02f068936171e202deab86c16db1&scene=21#wechat_redirect)
+7. [一篇文章了解爬虫技术现状 | 岂安低调分享](https://mp.weixin.qq.com/s/N95afABrhlajeHlxMxZMsg)
 5. [别让你的老板进监狱也别让你的用户受伤害，谈爬虫反爬虫套路](https://mp.weixin.qq.com/s/tdt0TQtGpiT_LcHkTXLa7A)
 
 	
