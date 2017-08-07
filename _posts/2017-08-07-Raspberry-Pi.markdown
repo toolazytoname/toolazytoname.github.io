@@ -16,7 +16,7 @@ N年前入手了树莓派，吃了好多年灰。
 无意间回顾了一下，自己在2012年四月前，就已经在央视的电视上，看到了树莓派的信息。
 把玩了一下，也踩了一些坑，记录一下，方便自己查看。
 
-#安装操作系统
+# 安装操作系统
 
 来安个操作系统，参照这上面的就可以了[INSTALLING OPERATING SYSTEM IMAGES](https://www.raspberrypi.org/documentation/installation/installing-images/README.md)
 
@@ -25,26 +25,26 @@ N年前入手了树莓派，吃了好多年灰。
 
 运气还真不错，还真是碰上了SD卡不兼容的情况，可以通过[RPi SD cards](http://elinux.org/RPi_SD_cards) 查询。
 
-#打开SSh功能
+# 打开SSh功能
 最新版本的树莓派系统，默认关闭了SSH功能，所以，你需要把sd卡插在Windows/Mac电脑上，可识别的分区上，创建一个空文件，名字是ssh，以开启SSH功能。
 
 
 
-#启动自动打开命令行界面
+# 启动自动打开命令行界面
 
 ~~~bash
 sudo raspi-config
 ~~~
 
 
-#图形界面，如何避免自动挂载移动硬盘
+# 图形界面，如何避免自动挂载移动硬盘
 
 在图形化界面中，打开文件管理器（file manager）
 依次点击 Edit -> Preferences
 点击选项 Volume Management
 
 
-#挂载移动硬盘
+# 挂载移动硬盘
 平常用Mac打算兼容windows，就格式化成ExFAT
 
 ~~~bash
@@ -71,7 +71,7 @@ mount -a
 试一下，不然下次很可能影响开机启动，我就试了一次，害得给他插上鼠标键盘显示器，老麻烦了。
 
 
-#AirPlay 音樂播放器
+# AirPlay 音樂播放器
 
 这个功能参考页面[使用 shairport-sync 在 Raspberry Pi 上上建立 AirPlay 音樂播放器](https://coldnew.github.io/70c5ffb9/)
 
@@ -107,10 +107,10 @@ systemctl start shairport-sync
 
 
 
-#测量设备温度
+# 测量设备温度
 vcgencmd measure_temp
 
-#反向隧道内网穿透
+# 反向隧道内网穿透
 可以从外网访问树莓派
 
 
@@ -174,7 +174,7 @@ ssh -p 6766 -i  ~/Downloads/aws.pem.txt  pi@publicServer
 ~~~
 
 
-#安装 resilio-sync
+# 安装 resilio-sync
 
 [官方安装指南](https://help.resilio.com/hc/en-us/articles/206178924-Installing-Sync-package-on-Linux
 )
@@ -219,7 +219,7 @@ rm key.asc
 
 
 
-#安装samba
+# 安装samba
 
 ~~~bash
 sudo apt-get install samba samba-common-bin
@@ -245,13 +245,13 @@ guest ok = Yes
 ~~~
 电视的播放器就可以访问播放这里的视频。
 
-#测网速
+# 测网速
  
 ~~~bash
 wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip
 ~~~
 
-#hdparm
+# hdparm
 
 还没有搞定
 
