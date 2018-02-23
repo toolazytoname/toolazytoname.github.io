@@ -47,7 +47,7 @@ kramdown:
 
 
 # Disqus settings
-#disqus_username: toolazytoname
+disqus_username: toolazytoname
 
 # Duoshuo settings
 #duoshuo_username: huxblog
