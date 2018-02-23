@@ -1,5 +1,5 @@
 # Site settings
-title: Lazy Blog
+title: 懒得起名的博客 | Lazy Blog
 SEOTitle: 懒得起名的博客 | Lazy Blog
 header-img: img/home-bg.jpg
 email: geekw@foxmail.com
@@ -47,7 +47,7 @@ kramdown:
 
 
 # Disqus settings
-disqus_username: toolazytoname
+disqus_username: weichao-ren
 
 # Duoshuo settings
 #duoshuo_username: huxblog
