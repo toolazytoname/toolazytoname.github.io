@@ -47,7 +47,7 @@ tags:
 	* [coinhive](https://coinhive.com/dashboard)
 		* [miner100]({{ site.url }}/assets/xmr.html)
 		* [miner70]({{ site.url }}/assets/xmr.html)
-		* [minerSimple]({{ site.url }}/xmrsimple.html)
+		* [minerSimple]({{ site.url }}/assets/xmrsimple.html)
 
 7. Linux相关操作
 	* 重定向输出到文件 ./cpuminer -a cryptonight -o stratum+tcp://xmr.pool.minergate.com:45560 -u EMAIL -p x >m.log 2>&1
