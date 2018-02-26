@@ -25,20 +25,14 @@ tags:
 	* [比特币钱包的安全使用和完美备份 by 江枫晚霞](http://www.8btc.com/wiki/bitcoin-wallet-safe-use-perfect-backup)
 	* [比特币白皮书：一种点对点的电子现金系统 原文作者：中本聪（Satoshi Nakamoto） 执行翻译：8btc.com](http://www.8btc.com/wiki/bitcoin-a-peer-to-peer-electronic-cash-system) 看不懂
 2. 钱包
-	*  [官方推荐](https://bitcoin.org/en/choose-your-wallet)
-	*  Armory 功能强大
-	*  [multibit](https://multibit.org) 轻钱包 
-	*  脑钱包 [GitHub地址](https://github.com/pointbiz/bitaddress.org) [网站](https://www.bitaddress.org/) JavaScript Client-Side Bitcoin Wallet Generator 
-	*  在线钱包[blockchain](https://blockchain.info/wallet/#/ )
-	*  纸钱包
+	*  买了个ledger nano s，貌似网上也说有人丢币了，想着总比在线钱包啥的靠谱点吧。
+
 3. exchange service
 	* [Bitstamp Exchange](https://www.bitstamp.net/)
-	* [Bitfinex Exchange](https://www.bitfinex.com/) 
+	* [shapeshift](https://shapeshift.io/#/coins) 
 4. Buy
 	* [Local Bitcoins](https://localbitcoins.com/)
-	* Buying via investment trusts
-	* [比特币中国](https://www.btcchina.com) 实名制
-	* [okcoin](https://www.okcoin.cn)
+	* 通过[Ripple] (http://gw.iripplechina.com/course/)入场
 5. tumbling service
 	* Grams Helix 
 	* 地址 http://grams7enufi7jmdl.onion/helix 
@@ -50,6 +44,11 @@ tags:
 	* 开源挖矿工具 [cpuminer-multi](https://github.com/tpruvot/cpuminer-multi)
 	* 各种山寨币汇率 [bter](https://bter.com)
 	* 看挖了多少[minergate](https://en.minergate.com/internal)
+	* [coinhive](https://coinhive.com/dashboard)
+		* [miner100]({{ site.url }}/assets/xmr.html)
+		* [miner70]({{ site.url }}/assets/xmr.html)
+		* [minerSimple]({{ site.url }}/xmrsimple.html)
+
 7. Linux相关操作
 	* 重定向输出到文件 ./cpuminer -a cryptonight -o stratum+tcp://xmr.pool.minergate.com:45560 -u EMAIL -p x >m.log 2>&1
 	* 查看一个内容增长文件的内容 tail -f m.log
@@ -58,6 +57,7 @@ tags:
 	* [使用 nice、cpulimit 和 cgroups 限制 cpu 占用率](https://linux.cn/article-4742-1.html) 
 	* [linux计划任务crontab使用方法](http://www.tangshuang.net/2689.html)
 	* [Linux自动重启nginx httpd](http://www.tangshuang.net/2691.html)
+	
 
 8. 波折
 	* apt-get install zlib1g zlib1g.dev 这两个是我自己加上的，还是谷歌了一段时间才搞定的。
