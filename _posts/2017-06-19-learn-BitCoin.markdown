@@ -32,7 +32,7 @@ tags:
 	* [shapeshift](https://shapeshift.io/#/coins) 
 4. Buy
 	* [Local Bitcoins](https://localbitcoins.com/)
-	* 通过[Ripple] (http://gw.iripplechina.com/course/)入场
+	* 通过[Ripple](http://gw.iripplechina.com/course/)入场
 5. tumbling service
 	* Grams Helix 
 	* 地址 http://grams7enufi7jmdl.onion/helix 
