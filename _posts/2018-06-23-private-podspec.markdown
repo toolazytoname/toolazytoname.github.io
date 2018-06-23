@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "使用Cocoapods创建私有podspec"
-date:   2018-06-23 15:32:32 +0800
+date:   2018-06-23 22:51:32 +0800
 categories: iOS
 catalog:  true
 tags:
