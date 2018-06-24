@@ -67,7 +67,13 @@ pod 'PodTestLibrary', :podspec => '~/code/Cocoapods/podTest/PodTestLibrary/PodTe
 $ pod repo push FDSpecs PodTestLibrary.podspec  #前面是本地Repo名字 后面是podspec名字
 ```
 
+删除一个私有`Spec Repo`
 
+~~~shell
+$ pod repo remove FDSpecs
+~~~
+
+如果我们要删除私有`Spec Repo`下的某一个`podspec`  只需要`cd`到`~/.cocoapods/repos/FDSpecs`目录下，删掉库目录，然后通过Git将变动 push到远端仓库。
 
 ## 参考
 
