@@ -140,6 +140,18 @@ s.vendored_libraries = 'Library/Classes/libWeChatSDK.a'
 
 表示依赖第三方的framework
 
+### 公开头文件
+
+可以用这种方式隐藏内部类，保证封装性，让外部引用不到别的类。
+
+~~~ruby
+s.public_header_files = 'Pod/Classes/**/*.h'
+~~~
+
+
+
+
+
 
 
 ## Podfile cheat sheet
@@ -195,6 +207,18 @@ pod 'AFNetworking', :git => 'https://github.com/gowalla/AFNetworking.git', :tag 
 pod 'AFNetworking', :git => 'https://github.com/gowalla/AFNetworking.git', :commit => '082f8319af'
 
 ~~~
+
+### use_frameworks!
+
+Use frameworks instead of static libraries for Pods.
+
+~~~ruby
+use_frameworks!
+~~~
+
+
+
+
 
 ## 参考
 
