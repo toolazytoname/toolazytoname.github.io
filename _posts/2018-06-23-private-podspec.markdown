@@ -12,7 +12,7 @@ tags:
 
 # 使用Cocoapods创建私有podspec
 
-学习了一下如何创建私有podspec，相应的案例可以参看 我的[私有源 ](https://github.com/toolazytoname/Specs)。
+学习了一下如何创建私有podspec，相应的案例可以参看 [GitHub上的私有源 ](https://github.com/toolazytoname/Specs)。
 
 
 
@@ -35,13 +35,14 @@ $ pod lib create podTestLibrary
 ```shell
 $ git tag -m "first release" 0.1.0
 $ git push --tags     #推送tag到远端仓库
-
 ```
 
 编辑完`podspec`文件后，需要验证一下这个文件是否可用，如果有任何`WARNING`或者`ERROR`都是不可以的，它就不能被添加到`Spec Repo`中，不过`xcode`的`WARNING`是可以存在的，验证需要执行一下命令
 
 ```shell
 $ pod lib lint
+$ pod lib lint --sources='https://github.com/toolazytoname/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings
+
 ```
 
 ## 创建Pod所对应的podspec文件
@@ -75,18 +76,138 @@ $ pod repo remove FDSpecs
 
 如果我们要删除私有`Spec Repo`下的某一个`podspec`  只需要`cd`到`~/.cocoapods/repos/FDSpecs`目录下，删掉库目录，然后通过Git将变动 push到远端仓库。
 
+
+
+## Specification 备忘
+
+### source
+
+The location from where the library should be retrieved.
+
+```ruby
+#Specifying a Git source with a tag. This is how most OSS Podspecs work.
+spec.source = { :git => 'https://github.com/AFNetworking/AFNetworking.git',
+                :tag => spec.version.to_s }
+
+#Using a tag prefixed with 'v' and submodules.
+spec.source = { :git => 'https://github.com/typhoon-framework/Typhoon.git',
+                :tag => "v#{spec.version}", :submodules => true }
+
+#Using Subversion with a tag.
+spec.source = { :svn => 'http://svn.code.sf.net/p/polyclipping/code', :tag => '4.8.8' }
+
+#Using Mercurial with the same revision as the spec's semantic version string.
+spec.source = { :hg => 'https://bitbucket.org/dcutting/hyperbek', :revision => "#{s.version}" }
+#Using HTTP to download a compressed file of the code. It supports zip, tgz, bz2, txz and tar
+spec.source = { :http => 'http://dev.wechatapp.com/download/sdk/WeChat_SDK_iOS_en.zip' }
+#Using HTTP to download a file using a hash to verify the download. It supports sha1 and sha256.
+spec.source = { :http => 'http://dev.wechatapp.com/download/sdk/WeChat_SDK_iOS_en.zip',
+                :sha1 => '7e21857fe11a511f472cfd7cfa2d979bd7ab7d96' }
+
+```
+
+### frameworks
+
+表示依赖系统的框架
+
+~~~ruby
+s.frameworks = 'UIKit', 'MapKit'
+~~~
+
+### libraries
+
+表示依赖系统类库
+
+~~~ruby
+  s.libraries = 'sqlite3','c++.1','bz2.1.0','xml2.2','iconv.2','resolv.9','z.1’
+~~~
+
+### vendored_libraries
+
+表示依赖第三方的静态库, <u>依赖的第三方的或者自己的静态库文件必须以lib为前缀进行命名</u>  ，否则会找不到
+
+s.vendored_libraries = 'Library/Classes/libWeChatSDK.a'
+
+~~~ruby
+s.vendored_libraries = 'Library/Classes/libWeChatSDK.a'
+~~~
+
+### vendored_frameworks
+
+表示依赖第三方的framework
+
+
+
+## Podfile备忘
+
+
+
+### pod
+
+```ruby
+#you will want to use the latest version of a Pod. If this is the case, simply omit the version requirements.
+pod 'SSZipArchive'
+#you may want to freeze to a specific version of a Pod, in which case you can specify that version number
+pod 'Objection', '0.9'
+#Besides no version, or a specific one, it is also possible to use operators:
+
+= 0.1 Version 0.1.
+> 0.1 Any version higher than 0.1.
+>= 0.1 Version 0.1 and any higher version.
+< 0.1 Any version lower than 0.1.
+<= 0.1 Version 0.1 and any lower version.
+~> 0.1.2 Version 0.1.2 and the versions up to 0.2, not including 0.2. This operator works based on the last component that you specify in your version requirement. The example is equal to >= 0.1.2 combined with < 0.2.0 and will always match the latest known version matching your requirements.
+```
+
+###  Build configurations
+
+~~~ruby
+pod 'PonyDebugger', :configurations => ['Debug', 'Beta']
+pod 'PonyDebugger', :configuration => 'Debug'
+~~~
+
+### Source
+
+~~~ruby
+pod 'PonyDebugger', :source => 'https://github.com/CocoaPods/Specs.git'
+~~~
+
+### Using the files from a local path.
+
+~~~ruby
+pod 'AFNetworking', :path => '~/Documents/AFNetworking'
+~~~
+
+### From a podspec in the root of a library repository
+
+~~~ruby
+#To use the master branch of the repository
+pod 'AFNetworking', :git => 'https://github.com/gowalla/AFNetworking.git'
+#To use a different branch of the repository
+pod 'AFNetworking', :git => 'https://github.com/gowalla/AFNetworking.git', :branch => 'dev'
+#To use a tag of the repository
+pod 'AFNetworking', :git => 'https://github.com/gowalla/AFNetworking.git', :tag => '0.7.0'
+#Or specify a commit:
+pod 'AFNetworking', :git => 'https://github.com/gowalla/AFNetworking.git', :commit => '082f8319af'
+
+~~~
+
+
+
+
+
+
+
 ## 参考
 
-[内容比较完整成体系](<http://blog.wtlucky.com/blog/2015/02/26/create-private-podspec/>)
+[Podspec Syntax Reference](https://guides.cocoapods.org/syntax/podspec.html#specification)
 
-[写的简单，因为较新所以有些参数调过来了](https://www.jianshu.com/p/d92a987203b1)
+[Podfile Syntax Reference](https://guides.cocoapods.org/syntax/podfile.html#pod)
 
-[官方文档](https://guides.cocoapods.org)
+[使用Cocoapods创建私有podspec](<http://blog.wtlucky.com/blog/2015/02/26/create-private-podspec/>) 
 
-[小坑](https://segmentfault.com/q/1010000012705430)
+[使用Cocoapods创建私有库](https://www.jianshu.com/p/d92a987203b1)
 
+[小坑xcrun: error: unable to find utility "simctl", not a developer tool or in PATH](https://segmentfault.com/q/1010000012705430)
 
-
-  
-
-​	
+[用CocoaPods做iOS程序的依赖管理](http://blog.devtang.com/2014/05/25/use-cocoapod-to-manage-ios-lib-dependency/)
