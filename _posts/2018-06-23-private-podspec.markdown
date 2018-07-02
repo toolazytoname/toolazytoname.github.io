@@ -45,6 +45,10 @@ $ pod lib lint --sources='https://github.com/toolazytoname/Specs.git,https://git
 
 ```
 
+<u>这里需要注意一下，如果podspec 有依赖私有源，需要--sources这个参数带上公有源和私有源，后面的push操作也一样</u>
+
+
+
 ## 创建Pod所对应的podspec文件
 
 ```she
@@ -78,7 +82,7 @@ $ pod repo remove FDSpecs
 
 
 
-## Specification 备忘
+## Specification cheat sheet
 
 ### source
 
@@ -138,7 +142,7 @@ s.vendored_libraries = 'Library/Classes/libWeChatSDK.a'
 
 
 
-## Podfile备忘
+## Podfile cheat sheet
 
 
 
@@ -191,12 +195,6 @@ pod 'AFNetworking', :git => 'https://github.com/gowalla/AFNetworking.git', :tag 
 pod 'AFNetworking', :git => 'https://github.com/gowalla/AFNetworking.git', :commit => '082f8319af'
 
 ~~~
-
-
-
-
-
-
 
 ## 参考
 
