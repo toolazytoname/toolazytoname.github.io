@@ -68,6 +68,10 @@ s.vendored_libraries = 'Library/Classes/libWeChatSDK.a'
 
 
 
+
+随着使用的深入，团队又碰到了两个棘手的问题，一个问题是pod lib lint  和repo push的验证操作时间太久了，可能每次验证就需要20分钟，另一个问题是，多人协同开发，工程文件会有很多冲突，几百个冲突，批量操作文件，目前都没有想到好办法，暂时先记下来。
+
+
 ## 参考
 
 * [https://cocoapods.org](https://cocoapods.org)
