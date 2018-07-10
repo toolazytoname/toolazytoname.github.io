@@ -93,7 +93,13 @@ You can use the `--no-clean` option to inspect any issue.
 
 就好了。
 
+## Invalid `Podfile` file: syntax error, unexpected end-of-input, expecting keyword_end.
 
+在Podfile的末尾添加 end
+
+
+
+## pod lib lint  和repo push的验证时间太久
 
 随着使用的深入，pod lib lint  和repo push的验证操作时间太久了，目前还没有好办法。
 
