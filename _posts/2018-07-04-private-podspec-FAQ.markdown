@@ -67,9 +67,45 @@ s.vendored_libraries = 'Library/Classes/libWeChatSDK.a'
 
 
 
+## target has transitive dependencies that include static binaries
 
 
-随着使用的深入，团队又碰到了两个棘手的问题，一个问题是pod lib lint  和repo push的验证操作时间太久了，可能每次验证就需要20分钟，另一个问题是，多人协同开发，工程文件会有很多冲突，几百个冲突，批量操作文件，目前都没有想到好办法，暂时先记下来。
+
+~~~shell
+BPMessageCenterLib git:(master) ✗ pod lib lint --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings
+
+ -> BPMessageCenterLib (0.1.0)
+    - ERROR | [iOS] unknown: Encountered an unknown error (The 'Pods-App' target has transitive dependencies that include static binaries: (/private/var/folders/m6/l5q3hp4d24d4vk4xplkcnhmh0000gn/T/CocoaPods-Lint-20180710-38805-dbfvbq-BPMessageCenterLib/Pods/RongCloudIM/RongCloudIM/RongIMKit.framework, /private/var/folders/m6/l5q3hp4d24d4vk4xplkcnhmh0000gn/T/CocoaPods-Lint-20180710-38805-dbfvbq-BPMessageCenterLib/Pods/RongCloudIM/RongCloudIM/libopencore-amrnb.a, and /private/var/folders/m6/l5q3hp4d24d4vk4xplkcnhmh0000gn/T/CocoaPods-Lint-20180710-38805-dbfvbq-BPMessageCenterLib/Pods/RongCloudIM/RongCloudIM/RongIMLib.framework)) during validation.
+
+[!] BPMessageCenterLib did not pass validation, due to 1 error.
+You can use the `--no-clean` option to inspect any issue.
+
+[!] 'RongCloudIM' uses the unencrypted http protocol to transfer the Pod. Please be sure you're in a safe network with only trusted hosts in there. Please reach out to the library author to notify them of this security issue.
+~~~
+
+
+
+很简单，加一个
+
+~~~shell
+--use-libraries
+~~~
+
+就好了。
+
+
+
+随着使用的深入，pod lib lint  和repo push的验证操作时间太久了，目前还没有好办法。
+
+
+
+常用命令放着复制粘贴
+
+~~~shell
+pod lib lint --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings --use-libraries
+~~~
+
+
 
 
 ## 参考
