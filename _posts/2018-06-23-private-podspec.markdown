@@ -150,6 +150,12 @@ s.public_header_files = 'Pod/Classes/**/*.h'
 
 
 
+设置pch
+
+~~~ ruby
+s.prefix_header_contents = '#import "YCAdditions.h"','#import "MJExtension.h"','#import "Masonry.h"','#import "UIImageView+Async.h"','#import <ReactiveObjC/RACEXTScope.h>','#import "YCAppMacro.h"','#import "Constants.h"','#import "BPResponseModel.h"','#import "YCTopicMacros.h"','#import "UITableView+Layout.h"','#import "YCToolSet.h"','#import "M80AttributedLabel.h"'
+~~~
+
 
 
 
