@@ -1,0 +1,134 @@
+---
+layout: post
+title:  "定时取源码执行pod lib lint校验"
+date:   2018-07-13 14:22:32 +0800
+categories: iOS
+catalog:  true
+tags:
+  - iOS
+---
+
+
+
+# 定时取源码执行pod lib lint校验
+
+代码已开源 [FDPodBot](https://github.com/toolazytoname/FDPodBot)
+
+## 介绍
+
+### 由来
+
+最近项目组件化，老有同事反馈pod lib lint 验证时间过长，最后repo push 的时间也过长。想了一下，就有了个这么个玩意儿。
+
+### 功能
+
+该脚本会定期去去服务器上拉一下，最新的源码，然后执行pod lib lint，然后分析执行结果有没有关键字passed validation，如果没有则认为没有通过校验，会把相关的错误信息和执行脚本，以邮件的形式发出来，通知开发人员。
+
+### 目的
+
+这个脚本的目的在于，可以每天都去执行一次校验，及时发现错误，避免到了pod repo push 发版的时候，会发现攒了很多错误，延误发版进度。
+
+
+
+## 如何使用
+
+clone 下来，cd到脚本所在目录，苹果自带的Python版本是2.7，你首先得安一个Python3
+
+```shell
+python3 FDPodBot.py
+```
+
+就是这么优雅
+
+
+
+### 如何配置
+
+有两个配置文件，分别是logconfig.ini 和FDPodBot.ini，logconfig.ini没啥好说的，一般也不用动，一般修改的是FDPodBot.ini
+
+~~~ini
+
+# Setting related to gitlab source configuration
+[git]
+git_sources = [
+    "http://gitlab.XXXXXXXXXX.com/WP/Mobile/IOS/XXXXXXXXXX",
+    "http://gitlab.XXXXXXXXXX.com/WP/Mobile/IOS/*******",
+    ]
+
+
+
+# Setting related to mail configuration
+[mail]
+mail_host = smtp.qq.com
+mail_user = ##########@##########.com
+mail_pass = ##########
+mail_sender = ##########@##########.com
+mail_smtp_ssl_port = 465
+mail_subject = pod lib lint error
+mail_receivers = ["##########@##########.com","##########@##########.com"]
+
+
+# Setting related to start time and duration
+#sched_hour = 4 sched_minute = 0 sched_second = 0 means 4 early in the morning
+# sched_duration = 60*60*24=86400  means one day
+
+[sched]
+sched_hour = 11
+sched_minute = 30
+sched_second = 0
+sched_duration = 86400
+
+~~~
+
+一般来说，只要修改git 模块和sched即可
+
+
+
+## 实现
+
+117行的代码，真是太高效了，因为Python不熟，其实还有优化的余地。麻雀虽小，五脏俱全，光看引入的库就知道了，功能强大，要啥有啥，这还是在没有引入第三方库的前提下完成的。
+
+~~~python
+#执行系统shell 脚本，访问目录等功能
+import os
+import subprocess
+#写日志文件
+import logging
+import logging.config
+#设置定时任务
+import time
+from datetime import datetime
+import sched
+#发送邮件
+import smtplib
+from email.mime.text import MIMEText
+from email.utils import formataddr
+#读取配置文件信息
+from configparser import ConfigParser
+#json 解析
+import json
+~~~
+
+
+
+
+## 待优化
+
+随着项目的进展，暴露了一些之前没有考虑的问题
+
+1. 应该对每个仓库设置branch ，因为我默认拉下来的都是master，但是我们在开发的时候不会一直在master上面开发，所以应该增加一个branch设置的配置
+
+2. 可以考虑增加一个开机启动
+
+   
+
+语言相关
+
+1. list comprehensions 没有实现
+2. generators 是啥不理解 
+
+
+
+## 畅想
+
+其实想实现这么个小工具很久了，其实把抓取数据的部分改一改，加一个爬虫，就可以在互联网上爬万物，设置一个条件，进行提醒，应用场景十分广泛。
