@@ -115,9 +115,19 @@ You can use the `--no-clean` option to inspect any issue.
 
 随着使用的深入，pod lib lint  和repo push的验证操作时间太久了，目前还没有好办法。
 
+分析慢的原因
+
+### 网络慢
+
+1.  干掉对官方库的依赖，GitLab上搭建一个私有的官方库索引镜像，同时在内网GitLab上把AF啊，SD之类的工程库也建一个镜像（这一步很重要）。目前这个工作由同事手工完成，这个也可以写一个脚本，我看有相应的API。
+
+### 编译验证慢
+
+1. 这个没有深入分析
 
 
-常用命令放着复制粘贴
+
+# 常用命令放着复制粘贴
 
 ~~~shell
 pod lib lint --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings --use-libraries
