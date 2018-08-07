@@ -121,7 +121,13 @@ You can use the `--no-clean` option to inspect any issue.
 
 ~~~shell
 pod lib lint --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings --use-libraries
+
+
+pod repo push XXSpecs XXXXXXXLib.podspec --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings --use-libraries --skip-import-validation
+
 ~~~
+
+
 
 
 
