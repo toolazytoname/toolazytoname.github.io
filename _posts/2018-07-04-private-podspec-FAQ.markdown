@@ -99,6 +99,18 @@ You can use the `--no-clean` option to inspect any issue.
 
 
 
+## Pod lint fails when containing dynamic-frameworks without simulator architectures
+
+苹果商店会拒绝包含模拟器架构的dynamic-framework,因此只能用包含真机的包，于是就碰到了如上问题，参看[#5854](https://github.com/CocoaPods/CocoaPods/issues/5854) 解决办法是加一个
+
+~~~shell
+--skip-import-validation
+~~~
+
+
+
+
+
 ## pod lib lint  和repo push的验证时间太久
 
 随着使用的深入，pod lib lint  和repo push的验证操作时间太久了，目前还没有好办法。
