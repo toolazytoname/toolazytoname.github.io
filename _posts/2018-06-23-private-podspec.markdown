@@ -304,3 +304,5 @@ use_frameworks!
 [小坑xcrun: error: unable to find utility "simctl", not a developer tool or in PATH](https://segmentfault.com/q/1010000012705430)
 
 [用CocoaPods做iOS程序的依赖管理](http://blog.devtang.com/2014/05/25/use-cocoapod-to-manage-ios-lib-dependency/)
+
+[利用 podspec 的 subspec 来实现多个预处理宏的灵活配置](https://juejin.im/entry/5833b464da2f600061cbf107)
