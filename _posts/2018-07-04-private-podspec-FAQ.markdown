@@ -1,4 +1,4 @@
----
+--
 layout: post
 title:  "使用Cocoapods 踩过的坑"
 date:   2018-07-04 22:04:32 +0800
@@ -127,13 +127,53 @@ You can use the `--no-clean` option to inspect any issue.
 
 
 
+## 两个第三方库冲突
+
+两个第三方库冲突，项目需要同时引入优酷播放器和友盟，单独引入都没有问题，同时引入会偶发崩溃
+
+日志如下
+
+~~~
+2018-08-02 11:41:47.220381+0800 BPBaseFuncLib_Example[39063:17508875] Could not successfully update network info during initialization.
+2018-08-02 11:41:47.334518+0800 BPBaseFuncLib_Example[39063:17508774] Could not save pasteboard named com.tencent.mqq.api.registerAppPlugin. Error: Error Domain=PBErrorDomain Code=0 "Cannot load representation of type com.tencent.mqq.api.registerAppPlugin" UserInfo={NSLocalizedDescription=Cannot load representation of type com.tencent.mqq.api.registerAppPlugin, NSUnderlyingError=0x6040002545b0 {Error Domain=PBErrorDomain Code=15 "No loader block available for type com.tencent.mqq.api.registerAppPlugin." UserInfo={NSLocalizedDescription=No loader block available for type com.tencent.mqq.api.registerAppPlugin.}}}
+(lldb) 
+~~~
+
+参看优酷文档，可以通过在宿主工程里面直接设置。
+
+~~~
+Other Linker Flags 设置 -force_load  "$(PROJECT_DIR)/path/to/libYouTuMediaPlayerEngineYouku.a"
+~~~
+
+不知道为什么，我在podspec 里面设置不管用。
+
+~~~
+spec.pod_target_xcconfig = { 'OTHER_LDFLAGS' => '-lObjC' }
+
+~~~
+
+## Subspecs 的理解
+
+代码如下
+
+~~~Ruby
+  s.resource_bundle = { 'BPBaseFuncLib' => 'BPBaseFuncLib/Assets/*' }
+  s.subspec 'OCR' do |ss|
+    ss.source_files = 'BPBaseFuncLib/Classes/OCR/*','BPBaseFuncLib/Classes/BPBaseFuncBundle/*'
+    ss.public_header_files = 'BPBaseFuncLib/Classes/OCR/BPOCRProtocol.h'
+    ss.vendored_frameworks =['BPBaseFuncLib/Classes/OCR/lib/AipBase.framework','BPBaseFuncLib/Classes/OCR/lib/IdcardQuality.framework']
+  end
+~~~
+
+在外部直接 BPBaseFuncLib/OCR，竟然找不到BPBaseFuncLib这个bundle，直接写BPBaseFuncLib当然是会有这个bundle的，着让我很费解，参看官方文档Subspecs 和主spec应该是一个继承的关系，先留着，待后续更新吧。
+
 # 常用命令放着复制粘贴
 
 ~~~shell
-pod lib lint --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings --use-libraries
+pod lib lint --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings --use-libraries --only-errors --fail-fast --skip-import-validation
 
 
-pod repo push XXSpecs XXXXXXXLib.podspec --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings --use-libraries --skip-import-validation
+pod repo push XXSpecs XXXXXXXLib.podspec --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings --use-libraries --only-errors --fail-fast --skip-import-validation
 
 ~~~
 

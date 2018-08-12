@@ -47,6 +47,17 @@ $ pod lib lint --sources='https://github.com/toolazytoname/Specs.git,https://git
 
 <u>这里需要注意一下，如果podspec 有依赖私有源，需要--sources这个参数带上公有源和私有源，后面的push操作也一样</u>
 
+这里列几个自认为很有用的配置
+
+1. --allow-warnings  
+2. --use-libraries
+3. --skip-import-validation
+4. --only-errors
+5. --fail-fast
+
+具体含义自己查一下官方文档吧
+
+
 
 
 ## 创建Pod所对应的podspec文件
@@ -162,6 +173,56 @@ s.prefix_header_file = 'BPNewsLib/Classes/BPNewsPrivate/BPNBaseHeader.pch'
 s.prefix_header_contents = '#import "YCAdditions.h"','#import "MJExtension.h"','#import "Masonry.h"','#import "UIImageView+Async.h"','#import <ReactiveObjC/RACEXTScope.h>','#import "YCAppMacro.h"','#import "Constants.h"','#import "BPResponseModel.h"','#import "YCTopicMacros.h"','#import "UITableView+Layout.h"','#import "YCToolSet.h"','#import "M80AttributedLabel.h"'
 ~~~
 
+## subspec
+看到这篇[利用 podspec 的 subspec 来实现多个预处理宏的灵活配置](https://juejin.im/entry/5833b464da2f600061cbf107)，思路很好学习记录如下
+
+这是普通青年的用法
+
+~~~Objective-C
+[JSPatch startWithAppKey:@"YOU_GUESS"];
+#ifdef DEBUG
+[JSPatch setupDevelopment];
+#endif
+[JSPatch sync];
+~~~
+
+这是文艺青年的用法
+
+~~~Ruby
+Pod::Spec.new do |s|
+
+  #设置 podspec 的默认 subspec
+  s.default_subspec = 'core'
+  #主要 subspec
+  s.subspec 'core' do |c|
+    c.source_files  = "*.{h,m}"
+    c.public_header_files = "*.h"
+    c.frameworks = 'UIKit',
+    c.libraries = 'icucore', 'sqlite3', 'z'
+    c.platform = :ios, "7.0"
+  end
+  #功能1，引入则开启
+  s.subspec 'IDFA' do |f|
+    f.dependency 'YOUR_SPEC/core'
+    f.pod_target_xcconfig = { 'GCC_PREPROCESSOR_DEFINITIONS' => 'ENABLE_IDFA=1'}
+  end
+
+  #功能2，引入则开启
+  s.subspec 'IDFB' do |f|
+    f.dependency 'YOUR_SPEC/core'
+    f.pod_target_xcconfig = { 'GCC_PREPROCESSOR_DEFINITIONS' => 'ENABLE_IDFB=1'}
+  end  
+
+end
+~~~
+
+这里面通过两个 subpec 来开关功能。当用户用的时候，则在 Podfile 里这么引入
+
+~~~
+pod 'YOUR_SPEC', :subspecs => ['IDFA', 'IDFB']
+~~~
+
+我觉得这是一种很优雅的做法。
 
 
 ## Podfile cheat sheet
