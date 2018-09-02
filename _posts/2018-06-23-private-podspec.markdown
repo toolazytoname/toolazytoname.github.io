@@ -52,8 +52,7 @@ $ pod lib lint --sources='https://github.com/toolazytoname/Specs.git,https://git
 1. --allow-warnings  
 2. --use-libraries
 3. --skip-import-validation
-4. --only-errors
-5. --fail-fast
+4. --fail-fast
 
 具体含义自己查一下官方文档吧
 

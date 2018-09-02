@@ -170,10 +170,10 @@ spec.pod_target_xcconfig = { 'OTHER_LDFLAGS' => '-lObjC' }
 # 常用命令放着复制粘贴
 
 ~~~shell
-pod lib lint --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings --use-libraries --only-errors --fail-fast --skip-import-validation
+pod lib lint --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings --use-libraries --fail-fast --skip-import-validation
 
 
-pod repo push XXSpecs XXXXXXXLib.podspec --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings --use-libraries --only-errors --fail-fast --skip-import-validation
+pod repo push XXSpecs XXXXXXXLib.podspec --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings --use-libraries  --fail-fast --skip-import-validation
 
 ~~~
 
