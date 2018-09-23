@@ -173,7 +173,7 @@ spec.pod_target_xcconfig = { 'OTHER_LDFLAGS' => '-lObjC' }
 pod lib lint --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings --use-libraries --fail-fast --skip-import-validation
 
 
-pod repo push XXSpecs XXXXXXXLib.podspec --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings --use-libraries  --fail-fast --skip-import-validation
+pod repo push XXSpecs XXXXXXXLib.podspec --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings --use-libraries  --skip-import-validation
 
 ~~~
 
