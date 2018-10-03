@@ -72,7 +72,11 @@ function processIcon() {
     height=`identify -format %h ${base_path}`
     #设置水印高度
     targetHeight=$(((4 * $height) / 6))
-    #生成目标图片，swap 不太懂，别的都懂了
+    #生成目标图片，swap 的官方解释看懂了，用到这不知道有什么用
+    #-swap index,index
+#Swap the positions of two images in the image sequence.
+
+#For example, -swap 0,2 swaps the first and the third images in the current image sequence. Use +swap to switch the last two images in the sequence.
     convert -background '#0008' -fill white -gravity center -size ${width}x${targetHeight}\
     caption:"${caption}"\
     ${base_path} +swap -gravity south -composite ${target_path}
@@ -92,10 +96,17 @@ processIcon "icon-60@3x_base.png"
 ~~~
 
 
+
+## 注意事项
+
+Compress Png Files 这一选项，只有在Xcode工程有图片资源的时候才会显示这个选项，如果把图片资源删除，这一选项会自动消失。
+
 ## 参考
+
 1. [在iOS APP icon上添加版本、时间等信息](https://www.jianshu.com/p/df21c51668f1)
 2. [给iOS应用的Logo加上构建信息水印](https://juejin.im/post/5a32120f51882575d42f6609)
 3. [iOS——写一个快速定位问题的脚本](http://zhoulingyu.com/2017/04/04/iOS——写一个快速定位问题的脚本/#more)
 4. [Overlaying application version on top of your icon](http://merowing.info/2013/03/overlaying-application-version-on-top-of-your-icon/)
+5. [Command-line Tools:Convert](http://www.imagemagick.org/script/convert.php)
 
 
