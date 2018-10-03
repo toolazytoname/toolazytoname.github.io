@@ -13,7 +13,7 @@ tags:
 # iOS 
 
 ## 介绍
-经常出现测试同事反馈新出的包没有修复已经修改的bug。一顿查，有时候是因为测试没有及时下新包，有的时候是因为开发没有及时git push 代码。想起之前同事提过给icon加水印是一个好办法，试了一下，效果也不错。
+经常出现测试同事反馈新出的包没有修复已经修改的bug。一顿查，有时候是因为测试没有及时下新包，有的时候是因为开发没有及时git push 代码。想起之前同事提过给icon加水印是一个好办法，再结合把podfile文件内容显示在debug页面，效果也不错。
 
 ## 如何实现
 搜到了两种方案，[iOS——写一个快速定位问题的脚本](http://zhoulingyu.com/2017/04/04/iOS——写一个快速定位问题的脚本/#more)没有试成，这种方案是进入编译后的工程目录，去替换相应的图标文件。用到了ImageMagick 。
@@ -90,6 +90,8 @@ brew install imagemagick
 =============="
 exit 0;
 fi
+
+
 
 processIcon "icon-60@2x_base.png"
 processIcon "icon-60@3x_base.png"
