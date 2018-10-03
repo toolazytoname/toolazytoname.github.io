@@ -22,6 +22,8 @@ tags:
 iOS 11 苹果应该是把这个方案给关掉了。如果你的设备恰巧符合要求，
 1. 那么用iTunes 做一个备份，记得不要选择加密。
 2. 备份完成以后，打开备份文件夹。定位到这个目录AppDomain-com.apple.Maps >> Library >> Preferences ，打开com.apple.Maps.plist，在 </dict> 标签前面插入下面这段内容。
+
+
 ~~~xml
  <key>__internal__PlaceCardLocationSimulation</key>
  <true/>
