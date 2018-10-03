@@ -177,7 +177,9 @@ pod repo push XXSpecs XXXXXXXLib.podspec --sources='http://gitlab.bitautotech.co
 
 ~~~
 
+# 常用命令放着复制粘贴
 
+都看到这里了，说明你很有耐心，来个彩蛋吧，我把上面常用的命令行写成了一个脚本。话还没试过呢，下回用到我会试一下。先放上来。[FDRepoPush](https://github.com/toolazytoname/FDRepoPush)
 
 
 
