@@ -10,7 +10,7 @@ tags:
 
 
 
-# 导出cocoapods依赖关系
+# cocoapods依赖关系导出
 
 
 
@@ -49,7 +49,9 @@ Use the --image option to generate <podspec name>.png or Podfile.png containing 
 
 [!] Note that for either graphviz or image output, GraphViz must be installed and dot must be accessible via $PATH.
 
-## 
+## 输出
+
+html ，图片，文本。应有尽有。
 
 ## 参考
 

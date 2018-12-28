@@ -1,0 +1,399 @@
+---
+
+layout: post
+title:  "iOS自动打包"
+date:   2018-12-27 18:09:32 +0800
+categories: iOS
+catalog:  true
+tags:
+  - iOS 
+---
+
+
+
+# 效果
+
+1. 结合Jenkins可以提供如下功能
+
+   1. 测试人员可以通过浏览器操作
+   2. 可以打不通分支的包，直接通过网页选择。
+   3. 可以定时触发
+   4. 打包完成可以发邮件通知
+      1. 邮件可以带工程目录的podfile.lock为附件
+      2. 邮件内容可定制，带上了进过正则筛选的日志内容
+
+2. 通过脚本
+
+   1. 打包前自动拉取远端Podfile覆盖本地文件(和工程目录分开管理)
+
+   2. pod update
+
+   3. 自动上传蒲公英
+
+   4. 备份了
+
+      1. .xcarchive文件夹
+
+      2. ipa 文件
+
+      3. Podfile
+
+      4. podfile.lock.
+
+
+## 工作目录结构
+
+将Package 放到当前工程的根目录下。
+
+
+
+* Package
+
+  * package.sh（打包脚本）
+
+  * plist
+
+    *   app-store.plist
+    *   enterprise.plist
+
+  * build
+
+    *   xxxxxx2018-12-27-14/59/08.xcarchive
+    *   xxxxxx2018-12-27-15/22/33.xcarchive
+
+  * IPADir
+
+    *   Release
+        *   2018-12-27-16/16/29
+            *   xxxxxx.ipa
+            *   DistributionSummary.plist
+            *   ExportOptions.plist
+            *   Packaging.log
+            *   Podfile
+            *   podfile.lock
+
+
+
+
+# 源码
+
+~~~shell
+#!/bin/sh
+# 该脚本使用方法
+# 源码地址：
+# step 1. 在工程根目录新建Package文件夹，package.sh放进去;
+# step 2. 设置该脚本;
+# step 2. cd 该脚本目录，运行chmod +x package.sh;
+# step 3. 终端运行 sh package.sh;
+# step 4. 选择不同选项....
+# step 5. Success  🎉 🎉 🎉!
+
+
+# ************************* 需要配置 Start ********************************
+
+#podfile的路径
+Podfile_URL=http://gitlabXXXXXXXXX/master/Podfile
+
+# 【配置上传到蒲公英相关信息】(可选)
+__PGYER_U_KEY="db4XXXXXXXXXXXXXXXXXXXXXXXXXXX"
+__PGYER_API_KEY="afXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+
+# 发布APP Store 账号密码
+__IOS_SUBMIT_ACCOUNT="apple id"
+__IOS_SUBMIT_PASSWORD="xxxxxx"
+
+#工程名
+project_name=XXXXXXXXX
+
+#scheme名
+scheme_name=XXXXXXXXX
+
+#打包模式 Debug/Release
+development_mode=Release
+
+#build文件夹路径
+build_path=${project_path}/Package/build
+
+#归档文件目录
+BUILD_DATETIME=`date '+%Y-%m-%d-%H:%M:%S'`
+archivePath=${build_path}/${project_name}${BUILD_DATETIME}.xcarchive
+
+#plist文件所在路径
+exportOptionsPlistPath=${project_path}/Package/plist/enterprise.plist
+
+#导出.ipa文件所在路径
+exportIpaPath=${project_path}/Package/IPADir/${development_mode}/${BUILD_DATETIME}
+# ************************* 需要配置 end ********************************
+
+#工程绝对路径
+project_path=$(cd `dirname $0`; pwd)
+cd ../
+
+echo "Place enter the number you want to export ? [ 1:app-store 2:enterprise] "
+read number
+
+# number=2
+while([[ $number != 1 ]] && [[ $number != 2 ]])
+do
+echo "Error! Should enter 1 or 2"
+echo "Place enter the number you want to export ? [ 1:app-store 2:enterprise] "
+read number
+done
+
+if [ $number == 1 ];then
+# development_mode=Release
+scheme_name=XXXXXXXXX
+exportOptionsPlistPath=${project_path}/Package/plist/exportAppstore.plist
+else
+# development_mode=Release
+scheme_name=XXXXXXXXX
+exportOptionsPlistPath=${project_path}/Package/plist/enterprise.plist
+fi
+
+echo '///-----------'
+echo '/// update Podfile '
+echo '///-----------'
+curl ${Podfile_URL} > Podfile
+
+echo '///-----------'
+echo '/// pod update'
+echo '///-----------'
+pod update
+
+echo '///-----------'
+echo '/// 正在清理工程'
+echo '///-----------'
+xcodebuild \
+clean -configuration ${development_mode} -quiet  || exit
+
+echo '///--------'
+echo '/// 清理完成'
+echo '///--------'
+echo ''
+
+echo '///-----------'
+echo '/// 正在编译工程:'${development_mode}
+echo '///-----------'
+xcodebuild \
+archive -workspace ${project_path}/${project_name}.xcworkspace \
+-scheme ${scheme_name} \
+-configuration ${development_mode} \
+-archivePath ${archivePath}  -quiet  || exit
+
+echo '///--------'
+echo '/// 编译完成'
+echo '///--------'
+echo ''
+
+echo '///----------'
+echo '/// 开始ipa打包'
+echo '///----------'
+xcodebuild -exportArchive -archivePath ${archivePath} \
+-configuration ${development_mode} \
+-exportPath ${exportIpaPath} \
+-exportOptionsPlist ${exportOptionsPlistPath} \
+-quiet || exit
+
+if [ -e $exportIpaPath/$scheme_name.ipa ]; then
+echo '///----------'
+echo '/// ipa包已导出'
+echo '///----------'
+else
+echo '///-------------'
+echo '/// ipa包导出失败 '
+echo '///-------------'
+fi
+echo '///------------'
+echo '/// 打包ipa完成  '
+echo '///-----------='
+echo ''
+
+echo '///-------------'
+echo '/// 开始发布ipa包 '
+echo '///-------------'
+
+if [ $number == 1 ];then
+
+#验证并上传到App Store
+altoolPath="/Applications/Xcode.app/Contents/Applications/Application Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Versions/A/Support/altool"
+"$altoolPath" --validate-app -f ${exportIpaPath}/${scheme_name}.ipa -u ${__IOS_SUBMIT_ACCOUNT} -p ${__IOS_SUBMIT_PASSWORD} -t ios --output-format xml
+"$altoolPath" --upload-app -f ${exportIpaPath}/${scheme_name}.ipa -u  ${__IOS_SUBMIT_ACCOUNT} -p ${__IOS_SUBMIT_PASSWORD} -t ios --output-format xml
+else
+
+# 上传蒲公英
+curl -F "file=@$exportIpaPath/$scheme_name.ipa" \
+   -F "uKey=$__PGYER_U_KEY" \
+   -F "_api_key=$__PGYER_API_KEY" \
+   "http://www.pgyer.com/apiv1/app/upload"
+   
+echo "上传 ${exportIpaPath}/${scheme_name}.ipa 包 到 pgyer 成功 🎉 🎉 🎉"
+
+fi
+
+echo '///-------------'
+echo '/// 开始备份Podfile 到'${exportIpaPath}
+echo '///-------------'
+
+cp Podfile ${exportIpaPath}
+cp podfile.lock  ${exportIpaPath}
+
+echo '///-------------'
+echo '/// 备份Podfile完成'
+echo '///-------------'
+exit 0
+
+~~~
+
+
+
+# jerkins 设置
+
+## 构建执行shell
+
+ ~~~shell
+
+sh Package/package.sh
+ ~~~
+
+
+
+## 构建出发器
+
+~~~
+0 9 * * *
+0 11 * * *
+0 13 * * *
+0 15 * * *
+0 17 * * *
+0 19 * * *
+0 21 * * *
+~~~
+
+
+
+## Dditable Email Notification
+
+Default Subject
+
+~~~sh
+$DEFAULT_SUBJECT
+~~~
+
+Default Content
+
+~~~html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>${ENV, var="JOB_NAME"}-第${BUILD_NUMBER}次构建日志</title>
+</head>
+<body leftmargin="8" marginwidth="0" topmargin="8" marginheight="4" offset="0">
+<table width="95%" cellpadding="0" cellspacing="0" style="font-size: 11pt; font-family: Tahoma, Arial, Helvetica, sans-serif">
+<tr>
+   <td>(本邮件是程序自动下发的，请勿回复！)</td>
+</tr>
+<tr>
+   <td><h2><font color="#0000FF">构建结果 - ${BUILD_STATUS}</font></h2></td>
+</tr>
+<tr>
+   <td><br /> <b><font color="#0B610B">构建信息</font></b> <hr size="2" width="100%" align="center" /></td> 
+</tr> 
+<tr>
+<td> 
+     <ul> 
+          <li>项目名称&nbsp;：&nbsp;${PROJECT_NAME}</li>
+          <li>构建编号&nbsp;：&nbsp;第${BUILD_NUMBER}次构建</li>
+          <li>触发原因：&nbsp;${CAUSE}</li>
+          <li>构建日志：&nbsp;<a href="${BUILD_URL}console">${BUILD_URL}console</a></li>
+          <li>构建&nbsp;&nbsp;Url&nbsp;：&nbsp;<a href="${BUILD_URL}">${BUILD_URL}</a></li>
+          <li>工作目录&nbsp;：&nbsp;<a href="${PROJECT_URL}ws">${PROJECT_URL}ws</a></li>
+          <li>项目&nbsp;&nbsp;Url&nbsp;：&nbsp;<a href="${PROJECT_URL}">${PROJECT_URL}</a></li>
+<li>下载地址： <a href="https://www.pgyer.com/bitautoplus">蒲公英</a></li> 
+     </ul> 
+</td> 
+</tr>
+<tr>
+     <td><b><font color="#0B610B">版本号</font></b> <hr size="2" width="100%" align="center" /></td>
+</tr>
+<tr>
+<td>
+     <span>${BUILD_LOG_MULTILINE_REGEX,showTruncatedLines="false",regex="Pre-downloading: `(.*)"} </span>
+</td> 
+</tr>
+</table>
+</body>
+</html>
+~~~
+
+
+
+Attachments
+
+
+
+~~~
+Podfile.lock
+~~~
+
+
+
+# 碰到的问题
+
+碰到的问题是pod update 的过程当中，Pre-downloading 
+
+~~~
+Pre-downloading: `xxxLib` from `http://gitlab.xxxxxxxxxxxxb.git`, tag `0.4.5`
+
+[!] Error installing xxxLib
+[!] Failed to download 'xxxLib'.
+~~~
+
+但是我远程登录到服务器	
+
+~~~shell
+cd  ~/.jenkins/jobs/iOSxxxxx/workspace
+pod update --verbose
+~~~
+
+打印出来的日志
+
+~~~
+  > Copying xxxxxxxMessageCenterLib from `/Users/xxxxxxx/Library/Caches/CocoaPods/Pods/External/xxxxxxxMessageCenterLib/ac0999518905dfaeb4412e75cb70102e` to `Pods/xxxxxxxMessageCenterLib`
+-> Pre-downloading: `xxxxxxxLib` from `http://gitlab.xxxxxxx.com/WP/Mobile/IOS/xxxxxxxLib.git`, tag `0.4.5`
+ > Git download
+ > Git download
+     $ /usr/bin/git clone http://gitlab.xxxxxxx.com/WP/Mobile/IOS/xxxxxxxLib.git /var/folders/7w/q65n0jy56nq42f3k0nlfnbm00000gn/T/d20181228-23832-zemqsr --template= --single-branch --depth 1 --branch 0.4.5
+     Cloning into '/var/folders/7w/q65n0jy56nq42f3k0nlfnbm00000gn/T/d20181228-23832-zemqsr'...
+     Note: checking out 'a6be63cbda94bd367394c9f392b94a2a793b3b6d'.
+     
+     You are in 'detached HEAD' state. You can look around, make experimental
+     changes and commit them, and you can discard any commits you make in this
+     state without impacting any branches by performing another checkout.
+     
+     If you want to create a new branch to retain commits you create, you may
+     do so (now or later) by using -b with the checkout command again. Example:
+     
+       git checkout -b <new-branch-name>
+     
+     Checking out files:  97% (6302/6496)   
+     Checking out files:  98% (6367/6496)   
+     Checking out files:  99% (6432/6496)   
+     Checking out files: 100% (6496/6496)   
+     Checking out files: 100% (6496/6496), done.
+[!] Error installing xxxxxxxLib
+[!] Failed to download 'xxxxxxxLib'.
+~~~
+
+虽然用到的文件是7M，但是pod update 会把整个目录都给拉下来，一整个目录一个多G，当然会失败了。我把 pods 目录给放到ignore 里面了，体量骤减。
+
+后续继续观察，观察。
+
+
+
+## 参考
+
+1. [AutoPacking-iOS](https://github.com/stackhou/AutoPacking-iOS)
+2. [archiveScript](https://github.com/kepuna/archiveScript)
+
+
