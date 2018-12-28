@@ -12,6 +12,8 @@ tags:
 
 # cocoapods依赖关系导出
 
+其实Podfile.lock藏满了，各个版本库的版本号信息和彼此的依赖关系。
+
 
 
 ## [cocoapods-graph](https://pypi.org/project/cocoapods-graph/)
@@ -56,6 +58,6 @@ html ，图片，文本。应有尽有。
 ## 参考
 
 1. [cocoapods-graph](https://pypi.org/project/cocoapods-graph/)
-2. [](<https://github.com/segiddins/cocoapods-dependencies>)
+2. [cocoapods-dependencies](<https://github.com/segiddins/cocoapods-dependencies>)
 
 
