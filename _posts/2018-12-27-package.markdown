@@ -16,7 +16,7 @@ tags:
 1. 结合Jenkins可以提供如下功能
 
    1. 测试人员可以通过浏览器操作
-   2. 可以打不通分支的包，直接通过网页选择。
+   2. 可以打不通分支的包
    3. 可以定时触发
    4. 打包完成可以发邮件通知
       1. 邮件可以带工程目录的podfile.lock为附件
@@ -39,6 +39,8 @@ tags:
       3. Podfile
 
       4. podfile.lock.
+
+
 
 
 ## 工作目录结构
@@ -271,7 +273,7 @@ sh Package/package.sh
 
 
 
-## Dditable Email Notification
+## Editable Email Notification
 
 Default Subject
 
@@ -359,11 +361,11 @@ pod update --verbose
 打印出来的日志
 
 ~~~
-  > Copying xxxxxxxMessageCenterLib from `/Users/xxxxxxx/Library/Caches/CocoaPods/Pods/External/xxxxxxxMessageCenterLib/ac0999518905dfaeb4412e75cb70102e` to `Pods/xxxxxxxMessageCenterLib`
--> Pre-downloading: `xxxxxxxLib` from `http://gitlab.xxxxxxx.com/WP/Mobile/IOS/xxxxxxxLib.git`, tag `0.4.5`
+  > Copying BPMessageCenterLib from `/Users/yiche/Library/Caches/CocoaPods/Pods/External/BPMessageCenterLib/ac0999518905dfaeb4412e75cb70102e` to `Pods/BPMessageCenterLib`
+-> Pre-downloading: `BPNewsLib` from `http://gitlab.bitautotech.com/WP/Mobile/IOS/BPNewsLib.git`, tag `0.4.5`
  > Git download
  > Git download
-     $ /usr/bin/git clone http://gitlab.xxxxxxx.com/WP/Mobile/IOS/xxxxxxxLib.git /var/folders/7w/q65n0jy56nq42f3k0nlfnbm00000gn/T/d20181228-23832-zemqsr --template= --single-branch --depth 1 --branch 0.4.5
+     $ /usr/bin/git clone http://gitlab.bitautotech.com/WP/Mobile/IOS/BPNewsLib.git /var/folders/7w/q65n0jy56nq42f3k0nlfnbm00000gn/T/d20181228-23832-zemqsr --template= --single-branch --depth 1 --branch 0.4.5
      Cloning into '/var/folders/7w/q65n0jy56nq42f3k0nlfnbm00000gn/T/d20181228-23832-zemqsr'...
      Note: checking out 'a6be63cbda94bd367394c9f392b94a2a793b3b6d'.
      
@@ -381,13 +383,11 @@ pod update --verbose
      Checking out files:  99% (6432/6496)   
      Checking out files: 100% (6496/6496)   
      Checking out files: 100% (6496/6496), done.
-[!] Error installing xxxxxxxLib
-[!] Failed to download 'xxxxxxxLib'.
+[!] Error installing BPNewsLib
+[!] Failed to download 'BPNewsLib'.
 ~~~
 
-虽然用到的文件是7M，但是pod update 会把整个目录都给拉下来，一整个目录一个多G，当然会失败了。我把 pods 目录给放到ignore 里面了，体量骤减。
-
-后续继续观察，观察。
+虽然用到的文件是7M，但是pod update 会把整个目录都给拉下来，一整个目录一个多G，当然会失败了，后续继续观察，观察。
 
 
 
