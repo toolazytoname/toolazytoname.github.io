@@ -163,6 +163,59 @@ launchctl list
 ## 参考
 
 1. [Creating a launchd Property List File](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html#//apple_ref/doc/uid/TP40001762-104142)
+
 2. The manual pages for `launchd` and `launchd.plist` are the two best sources for information about `launchd`.
 
+   ~~~shell
+        StartInterval <integer>
+        This optional key causes the job to be started every N seconds. If the system is
+        asleep during the time of the next scheduled interval firing, that interval will be
+        missed due to shortcomings in kqueue(3).  If the job is running during an interval
+        firing, that interval firing will likewise be missed.
+   
+        StartCalendarInterval <dictionary of integers or array of dictionaries of integers>
+        This optional key causes the job to be started every calendar interval as specified.
+        Missing arguments are considered to be wildcard. The semantics are similar to
+        crontab(5) in how firing dates are specified. Multiple dictionaries may be specified
+        in an array to schedule multiple calendar intervals.
+   
+        Unlike cron which skips job invocations when the computer is asleep, launchd will
+        start the job the next time the computer wakes up.  If multiple intervals transpire
+        before the computer is woken, those events will be coalesced into one event upon wake
+        from sleep.
+   
+        Note that StartInterval and StartCalendarInterval are not aware of each other. They
+        are evaluated completely independently by the system.
+   
+              Minute <integer>
+              The minute (0-59) on which this job will be run.
+   
+              Hour <integer>
+              The hour (0-23) on which this job will be run.
+   
+              Day <integer>
+              The day of the month (1-31) on which this job will be run.
+   
+              Weekday <integer>
+              The weekday on which this job will be run (0 and 7 are Sunday). If both Day and
+              Weekday are specificed, then the job will be started if either one matches the
+              current date.
+   
+              Month <integer>
+              The month (1-12) on which this job will be run.
+   
+   
+   
+        StandardOutPath <string>
+        This optional key specifies that the given path should be mapped to the job's
+        stdout(4), and that any writes to the job's stdout(4) will go to the given file. If
+        the file does not exist, it will be created with writable permissions and ownership
+        reflecting the user and/or group specified as the UserName and/or GroupName, respec-
+        tively (if set) and permissions reflecting the umask(2) specified by the Umask key,
+        if set.
+   
+        StandardErrorPath <string>
+        This optional key specifies that the given path should be mapped to the job's
+        stderr(4)
+   ~~~
 
