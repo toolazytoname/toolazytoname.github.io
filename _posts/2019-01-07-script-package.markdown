@@ -13,11 +13,10 @@ tags:
 
 # 效果
 
-1. 邮件通知（未实现）
-2. 定时器
+1. 定时器
    1. 每隔两小时，自动触发一次脚本
    2. 不受系统重启影响
-3. 通过脚本
+2. 通过脚本
    1. 通过git拉取远端壳工程最新的源码
    2. 打包前自动拉取远端Podfile覆盖本地文件(和工程目录分开管理)
    3. pod update
@@ -25,8 +24,11 @@ tags:
    5. 备份了
 
       1. .xcarchive文件夹
+
       2. ipa 文件
+
       3. Podfile
+
       4. podfile.lock.
 
 
@@ -94,20 +96,24 @@ git branch
 
 # 定时器设置
 
-用的是苹果推荐的launchctl 命令，因为打算不受系统重启的影响，所以放到了/Library/LaunchDaemons目录下。看二手文章太坑了，早知道早点上苹果官网搜了，关键字  launchd.plist
+用的是苹果推荐的launchctl 命令，因为打算不受系统重启的影响，所以放到了/Library/LaunchDaemons目录下。
+
+
 
 1. 已完成
+
    1. 间隔两小时出一个。
+
 2. 待完成
+
    1. 导出的日志文件，加一个时间参数，每次导出文件分开
-   2. 每天固定几个时间点执行（死活不管用）
-   3. launchctl start 管用（死活不管用）
+
+   2. 每天固定时间点执行
+
+   3. launchctl start 管用
 
 
-
-## 配置文件 demo
-
-
+导出日志的目录想加一个参数。
 
 ~~~xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -119,26 +125,26 @@ git branch
 	<key>ProgramArguments</key>
 	<array>
 		<string>/bin/bash</string>
-		<string>/Users/FG/lazy/Package/autoPackage.sh</string>
+		<string>/Users/yiche/weichao/Package/autoPackage.sh</string>
 	</array>
 	<key>StartInterval</key>
 	<integer>7200</integer>
 	<key>StandardOutPath</key>
-	<string>/Users/FG/lazy/Package/log/log</string>
+	<string>/Users/yiche/weichao/Package/log/log</string>
 	<key>StandardErrorPath</key>
-	<string>/Users/FG/lazy/Package/log/errorlog</string>
+	<string>/Users/yiche/weichao/Package/log/errorlog</string>
 </dict>
 </plist>
 
 ~~~
 
-## 常用命令
+
 
 ~~~shell
-launchctl load   com.lazy.launchctl.plist
-launchctl unload com.lazy.launchctl.plist
-launchctl start  com.lazy.launchctl.plist
-launchctl stop   com.lazy.launchctl.plist
+launchctl load   com.aigo.launchctl.plist
+launchctl unload com.aigo.launchctl.plist
+launchctl start  com.aigo.launchctl.plist
+launchctl stop   com.aigo.launchctl.plist
 launchctl list
 ~~~
 
@@ -150,14 +156,10 @@ launchctl list
 - 执行start和unload前，任务必须先load过，否则报错
 - stop可以停止任务
 
-## 目录配置 
-
-The property list file is structured the same for both daemons and agents. You indicate whether it describes a daemon or agent by the directory you place it in. Property list files describing daemons are installed in `/Library/LaunchDaemons`, and those describing agents are installed in `/Library/LaunchAgents` or in the `LaunchAgents` subdirectory of an individual user’s `Library` directory. (The appropriate location for executables that you launch from your job is `/usr/local/libexec`.)
-
 
 
 ## 参考
 
-1. [Scheduling Timed Jobs](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/ScheduledJobs.html#//apple_ref/doc/uid/10000172i-CH1-SW2)
+1. [Creating a launchd Property List File](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html#//apple_ref/doc/uid/TP40001762-104142)
 
 
