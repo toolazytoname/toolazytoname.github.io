@@ -105,14 +105,13 @@ git branch
 1. 已完成
 
    1. 间隔两小时出一个。
+   2. launchctl start ,方便调试
 
 2. 待完成
 
    1. 导出的日志文件，加一个时间参数，每次导出文件分开
 
    2. 每天固定时间点执行
-
-   3. launchctl start 管用
 
 
 导出日志的目录想加一个参数。
@@ -143,10 +142,10 @@ git branch
 
 
 ~~~shell
-launchctl load   com.lazy.launchctl.plist
-launchctl unload com.lazy.launchctl.plist
-launchctl start  com.lazy.launchctl.plist
-launchctl stop   com.lazy.launchctl.plist
+launchctl load   com.XXXXX.autoPackage.plist
+launchctl unload com.XXXXX.autoPackage.plist
+launchctl start  com.XXXXX.autoPackage
+launchctl stop   com.XXXXX.autoPackage
 launchctl list
 ~~~
 
@@ -154,9 +153,34 @@ launchctl list
 
 - 要让任务生效，必须先load命令加载这个plist
 - 如果任务呗修改了，那么必须先unload，然后重新load
-- start可以测试任务，这个是立即执行，不管时间到了没有(发现死活不管用)
+- start可以测试任务，这个是立即执行，不管时间到了没有
 - 执行start和unload前，任务必须先load过，否则报错
 - stop可以停止任务
+
+
+
+## 踩过坑
+
+###  launchctl start  不管用
+
+知道为啥之前start不了了。
+
+自己看下面man吧。传的参数含义不一样。
+
+~~~shell
+ load | unload [-wF] [-S sessiontype] [-D searchpath] paths ...
+              Load the specified configuration files or directories of configuration
+              files.
+~~~
+
+~~~shell
+  start label
+              Start the specified job by label. The expected use of this subcommand is for
+              debugging and testing so that one can manually kick-start an on-demand
+              server.
+~~~
+
+
 
 
 
@@ -165,6 +189,13 @@ launchctl list
 1. [Creating a launchd Property List File](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html#//apple_ref/doc/uid/TP40001762-104142)
 
 2. The manual pages for `launchd` and `launchd.plist` are the two best sources for information about `launchd`.
+
+   ~~~shell
+   man launchd.plist
+   man launchctl
+   ~~~
+
+
 
    ~~~shell
         StartInterval <integer>
