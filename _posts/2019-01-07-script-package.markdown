@@ -13,10 +13,12 @@ tags:
 
 # 效果
 
-1. 定时器
+1. 邮件（未实现）
+2. 远程执行（未实现）
+3. 定时器
    1. 每隔两小时，自动触发一次脚本
    2. 不受系统重启影响
-2. 通过脚本
+4. 通过脚本
    1. 通过git拉取远端壳工程最新的源码
    2. 打包前自动拉取远端Podfile覆盖本地文件(和工程目录分开管理)
    3. pod update
@@ -72,7 +74,7 @@ tags:
 
 ~~~shell
 #在上一个脚本的基础上，增加了git 获取壳工程的一些语句
-BitAutoPlusGitLabURL=http://gitlab.XXXXXs
+XXXXXGitLabURL=http://gitlab.XXXXXs
 echo '///-----------'
 echo '/// Git '
 echo '///-----------'
@@ -83,8 +85,8 @@ cd ${project_path}
 cd ../
 echo "pwd:$(pwd)"
 work_path=$(pwd)
-git clone ${BitAutoPlusGitLabURL}
-cd BitAutoPlus
+git clone ${XXXXXGitLabURL}
+cd XXXXX
 git pull
 git checkout develop
 git log -1
@@ -121,18 +123,18 @@ git branch
 <plist version="1.0">
 <dict>
 	<key>Label</key>
-	<string>com.BitAutoPlus.autoPackage</string>
+	<string>com.XXXXX.autoPackage</string>
 	<key>ProgramArguments</key>
 	<array>
 		<string>/bin/bash</string>
-		<string>/Users/yiche/weichao/Package/autoPackage.sh</string>
+		<string>/Users/FG/lazy/Package/autoPackage.sh</string>
 	</array>
 	<key>StartInterval</key>
 	<integer>7200</integer>
 	<key>StandardOutPath</key>
-	<string>/Users/yiche/weichao/Package/log/log</string>
+	<string>/Users/FG/lazy/Package/log/log</string>
 	<key>StandardErrorPath</key>
-	<string>/Users/yiche/weichao/Package/log/errorlog</string>
+	<string>/Users/FG/lazy/Package/log/errorlog</string>
 </dict>
 </plist>
 
@@ -141,10 +143,10 @@ git branch
 
 
 ~~~shell
-launchctl load   com.aigo.launchctl.plist
-launchctl unload com.aigo.launchctl.plist
-launchctl start  com.aigo.launchctl.plist
-launchctl stop   com.aigo.launchctl.plist
+launchctl load   com.lazy.launchctl.plist
+launchctl unload com.lazy.launchctl.plist
+launchctl start  com.lazy.launchctl.plist
+launchctl stop   com.lazy.launchctl.plist
 launchctl list
 ~~~
 
@@ -161,5 +163,6 @@ launchctl list
 ## 参考
 
 1. [Creating a launchd Property List File](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html#//apple_ref/doc/uid/TP40001762-104142)
+2. The manual pages for `launchd` and `launchd.plist` are the two best sources for information about `launchd`.
 
 
