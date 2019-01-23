@@ -197,7 +197,6 @@ $ echo "Hello world" | mail -s "msmtp test at `date`" yourfriend®@gmail.com
 
 
 
-
 # 坑
 
 ## git秘钥获取
@@ -215,7 +214,8 @@ Errno::EACCES: Permission denied @ rb_sysopen - XXXXXX
 解决：
 
 ~~~shell
-sudo chmod -R 1777 XXXXXX
+sudo chmod -R 777 XXXXXX
+sudo chown -R XXX XXXXXX
 ~~~
 
 ## pod update 失败
@@ -226,4 +226,3 @@ sudo chmod -R 1777 XXXXXX
 
 1. [Creating a launchd Property List File](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html#//apple_ref/doc/uid/TP40001762-104142)
 2. The manual pages for `launchd` and `launchd.plist` are the two best sources for information about `launchd`.
-3. [邮件配置](https://my.oschina.net/uhziel/blog/186683)
