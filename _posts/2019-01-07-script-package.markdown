@@ -209,6 +209,7 @@ git 获取不到存在 keychain 里面的密码，每次都是要手工输入，
 
 ~~~shell
 Errno::EACCES: Permission denied @ rb_sysopen - XXXXXX
+Errno::EACCES - Permission denied @ apply2files - /XXXXXX
 ~~~
 
 解决：
