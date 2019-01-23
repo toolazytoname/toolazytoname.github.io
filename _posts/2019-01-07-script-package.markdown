@@ -147,6 +147,55 @@ launchctl list | grep XXXX
 - 执行start和unload前，任务必须先load过，否则报错
 - stop可以停止任务
 
+# 配置邮件
+
+~~~shell
+# 安装 msmtp
+brew install msmtp
+~~~
+
+
+~~~shell
+#编辑文件
+cat ~/.mailrc
+set sendmail=/usr/local/bin/msmtp
+~~~
+
+
+~~~shell
+#编辑文件
+cat ~/.msmtprc
+# Example for a user configuration file
+# Set default values for all following accounts.
+defaults
+
+logfile /tmp/qqemail.log
+# A  service
+account qq
+host smtp.qq.com
+port 587
+from XXX@foxmail.com
+auth login
+
+tls on
+tls_certcheck off
+user XXX@foxmail.com
+password XXX
+# You need to set a default account for Mail
+account default : qq
+~~~
+
+~~~shell
+# 设置正确的访问权限
+chmod 600 ~/.msmtprc
+
+
+# 试用
+$ echo "Hello world" | mail -s "msmtp test at `date`" yourfriend®@gmail.com
+~~~
+
+
+
 
 
 # 坑
@@ -177,3 +226,4 @@ sudo chmod -R 1777 XXXXXX
 
 1. [Creating a launchd Property List File](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html#//apple_ref/doc/uid/TP40001762-104142)
 2. The manual pages for `launchd` and `launchd.plist` are the two best sources for information about `launchd`.
+3. [邮件配置](https://my.oschina.net/uhziel/blog/186683)
