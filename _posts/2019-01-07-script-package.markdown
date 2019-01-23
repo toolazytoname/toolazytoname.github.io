@@ -31,6 +31,8 @@ tags:
       3. Podfile
 
       4. podfile.lock.
+   6. 查看已打完包的entitlements和版本号
+   6. 发邮件通知
 
 
 
@@ -50,21 +52,18 @@ tags:
     *   app-store.plist
     *   enterprise.plist
 
-  * build
-
-    *   xxxxxx2018-12-27-14/59/08.xcarchive
-    *   xxxxxx2018-12-27-15/22/33.xcarchive
-
   * IPADir
 
-    *   Release
-        *   2018-12-27-16/16/29
-            *   xxxxxx.ipa
-            *   DistributionSummary.plist
-            *   ExportOptions.plist
-            *   Packaging.log
-            *   Podfile
-            *   podfile.lock
+    *   schemeX
+        *   Release
+            *   2018-12-27-16/16/29
+                *   xxxxxx2018-12-27-14/59/08.xcarchive
+                *   xxxxxx.ipa
+                *   DistributionSummary.plist
+                *   ExportOptions.plist
+                *   Packaging.log
+                *   Podfile
+                *   podfile.lock
 
 
 
@@ -150,11 +149,31 @@ launchctl list | grep XXXX
 
 
 
-# 未实现
+# 坑
 
-mail 功能尚未实现
+## git秘钥获取
 
-## 参考
+git 获取不到存在 keychain 里面的密码，每次都是要手工输入，推测是keychain挂掉了，重启一下Mac就好了。
+
+## ruby权限问题
+
+提示我，突然有一天打包失败，执行pod update 失败，报这个错
+
+~~~shell
+Errno::EACCES: Permission denied @ rb_sysopen - XXXXXX
+~~~
+
+解决：
+
+~~~shell
+sudo chmod -R 1777 XXXXXX
+~~~
+
+## pod update 失败
+
+未将定时任务和脚本 结合。某几个特殊的库，每次更新都会导致pod update 定时执行失败，手动命令行执行没有这个问题。
+
+# 参考
 
 1. [Creating a launchd Property List File](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html#//apple_ref/doc/uid/TP40001762-104142)
 2. The manual pages for `launchd` and `launchd.plist` are the two best sources for information about `launchd`.
