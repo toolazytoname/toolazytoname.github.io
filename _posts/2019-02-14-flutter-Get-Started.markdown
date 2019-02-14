@@ -60,6 +60,17 @@ cp -r -- "$FLUTTER_APPLICATION_PATH/.ios/Flutter/App.framework" "$SOURCE_ROOT/Fl
 
 
 
+## 上架提交商店报错解决
+
+~~~shell
+if [[ "$CONFIGURATION" =~ "Release" ]];then
+# Release环境删除Flutter.framework "x86_64" 框架
+lipo -remove "x86_64" "$FLUTTER_APPLICATION_PATH/.ios/Flutter/engine/Flutter.framework/Flutter" -output "$FLUTTER_APPLICATION_PATH/.ios/Flutter/engine/Flutter.framework/Flutter"
+fi
+~~~
+
+
+
 
 
 # 参考
