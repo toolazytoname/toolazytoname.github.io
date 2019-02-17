@@ -42,6 +42,45 @@ Xcode 可以在debug的时候，修改当前正在debug 的App的定位信息，
 如果你嫌麻烦，懒得每次都这么点，也可以在启动的时候，设置默认位置，具体操作路径是
 product -->Scheme --> edit scheme -->options --->default location (插上真机才会有这个选项)
 
+##### 获取GCJ－02经纬度
+通过[高德开放平台](https://lbs.amap.com/console/show/picker)获取某一点的经纬度数据。
+
+##### 获取WGS－84经纬度
+GCJ－02转换成 WGS－84坐标系
+代码[FDLocationCoordinateUtil.h](https://github.com/toolazytoname/FDKit/blob/master/FDKit/Classes/Utility/LocationCoordinate/FDLocationCoordinateUtil.h)
+
+##### 改变相应的经纬度值
+~~~xml
+<?xml version="1.0"?>
+<gpx version="1.1" creator="Xcode">
+
+    <!--
+     Provide one or more waypoints containing a latitude/longitude pair. If you provide one
+     waypoint, Xcode will simulate that specific location. If you provide multiple waypoints,
+     Xcode will simulate a route visiting each waypoint.
+     -->
+    
+    <wpt lat="42.877021" lon="129.413881">
+        <name>Cupertino</name>
+
+        <!--
+         Optionally provide a time element for each waypoint. Xcode will interpolate movement
+         at a rate of speed based on the time elapsed between each waypoint. If you do not provide
+         a time element, then Xcode will use a fixed rate of speed.
+
+         Waypoints must be sorted by time in ascending order.
+         -->
+        <time>2014-09-24T14:55:37Z</time>
+    </wpt>
+
+</gpx>
+
+~~~
+
+
+
+
+
 ## 背景知识
 以下是坐标系的基础知识，苹果用的是WGS-84，gpx文件的经纬度，可以直接通过设备获取，也可以通过高德地图拿到，然后略加转换层WGS-84就可以了。具体算法，参考文献第二篇就可以了。
 ###  WGS－84
