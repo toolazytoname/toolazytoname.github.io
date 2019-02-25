@@ -109,6 +109,7 @@ fi
    1. [[!] Invalid `Podfile` file: [!] Specifying multiple `post_install` hooks is unsupported..](https://github.com/flutter/flutter/issues/26212)
    2. [iOS混编Flutter优化&注意](https://www.jianshu.com/p/0ec95723909c)
    3. [Flutter: PhaseScriptExecution failed with a nonzero exit code](https://www.jianshu.com/p/3106715ea9a3)
+   4. [使用Flutter之后，我们的CPU占用率降了50%](https://mp.weixin.qq.com/s/NtwHJLwMigNG-SSr9DDDIQ)
 
 6. 原理
 
