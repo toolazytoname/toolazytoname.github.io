@@ -76,13 +76,21 @@ tags:
 7. 不足
 
    1. Weex的多页面实现问题
+
       1. weex 在 native 端是不支持 <keep-alive>的，这一点和 react-native 不同在与，如果在 native 需要实现页面跳转，使用 vue-router 将会惨不忍睹：返回后页面不做特别处理时，是会空白一片。参考官方Demo [playground](https://link.juejin.im/?target=https%3A%2F%2Fgithub.com%2Fapache%2Fincubator-weex%2Ftree%2Fmaster%2Fandroid%2Fplayground)，native 端 的采用 weex.requireModule('navigator')跳转 Activity 是才正确实现。
       2. 同时，weex中 navigator 跳转的设计，也导致了多页面的页面间通讯的差异。weex在多页面下的数据通讯，是通过url实现的，比如<file://assets/dist/SecondPage.js?params=0>，而vuex和vue-router在跨页面是无法共用的；而 react native 在跨 Actvity 使用时，因为是同一个bundle文件，只要 manager 相同，那么 router 和 store 时可以照样使用的，数据通信方式也和单个 Actvity 没区别。 
+
    2. Flutter
+
       1. 目前成熟度有限
+
       2. Dart 偏小众
+
       3. Dart 缺少语法糖,嵌套下来的代码有点不忍直视
-      4. 嵌入外部 platform view 成本高
+
+      4. 嵌入外部 platform view 成本高，官方现有集成方案对现有工程配置和打包流程有侵入，需要改造。理想状态下，不开发flutter同事不需要安装flutter 环境。
+
+         
 
 
 
