@@ -35,7 +35,11 @@ tags:
 
 ## multiple post_install
 Invalid `Podfile` file: [!] Specifying multiple `post_install` hooks is unsupported
-查看issue发现了原因，并且手动修改
+查看issue发现了原因，并且手动修改。
+
+具体解决方法请参考以下链接。
+
+[[!] Invalid `Podfile` file: [!] Specifying multiple `post_install` hooks is unsupported..](https://github.com/flutter/flutter/issues/26212)
 
 ## PhaseScriptExecution failed
 
