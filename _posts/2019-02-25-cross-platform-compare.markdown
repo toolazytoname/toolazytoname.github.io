@@ -33,8 +33,7 @@ tags:
 | star 数            | 74,351                         | 11,819                                                   | 54,180                                                      |
 | 背后大佬           | Facebook                       | Alibaba                                                  | Google                                                      |
 | 支持               | Android、IOS                   | Android、IOS、Web                                        | Android、IOS，谷歌新操作系统 Fuchsia 使用Flutter 作为UI框架 |
-
-
+| 热更新             | 支持                           | 支持                                                     | 目前不支持                                                  |
 
 # 文字补充
 

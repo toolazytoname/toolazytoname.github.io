@@ -1,0 +1,21 @@
+---
+layout: post
+title:  "SDImageCache.h 与YYCache 源码对比阅读"
+date:   2018-06-23 22:55:32 +0800
+categories: iOS
+catalog:  true
+tags:
+  - iOS
+---
+
+
+
+# SDImageCache.h 与YYCache 源码对比阅读
+
+这篇[YYCache 设计思路](https://blog.ibireme.com/2015/10/26/yycache/)也看了很多遍，也推荐给同事看。好吧，我承认我背离了iOS之道。    顺着文章的思路阅读了一下源码，对比一下SDImageCache.h果然很有收获。
+
+
+
+  
+
+​	
