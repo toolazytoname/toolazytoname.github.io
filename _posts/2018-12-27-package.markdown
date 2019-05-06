@@ -389,7 +389,139 @@ pod update --verbose
 
 虽然用到的文件是7M，但是pod update 会把整个目录都给拉下来，一整个目录一个多G，当然会失败了，后续继续观察，观察。
 
-实践证明，上述问题，并没有解决，在经历了一段时间的挣扎过后，只能是放弃jekkins了。于是有了第二季 原生脚本打包。
+实践证明，在xxxxxxNewsLib 瘦身以后上述问题，依然没有解决， jekkins又是一个很好的调用本地脚本的方案，不能舍弃。
+
+先描述一下现象
+
+1. 直接在控制台运行脚本，OK
+2. 如果news更新了，通过jekkins 执行脚本，不行
+3. 在上述情况下，在控制台执行一遍，jekkins就好使了。
+
+结合日志，都是挂在pod update 这一个命令上，结合输出的日志和cocoapods的源码，大体上知道了原因出在git clone 这一环节，一旦下载到本地缓存了，就不会走网络下载逻辑，直接走的是缓存逻辑。本地缓存可以通过 pod cache list 查看,通过 pod cache clean来清除。
+
+我的思路是
+
+1. 对比jekkins 和 命令行直接调用有什么环境差异，导致下载不成功
+2. 对比 news 和别的库有什么差异。我发现我在命令行直接执行
+
+
+
+顺着第一条路，我打印了一些书里列出的一些Git相关的环境变量
+
+~~~shell
+who am i
+echo $0
+echo $1
+echo $2
+git --exec-path
+echo $HOME
+echo $GIT_DIR
+等
+
+~~~
+
+没看出啥差异
+
+
+
+
+
+顺着第二条路，我在终端直接执行输出结果是
+
+~~~shell
+git clone http://gitlab.*******MessageCenterLib.git   messageCenter8 --template= --single-branch --depth 1 --branch 0.9.04 --verbose
+Cloning into 'messageCenter8'...
+POST git-upload-pack (196 bytes)
+POST git-upload-pack (205 bytes)
+remote: Counting objects: 3410, done.
+remote: Compressing objects: 100% (2893/2893), done.
+remote: Total 3410 (delta 517), reused 2846 (delta 429)
+Receiving objects: 100% (3410/3410), 57.50 MiB | 3.01 MiB/s, done.
+Resolving deltas: 100% (517/517), done.
+Note: checking out 'c0a1d2edb9f1a476fc229df92be2c5a700fbf019'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b <new-branch-name>
+
+Checking out files: 100% (3795/3795), done.
+~~~
+
+
+
+
+
+~~~shell
+git clone http://gitlab.bi******NewsLib.git  news8 --template= --single-branch --depth 1 --branch 0.9.05 --verbose
+Cloning into 'news8'...
+POST git-upload-pack (196 bytes)
+POST git-upload-pack (205 bytes)
+remote: Counting objects: 1328, done.
+remote: Compressing objects: 100% (1226/1226), done.
+remote: Total 1328 (delta 144), reused 1133 (delta 100)
+Receiving objects: 100% (1328/1328), 3.43 MiB | 7.01 MiB/s, done.
+Resolving deltas: 100% (144/144), done.
+Note: checking out 'b41984e840493d536a9feff198b4ad04d5f4088a'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b <new-branch-name>
+
+~~~
+
+
+
+我发现少了 Checking out files: 100% (3795/3795), done. 这一句输出，在加了 --verbose 不管用，因为Git 本来就支持调试日志的输出，我又加了一些变量，
+
+~~~shell
+GIT_TRACE=true GIT_TRACE_PACK_ACCESS=true GIT_TRACE_PACKET=true GIT_TRACE_PERFORMANCE=true GIT_TRACE_SETUP=true
+~~~
+
+没看出啥端倪，先立字为据，希望以后能有一个答案。
+
+
+
+最后怎么解决这个问题的呢？同事搞定的，在jekkins调用.command 可以解决这个问题，于是我写了个脚本放到jekkins 里面,动态生成。
+
+.command 应该是类似windows里面的.bat，直接双击就可以执行了，但是传参是一个问题 - -args 不管用，我用动态生成文件的办法解决了这个问题。
+
+~~~shell
+cd /Users/***/Package
+echo "cd /Users/***/Package; ./autoPackage.sh $channel $customPod" > ./tmp.command
+chmod +x ./tmp.command
+open ./tmp.command
+
+#本来也写了一个 因为customPod 是多行参数，所以暂时没有搞定
+#./dynamicCommand.sh $channel $customPod
+~~~
+
+
+
+dynamicCommand.sh 如下
+
+~~~shell
+#!/bin/sh
+pacage_path=$(cd `dirname $0`; pwd)
+# [ 1:app-store 2:enterprise]
+echo "cd $pacage_path; ./autoPackage.sh $1 $2" > ./tmp.command
+chmod +x ./tmp.command
+open ./tmp.command
+#rm ./tmp.command
+~~~
+
+
+
+
 
 ## 参考
 
