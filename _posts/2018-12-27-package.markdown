@@ -493,7 +493,7 @@ GIT_TRACE=true GIT_TRACE_PACK_ACCESS=true GIT_TRACE_PACKET=true GIT_TRACE_PERFOR
 
 最后怎么解决这个问题的呢？同事搞定的，在jekkins调用.command 可以解决这个问题，于是我写了个脚本放到jekkins 里面,动态生成。
 
-.command 应该是类似windows里面的.bat，直接双击就可以执行了，但是传参是一个问题 - -args 不管用，我用动态生成文件的办法解决了这个问题。
+.command 应该是类似windows里面的.bat，直接双击就可以执行了，但是传参是一个问题man open 看了一下， - -args 应该是用来传参的，但是我试了一下不管用，看样子应该是直接传到main函数里面的，我也没有继续试了。最后，我用动态生成文件的办法解决了这个问题。
 
 ~~~shell
 cd /Users/***/Package
