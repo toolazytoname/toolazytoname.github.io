@@ -11,6 +11,8 @@ tags:
 
 
 
+太长不看版:[源码](https://github.com/toolazytoname/BPFlutter)
+
 # 官方集成方案
 
 在Flutter 的FAQ里面有这么一个问题
@@ -72,8 +74,9 @@ podspec 写成这样以后，打包脚本得加入如下逻辑,为了让第三�
 #
 
     sed -i '' -e 's/<.*\/\(.*\)>/\"\1\"/g' ${PRODUCT_PATH}/GeneratedPluginRegistrant.m
-
 ~~~
+
+为了解决第二个缺点，我把Flutter封装成了一个单例。
 
 后面列一下目前为止，已解决的和未解决的一些坑
 
@@ -118,8 +121,6 @@ if [[ "$CONFIGURATION" =~ "Release" ]];then
 lipo -remove "x86_64" "$FLUTTER_APPLICATION_PATH/.ios/Flutter/engine/Flutter.framework/Flutter" -output "$FLUTTER_APPLICATION_PATH/.ios/Flutter/engine/Flutter.framework/Flutter"
 fi
 ~~~
-
-
 
 同时为了能在模拟器上编译通过，我用脚本增加了条件编译
 
@@ -251,4 +252,4 @@ Flutter native ，同时断点调试，未实现。
 5. [flutter 社区中文资源](https://flutter-io.cn)
 6. [json_serializable库转换工具](https://caijinglong.github.io/json2dart/index_ch.html)
 7. [Dart 语法](http://codingdict.com/article/22000) [DartPad](https://www.dartlang.org/tools/dartpad) 
-8. [翻页](https://marcinszalek.pl/flutter/infinite-dynamic-listview/)
+8. [翻页如何实现](https://marcinszalek.pl/flutter/infinite-dynamic-listview/)
