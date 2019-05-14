@@ -165,11 +165,9 @@ function add_compile_condition() {
 
 ## 在iOS 9 上启动崩溃
 
-GitHub 上面有一个[issue](https://github.com/flutter/flutter/issues/30834)
+GitHub 上面有一个[issue](https://github.com/flutter/flutter/issues/30834)。
 
-在iOS 9 上启动崩溃，debug不崩溃，把线拔掉，重启，崩溃.崩溃输出的堆栈在上面这个issue 里面都有。
-
-事后用otool -l /path/to/App 对比了一下输出结果，有问题的那个App确实没有如下这个Load command。
+在iOS 9 上启动崩溃，debug不崩溃，把线拔掉，重启，崩溃.崩溃输出的堆栈在上面这个issue 里面都有。事后用otool -l /path/to/App 对比了一下输出结果，有问题的那个App确实没有如下这个Load command。
 
 ~~~shell
 Load command 10
