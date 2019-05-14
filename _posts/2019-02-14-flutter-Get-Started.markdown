@@ -61,7 +61,7 @@ Two current demonstrations of this are the [platform_view](https://github.com/fl
   s.vendored_frameworks = 'iosbp/build_ios/release/product/Flutter/*.framework'
 ~~~
 
-podspec 写成这样以后，打包脚本得加入如下逻辑
+podspec 写成这样以后，打包脚本得加入如下逻辑,为了让第三方插件的源码，也放在当前pod。
 
 ~~~shell
 #改造
@@ -247,5 +247,8 @@ Flutter native ，同时断点调试，未实现。
 1. [官方文档](https://flutter.io/docs/get-started/codelab)
 2. [包地址](https://pub.dartlang.org/flutter/packages?q=json)
 3. [Using Flutter in China](https://flutter.io/community/china)
-4.  [Flutter中文网](https://flutterchina.club/) [《Flutter实战》](https://book.flutterchina.club/)
+4. [Flutter中文网](https://flutterchina.club/) [《Flutter实战》](https://book.flutterchina.club/)
 5. [flutter 社区中文资源](https://flutter-io.cn)
+6. [json_serializable库转换工具](https://caijinglong.github.io/json2dart/index_ch.html)
+7. [Dart 语法](http://codingdict.com/article/22000) [DartPad](https://www.dartlang.org/tools/dartpad) 
+8. [翻页](https://marcinszalek.pl/flutter/infinite-dynamic-listview/)
