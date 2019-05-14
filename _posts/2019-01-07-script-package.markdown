@@ -226,6 +226,14 @@ sudo chown -R XXX XXXXXX
 
 未将定时任务和脚本 结合。某几个特殊的库，每次更新都会导致pod update 定时执行失败，手动命令行执行没有这个问题。
 
+已规避，参看上一篇文章[《iOS自动打包》]({{ site.url }}/ios/2018/12/27/package/l) 最后。
+
+# fastlane
+
+无意间发现这么个东西  [fastlane](https://docs.fastlane.tools)
+
+
+
 # 参考
 
 1. [Creating a launchd Property List File](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html#//apple_ref/doc/uid/TP40001762-104142)
