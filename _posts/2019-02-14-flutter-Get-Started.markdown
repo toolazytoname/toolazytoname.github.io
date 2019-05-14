@@ -17,11 +17,16 @@ tags:
 
 在Flutter 的FAQ里面有这么一个问题
 
-### Can I use Flutter inside of my existing native app?
+~~~ 
+Can I use Flutter inside of my existing native app?
 
-Yes, you can embed a Flutter view in your existing Android or iOS app, however our tooling is currently not fully optimized for this use case (see [issue #14821](https://github.com/flutter/flutter/issues/14821) for details).
+Yes, you can embed a Flutter view in your existing Android or iOS app, however our tooling is currently not fully optimized for this use case (see issue #14821 for details).
 
-Two current demonstrations of this are the [platform_view](https://github.com/flutter/flutter/tree/master/examples/platform_view) and [flutter_view](https://github.com/flutter/flutter/tree/master/examples/flutter_view) examples. Some initial documentation is available in the wiki page [Add Flutter to existing apps](https://github.com/flutter/flutter/wiki/Add-Flutter-to-existing-apps).
+Two current demonstrations of this are the platform_view and flutter_view examples. Some initial documentation is available in the wiki page Add Flutter to existing apps.
+
+~~~
+
+文中的链接：  [issue #14821](https://github.com/flutter/flutter/issues/14821)  [platform_view](https://github.com/flutter/flutter/tree/master/examples/platform_view) and [flutter_view](https://github.com/flutter/flutter/tree/master/examples/flutter_view) examples.  wiki page [Add Flutter to existing apps](https://github.com/flutter/flutter/wiki/Add-Flutter-to-existing-apps).
 
 看了才发现，Google官方对这一点支持的不太友好，能实现，但过程极度不优雅。国内有几篇文章都分享了如何优雅集成，
 
