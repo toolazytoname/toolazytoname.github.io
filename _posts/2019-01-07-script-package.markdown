@@ -230,7 +230,9 @@ sudo chown -R XXX XXXXXX
 
 # fastlane
 
-无意间发现这么个东西  [fastlane](https://docs.fastlane.tools)
+无意间发现这么个东西  [fastlane](https://docs.fastlane.tools) 和 [Transporter](https://help.apple.com/itc/transporteruserguide/?spm=a2c4e.11153940.blogcont701385.7.6aea4101STSXaY#/itc0d5b535bf)， 参考[谈一谈 IPA 上传到 App Store Connect 的几种方法](https://yq.aliyun.com/articles/701385?spm=a2c4e.11155435.0.0.4bfd6186xVSLrw)。
+
+
 
 
 
