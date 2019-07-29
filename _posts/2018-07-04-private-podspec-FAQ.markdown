@@ -167,46 +167,6 @@ spec.pod_target_xcconfig = { 'OTHER_LDFLAGS' => '-lObjC' }
 
 在外部直接 BPBaseFuncLib/OCR，竟然找不到BPBaseFuncLib这个bundle，直接写BPBaseFuncLib当然是会有这个bundle的，着让我很费解，参看官方文档Subspecs 和主spec应该是一个继承的关系，先留着，待后续更新吧。
 
-### default_subspecs 
-
-随着组件化的铺开，当我们打算创建一个新App的时候，自然而然地就会复用指之前的模块和代码。当一个组件需要同时支持两个上层App， 两个App所需要的逻辑有所差异，我们会把一个库划分为两个子库。例如
-
-~~~ruby
-s.default_subspec = 'Pay'
-s.subspec 'Pay' do |pay|
-      pay.source_files = 'BitAutoPlusHomeLib/Classes/**/*'
-      pay.resource_bundles = {
-          'BitAutoPlusHomeLib' => ['BitAutoPlusHomeLib/Assets/**/*.{json,png}']
-      }
-      pay.dependency 'UMCShare/Social/QQ'
-      pay.dependency 'UMCShare/Social/Sina'
-      pay.dependency 'UMCShare/Social/WeChat'
-  end
-  
-  s.subspec 'NoPay' do |nopay|
-      nopay.source_files = 'BitAutoPlusHomeLib/Classes/**/*'
-      nopay.resource_bundles = {
-         'BitAutoPlusHomeLib' => ['BitAutoPlusHomeLib/Assets/**/*.{json,png}']
-      }
-      nopay.dependency 'UMCShareNoPay/Social/QQ'
-      nopay.dependency 'UMCShareNoPay/Social/Sina'
-      nopay.dependency 'UMCShareNoPay/Social/WeChat'
-  end
-
-~~~
-
-两个子库的区别是pay 这个子库，引入的是一个完整的微信SDK的友盟，而另一个子库引入的是不带微信SDK的友盟。
-
-如果不设置这一个属性，那么根据[官方文档](https://guides.cocoapods.org/syntax/podspec.html#specification) 的解释，外部引用BitAutoPlusHomeLib 的时候，会出现命名重复，冲突的错误。因为 If not specified a specifications requires all its subspecs as dependencies.所以我们需要设置这一个属性为其中一个子库，这个属性在两个子库不能共存的场景下分外实用。
-
-
-
-另一个场景的场景是，组件二进制化。当一个库，需要同时对外暴露源码和二进制包的时候。两个子库也会有冲突，这时候也需要设置这个属性。
-
-
-
-
-
 # 常用命令放着复制粘贴
 
 ~~~shell
