@@ -6,7 +6,7 @@ categories: hack your life
 tags:
   - hack your life
   - Shell
-  - 自制工具
+  - 自制脚本
 ---
 受到知乎上一个问题的启发，打算写一个简单的脚本。
 
