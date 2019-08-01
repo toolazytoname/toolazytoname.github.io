@@ -2,11 +2,11 @@
 
 layout: post
 title:  "iOS脚本打包升级"
-date:   2019-1-7 10:02:32 +0800
+date:   2019-8-1 11:42:32 +0800
 categories: iOS
 catalog:  true
 tags:
-  - iOS
+  - iOS - 打包
 ---
 
 
