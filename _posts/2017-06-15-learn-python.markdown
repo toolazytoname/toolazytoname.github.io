@@ -5,7 +5,7 @@ date:   2017-06-15 17:50:32 +0800
 categories: python
 catalog:  true
 tags:
-  - python 
+  - Python 
 ---
 
 
@@ -175,8 +175,8 @@ bytes object 之前操作的比较少。
 
 基本代码应该能看懂了吧。试试。
 
-	
+​	
 
-	
+​	
 
 
