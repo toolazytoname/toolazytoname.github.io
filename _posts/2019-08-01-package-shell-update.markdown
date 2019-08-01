@@ -162,7 +162,7 @@ tags:
 # 知识点
 
 1. 将命令执行结果赋给变量—反引号与$() 
-2. shell if 判断逻辑 ，数字用 (())    ,非数字用 [[]] 参考  [ Shell\[\[\]\]详解：检测某个条件是否成立](http://c.biancheng.net/view/2751.html )
+2. shell if 判断逻辑 ，数字用 (())    ,非数字用 [[]] 参考  [ Shell[[]\]详解：检测某个条件是否成立](http://c.biancheng.net/view/2751.html )
 
 
 
@@ -179,6 +179,6 @@ tags:
 
 # 参考
 
-1.  [ Shell\[\[\]\]详解：检测某个条件是否成立](http://c.biancheng.net/view/2751.html )
+1.  [ Shell\[\[\]]详解：检测某个条件是否成立](http://c.biancheng.net/view/2751.html )
 2. [shell如何模块化和复用——shell深入学习](https://arganzheng.iteye.com/blog/1174470)
 3. [Shell脚本的模块化和脚本复用](https://blog.51cto.com/atong/1912179)
