@@ -7,6 +7,7 @@ categories: iOS
 catalog:  true
 tags:
   - iOS
+  - Flutter
 ---
 
 
@@ -17,7 +18,7 @@ tags:
 
 在Flutter 的FAQ里面有这么一个问题
 
-~~~ 
+~~~
 Can I use Flutter inside of my existing native app?
 
 Yes, you can embed a Flutter view in your existing Android or iOS app, however our tooling is currently not fully optimized for this use case (see issue #14821 for details).
@@ -187,7 +188,7 @@ compatibility version 1.0.0
 
 删了呢，又会报错App installation failed，Could not inspect the application package.
 
-更可恶的是如果保留Info.plist， 
+更可恶的是如果保留Info.plist，
 
 ~~~ruby
 #在主工程的podfile 里面，路径指向本地没问题，
@@ -221,7 +222,7 @@ pod 'BPFlutter', :git => 'http://gitlab.*****.com/WP/Mobile/IOS/BPFlutter.git', 
 
 ## 如果iOS有一个UIScrollview 套一个 flutter 的ListView。手势会有冲突。
 
-[Issue](https://github.com/flutter/flutter/issues/27071) 
+[Issue](https://github.com/flutter/flutter/issues/27071)
 
 目前最好的解决方案是外部实现一个UIScrollview子类，添加如下方法。
 
@@ -254,5 +255,5 @@ Flutter native ，同时断点调试，未实现。
 4. [Flutter中文网](https://flutterchina.club/) [《Flutter实战》](https://book.flutterchina.club/)
 5. [flutter 社区中文资源](https://flutter-io.cn)
 6. [json_serializable库转换工具](https://caijinglong.github.io/json2dart/index_ch.html)
-7. [Dart 语法](http://codingdict.com/article/22000) [DartPad](https://www.dartlang.org/tools/dartpad) 
+7. [Dart 语法](http://codingdict.com/article/22000) [DartPad](https://www.dartlang.org/tools/dartpad)
 8. [翻页如何实现](https://marcinszalek.pl/flutter/infinite-dynamic-listview/)
