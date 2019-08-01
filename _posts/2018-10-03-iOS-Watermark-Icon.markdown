@@ -6,6 +6,9 @@ categories: iOS
 catalog:  true
 tags:
   - iOS 
+  - 自制脚本
+  - Shell
+ 
 ---
 
 
@@ -17,84 +20,90 @@ tags:
 
 ## 如何实现
 搜到了两种方案，[iOS——写一个快速定位问题的脚本](http://zhoulingyu.com/2017/04/04/iOS——写一个快速定位问题的脚本/#more)没有试成，这种方案是进入编译后的工程目录，去替换相应的图标文件。用到了ImageMagick 。
-另一种方案时候，直接修改工程目录中的图标源文件，这种方法试成功了。用到了ImageMagick 和ghostscript。不是太理解，ghostscript [Overlaying application version on top of your icon](http://merowing.info/2013/03/overlaying-application-version-on-top-of-your-icon/)提到了，ghostscript (fonts),但我还是不太理解ghostscript 是干啥用的。ImageMagick 我能用which convert 来判断是否安装，ghostscript 就不知道改怎么判断了，灵机一动。
-
-~~~shell
-#判断是否已经安装了必须工具 imagemagick ghostscript
-echo `brew ls` |grep -q "imagemagick"
-if [ $? -eq 0 ]; then
-echo "imagemagick installed "
-
-echo `brew ls` |grep -q "ghostscript"
-if [ $? -eq 0 ]; then
-echo "ghostscript installed "
-
-~~~
+另一种方案时候，直接修改工程目录中的图标源文件，这种方法试成功了。
 
 
 ## 目标
-希望只用ImageMagick 这么一个库，应该也是可以实现的
-自己改了一下代码，先用上,调高了高度，修改了文案。
+scripts/water_mark.sh
 
 ~~~shell
-version=`/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "${INFOPLIST_FILE}"`
-commit=`git rev-parse --short HEAD`
-branch=`git rev-parse --abbrev-ref HEAD`
-buildNumber=`/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "${INFOPLIST_FILE}"`
-buildDate=`date "+%Y-%m-%d"`
-buildTime=`date "+%H:%M:%S"`
-caption="${buildDate}\n${buildTime}\n${buildNumber}_${branch}\n${commit}"
+#!/bin/sh
+
+#需要在外面定义最多重传次数 pgy_upload_max_retry_count
+if [[ -n $water_mark_shell_imported ]]; then
+  return
+fi
+export water_mark_shell_imported="water_mark.sh"
+
+. log.sh
+. base_command.sh
 
 function processIcon() {
-    #根据传入参数获取文件名
-    base_file=$1
-    #得到完整路径
-    base_path=`find ${SRCROOT} -name $base_file`
-    #打印完整路径
-    echo "base_path:${base_path}"
-    #如果找不到这个文件就退出
-    if [[ ! -f ${base_path} || -z ${base_path} ]]; then
+  local info_plist_file=$1
+  #根据传入参数获取文件名
+  local base_file=$2
+  local source_root=$3
+  local appicon_appiconset_path=$4
+  local build_datetime_for_buildnumber=$5
+
+  stream_output "info_plist_file:${info_plist_file}"
+
+  local version=`/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" ${info_plist_file}`
+  local commit=`git rev-parse --short HEAD`
+  local branch=`git rev-parse --abbrev-ref HEAD`
+  local buildNumber=`/usr/libexec/PlistBuddy -c "Print CFBundleVersion" ${info_plist_file}`
+  # local buildDate=`date "+%Y-%m-%d"`
+  # local buildTime=`date "+%H:%M:%S"`
+
+  # local caption="${buildDate}\n${buildTime}\n${version}\n${buildNumber}_${branch}\n${commit}"
+  local caption="${build_datetime_for_buildnumber}\n${version}\n${buildNumber}_${branch}\n${commit}"
+
+
+  #得到完整路径
+  local base_path=`find ${source_root} -name $base_file`
+  #打印完整路径
+  stream_output "base_path:${base_path}"
+  #如果找不到这个文件就退出
+  if [[ ! -f ${base_path} || -z ${base_path} ]]; then
     return;
-    fi
+  fi
 
-    # 如果icon-60@2x_base.png 我猜得到的应该是icon-60@2x.png
-    target_file=`echo $base_file | sed "s/_base//"`
-    target_path="${SRCROOT}/BitAutoPlus/Assets.xcassets/AppIcon.appiconset/${target_file}"
-    #如果是Release，恢复AppIcon.appiconset中的水印图为默认图片
-#    if [ $CONFIGURATION = "Release" ]; then
-#    cp ${base_path} ${target_path}
-#    return
-#    fi
+  # 如果icon-60@2x_base.png ,得到的应该是icon-60@2x.png
+  local target_file=`echo $base_file | sed "s/_base//"`
+  local target_path="${appicon_appiconset_path}/${target_file}"
 
-    #获取原始文件宽度
-    width=`identify -format %w ${base_path}`
+  #获取原始文件宽度
+  local width=`identify -format %w ${base_path}`
     #获取原始文件高度
-    height=`identify -format %h ${base_path}`
-    #设置水印高度
-    targetHeight=$(((4 * $height) / 6))
-    #生成目标图片，swap 的官方解释看懂了，用到这不知道有什么用
-    #-swap index,index
-#Swap the positions of two images in the image sequence.
+  local height=`identify -format %h ${base_path}`
+  #设置水印高度
+  local targetHeight=$(((4 * $height) / 6))
 
-#For example, -swap 0,2 swaps the first and the third images in the current image sequence. Use +swap to switch the last two images in the sequence.
-    convert -background '#0008' -fill white -gravity center -size ${width}x${targetHeight}\
-    caption:"${caption}"\
-    ${base_path} +swap -gravity south -composite ${target_path}
+  run_command_not_exit convert -background '#0008' -fill white -gravity center -size ${width}x${targetHeight}\
+  caption:"${caption}"\
+  ${base_path} +swap -gravity south -composite ${target_path}
 }
 
-convertPath=`which convert`
-if [[ ! -f ${convertPath} || -z ${convertPath} ]]; then
-echo "==============
-WARNING: 你需要先安装 ImageMagick！！！！:
-brew install imagemagick
-=============="
-exit 0;
-fi
 
 
+function water_mark_main() {
+  local info_plist_file=$1
+  local source_root=$2
+  local appicon_appiconset_path=$3
+  local build_datetime_for_buildnumber=$4
 
-processIcon "icon-60@2x_base.png"
-processIcon "icon-60@3x_base.png"
+  #判断是否已经安装了必须工具 imagemagick
+  run_command echo `brew ls` |grep -q "imagemagick"
+  if (( $? == 0 )); then
+    echo "imagemagick installed "
+  else
+    echo_error "============== WARNING: 你需要先安装 ImageMagick！！！！: brew install imagemagick =============="
+  fi
+
+   processIcon ${info_plist_file} "icon-60@2x_base.png" ${source_root} ${appicon_appiconset_path} ${build_datetime_for_buildnumber}
+   processIcon ${info_plist_file} "icon-60@3x_base.png" ${source_root} ${appicon_appiconset_path} ${build_datetime_for_buildnumber}
+}
+
 ~~~
 
 
