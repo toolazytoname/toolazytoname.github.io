@@ -1,7 +1,7 @@
 ---
 
 layout: post
-title:  "iOS脚本自动打包"
+title:  "iOS脚本打包"
 date:   2019-1-7 10:02:32 +0800
 categories: iOS
 catalog:  true

@@ -1,7 +1,7 @@
 ---
 
 layout: post
-title:  "iOS自动打包"
+title:  "iOS jekins 打包"
 date:   2018-12-27 18:09:32 +0800
 categories: iOS
 catalog:  true
