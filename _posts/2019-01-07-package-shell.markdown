@@ -6,10 +6,16 @@ date:   2019-1-7 10:02:32 +0800
 categories: iOS
 catalog:  true
 tags:
-  - iOS
+  - 打包 - iOS 
 ---
 
+这是打包系列 
 
+- 第一篇 [《iOS jekins 打包》]({{ site.url }}/ios/2018/12/27/package-jekins/) 
+
+- 第二篇 [《iOS 脚本打包》]({{ site.url }}/ios/2019/01/07/package-shell/) 
+
+- 第三篇 [《iOS脚本打包升级》]({{ site.url }}/ios/2019/08/01/package-shell-update/) 
 
 # 效果
 

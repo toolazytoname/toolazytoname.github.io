@@ -11,11 +11,13 @@ tags:
 
 
 
-这是打包系列第三篇，可以参考前两篇 
+这是打包系列 
 
-[《iOS jekins 打包》]({{ site.url }}/ios/2018/12/27/package-jekins/) 
+* 第一篇 [《iOS jekins 打包》]({{ site.url }}/ios/2018/12/27/package-jekins/) 
 
-[《iOS 脚本打包》]({{ site.url }}/ios/2018/12/27/package-shell/l) 
+* 第二篇 [《iOS 脚本打包》]({{ site.url }}/ios/2019/01/07/package-shell/) 
+
+* 第三篇 [《iOS脚本打包升级》]({{ site.url }}/ios/2019/08/01/package-shell-update/) 
 
 
 
@@ -54,7 +56,7 @@ tags:
    
            network_replace_section Podfile用网络刷新本地，替换原始脚本中的 
    
-                                   #ShellPodsStart和ShellPodsEnd 之间内容,执行pod update. 
+                                   ShellPodsStart和ShellPodsEnd 之间内容,执行pod update. 
    
            network_replace_pods    Podfile用网络刷新本地，替换原始脚本中的 特定的pod内容内容为本地目录,执行pod update. 
    
@@ -165,8 +167,6 @@ tags:
 
 # 未做
 
-未做 
-
 1. 证书到期时间检测，到期提前通知 
 2. 描述文件到期时间检测，到期提前通知 
 3. 苹果上传结果解析 
@@ -178,4 +178,6 @@ tags:
 
 # 参考
 
-1. 
+1.  [ Shell\[\[\]\]详解：检测某个条件是否成立](http://c.biancheng.net/view/2751.html )
+2. [shell如何模块化和复用——shell深入学习](https://arganzheng.iteye.com/blog/1174470)
+3. [Shell脚本的模块化和脚本复用](https://blog.51cto.com/atong/1912179)
