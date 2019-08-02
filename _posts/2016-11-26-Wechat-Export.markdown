@@ -6,6 +6,7 @@ categories: hack your life
 catalog: true
 tags:
   - hack your life
+  - 自制工具
 ---
 闲来有事，自己搞一个自己用的小工具，凑活能用。
 
