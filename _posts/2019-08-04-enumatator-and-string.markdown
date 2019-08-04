@@ -58,9 +58,9 @@ NSUInteger length = sizeof(BPEPlaceHolderImageNames)/sizeof(BPEPlaceHolderImageN
 
 我一般都会这么写，比较喜欢，枚举和字符串的转换这一部分，很直观，不容易出错，也不用刻意加多余的代码。BPEPlaceHolderImageNames 是一个数组，这里有两点不太好。
 
-###  数组表发方式的缺点1
+###  数组缺点1
 如果我在定义枚举值的时候把BPEPlaceHolderType_Avatar改为300，那么BPEPlaceHolderImageNames 的数组长度就会变为300+1。这样就会浪费内存。
-###  数组表发方式的缺点2
+###  数组缺点2
 永远不要相信外部的传入，如果我没有定义0的枚举值，BPEPlaceHolderImageNames[0]会是一个nil。
 但如果传入的枚举值是    if (type < 0 || type >=length  ) ，就会数组就越界了。
 
