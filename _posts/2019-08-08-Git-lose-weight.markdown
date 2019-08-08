@@ -32,6 +32,8 @@ cocoapods在组件化过程中，有的团队会把Pods上传，有的不会。�
 
 ## 脚本
 
+[FDLoseWeight.sh](https://raw.githubusercontent.com/toolazytoname/FDRepoPush/master/FDLoseWeight.sh)
+
 ~~~shell
 #! /bin/sh
 #--------------------------------------------
