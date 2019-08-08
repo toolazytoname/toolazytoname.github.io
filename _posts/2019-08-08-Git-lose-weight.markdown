@@ -28,11 +28,11 @@ iOS组件化系列
 
 # 由来
 
-cocoapods在组件化过程中，有的团队会把Pods上传，有的不会。我认为在壳工程中，Pods纳入版本管理是有必要的，在单个pod工程中，就显得有点冗余了。我们团队有的pod因为引入的第三方组件库比较多，Git工程目录的大小甚至达到了1G多。为了瘦身，所以我写了个脚本，去自动完成这件高风险的事情。
+cocoapods在组件化过程中，有的团队会把Pods上传，有的不会。我认为在壳工程中，Pods纳入版本管理是有必要的，在单个pod工程中，就显得有点冗余了。我们团队有的pod因为引入的第三方组件库比较多，Git工程目录的大小甚至达到了1G多。为了瘦身，所以我写了个脚本[lose_weight.sh](https://raw.githubusercontent.com/toolazytoname/FDRepoPush/master/lose_weight.sh)，去自动完成这件高风险的事情。
 
 ## 脚本
 
-[FDLoseWeight.sh](https://raw.githubusercontent.com/toolazytoname/FDRepoPush/master/FDLoseWeight.sh)
+[lose_weight.sh](https://raw.githubusercontent.com/toolazytoname/FDRepoPush/master/lose_weight.sh)
 
 ~~~shell
 #! /bin/sh
@@ -44,9 +44,9 @@ cocoapods在组件化过程中，有的团队会把Pods上传，有的不会。�
 #         (2) chmod +x FD***.sh
 #         (3) 在GitLab上新建一个repo，例如 http://gitlab.bitautotech.com/weichao/WelfareThin
 #         (4) 想删除单个目录，记得斜杠结尾
-#              ./FDLoseWeight.sh  /Users/yiche/Code/test/WelfareMirror（库的根目录） Example/Pods/（想删除的文件夹） http://gitlab.bitautotech.com/weichao/WelfareThin（新目录地址）
+#              ./lose_weight.sh  /Users/yiche/Code/test/WelfareMirror（库的根目录） Example/Pods/（想删除的文件夹） http://gitlab.bitautotech.com/weichao/WelfareThin（新目录地址）
 #         (5) 想删除多个目录，每个目录斜杠结尾 ，用逗号隔开
-#             ./FDLoseWeight.sh  /Users/yiche/Code/test/WelfareMirror（库的根目录） Example/Pods/,Example2（想删除的文件夹数组） http://gitlab.bitautotech.com/weichao/WelfareThin（新目录地址）
+#             ./lose_weight.sh  /Users/yiche/Code/test/WelfareMirror（库的根目录） Example/Pods/,Example2（想删除的文件夹数组） http://gitlab.bitautotech.com/weichao/WelfareThin（新目录地址）
 #  最理想状态是直接在当前remote操作，但是操作了以后文件是删了，没瘦下来，所以退而求其次，推了个新库。
 #  如果要改原来的，在这里把分支保护给关掉http://gitlab.bitautotech.com/weichao/WelfareMirror/settings/repository  点击unprotect，记得完事后重新保护上
 #  可以通过如下命令找到大文件
@@ -124,6 +124,7 @@ git gc --aggressive --prune=now
 git remote add thin $3
 git push -u thin --all
 git push -u thin --tags
+
 
 
 ~~~
