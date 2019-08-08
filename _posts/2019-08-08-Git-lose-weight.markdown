@@ -22,7 +22,7 @@ iOS组件化系列
 3. [《定时取源码执行pod lib lint校验》]({{ site.url }}/ios/2018/07/13/FDPodBot/) 
 4.  [《cocoapods依赖关系导出》]({{ site.url }}/ios/2018/12/27/cocoapods-graph/) 
 5.  [《iOS 组件二进制》]({{ site.url }}/ios/2019/08/01/cocoapods-binary//) 
-6.  [《Git工作目录瘦身》]({{ site.url }}/git/2019/08/08/git-lose-weight/) 
+6.  [《Git工作目录瘦身》]({{ site.url }}/git/2019/08/08/Git-lose-weight/) 
 
 
 
