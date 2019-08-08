@@ -101,14 +101,10 @@ done
 #If you wish to do so, use the following script:
 for branch in `git branch -a | grep remotes/origin | grep -v HEAD | grep -v master `; do
    git branch --track ${branch#remotes/origin/} $branch
-   # echo "log: git branch --track ${branch#remotes/origin/} $branch"
+   # https://www.cnblogs.com/sherlockhomles/p/3837113.html
    # log: git branch --track RMLogin remotes/origin/RMLogin
 done
 # https://stackoverflow.com/questions/67699/how-to-clone-all-remote-branches-in-git
-# remotes/origin/RMLogin
-# remotes/origin/develop
-# remotes/origin/flutter
-# remotes/origin/navigation
 # for branch in  `git branch -r | grep -v 'HEAD\|master'`; do
 #  git branch --track ${branch##*/} $branch;
 # done
@@ -127,6 +123,7 @@ git remote add thin $3
 git push -u thin --all
 git push -u thin --tags
 
+
 ~~~
 
 
@@ -141,6 +138,58 @@ git push -u thin --tags
 # 参考
 
 1. [.git文件过大！删除大文件](https://www.cnblogs.com/lout/p/6111739.html)
-2.  [Git如何永久删除文件(包括历史记录)](https://www.cnblogs.com/shines77/p/3460274.html)
+
+2. [Git如何永久删除文件(包括历史记录)](https://www.cnblogs.com/shines77/p/3460274.html)
+
 3. [how-to-clone-all-remote-branches-in-git](https://stackoverflow.com/questions/67699/how-to-clone-all-remote-branches-in-git)
+
+4. [[shell中的${}，##和%%的使用](https://www.cnblogs.com/sherlockhomles/p/3837113.html)](https://www.cnblogs.com/sherlockhomles/p/3837113.html)
+
+5. ~~~shell
+   假设我们定义了一个变量为：
+   file=/dir1/dir2/dir3/my.file.txt
+   
+   可以用${ }分别替换得到不同的值：
+   ${file#*/}：删掉第一个 / 及其左边的字符串：dir1/dir2/dir3/my.file.txt
+   ${file##*/}：删掉最后一个 /  及其左边的字符串：my.file.txt
+   ${file#*.}：删掉第一个 .  及其左边的字符串：file.txt
+   ${file##*.}：删掉最后一个 .  及其左边的字符串：txt
+   ${file%/*}：删掉最后一个  /  及其右边的字符串：/dir1/dir2/dir3
+   ${file%%/*}：删掉第一个 /  及其右边的字符串：(空值)
+   ${file%.*}：删掉最后一个  .  及其右边的字符串：/dir1/dir2/dir3/my.file
+   ${file%%.*}：删掉第一个  .   及其右边的字符串：/dir1/dir2/dir3/my
+   
+   记忆的方法为：
+   # 是 去掉左边（键盘上#在 $ 的左边）
+   %是去掉右边（键盘上% 在$ 的右边）
+   单一符号是最小匹配；两个符号是最大匹配
+   ${file:0:5}：提取最左边的 5 个字节：/dir1
+   ${file:5:5}：提取第 5 个字节右边的连续5个字节：/dir2
+   
+   也可以对变量值里的字符串作替换：
+   ${file/dir/path}：将第一个dir 替换为path：/path1/dir2/dir3/my.file.txt
+   ${file//dir/path}：将全部dir 替换为 path：/path1/path2/path3/my.file.txt
+   
+   利用 ${ } 还可针对不同的变数状态赋值(沒设定、空值、非空值)： 
+   ${file-my.file.txt} ：假如 $file 沒有设定，則使用 my.file.txt 作传回值。(空值及非空值時不作处理) 
+   ${file:-my.file.txt} ：假如 $file 沒有設定或為空值，則使用 my.file.txt 作傳回值。 (非空值時不作处理)
+   ${file+my.file.txt} ：假如 $file 設為空值或非空值，均使用 my.file.txt 作傳回值。(沒設定時不作处理)
+   ${file:+my.file.txt} ：若 $file 為非空值，則使用 my.file.txt 作傳回值。 (沒設定及空值時不作处理)
+   ${file=my.file.txt} ：若 $file 沒設定，則使用 my.file.txt 作傳回值，同時將 $file 賦值為 my.file.txt 。 (空值及非空值時不作处理)
+   ${file:=my.file.txt} ：若 $file 沒設定或為空值，則使用 my.file.txt 作傳回值，同時將 $file 賦值為my.file.txt 。 (非空值時不作处理)
+   ${file?my.file.txt} ：若 $file 沒設定，則將 my.file.txt 輸出至 STDERR。 (空值及非空值時不作处理)
+   
+   
+   ${file:?my.file.txt} ：若 $file 没设定或为空值，则将 my.file.txt 输出至 STDERR。 (非空值時不作处理)
+   
+   ${#var} 可计算出变量值的长度：
+   
+   
+   ${#file} 可得到 27 ，因为/dir1/dir2/dir3/my.file.txt 是27个字节
+   
+   技术成就现在，眼光着看未来。
+   
+   ~~~
+
+   
 
