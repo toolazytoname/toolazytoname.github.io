@@ -132,7 +132,7 @@ git push -u thin --tags
 
 
 
-1. 对于 shell 变量中的# 和 ## 的使用不太了解，目前没找到相关的资料。
+1.  ~~对于 shell 变量中的# 和 ## 的使用不太了解，目前没找到相关的资料。~~ 参看[shell中的${}，##和%%的使用](https://www.cnblogs.com/sherlockhomles/p/3837113.html)
 2. 功能上，虽然本地库瘦下来了，但是对原repo，瘦不下来。所以退而求其次，推到了一个新的瘦repo上。
 
 # 参考
@@ -143,7 +143,7 @@ git push -u thin --tags
 
 3. [how-to-clone-all-remote-branches-in-git](https://stackoverflow.com/questions/67699/how-to-clone-all-remote-branches-in-git)
 
-4. [[shell中的${}，##和%%的使用](https://www.cnblogs.com/sherlockhomles/p/3837113.html)](https://www.cnblogs.com/sherlockhomles/p/3837113.html)
+4. [shell中的${}，##和%%的使用](https://www.cnblogs.com/sherlockhomles/p/3837113.html)
 
 5. ~~~shell
    假设我们定义了一个变量为：
