@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "iOS Location Spoofing"
-date:   2015-10-03 18:19:32 +0800
+date:   2018-10-03 18:19:32 +0800
 categories: iOS
 catalog:  true
 tags:
@@ -16,8 +16,8 @@ tags:
 ### 由来
 某个加班回来的晚上，根据同事的思路随意搜索了一下，还真有在iOS上现成的解决方案。
 ### 简单介绍一下
-#### 越狱设备(未亲试)
-如果你的设备是越狱设备，那么可以试试安一个插件，LocationFaker，或者iOSRoamingGuide。（这两个我都没试过，自己上big boss源去搜一个，应该没啥问题）
+#### 越狱设备
+如果你的设备是越狱设备，那么可以试试安一个插件，LocationFaker，或者iOSRoamingGuide。
 #### iOS10 及以下(未亲试)
 iOS 11 苹果应该是把这个方案给关掉了。如果你的设备恰巧符合要求，
 1. 那么用iTunes 做一个备份，记得不要选择加密。
