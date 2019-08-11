@@ -12,7 +12,9 @@ tags:
 
 
 
+# 解读思路
 
+根据一个一个类来的，看到AspectIdentifier 了。
 
 # 源码
 
@@ -124,7 +126,7 @@ extern NSString *const AspectErrorDomain;
 
 #define AspectLog(...)
 //#define AspectLog(...) do { NSLog(__VA_ARGS__); }while(0)
-#define AspectLogError(...) do { NSLog(__VA_ARGS__); }while(0)//哈哈，邮件do while(0)
+#define AspectLogError(...) do { NSLog(__VA_ARGS__); }while(0)//哈哈，do while(0)
 
 // Block internals.
 typedef NS_OPTIONS(int, AspectBlockFlags) {
@@ -190,6 +192,7 @@ typedef struct _AspectBlock {
 @end
 
 @interface NSInvocation (Aspects)
+  //返回了一个数组，数组里面包含了当前invocation的所有参数
 - (NSArray *)aspects_arguments;
 @end
 
@@ -839,20 +842,26 @@ static void aspect_deregisterTrackedSelector(id self, SEL selector) {
 
 // Thanks to the ReactiveCocoa team for providing a generic solution for this.
 - (id)aspect_argumentAtIndex:(NSUInteger)index {
+  //用来获取mthoedSignature 方法签名指定index的type encoding字符串
 	const char *argType = [self.methodSignature getArgumentTypeAtIndex:index];
 	// Skip const type qualifier.
+  //_C_CONST是一个常量，用来判断encoding的字符串是不是CONST常量
+  //#define _C_CONST    'r'
 	if (argType[0] == _C_CONST) argType++;
-
+// 这个宏定义的目的是，把基本数据类型，给包装成一个对象
 #define WRAP_AND_RETURN(type) do { type val = 0; [self getArgument:&val atIndex:(NSInteger)index]; return @(val); } while (0)
+  //判断了 id Class，注意这里用了__autoreleasing 修饰
 	if (strcmp(argType, @encode(id)) == 0 || strcmp(argType, @encode(Class)) == 0) {
 		__autoreleasing id returnObj;
 		[self getArgument:&returnObj atIndex:(NSInteger)index];
 		return returnObj;
 	} else if (strcmp(argType, @encode(SEL)) == 0) {
+    //判断了SEL
         SEL selector = 0;
         [self getArgument:&selector atIndex:(NSInteger)index];
         return NSStringFromSelector(selector);
     } else if (strcmp(argType, @encode(Class)) == 0) {
+    //这里怎么和上面一样，是写错了吗？？？
         __autoreleasing Class theClass = Nil;
         [self getArgument:&theClass atIndex:(NSInteger)index];
         return theClass;
@@ -888,10 +897,12 @@ static void aspect_deregisterTrackedSelector(id self, SEL selector) {
 	} else if (strcmp(argType, @encode(char *)) == 0) {
 		WRAP_AND_RETURN(const char *);
 	} else if (strcmp(argType, @encode(void (^)(void))) == 0) {
+    //判断block，注意这里用了__unsafe_unretained
 		__unsafe_unretained id block = nil;
 		[self getArgument:&block atIndex:(NSInteger)index];
 		return [block copy];
 	} else {
+    //判断struct 结构体，返回NSValue对象
 		NSUInteger valueSize = 0;
 		NSGetSizeAndAlignment(argType, &valueSize, NULL);
 
@@ -900,12 +911,17 @@ static void aspect_deregisterTrackedSelector(id self, SEL selector) {
 
 		return [NSValue valueWithBytes:valueBytes objCType:argType];
 	}
-	return nil;
-#undef WRAP_AND_RETURN
+	return nil;//这句话，让代码更健壮
+#undef WRAP_AND_RETURN //及时undef，是一个好习惯
 }
 
 - (NSArray *)aspects_arguments {
 	NSMutableArray *argumentsArray = [NSMutableArray array];
+  //为啥从2开始？参考https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtTypeEncodings.html
+  //第一位为返回值type，
+  //第二位为隐藏参数self的type【@ An object (whether statically typed or typed id)】
+  //第三位隐藏参数type【:A method selector (SEL)】
+  //第3位开始，是入参。
 	for (NSUInteger idx = 2; idx < self.methodSignature.numberOfArguments; idx++) {
 		[argumentsArray addObject:[self aspect_argumentAtIndex:idx] ?: NSNull.null];
 	}
@@ -1040,12 +1056,12 @@ static void aspect_deregisterTrackedSelector(id self, SEL selector) {
     NSCParameterAssert(instance);
     NSCParameterAssert(invocation);
     if (self = [super init]) {
-        _instance = instance;
-        _originalInvocation = invocation;
+        _instance = instance;//把外面传进来的实例instance
+        _originalInvocation = invocation;//原始的invocation保存到对应的成员变量
     }
     return self;
 }
-
+//懒加载，返回原始invocation的aspects_arguments数组，作者为NSInvocation添加了一个分类
 - (NSArray *)arguments {
     // Lazily evaluate arguments, boxing is expensive.
     if (!_arguments) {
@@ -1065,7 +1081,5 @@ static void aspect_deregisterTrackedSelector(id self, SEL selector) {
 #  参考 
 
 1.  [iOS 如何实现 Aspect Oriented Programming](https://halfrost.com/ios_aspect/)
-2.  
-
-
+2.  [github](https://github.com/steipete/Aspects/)
 
