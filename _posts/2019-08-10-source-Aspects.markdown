@@ -130,9 +130,27 @@ extern NSString *const AspectErrorDomain;
 
 // Block internals.
 typedef NS_OPTIONS(int, AspectBlockFlags) {
-	AspectBlockFlagsHasCopyDisposeHelpers = (1 << 25),//是否需要Copy和Dispose的Helpers
+	AspectBlockFlagsHasCopyDisposeHelpers = (1 << 25),//是否需要Copy和Dispose的Helpers，尚不清楚这个25，和下面的30是怎么知道的
 	AspectBlockFlagsHasSignature          = (1 << 30)//是否需要方法签名Signature 
 };
+//和系统的Block很类似，可以用Clang 把Block转换成结构体
+/*
+如下 2 个结构体 SampleA 和 SampleB 在内存上是完全一样的，原因是结构体本身并不带有任何额外的附加信息。
+struct SampleA {
+    int a;
+    int b;
+    int c;
+};
+struct SampleB {
+    int a;
+    struct Part1 {
+        int b;
+    };
+    struct Part2 {
+        int c;
+    };
+};
+*/
 typedef struct _AspectBlock {
 	__unused Class isa;
 	AspectBlockFlags flags;
@@ -159,6 +177,7 @@ typedef struct _AspectBlock {
 @end
 
 // Tracks a single aspect.
+  //传入的block打包成AspectIdentifier
 @interface AspectIdentifier : NSObject
 + (instancetype)identifierWithSelector:(SEL)selector object:(id)object options:(AspectOptions)options block:(id)block error:(NSError **)error;
 - (BOOL)invokeWithInfo:(id<AspectInfo>)info;
@@ -174,6 +193,7 @@ typedef struct _AspectBlock {
 - (void)addAspect:(AspectIdentifier *)aspect withOptions:(AspectOptions)injectPosition;
 - (BOOL)removeAspect:(id)aspect;
 - (BOOL)hasAspects;
+//第一次简单用atomic修饰，原子性，不需要同步锁
 @property (atomic, copy) NSArray *beforeAspects;
 @property (atomic, copy) NSArray *insteadAspects;
 @property (atomic, copy) NSArray *afterAspects;
@@ -235,8 +255,11 @@ static id aspect_add(id self, SEL selector, AspectOptions options, id block, NSE
     NSCParameterAssert(block);
 
     __block AspectIdentifier *identifier = nil;
+  //加了个自旋锁，保证整个操作的线程安全
     aspect_performLocked(^{
+      //对传进来的参数进行校验，保证参数合法性
         if (aspect_isSelectorAllowedAndTrack(self, selector, options, error)) {
+          //创建AspectsContainer容器，利用AssociatedObject关联对象，添加到NSObject分类中作为aliasSelector属性
             AspectsContainer *aspectContainer = aspect_getContainerForObject(self, selector);
             identifier = [AspectIdentifier identifierWithSelector:selector object:self options:options block:block error:error];
             if (identifier) {
@@ -275,6 +298,8 @@ static BOOL aspect_remove(AspectIdentifier *aspect, NSError **error) {
 
 static void aspect_performLocked(dispatch_block_t block) {
     static OSSpinLock aspect_lock = OS_SPINLOCK_INIT;
+  //自旋锁，效率较高，OSSpinLock的问题在于，如果访问这个锁的线程不是同一优先级的话，会有死锁的风险。
+  //这里暂时认为是相同的优先级线程，所以保护了block的线程安全
     OSSpinLockLock(&aspect_lock);
     block();
     OSSpinLockUnlock(&aspect_lock);
@@ -286,26 +311,45 @@ static SEL aspect_aliasForSelector(SEL selector) {
 }
 
 static NSMethodSignature *aspect_blockMethodSignature(id block, NSError **error) {
+  //因为实现类似，入参block，强制转换成AspectBlockRef类型
     AspectBlockRef layout = (__bridge void *)block;
 	if (!(layout->flags & AspectBlockFlagsHasSignature)) {
+    //判断是否有AspectBlockFlagsHasSignature，如果没有，则报不包含方法签名的错
         NSString *description = [NSString stringWithFormat:@"The block %@ doesn't contain a type signature.", block];
         AspectError(AspectErrorMissingBlockSignature, description);
         return nil;
     }
+  //block里面对应的descriptor指针
 	void *desc = layout->descriptor;
+  //往下偏移两个(unsigned long int)的位置指向了copy函数的地址
+  /*
+  对照结构体里面的
+  	unsigned long int reserved;
+		unsigned long int size;
+  */
 	desc += 2 * sizeof(unsigned long int);
+  //如果包含Copy 和Dispose 函数
 	if (layout->flags & AspectBlockFlagsHasCopyDisposeHelpers) {
+    //继续往下偏移两个(void *)的大小
+    /*
+    void (*copy)(void *dst, const void *src);
+		void (*dispose)(const void *);
+    */
 		desc += 2 * sizeof(void *);
     }
+  //这时指针移动到了const char *signature;
 	if (!desc) {
+    //我发现这里和上文的逻辑一样，都是报的AspectErrorMissingBlockSignature。不明白为什么这里的判定条件是if (!desc)，上一段是 layout->flags & AspectBlockFlagsHasCopyDisposeHelpers，为什么上一段不用if (!desc)来判断呢。
         NSString *description = [NSString stringWithFormat:@"The block %@ doesn't has a type signature.", block];
         AspectError(AspectErrorMissingBlockSignature, description);
         return nil;
     }
+  //参考文章中举了一个例子 打印出来一堆type+位移，还是把NSMethodSignature打印出来比较直观
 	const char *signature = (*(const char **)desc);
 	return [NSMethodSignature signatureWithObjCTypes:signature];
 }
 
+//对比要替换的方法block和原始方法的签名
 static BOOL aspect_isCompatibleBlockSignature(NSMethodSignature *blockSignature, id object, SEL selector, NSError **error) {
     NSCParameterAssert(blockSignature);
     NSCParameterAssert(object);
@@ -313,10 +357,12 @@ static BOOL aspect_isCompatibleBlockSignature(NSMethodSignature *blockSignature,
 
     BOOL signaturesMatch = YES;
     NSMethodSignature *methodSignature = [[object class] instanceMethodSignatureForSelector:selector];
+  //这里比较参数个数，两者不一定要相等，block的参数可以比原始参数少。参考文章解读有误
     if (blockSignature.numberOfArguments > methodSignature.numberOfArguments) {
         signaturesMatch = NO;
     }else {
         if (blockSignature.numberOfArguments > 1) {
+          //这里应该是 @"<AspectInfo>"。参考文章解读有误
             const char *blockType = [blockSignature getArgumentTypeAtIndex:1];
             if (blockType[0] != '@') {
                 signaturesMatch = NO;
@@ -464,19 +510,35 @@ static void aspect_cleanupHookedClassAndSelector(NSObject *self, SEL selector) {
 
 static Class aspect_hookClass(NSObject *self, NSError **error) {
     NSCParameterAssert(self);
+  /*
+  + (Class)class {
+    return self;
+   }
+获取类对象
+  */
 	Class statedClass = self.class;
+  /*
+  Class object_getClass(id obj)
+{
+    if (obj) return obj->getIsa();
+    else return Nil;
+}
+获取类的isa
+  */
 	Class baseClass = object_getClass(self);
 	NSString *className = NSStringFromClass(baseClass);
 
-    // Already subclassed
+    // Already subclassed 判断类是否已经被hook过
 	if ([className hasSuffix:AspectsSubclassSuffix]) {
 		return baseClass;
 
         // We swizzle a class object, not a single object.
 	}else if (class_isMetaClass(baseClass)) {
+    //判断是否是元类，如果是元类，
         return aspect_swizzleClassInPlace((Class)self);
         // Probably a KVO'ed class. Swizzle in place. Also swizzle meta classes in place.
     }else if (statedClass != baseClass) {
+    //如果不是元类，
         return aspect_swizzleClassInPlace(baseClass);
     }
 
@@ -689,6 +751,7 @@ static BOOL aspect_isSelectorAllowedAndTrack(NSObject *self, SEL selector, Aspec
 
     // Check against the blacklist.
     NSString *selectorName = NSStringFromSelector(selector);
+  //黑名单不行
     if ([disallowedSelectorList containsObject:selectorName]) {
         NSString *errorDescription = [NSString stringWithFormat:@"Selector %@ is blacklisted.", selectorName];
         AspectError(AspectErrorSelectorBlacklisted, errorDescription);
@@ -698,24 +761,29 @@ static BOOL aspect_isSelectorAllowedAndTrack(NSObject *self, SEL selector, Aspec
     // Additional checks.
     AspectOptions position = options&AspectPositionFilter;
     if ([selectorName isEqualToString:@"dealloc"] && position != AspectPositionBefore) {
+      //描述的很清楚
         NSString *errorDesc = @"AspectPositionBefore is the only valid position when hooking dealloc.";
         AspectError(AspectErrorSelectorDeallocPosition, errorDesc);
         return NO;
     }
 
     if (![self respondsToSelector:selector] && ![self.class instancesRespondToSelector:selector]) {
+      //这里也描述的很清楚
         NSString *errorDesc = [NSString stringWithFormat:@"Unable to find selector -[%@ %@].", NSStringFromClass(self.class), selectorName];
         AspectError(AspectErrorDoesNotRespondToSelector, errorDesc);
         return NO;
     }
 
     // Search for the current class and the class hierarchy IF we are modifying a class object
+  //先判断是不是元类
     if (class_isMetaClass(object_getClass(self))) {
         Class klass = [self class];
+      //一个static 的字典，key 为Class， value 为 AspectTracker
         NSMutableDictionary *swizzledClassesDict = aspect_getSwizzledClassesDict();
         Class currentClass = [self class];
 
         AspectTracker *tracker = swizzledClassesDict[currentClass];
+      //第一块判断逻辑，tracker 的 subclassHasHookedSelectorName 方法判断
         if ([tracker subclassHasHookedSelectorName:selectorName]) {
             NSSet *subclassTracker = [tracker subclassTrackersHookingSelectorName:selectorName];
             NSSet *subclassNames = [subclassTracker valueForKey:@"trackedClassName"];
@@ -723,10 +791,11 @@ static BOOL aspect_isSelectorAllowedAndTrack(NSObject *self, SEL selector, Aspec
             AspectError(AspectErrorSelectorAlreadyHookedInClassHierarchy, errorDescription);
             return NO;
         }
-
+//第二块判断逻辑，一直往上找
         do {
             tracker = swizzledClassesDict[currentClass];
             if ([tracker.selectorNames containsObject:selectorName]) {
+              //这个逻辑不太确认，不知道为啥能判断是topmost
                 if (klass == currentClass) {
                     // Already modified and topmost!
                     return YES;
@@ -735,11 +804,13 @@ static BOOL aspect_isSelectorAllowedAndTrack(NSObject *self, SEL selector, Aspec
                 AspectError(AspectErrorSelectorAlreadyHookedInClassHierarchy, errorDescription);
                 return NO;
             }
+          //从currentClass 的super class ，会一直执向NSObject(meta)->NSObject->nil
         } while ((currentClass = class_getSuperclass(currentClass)));
 
         // Add the selector as being modified.
         currentClass = klass;
         AspectTracker *subclassTracker = nil;
+      //第三块构造逻辑，我咋觉得这个逻辑不应该写在这里，这端和判断其实没关系了，只是为了从下往上构造subclassTracker 链
         do {
             tracker = swizzledClassesDict[currentClass];
             if (!tracker) {
@@ -811,6 +882,7 @@ static void aspect_deregisterTrackedSelector(id self, SEL selector) {
 - (void)removeSubclassTracker:(AspectTracker *)subclassTracker hookingSelectorName:(NSString *)selectorName {
     NSMutableSet *trackerSet = self.selectorNamesToSubclassTrackers[selectorName];
     [trackerSet removeObject:subclassTracker];
+  //如果这个selectorName对应的set空了，则删除这一键值对
     if (trackerSet.count == 0) {
         [self.selectorNamesToSubclassTrackers removeObjectForKey:selectorName];
     }
@@ -918,10 +990,12 @@ static void aspect_deregisterTrackedSelector(id self, SEL selector) {
 - (NSArray *)aspects_arguments {
 	NSMutableArray *argumentsArray = [NSMutableArray array];
   //为啥从2开始？参考https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtTypeEncodings.html
-  //第一位为返回值type，
-  //第二位为隐藏参数self的type【@ An object (whether statically typed or typed id)】
-  //第三位隐藏参数type【:A method selector (SEL)】
-  //第3位开始，是入参。
+  //通过methodSignature打印出来的结果，比numberOfArguments 应该是多一位的
+  //返回值type，这一位不能算进去
+  
+  //0 隐藏参数self的type【@ An object (whether statically typed or typed id)】
+  //1 隐藏参数type【:A method selector (SEL)】
+  //2 第3位开始，是入参。
 	for (NSUInteger idx = 2; idx < self.methodSignature.numberOfArguments; idx++) {
 		[argumentsArray addObject:[self aspect_argumentAtIndex:idx] ?: NSNull.null];
 	}
@@ -934,7 +1008,7 @@ static void aspect_deregisterTrackedSelector(id self, SEL selector) {
 #pragma mark - AspectIdentifier
 
 @implementation AspectIdentifier
-
+//逻辑都在两个静态方法内，做block签名类型转换，做签名兼容性校验
 + (instancetype)identifierWithSelector:(SEL)selector object:(id)object options:(AspectOptions)options block:(id)block error:(NSError **)error {
     NSCParameterAssert(block);
     NSCParameterAssert(selector);
@@ -950,17 +1024,18 @@ static void aspect_deregisterTrackedSelector(id self, SEL selector) {
         identifier.block = block;
         identifier.blockSignature = blockSignature;
         identifier.options = options;
-        identifier.object = object; // weak
+        identifier.object = object; // weak 不会ratain 外部对象
     }
     return identifier;
 }
-
+//执行block方法
 - (BOOL)invokeWithInfo:(id<AspectInfo>)info {
     NSInvocation *blockInvocation = [NSInvocation invocationWithMethodSignature:self.blockSignature];
     NSInvocation *originalInvocation = info.originalInvocation;
     NSUInteger numberOfArguments = self.blockSignature.numberOfArguments;
 
     // Be extra paranoid. We already check that on hook registration.
+  //其实在方法aspect_isCompatibleBlockSignature内部已经做过参数个数的校验了
     if (numberOfArguments > originalInvocation.methodSignature.numberOfArguments) {
         AspectLogError(@"Block has too many arguments. Not calling %@", info);
         return NO;
@@ -968,6 +1043,7 @@ static void aspect_deregisterTrackedSelector(id self, SEL selector) {
 
     // The `self` of the block will be the AspectInfo. Optional.
     if (numberOfArguments > 1) {
+      //把AspectInfo 存入blockInvocation中
         [blockInvocation setArgument:&info atIndex:1];
     }
     
@@ -1015,6 +1091,16 @@ static void aspect_deregisterTrackedSelector(id self, SEL selector) {
 
 - (void)addAspect:(AspectIdentifier *)aspect withOptions:(AspectOptions)options {
     NSParameterAssert(aspect);
+      /*
+     分别是 0
+     1
+     10
+     100
+     & ---------
+     111（7）AspectPositionFilter
+     ----------
+     能传入多个组合值吗？为啥这里要做与运算
+     */
     NSUInteger position = options&AspectPositionFilter;
     switch (position) {
         case AspectPositionBefore:  self.beforeAspects  = [(self.beforeAspects ?:@[]) arrayByAddingObject:aspect]; break;
@@ -1082,4 +1168,5 @@ static void aspect_deregisterTrackedSelector(id self, SEL selector) {
 
 1.  [iOS 如何实现 Aspect Oriented Programming](https://halfrost.com/ios_aspect/)
 2.  [github](https://github.com/steipete/Aspects/)
+3.  [ Type Encodings](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtTypeEncodings.html)
 
