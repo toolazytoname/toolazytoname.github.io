@@ -14,7 +14,15 @@ tags:
 
 # 解读思路
 
-根据一个一个类来的，看到AspectIdentifier 了。
+先看完Aspects.h头文件
+
+再看AspectInfo类，AspectIdentifier，AspectsContainer，AspectTracker
+
+再按照hook的主流程，add 
+
+remove
+
+整体过了一遍，还是有点懵，不过比看这段代码之前强夺了。
 
 # 源码
 
