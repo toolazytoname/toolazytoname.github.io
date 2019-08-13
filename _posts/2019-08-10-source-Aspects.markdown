@@ -273,16 +273,18 @@ static id aspect_add(id self, SEL selector, AspectOptions options, id block, NSE
     return identifier;
 }
 
+//aspect_remove 是整个aspec_add的逆过程
 static BOOL aspect_remove(AspectIdentifier *aspect, NSError **error) {
     NSCAssert([aspect isKindOfClass:AspectIdentifier.class], @"Must have correct type.");
 
     __block BOOL success = NO;
+  //保证线程安全
     aspect_performLocked(^{
         id self = aspect.object; // strongify
         if (self) {
             AspectsContainer *aspectContainer = aspect_getContainerForObject(self, aspect.selector);
             success = [aspectContainer removeAspect:aspect];
-
+//移除之前hook的class 和selector
             aspect_cleanupHookedClassAndSelector(self, aspect.selector);
             // destroy token
             aspect.object = nil;
@@ -430,19 +432,24 @@ static IMP aspect_getMsgForwardIMP(NSObject *self, SEL selector) {
 
 static void aspect_prepareClassAndHookSelector(NSObject *self, SEL selector, NSError **error) {
     NSCParameterAssert(selector);
+  //kclass 是hook完原始的class得到的子类
     Class klass = aspect_hookClass(self, error);
     Method targetMethod = class_getInstanceMethod(klass, selector);
     IMP targetMethodIMP = method_getImplementation(targetMethod);
+  //判断当前IMP是不是消息转发
     if (!aspect_isMsgForwardIMP(targetMethodIMP)) {
         // Make a method alias for the existing method implementation, it not already copied.
+      //如果不是消息转发，获取原始selector对应的IMP的方法编码typeEncoding
         const char *typeEncoding = method_getTypeEncoding(targetMethod);
         SEL aliasSelector = aspect_aliasForSelector(selector);
         if (![klass instancesRespondToSelector:aliasSelector]) {
+        //如果子类不能响应aspects_xxxx，就为kclass添加aspects_xxxx，
             __unused BOOL addedAlias = class_addMethod(klass, aliasSelector, method_getImplementation(targetMethod), typeEncoding);
             NSCAssert(addedAlias, @"Original implementation for %@ is already copied to %@ on %@", NSStringFromSelector(selector), NSStringFromSelector(aliasSelector), klass);
         }
 
         // We use forwardInvocation to hook in.
+      //我们将selector 指向_objc_msgForward
         class_replaceMethod(klass, selector, aspect_getMsgForwardIMP(self, selector), typeEncoding);
         AspectLog(@"Aspects: Installed hook for -[%@ %@].", klass, NSStringFromSelector(selector));
     }
@@ -452,10 +459,11 @@ static void aspect_prepareClassAndHookSelector(NSObject *self, SEL selector, NSE
 static void aspect_cleanupHookedClassAndSelector(NSObject *self, SEL selector) {
     NSCParameterAssert(self);
     NSCParameterAssert(selector);
-
+//获取当前self，所指向的isa，
 	Class klass = object_getClass(self);
     BOOL isMetaClass = class_isMetaClass(klass);
     if (isMetaClass) {
+      // 如果是元类，self 为类对象，把klass 指向自己
         klass = (Class)self;
     }
 
@@ -507,7 +515,7 @@ static void aspect_cleanupHookedClassAndSelector(NSObject *self, SEL selector) {
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - Hook Class
-
+//hook 完原始的class之后得到的子类，名字都是带有_Aspects_后缀的子类
 static Class aspect_hookClass(NSObject *self, NSError **error) {
     NSCParameterAssert(self);
   /*
@@ -534,33 +542,117 @@ static Class aspect_hookClass(NSObject *self, NSError **error) {
 
         // We swizzle a class object, not a single object.
 	}else if (class_isMetaClass(baseClass)) {
-    //判断是否是元类，如果是元类，
+    //如果baseClass是元类，那么传入的self，是一个类对象
         return aspect_swizzleClassInPlace((Class)self);
         // Probably a KVO'ed class. Swizzle in place. Also swizzle meta classes in place.
     }else if (statedClass != baseClass) {
-    //如果不是元类，
+    //如传入的是一个对象，不是类。如果statedClass和baseClass不相等，说明为KVO过的对象。KVO的对象的isa指针会指向一个中间类。对中间类调用aspect_swizzleClassInPlace
         return aspect_swizzleClassInPlace(baseClass);
     }
 
     // Default case. Create dynamic subclass.
+  //当className 没有包含@"_Aspects_"后缀，并且也不是元类，不是KVO的中间类，既statedClass == baseClass的情况。于是默认新建一个子类subclass。
+  /*
+  设计思想：hook 是在runtime中动态穿件子类的基础上实现的。所有的swizzling 操作都发生在子类，这样做的好处是1.你不需要去更改对象本身的类。当你remove aspects的时候，如果发现当前对象的aspect都被移除了，可以将isa指针重新指回对象本身的类。
+2.不会影响到该类的其它对象，可以做到只改变一个对象的行为，不改变该类的其它对象。(看到这里,我觉得作者好聪明啊)
+  */
 	const char *subclassName = [className stringByAppendingString:AspectsSubclassSuffix].UTF8String;
-	Class subclass = objc_getClass(subclassName);
 
+  /***********************************************************************
+* objc_getClass.  Return the id of the named class.  If the class does
+* not exist, call _objc_classLoader and then objc_classHandler, either of 
+* which may create a new class.
+* Warning: doesn't work if aClassName is the name of a posed-for class's isa!
+**********************************************************************/
+   /*
+Class objc_getClass(const char *aClassName)
+{
+    if (!aClassName) return Nil;
+
+    // NO unconnected, YES class handler
+    return look_up_class(aClassName, NO, YES);
+}
+  */
+/***********************************************************************
+* look_up_class
+* Look up a class by name, and realize it.
+* Locking: acquires runtimeLock
+**********************************************************************/
+/*
+Class look_up_class(const char *name, 
+              bool includeUnconnected __attribute__((unused)), 
+              bool includeClassHandler __attribute__((unused)))
+{
+    if (!name) return nil;
+
+    Class result;
+    bool unrealized;
+    {
+    //读写锁，底层是用pthread_rwlock_t实现的
+        rwlock_reader_t lock(runtimeLock);
+        // 查看有没有实现叫name的class
+        result = getClass(name);
+        unrealized = result  &&  !result->isRealized();
+    }
+    if (unrealized) {
+        rwlock_writer_t lock(runtimeLock);
+        realizeClass(result);
+    }
+    return result;
+}
+*/
+	Class subclass = objc_getClass(subclassName);
 	if (subclass == nil) {
+    //新建这个子类
+/***********************************************************************
+* objc_allocateClassPair
+* fixme
+* Locking: acquires runtimeLock
+**********************************************************************/
+/*
+Class objc_allocateClassPair(Class superclass, const char *name, 
+                             size_t extraBytes)
+{
+    Class cls, meta;
+
+    rwlock_writer_t lock(runtimeLock);
+
+    // Fail if the class name is in use.
+    // Fail if the superclass isn't kosher.            //rootOK
+    if (getClass(name)  ||  !verifySuperclass(superclass, true)) {
+        return nil;
+    }
+
+    // Allocate new classes.
+    cls  = alloc_class_for_subclass(superclass, extraBytes);
+    meta = alloc_class_for_subclass(superclass, extraBytes);
+
+    // fixme mangle the name if it looks swift-y?
+    objc_initializeClassPair_internal(superclass, name, cls, meta);
+
+    return cls;
+}
+*/
+    //baseClass 是入参，superclass
 		subclass = objc_allocateClassPair(baseClass, subclassName, 0);
 		if (subclass == nil) {
+      //新建子类失败，报错
             NSString *errrorDesc = [NSString stringWithFormat:@"objc_allocateClassPair failed to allocate class %s.", subclassName];
             AspectError(AspectErrorFailedToAllocateClassPair, errrorDesc);
             return nil;
         }
 
 		aspect_swizzleForwardInvocation(subclass);
+    //subclass isa-> statedClass
 		aspect_hookedGetClass(subclass, statedClass);
+    //meta subclass isa-> statedClass
 		aspect_hookedGetClass(object_getClass(subclass), statedClass);
+    //注册刚刚新建的subclass
 		objc_registerClassPair(subclass);
 	}
-
+//把当前self 的 isa 指向了子类subclass
 	object_setClass(self, subclass);
+  //hook 阶段完成，成功把self hook 成了其子类 xxx_Aspects_
 	return subclass;
 }
 
@@ -568,8 +660,64 @@ static NSString *const AspectsForwardInvocationSelectorName = @"__aspects_forwar
 static void aspect_swizzleForwardInvocation(Class klass) {
     NSCParameterAssert(klass);
     // If there is no method, replace will act like class_addMethod.
+/***********************************************************************
+* class_replaceMethod
+**********************************************************************/
+/*
+IMP class_replaceMethod(Class cls, SEL name, IMP imp, const char *types)
+{
+    if (!cls) return nil;
+
+    return _class_addMethod(cls, name, imp, types, YES);
+}
+static IMP _class_addMethod(Class cls, SEL name, IMP imp, 
+                            const char *types, bool replace)
+{
+    old_method *m;
+    IMP result = nil;
+
+    if (!types) types = "";
+
+    mutex_locker_t lock(methodListLock);
+
+    if ((m = _findMethodInClass(cls, name))) {
+        // already exists
+        // fixme atomic
+        result = method_getImplementation((Method)m);
+        if (replace) {
+            method_setImplementation((Method)m, imp);
+        }
+    } else {
+        // fixme could be faster
+        old_method_list *mlist = 
+            (old_method_list *)calloc(sizeof(old_method_list), 1);
+        mlist->obsolete = fixed_up_method_list;
+        mlist->method_count = 1;
+        mlist->method_list[0].method_name = name;
+        mlist->method_list[0].method_types = strdup(types);
+        if (!ignoreSelector(name)) {
+            mlist->method_list[0].method_imp = imp;
+        } else {
+            mlist->method_list[0].method_imp = (IMP)&_objc_ignored_method;
+        }
+        
+        _objc_insertMethods(cls, mlist, nil);
+        if (!(cls->info & CLS_CONSTRUCTING)) {
+            flush_caches(cls, NO);
+        } else {
+            // in-construction class has no subclasses
+            flush_cache(cls);
+        }
+        result = nil;
+    }
+
+    return result;
+}
+*/
+  //把forwardInvocation:的IMP替换成__ASPECTS_ARE_BEING_CALLED__,返回的是原方法的IMP
     IMP originalImplementation = class_replaceMethod(klass, @selector(forwardInvocation:), (IMP)__ASPECTS_ARE_BEING_CALLED__, "v@:@");
     if (originalImplementation) {
+      //原方法有实现，先添加一个方法__aspects_forwardInvocation，指向原来的实现
         class_addMethod(klass, NSSelectorFromString(AspectsForwardInvocationSelectorName), originalImplementation, "v@:@");
     }
     AspectLog(@"Aspects: %@ is now aspect aware.", NSStringFromClass(klass));
@@ -585,7 +733,7 @@ static void aspect_undoSwizzleForwardInvocation(Class klass) {
 
     AspectLog(@"Aspects: %@ has been restored.", NSStringFromClass(klass));
 }
-
+//把class的实例方法替换成statedClass，把调用class时候的isa指向了statedClass
 static void aspect_hookedGetClass(Class class, Class statedClass) {
     NSCParameterAssert(class);
     NSCParameterAssert(statedClass);
@@ -647,30 +795,40 @@ for (AspectIdentifier *aspect in aspects) {\
     } \
 }
 
-// This is the swizzled forwardInvocation: method.
+// This is the swizzled forwardInvocation: method.核心实现
 static void __ASPECTS_ARE_BEING_CALLED__(__unsafe_unretained NSObject *self, SEL selector, NSInvocation *invocation) {
     NSCParameterAssert(self);
     NSCParameterAssert(invocation);
+  //获取原始selector
     SEL originalSelector = invocation.selector;
+  //获取带有aspects_xxx前缀的方法
 	SEL aliasSelector = aspect_aliasForSelector(invocation.selector);
+  //替换selector
     invocation.selector = aliasSelector;
+  //获得实例对象的容器
     AspectsContainer *objectContainer = objc_getAssociatedObject(self, aliasSelector);
+  //获取类对象的容器
     AspectsContainer *classContainer = aspect_getContainerForClass(object_getClass(self), aliasSelector);
+  //初始化 AspectInfo
     AspectInfo *info = [[AspectInfo alloc] initWithInstance:self invocation:invocation];
+  //存放需要被remove的Aspects
     NSArray *aspectsToRemove = nil;
 
     // Before hooks.
+  //执行对应的传入block
     aspect_invoke(classContainer.beforeAspects, info);
     aspect_invoke(objectContainer.beforeAspects, info);
 
     // Instead hooks.
     BOOL respondsToAlias = YES;
+  //判断当前insteadAspects是否有数据
     if (objectContainer.insteadAspects.count || classContainer.insteadAspects.count) {
         aspect_invoke(classContainer.insteadAspects, info);
         aspect_invoke(objectContainer.insteadAspects, info);
     }else {
+      //如果没有数据
         Class klass = object_getClass(invocation.target);
-        do {
+        do {//判断当前继承链是否能响应aspects_xxx,这里aliasSelector是原方法
             if ((respondsToAlias = [klass instancesRespondToSelector:aliasSelector])) {
                 [invocation invoke];
                 break;
@@ -683,12 +841,14 @@ static void __ASPECTS_ARE_BEING_CALLED__(__unsafe_unretained NSObject *self, SEL
     aspect_invoke(objectContainer.afterAspects, info);
 
     // If no hooks are installed, call original implementation (usually to throw an exception)
+  //如果hook没有被正常执行，执行原来的方法
     if (!respondsToAlias) {
         invocation.selector = originalSelector;
         SEL originalForwardInvocationSEL = NSSelectorFromString(AspectsForwardInvocationSelectorName);
         if ([self respondsToSelector:originalForwardInvocationSEL]) {
             ((void( *)(id, SEL, NSInvocation *))objc_msgSend)(self, originalForwardInvocationSEL, invocation);
         }else {
+          //移除方法
             [self doesNotRecognizeSelector:invocation.selector];
         }
     }
