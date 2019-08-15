@@ -39,6 +39,8 @@ Requirement already satisfied: pillow in /usr/local/lib/python3.7/site-packages 
 如果不设定格式，会默认按照脚本内部定义的文件名，尺寸输出图片，路径也会打印在控制台
 
 ~~~shell
+# python3 /Users/yiche/Code/downloadDemo/FDKit/FDKit/Shell/AppIconTool/ResizeImage.py(脚本路径)  /Users/yiche/Desktop/tempDirectory/icon.png（原始图片路径，最好是1024*1024）
+
 python3 /Users/yiche/Code/downloadDemo/FDKit/FDKit/Shell/AppIconTool/ResizeImage.py  /Users/yiche/Desktop/tempDirectory/icon.png
 sys.argv:['/Users/yiche/Code/downloadDemo/FDKit/FDKit/Shell/AppIconTool/ResizeImage.py', '/Users/yiche/Desktop/tempDirectory/icon.png']
 output_path is :/Users/yiche/Desktop/tempDirectory/icon_20x20.png
@@ -78,6 +80,8 @@ output_path is :/Users/yiche/Desktop/tempDirectory/icon_76x76@3x.png
 ## 设定格式
 
 ~~~python
+# python3 /Users/yiche/Code/downloadDemo/FDKit/FDKit/Shell/AppIconTool/ResizeImage.py（脚本路径）  /Users/yiche/Desktop/tempDirectory/icon.png（原始图片路径）  ./ImageNameToSizeMap.json（配置文件路径）
+
 ➜  AppIconTool git:(master) ✗ python3 /Users/yiche/Code/downloadDemo/FDKit/FDKit/Shell/AppIconTool/ResizeImage.py  /Users/yiche/Desktop/tempDirectory/icon.png  ./ImageNameToSizeMap.json
 sys.argv:['/Users/yiche/Code/downloadDemo/FDKit/FDKit/Shell/AppIconTool/ResizeImage.py', '/Users/yiche/Desktop/tempDirectory/icon.png', './ImageNameToSizeMap.json']
 output_path is :/Users/yiche/Desktop/tempDirectory/iphone_notification_20@2x.png
