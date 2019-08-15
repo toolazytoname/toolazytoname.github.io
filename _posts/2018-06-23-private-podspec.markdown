@@ -28,6 +28,24 @@ iOS组件化系列
 
 学习了一下如何创建私有podspec，相应的案例可以参看 [GitHub上的私有源 ](https://github.com/toolazytoname/Specs)。
 
+## 更新pod到最新稳定版本
+
+~~~shell
+➜  BitAutoPlus git:(develop) pod --version
+1.5.3
+➜  BitAutoPlus git:(develop) gem source -l
+*** CURRENT SOURCES ***
+
+http://gems.ruby-china.org/
+➜  BitAutoPlus git:(develop) gem source -r http://gems.ruby-china.org/
+http://gems.ruby-china.org/ removed from sources
+➜  BitAutoPlus git:(develop) gem source -a https://gems.ruby-china.com/
+https://gems.ruby-china.com/ added to sources
+➜  BitAutoPlus git:(develop) sudo gem install cocoapods
+➜  BitAutoPlus git:(develop) pod --version
+1.7.5
+~~~
+
 
 
 ## 创建并设置一个私有的Spec Repo
