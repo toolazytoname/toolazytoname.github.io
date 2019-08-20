@@ -150,6 +150,14 @@ end
 #import "BPRCycleScrollView.h"
 ~~~
 
+我的二进制包是用pod package命令生成的，很好用
+
+~~~shell
+pod package BPRCycleScrollView.podspec --exclude-deps   --configuration='Release' -no-mangle --spec-sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git’
+~~~
+
+
+
 执行pod 命令前面带一个环境变量
 
 ~~~shell
