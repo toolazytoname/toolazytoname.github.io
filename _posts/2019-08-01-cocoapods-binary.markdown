@@ -103,56 +103,66 @@ iOS组件化系列
 执行  IS_SOURCE=1 pod install 带入参数，然后在每个组件的podspec 里面做判断
 
 ~~~ruby
-#
-# Be sure to run `pod lib lint YTXChart.podspec' to ensure this is a
-# valid spec before submitting.
-#
-# Any lines starting with a # are optional, but their use is encouraged
-# To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
-#
 
 Pod::Spec.new do |s|
-  s.name             = "YTXChart"
-  s.version          = "0.17.7"
-  s.summary          = "YTXChart for pod"
+  s.name             = 'BPRCycleScrollView'
+  s.version          = '0.1.28'
+  s.summary          = '无限轮播图'
+  s.description      =  '无限轮播图'
+                       
 
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
-  s.description      = "银天下Chart, 依赖AFNetworking"
+  s.homepage         = 'http://gitlab.bitautotech.com/WP/Mobile/IOS/BPRCycleScrollView'
+  s.license          = { :type => 'MIT', :file => 'LICENSE' }
+  s.author           = { 'xuxiaolong3' => 'xuxiaolong3@yiche.com' }
+  s.source           = { :git => 'http://gitlab.bitautotech.com/WP/Mobile/IOS/BPRCycleScrollView.git', :tag => s.version.to_s }
 
-  s.homepage         = "http://gitlab.baidao.com/ios/YTXChart.git"
-  # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
-  s.license          = 'MIT'
-  s.author           = { "caojun-mac" => "78612846@qq.com" }
-  s.source           = { :git => "http://gitlab.baidao.com/ios/YTXChart.git", :tag => s.version }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.ios.deployment_target = '8.0'
 
-  s.platform     = :ios, '7.0'
-  s.requires_arc = true
+  #控制安装 Pod 的时候判断使用源码还是二进制库
+  $lib = ENV['use_lib']
+  $lib_name = ENV["#{s.name}_use_lib"]
 
-  
- if ENV['IS_SOURCE']
+  if $lib || $lib_name
     puts '-------------------------------------------------------------------'
-    puts 'Notice:YTXChart is source now'
+    puts 'Notice:BPRCycleScrollView is binary now'
     puts '-------------------------------------------------------------------'
-      s.source_files  = "Pod/Classes/painter/*.{h,m,mm}", "Pod/Classes/painterview/*.{h,m,mm}", "Pod/Classes/chart/*.{h,m,mm}", "Pod/Classes/core/*.{h,mm}", "Pod/Classes/core/**/*.{h,m,mm,inl}"  
+    s.source_files='BPRCycleScrollView-0.1.28/ios/BPRCycleScrollView.framework/Versions/A/Headers/*.h'
+    s.public_header_files='BPRCycleScrollView-0.1.28/ios/BPRCycleScrollView.framework/Versions/A/Headers/*.h'
+    s.vendored_framework='BPRCycleScrollView-0.1.28/ios/BPRCycleScrollView.framework'
+    s.xcconfig = { 'HEADER_SEARCH_PATHS' => '${PODS_ROOT}/BPRCycleScrollView/BPRCycleScrollView-0.1.28/ios/BPRCycleScrollView.framework/Versions/A/Headers/'}
+    s.source = { :http => 'http://172.20.15.54/ios_binary/BPRCycleScrollView/BPRCycleScrollView-0.1.28.zip' }
   else
     puts '-------------------------------------------------------------------'
-    puts 'Notice:YTXChart is binary now'
+    puts 'Notice:BPRCycleScrollView is source now'
     puts '-------------------------------------------------------------------'
-    s.source_files = 'Pod/Products/include/**'
-    s.public_header_files = 'Pod/Products/include/*.h'
-    s.ios.vendored_libraries = 'Pod/Products/lib/libYTXChart.a'
+    s.source_files = 'BPRCycleScrollView/Classes/**/*'
   end
 
-  s.libraries = 'sqlite3', 'c++'
+   s.dependency 'SDWebImage'
 
-  s.dependency 'YTXServerId'
-  s.dependency 'AFNetworking', '~> 2.0'
 end
+
+~~~
+
+做一个替换
+
+~~~objective-c
+#import <BPRCycleScrollView/BPRCycleScrollView.h>
+替换成
+#import "BPRCycleScrollView.h"
+~~~
+
+执行pod 命令前面带一个环境变量
+
+~~~shell
+#只有BPRCycleScrollView一个库用二进制包
+BPRCycleScrollView_use_lib=1 pod update BPRCycleScrollView
+#use_lib=1 所有库都用二进制包
+BPRCycleScrollView_use_lib=1 pod install
+
+#当然我都是配合一下命令使用
+pod cache clean BPRCycleScrollView
+rm -rf Pods/BPRCycleScrollView
 ~~~
 
 
@@ -327,7 +337,7 @@ s.xcconfig = { "GCC_PREPROCESSOR_DEFINITIONS" => "$(GCC_PREPROCESSOR_DEFINITIONS
 
 如何无二进制版本时，最好能自动采用源码版本?
 
-最后一个方案天然地能搞定这个问题。
+最后轮子4可以实现，用环境变量区分。cocoapods-bin 也可以做到。
 
 当然其它方案，得在每个pod 后面自行制定地址了，比如    
 
