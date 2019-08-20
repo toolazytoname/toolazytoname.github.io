@@ -109,8 +109,6 @@ Pod::Spec.new do |s|
   s.version          = '0.1.28'
   s.summary          = '无限轮播图'
   s.description      =  '无限轮播图'
-                       
-
   s.homepage         = 'http://gitlab.bitautotech.com/WP/Mobile/IOS/BPRCycleScrollView'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'xuxiaolong3' => 'xuxiaolong3@yiche.com' }
@@ -144,7 +142,7 @@ end
 
 ~~~
 
-做一个替换
+做一个替换，这一步应该可以省略，我暂时没找到原因
 
 ~~~objective-c
 #import <BPRCycleScrollView/BPRCycleScrollView.h>
@@ -160,7 +158,7 @@ BPRCycleScrollView_use_lib=1 pod update BPRCycleScrollView
 #use_lib=1 所有库都用二进制包
 BPRCycleScrollView_use_lib=1 pod install
 
-#当然我都是配合一下命令使用
+#当然我都是配合如下命令使用
 pod cache clean BPRCycleScrollView
 rm -rf Pods/BPRCycleScrollView
 ~~~
@@ -179,7 +177,7 @@ rm -rf Pods/BPRCycleScrollView
 
 * pod lib lint执行这个命令还需要带上额外的参数， IS_SOURCE=1 pod lib lint
 
-* 最重要的一点，与cocoapods的机制略微有点冲突，切换的时候需要执行 
+* 最重要的一点，与cocoapods的机制略微有点冲突，切换的时候需要执行清缓存操作
 
 
 
