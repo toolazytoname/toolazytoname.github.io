@@ -174,6 +174,7 @@ tags:
 4. 未集成 fastlane 
 5. 遗留更新失败问题检测 
 6. 并发打多个包？检测exit or 支持并发。并发逻辑，目录根据时间戳去生成，这样就不会冲突 
+7. Cannot proceed with delivery: an existing transporter instance is currently uploading this package 目前只能通过重启电脑解决
 
 
 
