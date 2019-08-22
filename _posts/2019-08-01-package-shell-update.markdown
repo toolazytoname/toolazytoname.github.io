@@ -41,7 +41,7 @@ tags:
    
    -b    - Branch name, valid values are 'master', 'develop' ,or others 
    
-           Default values: 'master'. 
+           Default values: 命令传入参数的优先级更高，如果shell命令没有代入分支参数，则用配置文件中的默认值. 
    
    -c    - Channel name, valid values are 'enterprise', or 'app_store'. 
    
@@ -144,7 +144,7 @@ tags:
 
 # 升级功能点
 
-1. 入参函数调整，用getopts处理，对外暴露就是 package.sh [-h | [-a <app>] | [-b <branch>] | [-c <channel>] | [-p <custom pods>] | [-r <content to replace>] | [-v]] 
+1. 入参函数调整，用getopts处理
 2. 支持-h 打印如何使用脚本 
 3. 模块化，一整个shell脚本，可复用的部分拆了出来。加了一些防止重复引入的逻辑 
 4. 测试icon加水印 
@@ -179,6 +179,7 @@ tags:
 
 # 参考
 
-1.  [ Shell\[\[\]]详解：检测某个条件是否成立](http://c.biancheng.net/view/2751.html )
+1.   [ Shell\[\[\]]详解：检测某个条件是否成立](http://c.biancheng.net/view/2751.html )
 2. [shell如何模块化和复用——shell深入学习](https://arganzheng.iteye.com/blog/1174470)
 3. [Shell脚本的模块化和脚本复用](https://blog.51cto.com/atong/1912179)
+
