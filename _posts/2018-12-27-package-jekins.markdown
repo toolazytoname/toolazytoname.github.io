@@ -11,13 +11,13 @@ tags:
 ---
 
 
-这是打包系列 
+这是打包系列
 
-- 第一篇 [《iOS jekins 打包》]({{ site.url }}/ios/2018/12/27/package-jekins/) 
+- 第一篇 [《iOS jekins 打包》]({{ site.url }}/ios/2018/12/27/package-jekins/)
 
-- 第二篇 [《iOS 脚本打包》]({{ site.url }}/ios/2019/01/07/package-shell/) 
+- 第二篇 [《iOS 脚本打包》]({{ site.url }}/ios/2019/01/07/package-shell/)
 
-- 第三篇 [《iOS脚本打包升级》]({{ site.url }}/ios/2019/08/01/package-shell-update/) 
+- 第三篇 [《iOS脚本打包升级》]({{ site.url }}/ios/2019/08/01/package-shell-update/)
 
 
 
@@ -50,7 +50,7 @@ tags:
 | -------- | ------------------------------------------------------------ |
 | 名称     | CUSTOM_PODS_JENKINS                                          |
 | 选项     | network<br>local<br>local_update<br>network_replace_section<br>network_replace_pods |
-| 描述     | local<br>含义：Podfile用本地的，不执行pod update.<br><br>local_update<br>含义：Podfile用本地的，执行pod update.<br><br/>network<br>含义：Podfile用网络刷新本地，执行pod update.<br><br>network_replace_section<br>含义：Podfile用网络刷新本地，替换原始脚本中的#ShellPodsStart和#ShellPodsEnd 之间内容,执行pod update.<br><br>network_replace_pods<br>含义：Podfile用网络刷新本地，替换原始脚本中的 特定的pod内容内容为本地目录,执行pod update.<br><br>Default value: network |
+| 描述     | local<br>含义：拉取壳工程指定分支最新代码，Podfile用本地从Git获取的，不执行pod update.<br><br>local_update<br>含义：拉取壳工程指定分支最新代码，Podfile用本地从Git获取的，执行pod update.<br><br/>network<br>含义：拉取壳工程指定分支最新代码，Podfile用网络刷新本地，执行pod update.<br><br>network_replace_section<br>含义：Podfile用网络刷新本地，替换原始脚本中的#ShellPodsStart和#ShellPodsEnd 之间内容,执行pod update.<br><br>network_replace_pods<br>含义：Podfile用网络刷新本地，替换原始脚本中的 特定的pod内容内容为本地目录,执行pod update.<br><br>Default value: network |
 
 
 
