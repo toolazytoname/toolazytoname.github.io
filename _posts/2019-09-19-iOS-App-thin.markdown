@@ -13,6 +13,12 @@ tags:
 
 最近打算给App瘦身，做一个简单的步骤整理。
 
+# 编译选项
+
+待补充
+
+
+
 # 资源瘦身
 
 1.  删除无用图片，已做自定义,介绍文章，看上篇 [删除无用图片工具定制]({{ site.url }}/ios/2019/09/19/iOS-LSUnusedResources/) 
@@ -37,9 +43,9 @@ tags:
 | 方案          |      文档       | 代码 |
 | :------------ | :-------------: | ------------: |
 | Link Map File 结合 Mac-O | [iOS微信安装包瘦身](https://mp.weixin.qq.com/s?__biz=MzAwNDY1ODY2OQ==&mid=207986417&idx=1&sn=77ea7d8e4f8ab7b59111e78c86ccfe66&3rd=MzA3MDU4NTYzMw==&scene=6#rd) | [检查每个类占用空间大小工具](https://github.com/toolazytoname/LinkMap) |
-| clang      |    [基于clang插件的一种iOS包大小瘦身方案](https://mp.weixin.qq.com/s?__biz=MzUxMzcxMzE5Ng==&mid=2247488360&idx=1&sn=94fba30a87d0f9bc0b9ff94d3fed3386&source=41#wechat_redirect)     |           [XcodeZombieCode](https://github.com/kangwang1988/XcodeZombieCode) |
+| clang      |    [基于clang插件的一种iOS包大小瘦身方案](https://mp.weixin.qq.com/s?__biz=MzUxMzcxMzE5Ng==&mid=2247488360&idx=1&sn=94fba30a87d0f9bc0b9ff94d3fed3386&source=41#wechat_redirect) [如何使用 Clang Plugin 找到项目中的无用代码](https://blog.gocy.tech/2017/09/12/DetectingUselessCodeWithClang-p1/)     |           [XcodeZombieCode](https://github.com/kangwang1988/XcodeZombieCode) |
 | 源码解析? |    无     |           [fui](https://github.com/dblock/fui)跑通了这个方案，但是目前不支持动态调用|
-| 源码解析？ | [使用Swift3开发了个MacOS的程序可以检测出objc项目中无用方法，然后一键全部清理](https://www.jianshu.com/p/a53480ad0364) | [SMCheckProject](https://github.com/ming1016/SMCheckProject.git) |
+| 源码解析？ | [使用Swift3开发了个MacOS的程序可以检测出objc项目中无用方法，然后一键全部清理](https://www.jianshu.com/p/a53480ad0364) | [SMCheckProject](https://github.com/ming1016/SMCheckProject.git) 难道我是时候重温一下swift了？？ |
 
 
 使用脚本
@@ -50,6 +56,6 @@ tags:
 grep BPNewsLib  unusedclass.txt | grep -v Cell | grep -v BPNBundle | grep -v BPTMediator | grep -v  Pods/Headers/  > news.txt
 ~~~
 
-
+未完待续，会产出一个结合运行时判断工具。
 
 
