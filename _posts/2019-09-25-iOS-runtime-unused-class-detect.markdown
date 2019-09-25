@@ -2,7 +2,7 @@
 
 layout: post
 title:  "iOS运行时检测无用类"
-date:   2019-9-19 16:47:32 +0800
+date:   2019-9-25 14:50:32 +0800
 categories: iOS
 catalog:  true
 tags:
@@ -34,7 +34,7 @@ bool isInitialized() {
 }
 ~~~
 
-保存在元类的 class_rw_t 结构体的flags的信息里面，flag的1<<29位记录的就是这个类是否初始化了的信息。课程里只是提供了这么一个思路，
+保存在元类的 class_rw_t 结构体的flags的信息里面，flag的1<<29位记录的就是这个类是否初始化了的信息。课程里只是提供了这么一个思路。
 
 # 如何实现呢？
 
