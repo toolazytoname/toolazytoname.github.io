@@ -36,7 +36,7 @@ tags:
 
 | 方案          |      文档       | 代码 |
 | :------------ | :-------------: | ------------: |
-| Link Map File 结合 Mac-O 微信 | [iOS微信安装包瘦身](https://mp.weixin.qq.com/s?__biz=MzAwNDY1ODY2OQ==&mid=207986417&idx=1&sn=77ea7d8e4f8ab7b59111e78c86ccfe66&3rd=MzA3MDU4NTYzMw==&scene=6#rd) | [检查每个类占用空间大小工具](https://github.com/toolazytoname/LinkMap) |
+| Link Map File 结合 Mac-O | [iOS微信安装包瘦身](https://mp.weixin.qq.com/s?__biz=MzAwNDY1ODY2OQ==&mid=207986417&idx=1&sn=77ea7d8e4f8ab7b59111e78c86ccfe66&3rd=MzA3MDU4NTYzMw==&scene=6#rd) | [检查每个类占用空间大小工具](https://github.com/toolazytoname/LinkMap) |
 | clang      |    [基于clang插件的一种iOS包大小瘦身方案](https://mp.weixin.qq.com/s?__biz=MzUxMzcxMzE5Ng==&mid=2247488360&idx=1&sn=94fba30a87d0f9bc0b9ff94d3fed3386&source=41#wechat_redirect)     |           [XcodeZombieCode](https://github.com/kangwang1988/XcodeZombieCode) |
 | 源码解析? |    无     |           [fui](https://github.com/dblock/fui)跑通了这个方案，但是目前不支持动态调用|
 | 源码解析？ | [使用Swift3开发了个MacOS的程序可以检测出objc项目中无用方法，然后一键全部清理](https://www.jianshu.com/p/a53480ad0364) | [SMCheckProject](https://github.com/ming1016/SMCheckProject.git) |
