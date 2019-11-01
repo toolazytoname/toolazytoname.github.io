@@ -1,0 +1,108 @@
+---
+
+layout: post
+title:  "HPE ProLiant MicroServer Gen10 NAS 搭建指南🧭"
+date:   2019-11-1 14:51:32 +0800
+categories: iOS
+catalog:  true
+tags:
+  - hack your life
+---
+
+# 前言
+
+进过精挑细选，前段时间败了个Gen 10，打算用它来搭一个NAS。
+
+* [官方主页]( https://www.hpe.com/cn/zh/product-catalog/servers/proliant-servers/pip.hpe-proliant-microserver-gen10.1009955118.html)
+
+* [配置]( http://detail.zol.com.cn/series/31/223/param_23100_0_1.html)
+
+挑选它的原因
+
+* 优点
+
+  1. 整机质量惠普背书，相对DIY 而言，不会存在兼容性问题。
+  2. 闲鱼上有人挂出来了，凑巧也愿意邮寄过来
+  3. 安静，N54L 也有这个特点
+  4. 支持DP 输出，可以当HTPC，N54L没有
+  
+* 缺点
+   1. CPU不能换，但我用也差不多了。
+   2. 价格比较贵，跟群晖比算便宜了吧。
+
+# 软件方案
+
+* 有安虚拟机的， [NAS 详细搭建方案 - 安装宿主系统ESXI 6.5](https://blog.csdn.net/aa13058219642/article/details/88622216)
+* 有安黑群晖的，[基于Gen10和黑群晖的个人NAS服务器构建](http://littleroach110.net/2018/05/30/Personal-NAS-Server.html)
+* 有FreeNAS的，[Gen10 NAS 搭建记录 —— 硬件篇 & 系统篇](https://blog.15cm.net/2018/03/24/gen10-nas-record-hardware-system/)
+
+本来想用ESXI，然后上面安装各种虚拟机，简单斟酌了一下，还是打算用Linux + docker（天下我有） 的方案。 
+
+## Linux系统安装
+
+制作安装U盘，
+
+Mac制作安装盘特别简单，基本上一个命令搞定。
+
+1. 制作安装U盘，可以参考，这篇centos的wiki https://wiki.centos.org/HowTos/InstallFromUSBkey
+2. 先通过  `diskutil list` 查看自己的U盘名称，比如我的是 /dev/disk3s1
+3. 卸载 ` sudo diskutil umount /dev/disk3s1`
+4. 再执行`sudo dd if=/Users/weichao/Downloads/CentOS-7-x86_64-DVD.iso  of=/dev/disk3s1`，如果不卸载，直接执行，会报 `dd: /dev/disk3s1: Resource busy`
+
+我用我的一个优盘，出现了各种奇怪的错误，一张盘不行，我又换了另一张总算是能安装了，安装完毕。
+
+仔细看会发现我上面走了一段弯路，明明我的CPU是ARM家，怎么会用x86_64的镜像。于是我重下了个ARM架构的，希望能管用。
+
+## docker在手，天下我有
+
+
+
+教程 
+
+阮一峰的 [Docker 入门教程](http://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html)
+
+[官方文档](https://docs.docker.com/install/linux/docker-ce/centos/)
+
+这篇很有意思 [10分钟看懂Docker和K8S]( https://zhuanlan.zhihu.com/p/53260098)
+
+docker命令较多，但我们有portainer这样的Web面板：
+
+<img src="https://pic1.zhimg.com/50/v2-e6875425ef6370a620d6fcf111feb77f_hd.jpg" data-size="normal" data-rawwidth="1388" data-rawheight="585" data-default-watermark-src="https://pic2.zhimg.com/50/v2-9731c83d0209b75559590afc4f4c1bf4_hd.jpg" class="origin_image zh-lightbox-thumb" width="1388" data-original="https://pic1.zhimg.com/v2-e6875425ef6370a620d6fcf111feb77f_r.jpg"/>
+
+
+
+## 应用软件收集
+
+以下内容参考[搭建家庭 NAS 服务器有什么好方案？](https://www.zhihu.com/question/21359049/answer/588579088)
+
+* 远程控制
+  1. 远程控制A (远程桌面方式)：[Jump Desktop](https://link.zhihu.com/?target=https%3A//jumpdesktop.com/) ；
+  2. 远程控制B (Web面板方式，简单控制)：[Cockpit](https://link.zhihu.com/?target=https%3A//cockpit-project.org/)；
+  3. 远程控制C (Web面板方式，功能全面)：[Webmin](https://link.zhihu.com/?target=http%3A//www.webmin.com/)；
+* 私有云：[Seafile](https://link.zhihu.com/?target=https%3A//www.seafile.com/)、[Nextcloud](https://link.zhihu.com/?target=https%3A//nextcloud.com/) ；
+* 下载
+  1. 下载方案A：迅雷远程(docker)；
+  2. 下载方案B：[Aria2](https://link.zhihu.com/?target=https%3A//aria2.github.io/)，Web管理面板：[Aria-NG](https://link.zhihu.com/?target=https%3A//github.com/mayswind/AriaNg)，[中文教程](https://link.zhihu.com/?target=https%3A//github.com/itgoyo/Aria2)；
+  3. 下载方案C：[uTorrent](https://link.zhihu.com/?target=https%3A//www.utorrent.com/intl/zh/) (Linux版本略老)；
+  4. transmission [ docker](https://hub.docker.com/r/linuxserver/transmission)  BT 下载客户端
+  5.  sabnzbd [docker](https://hub.docker.com/r/linuxserver/sabnzbd) Usenet下载客户端
+
+* 视频分享、远程播放
+
+  1. 视频/图片分享、远程播放A：[Emby Server](https://link.zhihu.com/?target=https%3A//emby.media/) ；
+  2. 视频分享、远程播放B：[Jellyfin](https://link.zhihu.com/?target=https%3A//jellyfin.github.io/)；
+  3. 视频分享、远程播放C：[Plex Media Server](https://link.zhihu.com/?target=https%3A//www.plex.tv/) ；
+
+* 虚拟机
+
+  1. 虚拟机方案A：[VirtualBox](https://link.zhihu.com/?target=https%3A//www.virtualbox.org/) ；
+
+  2. 虚拟机方案B：gnome Boxes ；
+
+* HTPC播放：[KODI](https://link.zhihu.com/?target=https%3A//kodi.tv/) 。
+* 自动化的电视剧管理软件 sonarr [ docker](https://hub.docker.com/r/linuxserver/sonarr)
+* 电影自动化管理软件 radarr [ docker](https://hub.docker.com/r/linuxserver/radarr)
+
+
+
+可以产出个脚本，
