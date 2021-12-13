@@ -8,7 +8,8 @@ keyword: "懒得起名"
 url: "http://weichao.ren"              # your host, for absolute URL
 baseurl: ""         # for example, '/blog' if your blog hosted on 'host/blog'
 
-
+# Publish posts or collection documents with a future date.
+future: true
 
 # SNS settings
 RSS: false
@@ -17,6 +18,8 @@ RSS: false
 github_username:    toolazytoname
 #twitter_username:  huxpro
 facebook_username:  toolazytoname
+#facebook_username:  huxpro
+#linkedin_username:  firstname-lastname-idxxxx
 
 
 
@@ -25,14 +28,18 @@ facebook_username:  toolazytoname
 highlighter: rouge
 permalink: pretty
 paginate: 10
-exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md","README.zh.md"]
 anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
+# If you have timezone issue (e.g. #68) in China, uncomment to use this:
+#timezone: CN  
 
 
 
 # Gems
 # from PR#40, to support local preview for Jekyll 3.0
-gems: [jekyll-paginate]
+# make sure you have this gem installed
+# `$ gem install jekyll-paginate`
+plugins: [jekyll-paginate]
 
 
 
@@ -43,23 +50,27 @@ gems: [jekyll-paginate]
 markdown: kramdown
 kramdown:
   input: GFM                            # use Github Flavored Markdown !important
+  syntax_highlighter_opts:
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true
+      start_line: 1
 
 
 
 # Disqus settings
 disqus_username: toolazytoname
 
-# Duoshuo settings
-#duoshuo_username: huxblog
-# Share component is depend on Comment so we can NOT use share only.
-#duoshuo_share: true                     # set to false if you want to use Comment without Sharing
-
+# Netease settings
+netease_comment: false
 
 
 
 # Analytics settings
-# Baidu Analytics
+# Baidu Analytics 
 ba_track_id: 0c746f235961d52a0637e76673a3caa9
+
 # Google Analytics
 ga_track_id: 'UA-99590899-1'            # Format: UA-xxxxxx-xx
 qga_domain: weichao.ren
@@ -79,10 +90,45 @@ featured-condition-size: 1              # A tag will be featured if the size of 
 
 
 
+# Progressive Web Apps
+chrome-tab-theme-color: "#000000"
+service-worker: true
+
+
+
+# MathJax rendering for layout:page (e.g. post preview)
+page-mathjax: false
+
+
+
 # Friends
-#friends: [
-#   {
-#        title: "Hux Blog",
-#        href: "http://huangxuan.me"
-#    }
-#]
+# friends: [
+#     {
+#     #     title: "Su",
+#     #     href: "http://su.gallery/"
+#     # },{
+#         title: "乱序（Midare）",
+#         href: "http://mida.re/"
+#     },{
+#         title: "Sherry Woo",
+#         href: "https://sherrywoo.me/"
+#     },{
+#         title: "Kun Qian",
+#         href: "http://kunq.me"
+#     },{
+#         title: "Ebn Zhang",
+#         href: "http://ebnbin.com/"
+#     },{
+#         title: "SmdCn",
+#         href: "http://blog.smdcn.net"
+#     },{
+#         title: "JiyinYiyong",
+#         href: "http://tiye.me/"
+#     },{
+#         title: "DHong Say",
+#         href: "http://dhong.co"
+#     },{
+#         title: "尹峰以为",
+#         href: "http://ingf.github.io/"
+#     }
+# ]
