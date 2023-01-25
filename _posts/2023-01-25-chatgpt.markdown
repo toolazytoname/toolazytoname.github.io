@@ -42,3 +42,4 @@ https://beta.openai.com/account/api-keys
 - [ ] 微信机器人 https://github.com/fuergaosi233/wechat-chatgpt
 	* 顺便体验了一下 [Railway](https://github.com/fuergaosi233/wechat-chatgpt#usage-with-railway)(没跑通)、Noptcha、2Captcha
 - [ ] 语音机器人，类似天猫精灵，小雅
+- [ ] 对接咸鱼客服，自动售卖？
