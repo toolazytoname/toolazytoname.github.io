@@ -43,3 +43,35 @@ https://beta.openai.com/account/api-keys
 	* 顺便体验了一下 [Railway](https://github.com/fuergaosi233/wechat-chatgpt#usage-with-railway)(没跑通)、Noptcha、2Captcha
 - [ ] 语音机器人，类似天猫精灵，小雅
 - [ ] 对接咸鱼客服，自动售卖？
+
+
+其它 
+- [ ] [AI 绘画 text2img](!https://huggingface.co/spaces/stabilityai/stable-diffusion) 
+  - [ ] NovelAI, 
+  - [ ] Dall-E, 
+  - [ ] Mid-Journey
+  - [ ] 
+- [ ] [prompt](!https://lexica.art/)
+- [ ] Hugging Face
+
+
+绘画笔记
+~~~
+NOVEL AI
+生成二次元Dall-E
+关键词
+风格化适应
+
+Mid-jourmey
+网页版
+
+关键词：
+Three d render
+Ultra detailed
+Photo realistic
+High contrast
+Baroque
+Elegent
+Opulent
+pearlescent
+~~~
