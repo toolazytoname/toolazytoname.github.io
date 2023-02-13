@@ -58,8 +58,9 @@ https://beta.openai.com/account/api-keys
 - [ ]  [还有人用来尝试做交易，可以试一下](!https://www.bilibili.com/video/BV1px4y1M79x/?spm_id_from=333.337.search-card.all.click&vd_source=fff14ac913ea9cdee56699d64abfd3ee)
 - [ ] 微信机器人 https://github.com/fuergaosi233/wechat-chatgpt
 	* 顺便体验了一下 [Railway](https://github.com/fuergaosi233/wechat-chatgpt#usage-with-railway)(没跑通)、Noptcha、2Captcha
-- [ ] 语音机器人，类似天猫精灵，小雅
+- [x] 语音机器人，类似天猫精灵，小雅。[已写完并且开源](https://github.com/toolazytoname/ChatGPTSpeaker)
 - [ ] 对接咸鱼客服，自动售卖？
+- [ ] 对接淘宝客服？
 
 
 其它 
