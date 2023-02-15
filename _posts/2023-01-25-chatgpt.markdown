@@ -15,7 +15,8 @@ tags:
 # 注册
 [官方注册地址](!https://chat.openai.com/auth/login )
 
-## 去除地域限制
+## 去除地域限制缓存数据
+如果你的浏览器之前访问过该网站，那么我理解会有相关地域信息。
 需要在chrom的console 里面执行下面👇脚本，删除本地的数据才可以
 ```javascript
 javascript:window.localStorage.removeItem(Object.keys(window.localStorage).find(i=>i.startsWith('@@auth0spajs')))
