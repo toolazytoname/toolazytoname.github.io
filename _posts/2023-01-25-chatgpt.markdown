@@ -13,7 +13,7 @@ tags:
 不过貌似有使用限制，能玩多久先玩多久。这里是一些简单的记录。
 
 # 注册
-[官方注册地址](!https://chat.openai.com/auth/login )
+[官方注册地址](https://chat.openai.com/auth/login )
 
 ## 去除地域限制缓存数据
 如果你的浏览器之前访问过该网站，那么我理解会有相关地域信息缓存。
@@ -31,8 +31,8 @@ https://beta.openai.com/account/api-keys
 
 # 使用
 ## 提示词
-* [https://www.emergentmind.com](!https://www.emergentmind.com)
-* [ 解除封印咒语](!https://github.com/PlexPt/awesome-chatgpt-prompts-zh) 很有意思，可以用话术来解除封印，展示洪荒之力
+* [https://www.emergentmind.com](https://www.emergentmind.com)
+* [解除封印咒语](https://github.com/PlexPt/awesome-chatgpt-prompts-zh) 很有意思，可以用话术来解除封印，展示洪荒之力
 
 
 ```
@@ -51,14 +51,14 @@ https://beta.openai.com/account/api-keys
 
 ```
 ## 使用渠道
-* 可以通过[官方聊天页面](!https://chat.openai.com/chat)
-* [国内可用免费使用网站](!https://chatgpt.sbaliyun.com/)
-* [非官方开源的客户端，输入提示比较方便 ](!https://github.com/lencx/ChatGPT)
-* VS 插件（因为不用科学上网，这个应该是用起来最方便的，配上自己的token）
-* Chrom 插件 （搜索Google的同时能同页面展示结果）
+* 可以通过[官方聊天页面](https://chat.openai.com/chat)
+* [国内可用免费使用网站](https://chatgpt.sbaliyun.com/)
+* [非官方开源的客户端，输入提示比较方便 ](https://github.com/lencx/ChatGPT)
+* [VS 插件,因为不用科学上网，这个应该是用起来最方便的，配上自己的token](https://marketplace.visualstudio.com/items?itemName=WhenSunset.chatgpt-china)
+* [Chrom 插件,搜索Google的同时能同页面展示结果](https://chrome.google.com/webstore/detail/chatgpt-for-google/jgjaeacdkonaoafenlfkkkmbaopkbilf) 
 
 ## 有趣的尝试
-- [ ]  [还有人用来尝试做交易，可以试一下](!https://www.bilibili.com/video/BV1px4y1M79x/?spm_id_from=333.337.search-card.all.click&vd_source=fff14ac913ea9cdee56699d64abfd3ee)
+- [ ]  [还有人用来尝试做交易，可以试一下](https://www.bilibili.com/video/BV1px4y1M79x/?spm_id_from=333.337.search-card.all.click&vd_source=fff14ac913ea9cdee56699d64abfd3ee)
 - [ ] 微信机器人 https://github.com/fuergaosi233/wechat-chatgpt
 	* 顺便体验了一下 [Railway](https://github.com/fuergaosi233/wechat-chatgpt#usage-with-railway)(没跑通)、Noptcha、2Captcha
 - [x] 语音机器人，类似天猫精灵，小雅。[已写完并且开源](https://github.com/toolazytoname/ChatGPTSpeaker)
@@ -67,12 +67,12 @@ https://beta.openai.com/account/api-keys
 
 
 其它 
-- [ ] [AI 绘画 text2img](!https://huggingface.co/spaces/stabilityai/stable-diffusion) 
+- [ ] [AI 绘画 text2img](https://huggingface.co/spaces/stabilityai/stable-diffusion) 
   - [ ] NovelAI, 
   - [ ] Dall-E, 
   - [ ] Mid-Journey
   - [ ] 
-- [ ] [prompt](!https://lexica.art/)
+- [ ] [prompt](https://lexica.art/)
 - [ ] Hugging Face
 
 

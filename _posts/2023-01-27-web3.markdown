@@ -28,6 +28,8 @@ web3的理财感觉比较捞偏门，需要DYOR，区别于常规的量化交易
 
 
 # 实际操作
+- [ ] 写一个自己的合约钱包
+
 - [ ] 有没有小狐狸钱包运行脚本现成封装库https://github.com/javerianadeem/selenium_metamask_automation
 - [ ] 钱包交互脚本demo
 - [ ] 链上*信息*监听
@@ -56,21 +58,20 @@ web3的理财感觉比较捞偏门，需要DYOR，区别于常规的量化交易
 - [x] 滑点？
 - [ ] 闪电贷
 
+# 开发笔记
+
+## goerli领水 亲测可用
+* [网页挖矿领水](!https://goerli-faucet.pk910.de/)，这个肯定能有。先start挖一段时间，然后stop。 
+* [验证Twitter账号，每日可以领取0.1个GoerliETH和10个LINK测试币](!https://faucets.chain.link/)。 
+
 
 # 参考
-网上一堆扯淡卖课的，还有骗子骗小白转账，把地址藏在头文件里的，真是群魔乱舞。
 * [Selenium with Python中文翻译文档
 ](!https://selenium-python-zh.readthedocs.io/en/latest/)
-* [web3py](!https://web3py.readthedocs.io/en/v5/)
-* 
+* [web3py 文档](!https://web3py.readthedocs.io/en/v5/)
+* [✨ Web3 科学家极简入门指南](!https://mirror.xyz/gm365.eth/ad4vbp_qLFKaOrAMtE2YZ6pzMuC3ejam-y_62QogSds)
+* [区块漫步](!https://blockwander.com/ethereum-goerli-faucet/ ) 
 
-视频教程
-* [✨ Web3 科学家极简入门指南
-](!https://mirror.xyz/gm365.eth/ad4vbp_qLFKaOrAMtE2YZ6pzMuC3ejam-y_62QogSds)
-* [从零开始成为web3科学家（第一课）python基础+撸毛交互脚本开发
-](!https://www.bilibili.com/video/BV1eY4y1f7yM/?spm_id_from=333.1007.top_right_bar_window_history.content.click&vd_source=fff14ac913ea9cdee56699d64abfd3ee)
-* [从零开始成为web3科学家第二课（上）web3py和链上交互
-](!https://www.bilibili.com/video/BV1v3411d7kM/?spm_id_from=333.788&vd_source=fff14ac913ea9cdee56699d64abfd3ee)
-
-
-https://space.bilibili.com/391232836
+## 视频教程
+* [web3一级工具箱](!https://mirror.xyz/gm365.eth/ad4vbp_qLFKaOrAMtE2YZ6pzMuC3ejam-y_62QogSds)
+* [孔明妖道的羽毛扇](!https://space.bilibili.com/391232836)
