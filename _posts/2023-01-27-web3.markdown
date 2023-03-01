@@ -61,17 +61,17 @@ web3的理财感觉比较捞偏门，需要DYOR，区别于常规的量化交易
 # 开发笔记
 
 ## goerli领水 亲测可用
-* [网页挖矿领水](!https://goerli-faucet.pk910.de/)，这个肯定能有。先start挖一段时间，然后stop。 
-* [验证Twitter账号，每日可以领取0.1个GoerliETH和10个LINK测试币](!https://faucets.chain.link/)。 
+* [网页挖矿领水](https://goerli-faucet.pk910.de/)，这个肯定能有。先start挖一段时间，然后stop。 
+* [验证Twitter账号，每日可以领取0.1个GoerliETH和10个LINK测试币](https://faucets.chain.link/)。 
 
 
 # 参考
 * [Selenium with Python中文翻译文档
-](!https://selenium-python-zh.readthedocs.io/en/latest/)
-* [web3py 文档](!https://web3py.readthedocs.io/en/v5/)
-* [✨ Web3 科学家极简入门指南](!https://mirror.xyz/gm365.eth/ad4vbp_qLFKaOrAMtE2YZ6pzMuC3ejam-y_62QogSds)
-* [区块漫步](!https://blockwander.com/ethereum-goerli-faucet/ ) 
+](https://selenium-python-zh.readthedocs.io/en/latest/)
+* [web3py 文档](https://web3py.readthedocs.io/en/v5/)
+* [✨ Web3 科学家极简入门指南](https://mirror.xyz/gm365.eth/ad4vbp_qLFKaOrAMtE2YZ6pzMuC3ejam-y_62QogSds)
+* [区块漫步](https://blockwander.com/ethereum-goerli-faucet/ ) 
 
 ## 视频教程
-* [web3一级工具箱](!https://mirror.xyz/gm365.eth/ad4vbp_qLFKaOrAMtE2YZ6pzMuC3ejam-y_62QogSds)
-* [孔明妖道的羽毛扇](!https://space.bilibili.com/391232836)
+* [web3一级工具箱](https://mirror.xyz/gm365.eth/ad4vbp_qLFKaOrAMtE2YZ6pzMuC3ejam-y_62QogSds)
+* [孔明妖道的羽毛扇](https://space.bilibili.com/391232836)
