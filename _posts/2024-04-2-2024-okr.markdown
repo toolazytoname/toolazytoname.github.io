@@ -34,5 +34,5 @@ tags:
 
 # AI
 ## 系统学习AI，搭建自己的AI项目；持续尝试变现。
-1.常看[通往AGI之路](https://waytoagi.feishu.cn/wiki/QPe5w5g7UisbEkkow8XcDmOpn8e)
+1. 挑着读[通往AGI之路](https://waytoagi.feishu.cn/wiki/QPe5w5g7UisbEkkow8XcDmOpn8e)
 2. 根据常用场景，搭建自己的AI项目，服务好自己。具体可量化item可参见网页。
