@@ -18,4 +18,6 @@
 * https://www.binance.com/zh-CN/activity/referral-entry/CPA?ref=CPA_001GVGOSRP
 * 注册派网
 * https://www.pionex.com/zh-CN/signUp?r=uG73BtLl
+* grass平台
+* https://app.getgrass.io/register/?referralCode=xnYb6oEixnN0e78
 
