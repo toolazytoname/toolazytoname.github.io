@@ -10,26 +10,31 @@ tags:
   - hack your life
 ---
 
-# 目标
-web3的理财感觉比较捞偏门，需要DYOR，区别于常规的量化交易，所以在这里独立成篇。<br/>
-我的目标是希望可以尽可能无风险或者低风险盈利，利用技术手段，多学习。
 
-
-# 已知套利方式
+# 套利方式
 按照尝试意愿排序。
-* 交易
-* 空投撸毛
-* NFT
-* 夹子机器人
-* MEV套利
-* 闪电贷
+* [ ] 交易
+* [ ] 空投撸毛
+* [ ] NFT
+* [ ] 夹子机器人
+* [ ] MEV套利
+* [ ] 闪电贷
+* [ ] 挖矿
 
 
 
 
-# 实际操作
+# 实操
+## 流动性挖矿
+- [ ] 流动性挖矿 [defichain_maxi](https://github.com/kuegi/defichain_maxi/tree/main)
+  - [x] aws 、telegram bot基础配置；钱包安装
+  - [ ] defichain 调研
+  - [ ] 小额资金手动体验
+  - [ ] 试运行
+- [ ] ENS
+
+
 - [ ] 写一个自己的合约钱包
-
 - [ ] 有没有小狐狸钱包运行脚本现成封装库https://github.com/javerianadeem/selenium_metamask_automation
 - [ ] 钱包交互脚本demo
 - [ ] 链上*信息*监听
@@ -49,10 +54,7 @@ web3的理财感觉比较捞偏门，需要DYOR，区别于常规的量化交易
   - [ ] 反撸
 - [ ] 夹子机器人编写
 - [ ] 如何避免夹子机器人攻击
-
-
 - [ ] 跟单套利机器人
-
 - [ ] Wei gwei 计算
 - [ ] Gas-limit 怎么计算的
 - [x] 滑点？
@@ -60,18 +62,19 @@ web3的理财感觉比较捞偏门，需要DYOR，区别于常规的量化交易
 
 # 开发笔记
 
-## goerli领水 亲测可用
+## goerli领水
 * [网页挖矿领水](https://goerli-faucet.pk910.de/)，这个肯定能有。先start挖一段时间，然后stop。 
 * [验证Twitter账号，每日可以领取0.1个GoerliETH和10个LINK测试币](https://faucets.chain.link/)。 
 
 
-# 参考
-* [Selenium with Python中文翻译文档
-](https://selenium-python-zh.readthedocs.io/en/latest/)
-* [web3py 文档](https://web3py.readthedocs.io/en/v5/)
-* [✨ Web3 科学家极简入门指南](https://mirror.xyz/gm365.eth/ad4vbp_qLFKaOrAMtE2YZ6pzMuC3ejam-y_62QogSds)
-* [区块漫步](https://blockwander.com/ethereum-goerli-faucet/ ) 
 
-## 视频教程
-* [web3一级工具箱](https://mirror.xyz/gm365.eth/ad4vbp_qLFKaOrAMtE2YZ6pzMuC3ejam-y_62QogSds)
-* [孔明妖道的羽毛扇](https://space.bilibili.com/391232836)
+## 好用的工具集锦
+* DefiLlama
+* 
+
+## 关键字
+* web3
+* defi
+* arbitrage
+* mev
+* 

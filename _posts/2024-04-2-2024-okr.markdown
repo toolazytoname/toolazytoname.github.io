@@ -36,3 +36,10 @@ tags:
 ## 系统学习AI，搭建自己的AI项目；持续尝试变现。
 1. 挑着读[通往AGI之路](https://waytoagi.feishu.cn/wiki/QPe5w5g7UisbEkkow8XcDmOpn8e)
 2. 根据常用场景，搭建自己的AI项目，服务好自己。具体可量化item可参见网页。
+
+# 尝试
+## 尝试做一件事，不管成功与否，持续折腾
+1. [x] grass
+2. [ ] AI音乐
+3. [ ] NAS
+4. [ ] 第二大脑
