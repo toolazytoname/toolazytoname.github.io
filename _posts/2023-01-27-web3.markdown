@@ -32,6 +32,7 @@ tags:
   - [ ] 小额资金手动体验
   - [ ] 试运行
 - [ ] ENS
+- [ ] Bitfinex 放贷
 
 
 - [ ] 写一个自己的合约钱包
@@ -69,12 +70,14 @@ tags:
 
 
 ## 好用的工具集锦
-* DefiLlama
-* 
+* [DefiLlama](https://defillama.com/)
+  * yields
+* [coingecko](https://www.coingecko.com)
+* [coinmarketcap](https://coinmarketcap.com/)
 
 ## 关键字
 * web3
 * defi
 * arbitrage
 * mev
-* 
+* grid
