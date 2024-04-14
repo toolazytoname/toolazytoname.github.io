@@ -25,14 +25,34 @@ tags:
 
 
 # 实操
+
+## 交易
+- [ ] 自建量化交易平台
+  - [ ] https://github.com/hummingbot/hummingbot 看上去很厉害
+
 ## 流动性挖矿
-- [ ] 流动性挖矿 [defichain_maxi](https://github.com/kuegi/defichain_maxi/tree/main)
+- [ ] defichain流动性挖矿 [defichain_maxi](https://github.com/kuegi/defichain_maxi/tree/main)
+  - [x] [faq](https://www.vault-maxi.live/faq)
   - [x] aws 、telegram bot基础配置；钱包安装
   - [ ] defichain 调研
   - [ ] 小额资金手动体验
   - [ ] 试运行
-- [ ] ENS
-- [ ] Bitfinex 放贷
+- [ ] - [ ] Bitfinex 放贷
+- [ ] 调研DefiLlama下的yields策略，谋定而后动
+- [ ] 派网机器人
+## 二道贩子
+- [x] ENS
+  - [x] 待售卖的已挂出,自用的已存冷钱包
+- [ ] Kitty
+  - [ ] NFT 错误排查  https://etherscan.io/tx/0xb9ad589a163a1c0129f1e288ef603e4824331aa32c6e8229be0fcfb235695965
+  - [ ] 可以略过
+  
+- [ ] opensea脚本
+  - [ ] [opensea-automatic-bulk-upload-and-sale](https://github.com/maximedrn/opensea-automatic-bulk-upload-and-sale)
+
+
+## 代办池
+
 
 
 - [ ] 写一个自己的合约钱包
@@ -63,9 +83,7 @@ tags:
 
 # 开发笔记
 
-## goerli领水
-* [网页挖矿领水](https://goerli-faucet.pk910.de/)，这个肯定能有。先start挖一段时间，然后stop。 
-* [验证Twitter账号，每日可以领取0.1个GoerliETH和10个LINK测试币](https://faucets.chain.link/)。 
+
 
 
 
@@ -74,6 +92,24 @@ tags:
   * yields
 * [coingecko](https://www.coingecko.com)
 * [coinmarketcap](https://coinmarketcap.com/)
+* 领水
+  * [网页挖矿领水](https://goerli-faucet.pk910.de/)，这个肯定能有。先start挖一段时间，然后stop。 
+  * [验证Twitter账号，每日可以领取0.1个GoerliETH和10个LINK测试币](https://faucets.chain.link/)。 
+
+
+## 学习资源
+* [DeFiHackLabs教程](https://github.com/SunWeb3Sec/DeFiHackLabs) 
+  * [x] Lesson 1: Tools
+  * [x] OnChain Transaction Debugging: 2. Warm up
+* [ ] [DEX Arbitrage](https://jamesbachini.com/dex-arbitrage/)
+  * [ ] 看上去挺好的一个教程
+* [套利](https://github.com/ccyanxyz/uniswap-arbitrage-analysis)  
+* [DeFi-Developer-Road-Map](https://github.com/OffcierCia/DeFi-Developer-Road-Map/blob/main/translations/README_cn.md)
+
+
+
+* [清算通知机器人，可以借鉴下](https://defichain-dobby.com/) 
+* [Defi bots 表格](https://natural-wilderness-81a.notion.site/ae190fb2da6e4c30a3c720bfce2cd8e0?v=3fb735d1b4f44899a7fccaaec8e55fca)
 
 ## 关键字
 * web3
@@ -81,3 +117,5 @@ tags:
 * arbitrage
 * mev
 * grid
+
+

@@ -40,7 +40,9 @@ tags:
 # 尝试
 ## 尝试做一件事，不管成功与否，持续折腾
 1. [x] grass
-2. [ ] [ENS](https://app.ens.domains/) 域名 检测
-3. [ ] AI音乐
-4. [ ] NAS
-5. [ ] 第二大脑
+2. [x] [ENS](https://app.ens.domains/) 已在opensea挂出
+3. [x] 域名 检测
+4. [ ] opensea 批量脚本
+5. [ ] AI音乐
+6. [ ] NAS
+7. [ ] 第二大脑
