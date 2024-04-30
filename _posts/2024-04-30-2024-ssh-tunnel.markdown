@@ -1,0 +1,77 @@
+---
+
+layout: post
+title:  "优雅访问局域网内Mac电脑"
+date:   2024-4-30 10:42:32 +0800
+categories: tool
+catalog:  true
+tags:
+  - hack your life
+---
+
+
+# 背景
+* 家里Mac电脑，没有公网IP
+* 云主机 Linux，有IP
+* 任意外网Mac电脑
+
+ssh 真是一个很灵活的神器。在本地局域网可以试通先，网上教程一大把。这里重点介绍一下无公网IP场景下的内网穿透。
+
+# 搭建流程
+ 
+ 在家里的电脑上执行
+```
+autossh -M 0 -f -N -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -R LinuxPort:localhost:home_ssh_port Linux_user@Linux_IP
+```
+这里 autossh用来保活。这里打了一个洞,贯穿Linux 和 Home Mac。
+
+# Show Time
+## Terminal 访问
+在外网电脑上执行如下命令
+```
+ssh -J Linux_user@Linux_IP -p LinuxPort home_user@localhost
+```
+这里一般的教程都会分成两步,SSH 的 ProxyJump 功能来合并这两步操作，从而实现一步访问家里的电脑。ProxyJump 允许您通过一个跳板主机（服务器）连接到目标主机（家里的电脑），而不需要在本地设备上进行多次 SSH 连接.
+
+请把<b>优雅</b>打在公屏上。
+
+## screen sharing(VNC) 图形化界面操作
+在外网电脑上执行如下命令
+```
+# -N：不执行远程命令，不进入远程 Shell 中。当然，即便不指定该参数，也不影响转发设置。
+ssh -J Linux_user@Linux_IP -p LinuxPort -L 6902:localhost:home_mac_vnc_port home_mac_user@localhost -N
+#访问本地端口
+open vnc://localhost:6902
+
+```
+
+这里<b>秒</b>在把<b>局域网</b>端口暴露出来了，当前外网mac  通过jump 绑定到了局域网的home_mac_vnc_port，而不是跳板机的某个端口。我也只是半会儿转不过弯来。
+# 优势
+网上的教程，都是会建立多个隧道，我觉得很麻烦，冗余，繁琐，所以有了这篇文章。
+此方案优点
+* 只有一个常驻维护的隧道:用来ssh 
+* GUI访问时，不需要安装任何额外vnc软件
+* Terminal 执行流程很简洁，一句命令搞定。ssh -j 配置进 ~/.ssh/config 以后可以实现ssh home 直接访问
+* vnc 不需要维护额外的ssh 隧道，建立连接的时候，临时创建vnc端口映射即可。
+* 安全
+  * 攻击面：
+    * 局域网Mac只对云主机暴露了一个常驻端口映射
+    * 云主机没有增加额外端口暴露，都是通过既有ssh访问
+* 性能
+  * 越简单，越高效。没有对比过别的协议，使用体验目前还是不错的。
+
+希望对你有帮助，不甚欣喜。
+
+# 参考
+```
+-L 是本地端口转发参数
+-L [bind_address:]port:host:hostport
+-L [bind_address:]port:remote_socket
+-L local_socket:host:hostport 
+-L local_socket:remote_socket 
+Specifies that connections to the given TCP port or Unix socket on the local (client) host are to be forwarded to the given host and port, or Unix socket, on the remote side. This works by allocating a socket to listen to either a TCP port on the local side, optionally bound to the specified bind_address, or to a Unix socket. Whenever a connection is made to the local port or socket, the connection is forwarded over the secure channel, and a connection is made to either host port hostport, or the Unix socket remote_socket, from the remote machine. Port forwardings can also be specified in the configuration file.  Only the superuser can forward privileged ports.  IPv6 addresses can be specified by enclosing the address in square brackets.
+By default, the local port is bound in accordance with the GatewayPorts setting. However, an explicit bind_address may be used to bind the connection to a specific address.  The bind_address of “localhost” indicates that the listening port be bound for local use only, while an empty address or ‘*’ indicates that the port should be available from all interfaces.
+
+
+
+```
