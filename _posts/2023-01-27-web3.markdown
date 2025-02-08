@@ -28,7 +28,7 @@ tags:
 
 ## 交易
 - [ ] 自建量化交易平台
-  - [ ] https://github.com/hummingbot/hummingbot 看上去很厉害
+  - [ ]  看上去很厉害
 
 ## 流动性挖矿
 - [ ] defichain流动性挖矿 [defichain_maxi](https://github.com/kuegi/defichain_maxi/tree/main)
@@ -95,6 +95,15 @@ tags:
 * 领水
   * [网页挖矿领水](https://goerli-faucet.pk910.de/)，这个肯定能有。先start挖一段时间，然后stop。 
   * [验证Twitter账号，每日可以领取0.1个GoerliETH和10个LINK测试币](https://faucets.chain.link/)。 
+* 交易工具
+  * [freqtrade](https://github.com/freqtrade/freqtrade)
+    * 5.6k 25.4k
+  * [hummingbot](https://github.com/hummingbot/hummingbot)
+    * 2.5k 7.3k
+  * [OctoBot](https://github.com/Drakkar-Software/OctoBot)
+    * 695 2.9k
+  * [ccxt](https://github.com/ccxt/ccxt)
+  * [vnpy]()
 
 
 ## 学习资源
