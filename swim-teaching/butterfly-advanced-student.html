@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🦋 蝶泳进阶学习手册（学员版）</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{min-height:100vh;background:linear-gradient(135deg,#f59e0b 0%,#d97706 100%);padding:20px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+        .container{background:#fff;border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,0.15);max-width:800px;margin:0 auto;overflow:hidden}
+        .header{background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;padding:25px;text-align:center}
+        .header h1{font-size:24px;margin-bottom:8px}
+        .header p{opacity:0.9;font-size:13px}
+        .info-section{background:#fffbeb;padding:20px;border-bottom:1px solid #fef3c7}
+        .info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;font-size:13px}
+        .info-item{display:flex;align-items:center;gap:8px}
+        .info-label{color:#d97706;font-weight:600}
+        .info-value{color:#333}
+        .section{padding:20px;border-bottom:1px solid #f0f0f0}
+        .section-title{font-size:16px;font-weight:800;color:#d97706;margin-bottom:15px;display:flex;align-items:center;gap:8px}
+        .progress-bar{display:flex;gap:4px;margin-bottom:8px}
+        .progress-dot{width:32px;height:32px;border-radius:50%;background:#fef3c7;color:#d97706;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+        .progress-dot.completed{background:#d97706;color:#fff}
+        .progress-dot.current{border:3px solid #d97706;animation:pulse 2s infinite}
+        @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+        .progress-labels{display:flex;justify-content:space-between;font-size:10px;color:#999}
+        .progress-label{text-align:center;width:80px}
+        .achievement-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+        .achievement-card{background:linear-gradient(135deg,#fffbeb,#fff);border:2px solid #fef3c7;border-radius:12px;padding:15px;text-align:center;transition:all .3s}
+        .achievement-card.earned{border-color:#d97706;background:linear-gradient(135deg,#fffaf0,#fff)}
+        .achievement-card .icon{font-size:28px;margin-bottom:8px}
+        .achievement-card h4{font-size:13px;color:#333;margin-bottom:4px}
+        .achievement-card .status{font-size:11px;color:#999;margin-top:5px}
+        .achievement-card.earned .status{color:#d97706;font-weight:600}
+        .lesson-card{background:#fffbeb;border-radius:12px;padding:15px;margin-bottom:12px}
+        .lesson-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+        .lesson-num{background:#d97706;color:#fff;padding:4px 10px;border-radius:12px;font-size:12px;font-weight:700}
+        .lesson-title{font-size:14px;font-weight:700;color:#333}
+        .lesson-date{font-size:11px;color:#999}
+        .lesson-goal{background:#fff;border-radius:8px;padding:10px;margin-bottom:10px}
+        .lesson-goal-label{font-size:11px;color:#d97706;font-weight:600;margin-bottom:4px}
+        .lesson-goal-text{font-size:13px;color:#333}
+        .lesson-form{font-size:12px;color:#666}
+        .lesson-form-row{display:flex;gap:10px;margin-bottom:8px}
+        .lesson-form label{color:#d97706;font-weight:600;min-width:70px}
+        .coach-comment{background:#fff;border-left:3px solid #d97706;padding:8px 12px;border-radius:0 8px 8px 0;margin-top:10px;font-size:12px;color:#555}
+        .comparison-table{width:100%;border-collapse:collapse;font-size:12px}
+        .comparison-table th{background:#d97706;color:#fff;padding:8px;text-align:center}
+        .comparison-table td{padding:8px;text-align:center;border-bottom:1px solid #eee}
+        .comparison-table td:first-child{font-weight:600;color:#d97706}
+        .homework-item{background:#fffbeb;border-radius:8px;padding:12px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+        .homework-content{font-size:13px;color:#333}
+        .homework-check{width:20px;height:20px;border:2px solid #d97706;border-radius:4px}
+        .tip-card{background:#fff8e6;border-radius:8px;padding:12px;margin-bottom:10px;border-left:4px solid #ffa500}
+        .tip-q{font-weight:700;color:#ffa500;font-size:13px;margin-bottom:5px}
+        .tip-a{font-size:12px;color:#666;line-height:1.5}
+        .encouragement{background:linear-gradient(135deg,#fffbeb,#fff);border-radius:16px;padding:20px;text-align:center;border:2px solid #fef3c7}
+        .encouragement p{font-size:14px;color:#d97706;line-height:1.8;margin-bottom:8px}
+        .encouragement p:last-child{font-size:16px;font-weight:700}
+        .footer{text-align:center;padding:15px;color:#999;font-size:11px}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🦋 蝶泳进阶学习手册</h1>
+            <p>我的蝶泳进阶之路</p>
+        </div>
+
+        <div class="info-section">
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="info-label">👤 姓名：</span>
+                    <span class="info-value">_______________</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">📅 开始日期：</span>
+                    <span class="info-value">_______________</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">🎯 学习目标：</span>
+                    <span class="info-value">□ 200米 □ 速度提升 □ 专业动作</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">💪 基础水平：</span>
+                    <span class="info-value">□ 会蝶泳25米 □ 会完整配合</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">📊 学习进度总览</div>
+            <div class="progress-bar">
+                <div class="progress-dot">1</div>
+                <div class="progress-dot">2</div>
+                <div class="progress-dot">3</div>
+                <div class="progress-dot">4</div>
+                <div class="progress-dot">5</div>
+                <div class="progress-dot">6</div>
+                <div class="progress-dot">7</div>
+                <div class="progress-dot">8</div>
+                <div class="progress-dot">9</div>
+                <div class="progress-dot">10</div>
+                <div class="progress-dot">11</div>
+                <div class="progress-dot">12</div>
+                <div class="progress-dot">13</div>
+                <div class="progress-dot">14</div>
+                <div class="progress-dot">15</div>
+                <div class="progress-dot">16</div>
+            </div>
+            <div class="progress-labels">
+                <div class="progress-label">技术强化<br>1-4课</div>
+                <div class="progress-label">呼吸进阶<br>5-8课</div>
+                <div class="progress-label">配合提升<br>9-12课</div>
+                <div class="progress-label">专业提升<br>13-16课</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🎖️ 我的成就墙</div>
+            <div class="achievement-grid">
+                <div class="achievement-card" id="ach1">
+                    <div class="icon">💪</div>
+                    <h4>划水达人</h4>
+                    <p>完成第4课 │ 蝶泳配合</p>
+                    <div class="status">⬜ 未获得</div>
+                </div>
+                <div class="achievement-card" id="ach2">
+                    <div class="icon">🫁</div>
+                    <h4>呼吸大师</h4>
+                    <p>完成第8课 │ 呼吸稳定</p>
+                    <div class="status">⬜ 未获得</div>
+                </div>
+                <div class="achievement-card" id="ach3">
+                    <div class="icon">⚡</div>
+                    <h4>配合高手</h4>
+                    <p>完成第12课 │ 100米</p>
+                    <div class="status">⬜ 未获得</div>
+                </div>
+                <div class="achievement-card" id="ach4">
+                    <div class="icon">🏆</div>
+                    <h4>进阶健将</h4>
+                    <p>完成第16课 │ 200米结业</p>
+                    <div class="status">⬜ 未获得</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">📝 每节课学习记录</div>
+
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <span class="lesson-num">第1课</span>
+                    <span class="lesson-title">蝶泳手臂划水</span>
+                    <span class="lesson-date">上课日期：____</span>
+                </div>
+                <div class="lesson-goal">
+                    <div class="lesson-goal-label">🎯 本课目标</div>
+                    <div class="lesson-goal-text">掌握双臂对称划水，感受入水抓水</div>
+                </div>
+                <div class="lesson-form">
+                    <div class="lesson-form-row"><label>今天学会了：</label><span>1. ________________________________</span></div>
+                    <div class="lesson-form-row"><label></label><span>2. ________________________________</span></div>
+                    <div class="lesson-form-row"><label>需要加强：</label><span>________________________________</span></div>
+                </div>
+                <div class="coach-comment">💬 教练评语：________________________________</div>
+            </div>
+
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <span class="lesson-num">第2课</span>
+                    <span class="lesson-title">蝶泳腿（海豚腿）</span>
+                    <span class="lesson-date">上课日期：____</span>
+                </div>
+                <div class="lesson-goal">
+                    <div class="lesson-goal-label">🎯 本课目标</div>
+                    <div class="lesson-goal-text">掌握海豚腿，髋部发力鞭打踢腿</div>
+                </div>
+                <div class="lesson-form">
+                    <div class="lesson-form-row"><label>今天学会了：</label><span>1. ________________________________</span></div>
+                    <div class="lesson-form-row"><label></label><span>2. ________________________________</span></div>
+                    <div class="lesson-form-row"><label>需要加强：</label><span>________________________________</span></div>
+                </div>
+                <div class="coach-comment">💬 教练评语：________________________________</div>
+            </div>
+
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <span class="lesson-num">第3课</span>
+                    <span class="lesson-title">两次腿配合</span>
+                    <span class="lesson-date">上课日期：____</span>
+                </div>
+                <div class="lesson-goal">
+                    <div class="lesson-goal-label">🎯 本课目标</div>
+                    <div class="lesson-goal-text">掌握两次蝶泳腿与划水的配合节奏</div>
+                </div>
+                <div class="lesson-form">
+                    <div class="lesson-form-row"><label>今天学会了：</label><span>1. ________________________________</span></div>
+                    <div class="lesson-form-row"><label></label><span>2. ________________________________</span></div>
+                    <div class="lesson-form-row"><label>需要加强：</label><span>________________________________</span></div>
+                </div>
+                <div class="coach-comment">💬 教练评语：________________________________</div>
+            </div>
+
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <span class="lesson-num">第4课</span>
+                    <span class="lesson-title">技术整合考核 🏅</span>
+                    <span class="lesson-date">上课日期：____</span>
+                </div>
+                <div class="lesson-goal">
+                    <div class="lesson-goal-label">🎯 考核内容</div>
+                    <div class="lesson-goal-text">✅ 对称划水 □ &nbsp; ✅ 蝶泳腿 □ &nbsp; ✅ 25米不间断 □</div>
+                </div>
+                <div class="lesson-form">
+                    <div class="lesson-form-row"><label>考核成绩：</label><span>____________秒</span></div>
+                    <div class="lesson-form-row"><label>获得证书：</label><span>【蝶泳基础证书】 □</span></div>
+                </div>
+                <div class="coach-comment">💬 教练评语：________________________________</div>
+            </div>
+
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <span class="lesson-num">第5课</span>
+                    <span class="lesson-title">呼吸时机掌握</span>
+                    <span class="lesson-date">上课日期：____</span>
+                </div>
+                <div class="lesson-goal">
+                    <div class="lesson-goal-label">🎯 本课目标</div>
+                    <div class="lesson-goal-text">掌握正确的抬头吸气时机</div>
+                </div>
+                <div class="lesson-form">
+                    <div class="lesson-form-row"><label>今天学会了：</label><span>1. ________________________________</span></div>
+                    <div class="lesson-form-row"><label></label><span>2. ________________________________</span></div>
+                    <div class="lesson-form-row"><label>需要加强：</label><span>________________________________</span></div>
+                </div>
+                <div class="coach-comment">💬 教练评语：________________________________</div>
+            </div>
+
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <span class="lesson-num">第6课</span>
+                    <span class="lesson-title">呼吸与划水配合</span>
+                    <span class="lesson-date">上课日期：____</span>
+                </div>
+                <div class="lesson-goal">
+                    <div class="lesson-goal-label">🎯 本课目标</div>
+                    <div class="lesson-goal-text">边划边吸，保持身体不歪</div>
+                </div>
+                <div class="lesson-form">
+                    <div class="lesson-form-row"><label>今天学会了：</label><span>1. ________________________________</span></div>
+                    <div class="lesson-form-row"><label></label><span>2. ________________________________</span></div>
+                    <div class="lesson-form-row"><label>需要加强：</label><span>________________________________</span></div>
+                </div>
+                <div class="coach-comment">💬 教练评语：________________________________</div>
+            </div>
+
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <span class="lesson-num">第7课</span>
+                    <span class="lesson-title">连续呼吸练习</span>
+                    <span class="lesson-date">上课日期：____</span>
+                </div>
+                <div class="lesson-goal">
+                    <div class="lesson-goal-label">🎯 本课目标</div>
+                    <div class="lesson-goal-text">连续游进中稳定呼吸，不影响节奏</div>
+                </div>
+                <div class="lesson-form">
+                    <div class="lesson-form-row"><label>今天学会了：</label><span>1. ________________________________</span></div>
+                    <div class="lesson-form-row"><label></label><span>2. ________________________________</span></div>
+                    <div class="lesson-form-row"><label>需要加强：</label><span>________________________________</span></div>
+                </div>
+                <div class="coach-comment">💬 教练评语：________________________________</div>
+            </div>
+
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <span class="lesson-num">第8课</span>
+                    <span class="lesson-title">呼吸综合考核 🏅</span>
+                    <span class="lesson-date">上课日期：____</span>
+                </div>
+                <div class="lesson-goal">
+                    <div class="lesson-goal-label">🎯 考核内容</div>
+                    <div class="lesson-goal-text">✅ 吸气时机 □ &nbsp; ✅ 呼吸与划水 □ &nbsp; ✅ 100米测试 □</div>
+                </div>
+                <div class="lesson-form">
+                    <div class="lesson-form-row"><label>考核成绩：</label><span>____________秒</span></div>
+                    <div class="lesson-form-row"><label>获得证书：</label><span>【呼吸技术证书】 □</span></div>
+                </div>
+                <div class="coach-comment">💬 教练评语：________________________________</div>
+            </div>
+
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <span class="lesson-num">第9课</span>
+                    <span class="lesson-title">身体波浪练习</span>
+                    <span class="lesson-date">上课日期：____</span>
+                </div>
+                <div class="lesson-goal">
+                    <div class="lesson-goal-label">🎯 本课目标</div>
+                    <div class="lesson-goal-text">身体从头到脚波浪式起伏，减少阻力</div>
+                </div>
+                <div class="lesson-form">
+                    <div class="lesson-form-row"><label>今天学会了：</label><span>1. ________________________________</span></div>
+                    <div class="lesson-form-row"><label></label><span>2. ________________________________</span></div>
+                    <div class="lesson-form-row"><label>需要加强：</label><span>________________________________</span></div>
+                </div>
+                <div class="coach-comment">💬 教练评语：________________________________</div>
+            </div>
+
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <span class="lesson-num">第10课</span>
+                    <span class="lesson-title">髋部转动练习</span>
+                    <span class="lesson-date">上课日期：____</span>
+                </div>
+                <div class="lesson-goal">
+                    <div class="lesson-goal-label">🎯 本课目标</div>
+                    <div class="lesson-goal-text">髋部转动与划水协调配合</div>
+                </div>
+                <div class="lesson-form">
+                    <div class="lesson-form-row"><label>今天学会了：</label><span>1. ________________________________</span></div>
+                    <div class="lesson-form-row"><label></label><span>2. ________________________________</span></div>
+                    <div class="lesson-form-row"><label>需要加强：</label><span>________________________________</span></div>
+                </div>
+                <div class="coach-comment">💬 教练评语：________________________________</div>
+            </div>
+
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <span class="lesson-num">第11课</span>
+                    <span class="lesson-title">完整配合强化</span>
+                    <span class="lesson-date">上课日期：____</span>
+                </div>
+                <div class="lesson-goal">
+                    <div class="lesson-goal-label">🎯 本课目标</div>
+                    <div class="lesson-goal-text">划水+打腿+呼吸完整配合流畅</div>
+                </div>
+                <div class="lesson-form">
+                    <div class="lesson-form-row"><label>今天学会了：</label><span>1. ________________________________</span></div>
+                    <div class="lesson-form-row"><label></label><span>2. ________________________________</span></div>
+                    <div class="lesson-form-row"><label>需要加强：</label><span>________________________________</span></div>
+                </div>
+                <div class="coach-comment">💬 教练评语：________________________________</div>
+            </div>
+
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <span class="lesson-num">第12课</span>
+                    <span class="lesson-title">100米达标测试 🏅</span>
+                    <span class="lesson-date">上课日期：____</span>
+                </div>
+                <div class="lesson-goal">
+                    <div class="lesson-goal-label">🎯 考核内容</div>
+                    <div class="lesson-goal-text">✅ 连续游100米 □ &nbsp; ✅ 动作连贯 □</div>
+                </div>
+                <div class="lesson-form">
+                    <div class="lesson-form-row"><label>考核成绩：</label><span>____________秒</span></div>
+                    <div class="lesson-form-row"><label>获得证书：</label><span>【进阶入门证书】 □</span></div>
+                </div>
+                <div class="coach-comment">💬 教练评语：________________________________</div>
+            </div>
+
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <span class="lesson-num">第13课</span>
+                    <span class="lesson-title">转身技术——翻转蹬壁</span>
+                    <span class="lesson-date">上课日期：____</span>
+                </div>
+                <div class="lesson-goal">
+                    <div class="lesson-goal-label">🎯 本课目标</div>
+                    <div class="lesson-goal-text">学会前滚翻，蹬壁后水下滑行</div>
+                </div>
+                <div class="lesson-form">
+                    <div class="lesson-form-row"><label>今天学会了：</label><span>1. ________________________________</span></div>
+                    <div class="lesson-form-row"><label></label><span>2. ________________________________</span></div>
+                    <div class="lesson-form-row"><label>需要加强：</label><span>________________________________</span></div>
+                </div>
+                <div class="coach-comment">💬 教练评语：________________________________</div>
+            </div>
+
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <span class="lesson-num">第14课</span>
+                    <span class="lesson-title">转身实战应用</span>
+                    <span class="lesson-date">上课日期：____</span>
+                </div>
+                <div class="lesson-goal">
+                    <div class="lesson-goal-label">🎯 本课目标</div>
+                    <div class="lesson-goal-text">熟练完成触壁转身，动作衔接流畅</div>
+                </div>
+                <div class="lesson-form">
+                    <div class="lesson-form-row"><label>今天学会了：</label><span>1. ________________________________</span></div>
+                    <div class="lesson-form-row"><label></label><span>2. ________________________________</span></div>
+                    <div class="lesson-form-row"><label>需要加强：</label><span>________________________________</span></div>
+                </div>
+                <div class="coach-comment">💬 教练评语：________________________________</div>
+            </div>
+
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <span class="lesson-num">第15课</span>
+                    <span class="lesson-title">出发与速度提升</span>
+                    <span class="lesson-date">上课日期：____</span>
+                </div>
+                <div class="lesson-goal">
+                    <div class="lesson-goal-label">🎯 本课目标</div>
+                    <div class="lesson-goal-text">掌握蹬壁出发，水下滑行更远</div>
+                </div>
+                <div class="lesson-form">
+                    <div class="lesson-form-row"><label>今天学会了：</label><span>1. ________________________________</span></div>
+                    <div class="lesson-form-row"><label></label><span>2. ________________________________</span></div>
+                    <div class="lesson-form-row"><label>需要加强：</label><span>________________________________</span></div>
+                </div>
+                <div class="coach-comment">💬 教练评语：________________________________</div>
+            </div>
+
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <span class="lesson-num">第16课</span>
+                    <span class="lesson-title">结业考核 🏆</span>
+                    <span class="lesson-date">上课日期：____</span>
+                </div>
+                <div class="lesson-goal">
+                    <div class="lesson-goal-label">🎯 考核内容</div>
+                    <div class="lesson-goal-text">✅ 200米达标 □ &nbsp; ✅ 转身技术 □ &nbsp; ✅ 出发技术 □</div>
+                </div>
+                <div class="lesson-form">
+                    <div class="lesson-form-row"><label>200米成绩：</label><span>____________秒</span></div>
+                    <div class="lesson-form-row"><label>获得证书：</label><span>【蝶泳进阶证书】 □</span></div>
+                    <div class="lesson-form-row"><label>下一目标：</label><span>□ 仰泳 □ 蛙泳 □ 速度突破</span></div>
+                </div>
+                <div class="coach-comment">💬 教练总评：________________________________</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🎬 我的成长对比</div>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>对比项目</th>
+                        <th>第1课</th>
+                        <th>第8课</th>
+                        <th>第16课</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>划水感觉</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>蝶泳腿</td>
+                        <td>僵硬</td>
+                        <td>开始流畅</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>单次距离</td>
+                        <td>____米</td>
+                        <td>____米</td>
+                        <td>____米</td>
+                    </tr>
+                    <tr>
+                        <td>呼吸方式</td>
+                        <td>不熟悉</td>
+                        <td>开始稳定</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>100米成绩</td>
+                        <td>-</td>
+                        <td>____秒</td>
+                        <td>____秒</td>
+                    </tr>
+                    <tr>
+                        <td>200米成绩</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>____秒</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <div class="section-title">💪 回家作业打卡</div>
+            <div class="homework-item">
+                <div class="homework-content">第1-4周：海豚腿练习 每天5分钟</div>
+                <div class="homework-check"></div>
+            </div>
+            <div class="homework-item">
+                <div class="homework-content">第5-8周：呼吸时机练习 每天5分钟</div>
+                <div class="homework-check"></div>
+            </div>
+            <div class="homework-item">
+                <div class="homework-content">第9-12周：完整配合练习 3组×25米</div>
+                <div class="homework-check"></div>
+            </div>
+            <div class="homework-item">
+                <div class="homework-content">第13-16周：转身与出发练习</div>
+                <div class="homework-check"></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">❓ 常见问题解答</div>
+            <div class="tip-card">
+                <div class="tip-q">Q: 蝶泳腿总是踢不好，膝盖很僵怎么办？</div>
+                <div class="tip-a">A: 关键是用髋部发力，不是膝盖。想象脚是脚的延伸，踢水时力量从髋部传到脚尖。多做陆地模仿练习，先找到髋部发力的感觉。</div>
+            </div>
+            <div class="tip-card">
+                <div class="tip-q">Q: 呼吸时身体总是下沉怎么办？</div>
+                <div class="tip-a">A: 吸气时下巴贴近水面，不要抬头过高。同时保持核心收紧，髋部积极发力向上。可以在浅水区练习低头吐气、抬头吸气的节奏。</div>
+            </div>
+            <div class="tip-card">
+                <div class="tip-q">Q: 划水和打腿总是配合不好，节奏乱？</div>
+                <div class="tip-a">A: 先陆地练习：站立弯腰，原地模仿"划手-打腿-划手-打腿"的节奏（2:2配合）。建立节奏感后再下水，从单臂配合开始练习。</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="encouragement">
+                <p>🦋 蝶泳是最具美感的泳姿</p>
+                <p>双手同时划水，海豚般的波浪起伏</p>
+                <p>坚持练习，你一定能掌握！</p>
+                <p>💪 加油，未来的蝶泳达人！</p>
+            </div>
+        </div>
+        <div class="footer">
+            蝶泳进阶学习手册 v1.0 │ 整理日期：2026年5月
+        </div>
+    </div>
+</body>
+</html>
