@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏊 蛙泳学习成长手册 · 学员版</title>
+<style>
+  :root {
+    --primary: #0077B6;
+    --primary-light: #90E0EF;
+    --secondary: #023E8A;
+    --accent: #00B4D8;
+    --green: #2D6A4F;
+    --green-light: #D8F3DC;
+    --yellow: #FFB703;
+    --yellow-light: #FFF3CD;
+    --red: #C1121F;
+    --purple: #7B2CBF;
+    --gray: #6C757D;
+    --bg: #F8F9FA;
+    --card-bg: #FFFFFF;
+    --text: #212529;
+    --border: #DEE2E6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #00B4D8 0%, #0077B6 50%, #023E8A 100%);
+    color: white;
+    border-radius: 24px;
+    padding: 40px 36px;
+    text-align: center;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '🏊';
+    position: absolute;
+    top: 15px; right: 20px;
+    font-size: 80px;
+    opacity: 0.1;
+  }
+  .hero::after {
+    content: '🌊';
+    position: absolute;
+    bottom: 10px; left: 20px;
+    font-size: 60px;
+    opacity: 0.1;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50px;
+    padding: 5px 16px;
+    font-size: 12px;
+    margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-size: 34px;
+    font-weight: 900;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+  .hero p { font-size: 14px; opacity: 0.9; margin-bottom: 20px; }
+  .hero-name {
+    background: rgba(255,255,255,0.15);
+    border-radius: 12px;
+    padding: 12px 24px;
+    display: inline-flex;
+    gap: 24px;
+    font-size: 13px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .hero-name span { display: flex; align-items: center; gap: 6px; }
+
+  /* Card */
+  .card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    border: 1px solid var(--border);
+  }
+  .card-title {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-title .icon { font-size: 24px; }
+
+  /* User info */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+  }
+  .info-item {
+    background: #F8F9FA;
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 13px;
+  }
+  .info-item .label { color: var(--gray); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+  .info-item .value { font-weight: 700; font-size: 15px; }
+
+  /* Progress overview */
+  .progress-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .progress-item {
+    border-radius: 12px;
+    padding: 14px 8px;
+    color: white;
+    font-size: 12px;
+  }
+  .progress-item.g1 { background: linear-gradient(135deg, var(--green), #40916C); }
+  .progress-item.g2 { background: linear-gradient(135deg, var(--primary), var(--accent)); }
+  .progress-item.g3 { background: linear-gradient(135deg, #5A189A, var(--purple)); }
+  .progress-item.g4 { background: linear-gradient(135deg, var(--secondary), var(--primary)); }
+  .progress-item .p-icon { font-size: 28px; margin-bottom: 4px; }
+  .progress-item .p-name { font-weight: 800; font-size: 13px; }
+  .progress-item .p-lessons { opacity: 0.8; font-size: 10px; margin-top: 2px; }
+
+  /* Checkboxes */
+  .checkbox-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .checkbox-num {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: #E9ECEF;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700; color: var(--gray);
+    flex-shrink: 0;
+  }
+  .checkbox-num.done { background: var(--green); color: white; }
+  .checkbox-num.active { background: var(--primary); color: white; animation: pulse 2s infinite; }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+  .checkbox-label {
+    font-size: 12px;
+    color: var(--gray);
+    padding: 2px 8px;
+    border-radius: 50px;
+    background: #F8F9FA;
+  }
+  .checkbox-label.done { background: var(--green-light); color: var(--green); text-decoration: line-through; }
+
+  /* Achievement wall */
+  .achievement-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+  }
+  .achievement-item {
+    border-radius: 14px;
+    padding: 18px 14px;
+    text-align: center;
+    border: 2px dashed #DEE2E6;
+    background: #FAFAFA;
+    transition: all 0.3s;
+  }
+  .achievement-item.unlocked {
+    border: 2px solid var(--green);
+    background: var(--green-light);
+  }
+  .achievement-item .a-icon { font-size: 40px; margin-bottom: 6px; }
+  .achievement-item .a-name { font-weight: 800; font-size: 14px; }
+  .achievement-item .a-desc { font-size: 11px; color: var(--gray); margin-top: 4px; }
+  .achievement-item .a-date { font-size: 10px; color: var(--green); margin-top: 6px; font-weight: 600; }
+
+  /* Lesson */
+  .lesson {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-bottom: 14px;
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--primary);
+    page-break-inside: avoid;
+  }
+  .lesson.g1 { border-left-color: var(--green); }
+  .lesson.g2 { border-left-color: var(--primary); }
+  .lesson.g3 { border-left-color: var(--purple); }
+  .lesson.g4 { border-left-color: var(--secondary); }
+  .lesson.exam { border-left-color: var(--yellow); background: #FFFBF0; }
+
+  .lesson-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .lesson-title {
+    font-size: 16px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .lesson-badge {
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 50px;
+    font-weight: 600;
+  }
+  .badge-g1 { background: var(--green-light); color: var(--green); }
+  .badge-g2 { background: #E3F2FD; color: var(--primary); }
+  .badge-g3 { background: #F3E5F5; color: var(--purple); }
+  .badge-g4 { background: #E8EAF6; color: var(--secondary); }
+  .badge-exam { background: var(--yellow-light); color: #856404; }
+
+  .lesson-goal {
+    background: #F0F8FF;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .lesson-goal .emoji { font-size: 18px; flex-shrink: 0; }
+
+  /* Form fields */
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 10px;
+  }
+  .form-field {
+    background: #F8F9FA;
+    border-radius: 10px;
+    padding: 10px 14px;
+  }
+  .form-field .label { font-size: 11px; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .form-field .input-line { border: none; background: transparent; font-size: 13px; width: 100%; outline: none; border-bottom: 1px dashed #CCC; padding-bottom: 2px; }
+  .form-field textarea { width: 100%; border: none; background: transparent; font-size: 13px; resize: none; outline: none; font-family: inherit; min-height: 60px; }
+
+  .form-checklist {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: #F8F9FA;
+  }
+  .check-box {
+    width: 20px; height: 20px;
+    border: 2px solid #CCC;
+    border-radius: 4px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+  }
+  .check-item.done .check-box { background: var(--green); border-color: var(--green); color: white; }
+
+  /* Table */
+  .exam-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin: 8px 0;
+  }
+  .exam-table th {
+    background: var(--yellow);
+    color: #5D4037;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 700;
+  }
+  .exam-table td { padding: 8px 12px; border-bottom: 1px solid #F0F0F0; }
+  .exam-table tr:nth-child(even) { background: #FAFAFA; }
+
+  /* Certificate */
+  .certificate {
+    background: linear-gradient(135deg, #FFF9E6, #FFF3CD);
+    border: 2px solid #FFE069;
+    border-radius: 14px;
+    padding: 16px 20px;
+    text-align: center;
+    margin: 8px 0;
+  }
+  .certificate .cert-icon { font-size: 36px; margin-bottom: 6px; }
+  .certificate .cert-title { font-size: 18px; font-weight: 900; color: #856404; }
+  .certificate .cert-desc { font-size: 12px; color: #856404; opacity: 0.8; margin-top: 4px; }
+  .certificate .cert-date { font-size: 11px; color: var(--gray); margin-top: 8px; }
+  .certificate.locked { filter: grayscale(1); opacity: 0.5; }
+
+  /* Memory */
+  .memory-card {
+    background: #FFF9E6;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 12px;
+    margin: 8px 0;
+    display: flex;
+    gap: 8px;
+  }
+  .memory-card .icon { font-size: 18px; flex-shrink: 0; }
+  .memory-card.red { background: #FFF5F5; }
+  .memory-card.blue { background: #E3F2FD; }
+  .memory-card.green { background: var(--green-light); }
+
+  /* Stage header */
+  .stage-header {
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 14px;
+    margin-top: 8px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .stage-header.g1 { background: linear-gradient(135deg, var(--green), #40916C); }
+  .stage-header.g2 { background: linear-gradient(135deg, var(--primary), var(--accent)); }
+  .stage-header.g3 { background: linear-gradient(135deg, #5A189A, var(--purple)); }
+  .stage-header.g4 { background: linear-gradient(135deg, var(--secondary), var(--primary)); }
+  .stage-num { font-size: 32px; font-weight: 900; opacity: 0.9; }
+  .stage-info h2 { font-size: 18px; font-weight: 800; }
+  .stage-info p { font-size: 12px; opacity: 0.85; }
+
+  /* Section divider */
+  .section-divider {
+    text-align: center;
+    padding: 24px 0 12px;
+    color: var(--gray);
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-divider::before, .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Growth comparison */
+  .growth-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin: 8px 0;
+  }
+  .growth-table th {
+    background: var(--primary);
+    color: white;
+    padding: 8px 12px;
+    font-weight: 700;
+  }
+  .growth-table td { padding: 8px 12px; border-bottom: 1px solid #F0F0F0; text-align: center; }
+  .growth-table tr:nth-child(even) { background: #FAFAFA; }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 24px;
+    color: var(--gray);
+    font-size: 12px;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .hero { padding: 28px 20px; }
+    .hero h1 { font-size: 26px; }
+    .card { padding: 18px 16px; }
+    .lesson { padding: 16px 16px; }
+    .progress-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero-name { gap: 12px; }
+  }
+
+  .slogan-box {
+    background: linear-gradient(135deg, var(--secondary), var(--primary));
+    color: white;
+    border-radius: 14px;
+    padding: 20px;
+    text-align: center;
+    margin: 12px 0;
+  }
+  .slogan-box h3 { font-size: 15px; margin-bottom: 10px; }
+  .slogan-list { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+  .slogan-item {
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .hw-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .hw-item {
+    background: #F8F9FA;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .hw-item .week { font-weight: 800; color: var(--primary); width: 40px; flex-shrink: 0; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">🏊 我的游泳学习手册</div>
+  <h1>蛙泳学习成长手册</h1>
+  <p>16课时的成长记录 · 收藏每一刻进步</p>
+  <div class="hero-name">
+    <span>👤 姓名：______________</span>
+    <span>📅 开始：______________</span>
+    <span>🎯 目标：蛙泳入门</span>
+  </div>
+</div>
+
+<!-- 个人信息 -->
+<div class="card">
+  <div class="card-title"><span class="icon">📋</span> 我的信息卡</div>
+  <div class="info-grid">
+    <div class="info-item">
+      <div class="label">姓名</div>
+      <div class="value">_____________</div>
+    </div>
+    <div class="info-item">
+      <div class="label">开始日期</div>
+      <div class="value">_____________</div>
+    </div>
+    <div class="info-item">
+      <div class="label">教练姓名</div>
+      <div class="value">_____________</div>
+    </div>
+    <div class="info-item">
+      <div class="label">我的运动基础</div>
+      <div class="value">□ 零基础  □ 有点基础  □ 经常运动</div>
+    </div>
+  </div>
+</div>
+
+<!-- 学习阶段总览 -->
+<div class="card">
+  <div class="card-title"><span class="icon">🗺️</span> 学习进度总览</div>
+  <div class="progress-grid">
+    <div class="progress-item g1">
+      <div class="p-icon">💧</div>
+      <div class="p-name">水性阶段</div>
+      <div class="p-lessons">第1-4课</div>
+    </div>
+    <div class="progress-item g2">
+      <div class="p-icon">🦵</div>
+      <div class="p-name">蛙泳腿</div>
+      <div class="p-lessons">第5-8课</div>
+    </div>
+    <div class="progress-item g3">
+      <div class="p-icon">🤝</div>
+      <div class="p-name">配合游</div>
+      <div class="p-lessons">第9-12课</div>
+    </div>
+    <div class="progress-item g4">
+      <div class="p-icon">🏆</div>
+      <div class="p-name">进阶提高</div>
+      <div class="p-lessons">第13-16课</div>
+    </div>
+  </div>
+
+  <div style="background:#F8F9FA; border-radius:12px; padding:12px 16px; margin-top:4px;">
+    <div style="font-size:12px; font-weight:700; margin-bottom:8px; color:var(--gray);">📝 课时打卡（第几课上完了就打勾 ✓）</div>
+    <div style="display:flex; flex-wrap:wrap; gap:8px;">
+      <div style="display:flex; align-items:center; gap:4px;"><span style="background:#2D6A4F; color:white; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700;">1</span><input type="checkbox" style="width:16px;height:16px;" /></div>
+      <div style="display:flex; align-items:center; gap:4px;"><span style="background:#2D6A4F; color:white; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700;">2</span><input type="checkbox" style="width:16px;height:16px;" /></div>
+      <div style="display:flex; align-items:center; gap:4px;"><span style="background:#2D6A4F; color:white; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700;">3</span><input type="checkbox" style="width:16px;height:16px;" /></div>
+      <div style="display:flex; align-items:center; gap:4px;"><span style="background:#2D6A4F; color:white; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700;">4</span><input type="checkbox" style="width:16px;height:16px;" />🏅</div>
+      <div style="display:flex; align-items:center; gap:4px;"><span style="background:#0077B6; color:white; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700;">5</span><input type="checkbox" style="width:16px;height:16px;" /></div>
+      <div style="display:flex; align-items:center; gap:4px;"><span style="background:#0077B6; color:white; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700;">6</span><input type="checkbox" style="width:16px;height:16px;" /></div>
+      <div style="display:flex; align-items:center; gap:4px;"><span style="background:#0077B6; color:white; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700;">7</span><input type="checkbox" style="width:16px;height:16px;" /></div>
+      <div style="display:flex; align-items:center; gap:4px;"><span style="background:#0077B6; color:white; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700;">8</span><input type="checkbox" style="width:16px;height:16px;" />🏅</div>
+      <div style="display:flex; align-items:center; gap:4px;"><span style="background:#7B2CBF; color:white; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700;">9</span><input type="checkbox" style="width:16px;height:16px;" /></div>
+      <div style="display:flex; align-items:center; gap:4px;"><span style="background:#7B2CBF; color:white; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700;">10</span><input type="checkbox" style="width:16px;height:16px;" /></div>
+      <div style="display:flex; align-items:center; gap:4px;"><span style="background:#7B2CBF; color:white; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700;">11</span><input type="checkbox" style="width:16px;height:16px;" /></div>
+      <div style="display:flex; align-items:center; gap:4px;"><span style="background:#7B2CBF; color:white; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700;">12</span><input type="checkbox" style="width:16px;height:16px;" />🏅</div>
+      <div style="display:flex; align-items:center; gap:4px;"><span style="background:#023E8A; color:white; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700;">13</span><input type="checkbox" style="width:16px;height:16px;" /></div>
+      <div style="display:flex; align-items:center; gap:4px;"><span style="background:#023E8A; color:white; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700;">14</span><input type="checkbox" style="width:16px;height:16px;" /></div>
+      <div style="display:flex; align-items:center; gap:4px;"><span style="background:#023E8A; color:white; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700;">15</span><input type="checkbox" style="width:16px;height:16px;" /></div>
+      <div style="display:flex; align-items:center; gap:4px;"><span style="background:#023E8A; color:white; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700;">16</span><input type="checkbox" style="width:16px;height:16px;" />🏆</div>
+    </div>
+  </div>
+</div>
+
+<!-- 成就墙 -->
+<div class="card">
+  <div class="card-title"><span class="icon">🎖️</span> 我的成就墙</div>
+  <div class="achievement-grid">
+    <div class="achievement-item" id="ach1">
+      <div class="a-icon">🏊</div>
+      <div class="a-name">水性达人</div>
+      <div class="a-desc">完成水性阶段（第4课）</div>
+      <div class="a-date">获得日期：____________</div>
+    </div>
+    <div class="achievement-item" id="ach2">
+      <div class="a-icon">🦵</div>
+      <div class="a-name">腿部大师</div>
+      <div class="a-desc">掌握蛙泳腿（第8课）</div>
+      <div class="a-date">获得日期：____________</div>
+    </div>
+    <div class="achievement-item" id="ach3">
+      <div class="a-icon">🎯</div>
+      <div class="a-name">入门选手</div>
+      <div class="a-desc">能游25米（第12课）</div>
+      <div class="a-date">获得日期：____________</div>
+    </div>
+    <div class="achievement-item" id="ach4">
+      <div class="a-icon">🏆</div>
+      <div class="a-name">游泳健将</div>
+      <div class="a-desc">完成16课全部学习</div>
+      <div class="a-date">获得日期：____________</div>
+    </div>
+  </div>
+</div>
+
+<!-- 教练寄语 -->
+<div class="slogan-box">
+  <h3>💬 教练三句话，记住它！</h3>
+  <div class="slogan-list">
+    <div class="slogan-item">放松，水会托着你</div>
+    <div class="slogan-item">慢一点，不用急</div>
+    <div class="slogan-item">找感觉，不是用蛮力</div>
+  </div>
+</div>
+
+<!-- ===================== 第一阶段 ===================== -->
+<div class="section-divider">💧 第一阶段：水性建立</div>
+
+<div class="stage-header g1">
+  <div class="stage-num">01</div>
+  <div class="stage-info">
+    <h2>水性建立阶段</h2>
+    <p>核心：消除恐惧，享受在水中的感觉</p>
+  </div>
+</div>
+
+<!-- 第1课 -->
+<div class="lesson g1">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第1课：与水做朋友</div>
+    <span class="lesson-badge badge-g1">消除恐惧</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>不怕水，能憋气10秒，完成漂浮→站立</div>
+  </div>
+  <div class="form-grid">
+    <div class="form-field">
+      <div class="label">上课日期</div>
+      <input class="input-line" type="text" placeholder="例：5月1日">
+    </div>
+    <div class="form-field">
+      <div class="label">今天最让我开心的事</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="label" style="font-size:11px; color:var(--gray); text-transform:uppercase; margin-bottom:6px;">✅ 今天学会了（在前面打勾）</div>
+    <div class="form-checklist">
+      <div class="check-item"><div class="check-box"></div> 憋气10秒以上</div>
+      <div class="check-item"><div class="check-box"></div> 抱膝漂浮</div>
+      <div class="check-item"><div class="check-box"></div> 漂浮后站立</div>
+      <div class="check-item"><div class="check-box"></div> 水中行走</div>
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="form-field">
+      <div class="label">⚠️ 我还需要加强（写下来）</div>
+      <textarea placeholder="写出你觉得还需要多练习的地方..."></textarea>
+    </div>
+  </div>
+  <div class="form-field" style="margin-top:10px;">
+    <div class="label">📹 练习视频链接</div>
+    <input class="input-line" type="text" placeholder="上传到网盘，粘贴链接到这里">
+  </div>
+  <div class="form-field" style="margin-top:10px;">
+    <div class="label">💬 教练评语</div>
+    <textarea placeholder="教练会在这里写评语～"></textarea>
+  </div>
+  <div class="memory-card blue">
+    <span class="icon">💡</span>
+    <div><strong>小技巧：</strong>憋气时鼻子慢慢吐泡泡，像"吹泡泡"一样，就不容易慌！</div>
+  </div>
+</div>
+
+<!-- 第2课 -->
+<div class="lesson g1">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第2课：水感游戏日</div>
+    <span class="lesson-badge badge-g1">培养兴趣</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>享受水中感觉，敢于仰漂5秒</div>
+  </div>
+  <div class="form-grid">
+    <div class="form-field">
+      <div class="label">上课日期</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+    <div class="form-field">
+      <div class="label">今天最开心的事</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="label" style="font-size:11px; color:var(--gray); text-transform:uppercase; margin-bottom:6px;">✅ 今天学会了</div>
+    <div class="form-checklist">
+      <div class="check-item"><div class="check-box"></div> 仰漂5秒</div>
+      <div class="check-item"><div class="check-box"></div> 水中睁眼</div>
+      <div class="check-item"><div class="check-box"></div> 吐泡泡游戏</div>
+      <div class="check-item"><div class="check-box"></div> 水中转身/翻跟头</div>
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="form-field">
+      <div class="label">⚠️ 需要加强</div>
+      <textarea placeholder=""></textarea>
+    </div>
+  </div>
+  <div class="form-field" style="margin-top:10px;">
+    <div class="label">💬 教练评语</div>
+    <textarea></textarea>
+  </div>
+</div>
+
+<!-- 第3课 -->
+<div class="lesson g1">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第3课：滑行的艺术</div>
+    <span class="lesson-badge badge-g1">基础滑行</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>蹬壁滑行5米以上</div>
+  </div>
+  <div class="form-grid">
+    <div class="form-field">
+      <div class="label">上课日期</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+    <div class="form-field">
+      <div class="label">蹬壁滑行最远距离</div>
+      <input class="input-line" type="text" placeholder="例：约5米">
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="label" style="font-size:11px; color:var(--gray); text-transform:uppercase; margin-bottom:6px;">✅ 今天学会了</div>
+    <div class="form-checklist">
+      <div class="check-item"><div class="check-box"></div> 蹬壁滑行</div>
+      <div class="check-item"><div class="check-box"></div> 呼吸节奏练习</div>
+      <div class="check-item"><div class="check-box"></div> 流线型姿势</div>
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="form-field">
+      <div class="label">⚠️ 需要加强</div>
+      <textarea placeholder=""></textarea>
+    </div>
+  </div>
+  <div class="form-field" style="margin-top:10px;">
+    <div class="label">💬 教练评语</div>
+    <textarea></textarea>
+  </div>
+  <div class="memory-card green">
+    <span class="icon">🌟</span>
+    <div><strong>感觉：</strong>像"箭"一样射出去！身体要"直成一条线"，双手叠放在头前。</div>
+  </div>
+</div>
+
+<!-- 第4课 -->
+<div class="lesson g1 exam">
+  <div class="lesson-header">
+    <div class="lesson-title">🏅 第4课：水性考核日</div>
+    <span class="lesson-badge badge-exam">颁发证书</span>
+  </div>
+  <table class="exam-table">
+    <thead>
+      <tr><th>考核项目</th><th>标准</th><th>我完成了吗？</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>抱膝漂浮</td><td>连续10秒</td><td>□ 是  □ 还要加油</td></tr>
+      <tr><td>蹬壁滑行</td><td>5米以上</td><td>□ 是  □ 还要加油</td></tr>
+      <tr><td>水中翻身</td><td>能完成</td><td>□ 是  □ 还要加油</td></tr>
+    </tbody>
+  </table>
+  <div class="certificate" id="cert1">
+    <div class="cert-icon">🏅</div>
+    <div class="cert-title">水性达标证书</div>
+    <div class="cert-desc">恭喜你完成第一阶段学习！不怕水了！</div>
+    <div class="cert-date">获得日期：____________</div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="form-field">
+      <div class="label">📹 考核视频链接</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+    <div class="form-field" style="margin-top:10px;">
+      <div class="label">💬 教练总评</div>
+      <textarea></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== 第二阶段 ===================== -->
+<div class="section-divider">🦵 第二阶段：蛙泳腿专项</div>
+
+<div class="stage-header g2">
+  <div class="stage-num">02</div>
+  <div class="stage-info">
+    <h2>蛙泳腿专项阶段</h2>
+    <p>核心：掌握"收翻蹬夹"，扶板打腿能前进</p>
+  </div>
+</div>
+
+<div class="slogan-box">
+  <h3>🦵 蛙泳腿口诀</h3>
+  <div class="slogan-list">
+    <div class="slogan-item">收 → 翻 → 蹬 → 夹 → 飘</div>
+    <div class="slogan-item">脚尖外翻 · 脚心对后方</div>
+    <div class="slogan-item">蹬完立刻并拢 · 飘一会儿</div>
+  </div>
+</div>
+
+<!-- 第5课 -->
+<div class="lesson g2">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第5课：蛙泳腿入门</div>
+    <span class="lesson-badge badge-g2">动作入门</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>学会"收翻蹬夹"基本动作</div>
+  </div>
+  <div class="form-grid">
+    <div class="form-field">
+      <div class="label">上课日期</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="label" style="font-size:11px; color:var(--gray); text-transform:uppercase; margin-bottom:6px;">✅ 今天学会了</div>
+    <div class="form-checklist">
+      <div class="check-item"><div class="check-box"></div> 收：脚后跟往屁股收</div>
+      <div class="check-item"><div class="check-box"></div> 翻：脚尖外翻，脚心朝后</div>
+      <div class="check-item"><div class="check-box"></div> 蹬夹：连贯用力蹬出去</div>
+      <div class="check-item"><div class="check-box"></div> 飘：蹬完并拢，漂一会儿</div>
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="form-field">
+      <div class="label">⚠️ 需要加强</div>
+      <textarea placeholder=""></textarea>
+    </div>
+  </div>
+  <div class="form-field" style="margin-top:10px;">
+    <div class="label">💬 教练评语</div>
+    <textarea></textarea>
+  </div>
+  <div class="memory-card">
+    <span class="icon">💡</span>
+    <div><strong>翻脚最重要！</strong>脚尖外翻，像"铲子"一样铲水，才能走水！</div>
+  </div>
+</div>
+
+<!-- 第6课 -->
+<div class="lesson g2">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第6课：蛙泳腿强化</div>
+    <span class="lesson-badge badge-g2">扶板打腿</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>扶板打腿能前进</div>
+  </div>
+  <div class="form-grid">
+    <div class="form-field">
+      <div class="label">上课日期</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+    <div class="form-field">
+      <div class="label">扶板打腿最远一次游了</div>
+      <input class="input-line" type="text" placeholder="例：约15米">
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="label" style="font-size:11px; color:var(--gray); text-transform:uppercase; margin-bottom:6px;">✅ 今天学会了</div>
+    <div class="form-checklist">
+      <div class="check-item"><div class="check-box"></div> 打1-2下，飘一会儿</div>
+      <div class="check-item"><div class="check-box"></div> 扶板打腿能前进</div>
+      <div class="check-item"><div class="check-box"></div> 单次蹬腿滑行3米以上</div>
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="form-field">
+      <div class="label">⚠️ 需要加强</div>
+      <textarea placeholder=""></textarea>
+    </div>
+  </div>
+  <div class="form-field" style="margin-top:10px;">
+    <div class="label">💬 教练评语</div>
+    <textarea></textarea>
+  </div>
+  <div class="memory-card red">
+    <span class="icon">⚠️</span>
+    <div><strong>不要一直打！</strong>打1-2下→飘3-5秒→再打。一直打会很累！</div>
+  </div>
+</div>
+
+<!-- 第7课 -->
+<div class="lesson g2">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第7课：蛙泳腿纠错日</div>
+    <span class="lesson-badge badge-g2">专项纠错</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>解决蹬腿不走水的问题</div>
+  </div>
+  <div class="form-grid">
+    <div class="form-field">
+      <div class="label">上课日期</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+    <div class="form-field">
+      <div class="label">扶板打腿现在能游多远</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="label" style="font-size:11px; color:var(--gray); text-transform:uppercase; margin-bottom:6px;">✅ 今天解决了哪些问题</div>
+    <div class="form-checklist">
+      <div class="check-item"><div class="check-box"></div> 翻脚不到位</div>
+      <div class="check-item"><div class="check-box"></div> 膝盖分开太宽</div>
+      <div class="check-item"><div class="check-box"></div> 身体下沉</div>
+      <div class="check-item"><div class="check-box"></div> 蹬夹不连贯</div>
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="form-field">
+      <div class="label">💬 教练评语</div>
+      <textarea></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- 第8课 -->
+<div class="lesson g2 exam">
+  <div class="lesson-header">
+    <div class="lesson-title">🏅 第8课：蛙泳腿考核日</div>
+    <span class="lesson-badge badge-exam">颁发证书</span>
+  </div>
+  <table class="exam-table">
+    <thead>
+      <tr><th>考核项目</th><th>标准</th><th>我完成了吗？</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>扶板打腿</td><td>25米不间断</td><td>□ 是  □ 还要加油</td></tr>
+      <tr><td>翻脚规范</td><td>脚尖外翻</td><td>□ 是  □ 还要加油</td></tr>
+      <tr><td>单次滑行</td><td>3米以上</td><td>□ 是  □ 还要加油</td></tr>
+    </tbody>
+  </table>
+  <div class="certificate" id="cert2">
+    <div class="cert-icon">🏅</div>
+    <div class="cert-title">蛙泳腿达标证书</div>
+    <div class="cert-desc">恭喜你掌握了蛙泳腿部动作！蹬腿会走水了！</div>
+    <div class="cert-date">获得日期：____________</div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="form-field">
+      <div class="label">💬 教练总评</div>
+      <textarea></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== 第三阶段 ===================== -->
+<div class="section-divider">🤝 第三阶段：完整配合</div>
+
+<div class="stage-header g3">
+  <div class="stage-num">03</div>
+  <div class="stage-info">
+    <h2>完整配合阶段</h2>
+    <p>核心：手腿配合，能独立游25米</p>
+  </div>
+</div>
+
+<div class="slogan-box">
+  <h3>🤝 手腿配合口诀</h3>
+  <div class="slogan-list">
+    <div class="slogan-item">划手腿不动</div>
+    <div class="slogan-item">收手再收腿</div>
+    <div class="slogan-item">先伸胳膊后蹬腿</div>
+    <div class="slogan-item">并拢伸直飘一会儿</div>
+  </div>
+</div>
+
+<!-- 第9课 -->
+<div class="lesson g3">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第9课：蛙泳手 + 手腿配合</div>
+    <span class="lesson-badge badge-g3">新动作引入</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>掌握划手动作，能完成3次完整配合</div>
+  </div>
+  <div class="form-grid">
+    <div class="form-field">
+      <div class="label">上课日期</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="label" style="font-size:11px; color:var(--gray); text-transform:uppercase; margin-bottom:6px;">✅ 今天学会了</div>
+    <div class="form-checklist">
+      <div class="check-item"><div class="check-box"></div> 划：双手向外划水</div>
+      <div class="check-item"><div class="check-box"></div> 抱：双手往胸前抱</div>
+      <div class="check-item"><div class="check-box"></div> 伸：双手前伸入水</div>
+      <div class="check-item"><div class="check-box"></div> 手腿配合3次循环</div>
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="form-field">
+      <div class="label">⚠️ 需要加强</div>
+      <textarea placeholder=""></textarea>
+    </div>
+  </div>
+  <div class="form-field" style="margin-top:10px;">
+    <div class="label">💬 教练评语</div>
+    <textarea></textarea>
+  </div>
+  <div class="memory-card">
+    <span class="icon">💡</span>
+    <div><strong>划手感觉：</strong>像"抱个大西瓜"！动作要慢，感受水的阻力。</div>
+  </div>
+</div>
+
+<!-- 第10课 -->
+<div class="lesson g3">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第10课：配合节奏强化</div>
+    <span class="lesson-badge badge-g3">节奏训练</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>能完成10次配合循环</div>
+  </div>
+  <div class="form-grid">
+    <div class="form-field">
+      <div class="label">上课日期</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+    <div class="form-field">
+      <div class="label">今天最多连续配合多少次？</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="label" style="font-size:11px; color:var(--gray); text-transform:uppercase; margin-bottom:6px;">✅ 今天学会了</div>
+    <div class="form-checklist">
+      <div class="check-item"><div class="check-box"></div> 慢动作分解</div>
+      <div class="check-item"><div class="check-box"></div> 连续配合10次以上</div>
+      <div class="check-item"><div class="check-box"></div> 找到自己的节奏</div>
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="form-field">
+      <div class="label">⚠️ 需要加强</div>
+      <textarea placeholder=""></textarea>
+    </div>
+  </div>
+  <div class="form-field" style="margin-top:10px;">
+    <div class="label">💬 教练评语</div>
+    <textarea></textarea>
+  </div>
+  <div class="memory-card blue">
+    <span class="icon">💡</span>
+    <div><strong>核心：慢！</strong>动作越慢越省力，越能找到水感。不要急！</div>
+  </div>
+</div>
+
+<!-- 第11课 -->
+<div class="lesson g3">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第11课：呼吸专项 + 纠错</div>
+    <span class="lesson-badge badge-g3">呼吸突破</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>掌握抬头吸气，能连续游15米</div>
+  </div>
+  <div class="form-grid">
+    <div class="form-field">
+      <div class="label">上课日期</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+    <div class="form-field">
+      <div class="label">今天最多连续游了多远？</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="label" style="font-size:11px; color:var(--gray); text-transform:uppercase; margin-bottom:6px;">✅ 今天解决了</div>
+    <div class="form-checklist">
+      <div class="check-item"><div class="check-box"></div> 抬头吸气不慌张</div>
+      <div class="check-item"><div class="check-box"></div> 吸气吸得够饱</div>
+      <div class="check-item"><div class="check-box"></div> 不再呛水</div>
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="form-field">
+      <div class="label">⚠️ 需要加强</div>
+      <textarea placeholder=""></textarea>
+    </div>
+  </div>
+  <div class="form-field" style="margin-top:10px;">
+    <div class="label">💬 教练评语</div>
+    <textarea></textarea>
+  </div>
+  <div class="memory-card green">
+    <span class="icon">🌟</span>
+    <div><strong>呼吸口诀：</strong>低头"嗯"（鼻子吐泡泡），抬头"哈"（嘴巴吸气）</div>
+  </div>
+</div>
+
+<!-- 第12课 -->
+<div class="lesson g3 exam">
+  <div class="lesson-header">
+    <div class="lesson-title">🏅 第12课：25米达标测试</div>
+    <span class="lesson-badge badge-exam">颁发证书</span>
+  </div>
+  <table class="exam-table">
+    <thead>
+      <tr><th>考核项目</th><th>标准</th><th>我完成了吗？</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>连续游25米</td><td>不间断</td><td>□ 是  □ 还要加油</td></tr>
+      <tr><td>动作连贯</td><td>基本流畅</td><td>□ 是  □ 还要加油</td></tr>
+      <tr><td>呼吸</td><td>能吸气不呛水</td><td>□ 是  □ 还要加油</td></tr>
+    </tbody>
+  </table>
+  <div style="display:flex; gap:12px; flex-wrap:wrap; margin:10px 0;">
+    <div class="form-field" style="flex:1;">
+      <div class="label">⏱️ 成绩记录</div>
+      <input class="input-line" type="text" placeholder="例：2分30秒">
+    </div>
+  </div>
+  <div class="certificate" id="cert3">
+    <div class="cert-icon">🏅</div>
+    <div class="cert-title">蛙泳入门证书</div>
+    <div class="cert-desc">恭喜你真正学会蛙泳了！能独立游25米！</div>
+    <div class="cert-date">获得日期：____________</div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="form-field">
+      <div class="label">💬 教练总评</div>
+      <textarea></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== 第四阶段 ===================== -->
+<div class="section-divider">🏆 第四阶段：进阶提高</div>
+
+<div class="stage-header g4">
+  <div class="stage-num">04</div>
+  <div class="stage-info">
+    <h2>进阶提高阶段</h2>
+    <p>核心：技术优化、出发转身、50米达标</p>
+  </div>
+</div>
+
+<!-- 第13课 -->
+<div class="lesson g4">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第13课：技术优化</div>
+    <span class="lesson-badge badge-g4">省力游</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>游得更轻松，同样距离少划2次</div>
+  </div>
+  <div class="form-grid">
+    <div class="form-field">
+      <div class="label">上课日期</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="label" style="font-size:11px; color:var(--gray); text-transform:uppercase; margin-bottom:6px;">✅ 今天学会了</div>
+    <div class="form-checklist">
+      <div class="check-item"><div class="check-box"></div> 滑行时间更长</div>
+      <div class="check-item"><div class="check-box"></div> 划水更有效</div>
+      <div class="check-item"><div class="check-box"></div> 身体位置更平</div>
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="form-field">
+      <div class="label">⚠️ 需要加强</div>
+      <textarea placeholder=""></textarea>
+    </div>
+  </div>
+  <div class="form-field" style="margin-top:10px;">
+    <div class="label">💬 教练评语</div>
+    <textarea></textarea>
+  </div>
+</div>
+
+<!-- 第14课 -->
+<div class="lesson g4">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第14课：出发 + 转身</div>
+    <span class="lesson-badge badge-g4">专业技能</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>学会蹬壁出发和简单转身</div>
+  </div>
+  <div class="form-grid">
+    <div class="form-field">
+      <div class="label">上课日期</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="label" style="font-size:11px; color:var(--gray); text-transform:uppercase; margin-bottom:6px;">✅ 今天学会了</div>
+    <div class="form-checklist">
+      <div class="check-item"><div class="check-box"></div> 蹬壁出发</div>
+      <div class="check-item"><div class="check-box"></div> 翻壁转身</div>
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="form-field">
+      <div class="label">⚠️ 需要加强</div>
+      <textarea placeholder=""></textarea>
+    </div>
+  </div>
+  <div class="form-field" style="margin-top:10px;">
+    <div class="label">💬 教练评语</div>
+    <textarea></textarea>
+  </div>
+</div>
+
+<!-- 第15课 -->
+<div class="lesson g4">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第15课：耐力 + 提速</div>
+    <span class="lesson-badge badge-g4">体能提升</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>能连续游50米</div>
+  </div>
+  <div class="form-grid">
+    <div class="form-field">
+      <div class="label">上课日期</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+    <div class="form-field">
+      <div class="label">今天50米用了多少时间？</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="form-field">
+      <div class="label">⚠️ 需要加强</div>
+      <textarea placeholder=""></textarea>
+    </div>
+  </div>
+  <div class="form-field" style="margin-top:10px;">
+    <div class="label">💬 教练评语</div>
+    <textarea></textarea>
+  </div>
+</div>
+
+<!-- 第16课 -->
+<div class="lesson g4 exam">
+  <div class="lesson-header">
+    <div class="lesson-title">🏆 第16课：结业考核</div>
+    <span class="lesson-badge badge-exam">颁发证书</span>
+  </div>
+  <table class="exam-table">
+    <thead>
+      <tr><th>考核项目</th><th>标准</th><th>我完成了吗？</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>50米达标</td><td>连续游完</td><td>□ 是  □ 还要加油</td></tr>
+      <tr><td>技术流畅</td><td>动作协调</td><td>□ 是  □ 还要加油</td></tr>
+      <tr><td>出发转身</td><td>基本规范</td><td>□ 是  □ 还要加油</td></tr>
+    </tbody>
+  </table>
+  <div style="display:flex; gap:12px; flex-wrap:wrap; margin:10px 0;">
+    <div class="form-field" style="flex:1;">
+      <div class="label">⏱️ 50米成绩</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+    <div class="form-field" style="flex:1;">
+      <div class="label">📊 技术评分（教练打）</div>
+      <input class="input-line" type="text" placeholder="例：85分">
+    </div>
+  </div>
+  <div class="form-field">
+    <div class="label">🎯 下一阶段目标</div>
+    <input class="input-line" type="text" placeholder="例：学习自由泳 / 挑战100米">
+  </div>
+  <div class="certificate" id="cert4" style="margin-top:10px;">
+    <div class="cert-icon">🏆</div>
+    <div class="cert-title">蛙泳结业证书</div>
+    <div class="cert-desc">恭喜你完成全部16课学习！正式成为游泳健将！</div>
+    <div class="cert-date">获得日期：____________</div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="form-field">
+      <div class="label">📹 结业视频链接</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+    <div class="form-field" style="margin-top:10px;">
+      <div class="label">💬 教练总评</div>
+      <textarea placeholder=""></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- 成长对比 -->
+<div class="card">
+  <div class="card-title"><span class="icon">📊</span> 我的成长对比</div>
+  <table class="growth-table">
+    <thead>
+      <tr><th>对比项目</th><th>第1课</th><th>第8课</th><th>第16课</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>憋气时间</td><td>____秒</td><td>____秒</td><td>____秒</td></tr>
+      <tr><td>单次最远距离</td><td>____米</td><td>____米</td><td>____米</td></tr>
+      <tr><td>50米成绩</td><td>—</td><td>—</td><td>____秒</td></tr>
+      <tr><td>动作流畅度</td><td>☐☐☐☐☐</td><td>☐☐☐☐☐</td><td>☐☐☐☐☐</td></tr>
+    </tbody>
+  </table>
+  <div class="form-field" style="margin-top:12px;">
+    <div class="label">📹 视频对比链接（第1课 / 第8课 / 第16课）</div>
+    <input class="input-line" type="text" placeholder="第1课：">
+  </div>
+  <div style="margin-top:6px;">
+    <input class="input-line" type="text" placeholder="第8课：">
+  </div>
+  <div style="margin-top:6px;">
+    <input class="input-line" type="text" placeholder="第16课：">
+  </div>
+</div>
+
+<!-- 回家作业 -->
+<div class="card">
+  <div class="card-title"><span class="icon">📝</span> 回家作业打卡</div>
+  <div class="hw-grid">
+    <div class="hw-item"><div class="week">第1周</div>翻脚练习 3组×30秒<br>蹬夹模仿 3组×20次</div>
+    <div class="hw-item"><div class="week">第2周</div>翻脚练习 3组×30秒<br>蹬夹模仿 3组×20次<br>平板支撑 3组×30秒</div>
+    <div class="hw-item"><div class="week">第3周</div>划手模仿 3组×20次<br>平板支撑 3组×40秒</div>
+    <div class="hw-item"><div class="week">第4周</div>划手模仿 3组×20次<br>平板支撑 3组×40秒</div>
+  </div>
+  <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:12px;">
+    <label style="display:flex; align-items:center; gap:6px; font-size:13px;"><input type="checkbox" style="width:16px;height:16px;"> 第1周完成</label>
+    <label style="display:flex; align-items:center; gap:6px; font-size:13px;"><input type="checkbox" style="width:16px;height:16px;"> 第2周完成</label>
+    <label style="display:flex; align-items:center; gap:6px; font-size:13px;"><input type="checkbox" style="width:16px;height:16px;"> 第3周完成</label>
+    <label style="display:flex; align-items:center; gap:6px; font-size:13px;"><input type="checkbox" style="width:16px;height:16px;"> 第4周完成</label>
+  </div>
+</div>
+
+<!-- 常见问题小课堂 -->
+<div class="card">
+  <div class="card-title"><span class="icon">❓</span> 常见问题小课堂</div>
+  <div style="display:flex; flex-direction:column; gap:10px; margin-top:4px;">
+    <div style="background:#FFF5F5; border-radius:10px; padding:12px 14px; display:flex; gap:10px;">
+      <span style="font-size:20px; flex-shrink:0;">❓</span>
+      <div><strong style="color:var(--red);">呛水了怎么办？</strong><br><span style="font-size:13px;">抬头就张嘴，低头鼻子就吐泡泡，形成习惯就不会呛了！</span></div>
+    </div>
+    <div style="background:#FFF5F5; border-radius:10px; padding:12px 14px; display:flex; gap:10px;">
+      <span style="font-size:20px; flex-shrink:0;">❓</span>
+      <div><strong style="color:var(--red);">蹬腿不走水？</strong><br><span style="font-size:13px;">检查翻脚！脚尖有没有外翻？脚心有没有对后方？</span></div>
+    </div>
+    <div style="background:#FFF5F5; border-radius:10px; padding:12px 14px; display:flex; gap:10px;">
+      <span style="font-size:20px; flex-shrink:0;">❓</span>
+      <div><strong style="color:var(--red);">游着游着沉了？</strong><br><span style="font-size:13px;">飘的时间再长一点，不要急着做下一个动作！</span></div>
+    </div>
+    <div style="background:#FFF5F5; border-radius:10px; padding:12px 14px; display:flex; gap:10px;">
+      <span style="font-size:20px; flex-shrink:0;">❓</span>
+      <div><strong style="color:var(--red);">游得特别累？</strong><br><span style="font-size:13px;">动作越慢越省力！口诀：划手腿不动。每个动作之间多飘一会儿。</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- 教练寄语 -->
+<div class="card">
+  <div class="card-title"><span class="icon">💬</span> 教练寄语</div>
+  <div class="form-field">
+    <textarea style="min-height:80px;" placeholder="教练在这里写下对你的寄语..."></textarea>
+  </div>
+</div>
+
+<div class="footer">
+  <p>🏊 蛙泳学习成长手册 · 学员版</p>
+  <p style="margin-top:4px;">💧💪 从零开始，每一课都是进步</p>
+  <p style="margin-top:8px; font-size:11px;">🎉 加油！你离"游泳健将"越来越近了！</p>
+</div>
+
+</div>
+</body>
+</html>
