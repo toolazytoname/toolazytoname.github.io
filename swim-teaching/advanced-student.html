@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏊 蛙泳进阶学习手册 · 学员版</title>
+<style>
+  :root {
+    --primary: #0077B6;
+    --primary-light: #90E0EF;
+    --secondary: #023E8A;
+    --accent: #00B4D8;
+    --green: #2D6A4F;
+    --green-light: #D8F3DC;
+    --yellow: #FFB703;
+    --yellow-light: #FFF3CD;
+    --orange: #E85D04;
+    --orange-light: #FFF0E6;
+    --red: #C1121F;
+    --purple: #7B2CBF;
+    --gold: #D4A017;
+    --gold-light: #FFF9E0;
+    --gray: #6C757D;
+    --bg: #F8F9FA;
+    --card-bg: #FFFFFF;
+    --text: #212529;
+    --border: #DEE2E6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
+    color: white;
+    border-radius: 24px;
+    padding: 40px 36px;
+    text-align: center;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '🏊‍♂️';
+    position: absolute;
+    top: 10px; right: 20px;
+    font-size: 90px;
+    opacity: 0.08;
+  }
+  .hero::after {
+    content: '💪';
+    position: absolute;
+    bottom: 5px; left: 20px;
+    font-size: 60px;
+    opacity: 0.1;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.12);
+    border-radius: 50px;
+    padding: 5px 16px;
+    font-size: 12px;
+    margin-bottom: 12px;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .hero h1 {
+    font-size: 32px;
+    font-weight: 900;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+  .hero p { font-size: 14px; opacity: 0.85; margin-bottom: 20px; }
+  .hero-name {
+    background: rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 12px 20px;
+    display: inline-flex;
+    gap: 20px;
+    font-size: 13px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .hero-name span { display: flex; align-items: center; gap: 6px; }
+
+  /* Card */
+  .card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    border: 1px solid var(--border);
+  }
+  .card-title {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-title .icon { font-size: 22px; }
+
+  /* Info grid */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+  }
+  .info-item {
+    background: #F8F9FA;
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 13px;
+  }
+  .info-item .label { font-size: 11px; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .info-item .value { font-weight: 700; font-size: 15px; }
+
+  /* Progress grid */
+  .progress-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .progress-item {
+    border-radius: 12px;
+    padding: 14px 8px;
+    color: white;
+    font-size: 12px;
+  }
+  .progress-item.s1 { background: linear-gradient(135deg, var(--orange), #F48C06); }
+  .progress-item.s2 { background: linear-gradient(135deg, var(--red), var(--orange)); }
+  .progress-item.s3 { background: linear-gradient(135deg, var(--purple), #C77DFF); }
+  .progress-item.s4 { background: linear-gradient(135deg, #1a1a2e, #16213e); }
+  .progress-item .p-icon { font-size: 28px; margin-bottom: 4px; }
+  .progress-item .p-name { font-weight: 800; font-size: 13px; }
+  .progress-item .p-lessons { opacity: 0.8; font-size: 10px; margin-top: 2px; }
+
+  /* Lesson */
+  .lesson {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-bottom: 14px;
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--orange);
+    page-break-inside: avoid;
+  }
+  .lesson.s1 { border-left-color: var(--orange); }
+  .lesson.s2 { border-left-color: var(--red); }
+  .lesson.s3 { border-left-color: var(--purple); }
+  .lesson.s4 { border-left-color: var(--secondary); }
+  .lesson.exam { border-left-color: var(--gold); background: #FFFBF0; }
+
+  .lesson-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .lesson-title {
+    font-size: 16px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .lesson-badge {
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 50px;
+    font-weight: 600;
+  }
+  .badge-s1 { background: var(--orange-light); color: var(--orange); }
+  .badge-s2 { background: #FFE5E5; color: var(--red); }
+  .badge-s3 { background: #F3E5F5; color: var(--purple); }
+  .badge-s4 { background: #E8EAF6; color: var(--secondary); }
+  .badge-exam { background: var(--gold-light); color: #856404; }
+
+  .lesson-goal {
+    background: #FFF8F0;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .lesson-goal .emoji { font-size: 18px; flex-shrink: 0; }
+
+  /* Form fields */
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 10px;
+  }
+  .form-field {
+    background: #F8F9FA;
+    border-radius: 10px;
+    padding: 10px 14px;
+  }
+  .form-field .label { font-size: 11px; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .form-field .input-line { border: none; background: transparent; font-size: 13px; width: 100%; outline: none; border-bottom: 1px dashed #CCC; padding-bottom: 2px; }
+  .form-field textarea { width: 100%; border: none; background: transparent; font-size: 13px; resize: none; outline: none; font-family: inherit; min-height: 60px; }
+
+  .form-checklist {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: #F8F9FA;
+  }
+  .check-box {
+    width: 20px; height: 20px;
+    border: 2px solid #CCC;
+    border-radius: 4px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+  }
+  .check-item.done .check-box { background: var(--green); border-color: var(--green); color: white; }
+
+  /* Table */
+  .exam-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin: 8px 0;
+  }
+  .exam-table th {
+    background: var(--gold);
+    color: #5D4037;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 700;
+  }
+  .exam-table td { padding: 8px 12px; border-bottom: 1px solid #F0F0F0; }
+  .exam-table tr:nth-child(even) { background: #FAFAFA; }
+
+  /* Certificate */
+  .certificate {
+    background: linear-gradient(135deg, #FFF9E6, var(--gold-light));
+    border: 2px solid #FFE069;
+    border-radius: 14px;
+    padding: 16px 20px;
+    text-align: center;
+    margin: 10px 0;
+  }
+  .certificate .cert-icon { font-size: 36px; margin-bottom: 6px; }
+  .certificate .cert-title { font-size: 18px; font-weight: 900; color: #856404; }
+  .certificate .cert-desc { font-size: 12px; color: #856404; opacity: 0.8; margin-top: 4px; }
+  .certificate .cert-date { font-size: 11px; color: var(--gray); margin-top: 8px; }
+  .certificate.locked { filter: grayscale(1); opacity: 0.5; }
+
+  /* Achievement */
+  .achievement-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+  }
+  .achievement-item {
+    border-radius: 14px;
+    padding: 18px 14px;
+    text-align: center;
+    border: 2px dashed #DEE2E6;
+    background: #FAFAFA;
+    transition: all 0.3s;
+  }
+  .achievement-item.unlocked { border: 2px solid var(--gold); background: var(--gold-light); }
+  .achievement-item .a-icon { font-size: 40px; margin-bottom: 6px; }
+  .achievement-item .a-name { font-weight: 800; font-size: 14px; }
+  .achievement-item .a-desc { font-size: 11px; color: var(--gray); margin-top: 4px; }
+  .achievement-item .a-date { font-size: 10px; color: var(--green); margin-top: 6px; font-weight: 600; }
+
+  /* Memory card */
+  .memory-card {
+    background: #FFF9E6;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 12px;
+    margin: 8px 0;
+    display: flex;
+    gap: 8px;
+  }
+  .memory-card .icon { font-size: 18px; flex-shrink: 0; }
+  .memory-card.blue { background: #E3F2FD; }
+  .memory-card.green { background: var(--green-light); }
+  .memory-card.red { background: #FFF5F5; }
+
+  /* Stage header */
+  .stage-header {
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 14px;
+    margin-top: 8px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .stage-header.s1 { background: linear-gradient(135deg, var(--orange), #F48C06); }
+  .stage-header.s2 { background: linear-gradient(135deg, var(--red), var(--orange)); }
+  .stage-header.s3 { background: linear-gradient(135deg, var(--purple), #C77DFF); }
+  .stage-header.s4 { background: linear-gradient(135deg, #1a1a2e, #16213e); }
+  .stage-num { font-size: 32px; font-weight: 900; opacity: 0.9; }
+  .stage-info h2 { font-size: 18px; font-weight: 800; }
+  .stage-info p { font-size: 12px; opacity: 0.85; }
+
+  /* Level cards */
+  .level-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .level-item {
+    border-radius: 14px;
+    padding: 16px 12px;
+    color: white;
+    text-align: center;
+  }
+  .level-item.bronze { background: linear-gradient(135deg, #CD7F32, #E8A870); }
+  .level-item.silver { background: linear-gradient(135deg, #A8A9AD, #C0C0C0); }
+  .level-item.gold { background: linear-gradient(135deg, #D4A017, #FFD700); }
+  .level-item.master { background: linear-gradient(135deg, #1a1a2e, #16213e); }
+  .level-item .level-icon { font-size: 32px; margin-bottom: 6px; }
+  .level-item .level-name { font-weight: 800; font-size: 14px; }
+  .level-item .level-target { font-size: 11px; opacity: 0.85; margin-top: 4px; }
+  .level-item .level-time { font-size: 10px; opacity: 0.7; margin-top: 2px; }
+
+  /* Slogan box */
+  .slogan-box {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: white;
+    border-radius: 14px;
+    padding: 18px;
+    text-align: center;
+    margin: 12px 0;
+  }
+  .slogan-box h3 { font-size: 14px; margin-bottom: 10px; }
+  .slogan-list { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+  .slogan-item {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  /* Section divider */
+  .section-divider {
+    text-align: center;
+    padding: 24px 0 12px;
+    color: var(--gray);
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-divider::before, .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Record table */
+  .record-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin: 8px 0;
+  }
+  .record-table th {
+    background: var(--secondary);
+    color: white;
+    padding: 8px 12px;
+    font-weight: 700;
+  }
+  .record-table td { padding: 8px 12px; border-bottom: 1px solid #F0F0F0; text-align: center; }
+  .record-table tr:nth-child(even) { background: #FAFAFA; }
+
+  /* Data cards */
+  .data-card {
+    background: #F8F9FA;
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin: 6px 0;
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .data-card .d-label { font-weight: 600; color: var(--secondary); }
+  .data-card .d-value { font-weight: 800; color: var(--orange); font-size: 16px; }
+  .data-card .d-unit { font-size: 12px; color: var(--gray); }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 24px;
+    color: var(--gray);
+    font-size: 12px;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .hero { padding: 28px 20px; }
+    .hero h1 { font-size: 26px; }
+    .card { padding: 18px 16px; }
+    .lesson { padding: 16px 16px; }
+    .progress-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero-name { gap: 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">🏊 进阶训练手册</div>
+  <h1>蛙泳进阶学习手册</h1>
+  <p>进阶16课时成长记录 · 挑战泳池极限</p>
+  <div class="hero-name">
+    <span>👤 姓名：______________</span>
+    <span>📅 起始：______________</span>
+    <span>🎯 目标：蛙泳大师</span>
+  </div>
+</div>
+
+<!-- 个人信息 -->
+<div class="card">
+  <div class="card-title"><span class="icon">📋</span> 我的信息卡</div>
+  <div class="info-grid">
+    <div class="info-item">
+      <div class="label">姓名</div>
+      <div class="value">_____________</div>
+    </div>
+    <div class="info-item">
+      <div class="label">起始日期</div>
+      <div class="value">_____________</div>
+    </div>
+    <div class="info-item">
+      <div class="label">教练姓名</div>
+      <div class="value">_____________</div>
+    </div>
+    <div class="info-item">
+      <div class="label">当前等级</div>
+      <div class="value">□ 青铜  □ 白银  □ 黄金  □ 大师</div>
+    </div>
+  </div>
+</div>
+
+<!-- 进阶等级 -->
+<div class="card">
+  <div class="card-title"><span class="icon">🏅</span> 我的进阶目标</div>
+  <div class="level-grid">
+    <div class="level-item bronze">
+      <div class="level-icon">🥉</div>
+      <div class="level-name">青铜</div>
+      <div class="level-target">100米 · 1分30秒</div>
+    </div>
+    <div class="level-item silver">
+      <div class="level-icon">🥈</div>
+      <div class="level-name">白银</div>
+      <div class="level-target">200米 · 3分钟内</div>
+    </div>
+    <div class="level-item gold">
+      <div class="level-icon">🥇</div>
+      <div class="level-name">黄金</div>
+      <div class="level-target">400米 · 50秒/50米</div>
+    </div>
+    <div class="level-item master">
+      <div class="level-icon">🏆</div>
+      <div class="level-name">大师</div>
+      <div class="level-target">800米 · 50秒内/50米</div>
+    </div>
+  </div>
+</div>
+
+<!-- 学习进度总览 -->
+<div class="card">
+  <div class="card-title"><span class="icon">🗺️</span> 学习进度总览</div>
+  <div class="progress-grid">
+    <div class="progress-item s1">
+      <div class="p-icon">🏃</div>
+      <div class="p-name">耐力筑基</div>
+      <div class="p-lessons">第17-20课</div>
+    </div>
+    <div class="progress-item s2">
+      <div class="p-icon">🔧</div>
+      <div class="p-name">技术精进</div>
+      <div class="p-lessons">第21-24课</div>
+    </div>
+    <div class="progress-item s3">
+      <div class="p-icon">⚡</div>
+      <div class="p-name">速度突破</div>
+      <div class="p-lessons">第25-28课</div>
+    </div>
+    <div class="progress-item s4">
+      <div class="p-icon">🏆</div>
+      <div class="p-name">综合达标</div>
+      <div class="p-lessons">第29-32课</div>
+    </div>
+  </div>
+
+  <div style="background:#F8F9FA; border-radius:12px; padding:12px 16px; margin-top:4px;">
+    <div style="font-size:12px; font-weight:700; margin-bottom:8px; color:var(--gray);">📝 课时打卡</div>
+    <div style="display:flex; flex-wrap:wrap; gap:8px;">
+      <div style="display:flex; align-items:center; gap:4px;"><span style="background:#E85D04; color:white; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700;">17</span><input type="checkbox" style="width:16px;height:16px;" /></div>
+      <div style="display:flex; align-items:center; gap:4px;"><span style="background:#E85D04; color:white; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700;">18</span><input type="checkbox" style="width:16px;height:16px;" /></div>
+      <div style="display:flex; align-items:center; gap:4px;"><span style="background:#E85D04; color:white; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700;">19</span><input type="checkbox" style="width:16px;height:16px;" /></div>
+      <div style="display:flex; align-items:center; gap:4px;"><span style="background:#E85D04; color:white; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700;">20</span><input type="checkbox" style="width:16px;height:16px;" />🥉</div>
+      <div style="display:flex; align-items:center; gap:4px;"><span style="background:#C1121F; color:white; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700;">21</span><input type="checkbox" style="width:16px;height:16px;" /></div>
+      <div style="display:flex; align-items:center; gap:4px;"><span style="background:#C1121F; color:white; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700;">22</span><input type="checkbox" style="width:16px;height:16px;" /></div>
+      <div style="display:flex; align-items:center; gap:4px;"><span style="background:#C1121F; color:white; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700;">23</span><input type="checkbox" style="width:16px;height:16px;" /></div>
+      <div style="display:flex; align-items:center; gap:4px;"><span style="background:#C1121F; color:white; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700;">24</span><input type="checkbox" style="width:16px;height:16px;" />🥈</div>
+      <div style="display:flex; align-items:center; gap:4px;"><span style="background:#7B2CBF; color:white; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700;">25</span><input type="checkbox" style="width:16px;height:16px;" /></div>
+      <div style="display:flex; align-items:center; gap:4px;"><span style="background:#7B2CBF; color:white; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700;">26</span><input type="checkbox" style="width:16px;height:16px;" /></div>
+      <div style="display:flex; align-items:center; gap:4px;"><span style="background:#7B2CBF; color:white; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700;">27</span><input type="checkbox" style="width:16px;height:16px;" /></div>
+      <div style="display:flex; align-items:center; gap:4px;"><span style="background:#7B2CBF; color:white; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700;">28</span><input type="checkbox" style="width:16px;height:16px;" />🥇</div>
+      <div style="display:flex; align-items:center; gap:4px;"><span style="background:#1a1a2e; color:white; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700;">29</span><input type="checkbox" style="width:16px;height:16px;" /></div>
+      <div style="display:flex; align-items:center; gap:4px;"><span style="background:#1a1a2e; color:white; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700;">30</span><input type="checkbox" style="width:16px;height:16px;" /></div>
+      <div style="display:flex; align-items:center; gap:4px;"><span style="background:#1a1a2e; color:white; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700;">31</span><input type="checkbox" style="width:16px;height:16px;" /></div>
+      <div style="display:flex; align-items:center; gap:4px;"><span style="background:#1a1a2e; color:white; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700;">32</span><input type="checkbox" style="width:16px;height:16px;" />🏆</div>
+    </div>
+  </div>
+</div>
+
+<!-- 成就墙 -->
+<div class="card">
+  <div class="card-title"><span class="icon">🎖️</span> 我的进阶成就墙</div>
+  <div class="achievement-grid">
+    <div class="achievement-item" id="ach1">
+      <div class="a-icon">🥉</div>
+      <div class="a-name">青铜耐力</div>
+      <div class="a-desc">能连续游100米</div>
+      <div class="a-date">获得日期：____________</div>
+    </div>
+    <div class="achievement-item" id="ach2">
+      <div class="a-icon">🥈</div>
+      <div class="a-name">白银技术</div>
+      <div class="a-desc">200米不间断 · 划次≤12</div>
+      <div class="a-date">获得日期：____________</div>
+    </div>
+    <div class="achievement-item" id="ach3">
+      <div class="a-icon">🥇</div>
+      <div class="a-name">黄金速度</div>
+      <div class="a-desc">50米≤60秒 · 400米完成</div>
+      <div class="a-date">获得日期：____________</div>
+    </div>
+    <div class="achievement-item" id="ach4">
+      <div class="a-icon">🏆</div>
+      <div class="a-name">蛙泳大师</div>
+      <div class="a-desc">50米≤50秒 · 800米挑战</div>
+      <div class="a-date">获得日期：____________</div>
+    </div>
+  </div>
+</div>
+
+<!-- 教练寄语 -->
+<div class="slogan-box">
+  <h3>💬 进阶训练核心理念</h3>
+  <div class="slogan-list">
+    <div class="slogan-item">系统化 · 不盲目加量</div>
+    <div class="slogan-item">细节控 · 抠每个动作</div>
+    <div class="slogan-item">数据化 · 用时间说话</div>
+    <div class="slogan-item">节奏感 · 找最适配速</div>
+  </div>
+</div>
+
+<!-- ===================== 第一阶段 ===================== -->
+<div class="section-divider">🏃 第一阶段：耐力筑基（第17-20课）</div>
+
+<div class="stage-header s1">
+  <div class="stage-num">01</div>
+  <div class="stage-info">
+    <h2>耐力筑基阶段</h2>
+    <p>核心：有氧基础建立，连续游100米以上</p>
+  </div>
+</div>
+
+<!-- 第17课 -->
+<div class="lesson s1">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第17课：耐力起步 —— 100米连续游</div>
+    <span class="lesson-badge badge-s1">有氧起步</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>不间断连续游完100米</div>
+  </div>
+  <div class="form-grid">
+    <div class="form-field">
+      <div class="label">上课日期</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+    <div class="form-field">
+      <div class="label">100米用时</div>
+      <input class="input-line" type="text" placeholder="例：2分30秒">
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="label" style="font-size:11px; color:var(--gray); text-transform:uppercase; margin-bottom:6px;">✅ 今日达成</div>
+    <div class="form-checklist">
+      <div class="check-item"><div class="check-box"></div> 100米不间断游完</div>
+      <div class="check-item"><div class="check-box"></div> 找到自己的配速</div>
+      <div class="check-item"><div class="check-box"></div> 记录了训练数据</div>
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="form-field">
+      <div class="label">⚠️ 需要加强</div>
+      <textarea placeholder=""></textarea>
+    </div>
+  </div>
+  <div class="form-field" style="margin-top:10px;">
+    <div class="label">💬 教练评语</div>
+    <textarea></textarea>
+  </div>
+  <div class="data-card">
+    <div class="d-label">💡 配速记录</div>
+    <div><span class="d-value">___</span><span class="d-unit">秒/50米</span></div>
+  </div>
+</div>
+
+<!-- 第18课 -->
+<div class="lesson s1">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第18课：耐力强化 —— 200米基础</div>
+    <span class="lesson-badge badge-s1">距离提升</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>连续游完200米，找到长距离节奏</div>
+  </div>
+  <div class="form-grid">
+    <div class="form-field">
+      <div class="label">上课日期</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+    <div class="form-field">
+      <div class="label">200米用时</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="label" style="font-size:11px; color:var(--gray); text-transform:uppercase; margin-bottom:6px;">✅ 今日达成</div>
+    <div class="form-checklist">
+      <div class="check-item"><div class="check-box"></div> 技术巩固慢游3组完成</div>
+      <div class="check-item"><div class="check-box"></div> 100米×2组计时完成</div>
+      <div class="check-item"><div class="check-box"></div> 200米连续游完成</div>
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="form-field">
+      <div class="label">💬 教练评语</div>
+      <textarea></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- 第19课 -->
+<div class="lesson s1">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第19课：动作细节精修</div>
+    <span class="lesson-badge badge-s1">技术细节</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>细化技术细节，为提速打基础</div>
+  </div>
+  <div class="form-grid">
+    <div class="form-field">
+      <div class="label">上课日期</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="label" style="font-size:11px; color:var(--gray); text-transform:uppercase; margin-bottom:6px;">✅ 今日学会了</div>
+    <div class="form-checklist">
+      <div class="check-item"><div class="check-box"></div> 踝关节拉伸方法</div>
+      <div class="check-item"><div class="check-box"></div> "一脚蹬到底"的用力感</div>
+      <div class="check-item"><div class="check-box"></div> 抱水像"抱大树"的感觉</div>
+      <div class="check-item"><div class="check-box"></div> 身体像木板一样平</div>
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="form-field">
+      <div class="label">⚠️ 我的技术问题</div>
+      <textarea placeholder="写出教练指出的问题..."></textarea>
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="form-field">
+      <div class="label">💬 教练评语</div>
+      <textarea></textarea>
+    </div>
+  </div>
+  <div class="memory-card blue">
+    <span class="icon">💡</span>
+    <div><strong>录像回放：</strong>教练会录一段我的泳姿，和之前对比看进步！</div>
+  </div>
+</div>
+
+<!-- 第20课 -->
+<div class="lesson s1 exam">
+  <div class="lesson-header">
+    <div class="lesson-title">🥉 第20课：耐力考核日</div>
+    <span class="lesson-badge badge-exam">青铜认证</span>
+  </div>
+  <table class="exam-table">
+    <thead>
+      <tr><th>考核项目</th><th>标准</th><th>我完成了吗？</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>连续距离</td><td>100米不间断</td><td>□ 是  □ 还需努力</td></tr>
+      <tr><td>技术稳定性</td><td>200米内不变形</td><td>□ 是  □ 还需努力</td></tr>
+      <tr><td>配速记录</td><td>有记录</td><td>□ 是  □ 还需努力</td></tr>
+    </tbody>
+  </table>
+  <div class="certificate" id="cert1">
+    <div class="cert-icon">🥉</div>
+    <div class="cert-title">青铜耐力证书</div>
+    <div class="cert-desc">能连续游100米以上，具备有氧耐力基础！</div>
+    <div class="cert-date">获得日期：____________</div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="form-field">
+      <div class="label">💬 教练总评</div>
+      <textarea></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== 第二阶段 ===================== -->
+<div class="section-divider">🔧 第二阶段：技术精进（第21-24课）</div>
+
+<div class="stage-header s2">
+  <div class="stage-num">02</div>
+  <div class="stage-info">
+    <h2>技术精进阶段</h2>
+    <p>核心：动作精细化，每一下都有效率</p>
+  </div>
+</div>
+
+<!-- 第21课 -->
+<div class="lesson s2">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第21课：划手效率专项</div>
+    <span class="lesson-badge badge-s2">效率提升</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>同样距离少划3-5次</div>
+  </div>
+  <div class="form-grid">
+    <div class="form-field">
+      <div class="label">上课日期</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+    <div class="form-field">
+      <div class="label">25米划次（今天）</div>
+      <input class="input-line" type="text" placeholder="例：10次">
+    </div>
+    <div class="form-field">
+      <div class="label">25米划次（上周）</div>
+      <input class="input-line" type="text" placeholder="例：13次">
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="label" style="font-size:11px; color:var(--gray); text-transform:uppercase; margin-bottom:6px;">✅ 今日达成</div>
+    <div class="form-checklist">
+      <div class="check-item"><div class="check-box"></div> 划手分解动作掌握</div>
+      <div class="check-item"><div class="check-box"></div> 抱水感觉找到</div>
+      <div class="check-item"><div class="check-box"></div> 窄划手有进步</div>
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="form-field">
+      <div class="label">💬 教练评语</div>
+      <textarea></textarea>
+    </div>
+  </div>
+  <div class="data-card">
+    <div class="d-label">📊 划次进步</div>
+    <div><span class="d-value">___</span>次（少划了___次！）</div>
+  </div>
+</div>
+
+<!-- 第22课 -->
+<div class="lesson s2">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第22课：蹬夹效率专项</div>
+    <span class="lesson-badge badge-s2">蹬夹优化</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>单次蹬腿滑行达到5米以上</div>
+  </div>
+  <div class="form-grid">
+    <div class="form-field">
+      <div class="label">上课日期</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+    <div class="form-field">
+      <div class="label">单次蹬腿滑行距离</div>
+      <input class="input-line" type="text" placeholder="例：4.5米">
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="label" style="font-size:11px; color:var(--gray); text-transform:uppercase; margin-bottom:6px;">✅ 今日达成</div>
+    <div class="form-checklist">
+      <div class="check-item"><div class="check-box"></div> 快蹬慢收节奏掌握</div>
+      <div class="check-item"><div class="check-box"></div> 单次蹬腿5米以上</div>
+      <div class="check-item"><div class="check-box"></div> 收腿更轻松了</div>
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="form-field">
+      <div class="label">💬 教练评语</div>
+      <textarea></textarea>
+    </div>
+  </div>
+  <div class="memory-card green">
+    <span class="icon">💡</span>
+    <div><strong>口诀：</strong>蹬出去要快（像踹墙），收回来要慢（像捡东西）</div>
+  </div>
+</div>
+
+<!-- 第23课 -->
+<div class="lesson s2">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第23课：呼吸效率专项</div>
+    <span class="lesson-badge badge-s2">呼吸优化</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>200米不停，呼吸节奏稳定</div>
+  </div>
+  <div class="form-grid">
+    <div class="form-field">
+      <div class="label">上课日期</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+    <div class="form-field">
+      <div class="label">200米用时</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="label" style="font-size:11px; color:var(--gray); text-transform:uppercase; margin-bottom:6px;">✅ 今日达成</div>
+    <div class="form-checklist">
+      <div class="check-item"><div class="check-box"></div> 抱水时抬头时机掌握</div>
+      <div class="check-item"><div class="check-box"></div> 用口吸气不呛水</div>
+      <div class="check-item"><div class="check-box"></div> 转头呼吸减少倾斜</div>
+      <div class="check-item"><div class="check-box"></div> 200米不间断</div>
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="form-field">
+      <div class="label">💬 教练评语</div>
+      <textarea></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- 第24课 -->
+<div class="lesson s2 exam">
+  <div class="lesson-header">
+    <div class="lesson-title">🥈 第24课：技术精进考核日</div>
+    <span class="lesson-badge badge-exam">白银认证</span>
+  </div>
+  <table class="exam-table">
+    <thead>
+      <tr><th>考核项目</th><th>白银标准</th><th>我的成绩</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>连续距离</td><td>200米不间断</td><td>□ 达成  □ 还需努力</td></tr>
+      <tr><td>200米用时</td><td>3分钟内</td><td>____分____秒</td></tr>
+      <tr><td>25米划次</td><td>≤12次</td><td>____次</td></tr>
+    </tbody>
+  </table>
+  <div class="certificate" id="cert2">
+    <div class="cert-icon">🥈</div>
+    <div class="cert-title">白银技术证书</div>
+    <div class="cert-desc">技术扎实，效率出色！可以开始速度训练了！</div>
+    <div class="cert-date">获得日期：____________</div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="form-field">
+      <div class="label">💬 教练总评</div>
+      <textarea></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== 第三阶段 ===================== -->
+<div class="section-divider">⚡ 第三阶段：速度突破（第25-28课）</div>
+
+<div class="stage-header s3">
+  <div class="stage-num">03</div>
+  <div class="stage-info">
+    <h2>速度突破阶段</h2>
+    <p>核心：50米跑进60秒，开始计时训练</p>
+  </div>
+</div>
+
+<!-- 第25课 -->
+<div class="lesson s3">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第25课：速度基础 —— 50米计时</div>
+    <span class="lesson-badge badge-s3">计时起步</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>完成首次50米计时测试</div>
+  </div>
+  <div class="form-grid">
+    <div class="form-field">
+      <div class="label">上课日期</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+    <div class="form-field">
+      <div class="label">第1次50米</div>
+      <input class="input-line" type="text" placeholder="例：52秒">
+    </div>
+    <div class="form-field">
+      <div class="label">第2次50米</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+    <div class="form-field">
+      <div class="label">第3次50米</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="data-card" style="background:#FFF0E6;">
+      <div class="d-label">🏆 50米最快成绩</div>
+      <div><span class="d-value" style="color:var(--red);">___</span><span class="d-unit">秒</span></div>
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="form-field">
+      <div class="label">💬 教练评语</div>
+      <textarea></textarea>
+    </div>
+  </div>
+  <div class="memory-card">
+    <span class="icon">💡</span>
+    <div><strong>成绩对照：</strong>新手下水：60-70秒 | 有基础：50-60秒 | 良好：45-50秒 | 优秀：<45秒</div>
+  </div>
+</div>
+
+<!-- 第26课 -->
+<div class="lesson s3">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第26课：间歇训练法</div>
+    <span class="lesson-badge badge-s3">提速核心</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>学会间歇训练法，完成8组25米</div>
+  </div>
+  <div class="form-grid">
+    <div class="form-field">
+      <div class="label">上课日期</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+    <div class="form-field">
+      <div class="label">8组平均成绩</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="label" style="font-size:11px; color:var(--gray); text-transform:uppercase; margin-bottom:6px;">✅ 今日达成</div>
+    <div class="form-checklist">
+      <div class="check-item"><div class="check-box"></div> 理解间歇原理</div>
+      <div class="check-item"><div class="check-box"></div> 完成8组×25米间歇</div>
+      <div class="check-item"><div class="check-box"></div> 找到最稳定的配速</div>
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="form-field">
+      <div class="label">💬 教练评语</div>
+      <textarea></textarea>
+    </div>
+  </div>
+  <div class="memory-card red">
+    <span class="icon">⚠️</span>
+    <div><strong>间歇要全力！</strong>每组都要拼尽全力，休息时深呼吸帮助排乳酸。</div>
+  </div>
+</div>
+
+<!-- 第27课 -->
+<div class="lesson s3">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第27课：出发转身强化</div>
+    <span class="lesson-badge badge-s3">专业技能</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>规范出发和转身，节省1-2秒</div>
+  </div>
+  <div class="form-grid">
+    <div class="form-field">
+      <div class="label">上课日期</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="label" style="font-size:11px; color:var(--gray); text-transform:uppercase; margin-bottom:6px;">✅ 今日达成</div>
+    <div class="form-checklist">
+      <div class="check-item"><div class="check-box"></div> 蹬壁出发姿势标准</div>
+      <div class="check-item"><div class="check-box"></div> 流线型滑行距离达标</div>
+      <div class="check-item"><div class="check-box"></div> 前滚翻转身学会</div>
+      <div class="check-item"><div class="check-box"></div> 蹬壁有力有角度</div>
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="form-field">
+      <div class="label">💬 教练评语</div>
+      <textarea></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- 第28课 -->
+<div class="lesson s3 exam">
+  <div class="lesson-header">
+    <div class="lesson-title">🥇 第28课：速度考核日</div>
+    <span class="lesson-badge badge-exam">黄金认证</span>
+  </div>
+  <table class="exam-table">
+    <thead>
+      <tr><th>考核项目</th><th>黄金标准</th><th>我的成绩</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>50米计时</td><td>≤60秒</td><td>____秒</td></tr>
+      <tr><td>400米连续</td><td>能完成</td><td>□ 达成  □ 还需努力</td></tr>
+      <tr><td>出发转身</td><td>规范</td><td>□ 达成  □ 还需努力</td></tr>
+    </tbody>
+  </table>
+  <div class="certificate" id="cert3">
+    <div class="cert-icon">🥇</div>
+    <div class="cert-title">黄金速度证书</div>
+    <div class="cert-desc">速度优秀！向大师级进发！</div>
+    <div class="cert-date">获得日期：____________</div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="form-field">
+      <div class="label">💬 教练总评</div>
+      <textarea></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== 第四阶段 ===================== -->
+<div class="section-divider">🏆 第四阶段：综合达标（第29-32课）</div>
+
+<div class="stage-header s4">
+  <div class="stage-num">04</div>
+  <div class="stage-info">
+    <h2>综合达标阶段</h2>
+    <p>核心：50米跑进50秒，挑战800米</p>
+  </div>
+</div>
+
+<!-- 第29课 -->
+<div class="lesson s4">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第29课：配速策略</div>
+    <span class="lesson-badge badge-s4">长距离</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>完成400米连续游</div>
+  </div>
+  <div class="form-grid">
+    <div class="form-field">
+      <div class="label">上课日期</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+    <div class="form-field">
+      <div class="label">400米用时</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="form-checklist">
+      <div class="check-item"><div class="check-box"></div> 学会配速理论</div>
+      <div class="check-item"><div class="check-box"></div> 400米不间断完成</div>
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="form-field">
+      <div class="label">💬 教练评语</div>
+      <textarea></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- 第30课 -->
+<div class="lesson s4">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第30课：冲刺能力训练</div>
+    <span class="lesson-badge badge-s4">最后冲刺</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>强化最后100米冲刺能力</div>
+  </div>
+  <div class="form-grid">
+    <div class="form-field">
+      <div class="label">上课日期</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+    <div class="form-field">
+      <div class="label">最后50米冲刺用时</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="form-field">
+      <div class="label">💬 教练评语</div>
+      <textarea></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- 第31课 -->
+<div class="lesson s4">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第31课：800米挑战</div>
+    <span class="lesson-badge badge-s4">长距离挑战</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>完成800米长距离挑战</div>
+  </div>
+  <div class="form-grid">
+    <div class="form-field">
+      <div class="label">上课日期</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+    <div class="form-field">
+      <div class="label">800米总用时</div>
+      <input class="input-line" type="text" placeholder="">
+    </div>
+  </div>
+  <table class="exam-table" style="margin-top:12px;">
+    <thead>
+      <tr><th>分段</th><th>时间</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>前200米</td><td>____________</td></tr>
+      <tr><td>中400米</td><td>____________</td></tr>
+      <tr><td>后200米</td><td>____________</td></tr>
+    </tbody>
+  </table>
+  <div style="margin-top:10px;">
+    <div class="form-field">
+      <div class="label">💬 教练评语</div>
+      <textarea></textarea>
+    </div>
+  </div>
+  <div class="memory-card">
+    <span class="icon">🏊</span>
+    <div><strong>800米！</strong>这是泳池马拉松！完成后你就是真正的耐力型选手了！</div>
+  </div>
+</div>
+
+<!-- 第32课 -->
+<div class="lesson s4 exam">
+  <div class="lesson-header">
+    <div class="lesson-title">🏆 第32课：结业考核</div>
+    <span class="lesson-badge badge-exam">大师认证</span>
+  </div>
+  <table class="exam-table">
+    <thead>
+      <tr><th>考核项目</th><th>大师标准</th><th>我的成绩</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>50米计时</td><td>≤50秒</td><td>____秒</td></tr>
+      <tr><td>400米连续</td><td>≤8分钟</td><td>____分____秒</td></tr>
+      <tr><td>800米挑战</td><td>能完成</td><td>□ 达成  □ 挑战中</td></tr>
+      <tr><td>出发转身</td><td>熟练</td><td>□ 达成  □ 还需努力</td></tr>
+    </tbody>
+  </table>
+  <div style="display:flex; gap:12px; flex-wrap:wrap; margin:10px 0;">
+    <div class="form-field" style="flex:1;">
+      <div class="label">🏆 大师宣言</div>
+      <input class="input-line" type="text" placeholder="写下你的结业感言...">
+    </div>
+  </div>
+  <div class="certificate" id="cert4" style="background:linear-gradient(135deg, #FFF9E6, #FFE066);">
+    <div class="cert-icon">🏆</div>
+    <div class="cert-title">蛙泳大师证书</div>
+    <div class="cert-desc">蛙泳全部技能解锁！你已经是游泳高手了！</div>
+    <div class="cert-date">获得日期：____________</div>
+  </div>
+  <div style="margin-top:10px;">
+    <div class="form-field">
+      <div class="label">🎯 下一阶段目标</div>
+      <input class="input-line" type="text" placeholder="例：学习自由泳 / 挑战1500米">
+    </div>
+    <div class="form-field" style="margin-top:10px;">
+      <div class="label">💬 教练总评</div>
+      <textarea></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- 成长记录 -->
+<div class="card">
+  <div class="card-title"><span class="icon">📊</span> 我的训练数据记录</div>
+  <table class="record-table">
+    <thead>
+      <tr><th>课时</th><th>50米</th><th>100米</th><th>200米</th><th>400米</th><th>800米</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>第17课</td><td></td><td></td><td></td><td></td><td>—</td></tr>
+      <tr><td>第20课</td><td></td><td></td><td></td><td></td><td>—</td></tr>
+      <tr><td>第24课</td><td></td><td></td><td></td><td></td><td>—</td></tr>
+      <tr><td>第28课</td><td></td><td></td><td></td><td></td><td>—</td></tr>
+      <tr><td>第32课</td><td></td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 常见问题 -->
+<div class="card">
+  <div class="card-title"><span class="icon">❓</span> 常见问题小课堂</div>
+  <div style="display:flex; flex-direction:column; gap:10px; margin-top:4px;">
+    <div style="background:#FFF5F5; border-radius:10px; padding:12px 14px; display:flex; gap:10px;">
+      <span style="font-size:20px; flex-shrink:0;">❓</span>
+      <div><strong style="color:var(--red);">速度提不上去？</strong><br><span style="font-size:13px;">先巩固耐力，减少无效划水，间歇训练全力冲！</span></div>
+    </div>
+    <div style="background:#FFF5F5; border-radius:10px; padding:12px 14px; display:flex; gap:10px;">
+      <span style="font-size:20px; flex-shrink:0;">❓</span>
+      <div><strong style="color:var(--red);">长距离游不完？</strong><br><span style="font-size:13px;">降低配速，不要一开始冲太快！</span></div>
+    </div>
+    <div style="background:#FFF5F5; border-radius:10px; padding:12px 14px; display:flex; gap:10px;">
+      <span style="font-size:20px; flex-shrink:0;">❓</span>
+      <div><strong style="color:var(--red);">划次太多？</strong><br><span style="font-size:13px;">窄划手，抱水要实，每划一下都要有推进感！</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <p>🏊 蛙泳进阶学习手册 · 学员版</p>
+  <p style="margin-top:4px;">💪 从100米到800米，向大师级进发</p>
+  <p style="margin-top:8px; font-size:11px;">🎉 坚持训练，你就是下一位蛙泳大师！</p>
+</div>
+
+</div>
+</body>
+</html>
