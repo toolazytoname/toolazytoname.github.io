@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🏊 自由泳进阶教学体系（教练版）</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{min-height:100vh;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);padding:20px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+        .container{background:#fff;border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,0.15);max-width:900px;margin:0 auto;overflow:hidden}
+        .header{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;padding:30px;text-align:center}
+        .header h1{font-size:28px;margin-bottom:10px}
+        .header p{opacity:0.9;font-size:14px}
+        .content{padding:30px}
+        .section{margin-bottom:30px}
+        .section-title{font-size:18px;font-weight:800;color:#667eea;margin-bottom:15px;padding-bottom:8px;border-bottom:2px solid #667eea}
+        .principle-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;margin-bottom:20px}
+        .principle-card{background:linear-gradient(135deg,#f8f9ff,#fff);border-radius:12px;padding:15px;border:1px solid #e8e8ff}
+        .principle-card h4{color:#667eea;font-size:14px;margin-bottom:5px}
+        .principle-card p{color:#666;font-size:13px}
+        .phase{background:#f8f9ff;border-radius:16px;padding:20px;margin-bottom:20px}
+        .phase-header{display:flex;align-items:center;gap:12px;margin-bottom:15px}
+        .phase-badge{background:#667eea;color:#fff;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px}
+        .phase-title{font-size:16px;font-weight:700;color:#333}
+        .lesson-table{width:100%;border-collapse:collapse;font-size:13px}
+        .lesson-table th{background:#667eea;color:#fff;padding:10px 8px;text-align:left;font-weight:700}
+        .lesson-table td{padding:10px 8px;border-bottom:1px solid #eee}
+        .lesson-table tr:hover{background:#f0f0ff}
+        .lesson-num{font-weight:800;color:#667eea}
+        .goal-tag{background:#e8e8ff;color:#667eea;padding:3px 8px;border-radius:12px;font-size:11px;font-weight:600}
+        .content-list{font-size:12px;color:#666;line-height:1.6}
+        .tip-box{background:#fff8e6;border-left:4px solid #ffa500;padding:12px 15px;border-radius:0 8px 8px 0;margin:15px 0}
+        .tip-box strong{color:#ffa500}
+        .milestone-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+        .milestone-card{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border-radius:12px;padding:15px;text-align:center}
+        .milestone-card .icon{font-size:32px;margin-bottom:8px}
+        .milestone-card h4{font-size:14px;margin-bottom:5px}
+        .milestone-card p{font-size:11px;opacity:0.9}
+        .feedback-box{background:#f8f9ff;border-radius:12px;padding:20px;margin-top:20px}
+        .feedback-box h4{color:#667eea;margin-bottom:12px;font-size:14px}
+        .feedback-form{font-size:13px;color:#666}
+        .footer{text-align:center;padding:20px;color:#999;font-size:12px;border-top:1px solid #eee}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏊 自由泳进阶教学体系</h1>
+            <p>适合已掌握基础自由泳的学员 │ 教练专用手册</p>
+        </div>
+        <div class="content">
+            <div class="section">
+                <div class="section-title">🎯 课程理念（核心原则）</div>
+                <div class="principle-grid">
+                    <div class="principle-card">
+                        <h4>💪 技术细化</h4>
+                        <p>每个动作拆解到极致，循序渐进提升</p>
+                    </div>
+                    <div class="principle-card">
+                        <h4>🔄 高肘抱水</h4>
+                        <p>强调S型划水路线，高肘入水抓水</p>
+                    </div>
+                    <div class="principle-card">
+                        <h4>🫁 呼吸为本</h4>
+                        <p>双侧呼吸是进阶关键，必须掌握</p>
+                    </div>
+                    <div class="principle-card">
+                        <h4>⚡ 速度效率</h4>
+                        <p>减少阻力，提升划水效率与速度</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">📅 16课时完整安排</div>
+                
+                <div class="phase">
+                    <div class="phase-header">
+                        <div class="phase-badge">1</div>
+                        <div class="phase-title">第一阶段：技术强化（第1-4课）</div>
+                    </div>
+                    <table class="lesson-table">
+                        <thead>
+                            <tr>
+                                <th>课时</th>
+                                <th>主题</th>
+                                <th>本课目标</th>
+                                <th>核心内容</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="lesson-num">第1课</td>
+                                <td>高肘入水与抓水</td>
+                                <td><span class="goal-tag">掌握高肘入水</span></td>
+                                <td class="content-list">✅ 入水角度练习（指尖先入水）<br>✅ 抓水感觉培养<br>✅ S型划水路线建立</td>
+                            </tr>
+                            <tr>
+                                <td class="lesson-num">第2课</td>
+                                <td>高肘抱水强化</td>
+                                <td><span class="goal-tag">形成高肘抱水</span></td>
+                                <td class="content-list">✅ 抱水动作分解练习<br>✅ 手臂入水后的延迟<br>✅ 水中支撑感培养</td>
+                            </tr>
+                            <tr>
+                                <td class="lesson-num">第3课</td>
+                                <td>推水与出水</td>
+                                <td><span class="goal-tag">完整划水周期</span></td>
+                                <td class="content-list">✅ 推水发力顺序<br>✅ 手臂出水技术<br>✅ 划水效率提升</td>
+                            </tr>
+                            <tr>
+                                <td class="lesson-num">第4课</td>
+                                <td>技术整合考核</td>
+                                <td><span class="goal-tag">连贯划水</span></td>
+                                <td class="content-list">✅ 完整划水练习<br>✅ 50米不间断划水<br>✅ 颁发【划水技术证书】</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="phase">
+                    <div class="phase-header">
+                        <div class="phase-badge">2</div>
+                        <div class="phase-title">第二阶段：呼吸进阶（第5-8课）</div>
+                    </div>
+                    <table class="lesson-table">
+                        <thead>
+                            <tr>
+                                <th>课时</th>
+                                <th>主题</th>
+                                <th>本课目标</th>
+                                <th>核心内容</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="lesson-num">第5课</td>
+                                <td>单侧呼吸强化</td>
+                                <td><span class="goal-tag">稳定转头呼吸</span></td>
+                                <td class="content-list">✅ 转头角度控制<br>✅ 吸气时机把握<br>✅ 嘴出水面的感觉</td>
+                            </tr>
+                            <tr>
+                                <td class="lesson-num">第6课</td>
+                                <td>双侧呼吸入门</td>
+                                <td><span class="goal-tag">开始双侧练习</span></td>
+                                <td class="content-list">✅ 每3次划臂换一次气<br>✅ 左右交替练习<br>✅ 呼吸节奏稳定</td>
+                            </tr>
+                            <tr>
+                                <td class="lesson-num">第7课</td>
+                                <td>双侧呼吸巩固</td>
+                                <td><span class="goal-tag">双侧呼吸自如</span></td>
+                                <td class="content-list">✅ 连续双侧呼吸<br>✅ 两侧划水对称<br>✅ 呼吸不影响节奏</td>
+                            </tr>
+                            <tr>
+                                <td class="lesson-num">第8课</td>
+                                <td>呼吸综合考核</td>
+                                <td><span class="goal-tag">100米双侧呼吸</span></td>
+                                <td class="content-list">✅ 100米双侧呼吸测试<br>✅ 呼吸与划水配合<br>✅ 颁发【呼吸技术证书】</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="phase">
+                    <div class="phase-header">
+                        <div class="phase-badge">3</div>
+                        <div class="phase-title">第三阶段：配合提升（第9-12课）</div>
+                    </div>
+                    <table class="lesson-table">
+                        <thead>
+                            <tr>
+                                <th>课时</th>
+                                <th>主题</th>
+                                <th>本课目标</th>
+                                <th>核心内容</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="lesson-num">第9课</td>
+                                <td>打腿与划水配合</td>
+                                <td><span class="goal-tag">手腿协调</span></td>
+                                <td class="content-list">✅ 6拍打腿节奏<br>✅ 划水时打腿不乱<br>✅ 保持身体水平</td>
+                            </tr>
+                            <tr>
+                                <td class="lesson-num">第10课</td>
+                                <td>呼吸与划水配合</td>
+                                <td><span class="goal-tag">呼吸不打断节奏</span></td>
+                                <td class="content-list">✅ 边划边吸边打腿<br>✅ 呼吸时身体不歪<br>✅ 完整配合循环</td>
+                            </tr>
+                            <tr>
+                                <td class="lesson-num">第11课</td>
+                                <td>全身配合强化</td>
+                                <td><span class="goal-tag">流畅配合</span></td>
+                                <td class="content-list">✅ 身体滚动练习<br>✅ 髋部发力传递<br>✅ 减少无效动作</td>
+                            </tr>
+                            <tr>
+                                <td class="lesson-num">第12课</td>
+                                <td>100米达标测试</td>
+                                <td><span class="goal-tag">连续游100米</span></td>
+                                <td class="content-list">✅ 100米连续游<br>✅ 技术动作评分<br>✅ 颁发【进阶入门证书】</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="phase">
+                    <div class="phase-header">
+                        <div class="phase-badge">4</div>
+                        <div class="phase-title">第四阶段：专业提升（第13-16课）</div>
+                    </div>
+                    <table class="lesson-table">
+                        <thead>
+                            <tr>
+                                <th>课时</th>
+                                <th>主题</th>
+                                <th>本课目标</th>
+                                <th>核心内容</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="lesson-num">第13课</td>
+                                <td>转身技术 —— 翻转蹬壁</td>
+                                <td><span class="goal-tag">学会翻转</span></td>
+                                <td class="content-list">✅ 前滚翻技术<br>✅ 蹬壁滑行<br>✅ 水下蝶泳腿</td>
+                            </tr>
+                            <tr>
+                                <td class="lesson-num">第14课</td>
+                                <td>转身实战应用</td>
+                                <td><span class="goal-tag">熟练转身</span></td>
+                                <td class="content-list">✅ 触壁转身衔接<br>✅ 翻转后姿态控制<br>✅ 连续转身练习</td>
+                            </tr>
+                            <tr>
+                                <td class="lesson-num">第15课</td>
+                                <td>出发与速度提升</td>
+                                <td><span class="goal-tag">出发+提速</span></td>
+                                <td class="content-list">✅ 蹬壁出发技术<br>✅ 水下滑行<br>✅ 划频与划幅平衡</td>
+                            </tr>
+                            <tr>
+                                <td class="lesson-num">第16课</td>
+                                <td>结业考核</td>
+                                <td><span class="goal-tag">200米达标</span></td>
+                                <td class="content-list">✅ 200米测试<br>✅ 转身技术考核<br>✅ 颁发【自由泳进阶证书】</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">🎖️ 成就系统（4个里程碑）</div>
+                <div class="milestone-grid">
+                    <div class="milestone-card">
+                        <div class="icon">💪</div>
+                        <h4>划水达人</h4>
+                        <p>完成第4课 │ 高肘划水掌握</p>
+                    </div>
+                    <div class="milestone-card">
+                        <div class="icon">🫁</div>
+                        <h4>呼吸大师</h4>
+                        <p>完成第8课 │ 双侧呼吸自如</p>
+                    </div>
+                    <div class="milestone-card">
+                        <div class="icon">⚡</div>
+                        <h4>配合高手</h4>
+                        <p>完成第12课 │ 100米达标</p>
+                    </div>
+                    <div class="milestone-card">
+                        <div class="icon">🏆</div>
+                        <h4>进阶健将</h4>
+                        <p>完成第16课 │ 200米结业</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">💡 教学小贴士</div>
+                
+                <div class="tip-box">
+                    <strong>⚠️ 高肘抱水常见错误：</strong>学员入水时手臂伸直后直接向后划，没有"抓水"感觉。解决方法：让学员手掌向外，模拟抱球动作。
+                </div>
+                <div class="tip-box">
+                    <strong>⚠️ 双侧呼吸难点：</strong>很多学员习惯单侧呼吸，双侧时会紧张。解决方法：先在岸边分解练习，逐步增加次数。
+                </div>
+                <div class="tip-box">
+                    <strong>⚠️ 转身常见问题：</strong>翻转时身体卷曲不够。解决方法：多练陆地翻滚，腹部收紧的感觉。
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">📋 教练课后反馈模板</div>
+                <div class="feedback-box">
+                    <h4>【第__课课后反馈】</h4>
+                    <div class="feedback-form">
+                        <p>📅 上课日期：_______________ &nbsp;&nbsp; 👤 学员姓名：_______________</p>
+                        <br>
+                        <p>✅ <strong>今天掌握情况：</strong></p>
+                        <p>1. ______________________________________</p>
+                        <p>2. ______________________________________</p>
+                        <br>
+                        <p>⚠️ <strong>需要加强的地方：</strong></p>
+                        <p>1. ______________________________________</p>
+                        <p>2. ______________________________________</p>
+                        <br>
+                        <p>📹 <strong>今日练习要点：</strong></p>
+                        <p>______________________________________</p>
+                        <br>
+                        <p>🎯 <strong>回家作业：</strong></p>
+                        <p>______________________________________</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            自由泳进阶教学体系 v1.0 │ 整理日期：2026年5月
+        </div>
+    </div>
+</body>
+</html>
