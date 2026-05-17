@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏊 蛙泳教学教案 · 教练版</title>
+<style>
+  :root {
+    --primary: #0077B6;
+    --primary-light: #90E0EF;
+    --secondary: #023E8A;
+    --accent: #00B4D8;
+    --green: #2D6A4F;
+    --green-light: #D8F3DC;
+    --yellow: #FFB703;
+    --yellow-light: #FFF3CD;
+    --red: #C1121F;
+    --red-light: #FFE5E5;
+    --purple: #7B2CBF;
+    --gray: #6C757D;
+    --bg: #F8F9FA;
+    --card-bg: #FFFFFF;
+    --text: #212529;
+    --border: #DEE2E6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 60%, var(--accent) 100%);
+    color: white;
+    border-radius: 24px;
+    padding: 48px 40px;
+    text-align: center;
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50px; right: -50px;
+    width: 200px; height: 200px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -30px; left: -30px;
+    width: 150px; height: 150px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 50px;
+    padding: 6px 20px;
+    font-size: 13px;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-size: 38px;
+    font-weight: 900;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+  }
+  .hero p { font-size: 16px; opacity: 0.9; margin-bottom: 24px; }
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .hero-stat {
+    text-align: center;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 16px;
+    padding: 16px 28px;
+    min-width: 100px;
+  }
+  .hero-stat .num { font-size: 28px; font-weight: 900; }
+  .hero-stat .label { font-size: 12px; opacity: 0.8; margin-top: 4px; }
+
+  /* Card */
+  .card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border: 1px solid var(--border);
+  }
+  .card-title {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card-title .icon { font-size: 28px; }
+
+  /* Philosophy */
+  .philosophy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+  }
+  .philosophy-item {
+    background: var(--primary-light);
+    background: linear-gradient(135deg, #E0F7FA, #B2EBF2);
+    border-radius: 14px;
+    padding: 18px;
+    text-align: center;
+  }
+  .philosophy-item .p-icon { font-size: 36px; margin-bottom: 8px; }
+  .philosophy-item .p-title { font-weight: 700; font-size: 15px; margin-bottom: 4px; color: var(--secondary); }
+  .philosophy-item .p-desc { font-size: 12px; color: var(--gray); }
+
+  /* Stage header */
+  .stage-header {
+    border-radius: 16px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .stage-header.green { background: linear-gradient(135deg, var(--green), #40916C); }
+  .stage-header.blue { background: linear-gradient(135deg, var(--primary), var(--accent)); }
+  .stage-header.purple { background: linear-gradient(135deg, #5A189A, var(--purple)); }
+  .stage-header.red { background: linear-gradient(135deg, var(--secondary), var(--primary)); }
+  .stage-num { font-size: 40px; font-weight: 900; opacity: 0.9; }
+  .stage-info h2 { font-size: 22px; font-weight: 800; }
+  .stage-info p { font-size: 13px; opacity: 0.85; }
+  .stage-info .stage-lessons { font-size: 12px; opacity: 0.75; margin-top: 2px; }
+
+  /* Lesson */
+  .lesson {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 22px 26px;
+    margin-bottom: 14px;
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--primary);
+    transition: box-shadow 0.2s;
+  }
+  .lesson:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+  .lesson.green { border-left-color: var(--green); }
+  .lesson.blue { border-left-color: var(--primary); }
+  .lesson.purple { border-left-color: var(--purple); }
+  .lesson.red { border-left-color: var(--secondary); }
+  .lesson.exam { border-left-color: var(--yellow); background: #FFFBF0; }
+
+  .lesson-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .lesson-title {
+    font-size: 17px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .lesson-badge {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 50px;
+    font-weight: 600;
+  }
+  .badge-green { background: var(--green-light); color: var(--green); }
+  .badge-blue { background: #E3F2FD; color: var(--primary); }
+  .badge-purple { background: #F3E5F5; color: var(--purple); }
+  .badge-red { background: #E8EAF6; color: var(--secondary); }
+  .badge-exam { background: var(--yellow-light); color: #856404; }
+
+  .lesson-goal {
+    background: #F0F8FF;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .lesson-goal .emoji { font-size: 18px; flex-shrink: 0; }
+
+  /* Table */
+  .lesson-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+  .lesson-table th {
+    background: var(--primary);
+    color: white;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 700;
+  }
+  .lesson-table th:first-child { border-radius: 8px 0 0 0; }
+  .lesson-table th:last-child { border-radius: 0 8px 0 0; }
+  .lesson-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #F0F0F0;
+    vertical-align: top;
+  }
+  .lesson-table tr:last-child td:first-child { border-radius: 0 0 0 8px; }
+  .lesson-table tr:last-child td:last-child { border-radius: 0 0 8px 0; }
+  .lesson-table tr:nth-child(even) { background: #FAFAFA; }
+  .lesson-table tr:hover { background: #F0F7FF; }
+
+  /* Checkpoint */
+  .checkpoint {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--green-light);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--green);
+    font-weight: 600;
+  }
+  .checkpoint .icon { font-size: 20px; }
+
+  /* Pro tips */
+  .tip-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .tip-item {
+    background: var(--yellow-light);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+    display: flex;
+    gap: 8px;
+  }
+  .tip-item .icon { font-size: 18px; flex-shrink: 0; }
+  .tip-item.blue { background: #E3F2FD; color: var(--primary); }
+  .tip-item.red { background: var(--red-light); color: var(--red); }
+
+  /* Error table */
+  .error-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .error-item {
+    background: var(--red-light);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 13px;
+  }
+  .error-item .error-title { font-weight: 700; color: var(--red); margin-bottom: 4px; display: flex; gap: 6px; }
+  .error-item .error-fix { color: #333; }
+
+  /* Milestone */
+  .milestone-bar {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 24px 0;
+    flex-wrap: wrap;
+  }
+  .milestone-item {
+    flex: 1;
+    min-width: 120px;
+    text-align: center;
+    padding: 16px 8px;
+    position: relative;
+  }
+  .milestone-item .m-icon { font-size: 36px; margin-bottom: 6px; }
+  .milestone-item .m-name { font-weight: 800; font-size: 14px; }
+  .milestone-item .m-desc { font-size: 11px; color: var(--gray); margin-top: 2px; }
+  .milestone-connector {
+    width: 40px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--green), var(--primary), var(--purple), var(--secondary));
+    flex-shrink: 0;
+  }
+
+  /* Flow diagram */
+  .flow-diagram {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+    padding: 16px;
+    background: #F8F9FA;
+    border-radius: 12px;
+    margin-top: 12px;
+    font-size: 13px;
+  }
+  .flow-step {
+    background: var(--primary);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .flow-arrow { color: var(--gray); font-size: 16px; }
+
+  /* Table of contents */
+  .toc {
+    background: #F8F9FA;
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+  .toc h3 { margin-bottom: 12px; font-size: 16px; }
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 8px;
+  }
+  .toc-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 13px;
+    transition: background 0.2s;
+  }
+  .toc-item:hover { background: #E9ECEF; }
+  .toc-num { 
+    width: 24px; height: 24px; 
+    border-radius: 50%; 
+    background: var(--primary); 
+    color: white; 
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; flex-shrink: 0;
+  }
+  .toc-item.green .toc-num { background: var(--green); }
+  .toc-item.blue .toc-num { background: var(--primary); }
+  .toc-item.purple .toc-num { background: var(--purple); }
+  .toc-item.red .toc-num { background: var(--secondary); }
+
+  /* Section divider */
+  .section-divider {
+    text-align: center;
+    padding: 32px 0 16px;
+    color: var(--gray);
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-divider::before, .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 32px;
+    color: var(--gray);
+    font-size: 12px;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .hero { padding: 32px 20px; }
+    .hero h1 { font-size: 28px; }
+    .hero-stats { gap: 16px; }
+    .card { padding: 20px 18px; }
+    .lesson { padding: 16px 18px; }
+    .lesson-table { font-size: 12px; }
+  }
+
+  .highlight-box {
+    background: linear-gradient(135deg, #FFF9E6, #FFF3CD);
+    border: 1px solid #FFE69C;
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-top: 14px;
+    font-size: 13px;
+  }
+  .highlight-box .title { font-weight: 700; color: #856404; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+
+  .three-columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .three-columns .col {
+    background: #F8F9FA;
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+    font-size: 12px;
+  }
+  .three-columns .col .emoji { font-size: 28px; margin-bottom: 4px; display: block; }
+  .three-columns .col .label { font-weight: 700; color: var(--secondary); }
+  .three-columns .col .sub { color: var(--gray); font-size: 11px; margin-top: 2px; }
+
+  @media (max-width: 600px) {
+    .three-columns { grid-template-columns: 1fr; }
+  }
+
+  .star-list { list-style: none; padding: 0; }
+  .star-list li { padding: 4px 0; display: flex; align-items: flex-start; gap: 8px; }
+  .star-list li::before { content: '⭐'; flex-shrink: 0; }
+
+  .coach-slogan {
+    background: linear-gradient(135deg, var(--secondary), var(--primary));
+    color: white;
+    border-radius: 16px;
+    padding: 28px;
+    text-align: center;
+    margin: 24px 0;
+  }
+  .coach-slogan h3 { font-size: 18px; margin-bottom: 12px; }
+  .coach-slogan .slogans { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+  .coach-slogan .slogan-item {
+    background: rgba(255,255,255,0.15);
+    border-radius: 12px;
+    padding: 12px 20px;
+    font-size: 15px;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">🏊 新手教练必备工具</div>
+  <h1>蛙泳教学教案</h1>
+  <p>16课时从入门到进阶 · 教练版 · 图文详解</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="num">16</div>
+      <div class="label">标准课时</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">4</div>
+      <div class="label">学习阶段</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">4</div>
+      <div class="label">里程碑证书</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">50m</div>
+      <div class="label">结业目标</div>
+    </div>
+  </div>
+</div>
+
+<!-- Table of Contents -->
+<div class="toc">
+  <h3>📑 目录导航</h3>
+  <div class="toc-grid">
+    <a href="#p1" class="toc-item green"><div class="toc-num">1</div>水性建立（第1-4课）</a>
+    <a href="#p2" class="toc-item blue"><div class="toc-num">2</div>蛙泳腿专项（第5-8课）</a>
+    <a href="#p3" class="toc-item purple"><div class="toc-num">3</div>完整配合（第9-12课）</a>
+    <a href="#p4" class="toc-item red"><div class="toc-num">4</div>进阶提高（第13-16课）</a>
+    <a href="#p5" class="toc-item"><div class="toc-num">5</div>常见问题纠错</a>
+    <a href="#p6" class="toc-item"><div class="toc-num">6</div>陆上辅助训练</a>
+  </div>
+</div>
+
+<!-- 教学核心理念 -->
+<div class="card">
+  <div class="card-title"><span class="icon">💡</span> 教学核心理念</div>
+  <div class="philosophy-grid">
+    <div class="philosophy-item">
+      <div class="p-icon">💧</div>
+      <div class="p-title">水性第一</div>
+      <div class="p-desc">不着急教动作<br>先让学员"不怕水"</div>
+    </div>
+    <div class="philosophy-item">
+      <div class="p-icon">🎯</div>
+      <div class="p-title">感觉驱动</div>
+      <div class="p-desc">强调"找感觉"<br>而不是机械模仿</div>
+    </div>
+    <div class="philosophy-item">
+      <div class="p-icon">🧩</div>
+      <div class="p-title">分解细化</div>
+      <div class="p-desc">每个动作拆到<br>不能再拆</div>
+    </div>
+    <div class="philosophy-item">
+      <div class="p-icon">⚠️</div>
+      <div class="p-title">纠错前置</div>
+      <div class="p-desc">提前告诉学员<br>"会犯什么错"</div>
+    </div>
+  </div>
+</div>
+
+<!-- 学习阶段总览 -->
+<div class="card">
+  <div class="card-title"><span class="icon">🗺️</span> 学习阶段总览</div>
+  <div class="milestone-bar">
+    <div class="milestone-item">
+      <div class="m-icon">🏊</div>
+      <div class="m-name">水性阶段</div>
+      <div class="m-desc">第1-4课</div>
+    </div>
+    <div class="milestone-connector"></div>
+    <div class="milestone-item">
+      <div class="m-icon">🦵</div>
+      <div class="m-name">腿部阶段</div>
+      <div class="m-desc">第5-8课</div>
+    </div>
+    <div class="milestone-connector"></div>
+    <div class="milestone-item">
+      <div class="m-icon">🎯</div>
+      <div class="m-name">配合阶段</div>
+      <div class="m-desc">第9-12课</div>
+    </div>
+    <div class="milestone-connector"></div>
+    <div class="milestone-item">
+      <div class="m-icon">🏆</div>
+      <div class="m-name">进阶阶段</div>
+      <div class="m-desc">第13-16课</div>
+    </div>
+  </div>
+  <div class="flow-diagram">
+    <span class="flow-step">消除恐惧</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-step">水性建立</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-step">蛙泳腿</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-step">手腿配合</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-step">呼吸节奏</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-step">完整游进</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-step">50米达标</span>
+  </div>
+</div>
+
+<!-- ===================== 第一阶段 ===================== -->
+<div class="section-divider">第一阶段 · 水性建立（第1-4课）</div>
+
+<div id="p1">
+<div class="stage-header green">
+  <div class="stage-num">01</div>
+  <div class="stage-info">
+    <h2>🏊 水性建立阶段</h2>
+    <p>核心目标：消除恐惧，建立水中安全感</p>
+    <div class="stage-lessons">第1-4课 · 🏅 第4课颁发【水性达标证书】</div>
+  </div>
+</div>
+
+<!-- 第1课 -->
+<div class="lesson green">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第1课：与水做朋友 —— 消除恐惧</div>
+    <span class="lesson-badge badge-green">零基础起点</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>不怕水，能在水中憋气10秒，完成漂浮→站立</div>
+  </div>
+  <table class="lesson-table">
+    <thead>
+      <tr>
+        <th>环节</th>
+        <th>内容</th>
+        <th>时间</th>
+        <th>教学要点</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>憋气练习</td>
+        <td>15分钟</td>
+        <td>盆水憋气→水中憋气→漂浮憋气<br><strong>重点：</strong>鼻子呼气，嘴巴吸气</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>水中行走</td>
+        <td>10分钟</td>
+        <td>水深到胸口，感受浮力和阻力<br>鼓励学员边走边玩水</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>抱膝漂浮</td>
+        <td>15分钟</td>
+        <td>像"气球"一样飘起来<br><strong>口诀：</strong>深呼吸→低头→抱膝→飘起来</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>漂浮站立</td>
+        <td>10分钟</td>
+        <td>漂浮→收腿→脚踩地→站立<br><strong>重点：</strong>先收手，再收腿，脚站稳再抬头</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="checkpoint"><span class="icon">✅</span> 课后考核：能连续漂浮10秒，独立完成漂浮→站立</div>
+  <div class="tip-grid">
+    <div class="tip-item">
+      <span class="icon">⚠️</span>
+      <div><strong>常见错误：</strong>憋气时脸浸入水就慌，要告诉学员鼻子慢慢吐气就没事</div>
+    </div>
+    <div class="tip-item blue">
+      <span class="icon">💡</span>
+      <div><strong>教学技巧：</strong>用"吹泡泡"游戏代替"憋气"，说"鼻子吹泡泡"更易接受</div>
+    </div>
+  </div>
+</div>
+
+<!-- 第2课 -->
+<div class="lesson green">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第2课：水感游戏日</div>
+    <span class="lesson-badge badge-green">培养兴趣</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>享受水中感觉，敢于在水中睁眼，能仰漂5秒</div>
+  </div>
+  <table class="lesson-table">
+    <thead>
+      <tr><th>环节</th><th>内容</th><th>时间</th><th>教学要点</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>仰漂练习</td><td>20分钟</td><td>脸朝上，放松身体躺下来<br><strong>感觉：</strong>像躺在床上一样</td></tr>
+      <tr><td>2</td><td>水中吐泡泡比赛</td><td>10分钟</td><td>鼻子慢慢吐，看谁吐的泡泡多<br>睁眼在水里看东西</td></tr>
+      <tr><td>3</td><td>水中转身游戏</td><td>10分钟</td><td>练习身体在水中的控制能力<br>翻跟头、打滚</td></tr>
+      <tr><td>4</td><td>打水仗（可选）</td><td>5分钟</td><td>彻底消除对水的恐惧</td></tr>
+    </tbody>
+  </table>
+  <div class="checkpoint"><span class="icon">✅</span> 课后考核：能仰漂5秒，不害怕水</div>
+  <div class="highlight-box">
+    <div class="title">💡 教学重点</div>
+    这一课的核心是"玩"，让学员觉得游泳课很有趣。不要急于教动作，多设计游戏环节。如果学员还害怕，第1-2课可以重复上。
+  </div>
+</div>
+
+<!-- 第3课 -->
+<div class="lesson green">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第3课：滑行的艺术</div>
+    <span class="lesson-badge badge-green">基础滑行</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>蹬壁滑行5米以上，掌握基本呼吸节奏</div>
+  </div>
+  <table class="lesson-table">
+    <thead>
+      <tr><th>环节</th><th>内容</th><th>时间</th><th>教学要点</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>蹬壁滑行</td><td>20分钟</td><td>蹲壁→蹬腿→伸直身体→滑行<br><strong>感觉：</strong>像"箭"一样射出去</td></tr>
+      <tr><td>2</td><td>呼吸节奏</td><td>15分钟</td><td>吸→憋→呼（鼻子慢慢吐泡泡）<br>站在水中练习抬头吸气</td></tr>
+      <tr><td>3</td><td>流线型练习</td><td>10分钟</td><td>身体要"直成一条线"<br>双手叠放在头前</td></tr>
+    </tbody>
+  </table>
+  <div class="checkpoint"><span class="icon">✅</span> 课后考核：蹬壁滑行能滑出5米以上</div>
+  <div class="tip-grid">
+    <div class="tip-item">
+      <span class="icon">⚠️</span>
+      <div><strong>常见错误：</strong>蹬壁时头埋太低，要强调眼睛看前方水底</div>
+    </div>
+    <div class="tip-item blue">
+      <span class="icon">💡</span>
+      <div><strong>教学技巧：</strong>滑行前先让学员"嗖"一下，数1、2、3再蹬腿，找"箭"的感觉</div>
+    </div>
+  </div>
+</div>
+
+<!-- 第4课 -->
+<div class="lesson green exam">
+  <div class="lesson-header">
+    <div class="lesson-title">🏅 第4课：水性考核日</div>
+    <span class="lesson-badge badge-exam">颁发证书</span>
+  </div>
+  <table class="lesson-table">
+    <thead>
+      <tr><th>考核项目</th><th>标准</th><th>说明</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>抱膝漂浮</td><td>连续10秒</td><td>不慌、不站起</td></tr>
+      <tr><td>蹬壁滑行</td><td>5米以上</td><td>身体直，滑得远</td></tr>
+      <tr><td>水中翻身</td><td>能完成</td><td>360度翻转</td></tr>
+    </tbody>
+  </table>
+  <div class="checkpoint" style="background:#FFF3CD;color:#856404;"><span class="icon">🏅</span> 通过考核颁发：【水性达标证书】</div>
+  <div class="highlight-box">
+    <div class="title">🏆 仪式感很重要！</div>
+    考核通过后，务必正式颁发证书，拍照留念。这是建立学员成就感的关键时刻，会让学员更有动力坚持下去！
+  </div>
+</div>
+</div>
+
+<!-- ===================== 第二阶段 ===================== -->
+<div class="section-divider">第二阶段 · 蛙泳腿专项（第5-8课）</div>
+
+<div id="p2">
+<div class="stage-header blue">
+  <div class="stage-num">02</div>
+  <div class="stage-info">
+    <h2>🦵 蛙泳腿专项阶段</h2>
+    <p>核心目标：掌握蛙泳腿部动作"收翻蹬夹"，扶板打腿能前进</p>
+    <div class="stage-lessons">第5-8课 · 🏅 第8课颁发【蛙泳腿达标证书】</div>
+  </div>
+</div>
+
+<div class="coach-slogan">
+  <h3>🦵 蛙泳腿口诀</h3>
+  <div class="slogans">
+    <div class="slogan-item">收 → 翻 → 蹬 → 夹 → 飘</div>
+    <div class="slogan-item">脚尖外翻 · 脚心对后方</div>
+    <div class="slogan-item">蹬完立刻并拢 · 飘一会儿</div>
+  </div>
+</div>
+
+<!-- 第5课 -->
+<div class="lesson blue">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第5课：蛙泳腿入门 —— 收翻蹬夹</div>
+    <span class="lesson-badge badge-blue">动作入门</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>能在池边正确做出"收翻蹬夹"完整动作</div>
+  </div>
+  <table class="lesson-table">
+    <thead>
+      <tr><th>环节</th><th>内容</th><th>时间</th><th>教学要点</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>陆上模仿</td><td>10分钟</td><td>趴在池边练腿<br><strong>口诀：</strong>收→翻→蹬→夹→飘</td></tr>
+      <tr><td>2</td><td>收腿练习</td><td>10分钟</td><td>脚后跟往屁股收，膝盖不要分开太宽<br><strong>重点：</strong>慢收</td></tr>
+      <tr><td>3</td><td>翻脚练习</td><td>15分钟</td><td>脚尖外翻，脚心对后方<br><strong>感觉：</strong>脚像"铲子"一样铲水</td></tr>
+      <tr><td>4</td><td>蹬夹练习</td><td>15分钟</td><td>蹬→夹要连贯，蹬完立刻并拢<br><strong>感觉：</strong>像踹墙一样用力蹬</td></tr>
+    </tbody>
+  </table>
+  <div class="checkpoint"><span class="icon">✅</span> 课后考核：能在池边正确做出收翻蹬夹动作</div>
+  <div class="tip-grid">
+    <div class="tip-item">
+      <span class="icon">⚠️</span>
+      <div><strong>最常见错误：</strong>翻脚不到位！90%的蹬腿不走水都是翻脚问题。<br>教练要手把手掰学员的脚，让他感受正确位置</div>
+    </div>
+    <div class="tip-item blue">
+      <span class="icon">💡</span>
+      <div><strong>教学技巧：</strong>先在岸上用浮板演示，让学员看清楚；下水后教练站在旁边看着做</div>
+    </div>
+  </div>
+  <div class="three-columns">
+    <div class="col"><span class="emoji">📥</span><div class="label">收</div><div class="sub">脚跟往屁股收<br>膝盖与肩同宽</div></div>
+    <div class="col"><span class="emoji">🔄</span><div class="label">翻</div><div class="sub">脚尖外翻<br>脚心朝后方</div></div>
+    <div class="col"><span class="emoji">🦶</span><div class="label">蹬夹</div><div class="sub">向外蹬→夹拢<br>动作要快</div></div>
+  </div>
+</div>
+
+<!-- 第6课 -->
+<div class="lesson blue">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第6课：蛙泳腿强化 —— 找水感</div>
+    <span class="lesson-badge badge-blue">扶板打腿</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>扶板打腿能前进，找到"蹬腿走水"的感觉</div>
+  </div>
+  <table class="lesson-table">
+    <thead>
+      <tr><th>环节</th><th>内容</th><th>时间</th><th>教学要点</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>扶板打腿</td><td>25分钟</td><td>25米×4组，组间休息<br><strong>重点：</strong>打几下，飘一会儿，不要一直打</td></tr>
+      <tr><td>2</td><td>翻脚强化</td><td>10分钟</td><td>教练用手感受学员的翻脚是否到位</td></tr>
+      <tr><td>3</td><td>蹬夹感觉练习</td><td>10分钟</td><td>只蹬一下，看能滑多远<br><strong>目标：</strong>一下滑3米以上</td></tr>
+    </tbody>
+  </table>
+  <div class="checkpoint"><span class="icon">✅</span> 课后考核：扶板打腿能前进</div>
+  <div class="tip-grid">
+    <div class="tip-item red">
+      <span class="icon">❌</span>
+      <div><strong>错误：</strong>一直打腿不停。正确：打1-2下→飘3-5秒→再打</div>
+    </div>
+    <div class="tip-item blue">
+      <span class="icon">💡</span>
+      <div><strong>教学技巧：</strong>数数法：蹬一下数"1、2、3"，飘三下再蹬。避免学员乱打</div>
+    </div>
+  </div>
+</div>
+
+<!-- 第7课 -->
+<div class="lesson blue">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第7课：蛙泳腿纠错日</div>
+    <span class="lesson-badge badge-blue">专项纠错</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>解决蹬腿不走水的问题，能连续游15米</div>
+  </div>
+  <div class="error-grid">
+    <div class="error-item">
+      <div class="error-title"><span>❌</span> 蹬腿不走水</div>
+      <div class="error-fix"><strong>原因：</strong>翻脚不到位<br><strong>解决：</strong>趴在池边，教练亲手掰脚，感受正确位置；脚尖必须外翻</div>
+    </div>
+    <div class="error-item">
+      <div class="error-title"><span>❌</span> 膝盖分开太宽</div>
+      <div class="error-fix"><strong>原因：</strong>收腿时膝盖往两边张<br><strong>解决：</strong>夹浮板练习收腿，强迫膝盖并拢</div>
+    </div>
+    <div class="error-item">
+      <div class="error-title"><span>❌</span> 蹬腿时身体下沉</div>
+      <div class="error-fix"><strong>原因：</strong>抬头太高，眼睛没看池底<br><strong>解决：</strong>头放低，下巴贴近水面</div>
+    </div>
+    <div class="error-item">
+      <div class="error-title"><span>❌</span> 蹬夹不连贯</div>
+      <div class="error-fix"><strong>原因：</strong>蹬完停顿了<br><strong>解决：</strong>蹬夹是一个动作，蹬完立刻夹，中间不停</div>
+    </div>
+  </div>
+  <div class="checkpoint"><span class="icon">✅</span> 课后考核：扶板打腿能连续游15米</div>
+</div>
+
+<!-- 第8课 -->
+<div class="lesson blue exam">
+  <div class="lesson-header">
+    <div class="lesson-title">🏅 第8课：蛙泳腿考核日</div>
+    <span class="lesson-badge badge-exam">颁发证书</span>
+  </div>
+  <table class="lesson-table">
+    <thead>
+      <tr><th>考核项目</th><th>标准</th><th>说明</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>扶板打腿25米</td><td>能完成</td><td>中途不站起来</td></tr>
+      <tr><td>动作规范度</td><td>翻脚到位</td><td>脚尖外翻，蹬夹连贯</td></tr>
+      <tr><td>滑行距离</td><td>单次蹬腿滑3米+</td><td>说明蹬腿有效</td></tr>
+    </tbody>
+  </table>
+  <div class="checkpoint" style="background:#FFF3CD;color:#856404;"><span class="icon">🏅</span> 通过考核颁发：【蛙泳腿达标证书】</div>
+  <div class="highlight-box">
+    <div class="title">🏆 颁发第二个证书！</div>
+    如果学员在第8课前就达到了标准，可以提前考核颁发证书，让学员保持新鲜感和成就感！
+  </div>
+</div>
+</div>
+
+<!-- ===================== 第三阶段 ===================== -->
+<div class="section-divider">第三阶段 · 完整配合（第9-12课）</div>
+
+<div id="p3">
+<div class="stage-header purple">
+  <div class="stage-num">03</div>
+  <div class="stage-info">
+    <h2>🎯 完整配合阶段</h2>
+    <p>核心目标：掌握手腿配合节奏，能独立完成25米蛙泳</p>
+    <div class="stage-lessons">第9-12课 · 🏅 第12课颁发【蛙泳入门证书】</div>
+  </div>
+</div>
+
+<div class="coach-slogan">
+  <h3>🤝 手腿配合口诀</h3>
+  <div class="slogans">
+    <div class="slogan-item">划手腿不动</div>
+    <div class="slogan-item">收手再收腿</div>
+    <div class="slogan-item">先伸胳膊后蹬腿</div>
+    <div class="slogan-item">并拢伸直飘一会儿</div>
+  </div>
+</div>
+
+<!-- 第9课 -->
+<div class="lesson purple">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第9课：蛙泳手 + 手腿配合</div>
+    <span class="lesson-badge badge-purple">新动作引入</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>掌握划手动作"划→抱→伸"，能完成3次完整手腿配合循环</div>
+  </div>
+  <table class="lesson-table">
+    <thead>
+      <tr><th>环节</th><th>内容</th><th>时间</th><th>教学要点</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>陆上划手模仿</td><td>10分钟</td><td>站着练，模拟划水路径<br><strong>感觉：</strong>划水像"抱个大西瓜"</td></tr>
+      <tr><td>2</td><td>水中划手练习</td><td>15分钟</td><td>站在水里划手，感受水的阻力<br>不要怕划空，多练</td></tr>
+      <tr><td>3</td><td>手腿配合</td><td>20分钟</td><td>划手抬头→伸手低头蹬腿<br>每个动作做慢一点</td></tr>
+    </tbody>
+  </table>
+  <div class="checkpoint"><span class="icon">✅</span> 课后考核：能完成3次完整的手腿配合循环</div>
+  <div class="tip-grid">
+    <div class="tip-item">
+      <span class="icon">⚠️</span>
+      <div><strong>常见错误：</strong>划手时腿也跟着动。正确：划手时腿保持蹬夹后的姿势不动</div>
+    </div>
+    <div class="tip-item blue">
+      <span class="icon">💡</span>
+      <div><strong>教学技巧：</strong>用"慢动作电影"来让学员理解——每个动作之间停顿1-2秒</div>
+    </div>
+  </div>
+  <div class="three-columns">
+    <div class="col"><span class="emoji">🖐️</span><div class="label">划</div><div class="sub">双手向外划<br>约肩宽</div></div>
+    <div class="col"><span class="emoji">🤲</span><div class="label">抱</div><div class="sub">双手往胸前抱<br>像抱球</div></div>
+    <div class="col"><span class="emoji">👉</span><div class="label">伸</div><div class="sub">双手前伸<br>低头入水</div></div>
+  </div>
+</div>
+
+<!-- 第10课 -->
+<div class="lesson purple">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第10课：配合节奏强化</div>
+    <span class="lesson-badge badge-purple">节奏训练</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>能完成10次配合循环，建立稳定节奏感</div>
+  </div>
+  <table class="lesson-table">
+    <thead>
+      <tr><th>环节</th><th>内容</th><th>时间</th><th>教学要点</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>慢动作分解</td><td>20分钟</td><td>1.飘着 2.划手抬头 3.伸手低头 4.收腿翻脚 5.蹬夹 6.飘回去</td></tr>
+      <tr><td>2</td><td>连续配合</td><td>20分钟</td><td>从3个动作→5个动作→10个动作<br><strong>重点：慢！慢！慢！</strong></td></tr>
+    </tbody>
+  </table>
+  <div class="checkpoint"><span class="icon">✅</span> 课后考核：能完成10次配合循环</div>
+  <div class="highlight-box">
+    <div class="title">🎵 节奏感训练</div>
+    配合的关键是"慢"。动作越慢，越省力，越能找到水感。教练可以用数数法：划手数"1、2"，伸出去数"3、4"，蹬腿数"5、6"，飘着数"7、8"。
+  </div>
+</div>
+
+<!-- 第11课 -->
+<div class="lesson purple">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第11课：呼吸专项 + 纠错日</div>
+    <span class="lesson-badge badge-purple">呼吸突破</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>掌握抬头吸气时机，能连续游15米不站起来</div>
+  </div>
+  <div class="error-grid">
+    <div class="error-item">
+      <div class="error-title"><span>❌</span> 抬头时腿停下来</div>
+      <div class="error-fix"><strong>原因：</strong>划手时精力全放在上半身<br><strong>解决：</strong>强制要求腿一直打，或者先蹬完腿再抬头</div>
+    </div>
+    <div class="error-item">
+      <div class="error-title"><span>❌</span> 吸气慌张，吸不到</div>
+      <div class="error-fix"><strong>原因：</strong>划手太快，头还没抬起来手就伸回去了<br><strong>解决：</strong>划手慢一点，抬头后停1秒再伸手</div>
+    </div>
+    <div class="error-item">
+      <div class="error-title"><span>❌</span> 配合混乱</div>
+      <div class="error-fix"><strong>原因：</strong>动作不熟练就急着连贯<br><strong>解决：</strong>回到分解动作，重新一个动作一个动作来</div>
+    </div>
+    <div class="error-item">
+      <div class="error-title"><span>❌</span> 呛水</div>
+      <div class="error-fix"><strong>原因：</strong>抬头就张嘴，没形成习惯<br><strong>解决：</strong>岸上练习：低头"嗯"（鼻子出气），抬头"哈"（嘴巴吸气）</div>
+    </div>
+  </div>
+  <div class="checkpoint"><span class="icon">✅</span> 课后考核：能连续游15米不站起来</div>
+</div>
+
+<!-- 第12课 -->
+<div class="lesson purple exam">
+  <div class="lesson-header">
+    <div class="lesson-title">🏅 第12课：25米达标测试</div>
+    <span class="lesson-badge badge-exam">颁发证书</span>
+  </div>
+  <table class="lesson-table">
+    <thead>
+      <tr><th>考核项目</th><th>标准</th><th>说明</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>连续游25米</td><td>不间断</td><td>中途可以站立休息，但不能重新开始</td></tr>
+      <tr><td>动作连贯性</td><td>基本流畅</td><td>无明显停顿，手腿配合基本协调</td></tr>
+      <tr><td>呼吸</td><td>能吸气</td><td>抬头能吸到气，不呛水</td></tr>
+    </tbody>
+  </table>
+  <div class="checkpoint" style="background:#FFF3CD;color:#856404;"><span class="icon">🏅</span> 通过考核颁发：【蛙泳入门证书】</div>
+  <div class="highlight-box">
+    <div class="title">🎉 里程碑时刻！</div>
+    能独立游25米，说明蛙泳基本学会！这是非常重要的里程碑，务必拍照/视频留念，正式颁发证书，让学员感受到"真的学会了"的成就感！
+  </div>
+</div>
+</div>
+
+<!-- ===================== 第四阶段 ===================== -->
+<div class="section-divider">第四阶段 · 进阶提高（第13-16课）</div>
+
+<div id="p4">
+<div class="stage-header red">
+  <div class="stage-num">04</div>
+  <div class="stage-info">
+    <h2>🏆 进阶提高阶段</h2>
+    <p>核心目标：技术优化、掌握出发转身、能连续游50米</p>
+    <div class="stage-lessons">第13-16课 · 🏆 第16课颁发【蛙泳结业证书】</div>
+  </div>
+</div>
+
+<!-- 第13课 -->
+<div class="lesson red">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第13课：技术优化 —— 省力游</div>
+    <span class="lesson-badge badge-red">技术细节</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>游得更轻松，同样距离少划2次</div>
+  </div>
+  <table class="lesson-table">
+    <thead>
+      <tr><th>环节</th><th>内容</th><th>时间</th><th>教学要点</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>滑行时间延长</td><td>15分钟</td><td>每蹬一次多飘2秒，感受滑行的力量</td></tr>
+      <tr><td>2</td><td>划水力度优化</td><td>15分钟</td><td>不要用蛮力，找"抱水"的感觉<br>划手不要太大，小幅度抱水</td></tr>
+      <tr><td>3</td><td>身体位置调整</td><td>10分钟</td><td>身体要平，不要塌腰<br>想象身体像木板一样平</td></tr>
+    </tbody>
+  </table>
+  <div class="checkpoint"><span class="icon">✅</span> 课后目标：同样距离少划2次</div>
+  <div class="tip-grid">
+    <div class="tip-item blue">
+      <span class="icon">💡</span>
+      <div><strong>核心思路：</strong>游得轻松 = 每一下动作更有效，而不是更快更用力</div>
+    </div>
+  </div>
+</div>
+
+<!-- 第14课 -->
+<div class="lesson red">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第14课：出发 + 转身</div>
+    <span class="lesson-badge badge-red">专业技能</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>学会标准蹬壁出发和简单翻壁转身</div>
+  </div>
+  <table class="lesson-table">
+    <thead>
+      <tr><th>环节</th><th>内容</th><th>时间</th><th>教学要点</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>蹬壁出发</td><td>20分钟</td><td>双手抓住池边→深吸一口气→身体翻转蹬壁→流线型滑行</td></tr>
+      <tr><td>2</td><td>简单转身</td><td>20分钟</td><td>靠近池壁时翻身→脚蹬壁→转身继续游</td></tr>
+    </tbody>
+  </table>
+  <div class="checkpoint"><span class="icon">✅</span> 课后目标：学会标准的出发和转身</div>
+  <div class="highlight-box">
+    <div class="title">💡 安全提示</div>
+    出发和转身是相对专业的技能，要根据泳池条件和学员能力酌情教学。如果学员基础不够扎实，可以跳过此课，重点巩固25米游进。
+  </div>
+</div>
+
+<!-- 第15课 -->
+<div class="lesson red">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第15课：耐力 + 提速</div>
+    <span class="lesson-badge badge-red">体能提升</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>能连续游50米，巩固耐力</div>
+  </div>
+  <table class="lesson-table">
+    <thead>
+      <tr><th>环节</th><th>内容</th><th>时间</th><th>教学要点</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>50米练习</td><td>20分钟</td><td>可以中途转身，不要停<br>找最舒服的节奏</td></tr>
+      <tr><td>2</td><td>节奏控制</td><td>15分钟</td><td>找到最省力的节奏<br>不要一开始就冲</td></tr>
+      <tr><td>3</td><td>提速技巧</td><td>5分钟</td><td>蹬腿用力一点，划手再抱实一点</td></tr>
+    </tbody>
+  </table>
+  <div class="checkpoint"><span class="icon">✅</span> 课后目标：能连续游50米</div>
+</div>
+
+<!-- 第16课 -->
+<div class="lesson red exam">
+  <div class="lesson-header">
+    <div class="lesson-title">🏆 第16课：结业考核</div>
+    <span class="lesson-badge badge-exam">颁发证书</span>
+  </div>
+  <table class="lesson-table">
+    <thead>
+      <tr><th>考核项目</th><th>标准</th><th>说明</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>50米达标</td><td>能连续游完</td><td>中途可转身，不停顿</td></tr>
+      <tr><td>技术流畅度</td><td>动作相对流畅</td><td>手腿配合协调，呼吸自然</td></tr>
+      <tr><td>出发转身</td><td>基本规范</td><td>如果课时不允许，可作为附加项</td></tr>
+    </tbody>
+  </table>
+  <div class="checkpoint" style="background:#FFF3CD;color:#856404;"><span class="icon">🏆</span> 结业颁发：【蛙泳结业证书】</div>
+  <div class="highlight-box">
+    <div class="title">🎬 制作成长合集视频</div>
+    第16课结业时，建议制作一份1分钟的成长合集视频：从第1课到第16课的精彩瞬间对比。让学员看到自己的巨大进步，这是最震撼的激励！效果远超预期！
+  </div>
+</div>
+</div>
+
+<!-- ===================== 常见问题 ===================== -->
+<div class="section-divider">常见问题与纠正方法大全</div>
+
+<div id="p5">
+<div class="card">
+  <div class="card-title"><span class="icon">❌</span> 常见错误纠正大全</div>
+  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:14px; margin-top:8px;">
+    <div style="background:#FFF5F5; border-radius:12px; padding:14px; border-left:4px solid #C1121F;">
+      <div style="font-weight:700; color:#C1121F; margin-bottom:6px;">❌ 问题：总是呛水</div>
+      <div style="font-size:13px;"><strong>原因：</strong>没有养成呼吸习惯<br><strong>纠正：</strong>站在水里，一上一下练习呼吸：低头鼻子吐泡泡（"嗯"），抬头嘴巴吸气（"哈"）。形成习惯就不会呛了。</div>
+    </div>
+    <div style="background:#FFF5F5; border-radius:12px; padding:14px; border-left:4px solid #C1121F;">
+      <div style="font-weight:700; color:#C1121F; margin-bottom:6px;">❌ 问题：蹬腿不走水</div>
+      <div style="font-size:13px;"><strong>原因：</strong>90%是翻脚不到位<br><strong>纠正：</strong>趴在池边，教练手把手掰脚感受正确位置。翻脚时脚尖必须外翻，脚心朝后方。</div>
+    </div>
+    <div style="background:#FFF5F5; border-radius:12px; padding:14px; border-left:4px solid #C1121F;">
+      <div style="font-weight:700; color:#C1121F; margin-bottom:6px;">❌ 问题：游着游着身体下沉</div>
+      <div style="font-size:13px;"><strong>原因：</strong>头抬太高 / 身体太紧张<br><strong>纠正：</strong>眼睛看池底，放松身体，飘的时间再长一点</div>
+    </div>
+    <div style="background:#FFF5F5; border-radius:12px; padding:14px; border-left:4px solid #C1121F;">
+      <div style="font-weight:700; color:#C1121F; margin-bottom:6px;">❌ 问题：游得特别累</div>
+      <div style="font-size:13px;"><strong>原因：</strong>手脚同时动 / 动作太快<br><strong>纠正：</strong>口诀背一遍：划手腿不动。动作越慢越省力</div>
+    </div>
+    <div style="background:#FFF5F5; border-radius:12px; padding:14px; border-left:4px solid #C1121F;">
+      <div style="font-weight:700; color:#C1121F; margin-bottom:6px;">❌ 问题：抬头吸气慌张</div>
+      <div style="font-size:13px;"><strong>原因：</strong>划手太快，头还没抬起来手就伸回去了<br><strong>纠正：</strong>划手慢一点，头抬起来后停1秒再伸手，吸饱气再低头</div>
+    </div>
+    <div style="background:#FFF5F5; border-radius:12px; padding:14px; border-left:4px solid #C1121F;">
+      <div style="font-weight:700; color:#C1121F; margin-bottom:6px;">❌ 问题：蹬夹不连贯</div>
+      <div style="font-size:13px;"><strong>原因：</strong>蹬完停顿了<br><strong>纠正：</strong>蹬夹是一个动作，像踹墙一样用力蹬出去，然后立刻并拢，中间不停顿</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ===================== 陆上辅助训练 ===================== -->
+<div id="p6">
+<div class="card">
+  <div class="card-title"><span class="icon">💪</span> 陆上辅助训练方案</div>
+  <p style="font-size:13px; color:#666; margin-bottom:16px;">每天10分钟，提高水中表现</p>
+  <table class="lesson-table">
+    <thead>
+      <tr><th>训练项目</th><th>组数×次数</th><th>作用</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>翻脚练习</td><td>3组×30秒</td><td>踝关节柔韧性，形成翻脚习惯</td></tr>
+      <tr><td>蹬夹模仿</td><td>3组×20次</td><td>肌肉记忆，动作规范</td></tr>
+      <tr><td>划手模仿</td><td>3组×20次</td><td>划手节奏，抱水感觉</td></tr>
+      <tr><td>平板支撑</td><td>3组×30秒</td><td>核心力量，身体不塌腰</td></tr>
+    </tbody>
+  </table>
+  <div class="highlight-box" style="margin-top:14px;">
+    <div class="title">🧘 课前5分钟柔韧性热身</div>
+    1. 压脚踝：跪坐，屁股坐在脚后跟上，身体向后倾<br>
+    2. 压肩：双手扶墙，身体下压，拉伸肩膀<br>
+    3. 压腿：正压腿+侧压腿，各30秒
+  </div>
+</div>
+</div>
+
+<!-- 课后反馈模板 -->
+<div class="card">
+  <div class="card-title"><span class="icon">📝</span> 课后反馈模板（每节课填写）</div>
+  <pre style="background:#F8F9FA; border-radius:12px; padding:16px; font-size:13px; line-height:1.8; overflow:auto;">
+【第X课反馈表】
+━━━━━━━━━━━━━━━━━━━━━━
+📅 日期：__________  学员：__________
+🎯 本课目标：________________________
+
+✅ 今天学会了：
+  1. ____________________________
+  2. ____________________________
+  3. ____________________________
+
+⚠️ 需要加强：
+  1. ____________________________
+  2. ____________________________
+
+💡 回家作业：________________________
+
+📹 练习视频：________________________
+
+💬 教练评语：________________________
+━━━━━━━━━━━━━━━━━━━━━━
+  </pre>
+</div>
+
+<!-- 进阶规划 -->
+<div class="card">
+  <div class="card-title"><span class="icon">🚀</span> 结业后进阶规划</div>
+  <div style="display:flex; flex-direction:column; gap:10px;">
+    <div style="display:flex; align-items:center; gap:10px; padding:10px 14px; background:#E3F2FD; border-radius:10px;">
+      <span style="font-size:22px;">🏅</span>
+      <div><strong>青铜：</strong>巩固50米，能游100米，1分30秒内</div>
+    </div>
+    <div style="display:flex; align-items:center; gap:10px; padding:10px 14px; background:#F3E5F5; border-radius:10px;">
+      <span style="font-size:22px;">🥈</span>
+      <div><strong>白银：</strong>能游200米，技术流畅，1分10秒内</div>
+    </div>
+    <div style="display:flex; align-items:center; gap:10px; padding:10px 14px; background:#FFF9E6; border-radius:10px;">
+      <span style="font-size:22px;">🥇</span>
+      <div><strong>黄金：</strong>能游500米，55秒内完成50米</div>
+    </div>
+    <div style="display:flex; align-items:center; gap:10px; padding:10px 14px; background:#D8F3DC; border-radius:10px;">
+      <span style="font-size:22px;">🌊</span>
+      <div><strong>下一个目标：</strong>学习其他泳姿（自由泳/仰泳/蝶泳）</div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <p>📖 蛙泳教学教案 · 教练版 · 16课时完整体系</p>
+  <p style="margin-top:4px;">💡 核心理念：水性第一 · 感觉驱动 · 分解细化 · 纠错前置</p>
+</div>
+
+</div>
+</body>
+</html>
