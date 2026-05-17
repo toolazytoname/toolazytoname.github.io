@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏊 蛙泳进阶教学教案 · 教练版</title>
+<style>
+  :root {
+    --primary: #0077B6;
+    --primary-light: #90E0EF;
+    --secondary: #023E8A;
+    --accent: #00B4D8;
+    --green: #2D6A4F;
+    --green-light: #D8F3DC;
+    --yellow: #FFB703;
+    --yellow-light: #FFF3CD;
+    --orange: #E85D04;
+    --orange-light: #FFF0E6;
+    --red: #C1121F;
+    --purple: #7B2CBF;
+    --gold: #D4A017;
+    --gold-light: #FFF9E0;
+    --gray: #6C757D;
+    --bg: #F8F9FA;
+    --card-bg: #FFFFFF;
+    --text: #212529;
+    --border: #DEE2E6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
+    color: white;
+    border-radius: 24px;
+    padding: 48px 40px;
+    text-align: center;
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '🏊‍♂️';
+    position: absolute;
+    top: 10px; right: 20px;
+    font-size: 100px;
+    opacity: 0.08;
+  }
+  .hero::after {
+    content: '🌊';
+    position: absolute;
+    bottom: 5px; left: 20px;
+    font-size: 70px;
+    opacity: 0.08;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.12);
+    border-radius: 50px;
+    padding: 5px 18px;
+    font-size: 13px;
+    margin-bottom: 14px;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .hero h1 {
+    font-size: 38px;
+    font-weight: 900;
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+  }
+  .hero p { font-size: 16px; opacity: 0.85; margin-bottom: 22px; }
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .hero-stat {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 14px;
+    padding: 14px 22px;
+    text-align: center;
+    min-width: 90px;
+  }
+  .hero-stat .num { font-size: 28px; font-weight: 900; color: #FFD700; }
+  .hero-stat .label { font-size: 11px; opacity: 0.7; margin-top: 4px; }
+
+  /* Card */
+  .card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border: 1px solid var(--border);
+  }
+  .card-title {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card-title .icon { font-size: 26px; }
+
+  /* Stage header */
+  .stage-header {
+    border-radius: 16px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .stage-header.s1 { background: linear-gradient(135deg, #E85D04, #F48C06); }
+  .stage-header.s2 { background: linear-gradient(135deg, #D00000, #E85D04); }
+  .stage-header.s3 { background: linear-gradient(135deg, #7B2CBF, #C77DFF); }
+  .stage-header.s4 { background: linear-gradient(135deg, #1a1a2e, #16213e); }
+  .stage-num { font-size: 42px; font-weight: 900; opacity: 0.9; }
+  .stage-info h2 { font-size: 22px; font-weight: 800; }
+  .stage-info p { font-size: 13px; opacity: 0.85; }
+  .stage-info .stage-lessons { font-size: 12px; opacity: 0.7; margin-top: 3px; }
+
+  /* Lesson */
+  .lesson {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 22px 26px;
+    margin-bottom: 14px;
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--orange);
+    transition: box-shadow 0.2s;
+  }
+  .lesson:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+  .lesson.s1 { border-left-color: var(--orange); }
+  .lesson.s2 { border-left-color: var(--red); }
+  .lesson.s3 { border-left-color: var(--purple); }
+  .lesson.s4 { border-left-color: var(--secondary); }
+  .lesson.exam { border-left-color: var(--gold); background: #FFFBF0; }
+
+  .lesson-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .lesson-title {
+    font-size: 17px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .lesson-badge {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 50px;
+    font-weight: 600;
+  }
+  .badge-s1 { background: var(--orange-light); color: var(--orange); }
+  .badge-s2 { background: #FFE5E5; color: var(--red); }
+  .badge-s3 { background: #F3E5F5; color: var(--purple); }
+  .badge-s4 { background: #E8EAF6; color: var(--secondary); }
+  .badge-exam { background: var(--gold-light); color: #856404; }
+
+  .lesson-goal {
+    background: #FFF8F0;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .lesson-goal .emoji { font-size: 18px; flex-shrink: 0; }
+
+  /* Table */
+  .lesson-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+  .lesson-table th {
+    background: var(--orange);
+    color: white;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 700;
+  }
+  .lesson-table th:first-child { border-radius: 8px 0 0 0; }
+  .lesson-table th:last-child { border-radius: 0 8px 0 0; }
+  .lesson-table td { padding: 8px 12px; border-bottom: 1px solid #F0F0F0; vertical-align: top; }
+  .lesson-table tr:nth-child(even) { background: #FAFAFA; }
+  .lesson-table tr:hover { background: #FFF8F0; }
+
+  .checkpoint {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--gold-light);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #856404;
+    font-weight: 600;
+  }
+  .checkpoint .icon { font-size: 20px; }
+
+  .tip-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .tip-item {
+    background: var(--yellow-light);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+    display: flex;
+    gap: 8px;
+  }
+  .tip-item .icon { font-size: 18px; flex-shrink: 0; }
+  .tip-item.blue { background: #E3F2FD; color: var(--primary); }
+  .tip-item.red { background: #FFF5F5; color: var(--red); }
+  .tip-item.green { background: var(--green-light); color: var(--green); }
+
+  .error-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .error-item {
+    background: #FFF5F5;
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 13px;
+    border-left: 3px solid var(--red);
+  }
+  .error-item .error-title { font-weight: 700; color: var(--red); margin-bottom: 4px; display: flex; gap: 6px; }
+  .error-item .error-fix { color: #333; }
+
+  /* Highlight box */
+  .highlight-box {
+    background: linear-gradient(135deg, #FFF9E6, var(--gold-light));
+    border: 1px solid #FFE069;
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-top: 14px;
+    font-size: 13px;
+  }
+  .highlight-box .title { font-weight: 700; color: #856404; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+
+  /* Level cards */
+  .level-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin-top: 12px;
+  }
+  .level-item {
+    border-radius: 14px;
+    padding: 18px 16px;
+    color: white;
+    text-align: center;
+  }
+  .level-item.bronze { background: linear-gradient(135deg, #CD7F32, #E8A870); }
+  .level-item.silver { background: linear-gradient(135deg, #A8A9AD, #C0C0C0); }
+  .level-item.gold { background: linear-gradient(135deg, #D4A017, #FFD700); }
+  .level-item.master { background: linear-gradient(135deg, #1a1a2e, #16213e); }
+  .level-item .level-icon { font-size: 36px; margin-bottom: 8px; }
+  .level-item .level-name { font-weight: 800; font-size: 16px; }
+  .level-item .level-target { font-size: 12px; opacity: 0.85; margin-top: 4px; }
+  .level-item .level-time { font-size: 11px; opacity: 0.7; margin-top: 2px; }
+
+  /* Slogan box */
+  .slogan-box {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: white;
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    margin: 20px 0;
+  }
+  .slogan-box h3 { font-size: 16px; margin-bottom: 12px; }
+  .slogan-list { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .slogan-item {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  /* Section divider */
+  .section-divider {
+    text-align: center;
+    padding: 28px 0 12px;
+    color: var(--gray);
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-divider::before, .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Tech detail cards */
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .tech-item {
+    background: #F8F9FA;
+    border-radius: 12px;
+    padding: 14px;
+    text-align: center;
+  }
+  .tech-item .tech-icon { font-size: 32px; margin-bottom: 6px; }
+  .tech-item .tech-name { font-weight: 700; font-size: 14px; color: var(--secondary); }
+  .tech-item .tech-desc { font-size: 12px; color: var(--gray); margin-top: 4px; }
+
+  /* Table of contents */
+  .toc {
+    background: #F8F9FA;
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+  .toc h3 { margin-bottom: 12px; font-size: 16px; }
+  .toc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; }
+  .toc-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 13px;
+    transition: background 0.2s;
+  }
+  .toc-item:hover { background: #E9ECEF; }
+  .toc-num {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; flex-shrink: 0;
+  }
+  .toc-item.s1 .toc-num { background: var(--orange); }
+  .toc-item.s2 .toc-num { background: var(--red); }
+  .toc-item.s3 .toc-num { background: var(--purple); }
+  .toc-item.s4 .toc-num { background: var(--secondary); }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 28px;
+    color: var(--gray);
+    font-size: 12px;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .hero { padding: 32px 20px; }
+    .hero h1 { font-size: 28px; }
+    .card { padding: 20px 18px; }
+    .lesson { padding: 16px 18px; }
+    .hero-stats { gap: 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">🏊 进阶级教学工具</div>
+  <h1>蛙泳进阶教学教案</h1>
+  <p>进阶训练完整体系 · 教练版 · 16课时深度提升方案</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="num">16</div>
+      <div class="label">进阶课时</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">4</div>
+      <div class="label">训练阶段</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">4</div>
+      <div class="label">等级认证</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">200m</div>
+      <div class="label">结业目标</div>
+    </div>
+  </div>
+</div>
+
+<!-- Table of Contents -->
+<div class="toc">
+  <h3>📑 目录导航</h3>
+  <div class="toc-grid">
+    <a href="#s1" class="toc-item s1"><div class="toc-num">1</div>耐力筑基（第17-20课）</a>
+    <a href="#s2" class="toc-item s2"><div class="toc-num">2</div>技术精进（第21-24课）</a>
+    <a href="#s3" class="toc-item s3"><div class="toc-num">3</div>速度突破（第25-28课）</a>
+    <a href="#s4" class="toc-item s4"><div class="toc-num">4</div>综合达标（第29-32课）</a>
+  </div>
+</div>
+
+<!-- 进阶目标 -->
+<div class="card">
+  <div class="card-title"><span class="icon">🎯</span> 进阶训练目标</div>
+  <div class="level-grid">
+    <div class="level-item bronze">
+      <div class="level-icon">🥉</div>
+      <div class="level-name">青铜</div>
+      <div class="level-target">巩固50米 · 能游100米</div>
+      <div class="level-time">目标：1分30秒内</div>
+    </div>
+    <div class="level-item silver">
+      <div class="level-icon">🥈</div>
+      <div class="level-name">白银</div>
+      <div class="level-target">能游200米 · 技术流畅</div>
+      <div class="level-time">目标：1分10秒内</div>
+    </div>
+    <div class="level-item gold">
+      <div class="level-icon">🥇</div>
+      <div class="level-name">黄金</div>
+      <div class="level-target">能游400米 · 动作标准</div>
+      <div class="level-time">目标：55秒内/50米</div>
+    </div>
+    <div class="level-item master">
+      <div class="level-icon">🏆</div>
+      <div class="level-name">大师</div>
+      <div class="level-target">能游800米+ · 接近专业</div>
+      <div class="level-time">目标：50秒内/50米</div>
+    </div>
+  </div>
+</div>
+
+<!-- 核心理念 -->
+<div class="slogan-box">
+  <h3>💡 进阶教学核心理念</h3>
+  <div class="slogan-list">
+    <div class="slogan-item">系统化 · 不盲目加量</div>
+    <div class="slogan-item">细节控 · 抠每一个动作</div>
+    <div class="slogan-item">数据化 · 用时间衡量进步</div>
+    <div class="slogan-item">节奏感 · 找到最省力配速</div>
+  </div>
+</div>
+
+<!-- ===================== 第一阶段 ===================== -->
+<div class="section-divider">第一阶段 · 耐力筑基（第17-20课）</div>
+
+<div id="s1">
+<div class="stage-header s1">
+  <div class="stage-num">01</div>
+  <div class="stage-info">
+    <h2>🏃 耐力筑基阶段</h2>
+    <p>核心目标：建立有氧基础，能连续游100米以上</p>
+    <div class="stage-lessons">第17-20课 · 重点：巩固技术 + 拉长距离</div>
+  </div>
+</div>
+
+<!-- 第17课 -->
+<div class="lesson s1">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第17课：耐力起步 —— 100米连续游</div>
+    <span class="lesson-badge badge-s1">有氧起步</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>不间断连续游完100米，建立游进节奏</div>
+  </div>
+  <table class="lesson-table">
+    <thead>
+      <tr><th>环节</th><th>内容</th><th>时间</th><th>教学要点</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>热身慢游</td><td>10分钟</td><td>50米慢游放松，熟悉水性<br><strong>重点：</strong>不要冲，慢速游</td></tr>
+      <tr><td>2</td><td>50米计时×4组</td><td>25分钟</td><td>每组间休息2分钟<br><strong>目标：</strong>找到自己的舒适配速</td></tr>
+      <tr><td>3</td><td>100米连续游</td><td>15分钟</td><td>不间断游完100米<br><strong>技巧：</strong>可以慢但不能停</td></tr>
+      <tr><td>4</td><td>放松游</td><td>5分钟</td><td>50米极慢速，整理恢复</td></tr>
+    </tbody>
+  </table>
+  <div class="checkpoint"><span class="icon">✅</span> 课后目标：能连续游完100米不间断，记录配速时间</div>
+  <div class="tip-grid">
+    <div class="tip-item blue">
+      <span class="icon">💡</span>
+      <div><strong>教学要点：</strong>进阶第一课的核心是"慢"——慢速连续游，建立有氧基础，不要追求速度</div>
+    </div>
+    <div class="tip-item red">
+      <span class="icon">⚠️</span>
+      <div><strong>提醒：</strong>学员可能会想冲速度，教练要控制节奏，强调"先能游完再追求速度"</div>
+    </div>
+  </div>
+</div>
+
+<!-- 第18课 -->
+<div class="lesson s1">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第18课：耐力强化 —— 200米基础</div>
+    <span class="lesson-badge badge-s1">距离提升</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>能连续游完200米，找到长距离游进节奏</div>
+  </div>
+  <table class="lesson-table">
+    <thead>
+      <tr><th>环节</th><th>内容</th><th>时间</th><th>教学要点</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>技术巩固</td><td>15分钟</td><td>慢速游50米×3组，专注动作质量<br>录像回放，找出问题</td></tr>
+      <tr><td>2</td><td>100米计时×2组</td><td>20分钟</td><td>记录每组时间，观察配速稳定性</td></tr>
+      <tr><td>3</td><td>200米连续游</td><td>15分钟</td><td>中途可转身，不能停<br><strong>技巧：</strong>找到"可以一直游下去"的节奏</td></tr>
+    </tbody>
+  </table>
+  <div class="checkpoint"><span class="icon">✅</span> 课后目标：连续游完200米，记录200米用时</div>
+  <div class="highlight-box">
+    <div class="title">📊 配速记录</div>
+    这一课开始建立配速记录习惯。每次训练记录成绩，观察进步曲线：
+    <br>• 50米用时：___秒
+    <br>• 100米用时：___秒
+    <br>• 200米用时：___秒
+  </div>
+</div>
+
+<!-- 第19课 -->
+<div class="lesson s1">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第19课：动作细节精修</div>
+    <span class="lesson-badge badge-s1">技术细节</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>细化技术细节，为提速打基础</div>
+  </div>
+  <table class="lesson-table">
+    <thead>
+      <tr><th>专项</th><th>常见问题</th><th>纠正方法</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>翻脚</td><td>翻脚角度不够</td><td>强化踝关节拉伸，每天陆上练习</td></tr>
+      <tr><td>蹬夹</td><td>蹬夹分离、力量不足</td><td>感受"一脚蹬到底"的发力</td></tr>
+      <tr><td>划手</td><td>划水路线过宽、抱水不够</td><td>抱水要像"抱大树"，感受水的阻力</td></tr>
+      <tr><td>配合</td><td>节奏不稳、停顿明显</td><td>建立稳定的"划-抱-伸-蹬-飘"节奏</td></tr>
+      <tr><td>身体位置</td><td>身体起伏大、塌腰</td><td>想象身体像木板一样平</td></tr>
+    </tbody>
+  </table>
+  <div class="tip-grid">
+    <div class="tip-item green">
+      <span class="icon">🎥</span>
+      <div><strong>录像分析：</strong>建议每2-3节课录一次像，对比分析技术变化</div>
+    </div>
+  </div>
+</div>
+
+<!-- 第20课 -->
+<div class="lesson s1 exam">
+  <div class="lesson-header">
+    <div class="lesson-title">🥉 第20课：耐力考核日</div>
+    <span class="lesson-badge badge-exam">青铜认证</span>
+  </div>
+  <table class="lesson-table">
+    <thead>
+      <tr><th>考核项目</th><th>标准</th><th>青铜要求</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>连续距离</td><td>不间断游完</td><td>100米</td></tr>
+      <tr><td>50米用时</td><td>不计时</td><td>能轻松完成</td></tr>
+      <tr><td>技术稳定性</td><td>动作基本不变形</td><td>200米内不变形</td></tr>
+    </tbody>
+  </table>
+  <div class="checkpoint" style="background:#FFF9E0;color:#856404;"><span class="icon">🥉</span> 通过考核：获得【青铜耐力证书】</div>
+  <div class="highlight-box">
+    <div class="title">🏆 里程碑！</div>
+    达到青铜水平说明具备了有氧耐力基础，可以进入技术精进阶段了！继续保持记录训练数据的习惯。
+  </div>
+</div>
+</div>
+
+<!-- ===================== 第二阶段 ===================== -->
+<div class="section-divider">第二阶段 · 技术精进（第21-24课）</div>
+
+<div id="s2">
+<div class="stage-header s2">
+  <div class="stage-num">02</div>
+  <div class="stage-info">
+    <h2>🔧 技术精进阶段</h2>
+    <p>核心目标：动作精细化，每一下都有效率，游200米不停</p>
+    <div class="stage-lessons">第21-24课 · 重点：细节优化 + 效率提升</div>
+  </div>
+</div>
+
+<!-- 第21课 -->
+<div class="lesson s2">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第21课：划手效率专项</div>
+    <span class="lesson-badge badge-s2">效率提升</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>提高每一次划手的推进效率，减少无效划水</div>
+  </div>
+  <table class="lesson-table">
+    <thead>
+      <tr><th>环节</th><th>内容</th><th>时间</th><th>教学要点</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>划手分解</td><td>15分钟</td><td>外划→肩宽→抱水→推水→移臂<br>每个动作停顿感受水的阻力</td></tr>
+      <tr><td>2</td><td>抱水练习</td><td>20分钟</td><td>站在水中，单手划水感受抱球感<br><strong>重点：</strong>抱水比划水更重要</td></tr>
+      <tr><td>3</td><td>窄划手练习</td><td>15分钟</td><td>划手路线收窄，减少浪费的动作</td></tr>
+    </tbody>
+  </table>
+  <div class="checkpoint"><span class="icon">✅</span> 课后目标：同样距离比上周少划3-5次</div>
+  <div class="tip-grid">
+    <div class="tip-item blue">
+      <span class="icon">💡</span>
+      <div><strong>核心指标：</strong>划次（游完25米划几下）——划次越少说明效率越高</div>
+    </div>
+    <div class="tip-item green">
+      <span class="icon">📊</span>
+      <div><strong>记录：</strong>25米划___次（上周___次），进步了___次</div>
+    </div>
+  </div>
+</div>
+
+<!-- 第22课 -->
+<div class="lesson s2">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第22课：蹬夹效率专项</div>
+    <span class="lesson-badge badge-s2">蹬夹优化</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>优化蹬夹质量，每一脚都走更远</div>
+  </div>
+  <table class="lesson-table">
+    <thead>
+      <tr><th>环节</th><th>内容</th><th>时间</th><th>教学要点</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>蹬夹感觉练习</td><td>20分钟</td><td>单次蹬腿滑行测试，记录最远距离<br>目标：从3米→5米</td></tr>
+      <tr><td>2</td><td>快蹬慢收</td><td>15分钟</td><td>强调"蹬出去要快，收回来要慢"<br>蹬夹时间比 = 1:2</td></tr>
+      <tr><td>3</td><td>200米连续游</td><td>15分钟</td><td>应用新蹬夹技术，体会效率差异</td></tr>
+    </tbody>
+  </table>
+  <div class="checkpoint"><span class="icon">✅</span> 课后目标：单次蹬腿滑行距离达到5米以上</div>
+  <div class="error-grid">
+    <div class="error-item">
+      <div class="error-title"><span>❌</span> 蹬腿滑不远</div>
+      <div class="error-fix"><strong>原因：</strong>翻脚不到位 + 蹬夹无力<br><strong>纠正：</strong>陆上踝关节拉伸，蹬夹专项训练</div>
+    </div>
+    <div class="error-item">
+      <div class="error-title"><span>❌</span> 收腿太用力</div>
+      <div class="error-fix"><strong>原因：</strong>收腿产生阻力，抵消推进力<br><strong>纠正：</strong>收腿要"轻"、要"慢"，像在水里捡东西</div>
+    </div>
+  </div>
+</div>
+
+<!-- 第23课 -->
+<div class="lesson s2">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第23课：呼吸效率专项</div>
+    <span class="lesson-badge badge-s2">呼吸优化</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>吸气更快速充足，不影响游进节奏</div>
+  </div>
+  <table class="lesson-table">
+    <thead>
+      <tr><th>环节</th><th>内容</th><th>时间</th><th>教学要点</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>呼吸时机</td><td>15分钟</td><td>在划手"抱水"阶段抬头<br>过早抬头会破坏身体位置</td></tr>
+      <tr><td>2</td><td>快速吸气</td><td>15分钟</td><td>抬头瞬间用口吸气，要快要深<br>不要用鼻子吸气（来不及）</td></tr>
+      <tr><td>3</td><td>侧呼吸练习</td><td>15分钟</td><td>转头而非抬头，减少身体倾斜<br>视线看池边，不是天花板</td></tr>
+      <tr><td>4</td><td>200米应用</td><td>10分钟</td><td>用新呼吸技术游200米</td></tr>
+    </tbody>
+  </table>
+  <div class="checkpoint"><span class="icon">✅</span> 课后目标：200米不停，不呛水，呼吸节奏稳定</div>
+</div>
+
+<!-- 第24课 -->
+<div class="lesson s2 exam">
+  <div class="lesson-header">
+    <div class="lesson-title">🥈 第24课：技术精进考核日</div>
+    <span class="lesson-badge badge-exam">白银认证</span>
+  </div>
+  <table class="lesson-table">
+    <thead>
+      <tr><th>考核项目</th><th>标准</th><th>白银要求</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>连续距离</td><td>不间断</td><td>200米</td></tr>
+      <tr><td>200米用时</td><td>参考标准</td><td>3分钟内</td></tr>
+      <tr><td>25米划次</td><td>越少越好</td><td>≤12次</td></tr>
+      <tr><td>技术稳定性</td><td>全程不变形</td><td>200米不变形</td></tr>
+    </tbody>
+  </table>
+  <div class="checkpoint" style="background:#FFF9E0;color:#856404;"><span class="icon">🥈</span> 通过考核：获得【白银技术证书】</div>
+  <div class="highlight-box">
+    <div class="title">🏆 进入提速阶段！</div>
+    达到白银水平说明技术已经非常扎实了！接下来进入速度突破阶段，开始计时训练，追求更快的成绩！
+  </div>
+</div>
+</div>
+
+<!-- ===================== 第三阶段 ===================== -->
+<div class="section-divider">第三阶段 · 速度突破（第25-28课）</div>
+
+<div id="s3">
+<div class="stage-header s3">
+  <div class="stage-num">03</div>
+  <div class="stage-info">
+    <h2>⚡ 速度突破阶段</h2>
+    <p>核心目标：50米跑进60秒，开始计时训练，建立速度感</p>
+    <div class="stage-lessons">第25-28课 · 重点：间歇训练 + 配速优化</div>
+  </div>
+</div>
+
+<!-- 第25课 -->
+<div class="lesson s3">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第25课：速度基础 —— 50米计时</div>
+    <span class="lesson-badge badge-s3">计时起步</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>进行首次50米计时测试，建立速度基准</div>
+  </div>
+  <table class="lesson-table">
+    <thead>
+      <tr><th>环节</th><th>内容</th><th>时间</th><th>教学要点</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>充分热身</td><td>15分钟</td><td>100米慢游 + 拉伸 + 3×25米加速游</td></tr>
+      <tr><td>2</td><td>50米计时×3组</td><td>25分钟</td><td>全力游，每组间休息3分钟<br><strong>记录：</strong>每组时间，找最快一组</td></tr>
+      <tr><td>3</td><td>数据分析</td><td>10分钟</td><td>分析每组时间差异，找问题</td></tr>
+    </tbody>
+  </table>
+  <div class="checkpoint"><span class="icon">✅</span> 课后记录：50米最快成绩：___秒</div>
+  <div class="tip-grid">
+    <div class="tip-item green">
+      <span class="icon">📊</span>
+      <div><strong>成绩对照表：</strong>新手下水：60-70秒 | 有基础：50-60秒 | 良好：45-50秒 | 优秀：<45秒</div>
+    </div>
+  </div>
+</div>
+
+<!-- 第26课 -->
+<div class="lesson s3">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第26课：间歇训练法</div>
+    <span class="lesson-badge badge-s3">提速核心</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>掌握正确的间歇训练方法，科学提速</div>
+  </div>
+  <table class="lesson-table">
+    <thead>
+      <tr><th>环节</th><th>内容</th><th>时间</th><th>教学要点</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>间歇概念讲解</td><td>10分钟</td><td>解释"游-停-游"的节奏<br>休息时间 = 游进时间的2倍</td></tr>
+      <tr><td>2</td><td>25米间歇×8组</td><td>25分钟</td><td>全力游25米，休息60-90秒<br>组间严格计时</td></tr>
+      <tr><td>3</td><td>间歇分析</td><td>10分钟</td><td>对比每组时间，找到最稳定的配速</td></tr>
+    </tbody>
+  </table>
+  <div class="highlight-box">
+    <div class="title">⚡ 间歇训练原理</div>
+    通过高强度短距离+充分休息的组合，刺激速度能力。关键：每组都要尽全力，不能留力。休息时大口深呼吸，帮助排出乳酸。
+  </div>
+</div>
+
+<!-- 第27课 -->
+<div class="lesson s3">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第27课：出发转身强化</div>
+    <span class="lesson-badge badge-s3">专业技能</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>规范出发和转身动作，减少时间浪费</div>
+  </div>
+  <table class="lesson-table">
+    <thead>
+      <tr><th>环节</th><th>内容</th><th>时间</th><th>教学要点</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>蹬壁出发</td><td>20分钟</td><td>标准出发姿势，流线型滑行<br><strong>计时：</strong>出发后滑行距离和时间</td></tr>
+      <tr><td>2</td><td>翻转转身</td><td>20分钟</td><td>学习"前滚翻"转身<br>脚蹬壁角度、推送时机</td></tr>
+      <tr><td>3</td><td>完整练习</td><td>10分钟</td><td>出发→游25米→转身→游25米</td></tr>
+    </tbody>
+  </table>
+  <div class="checkpoint"><span class="icon">✅</span> 课后目标：出发和转身各节省1-2秒</div>
+  <div class="error-grid">
+    <div class="error-item">
+      <div class="error-title"><span>❌</span> 出发滑行太短</div>
+      <div class="error-fix"><strong>纠正：</strong>出发后身体完全伸展，手叠放在头前，多滑2秒再开始动作</div>
+    </div>
+    <div class="error-item">
+      <div class="error-title"><span>❌</span> 转身慢、蹬壁无力</div>
+      <div class="error-fix"><strong>纠正：</strong>练习"前滚翻"，翻转时团身要紧凑，蹬壁要用力</div>
+    </div>
+  </div>
+</div>
+
+<!-- 第28课 -->
+<div class="lesson s3 exam">
+  <div class="lesson-header">
+    <div class="lesson-title">🥇 第28课：速度考核日</div>
+    <span class="lesson-badge badge-exam">黄金认证</span>
+  </div>
+  <table class="lesson-table">
+    <thead>
+      <tr><th>考核项目</th><th>标准</th><th>黄金要求</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>50米计时</td><td>全力</td><td>≤60秒</td></tr>
+      <tr><td>400米连续</td><td>不间断</td><td>能完成</td></tr>
+      <tr><td>出发转身</td><td>规范</td><td>基本到位</td></tr>
+    </tbody>
+  </table>
+  <div class="checkpoint" style="background:#FFF9E0;color:#856404;"><span class="icon">🥇</span> 通过考核：获得【黄金速度证书】</div>
+</div>
+</div>
+
+<!-- ===================== 第四阶段 ===================== -->
+<div class="section-divider">第四阶段 · 综合达标（第29-32课）</div>
+
+<div id="s4">
+<div class="stage-header s4">
+  <div class="stage-num">04</div>
+  <div class="stage-info">
+    <h2>🏆 综合达标阶段</h2>
+    <p>核心目标：50米跑进50秒，能游800米，向大师级进发</p>
+    <div class="stage-lessons">第29-32课 · 重点：综合能力 + 长距离挑战</div>
+  </div>
+</div>
+
+<!-- 第29课 -->
+<div class="lesson s4">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第29课：配速策略</div>
+    <span class="lesson-badge badge-s4">长距离</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>学习长距离配速策略，能游400米以上</div>
+  </div>
+  <table class="lesson-table">
+    <thead>
+      <tr><th>环节</th><th>内容</th><th>时间</th><th>教学要点</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>配速理论</td><td>10分钟</td><td>前100米"保存体力"策略<br>每100米比自己最好成绩慢5-10秒</td></tr>
+      <tr><td>2</td><td>400米体验</td><td>25分钟</td><td>尝试不间断游完400米<br>允许慢速但不能停</td></tr>
+      <tr><td>3</td><td>配速分析</td><td>10分钟</td><td>分析每100米的用时变化</td></tr>
+    </tbody>
+  </table>
+  <div class="checkpoint"><span class="icon">✅</span> 课后目标：完成400米连续游</div>
+</div>
+
+<!-- 第30课 -->
+<div class="lesson s4">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第30课：冲刺能力训练</div>
+    <span class="lesson-badge badge-s4">最后冲刺</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>强化最后100米的冲刺能力</div>
+  </div>
+  <table class="lesson-table">
+    <thead>
+      <tr><th>环节</th><th>内容</th><th>时间</th><th>教学要点</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>200米计时</td><td>15分钟</td><td>记录基础成绩</td></tr>
+      <tr><td>2</td><td>倒训练法</td><td>20分钟</td><td>最后50米全力冲<br>倒着推：200→150→100→50</td></tr>
+      <tr><td>3</td><td>终点冲刺</td><td>10分钟</td><td>练习最后15米加速技巧</td></tr>
+    </tbody>
+  </table>
+  <div class="checkpoint"><span class="icon">✅</span> 课后记录：最后50米冲刺成绩：___秒</div>
+</div>
+
+<!-- 第31课 -->
+<div class="lesson s4">
+  <div class="lesson-header">
+    <div class="lesson-title">📘 第31课：800米挑战</div>
+    <span class="lesson-badge badge-s4">长距离</span>
+  </div>
+  <div class="lesson-goal">
+    <span class="emoji">🎯</span>
+    <div><strong>本课目标：</strong>完成800米长距离挑战，体验泳池马拉松</div>
+  </div>
+  <table class="lesson-table">
+    <thead>
+      <tr><th>环节</th><th>内容</th><th>时间</th><th>教学要点</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>800米连续游</td><td>40分钟</td><td>不间断游完800米<br><strong>策略：</strong>每200米休息10秒（大喘气）</td></tr>
+      <tr><td>2</td><td>分段计时</td><td>记录</td><td>每200米的分段成绩</td></tr>
+    </tbody>
+  </table>
+  <div class="checkpoint"><span class="icon">✅</span> 课后目标：完成800米，记录总用时</div>
+  <div class="highlight-box">
+    <div class="title">🏊 800米是什么概念？</div>
+    800米≈32个来回，普通人约需要20-30分钟完成。能游完800米说明心肺功能和耐力都非常优秀了！
+  </div>
+</div>
+
+<!-- 第32课 -->
+<div class="lesson s4 exam">
+  <div class="lesson-header">
+    <div class="lesson-title">🏆 第32课：结业考核</div>
+    <span class="lesson-badge badge-exam">大师认证</span>
+  </div>
+  <table class="lesson-table">
+    <thead>
+      <tr><th>考核项目</th><th>标准</th><th>大师要求</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>50米计时</td><td>全力</td><td>≤50秒</td></tr>
+      <tr><td>400米连续</td><td>不间断</td><td>≤8分钟</td></tr>
+      <tr><td>800米挑战</td><td>能完成</td><td>不要求时间</td></tr>
+      <tr><td>出发转身</td><td>规范</td><td>熟练</td></tr>
+    </tbody>
+  </table>
+  <div class="checkpoint" style="background:#FFF9E0;color:#856404;"><span class="icon">🏆</span> 结业颁发：【蛙泳大师证书】</div>
+  <div class="highlight-box">
+    <div class="title">🎉 恭喜达到大师级水平！</div>
+    从50米到800米，从 Bronze 到 Master——你已经是一个真正的游泳高手了！蛙泳对你来说已经成为一种享受。接下来可以考虑学习自由泳、仰泳、蝶泳，或者继续挑战长距离和速度！
+  </div>
+</div>
+</div>
+
+<!-- 课后反馈模板 -->
+<div class="card">
+  <div class="card-title"><span class="icon">📝</span> 进阶训练课后反馈模板</div>
+  <pre style="background:#F8F9FA; border-radius:12px; padding:16px; font-size:13px; line-height:1.8; overflow:auto;">
+【第X课反馈表】
+━━━━━━━━━━━━━━━━━━━━━━
+📅 日期：__________  学员：__________
+🎯 本课目标：________________________
+
+📊 训练数据：
+  50米用时：___秒（上次：___秒）
+  100米用时：___秒（上次：___秒）
+  200米用时：___秒（上次：___秒）
+  25米划次：___次（上次：___次）
+
+✅ 今日进步：
+  1. ____________________________
+  2. ____________________________
+
+⚠️ 需要加强：
+  1. ____________________________
+  2. ____________________________
+
+💬 教练评语：________________________
+━━━━━━━━━━━━━━━━━━━━━━
+  </pre>
+</div>
+
+<!-- 常见问题 -->
+<div class="card">
+  <div class="card-title"><span class="icon">❌</span> 进阶阶段常见问题</div>
+  <div class="error-grid">
+    <div class="error-item">
+      <div class="error-title"><span>❌</span> 速度提不上去</div>
+      <div class="error-fix">原因：耐力基础不够 or 技术有浪费<br>解决：先巩固耐力，再练速度；减少无效划水</div>
+    </div>
+    <div class="error-item">
+      <div class="error-title"><span>❌</span> 长距离游不完</div>
+      <div class="error-fix">原因：有氧基础薄弱 or 配速太快<br>解决：降低配速；增加训练频次</div>
+    </div>
+    <div class="error-item">
+      <div class="error-title"><span>❌</span> 划次太多</div>
+      <div class="error-fix">原因：划水路线宽 or 蹬腿效率低<br>解决：窄划手；加强蹬腿训练</div>
+    </div>
+    <div class="error-item">
+      <div class="error-title"><span>❌</span> 转身太慢</div>
+      <div class="error-fix">原因：翻转不熟练 or 蹬壁无力<br>解决：多练前滚翻；强化核心力量</div>
+    </div>
+  </div>
+</div>
+
+<!-- 训练计划参考 -->
+<div class="card">
+  <div class="card-title"><span class="icon">📅</span> 一周训练计划参考</div>
+  <table class="lesson-table">
+    <thead>
+      <tr><th>星期</th><th>训练内容</th><th>强度</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>周一</td><td>休息/拉伸</td><td>低</td></tr>
+      <tr><td>周二</td><td>技术专项（划手/蹬腿）</td><td>中</td></tr>
+      <tr><td>周三</td><td>间歇训练（25米×8组）</td><td>高</td></tr>
+      <tr><td>周四</td><td>休息/瑜伽/拉伸</td><td>低</td></tr>
+      <tr><td>周五</td><td>耐力训练（200-400米）</td><td>中</td></tr>
+      <tr><td>周六</td><td>计时测试/长距离</td><td>中高</td></tr>
+      <tr><td>周日</td><td>完全休息</td><td>无</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="footer">
+  <p>🏊 蛙泳进阶教学教案 · 教练版 · 进阶16课时完整体系</p>
+  <p style="margin-top:4px;">💡 核心理念：系统化 · 细节控 · 数据化 · 节奏感</p>
+</div>
+
+</div>
+</body>
+</html>
