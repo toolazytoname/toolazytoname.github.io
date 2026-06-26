@@ -1,0 +1,27 @@
+# build output
+dist/
+.astro/
+.vercel/
+
+# deps
+node_modules/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# env
+.env
+.env.local
+.env.*.local
+
+# editor
+.vscode/
+.idea/
+.DS_Store
+*.swp
+
+# typescript
+*.tsbuildinfo

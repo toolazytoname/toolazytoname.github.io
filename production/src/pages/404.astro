@@ -1,0 +1,72 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  seo={{
+    title: '404',
+    description: '页面没找到。',
+  }}
+>
+  <section class="not-found">
+    <div class="container container-narrow">
+      <div class="not-found__inner reveal">
+        <p class="eyebrow">404</p>
+        <h1 class="not-found__title serif">这条路径不存在</h1>
+        <p class="not-found__lede">
+          可能链接写错了，或者我刚把旧文章搬走。
+          不如回到主页，看看地球上的 4 个点？
+        </p>
+        <div class="not-found__ctas">
+          <a href="/" class="btn btn--primary">回到主页</a>
+          <a href="/posts" class="btn btn--ghost">浏览文章</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    background: var(--color-ink);
+    color: var(--color-ivory);
+    min-height: 90vh;
+    display: grid;
+    place-items: center;
+    padding: var(--s-20) 0;
+  }
+  .not-found__inner {
+    text-align: center;
+  }
+  .not-found .eyebrow {
+    color: var(--color-coral);
+    font-size: 14px;
+  }
+  .not-found__title {
+    font-size: clamp(48px, 8vw, 96px);
+    margin: var(--s-4) 0 var(--s-5);
+    color: var(--color-ivory);
+    letter-spacing: -0.03em;
+  }
+  .not-found__lede {
+    color: rgba(250, 249, 245, 0.7);
+    max-width: 480px;
+    margin: 0 auto var(--s-8);
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  .not-found__ctas {
+    display: flex;
+    gap: var(--s-3);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .not-found .btn--primary {
+    background: var(--color-terracotta);
+    color: var(--color-ivory);
+  }
+  .not-found .btn--ghost {
+    border: 1px solid rgba(250, 249, 245, 0.3);
+    color: var(--color-ivory);
+  }
+</style>

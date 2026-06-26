@@ -1,0 +1,347 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Hero from '@components/Hero.astro';
+import WorkCard from '@components/WorkCard.astro';
+import Timeline from '@components/Timeline.astro';
+import MemoryCard from '@components/MemoryCard.astro';
+import { works } from '@data/works';
+import { memories } from '@data/memories';
+
+const skills = [
+  'Swift', 'Objective-C', 'LLVM', 'TypeScript', 'Python',
+  'Rust (学)', 'Neovim', 'Xcode', 'iOS', 'Android', 'Linux',
+  'SwiftPM', 'Git', 'Docker', 'K8s', 'Cloudflare', 'Vercel',
+  'PADI AOW', 'Ski · 单板', 'Climbing · 5.10a', '公路旅行',
+];
+
+const interests = [
+  {
+    title: '写代码',
+    body:
+      '16 岁开始写代码，做过 Swift 编译器、Apple LLVM 后端、字节隐私检测。\n技术不是目的，是手段。',
+  },
+  {
+    title: '户外',
+    body:
+      '滑雪 + 潜水 + 攀岩 + 公路旅行。\n每年至少 3 次长线 + 无数短线。把身体练好是中年最重要的事。',
+  },
+  {
+    title: '看书写字',
+    body:
+      '最近在读非技术书偏多。\n也写 —— 这个站点就是 14 年博客的延续。',
+  },
+  {
+    title: '发呆',
+    body:
+      '看云、看树、看人。\n想清楚"我到底要什么"比"我要做什么"重要得多。',
+  },
+];
+---
+
+<BaseLayout>
+  <Hero />
+
+  <!-- =========================== Skills marquee =========================== -->
+  <section class="skills" aria-label="技能">
+    <div class="skills__track" data-marquee>
+      {[...skills, ...skills].map((s) => (
+        <span class="skills__item">
+          <span class="skills__bullet" aria-hidden="true">●</span>
+          {s}
+        </span>
+      ))}
+    </div>
+  </section>
+
+  <!-- =========================== Works (3x2) =========================== -->
+  <section class="works" id="works">
+    <div class="container">
+      <header class="section-head reveal">
+        <p class="eyebrow">Works · 作品</p>
+        <h2 class="section-title serif">做过的一些东西</h2>
+        <p class="section-sub">
+          悬停翻转查看细节。6 个，按时间倒序。
+        </p>
+      </header>
+
+      <div class="works__grid">
+        {works.map((w, i) => <WorkCard work={w} index={i} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================== Now =========================== -->
+  <section class="now" id="now">
+    <div class="container container-narrow">
+      <header class="section-head reveal">
+        <p class="eyebrow">Now · 当下</p>
+        <h2 class="section-title serif">最近在想、在做</h2>
+        <p class="section-sub">
+          来自 <a href="/now">/now</a> 页面。每月更新一次。
+        </p>
+      </header>
+
+      <Timeline />
+    </div>
+  </section>
+
+  <!-- =========================== Interests split =========================== -->
+  <section class="interests" id="interests">
+    <div class="container">
+      <header class="section-head reveal">
+        <p class="eyebrow">Interests · 兴趣</p>
+        <h2 class="section-title serif">除了写代码之外</h2>
+      </header>
+
+      <div class="interests__split">
+        <div class="interests__left reveal">
+          <h3 class="serif interests__heading">Outdoor / Mind</h3>
+          <p class="interests__lede">
+            把身体练好，是中年人最重要的事。
+            滑雪让冬天有盼头，潜水让夏天有盼头，攀岩让每个周末有盼头。
+          </p>
+          <div class="interests__quote">
+            <p class="serif">
+              "不是去看什么风景，是去看自己在风景里是什么样子。"
+            </p>
+          </div>
+        </div>
+        <div class="interests__right">
+          {interests.map((it, i) => (
+            <article class="interests__item reveal" style={`--i: ${i};`}>
+              <h4 class="interests__item-title serif">{it.title}</h4>
+              <p class="interests__item-body">
+                {it.body.split('\n').map((line) => (
+                  <span>{line}<br /></span>
+                ))}
+              </p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================== Memories grid (companion to Globe) =========================== -->
+  <section class="memories" id="memories">
+    <div class="container">
+      <header class="section-head reveal">
+        <p class="eyebrow">Memories · 记忆</p>
+        <h2 class="section-title serif">4 个地点</h2>
+        <p class="section-sub">
+          不只是"我去过的地方"，是塑造过我的地方。点击地球上的点看完整故事。
+        </p>
+      </header>
+
+      <div class="memories__grid">
+        {memories.map((m, i) => <MemoryCard memory={m} index={i} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================== Closing CTA =========================== -->
+  <section class="closing">
+    <div class="container container-narrow closing__inner reveal">
+      <p class="eyebrow">Get in touch</p>
+      <h2 class="closing__title serif">想聊点什么？</h2>
+      <p class="closing__lede">
+        关于合作、技术、户外、或者只是想认识一下 —— 邮件最稳。
+      </p>
+      <div class="closing__ctas">
+        <a href="mailto:hi@weichao.ren" class="btn btn--primary">hi@weichao.ren</a>
+        <a href="/colophon" class="btn btn--ghost">关于这个站 →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Skills marquee */
+  .skills {
+    background: var(--color-ink);
+    color: var(--color-ivory);
+    padding: var(--s-6) 0;
+    overflow: hidden;
+    border-top: 1px solid var(--color-ink-soft);
+    border-bottom: 1px solid var(--color-ink-soft);
+  }
+  .skills__track {
+    display: flex;
+    gap: var(--s-10);
+    animation: marquee 38s linear infinite;
+    width: max-content;
+    will-change: transform;
+  }
+  .skills:hover .skills__track { animation-play-state: paused; }
+  .skills__item {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    font-size: 15px;
+    color: rgba(250, 249, 245, 0.7);
+    font-family: var(--font-mono);
+    white-space: nowrap;
+  }
+  .skills__bullet {
+    color: var(--color-terracotta);
+    font-size: 8px;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* Section headings */
+  .section-head {
+    margin-bottom: var(--s-12);
+    max-width: 720px;
+  }
+  .section-title {
+    font-size: clamp(32px, 4vw, 48px);
+    line-height: 1.1;
+    margin: var(--s-3) 0;
+    color: var(--color-warm-text);
+    letter-spacing: -0.01em;
+  }
+  .section-sub {
+    color: var(--color-warm-text-muted);
+    font-size: 17px;
+    line-height: 1.6;
+    margin: 0;
+  }
+  .section-head .eyebrow {
+    color: var(--color-terracotta);
+  }
+
+  /* Works */
+  .works {
+    padding: var(--s-24) 0;
+    background: var(--color-parchment);
+  }
+  .works__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-5);
+  }
+
+  /* Now */
+  .now {
+    padding: var(--s-24) 0;
+    background: var(--color-ivory);
+  }
+
+  /* Interests */
+  .interests {
+    padding: var(--s-24) 0;
+    background: var(--color-parchment);
+  }
+  .interests__split {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: var(--s-12);
+    align-items: start;
+  }
+  .interests__heading {
+    font-size: 36px;
+    margin: 0 0 var(--s-4);
+    color: var(--color-warm-text);
+  }
+  .interests__lede {
+    color: var(--color-warm-text-muted);
+    line-height: 1.65;
+    margin: 0 0 var(--s-6);
+  }
+  .interests__quote {
+    border-left: 3px solid var(--color-terracotta);
+    padding-left: var(--s-4);
+    color: var(--color-warm-text);
+  }
+  .interests__quote p {
+    font-size: 22px;
+    line-height: 1.4;
+    margin: 0;
+    color: var(--color-warm-text-muted);
+    font-style: italic;
+  }
+  .interests__item {
+    padding: var(--s-5) 0;
+    border-top: 1px solid var(--color-warm-border);
+    transition-delay: calc(var(--i, 0) * 80ms);
+  }
+  .interests__item:last-child { border-bottom: 1px solid var(--color-warm-border); }
+  .interests__item-title {
+    font-size: 20px;
+    margin: 0 0 var(--s-2);
+    color: var(--color-warm-text);
+  }
+  .interests__item-body {
+    margin: 0;
+    color: var(--color-warm-text-muted);
+    line-height: 1.65;
+    font-size: 15px;
+  }
+
+  /* Memories grid */
+  .memories {
+    padding: var(--s-24) 0;
+    background: var(--color-ivory);
+  }
+  .memories__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--s-5);
+  }
+
+  /* Closing */
+  .closing {
+    padding: var(--s-32) 0;
+    background: var(--color-ink);
+    color: var(--color-ivory);
+    text-align: center;
+  }
+  .closing__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .closing .eyebrow {
+    color: var(--color-coral);
+  }
+  .closing__title {
+    font-size: clamp(40px, 5vw, 64px);
+    margin: var(--s-3) 0 var(--s-5);
+    color: var(--color-ivory);
+    letter-spacing: -0.02em;
+  }
+  .closing__lede {
+    color: rgba(250, 249, 245, 0.65);
+    max-width: 480px;
+    margin: 0 0 var(--s-8);
+    font-size: 17px;
+  }
+  .closing__ctas {
+    display: flex;
+    gap: var(--s-3);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .closing .btn--primary {
+    background: var(--color-terracotta);
+    color: var(--color-ivory);
+  }
+  .closing .btn--ghost {
+    border: 1px solid rgba(250, 249, 245, 0.3);
+    color: var(--color-ivory);
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .works__grid { grid-template-columns: repeat(2, 1fr); }
+    .memories__grid { grid-template-columns: repeat(2, 1fr); }
+    .interests__split { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .works__grid { grid-template-columns: 1fr; }
+    .memories__grid { grid-template-columns: 1fr; }
+  }
+</style>

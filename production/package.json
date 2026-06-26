@@ -1,0 +1,36 @@
+{
+  "name": "weichao-ren",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "weichao.ren — personal site rebuilt on Astro 5 + Vercel",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev --port 4321",
+    "start": "astro dev --port 4321",
+    "build": "astro check && astro build",
+    "preview": "astro preview --port 4321",
+    "astro": "astro",
+    "typecheck": "astro check",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^4.0.0",
+    "@astrojs/react": "^4.0.0",
+    "@astrojs/rss": "^4.0.0",
+    "@astrojs/sitemap": "^3.2.0",
+    "@astrojs/vercel": "^8.0.0",
+    "@google/generative-ai": "^0.21.0",
+    "astro": "^5.0.0",
+    "openai": "^4.78.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "three": "^0.160.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "@types/three": "^0.160.0",
+    "typescript": "^5.7.0",
+    "vitest": "^4.1.9"
+  }
+}

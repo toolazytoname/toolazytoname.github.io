@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141413"/>
+      <stop offset="100%" stop-color="#0e0e0d"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="80%" cy="20%" r="50%">
+      <stop offset="0%" stop-color="#c96442" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#c96442" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <text x="80" y="320" font-family="Georgia, serif" font-weight="500" font-size="120" fill="#faf9f5" letter-spacing="-2">
+    小兔头
+  </text>
+  <text x="80" y="380" font-family="-apple-system, SF Pro Text, Inter, sans-serif" font-size="28" fill="#c96442" letter-spacing="1">
+    WEICHAO.REN
+  </text>
+  <text x="80" y="460" font-family="-apple-system, SF Pro Text, Inter, sans-serif" font-size="22" fill="#87867f">
+    做过 Swift 编译器 · LLVM 后端 · 字节隐私检测
+  </text>
+  <text x="80" y="490" font-family="-apple-system, SF Pro Text, Inter, sans-serif" font-size="22" fill="#87867f">
+    现在想清楚下一步。
+  </text>
+  <circle cx="950" cy="315" r="200" fill="none" stroke="#c96442" stroke-width="1" opacity="0.4"/>
+  <circle cx="950" cy="315" r="120" fill="none" stroke="#c96442" stroke-width="1" opacity="0.6"/>
+  <circle cx="950" cy="315" r="40" fill="#c96442"/>
+  <circle cx="850" cy="240" r="12" fill="#ff6b35"/>
+  <circle cx="980" cy="380" r="10" fill="#3b82f6"/>
+  <circle cx="1020" cy="250" r="10" fill="#10b981"/>
+  <circle cx="900" cy="380" r="10" fill="#f59e0b"/>
+</svg>

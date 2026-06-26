@@ -1,0 +1,177 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+const stack = [
+  { name: 'Astro 5', role: '页面框架、Content Collections、静态生成' },
+  { name: 'React 19', role: '3D 地球、AI 聊天助手等交互岛' },
+  { name: 'Three.js', role: 'Hero 的 3D 地球与记忆点动画' },
+  { name: 'Vercel', role: '托管 + Serverless Functions + CDN' },
+  { name: 'TypeScript', role: 'strict 模式，路径别名 @components / @data / @lib' },
+  { name: 'Gemini 1.5 Flash', role: '聊天机器人首选模型' },
+  { name: 'DeepSeek', role: '聊天机器人兜底模型' },
+  { name: 'Anthropic Serif / SF Pro', role: '字体（取决于系统可用性）' },
+];
+
+const principles = [
+  '内容先于装饰 — 文字 > 图像 > 动效',
+  '每屏只一个核心信息',
+  '段落短、句子短、留白多',
+  '暖色调（parchment + ivory + terracotta）',
+  'Apple 蓝只用在行动按钮',
+  '阴影只出现在浮起元素',
+  '移动端和桌面端同等重要',
+];
+---
+
+<BaseLayout
+  seo={{
+    title: 'Colophon',
+    description: '这个站点用什么做的、设计原则、字体、托管。',
+  }}
+>
+  <article class="colophon">
+    <div class="container container-narrow">
+      <header class="colophon__head reveal">
+        <p class="eyebrow">Colophon</p>
+        <h1 class="colophon__title serif">关于这个站</h1>
+        <p class="colophon__lede">
+          写给好奇的人。这个站用什么做的、为什么这么做、一些设计原则。
+        </p>
+      </header>
+
+      <section class="reveal">
+        <h2 class="serif">Why</h2>
+        <p>
+          旧站跑在 GitHub Pages 上的 Jekyll，从 2011 年写到 2025 年。
+          56 篇文章 + 无数次折腾模板，最后变成了一个我不愿意再写新文章的地方。
+        </p>
+        <p>
+          2026 年决定重建。目标：让我重新喜欢在这里写东西。
+          技术选型简单 —— Astro + Vercel，TypeScript 严格模式，
+          客户端交互岛尽量少。
+        </p>
+      </section>
+
+      <section class="reveal">
+        <h2 class="serif">Stack</h2>
+        <ul class="colophon__stack">
+          {stack.map((s) => (
+            <li>
+              <strong>{s.name}</strong>
+              <span>{s.role}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="reveal">
+        <h2 class="serif">Principles</h2>
+        <ol class="colophon__principles">
+          {principles.map((p) => <li>{p}</li>)}
+        </ol>
+      </section>
+
+      <section class="reveal">
+        <h2 class="serif">Photos</h2>
+        <p>
+          4 张照片是我自己拍的。
+          你可以在 <a href="https://github.com/toolazytoname/toolazytoname.github.io/tree/main/production/public/photos">GitHub 仓库</a> 看完整版本。
+        </p>
+      </section>
+
+      <section class="reveal">
+        <h2 class="serif">Source</h2>
+        <p>
+          所有源码公开：<a href="https://github.com/toolazytoname/toolazytoname.github.io">github.com/toolazytoname/toolazytoname.github.io</a>
+        </p>
+        <p class="colophon__signoff">
+          Built by 小兔头 · 2026
+        </p>
+      </section>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .colophon {
+    padding: var(--s-20) 0 var(--s-24);
+    background: var(--color-parchment);
+    min-height: 80vh;
+  }
+  .colophon__head {
+    margin-bottom: var(--s-12);
+    padding-bottom: var(--s-6);
+    border-bottom: 1px solid var(--color-warm-border);
+  }
+  .colophon__title {
+    font-size: clamp(48px, 6vw, 72px);
+    margin: var(--s-3) 0 var(--s-4);
+    color: var(--color-warm-text);
+    letter-spacing: -0.02em;
+  }
+  .colophon__lede {
+    color: var(--color-warm-text-muted);
+    font-size: 18px;
+    margin: 0;
+  }
+  .colophon section {
+    margin-bottom: var(--s-12);
+  }
+  .colophon h2 {
+    font-size: 26px;
+    margin: 0 0 var(--s-4);
+    color: var(--color-warm-text);
+    font-weight: 500;
+  }
+  .colophon p {
+    color: var(--color-warm-text-muted);
+    line-height: 1.7;
+    margin: 0 0 var(--s-4);
+  }
+  .colophon__stack {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .colophon__stack li {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: var(--s-4);
+    padding: var(--s-3) 0;
+    border-top: 1px solid var(--color-warm-border);
+    align-items: baseline;
+  }
+  .colophon__stack li:last-child {
+    border-bottom: 1px solid var(--color-warm-border);
+  }
+  .colophon__stack strong {
+    color: var(--color-warm-text);
+    font-weight: 500;
+    font-family: var(--font-mono);
+    font-size: 14px;
+  }
+  .colophon__stack span {
+    color: var(--color-warm-text-muted);
+    font-size: 15px;
+  }
+  .colophon__principles {
+    list-style: decimal;
+    padding-left: var(--s-6);
+    color: var(--color-warm-text-muted);
+    line-height: 1.9;
+  }
+  .colophon__principles li {
+    margin-bottom: var(--s-2);
+  }
+  .colophon__signoff {
+    margin-top: var(--s-12);
+    text-align: center;
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--color-warm-text-dim);
+    font-size: 16px;
+  }
+  @media (max-width: 600px) {
+    .colophon__stack li { grid-template-columns: 1fr; gap: 4px; }
+  }
+</style>

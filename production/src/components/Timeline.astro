@@ -1,0 +1,111 @@
+---
+import { nowEntries } from '@data/now';
+
+const sorted = [...nowEntries].sort((a, b) => a.date.localeCompare(b.date));
+---
+
+<ol class="timeline" reversed>
+  {
+    sorted.map((entry, i) => (
+      <li class="timeline__item reveal" style={`--i: ${i};`}>
+        <div class="timeline__dot" aria-hidden="true" />
+        <div class="timeline__content">
+          <p class="timeline__date eyebrow">{entry.date}</p>
+          <h3 class="timeline__title serif">{entry.title}</h3>
+          <p class="timeline__body">{entry.body}</p>
+          {entry.tag && (
+            <span class={`timeline__tag timeline__tag--${entry.tag}`}>
+              {entry.tag}
+            </span>
+          )}
+        </div>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .timeline {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 11px;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: var(--color-warm-border);
+  }
+  .timeline__item {
+    position: relative;
+    padding-left: var(--s-10);
+    padding-bottom: var(--s-10);
+    transition-delay: calc(var(--i, 0) * 120ms);
+  }
+  .timeline__item:last-child {
+    padding-bottom: 0;
+  }
+  .timeline__dot {
+    position: absolute;
+    left: 6px;
+    top: 8px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-parchment);
+    border: 2px solid var(--color-terracotta);
+    box-shadow: 0 0 0 4px var(--color-parchment);
+  }
+  .timeline__content {
+    background: var(--color-ivory);
+    border: 1px solid var(--color-warm-border);
+    border-radius: var(--r-lg);
+    padding: var(--s-5) var(--s-6);
+  }
+  .timeline__date {
+    margin: 0 0 var(--s-2);
+    color: var(--color-warm-text-dim);
+  }
+  .timeline__title {
+    font-size: 22px;
+    margin: 0 0 var(--s-3);
+    color: var(--color-warm-text);
+  }
+  .timeline__body {
+    margin: 0;
+    color: var(--color-warm-text-muted);
+    line-height: 1.65;
+    font-size: 15px;
+  }
+  .timeline__tag {
+    display: inline-block;
+    margin-top: var(--s-3);
+    font-size: 11px;
+    padding: 2px 10px;
+    border-radius: 980px;
+    background: var(--color-warm-sand);
+    color: var(--color-warm-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .timeline__tag--work {
+    background: rgba(201, 100, 66, 0.15);
+    color: var(--color-terracotta);
+  }
+  .timeline__tag--life {
+    background: rgba(16, 185, 129, 0.15);
+    color: #047857;
+  }
+  .timeline__tag--travel {
+    background: rgba(59, 130, 246, 0.15);
+    color: #1d4ed8;
+  }
+  .timeline__tag--open-source {
+    background: rgba(245, 158, 11, 0.15);
+    color: #b45309;
+  }
+</style>

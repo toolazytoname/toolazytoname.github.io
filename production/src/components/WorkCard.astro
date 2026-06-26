@@ -1,0 +1,253 @@
+---
+import type { Work } from '@data/works';
+
+interface Props {
+  work: Work;
+  index: number;
+}
+
+const { work, index } = Astro.props;
+---
+
+<article
+  class="work-card reveal"
+  data-tilt
+  data-status={work.status}
+  style={`--i: ${index};`}
+>
+  <div class="work-card__inner">
+    <!-- FRONT -->
+    <div class="work-card__face work-card__face--front">
+      <header class="work-card__head">
+        <span class="work-card__tag">{work.tag}</span>
+        <span class={`work-card__status work-card__status--${work.status}`}>
+          {work.status}
+        </span>
+      </header>
+      <h3 class="work-card__title serif">{work.title}</h3>
+      <p class="work-card__subtitle">{work.subtitle}</p>
+      <ul class="work-card__highlights">
+        {work.front.highlights.map((h) => (
+          <li>{h}</li>
+        ))}
+      </ul>
+      <p class="work-card__hint">悬停查看详情 ↻</p>
+    </div>
+
+    <!-- BACK -->
+    <div class="work-card__face work-card__face--back">
+      <p class="eyebrow">{work.period} · {work.tag}</p>
+      <h4 class="work-card__back-title serif">怎么做的</h4>
+      <p class="work-card__back-problem"><strong>问题。</strong>{work.back.problem}</p>
+      <p class="work-card__back-approach"><strong>方法。</strong>{work.back.approach}</p>
+      <p class="work-card__back-outcome"><strong>结果。</strong>{work.back.outcome}</p>
+      <div class="work-card__stack">
+        {work.back.stack.map((s) => <span class="work-card__chip">{s}</span>)}
+      </div>
+      {
+        work.back.links && work.back.links.length > 0 && (
+          <div class="work-card__links">
+            {work.back.links.map((l) => (
+              <a href={l.url} class="work-card__link">
+                {l.label} →
+              </a>
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </div>
+</article>
+
+<style>
+  .work-card {
+    perspective: 1400px;
+    min-height: 320px;
+  }
+  .work-card__inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 320px;
+    transform-style: preserve-3d;
+    transition: transform 700ms var(--ease-out);
+  }
+  .work-card:hover .work-card__inner,
+  .work-card:focus-within .work-card__inner {
+    transform: rotateY(180deg);
+  }
+
+  .work-card__face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: var(--r-xl);
+    padding: var(--s-6);
+    display: flex;
+    flex-direction: column;
+  }
+  .work-card__face--front {
+    background: var(--color-ivory);
+    border: 1px solid var(--color-warm-border);
+  }
+  .work-card__face--back {
+    background: var(--color-ink);
+    color: var(--color-ivory);
+    transform: rotateY(180deg);
+  }
+
+  .work-card__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--s-5);
+  }
+  .work-card__tag {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    color: var(--color-terracotta);
+  }
+  .work-card__status {
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 980px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .work-card__status--shipped {
+    background: rgba(16, 185, 129, 0.15);
+    color: #047857;
+  }
+  .work-card__status--wip {
+    background: rgba(245, 158, 11, 0.15);
+    color: #b45309;
+  }
+  .work-card__status--archived {
+    background: rgba(120, 120, 120, 0.15);
+    color: #525252;
+  }
+
+  .work-card__title {
+    font-size: 26px;
+    line-height: 1.15;
+    margin: 0 0 var(--s-2);
+    color: var(--color-warm-text);
+  }
+  .work-card__subtitle {
+    color: var(--color-warm-text-muted);
+    margin: 0 0 var(--s-5);
+    font-size: 14px;
+  }
+  .work-card__highlights {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--s-4);
+    flex-grow: 1;
+  }
+  .work-card__highlights li {
+    color: var(--color-warm-text);
+    padding: var(--s-2) 0;
+    border-bottom: 1px solid var(--color-warm-border);
+    font-size: 14px;
+    position: relative;
+    padding-left: var(--s-4);
+  }
+  .work-card__highlights li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--color-terracotta);
+  }
+  .work-card__highlights li:last-child {
+    border-bottom: none;
+  }
+  .work-card__hint {
+    font-size: 11px;
+    color: var(--color-warm-text-dim);
+    margin: auto 0 0;
+    font-style: italic;
+  }
+
+  /* BACK */
+  .work-card__back-title {
+    font-size: 18px;
+    margin: var(--s-2) 0 var(--s-4);
+    color: var(--color-coral);
+  }
+  .work-card__back-problem,
+  .work-card__back-approach,
+  .work-card__back-outcome {
+    font-size: 13px;
+    line-height: 1.55;
+    margin: 0 0 var(--s-3);
+    color: var(--color-ivory);
+  }
+  .work-card__back-problem strong,
+  .work-card__back-approach strong,
+  .work-card__back-outcome strong {
+    color: var(--color-coral);
+    margin-right: 6px;
+  }
+  .work-card__stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: auto;
+  }
+  .work-card__chip {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 2px 8px;
+    background: rgba(250, 249, 245, 0.1);
+    border: 1px solid rgba(250, 249, 245, 0.18);
+    border-radius: 4px;
+    color: var(--color-ivory);
+  }
+  .work-card__links {
+    display: flex;
+    gap: var(--s-3);
+    margin-top: var(--s-3);
+  }
+  .work-card__link {
+    color: var(--color-coral);
+    font-size: 13px;
+  }
+
+  /* Touch devices: don't flip, show front only with details inline */
+  @media (hover: none) {
+    .work-card__inner {
+      transform: none !important;
+    }
+    .work-card__face--back {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  // Mouse-tilt micro-interaction. Skipped on touch / reduced motion.
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const cards = document.querySelectorAll<HTMLElement>('[data-tilt]');
+    cards.forEach((card) => {
+      card.addEventListener('pointermove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const dx = (e.clientX - cx) / rect.width;
+        const dy = (e.clientY - cy) / rect.height;
+        const inner = card.querySelector<HTMLElement>('.work-card__inner');
+        if (inner) {
+          inner.style.transform = `rotateY(${dx * 8}deg) rotateX(${-dy * 8}deg)`;
+        }
+      });
+      card.addEventListener('pointerleave', () => {
+        const inner = card.querySelector<HTMLElement>('.work-card__inner');
+        if (inner) inner.style.transform = '';
+      });
+    });
+  }
+</script>

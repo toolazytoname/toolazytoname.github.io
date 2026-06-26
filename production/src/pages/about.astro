@@ -1,0 +1,154 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+const timeline = [
+  { year: '1986', text: '出生于湖南，成长于北京。' },
+  { year: '2006-2010', text: '北京林业大学，信息管理与信息系统。' },
+  { year: '2010-2013', text: '搜狐 → 新浪，做 iOS 开发者。' },
+  { year: '2013-2016', text: '易车，做编辑器、UI 框架、视频播放内核。' },
+  { year: '2016-2024', text: '字节跳动，做 iOS 基础架构、隐私检测、LLVM 工具链。' },
+  { year: '2024', text: '离开大厂。开始想清楚下一步。' },
+  { year: '2025', text: '去滑雪场 30 天，去潜 5 次，去阳朔爬了两次。' },
+  { year: '2026', text: '重建个人站。在 AI / 编译 / 创业之间选择。' },
+];
+---
+
+<BaseLayout
+  seo={{
+    title: 'About',
+    description: '韦超（小兔头），做过 Swift 编译器、LLVM 后端、字节隐私检测。',
+  }}
+>
+  <article class="about">
+    <div class="container container-narrow">
+      <header class="about__head reveal">
+        <p class="eyebrow">About</p>
+        <h1 class="about__title serif">我是谁</h1>
+      </header>
+
+      <div class="about__body reveal">
+        <p>
+          韦超，网名"小兔头"。生于 1986，长在湖南和北京。
+        </p>
+        <p>
+          大学在北京林业大学读信管，毕业后误打误撞进了互联网。
+          做过搜狐 / 新浪的 iOS App，做过易车的编辑器 / UI 框架 / 视频内核，
+          在字节跳动做了八年 —— 从客户端到 LLVM 工具链到隐私检测。
+        </p>
+        <p>
+          2024 年底被裁，开始认真想：接下来 10 年要做什么？
+          是回大厂做 AI infra，还是跳出去做 AI 应用，
+          还是做点别的什么？这个问题到现在还没答案。
+        </p>
+        <p>
+          喜欢滑雪、潜水、攀岩、公路旅行。喜欢写代码，
+          也喜欢写代码之外的东西 —— 这就是为什么有这个站。
+        </p>
+      </div>
+
+      <section class="about__timeline">
+        <h2 class="about__subtitle serif reveal">时间线</h2>
+        <ol class="about__list">
+          {timeline.map((t, i) => (
+            <li class="about__row reveal" style={`--i: ${i};`}>
+              <span class="about__year">{t.year}</span>
+              <span class="about__text">{t.text}</span>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section class="about__contact reveal">
+        <h2 class="about__subtitle serif">联系</h2>
+        <ul class="about__links">
+          <li><strong>Email：</strong><a href="mailto:hi@weichao.ren">hi@weichao.ren</a></li>
+          <li><strong>GitHub：</strong><a href="https://github.com/toolazytoname" rel="noopener" target="_blank">toolazytoname</a></li>
+          <li><strong>X：</strong><a href="https://x.com/toolazytoname" rel="noopener" target="_blank">@toolazytoname</a></li>
+        </ul>
+      </section>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .about {
+    padding: var(--s-20) 0 var(--s-24);
+    background: var(--color-parchment);
+    min-height: 80vh;
+  }
+  .about__head {
+    margin-bottom: var(--s-12);
+    padding-bottom: var(--s-6);
+    border-bottom: 1px solid var(--color-warm-border);
+  }
+  .about__title {
+    font-size: clamp(48px, 6vw, 72px);
+    margin: var(--s-3) 0 0;
+    color: var(--color-warm-text);
+    letter-spacing: -0.02em;
+  }
+  .about__body {
+    color: var(--color-warm-text-muted);
+    font-size: 18px;
+    line-height: 1.75;
+    margin-bottom: var(--s-16);
+  }
+  .about__body p {
+    margin: 0 0 var(--s-5);
+  }
+  .about__timeline {
+    margin-bottom: var(--s-16);
+  }
+  .about__subtitle {
+    font-size: 28px;
+    margin: 0 0 var(--s-6);
+    color: var(--color-warm-text);
+  }
+  .about__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .about__row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: var(--s-6);
+    padding: var(--s-4) 0;
+    border-top: 1px solid var(--color-warm-border);
+    transition-delay: calc(var(--i, 0) * 60ms);
+  }
+  .about__row:last-child {
+    border-bottom: 1px solid var(--color-warm-border);
+  }
+  .about__year {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--color-warm-text-dim);
+    padding-top: 4px;
+  }
+  .about__text {
+    color: var(--color-warm-text);
+    line-height: 1.65;
+  }
+  .about__contact ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .about__contact li {
+    padding: var(--s-3) 0;
+    border-top: 1px solid var(--color-warm-border);
+  }
+  .about__contact li:last-child {
+    border-bottom: 1px solid var(--color-warm-border);
+  }
+  .about__contact strong {
+    display: inline-block;
+    width: 80px;
+    color: var(--color-warm-text-dim);
+    font-weight: 500;
+  }
+  @media (max-width: 600px) {
+    .about__row { grid-template-columns: 1fr; gap: var(--s-1); }
+  }
+</style>

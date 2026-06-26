@@ -1,0 +1,162 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import type { CollectionEntry } from 'astro:content';
+
+type Props = {
+  entry: CollectionEntry<'life'> | CollectionEntry<'craft'>;
+};
+
+const { entry } = Astro.props;
+const collection = entry.collection; // 'life' | 'craft'
+const date = entry.data.date instanceof Date ? entry.data.date : new Date(entry.data.date);
+const dateStr = date.toISOString().slice(0, 10);
+---
+
+<BaseLayout seo={{ title: entry.data.title, description: entry.data.summary, type: 'article' }}>
+  <article class="post container-narrow">
+    <header class="post__header reveal">
+      <p class="eyebrow">{collection === 'life' ? 'Life · 生活' : 'Craft · 技术'}</p>
+      <h1 class="post__title serif">{entry.data.title}</h1>
+      <p class="post__meta">
+        <time datetime={dateStr}>{dateStr}</time>
+        {
+          entry.data.tags.length > 0 && (
+            <span class="post__tags">
+              {entry.data.tags.map((t) => (
+                <span class="post__tag">#{t}</span>
+              ))}
+            </span>
+          )
+        }
+      </p>
+      {entry.data.summary && <p class="post__summary">{entry.data.summary}</p>}
+    </header>
+
+    <div class="post__body prose reveal">
+      <slot />
+    </div>
+
+    <footer class="post__footer reveal">
+      <a href="/posts" class="post__back">← 回到列表</a>
+    </footer>
+  </article>
+
+  <style>
+    .post {
+      padding-top: var(--s-20);
+      padding-bottom: var(--s-32);
+    }
+    .post__header {
+      margin-bottom: var(--s-12);
+      padding-bottom: var(--s-8);
+      border-bottom: 1px solid var(--color-warm-border);
+    }
+    .post__title {
+      font-size: clamp(36px, 5vw, 56px);
+      line-height: 1.1;
+      margin: var(--s-3) 0 var(--s-4);
+      color: var(--color-warm-text);
+    }
+    .post__meta {
+      color: var(--color-warm-text-muted);
+      font-size: 14px;
+      display: flex;
+      gap: var(--s-3);
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .post__tag {
+      color: var(--color-warm-text-dim);
+      margin-right: var(--s-2);
+    }
+    .post__summary {
+      margin-top: var(--s-5);
+      color: var(--color-warm-text-muted);
+      font-size: 19px;
+      line-height: 1.55;
+    }
+    .post__body {
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--color-warm-text);
+    }
+    .post__body :global(h2) {
+      font-family: var(--font-serif);
+      font-weight: 500;
+      font-size: 28px;
+      margin-top: var(--s-12);
+      margin-bottom: var(--s-4);
+      letter-spacing: -0.01em;
+    }
+    .post__body :global(h3) {
+      font-family: var(--font-serif);
+      font-weight: 500;
+      font-size: 22px;
+      margin-top: var(--s-8);
+      margin-bottom: var(--s-3);
+    }
+    .post__body :global(p) {
+      margin: var(--s-4) 0;
+    }
+    .post__body :global(a) {
+      color: var(--color-blue-link);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .post__body :global(blockquote) {
+      margin: var(--s-6) 0;
+      padding: var(--s-4) var(--s-6);
+      border-left: 3px solid var(--color-terracotta);
+      background: var(--color-ivory);
+      border-radius: 0 var(--r-md) var(--r-md) 0;
+      color: var(--color-warm-text-muted);
+      font-style: italic;
+    }
+    .post__body :global(code) {
+      font-family: var(--font-mono);
+      font-size: 0.92em;
+      background: var(--color-warm-sand);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .post__body :global(pre) {
+      background: var(--color-ink);
+      color: var(--color-ivory);
+      padding: var(--s-5);
+      border-radius: var(--r-lg);
+      overflow-x: auto;
+      font-size: 14px;
+      line-height: 1.55;
+      margin: var(--s-6) 0;
+    }
+    .post__body :global(pre code) {
+      background: transparent;
+      padding: 0;
+      color: inherit;
+    }
+    .post__body :global(ul),
+    .post__body :global(ol) {
+      padding-left: var(--s-6);
+      margin: var(--s-4) 0;
+    }
+    .post__body :global(li) {
+      margin: var(--s-2) 0;
+    }
+    .post__body :global(img) {
+      border-radius: var(--r-lg);
+      margin: var(--s-6) 0;
+    }
+    .post__footer {
+      margin-top: var(--s-16);
+      padding-top: var(--s-8);
+      border-top: 1px solid var(--color-warm-border);
+    }
+    .post__back {
+      color: var(--color-warm-text-muted);
+      font-size: 15px;
+    }
+    .post__back:hover {
+      color: var(--color-warm-text);
+    }
+  </style>
+</BaseLayout>

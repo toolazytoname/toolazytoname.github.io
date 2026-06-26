@@ -1,0 +1,431 @@
+---
+import Globe from './Globe';
+import { memories } from '@data/memories';
+---
+
+<section class="hero" id="hero">
+  <div class="hero__bg" aria-hidden="true">
+    <div class="hero__glow hero__glow--a"></div>
+    <div class="hero__glow hero__glow--b"></div>
+  </div>
+
+  <div class="container hero__inner">
+    <div class="hero__copy">
+      <p class="hero__eyebrow eyebrow" data-line-up>韦超 · 小兔头 · 1986</p>
+      <h1 class="hero__title serif">
+        <span class="hero__line" data-typewriter>把日子</span>
+        <span class="hero__line" data-typewriter>过成自己</span>
+        <span class="hero__line" data-typewriter>喜欢的样子。</span>
+      </h1>
+      <p class="hero__lede" data-line-up>
+        做过 Swift 编译器、LLVM 后端、字节隐私检测。现在中年被裁，
+        正在想清楚下一步要做什么。喜欢滑雪、潜水、攀岩、公路旅行。
+      </p>
+      <div class="hero__ctas" data-line-up>
+        <a href="/now" class="btn btn--primary">看看现在 →</a>
+        <a href="/posts" class="btn btn--ghost">读文章</a>
+      </div>
+
+      <ul class="hero__meta" data-line-up>
+        <li>
+          <span class="hero__meta-num serif">14</span>
+          <span class="hero__meta-label">年写博客</span>
+        </li>
+        <li>
+          <span class="hero__meta-num serif">56</span>
+          <span class="hero__meta-label">篇文章</span>
+        </li>
+        <li>
+          <span class="hero__meta-num serif">4</span>
+          <span class="hero__meta-label">个想去的地方</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="hero__globe reveal" data-globe-host>
+      <Globe client:visible memories={memories} onSelect={undefined} />
+      <p class="hero__globe-hint">点击城市 · 拖动旋转</p>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox mount point (toggled by Globe.tsx via custom event) -->
+<div data-lightbox-mount></div>
+
+<style>
+  .hero {
+    position: relative;
+    background: linear-gradient(180deg, #0e0e0d 0%, #141413 100%);
+    color: var(--color-ivory);
+    overflow: hidden;
+    min-height: 100svh;
+    padding: var(--s-16) 0 var(--s-12);
+  }
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .hero__glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.35;
+  }
+  .hero__glow--a {
+    width: 480px;
+    height: 480px;
+    top: -100px;
+    right: -100px;
+    background: var(--color-terracotta);
+  }
+  .hero__glow--b {
+    width: 380px;
+    height: 380px;
+    bottom: -80px;
+    left: -80px;
+    background: var(--color-coral);
+    opacity: 0.2;
+  }
+  .hero__inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: var(--s-12);
+    align-items: center;
+  }
+
+  .hero__eyebrow {
+    color: var(--color-coral);
+    margin-bottom: var(--s-5);
+  }
+  .hero__title {
+    font-size: clamp(40px, 6vw, 72px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0 0 var(--s-6);
+    font-weight: 500;
+  }
+  .hero__line {
+    display: block;
+    overflow: hidden;
+  }
+  .hero__lede {
+    color: rgba(250, 249, 245, 0.7);
+    font-size: clamp(17px, 1.4vw, 19px);
+    line-height: 1.6;
+    max-width: 520px;
+    margin: 0 0 var(--s-8);
+  }
+  .hero__ctas {
+    display: flex;
+    gap: var(--s-3);
+    margin-bottom: var(--s-10);
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 22px;
+    border-radius: var(--r-pill);
+    font-size: 15px;
+    font-weight: 500;
+    transition: transform var(--t-fast) var(--ease-out),
+      background var(--t-fast) var(--ease-out);
+  }
+  .btn:hover {
+    text-decoration: none;
+    transform: translateY(-1px);
+  }
+  .btn--primary {
+    background: var(--color-terracotta);
+    color: var(--color-ivory);
+  }
+  .btn--primary:hover {
+    background: var(--color-coral);
+  }
+  .btn--ghost {
+    background: rgba(250, 249, 245, 0.08);
+    color: var(--color-ivory);
+    border: 1px solid rgba(250, 249, 245, 0.2);
+  }
+  .btn--ghost:hover {
+    background: rgba(250, 249, 245, 0.14);
+  }
+
+  .hero__meta {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: var(--s-8);
+    flex-wrap: wrap;
+  }
+  .hero__meta li {
+    display: flex;
+    flex-direction: column;
+  }
+  .hero__meta-num {
+    font-size: 36px;
+    line-height: 1;
+    color: var(--color-coral);
+    letter-spacing: -0.01em;
+  }
+  .hero__meta-label {
+    font-size: 12px;
+    color: rgba(250, 249, 245, 0.55);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 6px;
+  }
+
+  .hero__globe {
+    position: relative;
+  }
+  .hero__globe-hint {
+    text-align: center;
+    font-size: 12px;
+    color: rgba(250, 249, 245, 0.5);
+    margin: var(--s-4) 0 0;
+    letter-spacing: 0.4px;
+  }
+
+  @media (max-width: 1024px) {
+    .hero__inner {
+      grid-template-columns: 1fr;
+      gap: var(--s-10);
+    }
+  }
+  @media (max-width: 480px) {
+    .hero {
+      padding-top: var(--s-12);
+      padding-bottom: var(--s-8);
+    }
+    .hero__title {
+      font-size: 38px;
+    }
+    .hero__meta {
+      gap: var(--s-5);
+    }
+    .hero__meta-num {
+      font-size: 28px;
+    }
+  }
+</style>
+
+<script>
+  // Hero text animations — line-up reveal + typewriter.
+  document.addEventListener('DOMContentLoaded', () => {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Line-up: translate from y(20px) + fade in. Staggered.
+    document.querySelectorAll<HTMLElement>('[data-line-up]').forEach((el, i) => {
+      if (prefersReduced) {
+        el.style.opacity = '1';
+        return;
+      }
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = `opacity 600ms var(--ease-out), transform 600ms var(--ease-out)`;
+      el.style.transitionDelay = `${300 + i * 120}ms`;
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        });
+      });
+    });
+
+    // Typewriter: clip from left edge, revealing each character.
+    document.querySelectorAll<HTMLElement>('[data-typewriter]').forEach((el, i) => {
+      if (prefersReduced) {
+        el.style.clipPath = 'none';
+        return;
+      }
+      const text = el.textContent ?? '';
+      el.textContent = text;
+      el.style.display = 'inline-block';
+      el.style.clipPath = 'inset(0 100% 0 0)';
+      el.style.transition = 'clip-path 800ms var(--ease-out)';
+      el.style.transitionDelay = `${600 + i * 200}ms`;
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          el.style.clipPath = 'inset(0 0 0 0)';
+        });
+      });
+    });
+  });
+</script>
+
+<!-- Lightbox bridge: Globe.tsx dispatches `memory:select`, we mount <Lightbox /> -->
+<script>
+  window.addEventListener('memory:select', async (e) => {
+    const id = (e as CustomEvent<string>).detail;
+    const mount = document.querySelector('[data-lightbox-mount]');
+    if (!mount) return;
+
+    // Fetch the memory's HTML chunk. Easiest path: render client-side from data.
+    const memories = await import('@data/memories').then((m) => m.memories);
+    const memory = memories.find((x) => x.id === id);
+    if (!memory) return;
+
+    // Render a minimal lightbox inline.
+    mount.innerHTML = `
+      <div class="hero-lightbox" role="dialog" aria-modal="true" aria-label="${memory.title}">
+        <button class="hero-lightbox__scrim" data-lb-close aria-label="关闭"></button>
+        <div class="hero-lightbox__panel">
+          <button class="hero-lightbox__close" data-lb-close aria-label="关闭">×</button>
+          <div class="hero-lightbox__photo" style="background: linear-gradient(135deg, ${memory.color}33, ${memory.color}11);">
+            <img src="${memory.photo}" alt="${memory.title}" />
+            <span class="hero-lightbox__icon">${memory.icon}</span>
+          </div>
+          <div class="hero-lightbox__body">
+            <p class="hero-lightbox__date">${memory.date}</p>
+            <h2 class="hero-lightbox__title serif">${memory.title}</h2>
+            <div class="hero-lightbox__desc">${memory.desc.split('\n\n').map((p) => `<p>${p.replace(/</g, '&lt;')}</p>`).join('')}</div>
+            <div class="hero-lightbox__tags">${memory.tags.map((t) => `<span>#${t}</span>`).join(' ')}</div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.body.style.overflow = 'hidden';
+    const close = () => {
+      mount.innerHTML = '';
+      document.body.style.overflow = '';
+      document.removeEventListener('keydown', escClose);
+    };
+    const escClose = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') close();
+    };
+    document.addEventListener('keydown', escClose);
+    mount.querySelectorAll('[data-lb-close]').forEach((b) =>
+      b.addEventListener('click', close),
+    );
+  });
+</script>
+
+<style is:global>
+  .hero-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 900;
+    display: grid;
+    place-items: center;
+    padding: 16px;
+    animation: hlbin 240ms var(--ease-out);
+  }
+  @keyframes hlbin {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  .hero-lightbox__scrim {
+    position: absolute;
+    inset: 0;
+    background: rgba(20, 20, 19, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: none;
+    cursor: pointer;
+  }
+  .hero-lightbox__panel {
+    position: relative;
+    width: min(960px, 100%);
+    max-height: 90vh;
+    overflow: auto;
+    background: var(--color-ivory);
+    border-radius: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.3);
+    animation: hlbp 320ms var(--ease-out);
+  }
+  @keyframes hlbp {
+    from { opacity: 0; transform: translateY(20px) scale(0.98); }
+    to { opacity: 1; transform: none; }
+  }
+  .hero-lightbox__close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(20, 20, 19, 0.6);
+    color: var(--color-ivory);
+    font-size: 22px;
+    line-height: 1;
+    z-index: 2;
+  }
+  .hero-lightbox__photo {
+    position: relative;
+    min-height: 280px;
+    overflow: hidden;
+    border-radius: 24px 0 0 24px;
+    display: grid;
+    place-items: center;
+  }
+  .hero-lightbox__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    inset: 0;
+  }
+  .hero-lightbox__icon {
+    font-size: 96px;
+    z-index: 1;
+    filter: drop-shadow(0 8px 24px rgba(0,0,0,0.3));
+  }
+  .hero-lightbox__body {
+    padding: 40px 32px;
+  }
+  .hero-lightbox__date {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: var(--color-terracotta);
+    margin: 0 0 8px;
+  }
+  .hero-lightbox__title {
+    font-size: 32px;
+    line-height: 1.15;
+    margin: 0 0 20px;
+    color: var(--color-warm-text);
+    font-weight: 500;
+  }
+  .hero-lightbox__desc p {
+    color: var(--color-warm-text-muted);
+    line-height: 1.7;
+    margin: 0 0 12px;
+    font-size: 16px;
+  }
+  .hero-lightbox__tags {
+    margin-top: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .hero-lightbox__tags span {
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 980px;
+    background: var(--color-warm-sand);
+    color: var(--color-warm-text-muted);
+  }
+  @media (max-width: 768px) {
+    .hero-lightbox__panel {
+      grid-template-columns: 1fr;
+      max-height: 95vh;
+    }
+    .hero-lightbox__photo {
+      min-height: 200px;
+      border-radius: 24px 24px 0 0;
+    }
+    .hero-lightbox__body { padding: 24px; }
+    .hero-lightbox__title { font-size: 24px; }
+  }
+</style>

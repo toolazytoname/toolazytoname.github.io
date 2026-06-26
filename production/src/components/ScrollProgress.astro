@@ -1,0 +1,52 @@
+---
+// Top-of-page scroll progress indicator.
+// 1px warm-terracotta bar that grows left→right as you scroll.
+---
+
+<div class="scroll-progress" role="progressbar" aria-label="页面滚动进度" data-scroll-progress>
+  <div class="scroll-progress__bar" data-scroll-progress-bar></div>
+</div>
+
+<style>
+  .scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    z-index: var(--z-progress);
+    background: transparent;
+    pointer-events: none;
+  }
+  .scroll-progress__bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--color-terracotta), var(--color-coral));
+    transition: width 80ms linear;
+  }
+</style>
+
+<script>
+  const bar = document.querySelector<HTMLElement>('[data-scroll-progress-bar]');
+  if (bar) {
+    let ticking = false;
+    const update = () => {
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+      bar.style.width = `${pct.toFixed(2)}%`;
+      ticking = false;
+    };
+    document.addEventListener(
+      'scroll',
+      () => {
+        if (!ticking) {
+          requestAnimationFrame(update);
+          ticking = true;
+        }
+      },
+      { passive: true },
+    );
+    update();
+  }
+</script>

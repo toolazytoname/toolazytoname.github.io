@@ -1,0 +1,27 @@
+{
+  "buildCommand": "astro build",
+  "outputDirectory": "dist",
+  "framework": null,
+  "functions": {
+    "src/pages/api/chat.ts": {
+      "maxDuration": 30,
+      "memory": 1024
+    }
+  },
+  "headers": [
+    {
+      "source": "/(.*)\\.(jpg|jpeg|png|webp|avif)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/fonts/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    }
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false
+}

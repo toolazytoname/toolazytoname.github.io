@@ -1,0 +1,102 @@
+---
+// Custom cursor — terracotta dot + ink ring that follows the pointer.
+// Hidden on touch devices via CSS @media.
+---
+
+<div class="cursor" aria-hidden="true" data-cursor>
+  <div class="cursor__dot" data-cursor-dot></div>
+  <div class="cursor__ring" data-cursor-ring></div>
+</div>
+
+<style>
+  .cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: var(--z-cursor);
+    mix-blend-mode: difference;
+    display: none;
+  }
+  .cursor__dot,
+  .cursor__ring {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    will-change: transform;
+  }
+  .cursor__dot {
+    width: 6px;
+    height: 6px;
+    background: var(--color-coral);
+    transform: translate(-50%, -50%);
+  }
+  .cursor__ring {
+    width: 32px;
+    height: 32px;
+    border: 1.5px solid var(--color-ivory);
+    transform: translate(-50%, -50%);
+    transition: width 200ms var(--ease-out), height 200ms var(--ease-out),
+      border-color 200ms;
+  }
+  .cursor.is-hover .cursor__ring {
+    width: 56px;
+    height: 56px;
+    border-color: var(--color-terracotta);
+  }
+  .cursor.is-down .cursor__ring {
+    width: 20px;
+    height: 20px;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .cursor {
+      display: block;
+    }
+    body {
+      cursor: none;
+    }
+  }
+</style>
+
+<script>
+  const cursor = document.querySelector<HTMLElement>('[data-cursor]');
+  const dot = document.querySelector<HTMLElement>('[data-cursor-dot]');
+  const ring = document.querySelector<HTMLElement>('[data-cursor-ring]');
+  if (cursor && dot && ring) {
+    let mx = 0,
+      my = 0,
+      rx = 0,
+      ry = 0;
+    document.addEventListener('pointermove', (e) => {
+      mx = e.clientX;
+      my = e.clientY;
+      dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
+    });
+
+    const animate = () => {
+      rx += (mx - rx) * 0.18;
+      ry += (my - ry) * 0.18;
+      ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
+      requestAnimationFrame(animate);
+    };
+    requestAnimationFrame(animate);
+
+    document.addEventListener('pointerdown', () => cursor.classList.add('is-down'));
+    document.addEventListener('pointerup', () => cursor.classList.remove('is-down'));
+
+    // Grow ring on interactive elements.
+    const interactives = 'a, button, [role="button"], input, textarea, [data-hover]';
+    document.addEventListener('pointerover', (e) => {
+      if ((e.target as Element)?.closest(interactives)) {
+        cursor.classList.add('is-hover');
+      }
+    });
+    document.addEventListener('pointerout', (e) => {
+      if ((e.target as Element)?.closest(interactives)) {
+        cursor.classList.remove('is-hover');
+      }
+    });
+  }
+</script>

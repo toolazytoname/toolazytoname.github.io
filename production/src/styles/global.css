@@ -1,0 +1,237 @@
+/* =========================================================
+   Design tokens — locked, never inline
+   Apple chrome (dark) + Claude warm body (light)
+   ========================================================= */
+
+:root {
+  /* Apple-style chrome */
+  --color-ink: #1d1d1f;
+  --color-ink-soft: #2a2a2c;
+  --color-ink-muted: #424245;
+  --color-bg-pale: #f5f5f7;
+  --color-bg-white: #ffffff;
+  --color-black: #000000;
+
+  /* Claude-style warm body */
+  --color-parchment: #f5f4ed;
+  --color-ivory: #faf9f5;
+  --color-warm-sand: #e8e6dc;
+  --color-warm-border: #f0eee6;
+  --color-warm-text: #141413;
+  --color-warm-text-muted: #5e5d59;
+  --color-warm-text-dim: #87867f;
+
+  /* Brand accents */
+  --color-terracotta: #c96442;
+  --color-coral: #d97757;
+  --color-blue: #0071e3;
+  --color-blue-link: #0066cc;
+
+  /* Memory dot colors */
+  --color-beijing: #ff6b35;
+  --color-xinjiang: #3b82f6;
+  --color-hainan: #10b981;
+  --color-guangxi: #f59e0b;
+
+  /* Type */
+  --font-display:
+    "SF Pro Display", "Inter Tight", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  --font-text:
+    "SF Pro Text", "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-serif: "Anthropic Serif", "Georgia", "Source Han Serif SC", serif;
+  --font-mono:
+    "JetBrains Mono", "SF Mono", "Fira Code", Menlo, Consolas, monospace;
+
+  /* Spacing scale */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 20px;
+  --s-6: 24px;
+  --s-8: 32px;
+  --s-10: 40px;
+  --s-12: 48px;
+  --s-16: 64px;
+  --s-20: 80px;
+  --s-24: 96px;
+  --s-32: 128px;
+
+  /* Radii */
+  --r-sm: 5px;
+  --r-md: 8px;
+  --r-lg: 12px;
+  --r-xl: 16px;
+  --r-2xl: 24px;
+  --r-pill: 980px;
+  --r-circle: 50%;
+
+  /* Layout */
+  --max-w: 1200px;
+  --max-w-narrow: 720px;
+  --max-w-wide: 1440px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --t-fast: 180ms;
+  --t-base: 320ms;
+  --t-slow: 600ms;
+
+  /* z-index */
+  --z-cursor: 9999;
+  --z-progress: 9998;
+  --z-nav: 1000;
+  --z-fab: 800;
+  --z-lightbox: 900;
+}
+
+/* =========================================================
+   Reset + base
+   ========================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  background: var(--color-parchment);
+  color: var(--color-warm-text);
+  font-family: var(--font-text);
+  font-size: 17px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  cursor: none; /* custom cursor takes over on desktop */
+}
+
+@media (pointer: coarse), (max-width: 768px) {
+  body {
+    cursor: auto;
+  }
+}
+
+a {
+  color: var(--color-blue-link);
+  text-decoration: none;
+  transition: color var(--t-fast) var(--ease-out);
+}
+a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+::selection {
+  background: var(--color-coral);
+  color: var(--color-ivory);
+}
+
+/* =========================================================
+   Focus — every interactive element must have a visible focus state
+   ========================================================= */
+
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 3px;
+  border-radius: var(--r-sm);
+}
+
+/* =========================================================
+   Utilities
+   ========================================================= */
+
+.container {
+  width: 100%;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--s-6);
+}
+
+.container-wide {
+  width: 100%;
+  max-width: var(--max-w-wide);
+  margin: 0 auto;
+  padding: 0 var(--s-6);
+}
+
+.container-narrow {
+  width: 100%;
+  max-width: var(--max-w-narrow);
+  margin: 0 auto;
+  padding: 0 var(--s-6);
+}
+
+.serif {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.eyebrow {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--color-warm-text-muted);
+}
+
+/* =========================================================
+   Reveal-on-scroll — add `.reveal` to anything that should fade up
+   ========================================================= */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================================================
+   Reduced motion
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

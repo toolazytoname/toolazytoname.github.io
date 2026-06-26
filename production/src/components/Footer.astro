@@ -1,0 +1,132 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <p class="footer__brand serif">小兔头</p>
+        <p class="footer__tag">韦超 · weichao.ren</p>
+      </div>
+
+      <nav class="footer__col" aria-label="站点">
+        <p class="footer__heading">站点</p>
+        <a href="/">主页</a>
+        <a href="/posts">文章</a>
+        <a href="/now">现在</a>
+        <a href="/about">关于</a>
+        <a href="/colophon">Colophon</a>
+      </nav>
+
+      <nav class="footer__col" aria-label="外部链接">
+        <p class="footer__heading">外部</p>
+        <a href="https://github.com/toolazytoname" rel="noopener" target="_blank">GitHub</a>
+        <a href="/posts.xml">RSS</a>
+        <a href="mailto:hi@weichao.ren">Email</a>
+      </nav>
+
+      <div class="footer__col">
+        <p class="footer__heading">订阅</p>
+        <p class="footer__copy">每月一封 email，写一点最近在想的事。</p>
+        <a href="/posts.xml" class="footer__btn">RSS →</a>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>© {year} 韦超 (小兔头). Built on Astro + Vercel.</p>
+      <p class="footer__build">Last build: <time datetime={new Date().toISOString()}>just now</time></p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--color-ink);
+    color: var(--color-ivory);
+    padding: var(--s-20) 0 var(--s-8);
+    margin-top: var(--s-32);
+  }
+  .footer__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 2fr;
+    gap: var(--s-10);
+    padding-bottom: var(--s-12);
+    border-bottom: 1px solid var(--color-ink-soft);
+  }
+  .footer__brand {
+    font-size: 24px;
+    margin: 0 0 var(--s-2);
+    color: var(--color-ivory);
+  }
+  .footer__tag {
+    color: var(--color-warm-text-dim);
+    margin: 0;
+    font-size: 14px;
+  }
+  .footer__heading {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--color-warm-text-dim);
+    margin: 0 0 var(--s-4);
+  }
+  .footer__col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+  }
+  .footer__col a {
+    color: var(--color-ivory);
+    font-size: 14px;
+    transition: color var(--t-fast);
+  }
+  .footer__col a:hover {
+    color: var(--color-coral);
+    text-decoration: none;
+  }
+  .footer__copy {
+    color: var(--color-warm-text-dim);
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 0 0 var(--s-3);
+  }
+  .footer__btn {
+    align-self: flex-start;
+    background: var(--color-terracotta);
+    color: var(--color-ivory);
+    padding: 8px 14px;
+    border-radius: var(--r-pill);
+    font-size: 13px;
+  }
+  .footer__btn:hover {
+    background: var(--color-coral);
+    text-decoration: none;
+  }
+  .footer__bottom {
+    display: flex;
+    justify-content: space-between;
+    padding-top: var(--s-6);
+    color: var(--color-warm-text-dim);
+    font-size: 12px;
+  }
+  .footer__bottom p {
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .footer__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--s-8);
+    }
+    .footer__bottom {
+      flex-direction: column;
+      gap: var(--s-2);
+    }
+  }
+  @media (max-width: 480px) {
+    .footer__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,80 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Timeline from '@components/Timeline.astro';
+import { nowEntries } from '@data/now';
+
+const lastUpdated = nowEntries.length
+  ? nowEntries.map((e) => e.date).sort().reverse()[0]
+  : new Date().toISOString().slice(0, 7);
+---
+
+<BaseLayout
+  seo={{
+    title: 'Now',
+    description: '韦超最近在想、在做的事情。每月更新一次。',
+  }}
+>
+  <section class="now-page">
+    <div class="container container-narrow">
+      <header class="now-page__head reveal">
+        <p class="eyebrow">/now</p>
+        <h1 class="now-page__title serif">当下</h1>
+        <p class="now-page__lede">
+          这页记录我最近在想、在做的事情。每月更新一次，不维护历史。
+          灵感来自 <a href="https://nownownow.com/about" rel="noopener" target="_blank">nownownow.com</a>。
+        </p>
+        <p class="now-page__updated">
+          Last updated · <time datetime={lastUpdated}>{lastUpdated}</time>
+        </p>
+      </header>
+
+      <div class="reveal">
+        <Timeline />
+      </div>
+
+      <footer class="now-page__foot reveal">
+        <p>
+          想看历史快照？去 <a href="https://web.archive.org/web/*/weichao.ren/now" rel="noopener" target="_blank">Wayback Machine</a>。
+        </p>
+      </footer>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .now-page {
+    padding: var(--s-20) 0 var(--s-24);
+    background: var(--color-parchment);
+    min-height: 80vh;
+  }
+  .now-page__head {
+    margin-bottom: var(--s-16);
+    padding-bottom: var(--s-8);
+    border-bottom: 1px solid var(--color-warm-border);
+  }
+  .now-page__title {
+    font-size: clamp(48px, 6vw, 72px);
+    margin: var(--s-3) 0 var(--s-5);
+    color: var(--color-warm-text);
+    letter-spacing: -0.02em;
+  }
+  .now-page__lede {
+    color: var(--color-warm-text-muted);
+    font-size: 18px;
+    line-height: 1.6;
+    margin: 0 0 var(--s-4);
+  }
+  .now-page__updated {
+    color: var(--color-warm-text-dim);
+    font-size: 13px;
+    margin: 0;
+    font-family: var(--font-mono);
+  }
+  .now-page__foot {
+    margin-top: var(--s-16);
+    padding-top: var(--s-6);
+    border-top: 1px solid var(--color-warm-border);
+    color: var(--color-warm-text-muted);
+    font-size: 14px;
+  }
+</style>
