@@ -161,3 +161,43 @@ frontmatter 加 `title` / `date` / `summary` / `tags` 即可。
 ## License
 
 Code: MIT. Content (文章 / 照片): CC BY-NC-SA 4.0.
+
+---
+
+## Known limitations / Future work
+
+下面这些是有意留作 follow-up 的，按优先级排序：
+
+### P3 — 已记录但暂不修
+
+- **P3 emoji used as icons** — 4 个 memory 的 `icon` 字段是 emoji（🏠🏔️🤿🧗）。
+  这是 [open-design 准则](https://github.com/nexu-io/open-design) 中的 hard ban
+  （"No emoji in chrome"），但因为是个人站、个人记忆的具象标记，站主拍板保留。
+  TODO：如果哪天觉得违和，替换为内嵌 SVG 图标。
+
+- **P3 sitemap / RSS 自动化** — 现在 sitemap 和 RSS 是 Astro 在 build 时生成的。
+  站主每次写新文章需要 `npm run build` + Vercel 自动部署。
+  TODO：接入 webhook 或者 GitHub Actions 触发自动构建。
+
+- **P3 旧博客 56 篇只迁移 2 篇 sample** — 旧 Jekyll 站 (toolazytoname.github.io)
+  有 56 篇文章，目前只 sample 了 2 篇（`2023-01-21-sushi` 和 `2024-04-30-ssh-tunnel`）。
+  TODO：站主自己做批量迁移。脚本可以参考 README 里的 frontmatter 说明。
+
+### P2 — 已修但留 follow-up
+
+- **P2 work card 链接 `TODO://replace-with-real-link`** —
+  4 个 work card 的 back face 链接用了占位 URL（App Store / Source / PR / GitHub），
+  等待站主替换为真实链接。
+
+### 已修
+
+- **P0-1** OG image 路径从 `/og-default.png` 改为 `/og-default.svg`
+- **P1-1** `/posts.xml` 加 `export const prerender = true;`，build 时生成静态文件
+- **P1-2** Hero 内联 lightbox 替换为 `<Lightbox memories={memories} />` 组件，
+  移除运行时 `await import('@data/...')`
+- **P1-3** 4 个 work card 链接 `#` → `TODO://replace-with-real-link`（见上）
+- **P1-6** 4 张照片占位已存在，站主自行替换
+- **P2-2** `/` `/about` `/colophon` `/now` `/404` 都加 `prerender = true`，
+  进 Vercel CDN 缓存
+- **P2-6** `vercel.json` chat function `maxDuration: 30` → `10`（Vercel 免费层上限）
+- **P2-8 / P2-10** WorkCard 在触屏上改用 click 切换 `.flipped` class

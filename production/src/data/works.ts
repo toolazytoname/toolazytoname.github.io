@@ -40,7 +40,8 @@ export const works: Work[] = [
         '用 CoreHaptics 实现有节律的震动反馈。Sound 设计来自真实机械节拍器录音，48kHz / 24bit。',
       outcome: 'App Store 上架，第一个月 2k 下载。',
       stack: ['Swift', 'SwiftUI', 'CoreHaptics', 'AVFoundation'],
-      links: [{ label: 'App Store', url: '#' }],
+      // TODO: 站主提供真实链接（App Store / GitHub / 微信小程序 / PR 链接）
+      links: [{ label: 'App Store', url: 'TODO://replace-with-real-link' }],
     },
   },
   {
@@ -61,7 +62,8 @@ export const works: Work[] = [
         '密码学在前端：内容用一次性 AES-256-GCM 密钥加密，密钥只放在 URL fragment（不会发到服务器）。',
       outcome: '自用一年半，分给几十个朋友用过。',
       stack: ['Next.js', 'Web Crypto API', 'Cloudflare Workers'],
-      links: [{ label: 'Source', url: '#' }],
+      // TODO: 站主提供真实链接（App Store / GitHub / 微信小程序 / PR 链接）
+      links: [{ label: 'Source', url: 'TODO://replace-with-real-link' }],
     },
   },
   {
@@ -100,7 +102,8 @@ export const works: Work[] = [
         '把编译产物的 hash 作为 key 缓存到 S3 兼容存储，CI 拉取命中后跳过 build。',
       outcome: '被 Swift 社区采纳，PR 合并进 swift-package-manager。',
       stack: ['Swift', 'SwiftPM', 'AWS S3'],
-      links: [{ label: 'PR', url: '#' }],
+      // TODO: 站主提供真实链接（App Store / GitHub / 微信小程序 / PR 链接）
+      links: [{ label: 'PR', url: 'TODO://replace-with-real-link' }],
     },
   },
   {
@@ -141,7 +144,8 @@ export const works: Work[] = [
         '逆向 iTunes backup 格式 + 解密 MM.sqlite + 解析多媒体相对路径。',
       outcome: 'GitHub 上 ~10k stars，被国外媒体推荐过。',
       stack: ['Objective-C', 'Swift', 'SQLite'],
-      links: [{ label: 'GitHub', url: '#' }],
+      // TODO: 站主提供真实链接（App Store / GitHub / 微信小程序 / PR 链接）
+      links: [{ label: 'GitHub', url: 'TODO://replace-with-real-link' }],
     },
   },
 ];

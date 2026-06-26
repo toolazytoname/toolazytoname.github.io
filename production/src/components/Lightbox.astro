@@ -2,55 +2,24 @@
 import type { Memory } from '@data/memories';
 
 interface Props {
-  memory: Memory;
+  memories: Memory[];
 }
 
-const { memory } = Astro.props;
+const { memories } = Astro.props;
 
-// Lock body scroll while open. Activated on the next tick via [data-lightbox] is-open.
+// Serialize memories to a data attribute so the client script can look up
+// the selected memory by id without a runtime dynamic import. Build-time
+// data only — the whole array ships in the HTML.
+const memoriesJson = JSON.stringify(memories);
 ---
 
-<div
-  class="lightbox"
-  role="dialog"
-  aria-modal="true"
-  aria-labelledby="lightbox-title"
-  data-lightbox
->
-  <button class="lightbox__scrim" aria-label="关闭" data-lightbox-close></button>
-
-  <div class="lightbox__panel" data-lightbox-panel>
-    <button
-      type="button"
-      class="lightbox__close"
-      aria-label="关闭"
-      data-lightbox-close
-    >
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <path d="M4 4L16 16M16 4L4 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>
-    </button>
-
-    <div class="lightbox__photo" style={`background: linear-gradient(135deg, ${memory.color}33, ${memory.color}11);`}>
-      <img src={memory.photo} alt={memory.title} loading="lazy" />
-      <span class="lightbox__icon">{memory.icon}</span>
-    </div>
-
-    <div class="lightbox__body">
-      <p class="eyebrow" style={`color: ${memory.color};`}>{memory.date}</p>
-      <h2 id="lightbox-title" class="lightbox__title serif">{memory.title}</h2>
-      <div class="lightbox__desc">
-        {memory.desc.split('\n\n').map((para) => <p>{para}</p>)}
-      </div>
-      <div class="lightbox__tags">
-        {memory.tags.map((t) => <span class="lightbox__tag">#{t}</span>)}
-      </div>
-    </div>
-  </div>
+<div data-lightbox-root data-memories={memoriesJson}>
+  <!-- Lightbox DOM is injected here on `memory:select` events. -->
 </div>
 
 <style>
-  .lightbox {
+  /* Styles below apply to the dynamically injected dialog. */
+  :global(.lightbox) {
     position: fixed;
     inset: 0;
     z-index: var(--z-lightbox);
@@ -63,7 +32,7 @@ const { memory } = Astro.props;
     from { opacity: 0; }
     to { opacity: 1; }
   }
-  .lightbox__scrim {
+  :global(.lightbox__scrim) {
     position: absolute;
     inset: 0;
     background: rgba(20, 20, 19, 0.7);
@@ -72,7 +41,7 @@ const { memory } = Astro.props;
     border: none;
     cursor: pointer;
   }
-  .lightbox__panel {
+  :global(.lightbox__panel) {
     position: relative;
     width: min(960px, 100%);
     max-height: 90vh;
@@ -94,7 +63,7 @@ const { memory } = Astro.props;
       transform: translateY(0) scale(1);
     }
   }
-  .lightbox__close {
+  :global(.lightbox__close) {
     position: absolute;
     top: 12px;
     right: 12px;
@@ -107,11 +76,13 @@ const { memory } = Astro.props;
     place-items: center;
     z-index: 2;
     transition: background 200ms;
+    border: none;
+    cursor: pointer;
   }
-  .lightbox__close:hover {
+  :global(.lightbox__close:hover) {
     background: rgba(20, 20, 19, 0.85);
   }
-  .lightbox__photo {
+  :global(.lightbox__photo) {
     position: relative;
     min-height: 280px;
     overflow: hidden;
@@ -119,110 +90,218 @@ const { memory } = Astro.props;
     display: grid;
     place-items: center;
   }
-  .lightbox__photo img {
+  :global(.lightbox__photo img) {
     width: 100%;
     height: 100%;
     object-fit: cover;
     position: absolute;
     inset: 0;
   }
-  .lightbox__icon {
+  :global(.lightbox__icon) {
     position: relative;
     font-size: 96px;
-    filter: drop-shadow(0 8px 24px rgba(0,0,0,0.3));
+    filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.3));
     z-index: 1;
   }
-  .lightbox__body {
+  :global(.lightbox__body) {
     padding: var(--s-10) var(--s-8);
   }
-  .lightbox__title {
+  :global(.lightbox__title) {
     font-size: 32px;
     margin: var(--s-2) 0 var(--s-5);
     color: var(--color-warm-text);
     line-height: 1.15;
+    font-weight: 500;
   }
-  .lightbox__desc p {
+  :global(.lightbox__desc p) {
     color: var(--color-warm-text-muted);
     line-height: 1.7;
     margin: 0 0 var(--s-3);
     font-size: 16px;
     white-space: pre-line;
   }
-  .lightbox__tags {
+  :global(.lightbox__tags) {
     margin-top: var(--s-6);
     display: flex;
     flex-wrap: wrap;
     gap: var(--s-2);
   }
-  .lightbox__tag {
+  :global(.lightbox__tag) {
     font-size: 12px;
     padding: 4px 10px;
     border-radius: 980px;
     background: var(--color-warm-sand);
     color: var(--color-warm-text-muted);
   }
+  :global(.lightbox__date) {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    margin: 0 0 8px;
+  }
 
   @media (max-width: 768px) {
-    .lightbox__panel {
+    :global(.lightbox__panel) {
       grid-template-columns: 1fr;
       max-height: 95vh;
     }
-    .lightbox__photo {
+    :global(.lightbox__photo) {
       min-height: 200px;
       border-radius: var(--r-2xl) var(--r-2xl) 0 0;
     }
-    .lightbox__body {
+    :global(.lightbox__body) {
       padding: var(--s-6);
     }
-    .lightbox__title {
+    :global(.lightbox__title) {
       font-size: 24px;
     }
   }
 </style>
 
 <script>
+  // Lightbox — listens for `memory:select` events dispatched by Globe.tsx,
+  // looks the memory up in a build-time data attribute, and renders a
+  // self-contained dialog. No runtime dynamic imports; closes on Esc /
+  // scrim / close-button. Restores body scroll on close.
+
+  function escapeHtml(s: string): string {
+    return s
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
   function closeLightbox() {
     const lb = document.querySelector<HTMLElement>('[data-lightbox]');
-    if (lb) {
-      lb.style.animation = 'lb-out 200ms var(--ease-out) forwards';
-      setTimeout(() => lb.remove(), 200);
-      document.body.style.overflow = '';
+    if (!lb) return;
+    lb.style.animation = 'lb-out 200ms var(--ease-out) forwards';
+    setTimeout(() => lb.remove(), 200);
+    document.body.style.overflow = '';
+    document.removeEventListener('keydown', onKeydown);
+  }
+
+  function onKeydown(e: KeyboardEvent) {
+    if (e.key === 'Escape') closeLightbox();
+  }
+
+  function openLightbox(memory: {
+    id: string;
+    title: string;
+    icon: string;
+    color: string;
+    photo: string;
+    date: string;
+    desc: string;
+    tags: string[];
+  }) {
+    // Close any existing one first (defensive).
+    closeLightbox();
+
+    const root = document.querySelector<HTMLElement>('[data-lightbox-root]');
+    if (!root) return;
+
+    const paragraphs = memory.desc
+      .split('\n\n')
+      .map((p) => `<p>${escapeHtml(p)}</p>`)
+      .join('');
+    const tags = memory.tags
+      .map((t) => `<span class="lightbox__tag">#${escapeHtml(t)}</span>`)
+      .join(' ');
+
+    const html = `
+      <div
+        class="lightbox"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="lightbox-title-${memory.id}"
+        data-lightbox
+      >
+        <button class="lightbox__scrim" aria-label="关闭" data-lightbox-close></button>
+        <div class="lightbox__panel" data-lightbox-panel>
+          <button type="button" class="lightbox__close" aria-label="关闭" data-lightbox-close>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M4 4L16 16M16 4L4 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div class="lightbox__photo" style="background: linear-gradient(135deg, ${memory.color}33, ${memory.color}11);">
+            <img src="${escapeHtml(memory.photo)}" alt="${escapeHtml(memory.title)}" loading="lazy" />
+            <span class="lightbox__icon">${escapeHtml(memory.icon)}</span>
+          </div>
+          <div class="lightbox__body">
+            <p class="eyebrow lightbox__date" style="color: ${memory.color};">${escapeHtml(memory.date)}</p>
+            <h2 id="lightbox-title-${memory.id}" class="lightbox__title serif">${escapeHtml(memory.title)}</h2>
+            <div class="lightbox__desc">${paragraphs}</div>
+            <div class="lightbox__tags">${tags}</div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    // Append into the wrapper.
+    root.insertAdjacentHTML('beforeend', html);
+
+    // Lock scroll.
+    document.body.style.overflow = 'hidden';
+
+    // Esc to close.
+    document.addEventListener('keydown', onKeydown);
+
+    // Wire close buttons.
+    root.querySelectorAll<HTMLElement>('[data-lightbox-close]').forEach((b) => {
+      b.addEventListener('click', closeLightbox);
+    });
+
+    // Focus the close button (for keyboard / SR users).
+    const closeBtn = root.querySelector<HTMLElement>('.lightbox__close');
+    closeBtn?.focus();
+
+    // Inject the out-animation keyframes once.
+    if (!document.getElementById('lb-out-kf')) {
+      const style = document.createElement('style');
+      style.id = 'lb-out-kf';
+      style.textContent = `@keyframes lb-out { to { opacity: 0; } }`;
+      document.head.appendChild(style);
     }
   }
 
-  // Wire up close buttons.
-  document.querySelectorAll<HTMLElement>('[data-lightbox-close]').forEach((b) => {
-    b.addEventListener('click', closeLightbox);
-  });
+  // Initialize once on load: read the memories JSON, listen for the event.
+  function init() {
+    const root = document.querySelector<HTMLElement>('[data-lightbox-root]');
+    if (!root) return;
+    const raw = root.dataset.memories ?? '[]';
+    let memories: Array<{ id: string }> = [];
+    try {
+      memories = JSON.parse(raw);
+    } catch {
+      memories = [];
+    }
 
-  // ESC to close.
-  const escListener = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') closeLightbox();
-  };
-  document.addEventListener('keydown', escListener);
+    window.addEventListener('memory:select', (e) => {
+      const evt = e as CustomEvent<string>;
+      const id = evt.detail;
+      const memory = memories.find((m) => m.id === id);
+      if (!memory) return;
+      // The data attribute typed it loosely; cast through unknown is safe
+      // because we serialized it from a typed object at build time.
+      openLightbox(memory as unknown as Parameters<typeof openLightbox>[0]);
+    });
 
-  // Lock scroll.
-  document.body.style.overflow = 'hidden';
-
-  // Trap focus.
-  const panel = document.querySelector<HTMLElement>('[data-lightbox-panel]');
-  if (panel) {
-    const closeBtn = panel.querySelector<HTMLElement>('[data-lightbox-close]');
-    closeBtn?.focus();
+    // Cleanup on Astro page swap.
+    document.addEventListener(
+      'astro:before-swap',
+      () => {
+        document.body.style.overflow = '';
+        document.removeEventListener('keydown', onKeydown);
+      },
+      { once: true },
+    );
   }
 
-  // Cleanup on unmount (when Astro swaps the page).
-  document.addEventListener(
-    'astro:before-swap',
-    () => {
-      document.body.style.overflow = '';
-      document.removeEventListener('keydown', escListener);
-    },
-    { once: true },
-  );
-
-  // Inject out animation.
-  const style = document.createElement('style');
-  style.textContent = `@keyframes lb-out { to { opacity: 0; } }`;
-  document.head.appendChild(style);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 </script>

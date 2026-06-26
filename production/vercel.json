@@ -4,7 +4,7 @@
   "framework": null,
   "functions": {
     "src/pages/api/chat.ts": {
-      "maxDuration": 30,
+      "maxDuration": 10,
       "memory": 1024
     }
   },

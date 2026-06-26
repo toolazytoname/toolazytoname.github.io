@@ -217,13 +217,15 @@ const { work, index } = Astro.props;
     font-size: 13px;
   }
 
-  /* Touch devices: don't flip, show front only with details inline */
+  /* Touch devices: tap to flip via the `.flipped` class (toggled by JS).
+     Still keep the hover-triggered flip working on hybrid devices. */
   @media (hover: none) {
     .work-card__inner {
-      transform: none !important;
+      /* Don't apply hover transform; tap-to-flip below overrides. */
+      transform: none;
     }
-    .work-card__face--back {
-      display: none;
+    .work-card.flipped .work-card__inner {
+      transform: rotateY(180deg);
     }
   }
 </style>
@@ -232,7 +234,16 @@ const { work, index } = Astro.props;
   // Mouse-tilt micro-interaction. Skipped on touch / reduced motion.
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     const cards = document.querySelectorAll<HTMLElement>('[data-tilt]');
+    const isTouch = window.matchMedia('(hover: none)').matches;
     cards.forEach((card) => {
+      // On touch devices, tap the card to toggle flip (back face is hidden
+      // by the CSS rule below `@media (hover: none)` until flipped).
+      if (isTouch) {
+        card.addEventListener('click', () => {
+          card.classList.toggle('flipped');
+        });
+        return;
+      }
       card.addEventListener('pointermove', (e) => {
         const rect = card.getBoundingClientRect();
         const cx = rect.left + rect.width / 2;

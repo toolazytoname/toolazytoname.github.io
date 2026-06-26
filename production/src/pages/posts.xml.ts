@@ -3,6 +3,11 @@ import { getCollection } from 'astro:content';
 import type { APIRoute } from 'astro';
 import { SITE } from '@lib/seo';
 
+// Pre-render at build time so /posts.xml ships as a static asset
+// and gets served from Vercel's CDN cache instead of cold-starting
+// a serverless function on every RSS reader poll.
+export const prerender = true;
+
 export const GET: APIRoute = async (context) => {
   const life = await getCollection('life');
   const craft = await getCollection('craft');

@@ -16,7 +16,7 @@ const title = seo?.title
   ? `${seo.title} · ${SITE.name}`
   : `${SITE.name} — ${SITE.description.split('。')[0]}`;
 const description = seo?.description ?? SITE.description;
-const ogImage = seo?.image ?? '/og-default.png';
+const ogImage = seo?.image ?? '/og-default.svg';
 const canonical = new URL(Astro.url.pathname, SITE.url).toString();
 ---
 
