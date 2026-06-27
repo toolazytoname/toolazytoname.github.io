@@ -1,6 +1,6 @@
 // POST /api/chat
 // Body: { messages: [{role, content}], context?: string }
-// Response: { reply: string, source: 'gemini'|'deepseek'|'static', remaining?: number }
+// Response: { reply: string, source: 'agnes'|'deepseek'|'static', remaining?: number }
 
 import type { APIRoute } from 'astro';
 import { chat, staticReply, type ChatMessage, type ChatResult } from '@lib/llm';

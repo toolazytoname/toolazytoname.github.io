@@ -15,7 +15,7 @@
 - **Three.js** — Hero 的 3D 地球
 - **Vercel** — 托管 + Serverless Functions + CDN
 - **TypeScript** — strict 模式，路径别名 `@components / @data / @lib`
-- **Gemini 1.5 Flash** — 聊天机器人首选
+- **Agnes-2.0-flash** — 聊天机器人首选
 - **DeepSeek** — 聊天机器人兜底
 
 ---
@@ -28,7 +28,7 @@ npm install
 
 # 2. 准备环境变量
 cp .env.example .env
-# 然后填入 GEMINI_API_KEY 和 DEEPSEEK_API_KEY
+# 然后填入 AGNES_API_KEY 和 DEEPSEEK_API_KEY
 
 # 3. 跑开发服务器
 npm run dev
@@ -44,14 +44,14 @@ npm run preview
 
 ## 获取 API Key
 
-### Gemini API Key（主）
+### Agnes API Key（主）
 
-1. 打开 [aistudio.google.com/apikey](https://aistudio.google.com/apikey)
-2. 登录 Google 账号
-3. 点 "Create API key"
-4. 复制 key 填到 `.env` 的 `GEMINI_API_KEY`
+1. 打开 [wiki.agnes-ai.com/en/docs/tokenplan.md](https://wiki.agnes-ai.com/en/docs/tokenplan.md)
+2. 注册 / 登录 Agnes 账号
+3. 创建一个 API key
+4. 复制 key 填到 `.env` 的 `AGNES_API_KEY`
 
-免费层配额：每分钟 15 次请求，每天 1500 次。对个人站绰绰有余。
+免费层配额：每分钟 20 次请求。对个人站绰绰有余。
 
 ### DeepSeek API Key（备用）
 
@@ -85,7 +85,7 @@ Vercel 项目设置 → Environment Variables：
 
 | Name | Value |
 |---|---|
-| `GEMINI_API_KEY` | 你的 Gemini key |
+| `AGNES_API_KEY` | 你的 Agnes key |
 | `DEEPSEEK_API_KEY` | 你的 DeepSeek key |
 
 每个环境（Production / Preview / Development）都可以分别配。
@@ -150,7 +150,7 @@ frontmatter 加 `title` / `date` / `summary` / `tags` 即可。
 
 站主需要做的：
 
-1. ☐ 获取 Gemini + DeepSeek API key，填到 Vercel 环境变量
+1. ☐ 获取 Agnes + DeepSeek API key，填到 Vercel 环境变量
 2. ☐ 把 4 张照片放到 `public/photos/`
 3. ☐ 把旧博客文章搬过来（src/content/{life,craft}/）
 4. ☐ 配 DNS（详见 DEPLOY.md）

@@ -15,7 +15,7 @@ import { useEffect, useRef, useState } from 'react';
 type Msg = {
   role: 'user' | 'assistant';
   content: string;
-  source?: 'gemini' | 'deepseek' | 'static' | 'fallback';
+  source?: 'agnes' | 'deepseek' | 'static' | 'fallback';
 };
 
 const SUGGESTIONS = [
@@ -27,8 +27,8 @@ const SUGGESTIONS = [
 
 const sourceLabel = (s?: Msg['source']) => {
   switch (s) {
-    case 'gemini':
-      return '🟢 Gemini';
+    case 'agnes':
+      return '🟢 Agnes';
     case 'deepseek':
       return '🟡 DeepSeek';
     case 'static':
@@ -150,7 +150,7 @@ export default function Chatbot() {
         <header className="chat-panel__head">
           <div>
             <p className="chat-panel__title">小兔头 · AI 助手</p>
-            <p className="chat-panel__sub">Gemini + DeepSeek + 静态兜底</p>
+            <p className="chat-panel__sub">Agnes + DeepSeek + 静态兜底</p>
           </div>
           <button
             type="button"

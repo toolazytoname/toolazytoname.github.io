@@ -1,7 +1,9 @@
-// LLM client — Gemini primary, DeepSeek fallback.
+// LLM client — Agnes-2.0-flash primary, DeepSeek fallback.
 // Returns a tagged reply so the UI can show which model answered.
+//
+// Both providers speak the OpenAI Chat Completions protocol, so we reuse
+// a single `openai` SDK instance and just swap the baseURL.
 
-import { GoogleGenerativeAI } from '@google/generative-ai';
 import OpenAI from 'openai';
 import { knowledge } from '@data/knowledge';
 
@@ -12,7 +14,7 @@ export type ChatMessage = {
 
 export type ChatResult = {
   reply: string;
-  source: 'gemini' | 'deepseek' | 'static' | 'fallback';
+  source: 'agnes' | 'deepseek' | 'static' | 'fallback';
   error?: string;
 };
 
@@ -30,13 +32,16 @@ ${knowledge.map((k) => `[${k.id}]\n${k.reply}`).join('\n\n')}
 
 记住：你不是真的韦超，你只是被授权代表他回答访客。`;
 
-const geminiKey = process.env.GEMINI_API_KEY;
+const agnesKey = process.env.AGNES_API_KEY;
 const deepseekKey = process.env.DEEPSEEK_API_KEY;
 
 // Lazy-init clients so cold-starts without keys don't crash.
-function getGemini() {
-  if (!geminiKey) return null;
-  return new GoogleGenerativeAI(geminiKey);
+function getAgnes() {
+  if (!agnesKey) return null;
+  return new OpenAI({
+    apiKey: agnesKey,
+    baseURL: 'https://apihub.agnes-ai.com/v1',
+  });
 }
 
 function getDeepSeek() {
@@ -53,29 +58,28 @@ export async function chat(messages: ChatMessage[]): Promise<ChatResult> {
     .filter((m) => m.role === 'user' || m.role === 'assistant')
     .slice(-10); // cap history to avoid token bloat
 
-  // 1. Try Gemini.
-  try {
-    const genai = getGemini();
-    if (genai) {
-      const model = genai.getGenerativeModel({
-        model: 'gemini-1.5-flash',
-        systemInstruction: SYSTEM_PROMPT,
-      });
-      const chat = model.startChat({
-        generationConfig: { maxOutputTokens: 600, temperature: 0.7 },
-      });
+  const fullMessages: ChatMessage[] = [
+    { role: 'system', content: SYSTEM_PROMPT },
+    ...history,
+  ];
 
-      // Gemini wants alternating user/model; collapse to last user msg.
-      const lastUser = [...history].reverse().find((m) => m.role === 'user');
-      if (!lastUser) throw new Error('no user message');
-      const result = await chat.sendMessage(lastUser.content);
-      const reply = result.response.text();
+  // 1. Try Agnes-2.0-flash.
+  try {
+    const agnes = getAgnes();
+    if (agnes) {
+      const completion = await agnes.chat.completions.create({
+        model: 'agnes-2.0-flash',
+        messages: fullMessages,
+        max_tokens: 1024,
+        temperature: 0.7,
+      });
+      const reply = completion.choices[0]?.message?.content;
       if (reply && reply.trim().length > 0) {
-        return { reply: reply.trim(), source: 'gemini' };
+        return { reply: reply.trim(), source: 'agnes' };
       }
     }
   } catch (err) {
-    console.warn('[llm] gemini failed:', err);
+    console.warn('[llm] agnes failed:', err);
   }
 
   // 2. Try DeepSeek.
@@ -84,11 +88,8 @@ export async function chat(messages: ChatMessage[]): Promise<ChatResult> {
     if (ds) {
       const completion = await ds.chat.completions.create({
         model: 'deepseek-chat',
-        messages: [
-          { role: 'system', content: SYSTEM_PROMPT },
-          ...history.map((m) => ({ role: m.role, content: m.content })),
-        ],
-        max_tokens: 600,
+        messages: fullMessages,
+        max_tokens: 1024,
         temperature: 0.7,
       });
       const reply = completion.choices[0]?.message?.content;
