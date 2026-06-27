@@ -70,14 +70,18 @@ DeepSeek 价格：每百万 token ¥1-2，非常便宜。
 
 ### 第一次
 
-1. 把代码推到 GitHub（已经推到 `rebuild/ip-xiaotutou` 分支的 `production/` 目录）
+1. 把代码推到 GitHub（已经推到 `rebuild/ip-xiaututou` 分支的 `production/` 目录）
 2. 登录 [vercel.com](https://vercel.com)
 3. 点 "Add New Project" → 选 GitHub 仓库
-4. **Framework Preset**: 选 "Other"
-5. **Root Directory**: 填 `production`（如果代码在仓库的子目录）
-6. **Build Command**: `npm run build`
-7. **Output Directory**: 留空（由 Vercel 自动识别 Astro）
-8. **Install Command**: `npm install`
+4. **⚠️ 重要：选对分支** — 在 Vercel New Project 页面，仓库名旁边会有一个分支 selector（下拉菜单），默认显示 `master`。**点击它** → 选 **`rebuild/ip-xiaututou`**（不是 master，master 是旧 Jekyll 站）。如果看不到这个分支，说明 GitHub 同步没刷出来，**回到 vercel.com 顶栏点一下 "Import Repository" 旁边的刷新按钮**，或退出重新登录。
+5. **Framework Preset**: 选 "Astro"（自动检测）
+6. **⚠️ 重要：改 Root Directory** — Root Directory 默认是 `./`（仓库根）。**点旁边的 "Edit" 按钮**，改成 **`production`**（代码在子目录）
+7. **Build Command**: `npm run build`（或留空，vercel.json 里已经写了）
+8. **Output Directory**: 留空（由 Vercel 自动识别 Astro / vercel.json 里写了 `dist`）
+9. **Install Command**: `npm install`
+10. 点 **Deploy**
+
+> **为什么选 `rebuild/ip-xiaututou` 而不是 `master`？** 因为 `master` 是 14 年的 Jekyll 旧站，`rebuild/ip-xiaututou` 才是 Astro 5 新代码。Vercel 部署哪个分支，就构建哪个分支的代码。
 
 ### 配置环境变量
 
