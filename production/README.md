@@ -70,18 +70,66 @@ DeepSeek 价格：每百万 token ¥1-2，非常便宜。
 
 ### 第一次
 
-1. 把代码推到 GitHub（已经推到 `rebuild/ip-xiaututou` 分支的 `production/` 目录）
-2. 登录 [vercel.com](https://vercel.com)
-3. 点 "Add New Project" → 选 GitHub 仓库
-4. **⚠️ 重要：选对分支** — 在 Vercel New Project 页面，仓库名旁边会有一个分支 selector（下拉菜单），默认显示 `master`。**点击它** → 选 **`rebuild/ip-xiaututou`**（不是 master，master 是旧 Jekyll 站）。如果看不到这个分支，说明 GitHub 同步没刷出来，**回到 vercel.com 顶栏点一下 "Import Repository" 旁边的刷新按钮**，或退出重新登录。
-5. **Framework Preset**: 选 "Astro"（自动检测）
-6. **⚠️ 重要：改 Root Directory** — Root Directory 默认是 `./`（仓库根）。**点旁边的 "Edit" 按钮**，改成 **`production`**（代码在子目录）
-7. **Build Command**: `npm run build`（或留空，vercel.json 里已经写了）
-8. **Output Directory**: 留空（由 Vercel 自动识别 Astro / vercel.json 里写了 `dist`）
-9. **Install Command**: `npm install`
-10. 点 **Deploy**
+**Vercel 是按页面顺序一步步配置的，不是单页表单。** 你会看到 3-4 个页面：
 
-> **为什么选 `rebuild/ip-xiaututou` 而不是 `master`？** 因为 `master` 是 14 年的 Jekyll 旧站，`rebuild/ip-xiaututou` 才是 Astro 5 新代码。Vercel 部署哪个分支，就构建哪个分支的代码。
+#### 页面 1：选择 GitHub 仓库（Add New Project 入口）
+
+登录 https://vercel.com → 点 **Add New → Project** → 在 GitHub repo 列表里找到 `toolazytoname/toolazytoname.github.io` → 点 **Import**。
+
+#### 页面 2：项目命名 + 团队
+
+- **Project Name**: 填 `weichao-ren`（或 `toolazytoname-github-io`，跟图里一样）
+- **Vercel Team**: 选 "toolazytoname's projects" Hobby
+- 点右下角 **Continue** / **Next**
+
+> 这一页**没有**分支选择 + Root Directory 配置，别在这一页找。
+
+#### 页面 3：分支选择 + 构建配置（关键）
+
+你会看到：
+
+```
+Branch:        [master ▼]              ← 这里下拉
+Framework:     [Astro ▼]
+Root Directory: ./    [Edit]           ← 默认 ./，点 Edit 改
+Build Command:  [npm run build]
+Output Dir:     [dist]
+Install Cmd:    [npm install]
+```
+
+**关键操作**：
+
+1. **Branch 下拉** → 选 **`rebuild/ip-xiaututou`**
+   - 如果下拉里**看不到这个分支**：说明 Vercel GitHub App 没有这个分支的访问权限。去 GitHub → Settings → Applications → Vercel → Repository access → 给 `toolazytoname/toolazytoname.github.io` 授权 → 勾选 "All repositories" 或 "Only select repositories" 加上这个 repo（包含所有分支）
+2. **Root Directory** → 点 **Edit** → 输入 **`production`**（代码在子目录）
+3. **Framework Preset**: 选 **Astro**（自动检测）
+4. 其他**留默认**（Build / Output / Install 都已写在 `vercel.json` 和 `package.json`）
+
+#### 页面 4：环境变量（可选，可后加）
+
+点 "Environment Variables" 折叠面板，添加：
+
+| Name | Value | Environments |
+|---|---|---|
+| `AGNES_API_KEY` | 你的 Agnes key | Production + Preview + Development |
+| `DEEPSEEK_API_KEY` | 你的 DeepSeek key（可选） | Production + Preview + Development |
+
+> 也可以**先不填，直接 Deploy**。Vercel 会 build 成功（chatbot 显示降级），deploy 完再回来设环境变量 + Redeploy。
+
+#### 点 Deploy
+
+第一次 build 大约 1-3 分钟（npm install 装 three.js + openai + astro）。
+
+#### Build 失败的常见原因 + 修法
+
+| 错误 | 原因 | 修法 |
+|---|---|---|
+| `Build script returned non-zero exit code: 1` | Root Directory 错了 / 依赖装不上 | 确认 Root Directory = `production`；Vercel → Settings → Node Version = 20 |
+| `Cannot find module '@google/generative-ai'` | (老 commit，没遇到) | 升级到 `rebuild/ip-xiaututou` 最新 commit |
+| 404 / 主页空白 | 函数没部署 | 检查 vercel.json `functions` 配置 |
+| Chatbot 一直显示 offline | 没设环境变量 | 在 Settings → Environment Variables 加 `AGNES_API_KEY` + Redeploy |
+
+> **为什么选 `rebuild/ip-xiaututou` 而不是 `master`？** `master` 是 14 年的 Jekyll 旧站，`rebuild/ip-xiaututou` 才是 Astro 5 新代码。Vercel 部署哪个分支，就构建哪个分支的代码。
 
 ### 配置环境变量
 
