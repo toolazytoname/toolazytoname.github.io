@@ -50,7 +50,9 @@ const memoriesJson = JSON.stringify(memories);
     border-radius: var(--r-2xl);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.25);
+    box-shadow:
+      0 0 0 1px rgba(20, 20, 19, 0.08),
+      0 4px 16px rgba(20, 20, 19, 0.12);
     animation: lb-panel-in 320ms var(--ease-out);
   }
   @keyframes lb-panel-in {
@@ -100,7 +102,7 @@ const memoriesJson = JSON.stringify(memories);
   :global(.lightbox__icon) {
     position: relative;
     font-size: 96px;
-    filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.3));
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));
     z-index: 1;
   }
   :global(.lightbox__body) {
@@ -225,7 +227,7 @@ const memoriesJson = JSON.stringify(memories);
               <path d="M4 4L16 16M16 4L4 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
             </svg>
           </button>
-          <div class="lightbox__photo" style="background: linear-gradient(135deg, ${memory.color}33, ${memory.color}11);">
+          <div class="lightbox__photo" style="background: var(--color-warm-sand);">
             <img src="${escapeHtml(memory.photo)}" alt="${escapeHtml(memory.title)}" loading="lazy" />
             <span class="lightbox__icon">${escapeHtml(memory.icon)}</span>
           </div>

@@ -31,6 +31,10 @@ const all = [...life, ...craft].sort(
         <button type="button" class="posts__filter" data-filter-value="craft">技术</button>
       </div>
 
+      <p class="posts__notice reveal" role="note">
+        这里目前只挂了 2 篇作为样本（生活 1、技术 1）。剩下的 54 篇还在从老的 WordPress 站点迁过来——迁移完成后会自动出现在这里。
+      </p>
+
       <ol class="posts__list">
         {all.map((entry) => {
           const dateStr = entry.data.date.toISOString().slice(0, 10);
@@ -107,6 +111,18 @@ const all = [...life, ...craft].sort(
     background: var(--color-warm-text);
     color: var(--color-ivory);
   }
+  .posts__notice {
+    background: var(--color-warm-sand);
+    border: 1px solid var(--color-warm-border);
+    border-left: 3px solid var(--color-coral);
+    border-radius: var(--r-md);
+    padding: var(--s-4) var(--s-5);
+    margin: 0 0 var(--s-8);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-warm-text-muted);
+    max-width: 720px;
+  }
   .posts__list {
     list-style: none;
     padding: 0;
@@ -123,10 +139,9 @@ const all = [...life, ...craft].sort(
     padding: var(--s-6) 0;
     color: inherit;
     text-decoration: none;
-    transition: transform 200ms var(--ease-out);
+    transition: color 200ms var(--ease-out);
   }
   .posts__link:hover {
-    transform: translateX(8px);
     text-decoration: none;
   }
   .posts__meta {

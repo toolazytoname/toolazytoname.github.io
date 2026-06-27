@@ -33,7 +33,7 @@ export const memories: Memory[] = [
     id: 'xinjiang',
     lat: 43.8,
     lon: 87.6,
-    color: '#3b82f6',
+    color: '#8a6f5a',
     title: '新疆 · 滑雪 + 独库公路',
     icon: '🏔️',
     date: '想去 · 下一站',

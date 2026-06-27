@@ -27,9 +27,9 @@
   --color-blue: #0071e3;
   --color-blue-link: #0066cc;
 
-  /* Memory dot colors */
+  /* Memory dot colors (all warm — cool tones violate the design system) */
   --color-beijing: #ff6b35;
-  --color-xinjiang: #3b82f6;
+  --color-xinjiang: #8a6f5a;
   --color-hainan: #10b981;
   --color-guangxi: #f59e0b;
 
