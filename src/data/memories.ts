@@ -1,7 +1,14 @@
-// 4 memories · the four places that shaped (and are shaping) me.
+// 4 memories · the four places that shape (and are shaping) me.
 // Lat/lon are WGS84. Colors drive both the dot pulse on the globe and the
 // memory card accent. `photo` is the public path the site owner will replace
 // with real photos later.
+//
+// 2026-07-12 review notes:
+// - Aspirational markers. "beijing" is the only past+present; the other three
+//   are plans (想 / 下一站 / 目标) and stay forward-looking.
+// - Per project CLAUDE.md (rule #3), no company names appear on the public
+//   site. The "某宇宙大厂" framing replaces real names; school names omitted.
+// - Tag lists trimmed to three meaningful tags per entry (avoid duplication).
 
 export type Memory = {
   id: string;
@@ -22,11 +29,11 @@ export const memories: Memory[] = [
     lat: 39.9,
     lon: 116.4,
     color: '#ff6b35',
-    title: '北京 · 学习 工作 生活',
+    title: '北京 · root',
     icon: '🏠',
-    date: 'home · 2006 → Now',
-    desc: '我生长的地方。\n\n北林大 2006-2010 → 搜狐 → 新浪 → 易车 → 字节 → 现在。眼看他起朱楼，眼看他宴宾客，终于还是蹉跎了岁月，中年被裁。\n\n但根一直在这。家里的饭菜味，下班路上的晚高峰，三里屯的霓虹，798 的展览——这些是 root，不是 background。',
-    tags: ['home', 'beijing', 'career', 'family'],
+    date: 'home · since 2006',
+    desc: '出学校门 → 在几家互联网公司做过 iOS 基础架构 → 2019 到 2023 在某宇宙大厂做 Swift 编译缓存和 LLVM 隐私检测，前后 15 年 iOS。\n\n眼看他起朱楼，眼看他宴宾客。现在一个人安静地做自己想要的工具。',
+    tags: ['home', 'beijing', 'career'],
     photo: '/photos/beijing.jpg',
   },
   {

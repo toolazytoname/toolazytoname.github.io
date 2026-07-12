@@ -1,6 +1,18 @@
 // Static knowledge base for the AI chatbot.
 // The chatbot tries the LLM first, falls back to static keyword match.
 // This file MUST stay human-readable — it's also the system prompt seed.
+//
+// 2026-07-12 review notes:
+// - 旧版条目里有 WeChatExport / Swift 编译缓存 / LLVM 隐私检测 / "中年被裁"。
+//   这些要么不在公开 profile，要么与新定位不符，要么 CLAUDE.md 不允许，
+//   全部按下面规则改写或删除：
+//   • about — 去掉"中年被裁"，只留人设与兴趣
+//   • products — 列节拍器 / Lodge / GridGo / Sentinel / autodev-harness / atelier
+//   • contact — 邮箱改 lazywc@gmail.com；Twitter 保留但标"不活跃"
+//   • byte — 删 (原条目谈字节跳动 + LLVM 隐私，违反 CLAUDE.md 第 3 条)
+//   • openSource — 列 6 个真实公开 repo
+//   • tech — iOS 历史/AI 当前栈表述，校准为 CLAUDE.md 的"用 AI 造工具"叙事
+// - sport / film / book / greeting / thanks 保留，仅做小幅校准。
 
 export type KnowledgeEntry = {
   id: string;
@@ -14,49 +26,42 @@ export const knowledge: KnowledgeEntry[] = [
     id: 'about',
     keywords: ['你是谁', 'who are you', 'about', '介绍', '韦超', '小兔头', '你是'],
     reply:
-      '我是韦超（网名"小兔头"），weichao.ren 的主人。\n\n做过 Swift 编译器、Apple LLVM 后端、字节跳动隐私检测。现在中年被裁，正在想清楚下一步要做什么。\n\n喜欢滑雪、潜水、攀岩、公路旅行。喜欢写代码，更喜欢写代码之外的东西。',
+      '我是韦超（网名"小兔头"，英文 ID toolazytoname），weichao.ren 的主人。\n\n前某宇宙大厂 iOS 基础架构工程师，2019 到 2023 期间做过 Swift 编译缓存和 LLVM 隐私检测。15 年 iOS。\n\n现在是持滑雪 / 攀岩 / 游泳教练证的独立开发者，用 AI 造自己想要的工具。\n\n喜欢滑雪、潜水、攀岩、公路旅行。喜欢写代码，更喜欢写代码之外的东西。',
     source: 'about',
   },
   {
     id: 'products',
     keywords: ['产品', '作品', 'project', '作品集', 'works', 'product'],
     reply:
-      '做过的几个：\n\n• weichao.studio — 个人工作室主页\n• WeChatExport — iOS 微信聊天记录导出工具\n• Swift 编译缓存优化 — SwiftPM 静态资源 cache 集成\n• LLVM 隐私检测 — 基于 LLVM Pass 的敏感 API 调用追踪\n• Metronome / Token / 几个 Side Project\n\n完整列表在主页 Works 区。',
+      '现在在维护的几个：\n\n• 节拍器 (Metronome) — 网页 + 小程序，专业场景节拍器\n• Lodge — 自部署的家庭服务器仪表盘\n• GridGo — 日历优先的轻量 todo (开发中)\n• Sentinel — freqtrade 之上的稳健型加密策略\n\n开源的几个：\n\n• autodev-harness — 多 agent 自动开发 harness\n• atelier — Claude Code 用的 disposable VM 沙盒\n• MediaForge — 本地媒体处理工具集\n• wechat-mp-devops — 微信公众号开发与运维工具\n\n完整列表在主页 Works 区。',
     source: 'products',
   },
   {
     id: 'contact',
     keywords: ['联系', 'contact', '邮箱', 'email', '怎么找你', 'twitter', 'github'],
     reply:
-      '最稳的方式是邮件：hi [at] weichao.ren\n\nGitHub: toolazytoname\nX / Twitter: @toolazytoname\n\n不常用的：知乎 / 即刻 / V2EX 也搜"小兔头"能找到。',
+      '最稳的方式是邮件：lazywc@gmail.com\n\nGitHub: @toolazytoname\nX / Twitter: @toolazytoname（不活跃，挂了占位用，主互动在 GitHub）\n\n不常用的：知乎 / 即刻 / V2EX 也搜"小兔头"能找到。',
     source: 'contact',
   },
   {
     id: 'now',
     keywords: ['now', '最近', '最近在干嘛', '你在做什么', '当下', '近况'],
     reply:
-      '最近两件事：\n\n1. 重建个人站（这个站），把 14 年的博客 / 作品 / 记忆全搬过来\n2. 想清楚下一步职业方向 —— 在 AI / 编译 / 隐私这三个领域之间选\n\n滑雪季再开就去新疆。PADI AOW 拿到之后安排海南潜水。',
+      '最近两件事：\n\n1. 重建个人站（这个站），把 14 年的博客 / 作品 / 记忆全搬过来，从 Jekyll 迁到 Astro 5 + Vercel\n2. 在想下一步职业方向 —— AI infra / AI 应用 / 继续做自己的产品 三个方向还在权衡\n\n滑雪季再开就去新疆。PADI AOW 拿到之后安排海南潜水。',
     source: 'now',
   },
   {
     id: 'sport',
-    keywords: ['运动', '户外', 'sport', '滑雪', 'ski', '潜水', 'dive', '攀岩', 'climb', '旅行'],
+    keywords: ['运动', '户外', 'sport', '滑雪', 'ski', '潜水', 'dive', '攀岩', 'climb', '游泳', '旅行'],
     reply:
-      '户外三件套：\n\n🏔️ 滑雪 — 阿勒泰 / 长白山 / 崇礼，目标新疆干粉雪\n🤿 潜水 — PADI AOW 已拿，下一站海南考深潜专长\n🧗 攀岩 — 阳朔朝圣，目标从 5.10a 推到 5.10c\n🚗 公路旅行 — 独库 / 318 / G7，看时间安排\n\n详细计划在主页 Memories 地球上的 4 个点。',
+      '户外 + 水上：\n\n🏔️ 滑雪 (双板 + 单板) — 阿勒泰 / 长白山 / 崇礼，持社会体育指导员证\n🧗 攀岩 — 阳朔朝圣，目标 5.10a → 5.10b → 5.10c，持指导员证\n🏊 游泳 — 持社会体育指导员证\n🤿 潜水 — PADI AOW 已拿，下一站海南考深潜专长\n🚗 公路旅行 — 独库 / 318 / G7，看时间安排\n\n详细计划在主页 Memories 地球上的 4 个点。',
     source: 'sport',
-  },
-  {
-    id: 'byte',
-    keywords: ['字节', '字节跳动', 'byte', '字节工作', 'bytedance'],
-    reply:
-      '在字节做过隐私检测方向 —— 基于 LLVM Pass 追踪敏感 API 调用（位置、相册、剪贴板、麦克风、摄像头），覆盖 iOS / Android / 桌面三端。\n\n技术栈：LLVM / Swift / Kotlin / C++。也做过一段时间 iOS 基础架构。',
-    source: 'byte',
   },
   {
     id: 'openSource',
     keywords: ['开源', 'open source', 'github', 'github 项目'],
     reply:
-      'GitHub: toolazytoname\n\n主要项目：\n• WeChatExport — iOS 微信聊天记录导出（OC + Swift）\n• 一些 Swift / LLVM 的实验代码\n\n早期博客和 side project 散落在各个 repo 里，慢慢整理中。',
+      'GitHub: @toolazytoname\n\n主要公开项目：\n\n• autodev-harness — 多 agent 自动开发 harness\n• atelier — Claude Code disposable VM 沙盒\n• Sentinel — freqtrade 之上的稳健加密策略\n• MediaForge — 本地媒体处理工具集\n• wechat-mp-devops — 微信公众号开发与运维工具\n• 早期 iOS 时代的 Swift / LLVM side code 也都还留着\n\n新东西在 Pipeline 上走：一个工具 → 试用 → 拆段可复用的开源部分 → 公开。',
     source: 'openSource',
   },
   {
@@ -70,14 +75,14 @@ export const knowledge: KnowledgeEntry[] = [
     id: 'book',
     keywords: ['书', 'book', '看书', '读什么', '推荐书', '读书'],
     reply:
-      '最近在读：\n\n• 《人月神话》 — 重读，每次都有新东西\n• 《代码大全》第 2 版 — 当工具书翻\n• 《活出生命的意义》 — Frankl\n• 一些关于中年危机的散文和博客\n\n技术书看不动了，现在更多读历史 / 哲学 / 散文。',
+      '最近在读：\n\n• 《人月神话》 — 重读，每次都有新东西\n• 《代码大全》第 2 版 — 当工具书翻\n• 《活出生命的意义》 — Frankl\n• 一些关于独立开发的散文和博客\n\n技术书看不动了，现在更多读历史 / 哲学 / 散文。',
     source: 'book',
   },
   {
     id: 'tech',
     keywords: ['tech', '技术栈', '用什么', '语言', 'language', 'swift', 'llvm'],
     reply:
-      '主力：Swift / Objective-C / LLVM\n会用：TypeScript / Python / Rust（学习中）\n曾经靠它吃饭：C++ / Kotlin / Java\n\n编辑器：Neovim（最近切到 LazyVim 配方） + 偶尔 Xcode\nShell：fish + starship\n笔记：Obsidian + Logseq',
+      '历史主力：Swift / Objective-C / LLVM（前后 15 年 iOS / 编译）\n现在用：TypeScript / Python / Astro / Vercel / Claude Code / Claude API\n学习中：Rust\n\n编辑器：Neovim（最近切到 LazyVim 配方） + 偶尔 Xcode\nShell：fish + starship\n笔记：Obsidian + Logseq\nAI：Claude Code 是主菜 + agent harness 自己写来用',
     source: 'tech',
   },
   {

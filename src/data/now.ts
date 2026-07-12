@@ -1,6 +1,11 @@
 // /now — what I'm focused on right now.
 // Two-line timeline; oldest at top, newest at bottom.
 // Entries MUST be in ascending date order — consumers assume that.
+//
+// 2026-07-12 review notes:
+// - 2026-06 条目里的"回大厂"措辞改为中性，让"下一步职业方向"的探索感保留。
+// - 不引入"出海"叙事（站主 2026-07-12 表示还没想）。
+// - 其它保留。
 
 export type NowEntry = {
   id: string;
@@ -24,7 +29,7 @@ export const nowEntries: NowEntry[] = [
     date: '2026-06',
     title: '站点重建 + 职业方向',
     body:
-      '把 weichao.ren 整体重建到 Astro 5 + Vercel，14 年的内容一次性搬过来。同时在想下一步：是回大厂做 AI infra，还是去做 AI 应用，还是跳出去做自己的东西。',
+      '把 weichao.ren 整体重建到 Astro 5 + Vercel，14 年的内容一次性搬过来。同时在想下一步：在 AI infra / AI 应用 / 继续做自己的产品 三个方向里选。',
     tag: 'work',
   },
 ];

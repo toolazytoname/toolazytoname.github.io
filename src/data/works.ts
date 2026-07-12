@@ -1,5 +1,16 @@
-// 6 work cards · the public-facing portfolio.
-// Each card has a front (summary) and a back (detail) for the 3D flip.
+// 6 work cards · the public-facing portfolio. Each card has a front (summary)
+// and a back (detail) for the 3D flip.
+//
+// 2026-07-12 review notes:
+// - Replaces 6 placeholder entries (Metronome / Token / weichao.studio /
+//   Swift 编译缓存 / LLVM 隐私检测 / WeChatExport). The old entries had:
+//   • fabricated platform claims ("Apple Watch first 节拍器", which was actually
+//     a Web + 小程序 product, not watchOS)
+//   • placeholder URLs ("TODO://replace-with-real-link")
+//   • products that aren't in the public profile README anymore
+//     (Token, WeChatExport)
+// - New 6 cards reflect the actual product line per current assets list
+//   (节拍器 / Lodge / GridGo / Sentinel / autodev-harness / atelier).
 
 export type Work = {
   id: string;
@@ -24,128 +35,131 @@ export type Work = {
 export const works: Work[] = [
   {
     id: 'metronome',
-    title: 'Metronome',
-    subtitle: '一个安静的练习节拍器',
-    period: '2025',
-    tag: 'iOS · Audio',
+    title: '节拍器',
+    subtitle: '钢琴吉他练习节拍器 (Web + 小程序)',
+    period: '2024-2026',
+    tag: 'Web · 小程序',
     status: 'shipped',
     front: {
-      summary: '一个 Apple Watch first 的节拍器 — 不打扰练习。',
-      highlights: ['手腕震动', '可听不可视', '100% 本地'],
+      summary: '一个针对钢琴 / 吉他 / 民乐练习场景的网页 + 小程序节拍器，本地优先、零账号、可长尾 SEO。',
+      highlights: ['BPM 30–300', 'Web Audio + 视觉静音', '20 个长尾落地页 (中/英)'],
     },
     back: {
-      problem:
-        '传统节拍器 app 在排练时屏幕太亮、声音太机械。乐手真正需要的是手腕上轻轻一拍。',
-      approach:
-        '用 CoreHaptics 实现有节律的震动反馈。Sound 设计来自真实机械节拍器录音，48kHz / 24bit。',
-      outcome: 'App Store 上架，第一个月 2k 下载。',
-      stack: ['Swift', 'SwiftUI', 'CoreHaptics', 'AVFoundation'],
-      // TODO: 站主提供真实链接（App Store / GitHub / 微信小程序 / PR 链接）
-      links: [{ label: 'App Store', url: 'TODO://replace-with-real-link' }],
+      problem: '主流节拍器 app 屏幕太亮、声音太机械，加练习辅助功能要收费；面向初学者的差异化搜索需求 (Hanon、6/8 jig 等) 没覆盖。',
+      approach: '纯前端 Web Audio + CacheStorage，零后端、零账号；用 per-field URL preset + 长尾 slug 列表做 SEO。',
+      outcome: '上线 jp + cn + en 三个 locale 的长尾落地页，零付费推广到达第一批稳定用户。',
+      stack: ['TypeScript', 'Web Audio API', 'Vercel', '小程序'],
+      links: [
+        { label: '主站', url: 'https://jpq.weichao.studio/' },
+        { label: 'GitHub', url: 'https://github.com/toolazytoname/metronome' },
+      ],
     },
   },
   {
-    id: 'token',
-    title: 'Token',
-    subtitle: '一次性的私密分享',
-    period: '2025',
-    tag: 'Web · Crypto',
+    id: 'lodge',
+    title: 'Lodge',
+    subtitle: '家庭服务器面板 · Self-hosted',
+    period: '2025-2026',
+    tag: 'Self-hosted',
     status: 'shipped',
     front: {
-      summary: '阅后即焚的链接分享 — 服务器不留痕。',
-      highlights: ['端到端加密', '一次访问即焚', '零日志'],
+      summary: 'Lodge 是一个自部署的家庭服务器面板：服务管理 + 配置中心 + 仪表盘，单 HTML 文件，零后端。',
+      highlights: ['单 HTML 文件', '零后端依赖', 'JSON 配置 + 状态 API'],
     },
     back: {
-      problem:
-        '发敏感信息给朋友时，邮件和网盘都不合适。需要一个"我发完你看完就没了"的工具。',
-      approach:
-        '密码学在前端：内容用一次性 AES-256-GCM 密钥加密，密钥只放在 URL fragment（不会发到服务器）。',
-      outcome: '自用一年半，分给几十个朋友用过。',
-      stack: ['Next.js', 'Web Crypto API', 'Cloudflare Workers'],
-      // TODO: 站主提供真实链接（App Store / GitHub / 微信小程序 / PR 链接）
-      links: [{ label: 'Source', url: 'TODO://replace-with-real-link' }],
+      problem: '跑家庭服务器 (HomeLab / SOHO / 小工作室) 时 SSH 记命令繁琐，外部 SaaS 要联网、要账号、贵。',
+      approach: '单 HTML + 静态 JSON 配置；客户端 JS 直接连服务器管理端口；服务端最小化处理。',
+      outcome: '已开源，含真实 dashboard 截图 + 中英 README 双版；v1.0.0 release 已发。',
+      stack: ['HTML', 'TypeScript', 'Zero-backend'],
+      links: [
+        { label: '主站', url: 'https://lodge.weichao.studio/about.html' },
+        { label: 'GitHub', url: 'https://github.com/toolazytoname/lodge' },
+      ],
     },
   },
   {
-    id: 'weichao-studio',
-    title: 'weichao.studio',
-    subtitle: '个人工作室主页',
-    period: '2024',
-    tag: 'Web · Brand',
-    status: 'shipped',
+    id: 'gridgo',
+    title: 'GridGo',
+    subtitle: '日历优先待办 · Calendar-first Todo',
+    period: '2024-2026',
+    tag: 'Web · Product',
+    status: 'wip',
     front: {
-      summary: '一个比简历更丰富的自我介绍。',
-      highlights: ['独立设计', '自托管', '中英双语'],
+      summary: '把日历视图当主入口的轻量 todo；不抢用户的输入主界面，只替代月历。',
+      highlights: ['日历优先', '多视图 (日/周/月)', '无社交、无云账号'],
     },
     back: {
-      problem: 'LinkedIn / 简历 / 个人站三种媒介讲三种故事，不一致。',
-      approach: '一个站点三套样式：通过 URL 参数切换 tone，但身份信息统一。',
-      outcome: '成为和雇主、朋友、合作方分别使用的入口。',
-      stack: ['Astro', 'TypeScript', 'Cloudflare Pages'],
+      problem: '主流 todo app 把 inbox 摆主入口，日历是被压扁的展示；用户真正在做的是「每天/每周有时间窗的事」。',
+      approach: '日 / 周 / 月三视图可切；事件存 localStorage + 可选 WebDAV 同步；不上 lock-in 云。',
+      outcome: 'beta 上线 (beta.gridgo.weichao.studio)；gridgo.cn 域名注册待正式启用。',
+      stack: ['TypeScript', 'React', 'Vite', 'Vercel'],
+      links: [
+        { label: 'Beta', url: 'https://beta.gridgo.weichao.studio/' },
+        { label: 'GitHub', url: 'https://github.com/toolazytoname/GridGo' },
+      ],
     },
   },
   {
-    id: 'swift-cache',
-    title: 'Swift 编译缓存',
-    subtitle: 'SwiftPM 静态资源 cache 集成',
-    period: '2022',
-    tag: 'Compiler · Swift',
+    id: 'sentinel',
+    title: 'Sentinel',
+    subtitle: '稳健型个人加密货币量化系统',
+    period: '2024-2026',
+    tag: 'Freqtrade · Crypto',
     status: 'shipped',
     front: {
-      summary: '让 SwiftPM build 复用预编译的二进制产物。',
-      highlights: ['~40% build 加速', 'PR 已合并', 'Swift 5.7+'],
+      summary: 'freqtrade 地基 + 自建薄壳：纪律写进状态机，LLM 只做研究 / 复盘 / 否决，不直接下决策。',
+      highlights: ['稳态策略为主', 'LLM 仅研究/复盘', '自托管 + 风控'],
     },
     back: {
-      problem:
-        'SwiftPM 在 CI 上每个 PR 都从 0 开始 build 一个有几 MB 二进制的依赖。冷启动 6+ 分钟。',
-      approach:
-        '把编译产物的 hash 作为 key 缓存到 S3 兼容存储，CI 拉取命中后跳过 build。',
-      outcome: '被 Swift 社区采纳，PR 合并进 swift-package-manager。',
-      stack: ['Swift', 'SwiftPM', 'AWS S3'],
-      // TODO: 站主提供真实链接（App Store / GitHub / 微信小程序 / PR 链接）
-      links: [{ label: 'PR', url: 'TODO://replace-with-real-link' }],
+      problem: '自己手动盯盘既不纪律也无法回测；直接拿 LLM 接交易 API 又太冒险。',
+      approach: 'Freqtrade 做执行底座；自建薄壳做 daily/weekly review；LLM 通过严格 prompt 只能产出「赞成 / 反对 / 静观」，不写订单。',
+      outcome: '已公开源码 + 论文级回测笔记；当前实盘小仓位持续。',
+      stack: ['Python', 'Freqtrade', '状态机', 'Claude API'],
+      links: [
+        { label: 'GitHub', url: 'https://github.com/toolazytoname/Sentinel' },
+      ],
     },
   },
   {
-    id: 'llvm-privacy',
-    title: 'LLVM 隐私检测',
-    subtitle: '基于 LLVM Pass 的敏感 API 调用追踪',
-    period: '2020-2022',
-    tag: 'LLVM · Privacy',
+    id: 'autodev-harness',
+    title: 'autodev-harness',
+    subtitle: '全自动 AI 开发系统',
+    period: '2025-2026',
+    tag: 'AI · Dev',
     status: 'shipped',
     front: {
-      summary: '在编译期标记每一个敏感 API 调用，覆盖 iOS / Android / 桌面。',
-      highlights: ['跨平台', '低误报', '生产环境'],
+      summary: '把 Claude / Codex 等 agent 编进一个 harness：拉代码 → 跑测试 → 出 PR，全程自动。',
+      highlights: ['自我修复', '多 agent 编排', '最低人类干预'],
     },
     back: {
-      problem:
-        'App 内调用了几百次位置、相册、麦克风、摄像头相关 API。人工 review 不可能穷举。',
-      approach:
-        '在 LLVM IR 层注入 Pass，标记每一个敏感 API call site，产出可读报告。',
-      outcome: '在字节跳动内部全量覆盖，日均扫描数千个 app。',
-      stack: ['C++', 'LLVM', 'Swift', 'Kotlin'],
+      problem: '一次 vibe-coding 改两个文件是可以的，让 agent 改 100 个文件跑 CI 全绿，没现成 harness。',
+      approach: 'agent loop 套 git 提交流程；测试失败时自动把 stack trace 喂回；agent 提 PR 时强制 review checklist。',
+      outcome: '已开源；用于节拍器/Lodge 等项目的自动化维护。',
+      stack: ['Python', 'Anthropic API', 'GitHub API', 'pytest'],
+      links: [
+        { label: 'GitHub', url: 'https://github.com/toolazytoname/autodev-harness' },
+      ],
     },
   },
   {
-    id: 'wechat-export',
-    title: 'WeChatExport',
-    subtitle: 'iOS 微信聊天记录导出工具',
-    period: '2018-2020',
-    tag: 'iOS · Tool',
-    status: 'archived',
+    id: 'atelier',
+    title: 'atelier',
+    subtitle: 'macOS + Claude Code 隔离沙盒',
+    period: '2026',
+    tag: 'Dev · Tool',
+    status: 'shipped',
     front: {
-      summary: '把微信聊天记录从 iOS 备份里抠出来变成可读文件。',
-      highlights: ['~10k GitHub stars', 'OC + Swift', '社区维护'],
+      summary: '让 Claude Code 跑在可销毁的 Linux VM 里，本机保持干净；跑完即扔。',
+      highlights: ['Disposable VM', 'Host 干净', '快照恢复'],
     },
     back: {
-      problem:
-        'iOS 微信聊天记录是 SQLite + 加密 + 散落在 backup 里，没官方导出接口。',
-      approach:
-        '逆向 iTunes backup 格式 + 解密 MM.sqlite + 解析多媒体相对路径。',
-      outcome: 'GitHub 上 ~10k stars，被国外媒体推荐过。',
-      stack: ['Objective-C', 'Swift', 'SQLite'],
-      // TODO: 站主提供真实链接（App Store / GitHub / 微信小程序 / PR 链接）
-      links: [{ label: 'GitHub', url: 'TODO://replace-with-real-link' }],
+      problem: 'Claude Code 跑久了会装一堆 Python / Node / 临时文件污染本机；重置一次要装半小时。',
+      approach: 'Linux VM 启动 → 共享工作目录 → agent 跑 → VM 销毁；本机不进任何 apt 痕迹。',
+      outcome: '日常开发默认接入；换工作台成本降到一次开关机。',
+      stack: ['Shell', 'QEMU / KVM', 'Linux VM'],
+      links: [
+        { label: 'GitHub', url: 'https://github.com/toolazytoname/atelier' },
+      ],
     },
   },
 ];
