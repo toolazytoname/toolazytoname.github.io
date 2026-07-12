@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # typescript
 *.tsbuildinfo
+# Legacy Jekyll residue (do not track)
+_site/
+.jekyll-cache/
