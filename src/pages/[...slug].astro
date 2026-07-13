@@ -1,17 +1,16 @@
 ---
 import { getCollection, render } from 'astro:content';
 import PostLayout from '@layouts/PostLayout.astro';
+import { postSlug } from '@lib/permalink';
 
 export const prerender = true;
 
 export async function getStaticPaths() {
-  const life = await getCollection('life');
-  const craft = await getCollection('craft');
-  const all = [...life, ...craft].map((entry) => ({
-    params: { slug: entry.id },
+  const posts = await getCollection('posts');
+  return posts.map((entry) => ({
+    params: { slug: postSlug(entry.id, entry.data) },
     props: { entry },
   }));
-  return all;
 }
 
 const { entry } = Astro.props;
