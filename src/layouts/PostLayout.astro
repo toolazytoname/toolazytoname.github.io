@@ -3,19 +3,24 @@ import BaseLayout from './BaseLayout.astro';
 import type { CollectionEntry } from 'astro:content';
 
 type Props = {
-  entry: CollectionEntry<'life'> | CollectionEntry<'craft'>;
+  entry: CollectionEntry<'posts'>;
 };
 
 const { entry } = Astro.props;
-const collection = entry.collection; // 'life' | 'craft'
 const date = entry.data.date instanceof Date ? entry.data.date : new Date(entry.data.date);
 const dateStr = date.toISOString().slice(0, 10);
+
+// Show first category as the post's "section" label. Migrated Jekyll posts
+// keep their old category (iOS / python / tool / life / hack your life / FDSDK);
+// the 2 sample posts use 'craft' or 'life' explicitly.
+const cats = Array.isArray(entry.data.categories) ? entry.data.categories : [entry.data.categories];
+const primaryCat = (cats[0] ?? '').toString().trim() || 'uncategorized';
 ---
 
 <BaseLayout seo={{ title: entry.data.title, description: entry.data.summary, type: 'article' }}>
   <article class="post container-narrow">
     <header class="post__header reveal">
-      <p class="eyebrow">{collection === 'life' ? 'Life · 生活' : 'Craft · 技术'}</p>
+      <p class="eyebrow">{primaryCat}</p>
       <h1 class="post__title serif">{entry.data.title}</h1>
       <p class="post__meta">
         <time datetime={dateStr}>{dateStr}</time>

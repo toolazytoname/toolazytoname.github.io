@@ -1,10 +1,9 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
+import { postSlug } from '@lib/permalink';
 
-const life = await getCollection('life');
-const craft = await getCollection('craft');
-const all = [...life, ...craft].sort(
+const all = (await getCollection('posts')).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime(),
 );
 ---
@@ -12,7 +11,7 @@ const all = [...life, ...craft].sort(
 <BaseLayout
   seo={{
     title: 'Posts',
-    description: '所有文章。生活 + 技术两个目录。',
+    description: '从 2016 到现在的所有文章，按时间倒序。',
   }}
 >
   <section class="posts">
@@ -21,33 +20,21 @@ const all = [...life, ...craft].sort(
         <p class="eyebrow">Posts · 文章</p>
         <h1 class="posts__title serif">{all.length} 篇</h1>
         <p class="posts__lede">
-          生活 + 技术两个目录，按时间倒序。
+          从 2016 到现在的所有文章，按时间倒序。
         </p>
       </header>
-
-      <div class="posts__filters reveal" data-filter>
-        <button type="button" class="posts__filter is-active" data-filter-value="all">全部</button>
-        <button type="button" class="posts__filter" data-filter-value="life">生活</button>
-        <button type="button" class="posts__filter" data-filter-value="craft">技术</button>
-      </div>
-
-      <p class="posts__notice reveal" role="note">
-        这里目前只挂了 2 篇作为样本（生活 1、技术 1）。剩下的 54 篇还在从老的 WordPress 站点迁过来——迁移完成后会自动出现在这里。
-      </p>
 
       <ol class="posts__list">
         {all.map((entry) => {
           const dateStr = entry.data.date.toISOString().slice(0, 10);
+          const cats = Array.isArray(entry.data.categories) ? entry.data.categories : [entry.data.categories];
+          const primaryCat = (cats[0] ?? '').toString().trim() || 'uncategorized';
+          const href = '/' + postSlug(entry.id, entry.data) + '/';
           return (
-            <li
-              class="posts__item reveal"
-              data-collection={entry.collection}
-            >
-              <a href={`/posts/${entry.id}`} class="posts__link">
+            <li class="posts__item reveal">
+              <a href={href} class="posts__link">
                 <div class="posts__meta">
-                  <span class={`posts__tag posts__tag--${entry.collection}`}>
-                    {entry.collection === 'life' ? '生活' : '技术'}
-                  </span>
+                  <span class="posts__tag">{primaryCat}</span>
                   <time datetime={dateStr}>{dateStr}</time>
                 </div>
                 <h2 class="posts__heading serif">{entry.data.title}</h2>
@@ -89,40 +76,6 @@ const all = [...life, ...craft].sort(
     font-size: 17px;
     margin: 0;
   }
-  .posts__filters {
-    display: flex;
-    gap: var(--s-2);
-    margin-bottom: var(--s-8);
-    padding-bottom: var(--s-4);
-    border-bottom: 1px solid var(--color-warm-border);
-  }
-  .posts__filter {
-    font-size: 14px;
-    padding: 6px 14px;
-    border-radius: 980px;
-    color: var(--color-warm-text-muted);
-    background: transparent;
-    transition: background 150ms, color 150ms;
-  }
-  .posts__filter:hover {
-    background: var(--color-warm-sand);
-  }
-  .posts__filter.is-active {
-    background: var(--color-warm-text);
-    color: var(--color-ivory);
-  }
-  .posts__notice {
-    background: var(--color-warm-sand);
-    border: 1px solid var(--color-warm-border);
-    border-left: 3px solid var(--color-coral);
-    border-radius: var(--r-md);
-    padding: var(--s-4) var(--s-5);
-    margin: 0 0 var(--s-8);
-    font-size: 14px;
-    line-height: 1.6;
-    color: var(--color-warm-text-muted);
-    max-width: 720px;
-  }
   .posts__list {
     list-style: none;
     padding: 0;
@@ -157,12 +110,6 @@ const all = [...life, ...craft].sort(
     text-transform: uppercase;
     letter-spacing: 0.3px;
     font-weight: 500;
-  }
-  .posts__tag--life {
-    background: rgba(16, 185, 129, 0.15);
-    color: #047857;
-  }
-  .posts__tag--craft {
     background: rgba(201, 100, 66, 0.15);
     color: var(--color-terracotta);
   }
@@ -199,22 +146,3 @@ const all = [...life, ...craft].sort(
     font-family: var(--font-mono);
   }
 </style>
-
-<script>
-  const filterRoot = document.querySelector<HTMLElement>('[data-filter]');
-  if (filterRoot) {
-    const buttons = filterRoot.querySelectorAll<HTMLButtonElement>('[data-filter-value]');
-    const items = document.querySelectorAll<HTMLElement>('.posts__item');
-    buttons.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        buttons.forEach((b) => b.classList.remove('is-active'));
-        btn.classList.add('is-active');
-        const v = btn.dataset.filterValue;
-        items.forEach((it) => {
-          const show = v === 'all' || it.dataset.collection === v;
-          it.style.display = show ? '' : 'none';
-        });
-      });
-    });
-  }
-</script>

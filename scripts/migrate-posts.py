@@ -83,15 +83,29 @@ def rewrite_body(body: str) -> str:
     return body
 
 
+def yaml_quote(s: str) -> str:
+    """Quote a string for safe YAML output.
+
+    Bare strings fail when they start with reserved indicators (@, &, *, !, |, >, %, `, ?, -, :, [, ], {, }, ,, #, &, !, |, >, ', ", %, @, `) or contain
+    newlines. Default to double quotes with backslash escapes.
+    """
+    if not isinstance(s, str):
+        return str(s)
+    if re.match(r"^[&*!|>%@`'\",:?{}\[\]#-]", s) or "\n" in s:
+        escaped = s.replace("\\", "\\\\").replace('"', '\\"')
+        return f'"{escaped}"'
+    return s
+
+
 def render_frontmatter(fm: dict) -> str:
     lines = ["---"]
     for k, v in fm.items():
         if isinstance(v, list):
             lines.append(f"{k}:")
             for item in v:
-                lines.append(f"  - {item}")
+                lines.append(f"  - {yaml_quote(item)}")
         else:
-            lines.append(f"{k}: {v}")
+            lines.append(f"{k}: {yaml_quote(v)}")
     lines.append("---")
     return "\n".join(lines)
 
