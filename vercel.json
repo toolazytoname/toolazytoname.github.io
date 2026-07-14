@@ -2,12 +2,6 @@
   "buildCommand": "astro build",
   "outputDirectory": "dist",
   "framework": null,
-  "functions": {
-    "src/pages/api/chat.ts": {
-      "maxDuration": 10,
-      "memory": 1024
-    }
-  },
   "headers": [
     {
       "source": "/(.*)\\.(jpg|jpeg|png|webp|avif)",
