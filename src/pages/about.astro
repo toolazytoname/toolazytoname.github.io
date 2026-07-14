@@ -5,13 +5,13 @@ export const prerender = true;
 import BaseLayout from '@layouts/BaseLayout.astro';
 
 const timeline = [
-  { year: 'root', text: '出生于南方，长在北京。' },
-  { year: 'study', text: '念了个跟代码没什么关系的本科。' },
-  { year: '2010-2014', text: '在两家门户系互联网公司做 iOS 入门。' },
-  { year: '2014-2017', text: '在一家汽车互联网公司做编辑器、UI 框架、视频内核。' },
-  { year: '2017-2024', text: '在某家科技公司做 iOS 基础架构、隐私检测、LLVM 工具链，前后八年。' },
+  { year: 'root', text: '出生于南方，长在南方。' },
+  { year: 'study', text: '（待你告诉我：读的什么专业，跟代码的关系）' },
+  { year: '2010-2014', text: '（待你告诉我：在哪家公司 + 做什么）' },
+  { year: '2014-2017', text: '（待你告诉我：在哪家公司 + 做什么）' },
+  { year: '2017-2024', text: '（待你告诉我：哪家公司 + 做了几年 + 做什么）' },
   { year: '2024', text: '离开职场。开始想清楚下一步。' },
-  { year: '2025', text: '去了 30 天雪季、5 次潜水、2 次阳朔攀岩。' },
+  { year: '2025', text: '（待你告诉我：实际做了什么）' },
   { year: '2026', text: '重建个人站。在 AI / 编译 / 创业之间选择。' },
 ];
 ---
@@ -34,9 +34,9 @@ const timeline = [
           lazy。前 iOS / LLVM 工程师，做过编译器、LLVM 后端、隐私检测相关工作，现在做独立开发者。
         </p>
         <p>
-          读书专业跟代码没什么关系，毕业后误打误撞进了互联网。
-          前十年在几家互联网公司做 iOS，从客户端到 LLVM 工具链到隐私检测相关工作，
-          前后八年做底层。
+          读书专业跟代码有关系，毕业后进了互联网。
+          先后在几家互联网公司做了 15 年 iOS —— 从客户端到底层
+          （编译器、LLVM、隐私检测相关）都做过。详情见下方时间线。
         </p>
         <p>
           2024 年离开职场，开始认真想：接下来 10 年要做什么？
@@ -64,7 +64,7 @@ const timeline = [
       <section class="about__contact reveal">
         <h2 class="about__subtitle serif">联系</h2>
         <ul class="about__links">
-          <li><strong>Email：</strong><a href="mailto:hi@weichao.ren">hi@weichao.ren</a></li>
+          <li><strong>Email：</strong><a href="mailto:lazywc@gmail.com">lazywc@gmail.com</a></li>
           <li><strong>GitHub：</strong><a href="https://github.com/toolazytoname" rel="noopener" target="_blank">toolazytoname</a></li>
           <li><strong>X：</strong><a href="https://x.com/toolazytoname" rel="noopener" target="_blank">@toolazytoname</a></li>
         </ul>
