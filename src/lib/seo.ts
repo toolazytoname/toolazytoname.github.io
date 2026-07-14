@@ -1,11 +1,11 @@
 // SEO helpers — used by every page.
 
 export const SITE = {
-  name: '韦超 · 小兔头',
+  name: 'lazy',
   url: 'https://weichao.ren',
   description:
-    '韦超（小兔头）的个人站。做过 Swift 编译器、Apple LLVM 后端、字节跳动隐私检测。现在想清楚下一步。',
-  author: '韦超',
+    'lazy 的个人站。做过 Swift 编译器、LLVM 后端、隐私检测相关工作。现在做独立开发者，用 AI 造自己想要的工具。',
+  author: 'lazy',
   twitter: '@toolazytoname',
 };
 

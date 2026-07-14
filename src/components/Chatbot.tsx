@@ -44,13 +44,12 @@ const sourceLabel = (s?: Msg['source']) => {
 // still answer if /api/chat itself is down (cold start, CORS, 500, etc).
 const STATIC_KB: Array<{ k: string[]; r: string }> = [
   { k: ['你好', 'hi', 'hello', '在吗'], r: '在的。问什么都行 —— 关于我、我的作品、最近在干什么、想去哪里玩。' },
-  { k: ['是谁', 'about', '介绍', '韦超', '小兔头'], r: '我是韦超（网名"小兔头"），weichao.ren 的主人。做过 Swift 编译器、Apple LLVM 后端、字节跳动隐私检测。现在中年被裁，正在想清楚下一步要做什么。' },
-  { k: ['产品', '作品', 'project', 'works', '作品集'], r: '主要作品：weichao.studio / WeChatExport / Swift 编译缓存优化 / LLVM 隐私检测。完整列表在主页 Works 区。' },
-  { k: ['联系', 'contact', '邮箱', 'email'], r: '邮件 hi [at] weichao.ren。GitHub: toolazytoname。' },
-  { k: ['now', '最近', '在做什么', '近况'], r: '最近两件事：1. 重建个人站 2. 想清楚下一步职业方向。' },
+  { k: ['是谁', 'about', '介绍', 'lazy'], r: '我是 lazy，weichao.ren 的主人。做过 Swift 编译器、LLVM 后端、隐私检测相关工作。现在做独立开发者，用 AI 造自己想要的工具。' },
+  { k: ['产品', '作品', 'project', 'works', '作品集'], r: '主要作品：节拍器 / Lodge / GridGo / Sentinel / autodev-harness / atelier。完整列表在主页 Works 区。' },
+  { k: ['联系', 'contact', '邮箱', 'email'], r: '邮件 lazywc@gmail.com。GitHub: toolazytoname。' },
+  { k: ['now', '最近', '在做什么', '近况'], r: '最近两件事：1. 重建个人站 2. 想清楚下一步职业方向。滑雪季再开就去新疆。' },
   { k: ['运动', '滑雪', '潜水', '攀岩', '户外'], r: '户外三件套：滑雪（目标新疆）、潜水（PADI AOW 已拿）、攀岩（阳朔朝圣）。' },
-  { k: ['字节', 'bytedance', 'byte'], r: '在字节做过隐私检测 —— 基于 LLVM Pass 追踪敏感 API 调用。' },
-  { k: ['开源', 'github', 'open source'], r: 'GitHub: toolazytoname。主要项目 WeChatExport (~10k stars)。' },
+  { k: ['开源', 'github', 'open source'], r: 'GitHub: toolazytoname。主要项目 autodev-harness / atelier / Sentinel。' },
   { k: ['电影', 'film', 'movie'], r: '最近在重看小津安二郎和是枝裕和。偏爱慢节奏剧情片。' },
   { k: ['书', 'book', '读书'], r: '最近在读《人月神话》《代码大全》《活出生命的意义》。技术书看不动了。' },
   { k: ['技术栈', 'tech', 'swift', 'llvm', '语言'], r: '主力 Swift / Objective-C / LLVM。会用 TypeScript / Python。编辑器 Neovim + LazyVim。' },
@@ -70,7 +69,7 @@ export default function Chatbot() {
   const [messages, setMessages] = useState<Msg[]>([
     {
       role: 'assistant',
-      content: '你好，我是小兔头的 AI 助手。问我关于他、他的作品、最近在干什么都行 :)',
+      content: '你好，我是 lazy 的 AI 助手。问我关于我、最近在做什么都行 :)',
       source: 'static',
     },
   ]);
@@ -149,7 +148,7 @@ export default function Chatbot() {
       >
         <header className="chat-panel__head">
           <div>
-            <p className="chat-panel__title">小兔头 · AI 助手</p>
+            <p className="chat-panel__title">lazy · AI 助手</p>
             <p className="chat-panel__sub">Agnes + DeepSeek + 静态兜底</p>
           </div>
           <button

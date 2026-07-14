@@ -24,9 +24,9 @@ export type KnowledgeEntry = {
 export const knowledge: KnowledgeEntry[] = [
   {
     id: 'about',
-    keywords: ['你是谁', 'who are you', 'about', '介绍', '韦超', '小兔头', '你是'],
+    keywords: ['你是谁', 'who are you', 'about', '介绍', 'lazy', '你是'],
     reply:
-      '我是韦超（网名"小兔头"，英文 ID toolazytoname），weichao.ren 的主人。\n\n前某宇宙大厂 iOS 基础架构工程师，2019 到 2023 期间做过 Swift 编译缓存和 LLVM 隐私检测。15 年 iOS。\n\n现在是持滑雪 / 攀岩 / 游泳教练证的独立开发者，用 AI 造自己想要的工具。\n\n喜欢滑雪、潜水、攀岩、公路旅行。喜欢写代码，更喜欢写代码之外的东西。',
+      '我是 lazy，weichao.ren 的主人。\n\n前某宇宙大厂 iOS 基础架构工程师，做过 Swift 编译缓存和 LLVM 隐私检测。15 年 iOS。\n\n现在是持滑雪 / 攀岩 / 游泳教练证的独立开发者，用 AI 造自己想要的工具。\n\n喜欢滑雪、潜水、攀岩、公路旅行。喜欢写代码，更喜欢写代码之外的东西。',
     source: 'about',
   },
   {
@@ -40,7 +40,7 @@ export const knowledge: KnowledgeEntry[] = [
     id: 'contact',
     keywords: ['联系', 'contact', '邮箱', 'email', '怎么找你', 'twitter', 'github'],
     reply:
-      '最稳的方式是邮件：lazywc@gmail.com\n\nGitHub: @toolazytoname\nX / Twitter: @toolazytoname（不活跃，挂了占位用，主互动在 GitHub）\n\n不常用的：知乎 / 即刻 / V2EX 也搜"小兔头"能找到。',
+      '最稳的方式是邮件：lazywc@gmail.com\n\nGitHub: @toolazytoname\nX / Twitter: @toolazytoname（不活跃，挂了占位用，主互动在 GitHub）\n\n不常用的：知乎 / 即刻 / V2EX 也搜"懒得起名"能找到。',
     source: 'contact',
   },
   {

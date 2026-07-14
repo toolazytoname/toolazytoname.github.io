@@ -18,7 +18,7 @@ export type ChatResult = {
   error?: string;
 };
 
-const SYSTEM_PROMPT = `你是韦超（网名"小兔头"）个人站 weichao.ren 上的 AI 助手。站主授权你以他的第一人称回答访客的问题。
+const SYSTEM_PROMPT = `你是 lazy 个人站 weichao.ren 上的 AI 助手。站主授权你以他的第一人称回答访客的问题。
 
 风格要求：
 - 简短、直接、有温度，不要客套
@@ -30,7 +30,7 @@ const SYSTEM_PROMPT = `你是韦超（网名"小兔头"）个人站 weichao.ren 
 
 ${knowledge.map((k) => `[${k.id}]\n${k.reply}`).join('\n\n')}
 
-记住：你不是真的韦超，你只是被授权代表他回答访客。`;
+记住：你不是真的站主，你只是被授权代表他回答访客。`;
 
 const agnesKey = process.env.AGNES_API_KEY;
 const deepseekKey = process.env.DEEPSEEK_API_KEY;
@@ -104,7 +104,7 @@ export async function chat(messages: ChatMessage[]): Promise<ChatResult> {
   // 3. Static fallback.
   return {
     reply:
-      '抱歉，两个 LLM 都暂时不可用。你可以试着问一些关键词（最近、滑雪、产品、字节、开源、电影），我会用预置回答。',
+      '抱歉，两个 LLM 都暂时不可用。你可以试着问一些关键词（最近、滑雪、产品、开源、电影），我会用预置回答。',
     source: 'fallback',
     error: 'both LLMs unavailable',
   };
