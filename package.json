@@ -19,7 +19,7 @@
     "@astrojs/react": "^4.0.0",
     "@astrojs/rss": "^4.0.0",
     "@astrojs/sitemap": "^3.2.0",
-    "@astrojs/vercel": "^8.0.0",
+    "@astrojs/vercel": "^10.0.2",
     "astro": "^5.0.0",
     "openai": "^4.78.0",
     "react": "^19.0.0",
