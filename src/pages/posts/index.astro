@@ -3,6 +3,12 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { postSlug } from '@lib/permalink';
 
+// Static-prerender: the page is fully determined at build time (all 61
+// posts are read synchronously into the HTML), so there is no reason to
+// pay a Vercel serverless cold start for /posts/. Mirrors the strategy
+// used by src/pages/[...slug].astro.
+export const prerender = true;
+
 const all = (await getCollection('posts')).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime(),
 );

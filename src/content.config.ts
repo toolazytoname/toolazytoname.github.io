@@ -6,9 +6,19 @@
 
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
+import path from 'node:path';
 
 const posts = defineCollection({
-  loader: glob({ pattern: '*.md', base: './src/content/posts' }),
+  loader: glob({
+    pattern: '*.md',
+    base: './src/content/posts',
+    // Astro's default generateId runs filenames through github-slugger,
+    // which lowercases ("iOS-App-thin" → "ios-app-thin"). That breaks
+    // a decade of 百度/GSC-indexed Jekyll URLs. We use the raw file
+    // stem instead so case is preserved exactly as Jekyll wrote it.
+    // The 11-char "YYYY-MM-DD-" prefix is stripped by postSlug().
+    generateId: ({ entry }) => path.parse(entry).name,
+  }),
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
