@@ -62,24 +62,24 @@ const { work, index } = Astro.props;
 <style>
   .work-card {
     perspective: 1400px;
-    min-height: 320px;
   }
   .work-card__inner {
     position: relative;
     width: 100%;
-    height: 100%;
-    min-height: 320px;
     transform-style: preserve-3d;
     transition: transform 700ms var(--ease-out);
+    /* Mouse-tilt uses these vars so it composes with the flip,
+       instead of fighting it via inline transform. */
+    --tilt-y: 0deg;
+    --tilt-x: 0deg;
+    transform: rotateY(var(--tilt-y)) rotateX(var(--tilt-x));
   }
   .work-card:hover .work-card__inner,
   .work-card:focus-within .work-card__inner {
-    transform: rotateY(180deg);
+    transform: rotateY(calc(180deg + var(--tilt-y))) rotateX(var(--tilt-x));
   }
 
   .work-card__face {
-    position: absolute;
-    inset: 0;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     border-radius: var(--r-xl);
@@ -95,6 +95,8 @@ const { work, index } = Astro.props;
     background: var(--color-ink);
     color: var(--color-ivory);
     transform: rotateY(180deg);
+    position: absolute;
+    inset: 0;
   }
 
   .work-card__head {
@@ -244,6 +246,7 @@ const { work, index } = Astro.props;
         });
         return;
       }
+      // Subtle mouse-tilt. Sets CSS vars on inner; CSS combines tilt + flip.
       card.addEventListener('pointermove', (e) => {
         const rect = card.getBoundingClientRect();
         const cx = rect.left + rect.width / 2;
@@ -252,12 +255,16 @@ const { work, index } = Astro.props;
         const dy = (e.clientY - cy) / rect.height;
         const inner = card.querySelector<HTMLElement>('.work-card__inner');
         if (inner) {
-          inner.style.transform = `rotateY(${dx * 8}deg) rotateX(${-dy * 8}deg)`;
+          inner.style.setProperty('--tilt-y', `${dx * 5}deg`);
+          inner.style.setProperty('--tilt-x', `${-dy * 5}deg`);
         }
       });
       card.addEventListener('pointerleave', () => {
         const inner = card.querySelector<HTMLElement>('.work-card__inner');
-        if (inner) inner.style.transform = '';
+        if (inner) {
+          inner.style.setProperty('--tilt-y', '0deg');
+          inner.style.setProperty('--tilt-x', '0deg');
+        }
       });
     });
   }

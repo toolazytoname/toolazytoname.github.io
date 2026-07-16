@@ -223,8 +223,11 @@ const interests = [
   }
   .works__grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--s-5);
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s-6);
+  }
+  .works__grid > :first-child {
+    grid-column: span 2;
   }
 
   /* Now */
@@ -295,12 +298,14 @@ const interests = [
     gap: var(--s-5);
   }
 
-  /* Closing */
+  /* Closing — kept in warm palette so the page doesn't slam into a dark slab.
+     Footer (still dark) reads as the deliberate signoff instead. */
   .closing {
-    padding: var(--s-32) 0;
-    background: var(--color-ink);
-    color: var(--color-ivory);
+    padding: var(--s-20) 0 var(--s-16);
+    background: var(--color-ivory);
+    color: var(--color-warm-text);
     text-align: center;
+    border-top: 1px solid var(--color-warm-border);
   }
   .closing__inner {
     display: flex;
@@ -308,18 +313,18 @@ const interests = [
     align-items: center;
   }
   .closing .eyebrow {
-    color: var(--color-coral);
+    color: var(--color-terracotta);
   }
   .closing__title {
-    font-size: clamp(40px, 5vw, 64px);
+    font-size: clamp(36px, 4.5vw, 56px);
     margin: var(--s-3) 0 var(--s-5);
-    color: var(--color-ivory);
+    color: var(--color-warm-text);
     letter-spacing: -0.02em;
   }
   .closing__lede {
-    color: rgba(250, 249, 245, 0.65);
+    color: var(--color-warm-text-muted);
     max-width: 480px;
-    margin: 0 0 var(--s-8);
+    margin: 0 0 var(--s-6);
     font-size: 17px;
   }
   .closing__ctas {
@@ -332,19 +337,25 @@ const interests = [
     background: var(--color-terracotta);
     color: var(--color-ivory);
   }
+  .closing .btn--primary:hover {
+    background: var(--color-coral);
+  }
   .closing .btn--ghost {
-    border: 1px solid rgba(250, 249, 245, 0.3);
-    color: var(--color-ivory);
+    border: 1px solid var(--color-warm-border);
+    color: var(--color-warm-text);
+  }
+  .closing .btn--ghost:hover {
+    background: var(--color-warm-sand);
   }
 
   /* Responsive */
   @media (max-width: 1024px) {
-    .works__grid { grid-template-columns: repeat(2, 1fr); }
+    .works__grid { grid-template-columns: 1fr; }
+    .works__grid > :first-child { grid-column: span 1; }
     .memories__grid { grid-template-columns: repeat(2, 1fr); }
     .interests__split { grid-template-columns: 1fr; }
   }
   @media (max-width: 600px) {
-    .works__grid { grid-template-columns: 1fr; }
     .memories__grid { grid-template-columns: 1fr; }
   }
 </style>

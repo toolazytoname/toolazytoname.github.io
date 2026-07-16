@@ -31,8 +31,8 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 
 <style>
   .not-found {
-    background: var(--color-ink);
-    color: var(--color-ivory);
+    background: var(--color-ivory);
+    color: var(--color-warm-text);
     min-height: 90vh;
     display: grid;
     place-items: center;
@@ -42,17 +42,17 @@ import BaseLayout from '@layouts/BaseLayout.astro';
     text-align: center;
   }
   .not-found .eyebrow {
-    color: var(--color-coral);
+    color: var(--color-terracotta);
     font-size: 14px;
   }
   .not-found__title {
     font-size: clamp(48px, 8vw, 96px);
     margin: var(--s-4) 0 var(--s-5);
-    color: var(--color-ivory);
+    color: var(--color-warm-text);
     letter-spacing: -0.03em;
   }
   .not-found__lede {
-    color: rgba(250, 249, 245, 0.7);
+    color: var(--color-warm-text-muted);
     max-width: 480px;
     margin: 0 auto var(--s-8);
     font-size: 17px;
@@ -68,8 +68,14 @@ import BaseLayout from '@layouts/BaseLayout.astro';
     background: var(--color-terracotta);
     color: var(--color-ivory);
   }
+  .not-found .btn--primary:hover {
+    background: var(--color-coral);
+  }
   .not-found .btn--ghost {
-    border: 1px solid rgba(250, 249, 245, 0.3);
-    color: var(--color-ivory);
+    border: 1px solid var(--color-warm-border);
+    color: var(--color-warm-text);
+  }
+  .not-found .btn--ghost:hover {
+    background: var(--color-warm-sand);
   }
 </style>
