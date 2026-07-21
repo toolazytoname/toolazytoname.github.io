@@ -17,7 +17,7 @@
   "dependencies": {
     "@astrojs/mdx": "^4.0.0",
     "@astrojs/react": "^4.0.0",
-    "@astrojs/rss": "^4.0.0",
+    "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.2.0",
     "@astrojs/vercel": "^8.0.0",
     "astro": "^5.0.0",
