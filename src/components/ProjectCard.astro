@@ -1,0 +1,154 @@
+---
+import type { Project } from '@data/projects';
+
+// GitHub Linguist language colors (subset — the languages our projects use).
+const LANG_COLORS: Record<string, string> = {
+  Go: '#00ADD8',
+  Python: '#3776AB',
+  Shell: '#4EAA25',
+  'Objective-C': '#438EFF',
+  Java: '#b07219',
+  HTML: '#e34c26',
+  TypeScript: '#3178C6',
+  JavaScript: '#f1e05a',
+};
+
+interface Props {
+  project: Project;
+  index: number;
+}
+
+const { project, index } = Astro.props;
+const dotColor = project.language ? LANG_COLORS[project.language] : null;
+---
+
+<article class="proj-card reveal" style={`--i: ${index};`}>
+  <a href={project.repo} class="proj-card__link" target="_blank" rel="noopener">
+    <div class="proj-card__head">
+      <span class="proj-card__title-row">
+        {project.language && (
+          <span
+            class="proj-card__dot"
+            style={dotColor ? `background:${dotColor};` : ''}
+            title={project.language}
+            aria-hidden="true"
+          ></span>
+        )}
+        <span class="proj-card__name">{project.title}</span>
+      </span>
+      {project.stars > 0 && (
+        <span class="proj-card__stars">★ {project.stars}</span>
+      )}
+    </div>
+
+    <p class="proj-card__desc">{project.description}</p>
+
+    <div class="proj-card__footer">
+      {project.demo && (
+        <a
+          href={project.demo}
+          class="proj-card__action proj-card__action--demo"
+          target="_blank"
+          rel="noopener"
+        >
+          主站 →
+        </a>
+      )}
+      <span class="proj-card__action proj-card__action--repo">
+        GitHub →
+      </span>
+    </div>
+  </a>
+</article>
+
+<style>
+  .proj-card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--r-lg);
+    transition: border-color var(--t-fast) var(--ease-out),
+      transform var(--t-fast) var(--ease-out);
+  }
+  .proj-card:hover {
+    border-color: var(--color-border-strong);
+    transform: translateY(-2px);
+  }
+
+  /* The outer <a> wraps the whole card for click-to-GitHub.
+     Inner demo link stops propagation so it navigates to demo instead. */
+  .proj-card__link {
+    display: block;
+    padding: var(--s-4) var(--s-5);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .proj-card__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-3);
+    margin-bottom: var(--s-2);
+  }
+  .proj-card__title-row {
+    display: flex;
+    align-items: center;
+    gap: var(--s-2);
+    min-width: 0;
+  }
+  .proj-card__dot {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background: var(--color-text-dim);
+  }
+  .proj-card__name {
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--color-text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .proj-card:hover .proj-card__name {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .proj-card__stars {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--color-text-dim);
+    flex-shrink: 0;
+  }
+
+  .proj-card__desc {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    margin: 0 0 var(--s-3);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .proj-card__footer {
+    display: flex;
+    gap: var(--s-4);
+    justify-content: flex-end;
+  }
+  .proj-card__action {
+    font-size: 13px;
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+  .proj-card__action:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .proj-card__action--repo {
+    color: var(--color-text-dim);
+  }
+</style>

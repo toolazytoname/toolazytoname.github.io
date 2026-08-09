@@ -2,7 +2,8 @@
 
 import { describe, it, expect } from 'vitest';
 import { findStaticReply, knowledge } from '../../data/knowledge';
-import { works } from '../../data/works';
+import { projects, categoryMeta } from '../../data/projects';
+import type { ProjectCategory } from '../../data/projects';
 import { nowEntries } from '../../data/now';
 
 describe('knowledge base', () => {
@@ -33,17 +34,27 @@ describe('knowledge base', () => {
   });
 });
 
-describe('works', () => {
-  it('has exactly 3 works', () => {
-    expect(works).toHaveLength(3);
+describe('projects', () => {
+  const validCategories = Object.keys(categoryMeta) as ProjectCategory[];
+
+  it('every project has a valid category', () => {
+    for (const p of projects) {
+      expect(validCategories).toContain(p.category);
+    }
   });
 
-  it('every work has required fields', () => {
-    for (const w of works) {
-      expect(w.title).toBeTruthy();
-      expect(w.summary.length).toBeGreaterThan(0);
-      expect(w.highlights.length).toBeGreaterThan(0);
-      expect(w.links.length).toBeGreaterThan(0);
+  it('every category has at least one project', () => {
+    for (const cat of validCategories) {
+      const count = projects.filter((p) => p.category === cat).length;
+      expect(count).toBeGreaterThan(0);
+    }
+  });
+
+  it('every project has required fields', () => {
+    for (const p of projects) {
+      expect(p.title.length).toBeGreaterThan(0);
+      expect(p.description.length).toBeGreaterThan(0);
+      expect(p.repo).toMatch(/^https:\/\/github\.com\//);
     }
   });
 });

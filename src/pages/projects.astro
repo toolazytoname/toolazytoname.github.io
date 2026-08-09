@@ -1,0 +1,109 @@
+---
+// Pre-render at build time → ships as a static asset, served from CDN.
+export const prerender = true;
+
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ProjectCard from '@components/ProjectCard.astro';
+import { projects, categoryMeta, type ProjectCategory } from '@data/projects';
+
+const categories: ProjectCategory[] = [
+  'mobile-lab',
+  'agents',
+  'infra',
+  'standalone',
+  'legacy-ios',
+];
+---
+
+<BaseLayout
+  seo={{
+    title: 'Projects',
+    description: '18 个开源项目 —— 手机 AI Agent、自动化工具、基础设施、独立产品、老 iOS。',
+  }}
+>
+  <section class="projects-page">
+    <div class="container container-narrow">
+      <header class="projects-page__head reveal">
+        <p class="eyebrow">Projects · 项目</p>
+        <h1 class="projects-page__title">{projects.length} 个开源项目</h1>
+        <p class="projects-page__lede">
+          从编译器到手机 AI Agent —— 我造的工具，都在这。
+        </p>
+      </header>
+
+      {
+        categories.map((cat) => {
+          const items = projects.filter((p) => p.category === cat);
+          const meta = categoryMeta[cat];
+          return (
+            <section class="projects-group">
+              <header class="projects-group__head reveal">
+                <h2 class="projects-group__title">{meta.label}</h2>
+                <p class="projects-group__sub">{meta.sublabel}</p>
+              </header>
+              <div class="projects-group__list">
+                {items.map((p, i) => (
+                  <ProjectCard project={p} index={i} />
+                ))}
+              </div>
+            </section>
+          );
+        })
+      }
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .projects-page {
+    padding: var(--s-20) 0 var(--s-32);
+    min-height: 80vh;
+  }
+  .projects-page__head {
+    margin-bottom: var(--s-16);
+  }
+  .projects-page__title {
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    margin: var(--s-3) 0 var(--s-4);
+  }
+  .projects-page__lede {
+    color: var(--color-text-muted);
+    font-size: 17px;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .projects-group {
+    margin-bottom: var(--s-16);
+  }
+  .projects-group:last-child {
+    margin-bottom: 0;
+  }
+  .projects-group__head {
+    margin-bottom: var(--s-5);
+    padding-bottom: var(--s-3);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .projects-group__title {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--color-text);
+    margin: 0 0 var(--s-1);
+    letter-spacing: -0.01em;
+  }
+  .projects-group__sub {
+    font-size: 14px;
+    color: var(--color-text-dim);
+    margin: 0;
+  }
+
+  .projects-group__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+</style>
