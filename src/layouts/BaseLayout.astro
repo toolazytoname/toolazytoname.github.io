@@ -3,7 +3,6 @@ import '../styles/global.css';
 import Nav from '@components/Nav.astro';
 import Footer from '@components/Footer.astro';
 import ScrollProgress from '@components/ScrollProgress.astro';
-import CustomCursor from '@components/CustomCursor.astro';
 import Chatbot from '@components/Chatbot';
 import { SITE, type Seo } from '@lib/seo';
 
@@ -60,7 +59,6 @@ const canonical = new URL(Astro.url.pathname, SITE.url).toString();
     <a href="#main" class="skip-link">跳到主要内容</a>
 
     <ScrollProgress />
-    <CustomCursor />
     <Nav />
 
     <main id="main">

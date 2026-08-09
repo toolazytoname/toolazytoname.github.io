@@ -1,129 +1,64 @@
 ---
-import Globe from './Globe';
-import Lightbox from './Lightbox.astro';
-import { memories } from '@data/memories';
 ---
 
 <section class="hero" id="hero">
-  <div class="hero__bg" aria-hidden="true">
-    <div class="hero__glow hero__glow--a"></div>
-    <div class="hero__glow hero__glow--b"></div>
-  </div>
-
-  <div class="container hero__inner">
-    <div class="hero__copy">
-      <p class="hero__eyebrow eyebrow" data-line-up>lazy · weichao.ren</p>
-      <h1 class="hero__title serif">
-        <span class="hero__line" data-typewriter>把日子</span>
-        <span class="hero__line" data-typewriter>过成自己</span>
-        <span class="hero__line" data-typewriter>喜欢的样子。</span>
-      </h1>
-      <p class="hero__lede" data-line-up>
-        做过 Swift 编译器、LLVM 后端、隐私检测相关工作。现在做独立开发者，
-        用 AI 造自己想要的工具。喜欢滑雪、潜水、攀岩、公路旅行。
-      </p>
-      <div class="hero__ctas" data-line-up>
-        <a href="/now" class="btn btn--primary">看看现在 →</a>
-        <a href="/posts" class="btn btn--ghost">读文章</a>
-      </div>
-
-      <ul class="hero__meta" data-line-up>
-        <li>
-          <span class="hero__meta-num serif">14</span>
-          <span class="hero__meta-label">年写博客</span>
-        </li>
-        <li>
-          <span class="hero__meta-num serif">56</span>
-          <span class="hero__meta-label">篇文章</span>
-        </li>
-        <li>
-          <span class="hero__meta-num serif">4</span>
-          <span class="hero__meta-label">个想去的地方</span>
-        </li>
-      </ul>
-    </div>
-
-    <div class="hero__globe reveal" data-globe-host>
-      <Globe client:visible memories={memories} onSelect={undefined} />
-      <p class="hero__globe-hint">点击城市 · 拖动旋转</p>
+  <div class="container container-narrow hero__inner">
+    <p class="hero__eyebrow eyebrow reveal">lazy · weichao.ren</p>
+    <h1 class="hero__title reveal">
+      <span class="hero__line">前宇宙大厂基础架构工程师，</span>
+      <span class="hero__line">现在是持滑雪、攀岩、游泳教练证的独立开发者。</span>
+      <span class="hero__line">用 AI 造自己想要的工具。</span>
+    </h1>
+    <p class="hero__lede reveal">
+      做过 Swift 编译缓存（部分项目编译时长 -50%）、LLVM 跨平台隐私检测工具链。
+      14 年写博客，61 篇文章，记录技术与生活。
+    </p>
+    <div class="hero__ctas reveal">
+      <a href="#posts" class="btn btn--primary">读文章</a>
+      <a href="/about" class="btn btn--ghost">关于我</a>
     </div>
   </div>
 </section>
 
-<!-- Lightbox component. Receives memories at build time and listens
-     for `memory:select` events dispatched by Globe.tsx. -->
-<Lightbox memories={memories} />
-
 <style>
   .hero {
-    position: relative;
-    background: linear-gradient(180deg, #0e0e0d 0%, #141413 100%);
-    color: var(--color-ivory);
-    overflow: hidden;
-    min-height: 100svh;
-    padding: var(--s-16) 0 var(--s-12);
+    padding: var(--s-20) 0 var(--s-16);
+    border-bottom: 1px solid var(--color-border);
   }
-  .hero__bg {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    overflow: hidden;
-  }
-  .hero__glow {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.35;
-  }
-  .hero__glow--a {
-    width: 360px;
-    height: 360px;
-    top: -80px;
-    right: -80px;
-    background: var(--color-terracotta);
-  }
-  .hero__glow--b {
-    width: 280px;
-    height: 280px;
-    bottom: -60px;
-    left: -60px;
-    background: var(--color-coral);
-    opacity: 0.2;
-  }
+
   .hero__inner {
-    position: relative;
-    display: grid;
-    grid-template-columns: 1.1fr 1fr;
-    gap: var(--s-12);
-    align-items: center;
+    max-width: 680px;
   }
 
   .hero__eyebrow {
-    color: var(--color-coral);
-    margin-bottom: var(--s-5);
+    color: var(--color-text-dim);
+    margin-bottom: var(--s-6);
   }
+
   .hero__title {
-    font-size: clamp(40px, 6vw, 72px);
-    line-height: 1.05;
+    font-size: clamp(28px, 4.5vw, 48px);
+    font-weight: 500;
+    line-height: 1.2;
     letter-spacing: -0.02em;
     margin: 0 0 var(--s-6);
-    font-weight: 500;
+    color: var(--color-text);
   }
+
   .hero__line {
     display: block;
-    overflow: hidden;
   }
+
   .hero__lede {
-    color: rgba(250, 249, 245, 0.7);
-    font-size: clamp(17px, 1.4vw, 19px);
-    line-height: 1.6;
-    max-width: 520px;
+    color: var(--color-text-muted);
+    font-size: 17px;
+    line-height: 1.65;
     margin: 0 0 var(--s-8);
+    max-width: 560px;
   }
+
   .hero__ctas {
     display: flex;
     gap: var(--s-3);
-    margin-bottom: var(--s-10);
     flex-wrap: wrap;
   }
 
@@ -131,133 +66,43 @@ import { memories } from '@data/memories';
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 12px 22px;
-    border-radius: var(--r-pill);
+    padding: 10px 20px;
+    border-radius: var(--r-md);
     font-size: 15px;
     font-weight: 500;
     transition: transform var(--t-fast) var(--ease-out),
-      background var(--t-fast) var(--ease-out);
+      background var(--t-fast) var(--ease-out),
+      border-color var(--t-fast) var(--ease-out);
   }
+
   .btn:hover {
     text-decoration: none;
     transform: translateY(-1px);
   }
+
   .btn--primary {
-    background: var(--color-ivory);
-    color: var(--color-warm-text);
+    background: var(--color-ink);
+    color: var(--color-bg);
   }
+
   .btn--primary:hover {
-    background: var(--color-warm-sand);
+    background: var(--color-ink-soft);
   }
+
   .btn--ghost {
-    background: rgba(250, 249, 245, 0.08);
-    color: var(--color-ivory);
-    border: 1px solid rgba(250, 249, 245, 0.2);
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
   }
+
   .btn--ghost:hover {
-    background: rgba(250, 249, 245, 0.14);
+    border-color: var(--color-border-strong);
+    background: var(--color-bg-subtle);
   }
 
-  .hero__meta {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    gap: var(--s-8);
-    flex-wrap: wrap;
-  }
-  .hero__meta li {
-    display: flex;
-    flex-direction: column;
-  }
-  .hero__meta-num {
-    font-size: 36px;
-    line-height: 1;
-    color: var(--color-coral);
-    letter-spacing: -0.01em;
-  }
-  .hero__meta-label {
-    font-size: 12px;
-    color: rgba(250, 249, 245, 0.55);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-top: 6px;
-  }
-
-  .hero__globe {
-    position: relative;
-  }
-  .hero__globe-hint {
-    text-align: center;
-    font-size: 12px;
-    color: rgba(250, 249, 245, 0.5);
-    margin: var(--s-4) 0 0;
-    letter-spacing: 0.4px;
-  }
-
-  @media (max-width: 1024px) {
-    .hero__inner {
-      grid-template-columns: 1fr;
-      gap: var(--s-10);
-    }
-  }
-  @media (max-width: 480px) {
+  @media (max-width: 600px) {
     .hero {
-      padding-top: var(--s-12);
-      padding-bottom: var(--s-8);
-    }
-    .hero__title {
-      font-size: 38px;
-    }
-    .hero__meta {
-      gap: var(--s-5);
-    }
-    .hero__meta-num {
-      font-size: 28px;
+      padding: var(--s-12) 0 var(--s-10);
     }
   }
 </style>
-
-<script>
-  // Hero text animations — line-up reveal + typewriter.
-  document.addEventListener('DOMContentLoaded', () => {
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    // Line-up: translate from y(20px) + fade in. Staggered.
-    document.querySelectorAll<HTMLElement>('[data-line-up]').forEach((el, i) => {
-      if (prefersReduced) {
-        el.style.opacity = '1';
-        return;
-      }
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(20px)';
-      el.style.transition = `opacity 600ms var(--ease-out), transform 600ms var(--ease-out)`;
-      el.style.transitionDelay = `${300 + i * 120}ms`;
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          el.style.opacity = '1';
-          el.style.transform = 'translateY(0)';
-        });
-      });
-    });
-
-    // Typewriter: clip from left edge, revealing each character.
-    document.querySelectorAll<HTMLElement>('[data-typewriter]').forEach((el, i) => {
-      if (prefersReduced) {
-        el.style.clipPath = 'none';
-        return;
-      }
-      const text = el.textContent ?? '';
-      el.textContent = text;
-      el.style.display = 'inline-block';
-      el.style.clipPath = 'inset(0 100% 0 0)';
-      el.style.transition = 'clip-path 800ms var(--ease-out)';
-      el.style.transitionDelay = `${600 + i * 200}ms`;
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          el.style.clipPath = 'inset(0 0 0 0)';
-        });
-      });
-    });
-  });
-</script>

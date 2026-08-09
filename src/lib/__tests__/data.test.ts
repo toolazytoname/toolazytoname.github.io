@@ -1,43 +1,9 @@
-// Unit tests for pure logic. Three.js / DOM behavior is exercised in-browser.
+// Unit tests for pure logic.
 
 import { describe, it, expect } from 'vitest';
 import { findStaticReply, knowledge } from '../../data/knowledge';
-import { memories, getMemory } from '../../data/memories';
 import { works } from '../../data/works';
 import { nowEntries } from '../../data/now';
-
-describe('memories', () => {
-  it('has exactly 4 memories', () => {
-    expect(memories).toHaveLength(4);
-  });
-
-  it('every memory has a valid lat/lon', () => {
-    for (const m of memories) {
-      expect(m.lat).toBeGreaterThanOrEqual(-90);
-      expect(m.lat).toBeLessThanOrEqual(90);
-      expect(m.lon).toBeGreaterThanOrEqual(-180);
-      expect(m.lon).toBeLessThanOrEqual(180);
-    }
-  });
-
-  it('getMemory returns the right entry by id', () => {
-    expect(getMemory('beijing')?.title).toContain('北京');
-    expect(getMemory('xinjiang')?.title).toContain('新疆');
-  });
-
-  it('getMemory returns undefined for unknown id', () => {
-    expect(getMemory('atlantis')).toBeUndefined();
-  });
-
-  it('every memory has a unique id and a photo path', () => {
-    const ids = new Set<string>();
-    for (const m of memories) {
-      expect(ids.has(m.id)).toBe(false);
-      ids.add(m.id);
-      expect(m.photo).toMatch(/^\/photos\/.+\.jpg$/);
-    }
-  });
-});
 
 describe('knowledge base', () => {
   it('has at least 10 entries', () => {
@@ -68,8 +34,8 @@ describe('knowledge base', () => {
 });
 
 describe('works', () => {
-  it('has exactly 6 works', () => {
-    expect(works).toHaveLength(6);
+  it('has exactly 3 works', () => {
+    expect(works).toHaveLength(3);
   });
 
   it('every work has front and back detail', () => {
