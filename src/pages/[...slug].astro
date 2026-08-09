@@ -14,9 +14,45 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { Content } = await render(entry);
+const { Content, headings } = await render(entry);
+
+// Reading time: ~300 CJK chars/min or ~200 English words/min.
+function readingTime(body: string): number {
+  const cjk = (body.match(/[\u4e00-\u9fff\u3040-\u309f\u30a0-\u30ff]/g) ?? []).length;
+  const words = body.replace(/[\u4e00-\u9fff\u3040-\u309f\u30a0-\u30ff]/g, '').split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.ceil(cjk / 300 + words / 200));
+}
+
+const readMin = readingTime(entry.body ?? '');
+
+// TOC headings: h2 and h3 only, with slugs derived from id.
+const tocHeadings = headings
+  .filter((h) => h.depth === 2 || h.depth === 3)
+  .map((h) => ({
+    depth: h.depth,
+    slug: h.slug,
+    text: h.text,
+  }));
+
+// Prev / next: sorted by date descending. "prev" = older, "next" = newer.
+const allPosts = await getCollection('posts');
+const sorted = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const idx = sorted.findIndex((p) => p.id === entry.id);
+const prevPost = idx < sorted.length - 1 ? sorted[idx + 1] : null;
+const nextPost = idx > 0 ? sorted[idx - 1] : null;
+
+// Related: posts sharing at least one tag, excluding current.
+const currentTags = new Set(entry.data.tags);
+const related = sorted
+  .filter((p) => p.id !== entry.id && p.data.tags.some((t) => currentTags.has(t)))
+  .slice(0, 3)
+  .map((p) => ({
+    title: p.data.title,
+    slug: postSlug(p.id, p.data),
+    date: p.data.date,
+  }));
 ---
 
-<PostLayout entry={entry}>
+<PostLayout entry={entry} headings={tocHeadings} readMin={readMin} prevPost={prevPost} nextPost={nextPost} relatedPosts={related}>
   <Content />
 </PostLayout>

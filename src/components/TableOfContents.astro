@@ -1,0 +1,187 @@
+---
+interface TocItem {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  headings: TocItem[];
+}
+
+const { headings } = Astro.props;
+
+// Only render TOC for 3+ headings
+if (headings.length < 3) return;
+---
+
+<nav class="toc" aria-label="目录">
+  <p class="toc__title">目录</p>
+
+  <!-- Mobile: collapsible details -->
+  <details class="toc__details">
+    <summary class="toc__summary">展开目录</summary>
+    <ol class="toc__list">
+      {headings.map((h) => (
+        <li class={`toc__item toc__item--${h.depth}`}>
+          <a href={`#${h.slug}`}>{h.text}</a>
+        </li>
+      ))}
+    </ol>
+  </details>
+
+  <!-- Desktop: sticky sidebar -->
+  <ol class="toc__list toc__list--desktop">
+    {headings.map((h) => (
+      <li class={`toc__item toc__item--${h.depth}`}>
+        <a href={`#${h.slug}`} data-toc-link>{h.text}</a>
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<style>
+  .toc {
+    position: relative;
+  }
+
+  .toc__title {
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: var(--color-text-dim);
+    margin: 0 0 var(--s-4);
+  }
+
+  /* Mobile details */
+  .toc__details {
+    display: block;
+  }
+
+  .toc__summary {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    padding: var(--s-2) 0;
+    list-style: none;
+  }
+
+  .toc__summary::before {
+    content: '▸ ';
+    font-size: 12px;
+  }
+
+  .toc__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .toc__item {
+    margin: 0;
+  }
+
+  .toc__item a {
+    display: block;
+    padding: var(--s-1) 0;
+    font-size: 14px;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    line-height: 1.5;
+    transition: color var(--t-fast) var(--ease-out);
+  }
+
+  .toc__item a:hover {
+    color: var(--color-text);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .toc__item--3 {
+    padding-left: var(--s-4);
+  }
+
+  .toc__item--4 {
+    padding-left: var(--s-8);
+  }
+
+  /* Active state (set by JS) */
+  .toc__item a.is-active {
+    color: var(--color-text);
+    font-weight: 500;
+  }
+
+  /* Desktop sidebar */
+  .toc__list--desktop {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .toc__details {
+      display: none;
+    }
+
+    .toc__list--desktop {
+      display: block;
+      position: sticky;
+      top: var(--s-20);
+      max-height: calc(100vh - var(--s-24));
+      overflow-y: auto;
+    }
+
+    .toc__list--desktop a {
+      font-size: 13px;
+    }
+
+    .toc__list--desktop .toc__item--3 {
+      padding-left: var(--s-3);
+    }
+
+    .toc__list--desktop .toc__item--4 {
+      padding-left: var(--s-6);
+    }
+  }
+</style>
+
+<script>
+  // IntersectionObserver-based TOC highlight.
+  // Finds all headings with id matching toc links, highlights the one
+  // currently in view.
+  function initTocHighlight() {
+    const links = document.querySelectorAll<HTMLElement>('[data-toc-link]');
+    if (!links.length) return;
+
+    const ids = new Set<string>();
+    links.forEach((a) => {
+      const href = a.getAttribute('href');
+      if (href?.startsWith('#')) ids.add(href.slice(1));
+    });
+
+    const headings = Array.from(ids)
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el != null);
+
+    if (!headings.length) return;
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            const id = e.target.id;
+            links.forEach((a) => {
+              const match = a.getAttribute('href') === `#${id}`;
+              a.classList.toggle('is-active', match);
+            });
+          }
+        }
+      },
+      { rootMargin: '-10% 0px -80% 0px', threshold: 0 },
+    );
+
+    headings.forEach((h) => io.observe(h));
+  }
+
+  document.addEventListener('astro:after-swap', initTocHighlight);
+  initTocHighlight();
+</script>

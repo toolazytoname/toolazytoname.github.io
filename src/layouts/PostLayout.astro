@@ -1,167 +1,474 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import TableOfContents from '@components/TableOfContents.astro';
 import type { CollectionEntry } from 'astro:content';
+import { postSlug } from '@lib/permalink';
+
+interface TocHeading {
+  depth: number;
+  slug: string;
+  text: string;
+}
 
 type Props = {
   entry: CollectionEntry<'posts'>;
+  headings?: TocHeading[];
+  readMin?: number;
+  prevPost?: CollectionEntry<'posts'> | null;
+  nextPost?: CollectionEntry<'posts'> | null;
+  relatedPosts?: Array<{ title: string; slug: string; date: Date }>;
 };
 
-const { entry } = Astro.props;
+const {
+  entry,
+  headings = [],
+  readMin = 1,
+  prevPost,
+  nextPost,
+  relatedPosts = [],
+} = Astro.props;
+
 const date = entry.data.date instanceof Date ? entry.data.date : new Date(entry.data.date);
 const dateStr = date.toISOString().slice(0, 10);
 
-// Show first category as the post's "section" label. Migrated Jekyll posts
-// keep their old category (iOS / python / tool / life / hack your life / FDSDK);
-// the 2 sample posts use 'craft' or 'life' explicitly.
 const cats = Array.isArray(entry.data.categories) ? entry.data.categories : [entry.data.categories];
 const primaryCat = (cats[0] ?? '').toString().trim() || 'uncategorized';
+
+function slugFor(p: CollectionEntry<'posts'>) {
+  return postSlug(p.id, p.data);
+}
 ---
 
-<BaseLayout seo={{ title: entry.data.title, description: entry.data.summary, type: 'article' }}>
-  <article class="post container-narrow">
-    <header class="post__header reveal">
-      <p class="eyebrow">{primaryCat}</p>
-      <h1 class="post__title serif">{entry.data.title}</h1>
-      <p class="post__meta">
-        <time datetime={dateStr}>{dateStr}</time>
-        {
-          entry.data.tags.length > 0 && (
-            <span class="post__tags">
-              {entry.data.tags.map((t) => (
-                <span class="post__tag">#{t}</span>
-              ))}
-            </span>
-          )
-        }
-      </p>
-      {entry.data.summary && <p class="post__summary">{entry.data.summary}</p>}
-    </header>
+<BaseLayout seo={{ title: entry.data.title, description: entry.data.summary, type: 'article', publishedAt: date }}>
+  <article class="post-page">
+    <div class="post-page__layout container">
+      <!-- Main column -->
+      <div class="post-page__main">
+        <div class="post container-narrow">
+          <header class="post__header reveal">
+            <p class="eyebrow">{primaryCat}</p>
+            <h1 class="post__title">{entry.data.title}</h1>
+            <p class="post__meta">
+              <time datetime={dateStr}>{dateStr}</time>
+              <span class="post__sep">·</span>
+              <span>{readMin} 分钟</span>
+              {entry.data.tags.length > 0 && (
+                <>
+                  <span class="post__sep">·</span>
+                  <span class="post__tags">
+                    {entry.data.tags.map((t) => (
+                      <span class="post__tag">#{t}</span>
+                    ))}
+                  </span>
+                </>
+              )}
+            </p>
+            {entry.data.summary && <p class="post__summary">{entry.data.summary}</p>}
+          </header>
 
-    <div class="post__body prose reveal">
-      <slot />
+          <div class="post__body prose reveal">
+            <slot />
+          </div>
+
+          <!-- Prev / Next navigation -->
+          <footer class="post__footer reveal">
+            <nav class="post__nav" aria-label="文章导航">
+              {prevPost && (
+                <a href={`/${slugFor(prevPost)}`} class="post__nav-link post__nav-link--prev">
+                  <span class="post__nav-dir">← 上一篇</span>
+                  <span class="post__nav-title">{prevPost.data.title}</span>
+                </a>
+              )}
+              {nextPost && (
+                <a href={`/${slugFor(nextPost)}`} class="post__nav-link post__nav-link--next">
+                  <span class="post__nav-dir">下一篇 →</span>
+                  <span class="post__nav-title">{nextPost.data.title}</span>
+                </a>
+              )}
+            </nav>
+
+            <a href="/posts" class="post__back">← 回到列表</a>
+          </footer>
+
+          <!-- Related posts -->
+          {relatedPosts.length > 0 && (
+            <section class="post__related reveal">
+              <h2 class="post__related-title">相关文章</h2>
+              <ol class="post__related-list">
+                {relatedPosts.map((rp) => (
+                  <li>
+                    <a href={`/${rp.slug}`} class="post__related-link">
+                      <span class="post__related-item-title">{rp.title}</span>
+                      <time class="post__related-date" datetime={rp.date.toISOString()}>
+                        {rp.date.toISOString().slice(0, 10)}
+                      </time>
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </section>
+          )}
+        </div>
+      </div>
+
+      <!-- TOC sidebar (desktop) -->
+      {headings.length >= 3 && (
+        <aside class="post-page__sidebar">
+          <div class="post-page__toc">
+            <TableOfContents headings={headings} />
+          </div>
+        </aside>
+      )}
     </div>
-
-    <footer class="post__footer reveal">
-      <a href="/posts" class="post__back">← 回到列表</a>
-    </footer>
   </article>
 
   <style>
-    .post {
+    .post-page__layout {
+      display: flex;
+      gap: var(--s-16);
+      align-items: flex-start;
       padding-top: var(--s-20);
       padding-bottom: var(--s-32);
     }
+
+    .post-page__main {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .post-page__sidebar {
+      display: none;
+      width: 200px;
+      flex-shrink: 0;
+      position: sticky;
+      top: var(--s-20);
+    }
+
+    .post-page__toc {
+      padding-top: var(--s-4);
+    }
+
+    @media (min-width: 1024px) {
+      .post-page__sidebar {
+        display: block;
+      }
+    }
+
+    /* Post header */
+    .post {
+      max-width: var(--max-w-narrow);
+    }
+
     .post__header {
       margin-bottom: var(--s-12);
       padding-bottom: var(--s-8);
-      border-bottom: 1px solid var(--color-warm-border);
+      border-bottom: 1px solid var(--color-border);
     }
+
     .post__title {
-      font-size: clamp(36px, 5vw, 56px);
+      font-size: clamp(32px, 4.5vw, 48px);
       line-height: 1.1;
       margin: var(--s-3) 0 var(--s-4);
-      color: var(--color-warm-text);
+      font-weight: 500;
+      color: var(--color-text);
+      letter-spacing: -0.01em;
     }
+
     .post__meta {
-      color: var(--color-warm-text-muted);
+      color: var(--color-text-muted);
       font-size: 14px;
       display: flex;
-      gap: var(--s-3);
+      gap: var(--s-2);
       flex-wrap: wrap;
       align-items: center;
     }
-    .post__tag {
-      color: var(--color-warm-text-dim);
-      margin-right: var(--s-2);
+
+    .post__sep {
+      color: var(--color-text-dim);
     }
+
+    .post__tag {
+      color: var(--color-text-dim);
+      margin-right: var(--s-1);
+    }
+
     .post__summary {
       margin-top: var(--s-5);
-      color: var(--color-warm-text-muted);
-      font-size: 19px;
+      color: var(--color-text-muted);
+      font-size: 18px;
       line-height: 1.55;
     }
+
+    /* Prose body */
     .post__body {
       font-size: 17px;
       line-height: 1.7;
-      color: var(--color-warm-text);
+      color: var(--color-text);
     }
-    .post__body :global(h2) {
-      font-family: var(--font-serif);
+
+    /* Markdown h1 inside body → visually demoted to h2 level */
+    .post__body :global(h1) {
+      font-size: 26px;
       font-weight: 500;
-      font-size: 28px;
       margin-top: var(--s-12);
       margin-bottom: var(--s-4);
       letter-spacing: -0.01em;
+      color: var(--color-text);
     }
-    .post__body :global(h3) {
-      font-family: var(--font-serif);
+
+    .post__body :global(h2) {
       font-weight: 500;
-      font-size: 22px;
+      font-size: 26px;
+      margin-top: var(--s-12);
+      margin-bottom: var(--s-4);
+      letter-spacing: -0.01em;
+      color: var(--color-text);
+    }
+
+    .post__body :global(h3) {
+      font-weight: 500;
+      font-size: 21px;
       margin-top: var(--s-8);
       margin-bottom: var(--s-3);
+      color: var(--color-text);
     }
+
     .post__body :global(p) {
       margin: var(--s-4) 0;
     }
+
     .post__body :global(a) {
-      color: var(--color-blue-link);
+      color: var(--color-link);
       text-decoration: underline;
       text-underline-offset: 3px;
     }
+
     .post__body :global(blockquote) {
       margin: var(--s-6) 0;
       padding: var(--s-4) var(--s-6);
-      border-left: 3px solid var(--color-terracotta);
-      background: var(--color-ivory);
+      border-left: 3px solid var(--color-ink);
+      background: var(--color-bg-subtle);
       border-radius: 0 var(--r-md) var(--r-md) 0;
-      color: var(--color-warm-text-muted);
+      color: var(--color-text-muted);
       font-style: italic;
     }
+
     .post__body :global(code) {
       font-family: var(--font-mono);
       font-size: 0.92em;
-      background: var(--color-warm-sand);
+      background: var(--color-bg-subtle);
       padding: 2px 6px;
       border-radius: 4px;
     }
+
     .post__body :global(pre) {
-      background: var(--color-ink);
-      color: var(--color-ivory);
+      background: var(--color-dark-bg);
+      color: var(--color-dark-text);
       padding: var(--s-5);
       border-radius: var(--r-lg);
       overflow-x: auto;
       font-size: 14px;
       line-height: 1.55;
       margin: var(--s-6) 0;
+      position: relative;
     }
+
     .post__body :global(pre code) {
       background: transparent;
       padding: 0;
       color: inherit;
     }
+
     .post__body :global(ul),
     .post__body :global(ol) {
       padding-left: var(--s-6);
       margin: var(--s-4) 0;
     }
+
     .post__body :global(li) {
       margin: var(--s-2) 0;
     }
+
     .post__body :global(img) {
       border-radius: var(--r-lg);
       margin: var(--s-6) 0;
     }
+
+    /* Footer navigation */
     .post__footer {
       margin-top: var(--s-16);
       padding-top: var(--s-8);
-      border-top: 1px solid var(--color-warm-border);
+      border-top: 1px solid var(--color-border);
     }
+
+    .post__nav {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--s-4);
+      margin-bottom: var(--s-6);
+    }
+
+    .post__nav-link {
+      display: block;
+      text-decoration: none;
+      padding: var(--s-4);
+      border: 1px solid var(--color-border);
+      border-radius: var(--r-lg);
+      transition: border-color var(--t-fast) var(--ease-out),
+        background var(--t-fast) var(--ease-out);
+    }
+
+    .post__nav-link:hover {
+      text-decoration: none;
+      border-color: var(--color-border-strong);
+      background: var(--color-bg-subtle);
+    }
+
+    .post__nav-link--prev {
+      text-align: left;
+    }
+
+    .post__nav-link--next {
+      text-align: right;
+    }
+
+    .post__nav-dir {
+      display: block;
+      font-size: 12px;
+      color: var(--color-text-dim);
+      margin-bottom: var(--s-1);
+    }
+
+    .post__nav-title {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--color-text);
+      line-height: 1.3;
+    }
+
     .post__back {
-      color: var(--color-warm-text-muted);
+      color: var(--color-text-muted);
       font-size: 15px;
     }
+
     .post__back:hover {
-      color: var(--color-warm-text);
+      color: var(--color-text);
+    }
+
+    /* Related posts */
+    .post__related {
+      margin-top: var(--s-16);
+      padding-top: var(--s-8);
+      border-top: 1px solid var(--color-border);
+    }
+
+    .post__related-title {
+      font-size: 18px;
+      font-weight: 500;
+      margin: 0 0 var(--s-5);
+      color: var(--color-text);
+    }
+
+    .post__related-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--s-3);
+    }
+
+    .post__related-link {
+      display: block;
+      text-decoration: none;
+      padding: var(--s-3);
+      border: 1px solid var(--color-border);
+      border-radius: var(--r-md);
+      transition: border-color var(--t-fast) var(--ease-out);
+    }
+
+    .post__related-link:hover {
+      text-decoration: none;
+      border-color: var(--color-border-strong);
+    }
+
+    .post__related-link:hover .post__related-item-title {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .post__related-item-title {
+      display: block;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--color-text);
+      margin-bottom: var(--s-1);
+    }
+
+    .post__related-date {
+      font-size: 13px;
+      color: var(--color-text-dim);
+      font-family: var(--font-mono);
+    }
+
+    @media (max-width: 600px) {
+      .post__nav {
+        grid-template-columns: 1fr;
+      }
+
+      .post__nav-link--next {
+        text-align: left;
+      }
+    }
+  </style>
+
+  <!-- Code block copy buttons -->
+  <script>
+    function initCopyButtons() {
+      document.querySelectorAll('.prose pre').forEach((pre) => {
+        // Skip if already has a button
+        if (pre.querySelector('.copy-btn')) return;
+
+        const btn = document.createElement('button');
+        btn.className = 'copy-btn';
+        btn.type = 'button';
+        btn.textContent = '复制';
+        btn.setAttribute('aria-label', '复制代码');
+        btn.addEventListener('click', () => {
+          const code = pre.querySelector('code')?.textContent ?? pre.textContent ?? '';
+          navigator.clipboard.writeText(code).then(() => {
+            btn.textContent = '已复制';
+            setTimeout(() => {
+              btn.textContent = '复制';
+            }, 2000);
+          });
+        });
+        (pre as HTMLElement).style.position = 'relative';
+        pre.appendChild(btn);
+      });
+    }
+
+    document.addEventListener('astro:after-swap', initCopyButtons);
+    initCopyButtons();
+  </script>
+
+  <style is:global>
+    .copy-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: var(--r-sm);
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: background 180ms, color 180ms;
+      z-index: 1;
+    }
+    .copy-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+      color: rgba(255, 255, 255, 0.9);
     }
   </style>
 </BaseLayout>
