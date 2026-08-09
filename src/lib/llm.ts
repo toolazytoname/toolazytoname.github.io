@@ -1,11 +1,12 @@
-// LLM client — Agnes-2.0-flash primary, DeepSeek fallback.
-// Returns a tagged reply so the UI can show which model answered.
+// LLM client — keyword match first (instant), then Agnes / DeepSeek with
+// timeout so the UI never hangs. Returns a tagged reply so the UI can
+// show which source answered.
 //
 // Both providers speak the OpenAI Chat Completions protocol, so we reuse
 // a single `openai` SDK instance and just swap the baseURL.
 
 import OpenAI from 'openai';
-import { knowledge } from '@data/knowledge';
+import { knowledge, findStaticReply } from '@data/knowledge';
 
 export type ChatMessage = {
   role: 'user' | 'assistant' | 'system';
@@ -32,6 +33,9 @@ ${knowledge.map((k) => `[${k.id}]\n${k.reply}`).join('\n\n')}
 
 记住：你不是真的站主，你只是被授权代表他回答访客。`;
 
+// 8s per provider — if it hasn't answered by then, move on.
+const LLM_TIMEOUT = 8000;
+
 const agnesKey = process.env.AGNES_API_KEY;
 const deepseekKey = process.env.DEEPSEEK_API_KEY;
 
@@ -41,6 +45,8 @@ function getAgnes() {
   return new OpenAI({
     apiKey: agnesKey,
     baseURL: 'https://apihub.agnes-ai.com/v1',
+    timeout: LLM_TIMEOUT,
+    maxRetries: 0,
   });
 }
 
@@ -49,14 +55,26 @@ function getDeepSeek() {
   return new OpenAI({
     apiKey: deepseekKey,
     baseURL: 'https://api.deepseek.com/v1',
+    timeout: LLM_TIMEOUT,
+    maxRetries: 0,
   });
 }
 
 export async function chat(messages: ChatMessage[]): Promise<ChatResult> {
-  // Filter & normalize incoming messages.
   const history = messages
     .filter((m) => m.role === 'user' || m.role === 'assistant')
-    .slice(-10); // cap history to avoid token bloat
+    .slice(-10);
+
+  // 0. Keyword match FIRST — instant, no network, always available.
+  // This handles 90% of questions ("最近在干嘛", "有哪些项目", "滑雪"...)
+  // without waiting for an LLM round-trip.
+  const lastUser = [...history].reverse().find((m) => m.role === 'user');
+  if (lastUser) {
+    const staticHit = findStaticReply(lastUser.content);
+    if (staticHit) {
+      return { reply: staticHit.reply, source: 'static' };
+    }
+  }
 
   const fullMessages: ChatMessage[] = [
     { role: 'system', content: SYSTEM_PROMPT },
@@ -101,30 +119,26 @@ export async function chat(messages: ChatMessage[]): Promise<ChatResult> {
     console.warn('[llm] deepseek failed:', err);
   }
 
-  // 3. Static fallback.
+  // 3. No keyword hit + no LLM → generic fallback.
   return {
     reply:
-      '抱歉，两个 LLM 都暂时不可用。你可以试着问一些关键词（最近、滑雪、产品、开源、电影），我会用预置回答。',
+      '这个问题我暂时答不上来。试试问"有哪些项目"、"最近在干嘛"、"户外运动"这些我能答的。',
     source: 'fallback',
-    error: 'both LLMs unavailable',
+    error: 'no match',
   };
 }
 
-// Static matcher — used by the API route as the last fallback (after both
-// LLMs fail) and by the UI when the API route itself fails.
+// Static matcher — exported for the client-side fallback (Chatbot.tsx).
 export function staticReply(input: string): ChatResult {
   const lower = input.toLowerCase().trim();
   if (!lower) {
     return { reply: '问点什么吧 :)', source: 'static' };
   }
-  for (const entry of knowledge) {
-    if (entry.keywords.some((kw) => lower.includes(kw.toLowerCase()))) {
-      return { reply: entry.reply, source: 'static' };
-    }
-  }
+  const hit = findStaticReply(lower);
+  if (hit) return { reply: hit.reply, source: 'static' };
   return {
     reply:
-      '这个问题我不知道。换个问法试试 —— 比如"最近在干嘛"、"作品"、"滑雪"这种关键词。',
+      '这个问题我暂时答不上来。试试问"有哪些项目"、"最近在干嘛"、"户外运动"这些我能答的。',
     source: 'static',
   };
 }

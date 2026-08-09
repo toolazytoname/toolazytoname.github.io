@@ -86,6 +86,12 @@ export default function Chatbot() {
     setMessages(next);
     setBusy(true);
 
+    // 12s client-side timeout — if the API hasn't responded by then,
+    // abort and use the local keyword matcher so the user isn't stuck
+    // staring at typing dots.
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 12000);
+
     try {
       const res = await fetch('/api/chat', {
         method: 'POST',
@@ -93,6 +99,7 @@ export default function Chatbot() {
         body: JSON.stringify({
           messages: next.map(({ role, content }) => ({ role, content })),
         }),
+        signal: controller.signal,
       });
 
       if (!res.ok) throw new Error(`http ${res.status}`);
@@ -108,6 +115,7 @@ export default function Chatbot() {
         { role: 'assistant', content: localStaticReply(trimmed), source: 'static' },
       ]);
     } finally {
+      clearTimeout(timeoutId);
       setBusy(false);
     }
   }
