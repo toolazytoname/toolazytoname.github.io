@@ -1,18 +1,10 @@
 // Static knowledge base for the AI chatbot.
 // The chatbot tries the LLM first, falls back to static keyword match.
-// This file MUST stay human-readable — it's also the system prompt seed.
+// This file is the SINGLE SOURCE OF TRUTH — both the server (llm.ts)
+// and the client (Chatbot.tsx) import from here. Edit this file only.
 //
-// 2026-07-12 review notes:
-// - 旧版条目里有 WeChatExport / Swift 编译缓存 / LLVM 隐私检测 / "中年被裁"。
-//   这些要么不在公开 profile，要么与新定位不符，要么 CLAUDE.md 不允许，
-//   全部按下面规则改写或删除：
-//   • about — 去掉"中年被裁"，只留人设与兴趣
-//   • products — 列节拍器 / Lodge / GridGo / Sentinel / autodev-harness / atelier
-//   • contact — 邮箱改 lazywc@gmail.com；Twitter 保留但标"不活跃"
-//   • byte — 删 (原条目谈字节跳动 + LLVM 隐私，违反 CLAUDE.md 第 3 条)
-//   • openSource — 列 6 个真实公开 repo
-//   • tech — iOS 历史/AI 当前栈表述，校准为 CLAUDE.md 的"用 AI 造工具"叙事
-// - sport / film / book / greeting / thanks 保留，仅做小幅校准。
+// This file MUST stay human-readable — it's also the system prompt seed
+// (the whole array gets stringified into the LLM system prompt in llm.ts).
 
 export type KnowledgeEntry = {
   id: string;
@@ -30,65 +22,65 @@ export const knowledge: KnowledgeEntry[] = [
     source: 'about',
   },
   {
-    id: 'products',
-    keywords: ['产品', '作品', 'project', '作品集', 'works', 'product'],
+    id: 'projects',
+    keywords: ['产品', '作品', '项目', 'project', 'projects', '作品集', 'works', 'product'],
     reply:
-      '现在在维护的几个：\n\n• 节拍器 (Metronome) — 网页 + 小程序，专业场景节拍器\n• Lodge — 自部署的家庭服务器仪表盘\n• GridGo — 日历优先的轻量 todo (开发中)\n• Sentinel — freqtrade 之上的稳健型加密策略\n\n开源的几个：\n\n• autodev-harness — 多 agent 自动开发 harness\n• atelier — Claude Code 用的 disposable VM 沙盒\n• MediaForge — 本地媒体处理工具集\n• wechat-mp-devops — 微信公众号开发与运维工具\n\n完整列表在主页 Works 区。',
-    source: 'products',
+      '18 个开源项目，分 5 组 —— 完整列表在 /projects 页：\n\n📱 手机实验室：oneplus-8t-mobile-lab / android-ai-stack / xiaohei-phone-agent / pocket-pentest\n🤖 Agent & 自动化：GridGo / llm-quota-watchdog / happy-relay-deploy\n🔧 基础设施：Lodge / home-nas-skill / reality-handshake / wechat-mp-devops\n🏭 独立产品：节拍器 / MediaForge / Sentinel\n📜 老 iOS：WeChatExport（★14）/ FDTops / BPFlutter',
+    source: 'projects',
   },
   {
     id: 'contact',
-    keywords: ['联系', 'contact', '邮箱', 'email', '怎么找你', 'twitter', 'github'],
+    keywords: ['联系', 'contact', '邮箱', 'email', '怎么找你', 'twitter', 'x', 'github'],
     reply:
-      '最稳的方式是邮件：lazywc@gmail.com\n\nGitHub: @toolazytoname\nX / Twitter: @toolazytoname（不活跃，挂了占位用，主互动在 GitHub）\n\n不常用的：知乎 / 即刻 / V2EX 也搜"懒得起名"能找到。',
+      '最稳的方式是邮件：lazywc@gmail.com\n\nGitHub: @toolazytoname\nX / Twitter: @toolazytoname（不活跃，主互动在 GitHub）',
     source: 'contact',
   },
   {
     id: 'now',
     keywords: ['now', '最近', '最近在干嘛', '你在做什么', '当下', '近况'],
     reply:
-      '最近两件事：\n\n1. 重建个人站（这个站），把 14 年的博客 / 作品 / 记忆全搬过来，从 Jekyll 迁到 Astro 5 + Vercel\n2. 在想下一步职业方向 —— AI infra / AI 应用 / 继续做自己的产品 三个方向还在权衡\n\n滑雪季再开就去新疆。PADI AOW 拿到之后安排海南潜水。',
+      '最近在做的事：\n\n1. 把一台 OnePlus 8T 变成 AI 可控的手机 —— 通话、短信、App 操作全自动化（xiaohei-phone-agent + android-ai-stack）\n2. 持续维护几个独立产品：节拍器、Lodge、GridGo\n3. 重建个人站，从 Jekyll 迁到 Astro 5 + Vercel\n\n滑雪季再开就去新疆。',
     source: 'now',
   },
   {
     id: 'sport',
     keywords: ['运动', '户外', 'sport', '滑雪', 'ski', '潜水', 'dive', '攀岩', 'climb', '游泳', '旅行'],
     reply:
-      '户外 + 水上：\n\n🏔️ 滑雪 (双板 + 单板) — 阿勒泰 / 长白山 / 崇礼，持社会体育指导员证\n🧗 攀岩 — 阳朔朝圣，目标 5.10a → 5.10b → 5.10c，持指导员证\n🏊 游泳 — 持社会体育指导员证\n🤿 潜水 — PADI AOW 已拿，下一站海南考深潜专长\n🚗 公路旅行 — 独库 / 318 / G7，看时间安排\n\n详细计划在主页 Memories 地球上的 4 个点。',
+      '户外 + 水上：\n\n🏔️ 滑雪 (双板 + 单板) — 阿勒泰 / 长白山 / 崇礼，持社会体育指导员证\n🧗 攀岩 — 阳朔朝圣，持指导员证\n🏊 游泳 — 持社会体育指导员证\n🤿 潜水 — PADI AOW 已拿\n🚗 公路旅行 — 独库 / 318 / G7',
     source: 'sport',
   },
   {
     id: 'openSource',
-    keywords: ['开源', 'open source', 'github', 'github 项目'],
+    keywords: ['开源', 'open source', 'github', 'github 项目', 'repo', '仓库'],
     reply:
-      'GitHub: @toolazytoname\n\n主要公开项目：\n\n• autodev-harness — 多 agent 自动开发 harness\n• atelier — Claude Code disposable VM 沙盒\n• Sentinel — freqtrade 之上的稳健加密策略\n• MediaForge — 本地媒体处理工具集\n• wechat-mp-devops — 微信公众号开发与运维工具\n• 早期 iOS 时代的 Swift / LLVM side code 也都还留着\n\n新东西在 Pipeline 上走：一个工具 → 试用 → 拆段可复用的开源部分 → 公开。',
+      'GitHub: @toolazytoname，29 个原创仓库。\n\n最活跃的方向是 Android AI 手机实验室（5 个相关 repo）。\n\n有星的几个老项目：WeChatExport（★14，导出微信聊天记录）、FDTops（★7，Xcode 类名前缀工具）、BPFlutter（★3，Flutter iOS 集成）。\n\n完整列表在 /projects 页。',
     source: 'openSource',
   },
   {
     id: 'film',
-    keywords: ['电影', 'film', 'movie', '看什么', '推荐'],
+    keywords: ['电影', 'film', 'movie', '看什么'],
     reply:
-      '最近在重看一遍小津安二郎和是枝裕和。\n\n也看纪录片多一些 —— 蓝色星球、人类星球、Our Planet。\n\n剧情片偏爱慢节奏：侯孝贤、阿巴斯、贾樟柯、王家卫早期。\n\n不怎么看爆米花片，但偶尔也吃垃圾食品。',
+      '最近在重看一遍小津安二郎和是枝裕和。\n\n也看纪录片多一些 —— 蓝色星球、人类星球、Our Planet。\n\n剧情片偏爱慢节奏：侯孝贤、阿巴斯、贾樟柯、王家卫早期。',
     source: 'film',
   },
   {
     id: 'book',
     keywords: ['书', 'book', '看书', '读什么', '推荐书', '读书'],
     reply:
-      '最近在读：\n\n• 《人月神话》 — 重读，每次都有新东西\n• 《代码大全》第 2 版 — 当工具书翻\n• 《活出生命的意义》 — Frankl\n• 一些关于独立开发的散文和博客\n\n技术书看不动了，现在更多读历史 / 哲学 / 散文。',
+      '最近在读：\n\n• 《人月神话》 — 重读，每次都有新东西\n• 《代码大全》第 2 版 — 当工具书翻\n• 《活出生命的意义》 — Frankl\n\n技术书看不动了，现在更多读历史 / 哲学 / 散文。',
     source: 'book',
   },
   {
     id: 'tech',
     keywords: ['tech', '技术栈', '用什么', '语言', 'language', 'swift', 'llvm'],
     reply:
-      '历史主力：Swift / Objective-C / LLVM（前后 15 年 iOS / 编译）\n现在用：TypeScript / Python / Astro / Vercel / Claude Code / Claude API\n学习中：Rust\n\n编辑器：Neovim（最近切到 LazyVim 配方） + 偶尔 Xcode\nShell：fish + starship\n笔记：Obsidian + Logseq\nAI：Claude Code 是主菜 + agent harness 自己写来用',
+      '历史主力：Swift / Objective-C / LLVM（15 年 iOS / 编译）\n现在用：TypeScript / Python / Go / Astro / Vercel / Claude Code\n\n编辑器：Neovim + LazyVim\nAI：Claude Code 是主菜，agent harness 自己写来用',
     source: 'tech',
   },
   {
     id: 'greeting',
     keywords: ['你好', 'hi', 'hello', 'hey', '在吗', '在么'],
-    reply: '在的。问什么都行 —— 关于我、我的作品、最近在干什么、想去哪里玩。',
+    reply: '在的。问什么都行 —— 关于我、我的项目、最近在干什么、户外运动。',
     source: 'greeting',
   },
   {
@@ -100,6 +92,8 @@ export const knowledge: KnowledgeEntry[] = [
 ];
 
 // Naive keyword matcher — used as fallback when LLM is unavailable.
+// Shared by the server (llm.ts) and the client (Chatbot.tsx) so there's
+// exactly ONE copy of the data and ONE matching function.
 export function findStaticReply(input: string): KnowledgeEntry | null {
   const lower = input.toLowerCase().trim();
   if (!lower) return null;

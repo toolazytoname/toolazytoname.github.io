@@ -11,6 +11,7 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
+import { findStaticReply } from '@data/knowledge';
 
 type Msg = {
   role: 'user' | 'assistant';
@@ -19,10 +20,10 @@ type Msg = {
 };
 
 const SUGGESTIONS = [
-  '最近在干嘛',
   '介绍下你自己',
-  '作品',
-  '滑雪计划',
+  '有哪些项目',
+  '最近在干嘛',
+  '户外运动',
 ];
 
 const sourceLabel = (s?: Msg['source']) => {
@@ -40,27 +41,12 @@ const sourceLabel = (s?: Msg['source']) => {
   }
 };
 
-// Local fallback that mirrors src/data/knowledge.ts. Duplicated so we can
-// still answer if /api/chat itself is down (cold start, CORS, 500, etc).
-const STATIC_KB: Array<{ k: string[]; r: string }> = [
-  { k: ['你好', 'hi', 'hello', '在吗'], r: '在的。问什么都行 —— 关于我、我的作品、最近在干什么、想去哪里玩。' },
-  { k: ['是谁', 'about', '介绍', 'lazy'], r: '我是 lazy，weichao.ren 的主人。做过 Swift 编译器、LLVM 后端、隐私检测相关工作。现在做独立开发者，用 AI 造自己想要的工具。' },
-  { k: ['产品', '作品', 'project', 'works', '作品集'], r: '主要作品：节拍器 / Lodge / GridGo / Sentinel / autodev-harness / atelier。完整列表在主页 Works 区。' },
-  { k: ['联系', 'contact', '邮箱', 'email'], r: '邮件 lazywc@gmail.com。GitHub: toolazytoname。' },
-  { k: ['now', '最近', '在做什么', '近况'], r: '最近两件事：1. 重建个人站 2. 想清楚下一步职业方向。滑雪季再开就去新疆。' },
-  { k: ['运动', '滑雪', '潜水', '攀岩', '户外'], r: '户外三件套：滑雪（目标新疆）、潜水（PADI AOW 已拿）、攀岩（阳朔朝圣）。' },
-  { k: ['开源', 'github', 'open source'], r: 'GitHub: toolazytoname。主要项目 autodev-harness / atelier / Sentinel。' },
-  { k: ['电影', 'film', 'movie'], r: '最近在重看小津安二郎和是枝裕和。偏爱慢节奏剧情片。' },
-  { k: ['书', 'book', '读书'], r: '最近在读《人月神话》《代码大全》《活出生命的意义》。技术书看不动了。' },
-  { k: ['技术栈', 'tech', 'swift', 'llvm', '语言'], r: '主力 Swift / Objective-C / LLVM。会用 TypeScript / Python。编辑器 Neovim + LazyVim。' },
-];
-
-function staticReply(input: string): string {
-  const lower = input.toLowerCase();
-  for (const e of STATIC_KB) {
-    if (e.k.some((k) => lower.includes(k))) return e.r;
-  }
-  return '这个问题我不知道。换个问法试试 —— 比如"最近在干嘛"、"作品"、"滑雪"。';
+// Client-side fallback when /api/chat itself is down (cold start, CORS, 500).
+// Uses the SAME knowledge.ts as the server — single source of truth.
+function localStaticReply(input: string): string {
+  const entry = findStaticReply(input);
+  if (entry) return entry.reply;
+  return '这个问题我不知道。换个问法试试 —— 比如"有哪些项目"、"最近在干嘛"、"滑雪"。';
 }
 
 export default function Chatbot() {
@@ -119,7 +105,7 @@ export default function Chatbot() {
       console.warn('[chatbot] api failed, using static fallback:', err);
       setMessages([
         ...next,
-        { role: 'assistant', content: staticReply(trimmed), source: 'static' },
+        { role: 'assistant', content: localStaticReply(trimmed), source: 'static' },
       ]);
     } finally {
       setBusy(false);
