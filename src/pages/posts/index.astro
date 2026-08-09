@@ -3,152 +3,340 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { postSlug } from '@lib/permalink';
 
-// Static-prerender: the page is fully determined at build time (all 61
-// posts are read synchronously into the HTML), so there is no reason to
-// pay a Vercel serverless cold start for /posts/. Mirrors the strategy
-// used by src/pages/[...slug].astro.
 export const prerender = true;
 
 const all = (await getCollection('posts')).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime(),
 );
+
+// Collect unique categories
+const catSet = new Set<string>();
+for (const p of all) {
+  const cats = Array.isArray(p.data.categories) ? p.data.categories : [p.data.categories];
+  cats.forEach((c) => catSet.add(c.toString().trim()));
+}
+const categories = [...catSet].sort();
+
+// Group posts by year
+const byYear = new Map<number, typeof all>();
+for (const p of all) {
+  const y = p.data.date.getFullYear();
+  if (!byYear.has(y)) byYear.set(y, []);
+  byYear.get(y)!.push(p);
+}
+const years = [...byYear.keys()].sort((a, b) => b - a);
+
+function slugFor(p: (typeof all)[number]) {
+  return postSlug(p.id, p.data);
+}
+
+function primaryCat(p: (typeof all)[number]) {
+  const cats = Array.isArray(p.data.categories) ? p.data.categories : [p.data.categories];
+  return (cats[0] ?? '').toString().trim() || 'uncategorized';
+}
+
+function dateStr(p: (typeof all)[number]) {
+  return p.data.date.toISOString().slice(0, 10);
+}
 ---
 
 <BaseLayout
   seo={{
     title: 'Posts',
-    description: '从 2016 到现在的所有文章，按时间倒序。',
+    description: `从 2016 到现在的 ${all.length} 篇文章。`,
   }}
 >
-  <section class="posts">
+  <section class="posts-page">
     <div class="container">
-      <header class="posts__head reveal">
+      <header class="posts-page__head reveal">
         <p class="eyebrow">Posts · 文章</p>
-        <h1 class="posts__title serif">{all.length} 篇</h1>
-        <p class="posts__lede">
-          从 2016 到现在的所有文章，按时间倒序。
+        <h1 class="posts-page__title">{all.length} 篇</h1>
+        <p class="posts-page__lede">
+          从 2016 到现在的所有文章。
         </p>
       </header>
 
-      <ol class="posts__list">
-        {all.map((entry) => {
-          const dateStr = entry.data.date.toISOString().slice(0, 10);
-          const cats = Array.isArray(entry.data.categories) ? entry.data.categories : [entry.data.categories];
-          const primaryCat = (cats[0] ?? '').toString().trim() || 'uncategorized';
-          const href = '/' + postSlug(entry.id, entry.data) + '/';
-          return (
-            <li class="posts__item reveal">
-              <a href={href} class="posts__link">
-                <div class="posts__meta">
-                  <span class="posts__tag">{primaryCat}</span>
-                  <time datetime={dateStr}>{dateStr}</time>
-                </div>
-                <h2 class="posts__heading serif">{entry.data.title}</h2>
-                {entry.data.summary && (
-                  <p class="posts__summary">{entry.data.summary}</p>
-                )}
-                <div class="posts__tags">
-                  {entry.data.tags.map((t) => (
-                    <span class="posts__chip">#{t}</span>
-                  ))}
-                </div>
-              </a>
-            </li>
-          );
-        })}
-      </ol>
+      <!-- Filters -->
+      <div class="posts-page__filters reveal">
+        <input
+          type="search"
+          class="posts-page__search"
+          placeholder="搜索标题…"
+          id="post-search"
+          data-post-search
+        />
+        <div class="posts-page__chips" data-post-chips>
+          <button class="chip chip--active" data-filter="all">全部</button>
+          {categories.map((c) => (
+            <button class="chip" data-filter={c.toLowerCase()}>{c}</button>
+          ))}
+        </div>
+      </div>
+
+      <!-- Post list grouped by year -->
+      <div class="posts-page__list" data-post-list>
+        {years.map((year) => (
+          <section class="year-section" data-year={year}>
+            <h2 class="year-section__title">{year} · {byYear.get(year)!.length} 篇</h2>
+            <ol class="year-section__list">
+              {byYear.get(year)!.map((p) => (
+                <li
+                  class="post-item"
+                  data-title={p.data.title.toLowerCase()}
+                  data-category={primaryCat(p).toLowerCase()}
+                  data-tags={(p.data.tags.join(' ') ?? '').toLowerCase()}
+                >
+                  <a href={`/${slugFor(p)}/`} class="post-item__link">
+                    <div class="post-item__meta">
+                      <span class="post-item__cat">{primaryCat(p)}</span>
+                      <time class="post-item__date" datetime={dateStr(p)}>{dateStr(p)}</time>
+                    </div>
+                    <h3 class="post-item__title">{p.data.title}</h3>
+                    {p.data.summary && <p class="post-item__summary">{p.data.summary}</p>}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </section>
+        ))}
+      </div>
+
+      <!-- Empty state -->
+      <p class="posts-page__empty" data-post-empty hidden>
+        没有匹配的文章。
+      </p>
     </div>
   </section>
 </BaseLayout>
 
+<script>
+  function initPostFilters() {
+    const search = document.querySelector<HTMLInputElement>('[data-post-search]');
+    const chips = document.querySelectorAll<HTMLElement>('[data-filter]');
+    const items = document.querySelectorAll<HTMLElement>('.post-item');
+    const yearSections = document.querySelectorAll<HTMLElement>('.year-section');
+    const empty = document.querySelector<HTMLElement>('[data-post-empty]');
+
+    if (!search || !items.length) return;
+
+    let activeCategory = 'all';
+
+    function apply() {
+      const q = search!.value.trim().toLowerCase();
+      let visible = 0;
+
+      items.forEach((item) => {
+        const title = item.dataset.title ?? '';
+        const cat = item.dataset.category ?? '';
+        const tags = item.dataset.tags ?? '';
+        const matchesSearch = !q || title.includes(q) || tags.includes(q) || cat.includes(q);
+        const matchesCat = activeCategory === 'all' || cat === activeCategory;
+        const show = matchesSearch && matchesCat;
+        item.hidden = !show;
+        if (show) visible++;
+      });
+
+      // Hide empty year sections
+      yearSections.forEach((sec) => {
+        const visItems = sec.querySelectorAll<HTMLElement>('.post-item:not([hidden])');
+        sec.hidden = visItems.length === 0;
+      });
+
+      if (empty) empty.hidden = visible > 0;
+    }
+
+    search.addEventListener('input', apply);
+
+    chips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        activeCategory = chip.dataset.filter ?? 'all';
+        chips.forEach((c) => c.classList.remove('chip--active'));
+        chip.classList.add('chip--active');
+        apply();
+      });
+    });
+  }
+
+  document.addEventListener('astro:after-swap', initPostFilters);
+  initPostFilters();
+</script>
+
 <style>
-  .posts {
-    padding: var(--s-20) 0 var(--s-24);
-    background: var(--color-parchment);
+  .posts-page {
+    padding: var(--s-20) 0 var(--s-32);
     min-height: 80vh;
   }
-  .posts__head {
-    margin-bottom: var(--s-12);
-    max-width: 720px;
+
+  .posts-page__head {
+    margin-bottom: var(--s-8);
   }
-  .posts__title {
-    font-size: clamp(48px, 6vw, 72px);
+
+  .posts-page__title {
+    font-size: clamp(40px, 5vw, 64px);
     margin: var(--s-3) 0 var(--s-4);
-    color: var(--color-warm-text);
+    font-weight: 500;
+    color: var(--color-text);
     letter-spacing: -0.02em;
   }
-  .posts__lede {
-    color: var(--color-warm-text-muted);
+
+  .posts-page__lede {
+    color: var(--color-text-muted);
     font-size: 17px;
     margin: 0;
   }
-  .posts__list {
+
+  /* Filters */
+  .posts-page__filters {
+    margin-bottom: var(--s-10);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+  }
+
+  .posts-page__search {
+    width: 100%;
+    max-width: 400px;
+    font-size: 15px;
+    padding: var(--s-3) var(--s-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--r-md);
+    background: var(--color-bg);
+    color: var(--color-text);
+    outline: none;
+    transition: border-color var(--t-fast) var(--ease-out);
+  }
+
+  .posts-page__search::placeholder {
+    color: var(--color-text-dim);
+  }
+
+  .posts-page__search:focus-visible {
+    border-color: var(--color-text);
+  }
+
+  .posts-page__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+  }
+
+  .chip {
+    font-size: 13px;
+    padding: 4px 12px;
+    border-radius: 980px;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: all var(--t-fast) var(--ease-out);
+  }
+
+  .chip:hover {
+    border-color: var(--color-border-strong);
+    color: var(--color-text);
+  }
+
+  .chip--active {
+    background: var(--color-text);
+    color: var(--color-bg);
+    border-color: var(--color-text);
+  }
+
+  .chip--active:hover {
+    background: var(--color-text);
+    color: var(--color-bg);
+  }
+
+  /* Year sections */
+  .year-section {
+    margin-bottom: var(--s-10);
+  }
+
+  .year-section__title {
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: var(--color-text-dim);
+    margin: 0 0 var(--s-4);
+    padding-bottom: var(--s-3);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .year-section__list {
     list-style: none;
     padding: 0;
     margin: 0;
   }
-  .posts__item {
-    border-top: 1px solid var(--color-warm-border);
+
+  /* Post items */
+  .post-item {
+    border-top: 1px solid var(--color-border);
   }
-  .posts__item:last-child {
-    border-bottom: 1px solid var(--color-warm-border);
+
+  .post-item:last-child {
+    border-bottom: 1px solid var(--color-border);
   }
-  .posts__link {
+
+  .post-item__link {
     display: block;
-    padding: var(--s-6) 0;
+    padding: var(--s-5) 0;
     color: inherit;
     text-decoration: none;
-    transition: color 200ms var(--ease-out);
   }
-  .posts__link:hover {
-    text-decoration: none;
+
+  .post-item__link:hover .post-item__title {
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
-  .posts__meta {
+
+  .post-item__meta {
     display: flex;
     gap: var(--s-3);
     align-items: center;
-    margin-bottom: var(--s-2);
+    margin-bottom: var(--s-1);
   }
-  .posts__tag {
+
+  .post-item__cat {
     font-size: 11px;
     padding: 2px 8px;
     border-radius: 980px;
     text-transform: uppercase;
     letter-spacing: 0.3px;
     font-weight: 500;
-    background: rgba(201, 100, 66, 0.15);
-    color: var(--color-terracotta);
+    background: var(--color-bg-pale);
+    color: var(--color-text-muted);
   }
-  .posts__meta time {
+
+  .post-item__date {
     font-family: var(--font-mono);
     font-size: 12px;
-    color: var(--color-warm-text-dim);
+    color: var(--color-text-dim);
   }
-  .posts__heading {
-    font-size: clamp(24px, 3vw, 32px);
-    margin: 0 0 var(--s-3);
-    color: var(--color-warm-text);
-    line-height: 1.2;
-    transition: color 200ms;
+
+  .post-item__title {
+    font-size: clamp(20px, 2.5vw, 26px);
+    margin: 0 0 var(--s-2);
+    color: var(--color-text);
+    line-height: 1.25;
+    font-weight: 500;
+    transition: text-decoration-color var(--t-fast);
   }
-  .posts__link:hover .posts__heading {
-    color: var(--color-terracotta);
-  }
-  .posts__summary {
-    margin: 0 0 var(--s-3);
-    color: var(--color-warm-text-muted);
+
+  .post-item__summary {
+    margin: 0;
+    color: var(--color-text-muted);
     font-size: 15px;
-    line-height: 1.6;
-    max-width: 720px;
+    line-height: 1.55;
+    max-width: 640px;
   }
-  .posts__tags {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
-  .posts__chip {
-    font-size: 11px;
-    color: var(--color-warm-text-dim);
-    font-family: var(--font-mono);
+
+  /* Empty state */
+  .posts-page__empty {
+    text-align: center;
+    color: var(--color-text-dim);
+    font-size: 16px;
+    padding: var(--s-16) 0;
   }
 </style>
+</BaseLayout>
