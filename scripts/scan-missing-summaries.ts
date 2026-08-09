@@ -17,7 +17,7 @@ const POSTS_DIR = path.resolve('src/content/posts');
 
 function extractFrontmatter(content: string): { raw: string; rest: string } {
   const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
-  if (!match) return { raw: '', rest: content };
+  if (!match?.[1] || !match[2]) return { raw: '', rest: content };
   return { raw: match[1], rest: match[2] };
 }
 
@@ -27,7 +27,7 @@ function hasSummary(frontmatter: string): boolean {
 
 function extractTitle(frontmatter: string): string {
   const m = frontmatter.match(/^\s*title\s*:\s*(.+)$/m);
-  return m ? m[1].replace(/^["']|["']$/g, '').trim() : '(no title)';
+  return m?.[1] ? m[1].replace(/^["']|["']$/g, '').trim() : '(no title)';
 }
 
 function stripMd(text: string): string {

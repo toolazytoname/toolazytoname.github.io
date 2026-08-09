@@ -4,19 +4,51 @@ import Nav from '@components/Nav.astro';
 import Footer from '@components/Footer.astro';
 import ScrollProgress from '@components/ScrollProgress.astro';
 import Chatbot from '@components/Chatbot';
-import { SITE, type Seo } from '@lib/seo';
+import { SITE, type Seo, websiteJsonLd, articleJsonLd } from '@lib/seo';
 
 interface Props {
   seo?: Seo;
+  /** Extra JSON-LD objects to merge into the graph */
+  jsonLdExtra?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const { seo } = Astro.props;
+const { seo, jsonLdExtra } = Astro.props;
 const title = seo?.title
   ? `${seo.title} · ${SITE.name}`
   : `${SITE.name} — ${SITE.description.split('。')[0]}`;
 const description = seo?.description ?? SITE.description;
 const ogImage = seo?.image ?? '/og-default.svg';
 const canonical = new URL(Astro.url.pathname, SITE.url).toString();
+
+// JSON-LD: always include WebSite+Person, merge article if applicable
+const baseGraph = websiteJsonLd();
+let jsonLdOutput: Record<string, unknown>;
+
+if (seo?.type === 'article' && seo.publishedAt) {
+  const article = articleJsonLd({
+    title: seo.title ?? '',
+    description: seo.description,
+    url: canonical,
+    publishedAt: seo.publishedAt,
+    section: seo.section,
+    tags: seo.tags,
+    image: ogImage,
+  });
+  jsonLdOutput = {
+    '@context': 'https://schema.org',
+    '@graph': [...baseGraph['@graph']!, article],
+  };
+} else {
+  jsonLdOutput = baseGraph;
+}
+
+// Merge any extras
+if (jsonLdExtra) {
+  const extras = Array.isArray(jsonLdExtra) ? jsonLdExtra : [jsonLdExtra];
+  if (jsonLdOutput['@graph']) {
+    (jsonLdOutput['@graph'] as unknown[]).push(...extras);
+  }
+}
 ---
 
 <!doctype html>
@@ -30,6 +62,9 @@ const canonical = new URL(Astro.url.pathname, SITE.url).toString();
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
 
+    <!-- JSON-LD structured data -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLdOutput)} />
+
     <!-- Open Graph -->
     <meta property="og:type" content={seo?.type ?? 'website'} />
     <meta property="og:title" content={title} />
@@ -37,6 +72,18 @@ const canonical = new URL(Astro.url.pathname, SITE.url).toString();
     <meta property="og:image" content={ogImage} />
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content={SITE.name} />
+
+    <!-- Article-specific OG tags -->
+    {seo?.type === 'article' && seo.publishedAt && (
+      <>
+        <meta property="article:published_time" content={seo.publishedAt.toISOString()} />
+        <meta property="article:author" content={SITE.author} />
+        {seo.section && <meta property="article:section" content={seo.section} />}
+        {seo.tags?.map((tag) => (
+          <meta property="article:tag" content={tag} />
+        ))}
+      </>
+    )}
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />

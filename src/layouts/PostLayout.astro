@@ -37,9 +37,12 @@ const primaryCat = (cats[0] ?? '').toString().trim() || 'uncategorized';
 function slugFor(p: CollectionEntry<'posts'>) {
   return postSlug(p.id, p.data);
 }
+
+const postSlugStr = '/' + postSlug(entry.id, entry.data);
+const ogImagePath = `/og${postSlugStr}.png`;
 ---
 
-<BaseLayout seo={{ title: entry.data.title, description: entry.data.summary, type: 'article', publishedAt: date }}>
+<BaseLayout seo={{ title: entry.data.title, description: entry.data.summary, type: 'article', publishedAt: date, section: primaryCat, tags: entry.data.tags, image: ogImagePath }}>
   <article class="post-page">
     <div class="post-page__layout container">
       <!-- Main column -->
