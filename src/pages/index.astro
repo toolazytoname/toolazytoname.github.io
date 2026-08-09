@@ -5,7 +5,6 @@ export const prerender = true;
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Hero from '@components/Hero.astro';
 import WorkCard from '@components/WorkCard.astro';
-import Timeline from '@components/Timeline.astro';
 import PostFeed from '@components/PostFeed.astro';
 import { works } from '@data/works';
 ---
@@ -29,21 +28,6 @@ import { works } from '@data/works';
     </div>
   </section>
 
-  <!-- =========================== Now =========================== -->
-  <section class="now" id="now">
-    <div class="container container-narrow">
-      <header class="section-head reveal">
-        <p class="eyebrow">Now · 当下</p>
-        <h2 class="section-title">最近在想、在做</h2>
-        <p class="section-sub">
-          来自 <a href="/now">/now</a> 页面。每月更新一次。
-        </p>
-      </header>
-
-      <Timeline />
-    </div>
-  </section>
-
   <!-- =========================== Closing CTA =========================== -->
   <section class="closing">
     <div class="container container-narrow closing__inner reveal">
@@ -54,7 +38,6 @@ import { works } from '@data/works';
       </p>
       <div class="closing__ctas">
         <a href="mailto:lazywc@gmail.com" class="btn btn--primary">lazywc@gmail.com</a>
-        <a href="/colophon" class="btn btn--ghost">关于这个站 →</a>
       </div>
     </div>
   </section>
@@ -74,12 +57,6 @@ import { works } from '@data/works';
     font-weight: 500;
     letter-spacing: -0.01em;
   }
-  .section-sub {
-    color: var(--color-text-muted);
-    font-size: 17px;
-    line-height: 1.6;
-    margin: 0;
-  }
 
   /* Works */
   .works {
@@ -91,12 +68,6 @@ import { works } from '@data/works';
     grid-template-columns: 1fr;
     gap: var(--s-5);
     max-width: 720px;
-  }
-
-  /* Now */
-  .now {
-    padding: var(--s-24) 0;
-    border-top: 1px solid var(--color-border);
   }
 
   /* Closing */
@@ -138,13 +109,6 @@ import { works } from '@data/works';
   .closing .btn--primary:hover {
     background: var(--color-ink-soft);
   }
-  .closing .btn--ghost {
-    border: 1px solid var(--color-border);
-    color: var(--color-text);
-  }
-  .closing .btn--ghost:hover {
-    background: var(--color-bg-subtle);
-  }
 
   .btn {
     display: inline-flex;
@@ -169,17 +133,7 @@ import { works } from '@data/works';
   .btn--primary:hover {
     background: var(--color-ink-soft);
   }
-  .btn--ghost {
-    background: transparent;
-    color: var(--color-text);
-    border: 1px solid var(--color-border);
-  }
-  .btn--ghost:hover {
-    border-color: var(--color-border-strong);
-    background: var(--color-bg-subtle);
-  }
 
-  /* Responsive */
   @media (max-width: 1024px) {
     .works__grid { grid-template-columns: 1fr; }
   }

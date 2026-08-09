@@ -11,92 +11,40 @@ const { work, index } = Astro.props;
 
 <article
   class="work-card reveal"
-  data-tilt
   data-status={work.status}
   style={`--i: ${index};`}
 >
   <div class="work-card__inner">
-    <!-- FRONT -->
-    <div class="work-card__face work-card__face--front">
-      <header class="work-card__head">
-        <span class="work-card__tag">{work.tag}</span>
-        <span class={`work-card__status work-card__status--${work.status}`}>
-          {work.status}
-        </span>
-      </header>
-      <h3 class="work-card__title serif">{work.title}</h3>
-      <p class="work-card__subtitle">{work.subtitle}</p>
-      <ul class="work-card__highlights">
-        {work.front.highlights.map((h) => (
-          <li>{h}</li>
-        ))}
-      </ul>
-      <p class="work-card__hint">悬停查看详情 ↻</p>
-    </div>
-
-    <!-- BACK -->
-    <div class="work-card__face work-card__face--back">
-      <p class="eyebrow">{work.period} · {work.tag}</p>
-      <h4 class="work-card__back-title serif">怎么做的</h4>
-      <p class="work-card__back-problem"><strong>问题。</strong>{work.back.problem}</p>
-      <p class="work-card__back-approach"><strong>方法。</strong>{work.back.approach}</p>
-      <p class="work-card__back-outcome"><strong>结果。</strong>{work.back.outcome}</p>
-      <div class="work-card__stack">
-        {work.back.stack.map((s) => <span class="work-card__chip">{s}</span>)}
-      </div>
-      {
-        work.back.links && work.back.links.length > 0 && (
-          <div class="work-card__links">
-            {work.back.links.map((l) => (
-              <a href={l.url} class="work-card__link">
-                {l.label} →
-              </a>
-            ))}
-          </div>
-        )
-      }
+    <header class="work-card__head">
+      <span class="work-card__tag">{work.tag}</span>
+      <span class={`work-card__status work-card__status--${work.status}`}>
+        {work.status}
+      </span>
+    </header>
+    <h3 class="work-card__title">{work.title}</h3>
+    <p class="work-card__subtitle">{work.subtitle}</p>
+    <p class="work-card__summary">{work.summary}</p>
+    <ul class="work-card__highlights">
+      {work.highlights.map((h) => (
+        <li>{h}</li>
+      ))}
+    </ul>
+    <div class="work-card__links">
+      {work.links.map((l) => (
+        <a href={l.url} class="work-card__link" rel="noopener" target="_blank">
+          {l.label} →
+        </a>
+      ))}
     </div>
   </div>
 </article>
 
 <style>
-  .work-card {
-    perspective: 1400px;
-  }
   .work-card__inner {
-    position: relative;
-    width: 100%;
-    transform-style: preserve-3d;
-    transition: transform 700ms var(--ease-out);
-    /* Mouse-tilt uses these vars so it composes with the flip,
-       instead of fighting it via inline transform. */
-    --tilt-y: 0deg;
-    --tilt-x: 0deg;
-    transform: rotateY(var(--tilt-y)) rotateX(var(--tilt-x));
-  }
-  .work-card:hover .work-card__inner,
-  .work-card:focus-within .work-card__inner {
-    transform: rotateY(calc(180deg + var(--tilt-y))) rotateX(var(--tilt-x));
-  }
-
-  .work-card__face {
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
     border-radius: var(--r-xl);
     padding: var(--s-6);
-    display: flex;
-    flex-direction: column;
-  }
-  .work-card__face--front {
-    background: var(--color-ivory);
-    border: 1px solid var(--color-warm-border);
-  }
-  .work-card__face--back {
-    background: var(--color-ink);
-    color: var(--color-ivory);
-    transform: rotateY(180deg);
-    position: absolute;
-    inset: 0;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
   }
 
   .work-card__head {
@@ -110,7 +58,7 @@ const { work, index } = Astro.props;
     font-weight: 500;
     letter-spacing: 0.3px;
     text-transform: uppercase;
-    color: var(--color-terracotta);
+    color: var(--color-ink);
   }
   .work-card__status {
     font-size: 10px;
@@ -138,23 +86,28 @@ const { work, index } = Astro.props;
     font-size: 26px;
     line-height: 1.15;
     margin: 0 0 var(--s-2);
-    color: var(--color-warm-text);
+    color: var(--color-text);
   }
   .work-card__subtitle {
-    color: var(--color-warm-text-muted);
-    margin: 0 0 var(--s-5);
+    color: var(--color-text-muted);
+    margin: 0 0 var(--s-4);
     font-size: 14px;
+  }
+  .work-card__summary {
+    color: var(--color-text);
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0 0 var(--s-4);
   }
   .work-card__highlights {
     list-style: none;
     padding: 0;
-    margin: 0 0 var(--s-4);
-    flex-grow: 1;
+    margin: 0 0 var(--s-5);
   }
   .work-card__highlights li {
-    color: var(--color-warm-text);
+    color: var(--color-text);
     padding: var(--s-2) 0;
-    border-bottom: 1px solid var(--color-warm-border);
+    border-bottom: 1px solid var(--color-border);
     font-size: 14px;
     position: relative;
     padding-left: var(--s-4);
@@ -163,110 +116,18 @@ const { work, index } = Astro.props;
     content: '→';
     position: absolute;
     left: 0;
-    color: var(--color-terracotta);
+    color: var(--color-ink);
   }
   .work-card__highlights li:last-child {
     border-bottom: none;
   }
-  .work-card__hint {
-    font-size: 11px;
-    color: var(--color-warm-text-dim);
-    margin: auto 0 0;
-    font-style: italic;
-  }
 
-  /* BACK */
-  .work-card__back-title {
-    font-size: 18px;
-    margin: var(--s-2) 0 var(--s-4);
-    color: var(--color-coral);
-  }
-  .work-card__back-problem,
-  .work-card__back-approach,
-  .work-card__back-outcome {
-    font-size: 13px;
-    line-height: 1.55;
-    margin: 0 0 var(--s-3);
-    color: var(--color-ivory);
-  }
-  .work-card__back-problem strong,
-  .work-card__back-approach strong,
-  .work-card__back-outcome strong {
-    color: var(--color-coral);
-    margin-right: 6px;
-  }
-  .work-card__stack {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-    margin-top: auto;
-  }
-  .work-card__chip {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    padding: 2px 8px;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    border-radius: 4px;
-    color: var(--color-dark-text);
-  }
   .work-card__links {
     display: flex;
     gap: var(--s-3);
-    margin-top: var(--s-3);
   }
   .work-card__link {
-    color: var(--color-coral);
+    color: var(--color-ink);
     font-size: 13px;
   }
-
-  /* Touch devices: tap to flip via the `.flipped` class (toggled by JS).
-     Still keep the hover-triggered flip working on hybrid devices. */
-  @media (hover: none) {
-    .work-card__inner {
-      /* Don't apply hover transform; tap-to-flip below overrides. */
-      transform: none;
-    }
-    .work-card.flipped .work-card__inner {
-      transform: rotateY(180deg);
-    }
-  }
 </style>
-
-<script>
-  // Mouse-tilt micro-interaction. Skipped on touch / reduced motion.
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const cards = document.querySelectorAll<HTMLElement>('[data-tilt]');
-    const isTouch = window.matchMedia('(hover: none)').matches;
-    cards.forEach((card) => {
-      // On touch devices, tap the card to toggle flip (back face is hidden
-      // by the CSS rule below `@media (hover: none)` until flipped).
-      if (isTouch) {
-        card.addEventListener('click', () => {
-          card.classList.toggle('flipped');
-        });
-        return;
-      }
-      // Subtle mouse-tilt. Sets CSS vars on inner; CSS combines tilt + flip.
-      card.addEventListener('pointermove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const cx = rect.left + rect.width / 2;
-        const cy = rect.top + rect.height / 2;
-        const dx = (e.clientX - cx) / rect.width;
-        const dy = (e.clientY - cy) / rect.height;
-        const inner = card.querySelector<HTMLElement>('.work-card__inner');
-        if (inner) {
-          inner.style.setProperty('--tilt-y', `${dx * 5}deg`);
-          inner.style.setProperty('--tilt-x', `${-dy * 5}deg`);
-        }
-      });
-      card.addEventListener('pointerleave', () => {
-        const inner = card.querySelector<HTMLElement>('.work-card__inner');
-        if (inner) {
-          inner.style.setProperty('--tilt-y', '0deg');
-          inner.style.setProperty('--tilt-x', '0deg');
-        }
-      });
-    });
-  }
-</script>

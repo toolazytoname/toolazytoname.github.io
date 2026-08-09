@@ -27,31 +27,51 @@ const timeline = [
     <div class="container container-narrow">
       <header class="about__head reveal">
         <p class="eyebrow">About</p>
-        <h1 class="about__title serif">我是谁</h1>
+        <h1 class="about__title">关于我</h1>
       </header>
 
-      <div class="about__body reveal">
-        <p>
-          lazy。前 iOS / LLVM 工程师，做过编译器、LLVM 后端、隐私检测相关工作，现在做独立开发者。
-        </p>
-        <p>
-          读书专业跟代码有关系，毕业后进了互联网。
-          先后在几家互联网公司做了 15 年 iOS —— 从客户端到底层
-          （编译器、LLVM、隐私检测相关）都做过。详情见下方时间线。
-        </p>
-        <p>
-          2024 年离开职场，开始认真想：接下来 10 年要做什么？
-          是回大厂做 AI infra，还是跳出去做 AI 应用，
-          还是做点别的什么？这个问题到现在还没答案。
-        </p>
-        <p>
-          喜欢滑雪、潜水、攀岩、公路旅行。喜欢写代码，
-          也喜欢写代码之外的东西 —— 这就是为什么有这个站。
-        </p>
-      </div>
+      <!-- ===== 中文 ===== -->
+      <details class="about__lang" open>
+        <summary class="about__lang-toggle">中文</summary>
+        <div class="about__body reveal">
+          <p>
+            我是一个<strong>程序员。</strong>
+          </p>
+          <p>
+            <strong>工作</strong>了十数载，经历了国内各个互联网大厂，也算是小吃了波互联网红利。眼看他起朱楼，眼看他宴宾客。终于还是蹉跎了岁月，中年被裁。或许一开始就已经注定结果，工作中不卷，埋头干，不向上管理；只对代码负责，对自己负责。喜欢有创造力有挑战的工作，好奇底层的实现原理，希望工作可以产出实际价值，拒绝无意义重复（代码、生活都是如此）。有点代码洁癖、强迫症，不通人情事故。有自己看好的技术方向，持续投入（叶公好龙，浅尝则止，不够深入，务必改进）。
+            对一眼望到头的职业生涯说不。有发奋学习，力争上游的努力奋进的时候；也有安逸躺在舒适圈，不持续学习迭代自己的时光。像是硬币的两面，矛盾的自我。
+          </p>
+          <p>
+            <strong>生活</strong>简单，不会交际，不抽烟喝酒。喜欢户外、自驾、游泳。自由的风吹过的地方，都会留下我的足迹。身和心总有一个在路上。梦想可以走遍海角天涯，饱览大好河山，零距离体会大自然的鬼斧神工、各地风土人情。
+          </p>
+          <p>
+            <strong>现</strong>困囿于家事，家里蹲一年有余。观自在，省吾身。追求自由、去中心化的区块链技术；也震撼于 AI 的发展与强大。坚信天生我材必有用，千金散尽还复来。修经济学原理，提升认知，打造一个可用的产品矩阵，持续盈利，实现自由。
+          </p>
+        </div>
+      </details>
 
+      <!-- ===== English ===== -->
+      <details class="about__lang">
+        <summary class="about__lang-toggle">English</summary>
+        <div class="about__body reveal">
+          <p>
+            I am a <strong>programmer</strong>
+            with over a decade of experience, having <strong>worked</strong> at various major internet companies in China. I've ridden the wave of the internet boom, witnessing its rise and fall—seeing grand buildings erected and lavish feasts hosted, only to watch it all fade with time. Eventually, I found myself caught in the tides of change, laid off in middle age. Perhaps the outcome was inevitable from the start. I've never been one to play office politics or engage in upward management. I simply focused on my work, taking responsibility for my code and myself. I thrive on creative and challenging tasks, driven by curiosity about the underlying principles of technology. I value work that produces tangible results and reject meaningless repetition—both in code and in life. I have a bit of a coding obsession and perfectionism, and I'm not particularly adept at navigating social intricacies. While I have my preferred technical interests, I admit I've only scratched the surface and need to dive deeper. I refuse to settle for a career that feels predictable and stagnant. There have been times when I've pushed myself to learn and grow, striving to excel, but also moments when I've lingered in my comfort zone, failing to keep up with self-improvement. It's like two sides of a coin—a contradictory self.
+          </p>
+          <p>
+            My <strong>life</strong> is simple. I'm not much of a socializer, and I don't smoke or drink. I love the outdoors, road trips, and swimming. Wherever the free wind blows, you'll find my footprints. Whether physically or mentally, I'm always on the move. My dream is to travel to the farthest corners of the world, to marvel at the wonders of nature and immerse myself in diverse cultures and traditions.
+          </p>
+          <p>
+            <strong>Currently</strong>, I've been grounded at home for over a year due to family responsibilities. This time has allowed me to reflect and introspect. I'm drawn to the freedom and decentralization of blockchain technology, and I'm equally amazed by the rapid advancements in AI. I firmly believe that everyone has a purpose, and that even if wealth is lost, it can be regained. I'm studying economic principles to broaden my understanding, aiming to build a viable product matrix that generates sustainable profits and ultimately leads to true freedom.
+          </p>
+        </div>
+      </details>
+
+      <hr class="about__divider" />
+
+      <!-- ===== 时间线 ===== -->
       <section class="about__timeline">
-        <h2 class="about__subtitle serif reveal">时间线</h2>
+        <h2 class="about__subtitle reveal">时间线</h2>
         <ol class="about__list">
           {timeline.map((t, i) => (
             <li class="about__row reveal" style={`--i: ${i};`}>
@@ -62,8 +82,9 @@ const timeline = [
         </ol>
       </section>
 
+      <!-- ===== 联系 ===== -->
       <section class="about__contact reveal">
-        <h2 class="about__subtitle serif">联系</h2>
+        <h2 class="about__subtitle">联系</h2>
         <ul class="about__links">
           <li><strong>Email：</strong><a href="mailto:lazywc@gmail.com">lazywc@gmail.com</a></li>
           <li><strong>GitHub：</strong><a href="https://github.com/toolazytoname" rel="noopener" target="_blank">toolazytoname</a></li>
@@ -77,36 +98,67 @@ const timeline = [
 <style>
   .about {
     padding: var(--s-20) 0 var(--s-24);
-    background: var(--color-parchment);
     min-height: 80vh;
   }
   .about__head {
     margin-bottom: var(--s-12);
     padding-bottom: var(--s-6);
-    border-bottom: 1px solid var(--color-warm-border);
+    border-bottom: 1px solid var(--color-border);
   }
   .about__title {
     font-size: clamp(48px, 6vw, 72px);
     margin: var(--s-3) 0 0;
-    color: var(--color-warm-text);
+    color: var(--color-text);
     letter-spacing: -0.02em;
   }
+
+  /* Language toggle */
+  .about__lang {
+    margin-bottom: var(--s-10);
+    border: none;
+  }
+  .about__lang-toggle {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    padding: var(--s-2) 0;
+    user-select: none;
+  }
+  .about__lang-toggle:hover {
+    color: var(--color-text);
+  }
+  .about__lang[open] > .about__lang-toggle {
+    margin-bottom: var(--s-4);
+  }
+
   .about__body {
-    color: var(--color-warm-text-muted);
-    font-size: 18px;
-    line-height: 1.75;
-    margin-bottom: var(--s-16);
+    color: var(--color-text-muted);
+    font-size: 17px;
+    line-height: 1.8;
+    margin-bottom: var(--s-8);
   }
   .about__body p {
     margin: 0 0 var(--s-5);
   }
+  .about__body strong {
+    color: var(--color-text);
+    font-weight: 600;
+  }
+
+  .about__divider {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: var(--s-8) 0;
+  }
+
   .about__timeline {
     margin-bottom: var(--s-16);
   }
   .about__subtitle {
     font-size: 28px;
     margin: 0 0 var(--s-6);
-    color: var(--color-warm-text);
+    color: var(--color-text);
   }
   .about__list {
     list-style: none;
@@ -118,20 +170,20 @@ const timeline = [
     grid-template-columns: 140px 1fr;
     gap: var(--s-6);
     padding: var(--s-4) 0;
-    border-top: 1px solid var(--color-warm-border);
+    border-top: 1px solid var(--color-border);
     transition-delay: calc(var(--i, 0) * 60ms);
   }
   .about__row:last-child {
-    border-bottom: 1px solid var(--color-warm-border);
+    border-bottom: 1px solid var(--color-border);
   }
   .about__year {
     font-family: var(--font-mono);
     font-size: 13px;
-    color: var(--color-warm-text-dim);
+    color: var(--color-text-dim);
     padding-top: 4px;
   }
   .about__text {
-    color: var(--color-warm-text);
+    color: var(--color-text);
     line-height: 1.65;
   }
   .about__contact ul {
@@ -141,15 +193,15 @@ const timeline = [
   }
   .about__contact li {
     padding: var(--s-3) 0;
-    border-top: 1px solid var(--color-warm-border);
+    border-top: 1px solid var(--color-border);
   }
   .about__contact li:last-child {
-    border-bottom: 1px solid var(--color-warm-border);
+    border-bottom: 1px solid var(--color-border);
   }
   .about__contact strong {
     display: inline-block;
     width: 80px;
-    color: var(--color-warm-text-dim);
+    color: var(--color-text-dim);
     font-weight: 500;
   }
   @media (max-width: 600px) {

@@ -38,14 +38,12 @@ describe('works', () => {
     expect(works).toHaveLength(3);
   });
 
-  it('every work has front and back detail', () => {
+  it('every work has required fields', () => {
     for (const w of works) {
       expect(w.title).toBeTruthy();
-      expect(w.front.highlights.length).toBeGreaterThan(0);
-      expect(w.back.problem.length).toBeGreaterThan(0);
-      expect(w.back.approach.length).toBeGreaterThan(0);
-      expect(w.back.outcome.length).toBeGreaterThan(0);
-      expect(w.back.stack.length).toBeGreaterThan(0);
+      expect(w.summary.length).toBeGreaterThan(0);
+      expect(w.highlights.length).toBeGreaterThan(0);
+      expect(w.links.length).toBeGreaterThan(0);
     }
   });
 });
