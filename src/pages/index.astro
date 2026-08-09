@@ -4,29 +4,13 @@ export const prerender = true;
 
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Hero from '@components/Hero.astro';
-import WorkCard from '@components/WorkCard.astro';
 import PostFeed from '@components/PostFeed.astro';
-import { works } from '@data/works';
 ---
 
 <BaseLayout>
   <Hero />
 
   <PostFeed />
-
-  <!-- =========================== Works =========================== -->
-  <section class="works" id="works">
-    <div class="container">
-      <header class="section-head reveal">
-        <p class="eyebrow">Works · 作品</p>
-        <h2 class="section-title">做过的一些东西</h2>
-      </header>
-
-      <div class="works__grid">
-        {works.map((w, i) => <WorkCard work={w} index={i} />)}
-      </div>
-    </div>
-  </section>
 
   <!-- =========================== Closing CTA =========================== -->
   <section class="closing">
@@ -44,32 +28,6 @@ import { works } from '@data/works';
 </BaseLayout>
 
 <style>
-  /* Section headings */
-  .section-head {
-    margin-bottom: var(--s-10);
-    max-width: 720px;
-  }
-  .section-title {
-    font-size: clamp(28px, 3.5vw, 40px);
-    line-height: 1.15;
-    margin: var(--s-3) 0;
-    color: var(--color-text);
-    font-weight: 500;
-    letter-spacing: -0.01em;
-  }
-
-  /* Works */
-  .works {
-    padding: var(--s-24) 0;
-    border-top: 1px solid var(--color-border);
-  }
-  .works__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--s-5);
-    max-width: 720px;
-  }
-
   /* Closing */
   .closing {
     padding: var(--s-20) 0 var(--s-16);
@@ -132,9 +90,5 @@ import { works } from '@data/works';
   }
   .btn--primary:hover {
     background: var(--color-ink-soft);
-  }
-
-  @media (max-width: 1024px) {
-    .works__grid { grid-template-columns: 1fr; }
   }
 </style>

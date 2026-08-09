@@ -3,18 +3,6 @@
 export const prerender = true;
 
 import BaseLayout from '@layouts/BaseLayout.astro';
-
-const timeline = [
-  { year: 'root', text: '出生于南方，长在南方。' },
-  { year: '2006–2010', text: '北京某 211 · 信息管理与信息系统 本科。大三 C 语言课入了代码的坑，从此再没出来过。' },
-  { year: '2010–2013', text: '某能源 IT 公司 · iOS 工程师。石油内部移动办公系统，期间做了一套 OA 表单的 DSL。' },
-  { year: '2013–2015', text: '某体育媒体 · iOS 工程师。从零搭了一套基于 JS + WebView 的跨端页面解析引擎。' },
-  { year: '2015–2017', text: '某视频平台 · iOS 工程师。把苹果商店 IAP 掉单率压到 1‰ 以下，重构弹幕模块。' },
-  { year: '2018–2019', text: '某汽车互联网 · iOS 工程师。组件化方案 + 一系列脚手架工具，Flutter 重构商城做到主工程 0 修改。' },
-  { year: '2019–2023', text: '某宇宙大厂 · iOS 基础架构。业内首发自研 Swift 编译缓存（部分项目编译时长 -50%），自建 LLVM 跨平台隐私检测工具链，4 项专利。' },
-  { year: '2023–', text: '离开职场。休息，开始认真想：接下来 10 年要做什么。' },
-  { year: '2026', text: '重建个人站。在 AI / 编译 / 创业之间选择。' },
-];
 ---
 
 <BaseLayout
@@ -38,7 +26,7 @@ const timeline = [
             我是一个<strong>程序员。</strong>
           </p>
           <p>
-            <strong>工作</strong>了十数载，经历了国内各个互联网大厂，也算是小吃了波互联网红利。眼看他起朱楼，眼看他宴宾客。终于还是蹉跎了岁月，中年被裁。或许一开始就已经注定结果，工作中不卷，埋头干，不向上管理；只对代码负责，对自己负责。喜欢有创造力有挑战的工作，好奇底层的实现原理，希望工作可以产出实际价值，拒绝无意义重复（代码、生活都是如此）。有点代码洁癖、强迫症，不通人情事故。有自己看好的技术方向，持续投入（叶公好龙，浅尝则止，不够深入，务必改进）。
+            <strong>工作</strong>了十数载，经历了国内各个互联网大厂，也算是小吃了波互联网红利。眼看他起朱楼，眼看他宴宾客。终于还是蹉跎了岁月。或许一开始就已经注定结果，工作中不卷，埋头干，不向上管理；只对代码负责，对自己负责。喜欢有创造力有挑战的工作，好奇底层的实现原理，希望工作可以产出实际价值，拒绝无意义重复（代码、生活都是如此）。有点代码洁癖、强迫症，不通人情事故。有自己看好的技术方向，持续投入（叶公好龙，浅尝则止，不够深入，务必改进）。
             对一眼望到头的职业生涯说不。有发奋学习，力争上游的努力奋进的时候；也有安逸躺在舒适圈，不持续学习迭代自己的时光。像是硬币的两面，矛盾的自我。
           </p>
           <p>
@@ -56,7 +44,7 @@ const timeline = [
         <div class="about__body reveal">
           <p>
             I am a <strong>programmer</strong>
-            with over a decade of experience, having <strong>worked</strong> at various major internet companies in China. I've ridden the wave of the internet boom, witnessing its rise and fall—seeing grand buildings erected and lavish feasts hosted, only to watch it all fade with time. Eventually, I found myself caught in the tides of change, laid off in middle age. Perhaps the outcome was inevitable from the start. I've never been one to play office politics or engage in upward management. I simply focused on my work, taking responsibility for my code and myself. I thrive on creative and challenging tasks, driven by curiosity about the underlying principles of technology. I value work that produces tangible results and reject meaningless repetition—both in code and in life. I have a bit of a coding obsession and perfectionism, and I'm not particularly adept at navigating social intricacies. While I have my preferred technical interests, I admit I've only scratched the surface and need to dive deeper. I refuse to settle for a career that feels predictable and stagnant. There have been times when I've pushed myself to learn and grow, striving to excel, but also moments when I've lingered in my comfort zone, failing to keep up with self-improvement. It's like two sides of a coin—a contradictory self.
+            with over a decade of experience, having <strong>worked</strong> at various major internet companies in China. I've ridden the wave of the internet boom, witnessing its rise and fall—seeing grand buildings erected and lavish feasts hosted, only to watch it all fade with time. Eventually, I found myself caught in the tides of change. Perhaps the outcome was inevitable from the start. I've never been one to play office politics or engage in upward management. I simply focused on my work, taking responsibility for my code and myself. I thrive on creative and challenging tasks, driven by curiosity about the underlying principles of technology. I value work that produces tangible results and reject meaningless repetition—both in code and in life. I have a bit of a coding obsession and perfectionism, and I'm not particularly adept at navigating social intricacies. While I have my preferred technical interests, I admit I've only scratched the surface and need to dive deeper. I refuse to settle for a career that feels predictable and stagnant. There have been times when I've pushed myself to learn and grow, striving to excel, but also moments when I've lingered in my comfort zone, failing to keep up with self-improvement. It's like two sides of a coin—a contradictory self.
           </p>
           <p>
             My <strong>life</strong> is simple. I'm not much of a socializer, and I don't smoke or drink. I love the outdoors, road trips, and swimming. Wherever the free wind blows, you'll find my footprints. Whether physically or mentally, I'm always on the move. My dream is to travel to the farthest corners of the world, to marvel at the wonders of nature and immerse myself in diverse cultures and traditions.
@@ -67,22 +55,9 @@ const timeline = [
         </div>
       </details>
 
+      <!-- ===== 联系 ===== -->
       <hr class="about__divider" />
 
-      <!-- ===== 时间线 ===== -->
-      <section class="about__timeline">
-        <h2 class="about__subtitle reveal">时间线</h2>
-        <ol class="about__list">
-          {timeline.map((t, i) => (
-            <li class="about__row reveal" style={`--i: ${i};`}>
-              <span class="about__year">{t.year}</span>
-              <span class="about__text">{t.text}</span>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      <!-- ===== 联系 ===== -->
       <section class="about__contact reveal">
         <h2 class="about__subtitle">联系</h2>
         <ul class="about__links">
@@ -152,39 +127,10 @@ const timeline = [
     margin: var(--s-8) 0;
   }
 
-  .about__timeline {
-    margin-bottom: var(--s-16);
-  }
   .about__subtitle {
     font-size: 28px;
     margin: 0 0 var(--s-6);
     color: var(--color-text);
-  }
-  .about__list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .about__row {
-    display: grid;
-    grid-template-columns: 140px 1fr;
-    gap: var(--s-6);
-    padding: var(--s-4) 0;
-    border-top: 1px solid var(--color-border);
-    transition-delay: calc(var(--i, 0) * 60ms);
-  }
-  .about__row:last-child {
-    border-bottom: 1px solid var(--color-border);
-  }
-  .about__year {
-    font-family: var(--font-mono);
-    font-size: 13px;
-    color: var(--color-text-dim);
-    padding-top: 4px;
-  }
-  .about__text {
-    color: var(--color-text);
-    line-height: 1.65;
   }
   .about__contact ul {
     list-style: none;
@@ -203,8 +149,5 @@ const timeline = [
     width: 80px;
     color: var(--color-text-dim);
     font-weight: 500;
-  }
-  @media (max-width: 600px) {
-    .about__row { grid-template-columns: 1fr; gap: var(--s-1); }
   }
 </style>
