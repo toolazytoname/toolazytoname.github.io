@@ -10,6 +10,26 @@
     <p class="hero__sub" data-hero-sub>
       前宇宙大厂基础架构工程师 · 持滑雪 / 攀岩 / 游泳教练证 · 用 AI 造自己想要的工具
     </p>
+
+    <!-- Terminal-style code block — visual focal point -->
+    <div class="hero__terminal" data-hero-terminal>
+      <div class="terminal__bar">
+        <span class="terminal__dot"></span>
+        <span class="terminal__dot"></span>
+        <span class="terminal__dot"></span>
+        <span class="terminal__title">whoami.sh</span>
+      </div>
+      <pre class="terminal__body"><code><span class="terminal__prompt">$</span> whoami
+<span class="terminal__out">ex-big-tech / indie-dev</span>
+
+<span class="terminal__prompt">$</span> ls skills/
+<span class="terminal__out">swift/  llvm/  typescript/  ai/</span>
+
+<span class="terminal__prompt">$</span> cat status.txt
+<span class="terminal__out">building tools with AI</span>
+<span class="terminal__out">skiing · climbing · diving</span></code></pre>
+    </div>
+
     <div class="hero__ctas" data-hero-ctas>
       <a href="#posts" class="btn btn--primary">读文章</a>
       <a href="/projects/" class="btn btn--ghost">看项目</a>
@@ -34,17 +54,17 @@
   }
 
   .hero__title {
-    font-size: clamp(22px, 3.2vw, 32px);
+    font-size: clamp(20px, 2.8vw, 28px);
     font-weight: 500;
     line-height: 1.4;
     letter-spacing: -0.01em;
     margin: 0 0 var(--s-4);
     color: var(--color-text);
-    min-height: 2.8em; /* prevent layout shift while typing */
+    min-height: 2.8em;
   }
 
   .hero__cursor {
-    color: var(--color-text-dim);
+    color: var(--color-accent);
     font-weight: 300;
     animation: blink 1s step-end infinite;
   }
@@ -58,6 +78,65 @@
   }
   .hero__sub.is-shown {
     animation: fade-in-up 600ms var(--ease-out) forwards;
+  }
+
+  /* Terminal code block */
+  .hero__terminal {
+    background: var(--color-dark-bg);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    margin-bottom: var(--s-6);
+    opacity: 0;
+    border: 1px solid var(--color-dark-border);
+  }
+  .hero__terminal.is-shown {
+    animation: fade-in-up 600ms var(--ease-out) forwards;
+  }
+  .terminal__bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 14px;
+    background: var(--color-dark-bg-soft);
+    border-bottom: 1px solid var(--color-dark-border);
+  }
+  .terminal__dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--color-dark-border);
+  }
+  .terminal__dot:nth-child(1) {
+    background: #ff5f57;
+  }
+  .terminal__dot:nth-child(2) {
+    background: #febc2e;
+  }
+  .terminal__dot:nth-child(3) {
+    background: #28c840;
+  }
+  .terminal__title {
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-dark-text-dim);
+  }
+  .terminal__body {
+    margin: 0;
+    padding: var(--s-4) var(--s-5);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--color-dark-text-muted);
+    overflow-x: auto;
+  }
+  .terminal__prompt {
+    color: var(--color-accent);
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  .terminal__out {
+    color: var(--color-dark-text);
   }
 
   .hero__ctas {
@@ -88,26 +167,33 @@
     transform: translateY(-1px);
   }
 
-  .btn--primary { background: var(--color-ink); color: var(--color-bg); }
-  .btn--primary:hover { background: var(--color-ink-soft); }
+  .btn--primary {
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+  }
+  .btn--primary:hover {
+    background: var(--color-accent-dark);
+  }
   .btn--ghost {
     background: transparent;
     color: var(--color-text);
     border: 1px solid var(--color-border);
   }
   .btn--ghost:hover {
-    border-color: var(--color-border-strong);
-    background: var(--color-bg-subtle);
+    border-color: var(--color-accent);
+    background: var(--color-accent-pale);
   }
 
   @media (max-width: 600px) {
     .hero { padding: var(--s-10) 0 var(--s-8); }
+    .terminal__body { font-size: 12px; }
   }
 </style>
 
 <script>
   const typed = document.querySelector<HTMLElement>('[data-typewriter]');
   const sub = document.querySelector<HTMLElement>('[data-hero-sub]');
+  const terminal = document.querySelector<HTMLElement>('[data-hero-terminal]');
   const ctas = document.querySelector<HTMLElement>('[data-hero-ctas]');
 
   if (typed) {
@@ -115,9 +201,9 @@
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (reduced) {
-      // Show everything immediately.
       typed.textContent = TEXT;
       sub?.classList.add('is-shown');
+      terminal?.classList.add('is-shown');
       ctas?.classList.add('is-shown');
     } else {
       let i = 0;
@@ -127,12 +213,11 @@
           i++;
           setTimeout(tick, 32 + Math.random() * 28);
         } else {
-          // Typing done — reveal subtitle + CTAs.
           sub?.classList.add('is-shown');
-          ctas?.classList.add('is-shown');
+          setTimeout(() => terminal?.classList.add('is-shown'), 200);
+          setTimeout(() => ctas?.classList.add('is-shown'), 400);
         }
       };
-      // Small delay so the eyebrow settles first.
       setTimeout(tick, 400);
     }
   }

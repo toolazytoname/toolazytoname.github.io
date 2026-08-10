@@ -150,7 +150,18 @@ export async function GET({
         backgroundColor: '#0a0a0a',
       },
       children: [
-        // Top: branding
+        // Top: accent bar
+        {
+          type: 'div',
+          props: {
+            style: {
+              width: 1200,
+              height: 4,
+              backgroundColor: '#0ea5e9',
+            },
+          },
+        },
+        // Branding
         {
           type: 'div',
           props: {
@@ -158,7 +169,7 @@ export async function GET({
               display: 'flex',
               padding: '48px 60px 0',
               fontSize: 16,
-              color: '#525252',
+              color: '#0ea5e9',
               fontFamily: FONT_FAMILY,
             },
             children: 'lazy \u00B7 weichao.ren',

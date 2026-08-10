@@ -29,6 +29,9 @@ const posts = defineCollection({
     // migrate without error.
     catalog: z.boolean().default(false),
     summary: z.string().optional(),
+    // Optional cover image path (e.g. "/photos/my-cover.jpg").
+    // When absent, the feed shows a gradient fallback block.
+    cover: z.string().optional(),
   }),
 });
 

@@ -71,6 +71,21 @@ const dotColor = project.language ? LANG_COLORS[project.language] : null;
       transform var(--t-fast) var(--ease-out),
       box-shadow var(--t-fast) var(--ease-out);
   }
+  .proj-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-accent), var(--color-accent-soft));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--t-base) var(--ease-out);
+  }
+  .proj-card:hover::after {
+    transform: scaleX(1);
+  }
   .proj-card::before {
     content: '';
     position: absolute;
@@ -78,15 +93,15 @@ const dotColor = project.language ? LANG_COLORS[project.language] : null;
     top: 0;
     bottom: 0;
     width: 3px;
-    background: var(--color-ink);
+    background: var(--color-accent);
     transform: scaleY(0);
     transform-origin: top;
     transition: transform var(--t-base) var(--ease-out);
   }
   .proj-card:hover {
-    border-color: var(--color-border-strong);
+    border-color: var(--color-accent);
     transform: translateY(-2px);
-    box-shadow: 0 4px 20px rgba(10, 10, 10, 0.06);
+    box-shadow: 0 4px 20px rgba(14, 165, 233, 0.1);
   }
   .proj-card:hover::before {
     transform: scaleY(1);
@@ -160,7 +175,7 @@ const dotColor = project.language ? LANG_COLORS[project.language] : null;
   }
   .proj-card__action {
     font-size: 13px;
-    color: var(--color-ink);
+    color: var(--color-accent);
     text-decoration: none;
   }
   .proj-card__action:hover {

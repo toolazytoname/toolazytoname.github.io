@@ -36,15 +36,25 @@ const totalCount = allPosts.length;
           month: '2-digit',
           day: '2-digit',
         });
+        const monthDay = `${String(post.data.date.getMonth() + 1).padStart(2, '0')}/${String(post.data.date.getDate()).padStart(2, '0')}`;
 
         return (
           <li class="post-feed__item reveal" style={`--i: ${i};`}>
             <a href={`/${slug}`} class="post-feed__link">
-              <time class="post-feed__date" datetime={post.data.date.toISOString()}>
-                {dateStr}
-              </time>
-              <h3 class="post-feed__item-title">{post.data.title}</h3>
-              {summary && <p class="post-feed__summary">{summary}</p>}
+              {post.data.cover ? (
+                <img src={post.data.cover} alt="" class="post-feed__thumb post-feed__thumb--img" loading="lazy" />
+              ) : (
+                <div class="post-feed__thumb post-feed__thumb--fallback">
+                  <span class="post-feed__thumb-date">{monthDay}</span>
+                </div>
+              )}
+              <div class="post-feed__content">
+                <time class="post-feed__date" datetime={post.data.date.toISOString()}>
+                  {dateStr}
+                </time>
+                <h3 class="post-feed__item-title">{post.data.title}</h3>
+                {summary && <p class="post-feed__summary">{summary}</p>}
+              </div>
             </a>
           </li>
         );
@@ -60,14 +70,8 @@ const totalCount = allPosts.length;
 </section>
 
 <style>
-  .post-feed {
-    padding: var(--s-24) 0;
-  }
-
-  .post-feed__head {
-    margin-bottom: var(--s-10);
-  }
-
+  .post-feed { padding: var(--s-24) 0; }
+  .post-feed__head { margin-bottom: var(--s-10); }
   .post-feed__title {
     font-size: clamp(28px, 3.5vw, 40px);
     font-weight: 500;
@@ -76,7 +80,6 @@ const totalCount = allPosts.length;
     letter-spacing: -0.01em;
     color: var(--color-text);
   }
-
   .post-feed__list {
     list-style: none;
     padding: 0;
@@ -84,27 +87,48 @@ const totalCount = allPosts.length;
     display: flex;
     flex-direction: column;
   }
-
-  .post-feed__item {
-    border-top: 1px solid var(--color-border);
-  }
-
+  .post-feed__item { border-top: 1px solid var(--color-border); }
   .post-feed__link {
-    display: block;
+    display: flex;
+    gap: var(--s-4);
     padding: var(--s-5) 0;
     text-decoration: none;
     transition: color var(--t-fast) var(--ease-out);
   }
-
-  .post-feed__link:hover {
-    text-decoration: none;
-  }
-
+  .post-feed__link:hover { text-decoration: none; }
   .post-feed__link:hover .post-feed__item-title {
     text-decoration: underline;
     text-underline-offset: 3px;
   }
 
+  /* Thumbnail */
+  .post-feed__thumb {
+    width: 80px;
+    height: 80px;
+    border-radius: var(--r-md);
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  .post-feed__thumb--img {
+    object-fit: cover;
+  }
+  .post-feed__thumb--fallback {
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, var(--color-accent), var(--color-accent-soft));
+  }
+  .post-feed__thumb-date {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-accent-contrast);
+    letter-spacing: -0.02em;
+  }
+
+  .post-feed__content {
+    flex: 1;
+    min-width: 0;
+  }
   .post-feed__date {
     display: block;
     font-size: 13px;
@@ -113,7 +137,6 @@ const totalCount = allPosts.length;
     letter-spacing: 0.02em;
     margin-bottom: var(--s-1);
   }
-
   .post-feed__item-title {
     font-size: 20px;
     font-weight: 500;
@@ -121,7 +144,6 @@ const totalCount = allPosts.length;
     margin: 0 0 var(--s-1);
     color: var(--color-text);
   }
-
   .post-feed__summary {
     font-size: 15px;
     color: var(--color-text-muted);
@@ -132,22 +154,21 @@ const totalCount = allPosts.length;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-
-  .post-feed__more {
-    margin-top: var(--s-8);
-    text-align: center;
-  }
-
+  .post-feed__more { margin-top: var(--s-8); text-align: center; }
   .post-feed__more-link {
     font-size: 15px;
     color: var(--color-text-muted);
     text-decoration: none;
     transition: color var(--t-fast) var(--ease-out);
   }
-
   .post-feed__more-link:hover {
-    color: var(--color-text);
+    color: var(--color-accent);
     text-decoration: underline;
     text-underline-offset: 3px;
+  }
+
+  @media (max-width: 480px) {
+    .post-feed__thumb { width: 60px; height: 60px; }
+    .post-feed__thumb-date { font-size: 13px; }
   }
 </style>

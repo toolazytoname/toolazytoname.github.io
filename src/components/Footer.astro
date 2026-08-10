@@ -1,4 +1,6 @@
 ---
+import Icon from '@components/Icons.astro';
+
 const year = new Date().getFullYear();
 ---
 
@@ -20,9 +22,15 @@ const year = new Date().getFullYear();
 
       <nav class="footer__col" aria-label="外部链接">
         <p class="footer__heading">外部</p>
-        <a href="https://github.com/toolazytoname" rel="noopener" target="_blank">GitHub</a>
-        <a href="/posts.xml">RSS</a>
-        <a href="mailto:lazywc@gmail.com">Email</a>
+        <a href="https://github.com/toolazytoname" rel="noopener" target="_blank">
+          <Icon name="github" size={15} /> GitHub
+        </a>
+        <a href="/posts.xml">
+          <Icon name="rss" size={15} /> RSS
+        </a>
+        <a href="mailto:lazywc@gmail.com">
+          <Icon name="mail" size={15} /> Email
+        </a>
       </nav>
 
       <div class="footer__col">
@@ -76,6 +84,9 @@ const year = new Date().getFullYear();
     gap: var(--s-2);
   }
   .footer__col a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     color: var(--color-dark-text-muted);
     font-size: 14px;
     transition: color var(--t-fast);

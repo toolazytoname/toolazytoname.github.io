@@ -1,7 +1,6 @@
 /* =========================================================
    Design tokens — locked, never inline
-   Minimal black & white technical aesthetic.
-   No brand color; emphasis comes from contrast (black on white).
+   Black & white base + sky-blue accent for emphasis.
    ========================================================= */
 
 :root {
@@ -30,16 +29,17 @@
   --color-dark-text-muted: #a3a3a3;
   --color-dark-text-dim: #737373;
 
-  /* Accent — used sparingly, kept as near-black for contrast-based emphasis.
-     A single restrained accent for links/active states. */
-  --color-accent: #0a0a0a;
+  /* Accent — sky blue. Used for buttons, active states, highlights,
+     card borders, and the hero code block. The single brand color. */
+  --color-accent: #0ea5e9;
+  --color-accent-soft: #38bdf8;
+  --color-accent-pale: #e0f2fe;
+  --color-accent-dark: #0284c7;
   --color-accent-contrast: #ffffff;
   --color-link: #0a0a0a;
 
-  /* === Legacy aliases — remapped to the new neutral scale.
-     Kept so existing components that reference the old token names
-     (color-terracotta, color-warm-text, color-ivory, etc.) follow the
-     new palette automatically without a per-file rewrite. === */
+  /* === Legacy aliases — terracotta/coral now point to sky-blue accent
+     so Chatbot FAB, 404, Timeline follow the new color automatically. === */
   --color-parchment: var(--color-bg-pale);
   --color-ivory: var(--color-bg);
   --color-warm-sand: var(--color-bg-subtle);
@@ -47,10 +47,10 @@
   --color-warm-text: var(--color-text);
   --color-warm-text-muted: var(--color-text-muted);
   --color-warm-text-dim: var(--color-text-dim);
-  --color-terracotta: var(--color-ink);
-  --color-coral: var(--color-text);
-  --color-blue: var(--color-ink);
-  --color-blue-link: var(--color-link);
+  --color-terracotta: var(--color-accent);
+  --color-coral: var(--color-accent-soft);
+  --color-blue: var(--color-accent);
+  --color-blue-link: var(--color-accent);
 
   /* Memory dot colors — desaturated to neutrals so they don't violate
      the monochrome system. (Globe/memories are slated for removal but
@@ -175,8 +175,8 @@ button {
 }
 
 ::selection {
-  background: var(--color-ink);
-  color: var(--color-bg);
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
 }
 
 /* =========================================================
@@ -188,7 +188,7 @@ button {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-ink);
+  outline: 2px solid var(--color-accent);
   outline-offset: 3px;
   border-radius: var(--r-sm);
 }
