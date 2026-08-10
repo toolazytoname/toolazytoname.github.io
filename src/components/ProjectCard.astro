@@ -1,7 +1,6 @@
 ---
 import type { Project } from '@data/projects';
 
-// GitHub Linguist language colors (subset — the languages our projects use).
 const LANG_COLORS: Record<string, string> = {
   Go: '#00ADD8',
   Python: '#3776AB',
@@ -32,6 +31,9 @@ const dotColor = project.language ? LANG_COLORS[project.language] : null;
           class="proj-card__image"
           loading="lazy"
         />
+        <span class={`proj-card__status proj-card__status--${project.status}`}>
+          {project.status}
+        </span>
       </div>
     )}
 
@@ -56,18 +58,12 @@ const dotColor = project.language ? LANG_COLORS[project.language] : null;
       <p class="proj-card__desc">{project.description}</p>
 
       <div class="proj-card__footer">
-        {project.demo && (
-          <a
-            href={project.demo}
-            class="proj-card__action proj-card__action--demo"
-            target="_blank"
-            rel="noopener"
-          >
-            主站 →
-          </a>
-        )}
-        <span class="proj-card__action proj-card__action--repo">
-          GitHub →
+        {project.language && <span class="proj-card__lang">{project.language}</span>}
+        <span class="proj-card__links">
+          {project.demo && (
+            <span class="proj-card__action proj-card__action--demo">主站 →</span>
+          )}
+          <span class="proj-card__action proj-card__action--repo">GitHub →</span>
         </span>
       </div>
     </div>
@@ -76,50 +72,32 @@ const dotColor = project.language ? LANG_COLORS[project.language] : null;
 
 <style>
   .proj-card {
-    position: relative;
     border-radius: var(--r-lg);
     background: var(--color-bg);
     overflow: hidden;
-    transition: background var(--t-fast) var(--ease-out),
-      transform var(--t-fast) var(--ease-out),
+    transition: transform var(--t-fast) var(--ease-out),
       box-shadow var(--t-fast) var(--ease-out);
   }
-  .proj-card::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 3px;
-    background: var(--color-accent);
-    transform: scaleY(0);
-    transform-origin: top;
-    transition: transform var(--t-base) var(--ease-out);
-    z-index: 1;
-  }
   .proj-card:hover {
-    background: var(--color-bg-subtle);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 20px rgba(14, 165, 233, 0.08);
-  }
-  .proj-card:hover::before {
-    transform: scaleY(1);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(14, 165, 233, 0.1);
   }
 
   .proj-card__link {
     display: flex;
-    gap: 0;
+    flex-direction: column;
+    height: 100%;
     text-decoration: none;
     color: inherit;
   }
 
-  /* Image — left side, fixed width */
+  /* Image — top, fixed aspect ratio (16:10), always uniform */
   .proj-card__image-wrap {
-    flex-shrink: 0;
-    width: 140px;
+    position: relative;
+    aspect-ratio: 16 / 10;
     overflow: hidden;
     background: var(--color-dark-bg);
-    border-radius: var(--r-lg) 0 0 var(--r-lg);
+    flex-shrink: 0;
   }
   .proj-card__image {
     width: 100%;
@@ -128,21 +106,49 @@ const dotColor = project.language ? LANG_COLORS[project.language] : null;
     transition: transform var(--t-slow) var(--ease-out);
   }
   .proj-card:hover .proj-card__image {
-    transform: scale(1.05);
+    transform: scale(1.04);
   }
 
-  /* Body — right side, flexes to fill */
+  /* Status badge on image */
+  .proj-card__status {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 980px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .proj-card__status--shipped {
+    background: rgba(14, 165, 233, 0.85);
+    color: #fff;
+  }
+  .proj-card__status--wip {
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+  }
+  .proj-card__status--archived {
+    background: rgba(0, 0, 0, 0.4);
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  /* Body — below image */
   .proj-card__body {
+    padding: var(--s-4) var(--s-5) var(--s-3);
+    display: flex;
+    flex-direction: column;
     flex: 1;
-    min-width: 0;
-    padding: var(--s-4) var(--s-5);
   }
 
   .proj-card__head {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--s-3);
+    gap: var(--s-2);
     margin-bottom: var(--s-2);
   }
   .proj-card__title-row {
@@ -160,64 +166,60 @@ const dotColor = project.language ? LANG_COLORS[project.language] : null;
     background: var(--color-text-dim);
   }
   .proj-card__name {
-    font-size: 17px;
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: 600;
     color: var(--color-text);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    transition: color var(--t-fast) var(--ease-out);
   }
   .proj-card:hover .proj-card__name {
     color: var(--color-accent);
   }
   .proj-card__stars {
     font-family: var(--font-mono);
-    font-size: 13px;
+    font-size: 12px;
     color: var(--color-text-dim);
     flex-shrink: 0;
   }
 
   .proj-card__desc {
-    font-size: 14px;
-    line-height: 1.6;
+    font-size: 13px;
+    line-height: 1.55;
     color: var(--color-text-muted);
     margin: 0 0 var(--s-3);
+    flex: 1;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
 
   .proj-card__footer {
     display: flex;
-    gap: var(--s-4);
-    justify-content: flex-end;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-2);
+    padding-top: var(--s-2);
+    border-top: 1px solid var(--color-border);
+  }
+  .proj-card__lang {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-text-dim);
+  }
+  .proj-card__links {
+    display: flex;
+    gap: var(--s-3);
   }
   .proj-card__action {
-    font-size: 13px;
+    font-size: 12px;
+    font-weight: 500;
     color: var(--color-accent);
-    text-decoration: none;
-  }
-  .proj-card__action:hover {
-    text-decoration: underline;
-    text-underline-offset: 3px;
   }
   .proj-card__action--repo {
     color: var(--color-text-dim);
-  }
-
-  /* Projects without images — full-width body, no image column */
-  .proj-card:not(:has(.proj-card__image-wrap)) .proj-card__body {
-    padding: var(--s-4) var(--s-5);
-  }
-
-  @media (max-width: 480px) {
-    .proj-card__image-wrap {
-      width: 100px;
-    }
-    .proj-card__body {
-      padding: var(--s-3) var(--s-4);
-    }
   }
 </style>

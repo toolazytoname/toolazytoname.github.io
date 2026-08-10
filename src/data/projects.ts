@@ -20,6 +20,7 @@ export type Project = {
   demo?: string;
   stars: number;
   image?: string;
+  status: 'shipped' | 'wip';
 };
 
 export const categoryMeta: Record<
@@ -61,6 +62,7 @@ export const projects: Project[] = [
     demo: 'https://toolazytoname.github.io/oneplus-8t-mobile-lab/',
     stars: 0,
     image: 'https://raw.githubusercontent.com/toolazytoname/oneplus-8t-mobile-lab/main/docs/assets/oneplus8t-field-guide/mobile-lab-ecosystem-v2.png',
+    status: 'wip',
   },
   {
     name: 'android-ai-stack',
@@ -72,6 +74,7 @@ export const projects: Project[] = [
     repo: 'https://github.com/toolazytoname/android-ai-stack',
     stars: 0,
     image: 'https://raw.githubusercontent.com/toolazytoname/android-ai-stack/main/docs/assets/android-ai-stack-overview.png',
+    status: 'wip',
   },
   {
     name: 'xiaohei-phone-agent',
@@ -83,6 +86,7 @@ export const projects: Project[] = [
     repo: 'https://github.com/toolazytoname/xiaohei-phone-agent',
     stars: 0,
     image: 'https://raw.githubusercontent.com/toolazytoname/xiaohei-phone-agent/main/docs/assets/xiaohei-phone-agent-overview.png',
+    status: 'wip',
   },
   {
     name: 'pocket-pentest',
@@ -93,6 +97,7 @@ export const projects: Project[] = [
     language: 'Shell',
     repo: 'https://github.com/toolazytoname/pocket-pentest',
     stars: 0,
+    status: 'wip',
   },
   {
     name: 'android-device-test',
@@ -103,6 +108,7 @@ export const projects: Project[] = [
     language: null,
     repo: 'https://github.com/toolazytoname/android-device-test',
     stars: 0,
+    status: 'wip',
   },
 
   // ===== Agents & Automation =====
@@ -117,6 +123,7 @@ export const projects: Project[] = [
     demo: 'https://beta.gridgo.weichao.studio/',
     stars: 0,
     image: 'https://raw.githubusercontent.com/toolazytoname/GridGo/main/UI/app-matrix-fixed.png',
+    status: 'wip',
   },
   {
     name: 'llm-quota-watchdog',
@@ -128,6 +135,7 @@ export const projects: Project[] = [
     repo: 'https://github.com/toolazytoname/llm-quota-watchdog',
     stars: 0,
     image: 'https://raw.githubusercontent.com/toolazytoname/llm-quota-watchdog/main/docs/screenshot.png',
+    status: 'shipped',
   },
   {
     name: 'happy-relay-deploy',
@@ -138,6 +146,7 @@ export const projects: Project[] = [
     language: 'TypeScript',
     repo: 'https://github.com/toolazytoname/happy-relay-deploy',
     stars: 0,
+    status: 'shipped',
   },
 
   // ===== Infra & Ops Skills =====
@@ -151,6 +160,7 @@ export const projects: Project[] = [
     repo: 'https://github.com/toolazytoname/lodge',
     demo: 'https://lodge.weichao.studio',
     stars: 0,
+    status: 'shipped',
   },
   {
     name: 'home-nas-skill',
@@ -161,6 +171,7 @@ export const projects: Project[] = [
     language: null,
     repo: 'https://github.com/toolazytoname/home-nas-skill',
     stars: 0,
+    status: 'shipped',
   },
   {
     name: 'reality-handshake',
@@ -171,6 +182,7 @@ export const projects: Project[] = [
     language: 'Shell',
     repo: 'https://github.com/toolazytoname/reality-handshake',
     stars: 0,
+    status: 'shipped',
   },
   {
     name: 'wechat-mp-devops',
@@ -181,6 +193,7 @@ export const projects: Project[] = [
     language: 'Shell',
     repo: 'https://github.com/toolazytoname/wechat-mp-devops',
     stars: 0,
+    status: 'shipped',
   },
 
   // ===== Standalone Projects =====
@@ -194,7 +207,8 @@ export const projects: Project[] = [
     repo: 'https://github.com/toolazytoname/metronome',
     demo: 'https://jpq.weichao.studio',
     stars: 0,
-    image: 'https://raw.githubusercontent.com/toolazytoname/metronome/main/assets/screenshots/landing-zh.png',
+    image: 'https://raw.githubusercontent.com/toolazytoname/metronome/main/images/bunny.png',
+    status: 'shipped',
   },
   {
     name: 'MediaForge',
@@ -206,6 +220,7 @@ export const projects: Project[] = [
     repo: 'https://github.com/toolazytoname/MediaForge',
     stars: 0,
     image: 'https://raw.githubusercontent.com/toolazytoname/MediaForge/main/docs/samples/xhs_card_sample-001.png',
+    status: 'wip',
   },
   {
     name: 'Sentinel',
@@ -216,6 +231,7 @@ export const projects: Project[] = [
     language: 'Python',
     repo: 'https://github.com/toolazytoname/Sentinel',
     stars: 2,
+    status: 'wip',
   },
 
   // ===== Legacy iOS =====
@@ -227,6 +243,7 @@ export const projects: Project[] = [
     language: 'Objective-C',
     repo: 'https://github.com/toolazytoname/WeChatExport',
     stars: 14,
+    status: 'shipped',
   },
   {
     name: 'FDTops',
@@ -237,6 +254,7 @@ export const projects: Project[] = [
     language: 'Python',
     repo: 'https://github.com/toolazytoname/FDTops',
     stars: 7,
+    status: 'shipped',
   },
   {
     name: 'BPFlutter',
@@ -246,5 +264,6 @@ export const projects: Project[] = [
     language: 'Objective-C',
     repo: 'https://github.com/toolazytoname/BPFlutter',
     stars: 3,
+    status: 'shipped',
   },
 ];
