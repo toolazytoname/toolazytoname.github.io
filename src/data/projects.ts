@@ -19,6 +19,7 @@ export type Project = {
   repo: string;
   demo?: string;
   stars: number;
+  image?: string;
 };
 
 export const categoryMeta: Record<
@@ -59,6 +60,7 @@ export const projects: Project[] = [
     repo: 'https://github.com/toolazytoname/oneplus-8t-mobile-lab',
     demo: 'https://toolazytoname.github.io/oneplus-8t-mobile-lab/',
     stars: 0,
+    image: 'https://raw.githubusercontent.com/toolazytoname/oneplus-8t-mobile-lab/main/docs/assets/oneplus8t-field-guide/mobile-lab-ecosystem-v2.png',
   },
   {
     name: 'android-ai-stack',
@@ -69,6 +71,7 @@ export const projects: Project[] = [
     language: 'Shell',
     repo: 'https://github.com/toolazytoname/android-ai-stack',
     stars: 0,
+    image: 'https://raw.githubusercontent.com/toolazytoname/android-ai-stack/main/docs/assets/android-ai-stack-overview.png',
   },
   {
     name: 'xiaohei-phone-agent',
@@ -79,6 +82,7 @@ export const projects: Project[] = [
     language: 'Java',
     repo: 'https://github.com/toolazytoname/xiaohei-phone-agent',
     stars: 0,
+    image: 'https://raw.githubusercontent.com/toolazytoname/xiaohei-phone-agent/main/docs/assets/xiaohei-phone-agent-overview.png',
   },
   {
     name: 'pocket-pentest',
@@ -112,6 +116,7 @@ export const projects: Project[] = [
     repo: 'https://github.com/toolazytoname/GridGo',
     demo: 'https://beta.gridgo.weichao.studio/',
     stars: 0,
+    image: 'https://raw.githubusercontent.com/toolazytoname/GridGo/main/UI/app-matrix-fixed.png',
   },
   {
     name: 'llm-quota-watchdog',
@@ -122,6 +127,7 @@ export const projects: Project[] = [
     language: 'Python',
     repo: 'https://github.com/toolazytoname/llm-quota-watchdog',
     stars: 0,
+    image: 'https://raw.githubusercontent.com/toolazytoname/llm-quota-watchdog/main/docs/screenshot.png',
   },
   {
     name: 'happy-relay-deploy',
@@ -188,6 +194,7 @@ export const projects: Project[] = [
     repo: 'https://github.com/toolazytoname/metronome',
     demo: 'https://jpq.weichao.studio',
     stars: 0,
+    image: 'https://raw.githubusercontent.com/toolazytoname/metronome/main/assets/screenshots/landing-zh.png',
   },
   {
     name: 'MediaForge',
@@ -198,6 +205,7 @@ export const projects: Project[] = [
     language: 'Python',
     repo: 'https://github.com/toolazytoname/MediaForge',
     stars: 0,
+    image: 'https://raw.githubusercontent.com/toolazytoname/MediaForge/main/docs/samples/xhs_card_sample-001.png',
   },
   {
     name: 'Sentinel',
