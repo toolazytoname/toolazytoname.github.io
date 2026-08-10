@@ -1,9 +1,5 @@
-// LLM client — keyword match first (instant), then Agnes / DeepSeek with
-// timeout so the UI never hangs. Returns a tagged reply so the UI can
-// show which source answered.
-//
-// Both providers speak the OpenAI Chat Completions protocol, so we reuse
-// a single `openai` SDK instance and just swap the baseURL.
+// LLM client — keyword match first (instant), then Agnes with timeout.
+// Returns a tagged reply so the UI can show which source answered.
 
 import OpenAI from 'openai';
 import { knowledge, findStaticReply } from '@data/knowledge';
@@ -15,7 +11,7 @@ export type ChatMessage = {
 
 export type ChatResult = {
   reply: string;
-  source: 'agnes' | 'deepseek' | 'static' | 'fallback';
+  source: 'agnes' | 'static' | 'fallback';
   error?: string;
 };
 
@@ -33,28 +29,17 @@ ${knowledge.map((k) => `[${k.id}]\n${k.reply}`).join('\n\n')}
 
 记住：你不是真的站主，你只是被授权代表他回答访客。`;
 
-// 8s per provider — if it hasn't answered by then, move on.
+// 8s — if it hasn't answered by then, move on.
 const LLM_TIMEOUT = 8000;
 
 const agnesKey = process.env.AGNES_API_KEY;
-const deepseekKey = process.env.DEEPSEEK_API_KEY;
 
-// Lazy-init clients so cold-starts without keys don't crash.
+// Lazy-init client so cold-starts without keys don't crash.
 function getAgnes() {
   if (!agnesKey) return null;
   return new OpenAI({
     apiKey: agnesKey,
     baseURL: 'https://apihub.agnes-ai.com/v1',
-    timeout: LLM_TIMEOUT,
-    maxRetries: 0,
-  });
-}
-
-function getDeepSeek() {
-  if (!deepseekKey) return null;
-  return new OpenAI({
-    apiKey: deepseekKey,
-    baseURL: 'https://api.deepseek.com/v1',
     timeout: LLM_TIMEOUT,
     maxRetries: 0,
   });
@@ -66,8 +51,7 @@ export async function chat(messages: ChatMessage[]): Promise<ChatResult> {
     .slice(-10);
 
   // 0. Keyword match FIRST — instant, no network, always available.
-  // This handles 90% of questions ("最近在干嘛", "有哪些项目", "滑雪"...)
-  // without waiting for an LLM round-trip.
+  // Handles 90% of questions without an LLM round-trip.
   const lastUser = [...history].reverse().find((m) => m.role === 'user');
   if (lastUser) {
     const staticHit = findStaticReply(lastUser.content);
@@ -100,26 +84,7 @@ export async function chat(messages: ChatMessage[]): Promise<ChatResult> {
     console.warn('[llm] agnes failed:', err);
   }
 
-  // 2. Try DeepSeek.
-  try {
-    const ds = getDeepSeek();
-    if (ds) {
-      const completion = await ds.chat.completions.create({
-        model: 'deepseek-chat',
-        messages: fullMessages,
-        max_tokens: 1024,
-        temperature: 0.7,
-      });
-      const reply = completion.choices[0]?.message?.content;
-      if (reply && reply.trim().length > 0) {
-        return { reply: reply.trim(), source: 'deepseek' };
-      }
-    }
-  } catch (err) {
-    console.warn('[llm] deepseek failed:', err);
-  }
-
-  // 3. No keyword hit + no LLM → generic fallback.
+  // 2. No keyword hit + no LLM → generic fallback.
   return {
     reply:
       '这个问题我暂时答不上来。试试问"有哪些项目"、"最近在干嘛"、"户外运动"这些我能答的。',

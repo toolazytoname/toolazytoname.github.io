@@ -25,7 +25,7 @@ const totalCount = allPosts.length;
     </header>
 
     <ol class="post-feed__list">
-      {latest.map((post) => {
+      {latest.map((post, i) => {
         const slug = postSlug(post.id, post.data);
         const summary =
           post.data.summary ??
@@ -38,7 +38,7 @@ const totalCount = allPosts.length;
         });
 
         return (
-          <li class="post-feed__item reveal">
+          <li class="post-feed__item reveal" style={`--i: ${i};`}>
             <a href={`/${slug}`} class="post-feed__link">
               <time class="post-feed__date" datetime={post.data.date.toISOString()}>
                 {dateStr}

@@ -4,8 +4,15 @@
 <section class="hero" id="hero">
   <div class="container container-narrow hero__inner">
     <p class="hero__eyebrow eyebrow reveal">lazy · weichao.ren</p>
-    <div class="hero__ctas reveal">
+    <h1 class="hero__title">
+      <span class="hero__typed" data-typewriter></span><span class="hero__cursor" aria-hidden="true">|</span>
+    </h1>
+    <p class="hero__sub" data-hero-sub>
+      前宇宙大厂基础架构工程师 · 持滑雪 / 攀岩 / 游泳教练证 · 用 AI 造自己想要的工具
+    </p>
+    <div class="hero__ctas" data-hero-ctas>
       <a href="#posts" class="btn btn--primary">读文章</a>
+      <a href="/projects" class="btn btn--ghost">看项目</a>
       <a href="/about" class="btn btn--ghost">关于我</a>
     </div>
   </div>
@@ -26,10 +33,41 @@
     margin-bottom: var(--s-5);
   }
 
+  .hero__title {
+    font-size: clamp(22px, 3.2vw, 32px);
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    margin: 0 0 var(--s-4);
+    color: var(--color-text);
+    min-height: 2.8em; /* prevent layout shift while typing */
+  }
+
+  .hero__cursor {
+    color: var(--color-text-dim);
+    font-weight: 300;
+    animation: blink 1s step-end infinite;
+  }
+
+  .hero__sub {
+    color: var(--color-text-muted);
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0 0 var(--s-6);
+    opacity: 0;
+  }
+  .hero__sub.is-shown {
+    animation: fade-in-up 600ms var(--ease-out) forwards;
+  }
+
   .hero__ctas {
     display: flex;
     gap: var(--s-3);
     flex-wrap: wrap;
+    opacity: 0;
+  }
+  .hero__ctas.is-shown {
+    animation: fade-in-up 600ms var(--ease-out) forwards;
   }
 
   .btn {
@@ -50,29 +88,52 @@
     transform: translateY(-1px);
   }
 
-  .btn--primary {
-    background: var(--color-ink);
-    color: var(--color-bg);
-  }
-
-  .btn--primary:hover {
-    background: var(--color-ink-soft);
-  }
-
+  .btn--primary { background: var(--color-ink); color: var(--color-bg); }
+  .btn--primary:hover { background: var(--color-ink-soft); }
   .btn--ghost {
     background: transparent;
     color: var(--color-text);
     border: 1px solid var(--color-border);
   }
-
   .btn--ghost:hover {
     border-color: var(--color-border-strong);
     background: var(--color-bg-subtle);
   }
 
   @media (max-width: 600px) {
-    .hero {
-      padding: var(--s-10) 0 var(--s-8);
-    }
+    .hero { padding: var(--s-10) 0 var(--s-8); }
   }
 </style>
+
+<script>
+  const typed = document.querySelector<HTMLElement>('[data-typewriter]');
+  const sub = document.querySelector<HTMLElement>('[data-hero-sub]');
+  const ctas = document.querySelector<HTMLElement>('[data-hero-ctas]');
+
+  if (typed) {
+    const TEXT = 'Ex-big-tech infra engineer, now an indie dev with ski/climbing/swim instructor certs.';
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (reduced) {
+      // Show everything immediately.
+      typed.textContent = TEXT;
+      sub?.classList.add('is-shown');
+      ctas?.classList.add('is-shown');
+    } else {
+      let i = 0;
+      const tick = () => {
+        if (i < TEXT.length) {
+          typed.textContent += TEXT[i];
+          i++;
+          setTimeout(tick, 32 + Math.random() * 28);
+        } else {
+          // Typing done — reveal subtitle + CTAs.
+          sub?.classList.add('is-shown');
+          ctas?.classList.add('is-shown');
+        }
+      };
+      // Small delay so the eyebrow settles first.
+      setTimeout(tick, 400);
+    }
+  }
+</script>

@@ -14,9 +14,8 @@ const year = new Date().getFullYear();
         <p class="footer__heading">站点</p>
         <a href="/">主页</a>
         <a href="/posts">文章</a>
-        <a href="/now">现在</a>
+        <a href="/projects">项目</a>
         <a href="/about">关于</a>
-        <a href="/colophon">Colophon</a>
       </nav>
 
       <nav class="footer__col" aria-label="外部链接">
@@ -42,8 +41,8 @@ const year = new Date().getFullYear();
 
 <style>
   .footer {
-    background: var(--color-ink);
-    color: var(--color-ivory);
+    background: var(--color-dark-bg);
+    color: var(--color-dark-text);
     padding: var(--s-16) 0 var(--s-6);
     margin-top: var(--s-10);
   }
@@ -52,15 +51,15 @@ const year = new Date().getFullYear();
     grid-template-columns: 2fr 1fr 1fr 2fr;
     gap: var(--s-10);
     padding-bottom: var(--s-12);
-    border-bottom: 1px solid var(--color-ink-soft);
+    border-bottom: 1px solid var(--color-dark-border);
   }
   .footer__brand {
     font-size: 24px;
     margin: 0 0 var(--s-2);
-    color: var(--color-ivory);
+    color: var(--color-dark-text);
   }
   .footer__tag {
-    color: var(--color-warm-text-dim);
+    color: var(--color-dark-text-dim);
     margin: 0;
     font-size: 14px;
   }
@@ -68,7 +67,7 @@ const year = new Date().getFullYear();
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: var(--color-warm-text-dim);
+    color: var(--color-dark-text-dim);
     margin: 0 0 var(--s-4);
   }
   .footer__col {
@@ -77,37 +76,38 @@ const year = new Date().getFullYear();
     gap: var(--s-2);
   }
   .footer__col a {
-    color: var(--color-ivory);
+    color: var(--color-dark-text-muted);
     font-size: 14px;
     transition: color var(--t-fast);
   }
   .footer__col a:hover {
-    color: var(--color-coral);
+    color: var(--color-dark-text);
     text-decoration: none;
   }
   .footer__copy {
-    color: var(--color-warm-text-dim);
+    color: var(--color-dark-text-dim);
     font-size: 13px;
     line-height: 1.5;
     margin: 0 0 var(--s-3);
   }
   .footer__btn {
     align-self: flex-start;
-    background: var(--color-terracotta);
-    color: var(--color-ivory);
+    background: var(--color-dark-bg-soft);
+    color: var(--color-dark-text);
     padding: 8px 14px;
-    border-radius: var(--r-pill);
+    border-radius: 980px;
     font-size: 13px;
+    transition: background var(--t-fast) var(--ease-out);
   }
   .footer__btn:hover {
-    background: var(--color-coral);
+    background: var(--color-dark-border);
     text-decoration: none;
   }
   .footer__bottom {
     display: flex;
     justify-content: space-between;
     padding-top: var(--s-6);
-    color: var(--color-warm-text-dim);
+    color: var(--color-dark-text-dim);
     font-size: 12px;
   }
   .footer__bottom p {

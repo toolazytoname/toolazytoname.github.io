@@ -16,7 +16,7 @@ import { findStaticReply } from '@data/knowledge';
 type Msg = {
   role: 'user' | 'assistant';
   content: string;
-  source?: 'agnes' | 'deepseek' | 'static' | 'fallback';
+  source?: 'agnes' | 'static' | 'fallback';
 };
 
 const SUGGESTIONS = [
@@ -30,8 +30,6 @@ const sourceLabel = (s?: Msg['source']) => {
   switch (s) {
     case 'agnes':
       return '🟢 Agnes';
-    case 'deepseek':
-      return '🟡 DeepSeek';
     case 'static':
       return '⚪ static';
     case 'fallback':
@@ -143,7 +141,7 @@ export default function Chatbot() {
         <header className="chat-panel__head">
           <div>
             <p className="chat-panel__title">lazy · AI 助手</p>
-            <p className="chat-panel__sub">Agnes + DeepSeek + 静态兜底</p>
+            <p className="chat-panel__sub">Agnes + 静态兜底</p>
           </div>
           <button
             type="button"

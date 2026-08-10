@@ -1,6 +1,5 @@
 ---
-// Top-of-page scroll progress indicator.
-// 1px warm-terracotta bar that grows left→right as you scroll.
+// Top-of-page scroll progress indicator — 2px black bar, left→right.
 ---
 
 <div class="scroll-progress" role="progressbar" aria-label="页面滚动进度" data-scroll-progress>
@@ -21,7 +20,7 @@
   .scroll-progress__bar {
     height: 100%;
     width: 0%;
-    background: linear-gradient(90deg, var(--color-terracotta), var(--color-coral));
+    background: var(--color-ink);
     transition: width 80ms linear;
   }
 </style>

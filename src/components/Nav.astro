@@ -136,7 +136,16 @@ const isActive = (href: string) =>
     width: 20px;
     height: 1.5px;
     background: var(--color-text);
-    transition: transform 200ms;
+    transition: transform 200ms var(--ease-out), opacity 200ms;
+    transform-origin: center;
+  }
+  /* Hamburger → X when menu is open */
+  .nav__toggle[aria-expanded='true'] span:nth-child(1) {
+    transform: translateY(3.25px) rotate(45deg);
+  }
+  .nav__toggle[aria-expanded='true'] span:nth-child(2) {
+    transform: translateY(-3.25px) rotate(-45deg);
+  }
   }
 
   .nav__mobile {

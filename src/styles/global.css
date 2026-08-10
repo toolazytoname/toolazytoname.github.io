@@ -148,11 +148,16 @@ body {
 a {
   color: var(--color-link);
   text-decoration: none;
-  transition: color var(--t-fast) var(--ease-out);
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: color var(--t-fast) var(--ease-out),
+    background-size var(--t-fast) var(--ease-out);
 }
 a:hover {
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  background-size: 100% 1px;
+  text-decoration: none;
 }
 
 img {
@@ -228,17 +233,33 @@ button {
 }
 
 /* =========================================================
-   Reveal-on-scroll — add `.reveal` to anything that should fade up
+   Reveal-on-scroll — add `.reveal` to anything that should fade up.
+   Set `style="--i: N"` for staggered cascade (N = item index).
    ========================================================= */
 
 .reveal {
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 60ms);
 }
 .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* =========================================================
+   Keyframes — used by Hero typewriter + entrance animations
+   ========================================================= */
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* =========================================================
