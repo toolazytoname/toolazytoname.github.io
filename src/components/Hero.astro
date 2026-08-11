@@ -3,16 +3,9 @@
 
 <section class="hero" id="hero">
   <div class="container container-narrow hero__inner">
-    <p class="hero__eyebrow eyebrow reveal">lazy · weichao.ren</p>
-    <h1 class="hero__title">
-      <span class="hero__typed" data-typewriter></span><span class="hero__cursor" aria-hidden="true">|</span>
-    </h1>
-    <p class="hero__sub" data-hero-sub>
-      前宇宙大厂基础架构工程师 · 持滑雪 / 攀岩 / 游泳教练证 · 用 AI 造自己想要的工具
-    </p>
+    <h1 class="hero__sr-only">lazy，独立开发者</h1>
 
-    <!-- Terminal-style code block — visual focal point -->
-    <div class="hero__terminal" data-hero-terminal>
+    <div class="hero__terminal">
       <div class="terminal__bar">
         <span class="terminal__dot"></span>
         <span class="terminal__dot"></span>
@@ -30,7 +23,7 @@
 <span class="terminal__out">skiing · climbing · diving</span></code></pre>
     </div>
 
-    <div class="hero__ctas" data-hero-ctas>
+    <div class="hero__ctas">
       <a href="#posts" class="btn btn--primary">读文章</a>
       <a href="/projects/" class="btn btn--ghost">看项目</a>
       <a href="/about/" class="btn btn--ghost">关于我</a>
@@ -47,36 +40,16 @@
     max-width: 680px;
   }
 
-  .hero__eyebrow {
-    color: var(--color-text-dim);
-    margin-bottom: var(--s-5);
-  }
-
-  .hero__title {
-    font-size: clamp(20px, 2.8vw, 28px);
-    font-weight: 500;
-    line-height: 1.4;
-    letter-spacing: -0.01em;
-    margin: 0 0 var(--s-4);
-    color: var(--color-text);
-    min-height: 2.8em;
-  }
-
-  .hero__cursor {
-    color: var(--color-accent);
-    font-weight: 300;
-    animation: blink 1s step-end infinite;
-  }
-
-  .hero__sub {
-    color: var(--color-text-muted);
-    font-size: 15px;
-    line-height: 1.6;
-    margin: 0 0 var(--s-6);
-    opacity: 0;
-  }
-  .hero__sub.is-shown {
-    animation: fade-in-up 600ms var(--ease-out) forwards;
+  .hero__sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 
   /* Terminal code block */
@@ -85,11 +58,7 @@
     border-radius: var(--r-lg);
     overflow: hidden;
     margin-bottom: var(--s-6);
-    opacity: 0;
     border: 1px solid var(--color-dark-border);
-  }
-  .hero__terminal.is-shown {
-    animation: fade-in-up 600ms var(--ease-out) forwards;
   }
   .terminal__bar {
     display: flex;
@@ -142,10 +111,6 @@
     display: flex;
     gap: var(--s-3);
     flex-wrap: wrap;
-    opacity: 0;
-  }
-  .hero__ctas.is-shown {
-    animation: fade-in-up 600ms var(--ease-out) forwards;
   }
 
   .btn {
@@ -188,36 +153,3 @@
     .terminal__body { font-size: 12px; }
   }
 </style>
-
-<script>
-  const typed = document.querySelector<HTMLElement>('[data-typewriter]');
-  const sub = document.querySelector<HTMLElement>('[data-hero-sub]');
-  const terminal = document.querySelector<HTMLElement>('[data-hero-terminal]');
-  const ctas = document.querySelector<HTMLElement>('[data-hero-ctas]');
-
-  if (typed) {
-    const TEXT = 'Ex-big-tech infra engineer, now an indie dev with ski/climbing/swim instructor certs.';
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (reduced) {
-      typed.textContent = TEXT;
-      sub?.classList.add('is-shown');
-      terminal?.classList.add('is-shown');
-      ctas?.classList.add('is-shown');
-    } else {
-      let i = 0;
-      const tick = () => {
-        if (i < TEXT.length) {
-          typed.textContent += TEXT[i];
-          i++;
-          setTimeout(tick, 32 + Math.random() * 28);
-        } else {
-          sub?.classList.add('is-shown');
-          setTimeout(() => terminal?.classList.add('is-shown'), 200);
-          setTimeout(() => ctas?.classList.add('is-shown'), 400);
-        }
-      };
-      setTimeout(tick, 400);
-    }
-  }
-</script>

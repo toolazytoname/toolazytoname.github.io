@@ -2,8 +2,8 @@
  * Per-post OG image generator using Satori + Resvg.
  *
  * Generates a 1200×630 black & white card with the post title, date,
- * and site branding. Fonts are fetched from Google Fonts CDN at build time
- * and cached in-memory across all 61 prerendered images.
+ * and site branding. Fonts are fetched from Google Fonts CDN on demand and
+ * cached in-memory for the lifetime of the serverless instance.
  *
  * NOTE: CJK title support requires downloading a CJK font (~2MB TTF).
  * If the download fails, Chinese characters may render as tofu (□).
@@ -16,7 +16,8 @@ import { Resvg } from '@resvg/resvg-js';
 import { getCollection } from 'astro:content';
 import { postSlug } from '@lib/permalink';
 
-export const prerender = true;
+// Do not make the site build depend on a third-party font CDN.
+export const prerender = false;
 
 // ---------------------------------------------------------------------------
 // Font loading (cached once per build)
@@ -102,29 +103,22 @@ async function loadFonts(): Promise<SatoriOptions['fonts']> {
 }
 
 // ---------------------------------------------------------------------------
-// Static paths (one per post)
-// ---------------------------------------------------------------------------
-
-export async function getStaticPaths() {
-  const posts = await getCollection('posts');
-  return posts.map((entry) => ({
-    params: { slug: postSlug(entry.id, entry.data) },
-    props: { entry },
-  }));
-}
-
-// ---------------------------------------------------------------------------
 // GET handler
 // ---------------------------------------------------------------------------
 
 const FONT_FAMILY = '"Inter", "Noto Sans SC", sans-serif';
 
-export async function GET({
-  props,
-}: {
-  props: { entry: { data: { title: string; date: Date } } };
-}) {
-  const { entry } = props;
+export async function GET({ params }: { params: { slug?: string } }) {
+  const slug = params.slug;
+  const posts = await getCollection('posts');
+  const entry = posts.find(
+    (post) => slug === postSlug(post.id, post.data),
+  );
+
+  if (!entry) {
+    return new Response('Not found', { status: 404 });
+  }
+
   const title = entry.data.title;
   const dateStr =
     entry.data.date instanceof Date

@@ -225,7 +225,7 @@ export default function Chatbot() {
           display: grid;
           place-items: center;
           z-index: var(--z-fab);
-          box-shadow: 0 8px 24px rgba(201, 100, 66, 0.45);
+          box-shadow: 0 8px 24px rgba(14, 165, 233, 0.35);
           transition: transform 200ms var(--ease-out), opacity 200ms;
         }
         .chat-fab:hover { transform: scale(1.06); }

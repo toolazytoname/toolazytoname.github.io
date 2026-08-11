@@ -17,7 +17,7 @@ const title = seo?.title
   ? `${seo.title} · ${SITE.name}`
   : `${SITE.name} — ${SITE.description.split('。')[0]}`;
 const description = seo?.description ?? SITE.description;
-const ogImage = seo?.image ?? '/og-default.svg';
+const ogImage = new URL(seo?.image ?? '/og-default.svg', SITE.url).toString();
 const canonical = new URL(Astro.url.pathname, SITE.url).toString();
 
 // JSON-LD: always include WebSite+Person, merge article if applicable
@@ -63,7 +63,7 @@ if (jsonLdExtra) {
     <link rel="canonical" href={canonical} />
 
     <!-- JSON-LD structured data -->
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLdOutput)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLdOutput)} />
 
     <!-- Open Graph -->
     <meta property="og:type" content={seo?.type ?? 'website'} />

@@ -10,12 +10,16 @@ const all = (await getCollection('posts')).sort(
 );
 
 // Collect unique categories
-const catSet = new Set<string>();
+const categoryLabels = new Map<string, string>();
 for (const p of all) {
   const cats = Array.isArray(p.data.categories) ? p.data.categories : [p.data.categories];
-  cats.forEach((c) => catSet.add(c.toString().trim()));
+  cats.forEach((c) => {
+    const label = c.toString().trim();
+    const key = label.toLowerCase();
+    if (key && !categoryLabels.has(key)) categoryLabels.set(key, label);
+  });
 }
-const categories = [...catSet].sort();
+const categories = [...categoryLabels.entries()].sort(([, a], [, b]) => a.localeCompare(b));
 
 // Group posts by year
 const byYear = new Map<number, typeof all>();
@@ -62,6 +66,7 @@ function monthDay(p: (typeof all)[number]) {
 
       <!-- Filters -->
       <div class="posts-page__filters reveal">
+        <label class="posts-page__search-label" for="post-search">搜索文章</label>
         <input
           type="search"
           class="posts-page__search"
@@ -71,8 +76,8 @@ function monthDay(p: (typeof all)[number]) {
         />
         <div class="posts-page__chips" data-post-chips>
           <button class="chip chip--active" data-filter="all">全部</button>
-          {categories.map((c) => (
-            <button class="chip" data-filter={c.toLowerCase()}>{c}</button>
+          {categories.map(([key, label]) => (
+            <button class="chip" data-filter={key}>{label}</button>
           ))}
         </div>
       </div>
@@ -217,6 +222,17 @@ function monthDay(p: (typeof all)[number]) {
     color: var(--color-text);
     outline: none;
     transition: border-color var(--t-fast) var(--ease-out);
+  }
+  .posts-page__search-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 
   .posts-page__search::placeholder {

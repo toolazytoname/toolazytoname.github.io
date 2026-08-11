@@ -22,52 +22,60 @@ const dotColor = project.language ? LANG_COLORS[project.language] : null;
 ---
 
 <article class="proj-card reveal" style={`--i: ${index};`}>
-  <a href={project.repo} class="proj-card__link" target="_blank" rel="noopener">
-    {project.image && (
+  {project.image && (
+    <a href={project.repo} class="proj-card__image-link" target="_blank" rel="noopener">
       <div class="proj-card__image-wrap">
         <img
           src={project.image}
           alt={project.title}
           class="proj-card__image"
           loading="lazy"
+          decoding="async"
         />
         <span class={`proj-card__status proj-card__status--${project.status}`}>
           {project.status}
         </span>
       </div>
-    )}
+    </a>
+  )}
 
-    <div class="proj-card__body">
-      <div class="proj-card__head">
-        <span class="proj-card__title-row">
-          {project.language && (
-            <span
-              class="proj-card__dot"
-              style={dotColor ? `background:${dotColor};` : ''}
-              title={project.language}
-              aria-hidden="true"
-            ></span>
-          )}
-          <span class="proj-card__name">{project.title}</span>
-        </span>
+  <div class="proj-card__body">
+    <div class="proj-card__head">
+      <span class="proj-card__title-row">
+        {project.language && (
+          <span
+            class="proj-card__dot"
+            style={dotColor ? `background:${dotColor};` : ''}
+            title={project.language}
+            aria-hidden="true"
+          ></span>
+        )}
+        <span class="proj-card__name">{project.title}</span>
+      </span>
+      <span class="proj-card__meta">
+        {!project.image && (
+          <span class={`proj-card__status proj-card__status--${project.status}`}>
+            {project.status}
+          </span>
+        )}
         {project.stars > 0 && (
           <span class="proj-card__stars">★ {project.stars}</span>
         )}
-      </div>
-
-      <p class="proj-card__desc">{project.description}</p>
-
-      <div class="proj-card__footer">
-        {project.language && <span class="proj-card__lang">{project.language}</span>}
-        <span class="proj-card__links">
-          {project.demo && (
-            <span class="proj-card__action proj-card__action--demo">主站 →</span>
-          )}
-          <span class="proj-card__action proj-card__action--repo">GitHub →</span>
-        </span>
-      </div>
+      </span>
     </div>
-  </a>
+
+    <p class="proj-card__desc">{project.description}</p>
+
+    <div class="proj-card__footer">
+      {project.language && <span class="proj-card__lang">{project.language}</span>}
+      <span class="proj-card__links">
+        {project.demo && (
+          <a href={project.demo} class="proj-card__action" target="_blank" rel="noopener">主站 →</a>
+        )}
+        <a href={project.repo} class="proj-card__action proj-card__action--repo" target="_blank" rel="noopener">GitHub →</a>
+      </span>
+    </div>
+  </div>
 </article>
 
 <style>
@@ -83,12 +91,9 @@ const dotColor = project.language ? LANG_COLORS[project.language] : null;
     box-shadow: 0 8px 30px rgba(14, 165, 233, 0.1);
   }
 
-  .proj-card__link {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+  .proj-card__image-link {
+    display: block;
     text-decoration: none;
-    color: inherit;
   }
 
   /* Image — top, fixed aspect ratio (16:10), always uniform */
@@ -109,17 +114,26 @@ const dotColor = project.language ? LANG_COLORS[project.language] : null;
     transform: scale(1.04);
   }
 
-  /* Status badge on image */
+  .proj-card__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--s-2);
+    flex-shrink: 0;
+  }
+
+  /* Status badge on image, and a compact in-body version when no image exists. */
   .proj-card__status {
-    position: absolute;
-    top: 10px;
-    right: 10px;
     font-size: 10px;
     padding: 3px 8px;
-    border-radius: 980px;
+    border-radius: var(--r-sm);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.4px;
+  }
+  .proj-card__image-wrap .proj-card__status {
+    position: absolute;
+    top: 10px;
+    right: 10px;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
   }
@@ -141,7 +155,6 @@ const dotColor = project.language ? LANG_COLORS[project.language] : null;
     padding: var(--s-4) var(--s-5) var(--s-3);
     display: flex;
     flex-direction: column;
-    flex: 1;
   }
 
   .proj-card__head {
@@ -189,7 +202,6 @@ const dotColor = project.language ? LANG_COLORS[project.language] : null;
     line-height: 1.55;
     color: var(--color-text-muted);
     margin: 0 0 var(--s-3);
-    flex: 1;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     line-clamp: 3;
@@ -215,9 +227,15 @@ const dotColor = project.language ? LANG_COLORS[project.language] : null;
     gap: var(--s-3);
   }
   .proj-card__action {
+    display: inline-flex;
     font-size: 12px;
     font-weight: 500;
     color: var(--color-accent);
+    text-decoration: none;
+  }
+  .proj-card__action:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
   .proj-card__action--repo {
     color: var(--color-text-dim);

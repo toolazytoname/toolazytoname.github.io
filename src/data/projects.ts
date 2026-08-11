@@ -122,7 +122,6 @@ export const projects: Project[] = [
     repo: 'https://github.com/toolazytoname/GridGo',
     demo: 'https://beta.gridgo.weichao.studio/',
     stars: 0,
-    image: 'https://raw.githubusercontent.com/toolazytoname/GridGo/main/UI/app-matrix-fixed.png',
     status: 'wip',
   },
   {

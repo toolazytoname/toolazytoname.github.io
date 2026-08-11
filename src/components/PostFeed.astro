@@ -40,7 +40,7 @@ const totalCount = allPosts.length;
 
         return (
           <li class="post-feed__item reveal" style={`--i: ${i};`}>
-            <a href={`/${slug}`} class="post-feed__link">
+            <a href={`/${slug}/`} class="post-feed__link">
               {post.data.cover ? (
                 <img src={post.data.cover} alt="" class="post-feed__thumb post-feed__thumb--img" loading="lazy" />
               ) : (

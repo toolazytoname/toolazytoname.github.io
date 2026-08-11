@@ -146,7 +146,6 @@ const isActive = (href: string) =>
   .nav__toggle[aria-expanded='true'] span:nth-child(2) {
     transform: translateY(-3.25px) rotate(-45deg);
   }
-  }
 
   .nav__mobile {
     display: none;
@@ -185,6 +184,7 @@ const isActive = (href: string) =>
     toggle.addEventListener('click', () => {
       const open = toggle.getAttribute('aria-expanded') === 'true';
       toggle.setAttribute('aria-expanded', String(!open));
+      toggle.setAttribute('aria-label', open ? '打开菜单' : '关闭菜单');
       mobile.hidden = open;
     });
   }
