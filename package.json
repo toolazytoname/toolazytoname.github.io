@@ -15,21 +15,29 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.0.0",
-    "@astrojs/react": "^4.0.0",
-    "@astrojs/rss": "^4.0.0",
-    "@astrojs/sitemap": "^3.2.0",
-    "@astrojs/vercel": "^8.0.0",
+    "@astrojs/mdx": "^7.0.5",
+    "@astrojs/react": "^6.0.2",
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.3",
+    "@astrojs/vercel": "^11.0.5",
     "@resvg/resvg-js": "^2.6.2",
-    "astro": "^5.0.0",
+    "astro": "^7.2.0",
     "openai": "^4.78.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
     "satori": "^0.29.0"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.9",
+    "@astrojs/check": "^0.9.10",
     "typescript": "^5.7.0",
     "vitest": "^4.1.9"
+  },
+  "overrides": {
+    "fast-uri": "3.1.5",
+    "fast-xml-parser": "5.10.1",
+    "path-to-regexp": "6.3.0",
+    "sharp": "0.35.0",
+    "svgo": "4.0.2",
+    "yaml": "2.8.3"
   }
 }

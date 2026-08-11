@@ -4,7 +4,8 @@
 // the slug() option does NOT belong in the collection config when using
 // the glob() loader. Keeping that responsibility on the page route.
 
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
 import { glob } from 'astro/loaders';
 import path from 'node:path';
 
