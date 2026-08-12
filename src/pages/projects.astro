@@ -56,14 +56,14 @@ const categories: ProjectCategory[] = [
 
 <style>
   .projects-page {
-    padding: var(--s-20) 0 var(--s-32);
+    padding: var(--s-16) 0 var(--s-24);
     min-height: 80vh;
   }
   .projects-page__head {
-    margin-bottom: var(--s-16);
+    margin-bottom: var(--s-12);
   }
   .projects-page__title {
-    font-size: clamp(40px, 5vw, 64px);
+    font-size: clamp(36px, 4vw, 54px);
     font-weight: 500;
     line-height: 1.1;
     letter-spacing: -0.02em;
@@ -78,24 +78,29 @@ const categories: ProjectCategory[] = [
   }
 
   .projects-group {
-    margin-bottom: var(--s-16);
+    margin-bottom: var(--s-10);
   }
   .projects-group:last-child {
     margin-bottom: 0;
   }
   .projects-group__head {
-    margin-bottom: var(--s-5);
-    padding-bottom: var(--s-3);
+    display: grid;
+    grid-template-columns: minmax(220px, 0.7fr) 1fr;
+    align-items: baseline;
+    gap: var(--s-5);
+    margin-bottom: var(--s-3);
+    padding-bottom: var(--s-2);
+    border-bottom: 1px solid var(--color-border);
   }
   .projects-group__title {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
     color: var(--color-text);
-    margin: 0 0 var(--s-1);
+    margin: 0;
     letter-spacing: -0.01em;
   }
   .projects-group__sub {
-    font-size: 14px;
+    font-size: 13px;
     color: var(--color-text-dim);
     margin: 0;
   }
@@ -103,13 +108,29 @@ const categories: ProjectCategory[] = [
   .projects-group__list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--s-4);
+    gap: var(--s-3);
     align-items: start;
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 760px) {
+    .projects-page {
+      padding: var(--s-10) 0 var(--s-16);
+    }
+    .projects-page__head {
+      margin-bottom: var(--s-10);
+    }
+    .projects-group {
+      margin-bottom: var(--s-8);
+    }
+    .projects-group__head {
+      display: block;
+    }
+    .projects-group__title {
+      margin-bottom: var(--s-1);
+    }
     .projects-group__list {
       grid-template-columns: 1fr;
+      gap: var(--s-2);
     }
   }
 </style>

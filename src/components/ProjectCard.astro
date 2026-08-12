@@ -24,18 +24,13 @@ const dotColor = project.language ? LANG_COLORS[project.language] : null;
 <article class="proj-card reveal" style={`--i: ${index};`}>
   {project.image && (
     <a href={project.repo} class="proj-card__image-link" target="_blank" rel="noopener">
-      <div class="proj-card__image-wrap">
-        <img
-          src={project.image}
-          alt={project.title}
-          class="proj-card__image"
-          loading="lazy"
-          decoding="async"
-        />
-        <span class={`proj-card__status proj-card__status--${project.status}`}>
-          {project.status}
-        </span>
-      </div>
+      <img
+        src={project.image}
+        alt=""
+        class="proj-card__image"
+        loading="lazy"
+        decoding="async"
+      />
     </a>
   )}
 
@@ -53,11 +48,9 @@ const dotColor = project.language ? LANG_COLORS[project.language] : null;
         <span class="proj-card__name">{project.title}</span>
       </span>
       <span class="proj-card__meta">
-        {!project.image && (
-          <span class={`proj-card__status proj-card__status--${project.status}`}>
-            {project.status}
-          </span>
-        )}
+        <span class={`proj-card__status proj-card__status--${project.status}`}>
+          {project.status}
+        </span>
         {project.stars > 0 && (
           <span class="proj-card__stars">★ {project.stars}</span>
         )}
@@ -80,33 +73,34 @@ const dotColor = project.language ? LANG_COLORS[project.language] : null;
 
 <style>
   .proj-card {
-    border-radius: var(--r-lg);
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: stretch;
+    min-height: 126px;
+    border-radius: var(--r-md);
     background: var(--color-bg);
     overflow: hidden;
-    transition: transform var(--t-fast) var(--ease-out),
-      box-shadow var(--t-fast) var(--ease-out);
+    border: 1px solid transparent;
+    transition: border-color var(--t-fast) var(--ease-out),
+      background var(--t-fast) var(--ease-out);
   }
   .proj-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 30px rgba(14, 165, 233, 0.1);
+    border-color: var(--color-border);
+    background: var(--color-bg-soft);
   }
 
   .proj-card__image-link {
     display: block;
+    width: 148px;
+    min-height: 100%;
     text-decoration: none;
-  }
-
-  /* Image — top, fixed aspect ratio (16:10), always uniform */
-  .proj-card__image-wrap {
-    position: relative;
-    aspect-ratio: 16 / 10;
     overflow: hidden;
     background: var(--color-dark-bg);
-    flex-shrink: 0;
   }
   .proj-card__image {
     width: 100%;
     height: 100%;
+    min-height: 126px;
     object-fit: cover;
     transition: transform var(--t-slow) var(--ease-out);
   }
@@ -121,7 +115,6 @@ const dotColor = project.language ? LANG_COLORS[project.language] : null;
     flex-shrink: 0;
   }
 
-  /* Status badge on image, and a compact in-body version when no image exists. */
   .proj-card__status {
     font-size: 10px;
     padding: 3px 8px;
@@ -130,29 +123,18 @@ const dotColor = project.language ? LANG_COLORS[project.language] : null;
     text-transform: uppercase;
     letter-spacing: 0.4px;
   }
-  .proj-card__image-wrap .proj-card__status {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-  }
   .proj-card__status--shipped {
-    background: rgba(14, 165, 233, 0.85);
-    color: #fff;
+    background: var(--color-accent-pale);
+    color: var(--color-accent-dark);
   }
   .proj-card__status--wip {
-    background: rgba(0, 0, 0, 0.6);
-    color: #fff;
-  }
-  .proj-card__status--archived {
-    background: rgba(0, 0, 0, 0.4);
-    color: rgba(255, 255, 255, 0.8);
+    background: var(--color-bg-muted);
+    color: var(--color-text-muted);
   }
 
-  /* Body — below image */
   .proj-card__body {
-    padding: var(--s-4) var(--s-5) var(--s-3);
+    min-width: 0;
+    padding: var(--s-3) var(--s-4);
     display: flex;
     flex-direction: column;
   }
@@ -162,7 +144,7 @@ const dotColor = project.language ? LANG_COLORS[project.language] : null;
     align-items: center;
     justify-content: space-between;
     gap: var(--s-2);
-    margin-bottom: var(--s-2);
+    margin-bottom: var(--s-1);
   }
   .proj-card__title-row {
     display: flex;
@@ -199,12 +181,12 @@ const dotColor = project.language ? LANG_COLORS[project.language] : null;
 
   .proj-card__desc {
     font-size: 13px;
-    line-height: 1.55;
+    line-height: 1.45;
     color: var(--color-text-muted);
-    margin: 0 0 var(--s-3);
+    margin: 0 0 auto;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
@@ -215,7 +197,6 @@ const dotColor = project.language ? LANG_COLORS[project.language] : null;
     justify-content: space-between;
     gap: var(--s-2);
     padding-top: var(--s-2);
-    border-top: 1px solid var(--color-border);
   }
   .proj-card__lang {
     font-family: var(--font-mono);
@@ -239,5 +220,36 @@ const dotColor = project.language ? LANG_COLORS[project.language] : null;
   }
   .proj-card__action--repo {
     color: var(--color-text-dim);
+  }
+
+  @media (max-width: 760px) {
+    .proj-card {
+      min-height: 112px;
+    }
+    .proj-card__image-link {
+      width: 104px;
+    }
+    .proj-card__image {
+      min-height: 112px;
+    }
+    .proj-card__body {
+      padding: var(--s-3);
+    }
+    .proj-card__status {
+      display: none;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .proj-card__image-link {
+      width: 88px;
+    }
+    .proj-card__name {
+      font-size: 15px;
+    }
+    .proj-card__desc {
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+    }
   }
 </style>
