@@ -1,0 +1,72 @@
+---
+export const prerender = true;
+
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Timeline from '@components/Timeline.astro';
+import { nowEntries } from '@data/now';
+
+const latest = nowEntries[nowEntries.length - 1];
+---
+
+<BaseLayout
+  chatbot
+  seo={{
+    title: 'Now',
+    description: latest
+      ? `最近：${latest.title}。${latest.body.slice(0, 80)}`
+      : 'lazy 最近在做什么。',
+  }}
+>
+  <section class="now-page">
+    <div class="container container-narrow">
+      <header class="now-page__head reveal">
+        <h1 class="now-page__title">Now</h1>
+        <p class="now-page__lede">
+          最近在忙什么、想什么。按月更新，不追求完整，只求诚实。
+        </p>
+      </header>
+
+      <Timeline />
+
+      <p class="now-page__note reveal">
+        灵感来自
+        <a href="https://nownownow.com/" rel="noopener" target="_blank">/now</a>
+        运动。想看更长的自我介绍去
+        <a href="/about/">About</a>。
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .now-page {
+    padding: var(--s-16) 0 var(--s-24);
+    min-height: 80vh;
+  }
+  .now-page__head {
+    margin-bottom: var(--s-12);
+    padding-bottom: var(--s-6);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .now-page__title {
+    margin: 0 0 var(--s-4);
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+  }
+  .now-page__lede {
+    margin: 0;
+    max-width: 42ch;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+  .now-page__note {
+    margin-top: var(--s-12);
+    padding-top: var(--s-6);
+    border-top: 1px solid var(--color-border);
+    font-size: 14px;
+    color: var(--color-text-dim);
+  }
+</style>

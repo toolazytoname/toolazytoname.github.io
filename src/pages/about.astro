@@ -6,21 +6,28 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
+  chatbot
   seo={{
     title: 'About',
-    description: 'lazy，做过 Swift 编译器、LLVM 后端、隐私检测相关工作。',
+    description:
+      'lazy，做过 Swift 编译器、LLVM 后端。现在做独立开发者，用 AI 造自己想要的工具。',
   }}
 >
   <article class="about">
     <div class="container container-narrow">
       <header class="about__head reveal">
-        <p class="eyebrow">About</p>
         <h1 class="about__title">关于我</h1>
+        <p class="about__lead">
+          我是 lazy。前大厂 iOS / 编译相关工程师，现在做独立开发，用 AI 造自己想用的工具。喜欢滑雪、潜水、攀岩和公路旅行。
+        </p>
+        <p class="about__lead about__lead--muted">
+          最近在做什么，看 <a href="/now/">/now</a>；造了什么，看
+          <a href="/projects/">Projects</a>。
+        </p>
       </header>
 
-      <!-- ===== 中文 ===== -->
       <details class="about__lang" open>
-        <summary class="about__lang-toggle">中文</summary>
+        <summary class="about__lang-toggle">更多（中文）</summary>
         <div class="about__body reveal">
           <p>
             我是一个<strong>程序员。</strong>
@@ -38,13 +45,12 @@ import BaseLayout from '@layouts/BaseLayout.astro';
         </div>
       </details>
 
-      <!-- ===== English ===== -->
       <details class="about__lang">
-        <summary class="about__lang-toggle">English</summary>
+        <summary class="about__lang-toggle">More (English)</summary>
         <div class="about__body reveal">
           <p>
             I am a <strong>programmer</strong>
-            with over a decade of experience, having <strong>worked</strong> at various major internet companies in China. I've ridden the wave of the internet boom, witnessing its rise and fall—seeing grand buildings erected and lavish feasts hosted, only to watch it all fade with time. Eventually, I found myself caught in the tides of change. Perhaps the outcome was inevitable from the start. I've never been one to play office politics or engage in upward management. I simply focused on my work, taking responsibility for my code and myself. I thrive on creative and challenging tasks, driven by curiosity about the underlying principles of technology. I value work that produces tangible results and reject meaningless repetition—both in code and in life. I have a bit of a coding obsession and perfectionism, and I'm not particularly adept at navigating social intricacies. While I have my preferred technical interests, I admit I've only scratched the surface and need to dive deeper. I refuse to settle for a career that feels predictable and stagnant. There have been times when I've pushed myself to learn and grow, striving to excel, but also moments when I've lingered in my comfort zone, failing to keep up with self-improvement. It's like two sides of a coin—a contradictory self.
+            with over a decade of experience, having <strong>worked</strong> at various major internet companies in China. I've ridden the wave of the internet boom, witnessing its rise and fall-seeing grand buildings erected and lavish feasts hosted, only to watch it all fade with time. Eventually, I found myself caught in the tides of change. Perhaps the outcome was inevitable from the start. I've never been one to play office politics or engage in upward management. I simply focused on my work, taking responsibility for my code and myself. I thrive on creative and challenging tasks, driven by curiosity about the underlying principles of technology. I value work that produces tangible results and reject meaningless repetition-both in code and in life. I have a bit of a coding obsession and perfectionism, and I'm not particularly adept at navigating social intricacies. While I have my preferred technical interests, I admit I've only scratched the surface and need to dive deeper. I refuse to settle for a career that feels predictable and stagnant. There have been times when I've pushed myself to learn and grow, striving to excel, but also moments when I've lingered in my comfort zone, failing to keep up with self-improvement. It's like two sides of a coin-a contradictory self.
           </p>
           <p>
             My <strong>life</strong> is simple. I'm not much of a socializer, and I don't smoke or drink. I love the outdoors, road trips, and swimming. Wherever the free wind blows, you'll find my footprints. Whether physically or mentally, I'm always on the move. My dream is to travel to the farthest corners of the world, to marvel at the wonders of nature and immerse myself in diverse cultures and traditions.
@@ -55,7 +61,6 @@ import BaseLayout from '@layouts/BaseLayout.astro';
         </div>
       </details>
 
-      <!-- ===== 联系 ===== -->
       <hr class="about__divider" />
 
       <section class="about__contact reveal">
@@ -72,24 +77,35 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 
 <style>
   .about {
-    padding: var(--s-20) 0 var(--s-24);
+    padding: var(--s-16) 0 var(--s-24);
     min-height: 80vh;
   }
   .about__head {
-    margin-bottom: var(--s-12);
+    margin-bottom: var(--s-10);
     padding-bottom: var(--s-6);
     border-bottom: 1px solid var(--color-border);
   }
   .about__title {
-    font-size: clamp(48px, 6vw, 72px);
-    margin: var(--s-3) 0 0;
+    font-size: clamp(40px, 6vw, 64px);
+    margin: 0 0 var(--s-5);
     color: var(--color-text);
     letter-spacing: -0.02em;
+    font-weight: 500;
+  }
+  .about__lead {
+    margin: 0 0 var(--s-3);
+    max-width: 48ch;
+    font-size: 18px;
+    line-height: 1.65;
+    color: var(--color-text);
+  }
+  .about__lead--muted {
+    color: var(--color-text-muted);
+    font-size: 16px;
   }
 
-  /* Language toggle */
   .about__lang {
-    margin-bottom: var(--s-10);
+    margin-bottom: var(--s-8);
     border: none;
   }
   .about__lang-toggle {
@@ -111,7 +127,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
     color: var(--color-text-muted);
     font-size: 17px;
     line-height: 1.8;
-    margin-bottom: var(--s-8);
+    margin-bottom: var(--s-4);
   }
   .about__body p {
     margin: 0 0 var(--s-5);
@@ -128,7 +144,8 @@ import BaseLayout from '@layouts/BaseLayout.astro';
   }
 
   .about__subtitle {
-    font-size: 28px;
+    font-size: 22px;
+    font-weight: 500;
     margin: 0 0 var(--s-6);
     color: var(--color-text);
   }

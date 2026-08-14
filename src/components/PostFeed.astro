@@ -20,17 +20,15 @@ const totalCount = allPosts.length;
 <section class="post-feed" id="posts">
   <div class="container container-narrow">
     <header class="post-feed__head reveal">
-      <p class="eyebrow">Blog · 博客</p>
-      <h2 class="post-feed__title">最新文章</h2>
+      <h2 class="post-feed__title">文章</h2>
+      <p class="post-feed__lede">旧文先放着，新的会慢慢写。</p>
     </header>
 
     <ol class="post-feed__list">
       {latest.map((post, i) => {
         const slug = postSlug(post.id, post.data);
-        const summary =
-          post.data.summary ??
-          post.body?.split('\n').find((l) => l.trim().length > 0)?.slice(0, 120) ??
-          '';
+        // Only show authored summaries — body fallback often pulls markdown junk.
+        const summary = post.data.summary?.trim() || '';
         const dateStr = post.data.date.toLocaleDateString('zh-CN', {
           year: 'numeric',
           month: '2-digit',
@@ -70,15 +68,20 @@ const totalCount = allPosts.length;
 </section>
 
 <style>
-  .post-feed { padding: var(--s-24) 0; }
-  .post-feed__head { margin-bottom: var(--s-10); }
+  .post-feed { padding: var(--s-16) 0 var(--s-12); }
+  .post-feed__head { margin-bottom: var(--s-8); }
   .post-feed__title {
     font-size: clamp(28px, 3.5vw, 40px);
     font-weight: 500;
     line-height: 1.15;
-    margin: var(--s-3) 0;
+    margin: 0 0 var(--s-3);
     letter-spacing: -0.01em;
     color: var(--color-text);
+  }
+  .post-feed__lede {
+    margin: 0;
+    font-size: 16px;
+    color: var(--color-text-muted);
   }
   .post-feed__list {
     list-style: none;

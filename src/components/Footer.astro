@@ -8,15 +8,16 @@ const year = new Date().getFullYear();
   <div class="container">
     <div class="footer__grid">
       <div>
-        <p class="footer__brand serif">lazy</p>
+        <p class="footer__brand">lazy</p>
         <p class="footer__tag">weichao.ren</p>
       </div>
 
       <nav class="footer__col" aria-label="站点">
         <p class="footer__heading">站点</p>
         <a href="/">主页</a>
-        <a href="/posts/">文章</a>
         <a href="/projects/">项目</a>
+        <a href="/posts/">文章</a>
+        <a href="/now/">Now</a>
         <a href="/about/">关于</a>
       </nav>
 
@@ -25,8 +26,8 @@ const year = new Date().getFullYear();
         <a href="https://github.com/toolazytoname" rel="noopener" target="_blank">
           <Icon name="github" size={15} /> GitHub
         </a>
-        <a href="/posts.xml">
-          <Icon name="rss" size={15} /> RSS
+        <a href="https://x.com/toolazytoname" rel="noopener" target="_blank">
+          <Icon name="x" size={15} /> X
         </a>
         <a href="mailto:lazywc@gmail.com">
           <Icon name="mail" size={15} /> Email
@@ -35,46 +36,50 @@ const year = new Date().getFullYear();
 
       <div class="footer__col">
         <p class="footer__heading">订阅</p>
-        <p class="footer__copy">每月一封 email，写一点最近在想的事。</p>
-        <a href="/posts.xml" class="footer__btn">RSS →</a>
+        <p class="footer__copy">有新文章时走 RSS，没有邮件列表。</p>
+        <a href="/posts.xml" class="footer__btn">
+          <Icon name="rss" size={14} /> RSS
+        </a>
       </div>
     </div>
 
     <div class="footer__bottom">
-      <p>© {year} lazy. Built on Astro + Vercel.</p>
-      <p class="footer__build">Last build: <time datetime={new Date().toISOString()}>just now</time></p>
+      <p>© {year} lazy · Astro + Vercel</p>
     </div>
   </div>
 </footer>
 
 <style>
   .footer {
-    background: var(--color-dark-bg);
-    color: var(--color-dark-text);
-    padding: var(--s-16) 0 var(--s-6);
-    margin-top: var(--s-10);
+    margin-top: var(--s-16);
+    padding: var(--s-12) 0 var(--s-8);
+    border-top: 1px solid var(--color-border);
+    background: var(--color-bg);
+    color: var(--color-text);
   }
   .footer__grid {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 2fr;
     gap: var(--s-10);
-    padding-bottom: var(--s-12);
+    padding-bottom: var(--s-10);
   }
   .footer__brand {
-    font-size: 24px;
+    font-size: 22px;
+    font-weight: 500;
     margin: 0 0 var(--s-2);
-    color: var(--color-dark-text);
+    color: var(--color-text);
   }
   .footer__tag {
-    color: var(--color-dark-text-dim);
+    color: var(--color-text-dim);
     margin: 0;
     font-size: 14px;
+    font-family: var(--font-mono);
   }
   .footer__heading {
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: var(--color-dark-text-dim);
+    color: var(--color-text-dim);
     margin: 0 0 var(--s-4);
   }
   .footer__col {
@@ -86,38 +91,37 @@ const year = new Date().getFullYear();
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    color: var(--color-dark-text-muted);
+    color: var(--color-text-muted);
     font-size: 14px;
     transition: color var(--t-fast);
   }
   .footer__col a:hover {
-    color: var(--color-dark-text);
+    color: var(--color-text);
     text-decoration: none;
   }
   .footer__copy {
-    color: var(--color-dark-text-dim);
+    color: var(--color-text-dim);
     font-size: 13px;
     line-height: 1.5;
     margin: 0 0 var(--s-3);
   }
   .footer__btn {
     align-self: flex-start;
-    background: var(--color-dark-bg-soft);
-    color: var(--color-dark-text);
+    background: var(--color-bg-subtle);
+    color: var(--color-text);
     padding: 8px 14px;
-    border-radius: 980px;
+    border-radius: var(--r-md);
     font-size: 13px;
     transition: background var(--t-fast) var(--ease-out);
   }
   .footer__btn:hover {
-    background: var(--color-dark-border);
+    background: var(--color-bg-muted);
     text-decoration: none;
   }
   .footer__bottom {
-    display: flex;
-    justify-content: space-between;
     padding-top: var(--s-6);
-    color: var(--color-dark-text-dim);
+    border-top: 1px solid var(--color-border);
+    color: var(--color-text-dim);
     font-size: 12px;
   }
   .footer__bottom p {
@@ -128,10 +132,6 @@ const year = new Date().getFullYear();
     .footer__grid {
       grid-template-columns: 1fr 1fr;
       gap: var(--s-8);
-    }
-    .footer__bottom {
-      flex-direction: column;
-      gap: var(--s-2);
     }
   }
   @media (max-width: 480px) {

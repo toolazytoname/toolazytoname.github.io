@@ -1,8 +1,9 @@
 ---
 const links = [
   { href: '/', label: 'Home' },
-  { href: '/posts/', label: 'Posts' },
   { href: '/projects/', label: 'Projects' },
+  { href: '/posts/', label: 'Posts' },
+  { href: '/now/', label: 'Now' },
   { href: '/about/', label: 'About' },
 ];
 
@@ -95,7 +96,7 @@ const isActive = (href: string) =>
   }
   .nav__links {
     display: flex;
-    gap: var(--s-6);
+    gap: var(--s-5);
   }
   .nav__link {
     color: var(--color-text-muted);
@@ -139,7 +140,6 @@ const isActive = (href: string) =>
     transition: transform 200ms var(--ease-out), opacity 200ms;
     transform-origin: center;
   }
-  /* Hamburger → X when menu is open */
   .nav__toggle[aria-expanded='true'] span:nth-child(1) {
     transform: translateY(3.25px) rotate(45deg);
   }

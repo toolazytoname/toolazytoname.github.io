@@ -4,31 +4,32 @@ export const prerender = true;
 
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Hero from '@components/Hero.astro';
+import FeaturedProjects from '@components/FeaturedProjects.astro';
 import PostFeed from '@components/PostFeed.astro';
 ---
 
-<BaseLayout>
+<BaseLayout chatbot>
   <Hero />
 
-  <PostFeed />
+  <FeaturedProjects />
 
-  <!-- =========================== Closing CTA =========================== -->
+  <PostFeed limit={4} />
+
   <section class="closing">
     <div class="container container-narrow closing__inner reveal">
-      <p class="eyebrow">Get in touch</p>
       <h2 class="closing__title">想聊点什么？</h2>
       <p class="closing__lede">
-        关于合作、技术、户外、或者只是想认识一下 —— 邮件最稳。
+        合作、技术、户外，或者只是打个招呼 —— 邮件最稳。
       </p>
       <div class="closing__ctas">
         <a href="mailto:lazywc@gmail.com" class="btn btn--primary">lazywc@gmail.com</a>
+        <a href="/now/" class="btn btn--ghost">最近在干嘛</a>
       </div>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  /* Closing */
   .closing {
     padding: var(--s-20) 0 var(--s-16);
     color: var(--color-text);
@@ -40,15 +41,15 @@ import PostFeed from '@components/PostFeed.astro';
     align-items: center;
   }
   .closing__title {
-    font-size: clamp(32px, 4vw, 48px);
-    margin: var(--s-3) 0 var(--s-5);
+    font-size: clamp(28px, 4vw, 40px);
+    margin: 0 0 var(--s-4);
     font-weight: 500;
     letter-spacing: -0.02em;
     color: var(--color-text);
   }
   .closing__lede {
     color: var(--color-text-muted);
-    max-width: 480px;
+    max-width: 420px;
     margin: 0 0 var(--s-6);
     font-size: 17px;
     line-height: 1.6;
@@ -59,13 +60,6 @@ import PostFeed from '@components/PostFeed.astro';
     flex-wrap: wrap;
     justify-content: center;
   }
-  .closing .btn--primary {
-    background: var(--color-ink);
-    color: var(--color-bg);
-  }
-  .closing .btn--primary:hover {
-    background: var(--color-ink-soft);
-  }
 
   .btn {
     display: inline-flex;
@@ -75,7 +69,8 @@ import PostFeed from '@components/PostFeed.astro';
     border-radius: var(--r-md);
     font-size: 15px;
     font-weight: 500;
-    transition: transform var(--t-fast) var(--ease-out),
+    transition:
+      transform var(--t-fast) var(--ease-out),
       background var(--t-fast) var(--ease-out),
       border-color var(--t-fast) var(--ease-out);
   }
@@ -84,10 +79,19 @@ import PostFeed from '@components/PostFeed.astro';
     transform: translateY(-1px);
   }
   .btn--primary {
-    background: var(--color-accent);
-    color: var(--color-accent-contrast);
+    background: var(--color-ink);
+    color: var(--color-bg);
   }
   .btn--primary:hover {
-    background: var(--color-accent-dark);
+    background: var(--color-ink-soft);
+  }
+  .btn--ghost {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+  .btn--ghost:hover {
+    border-color: var(--color-accent);
+    background: var(--color-accent-pale);
   }
 </style>

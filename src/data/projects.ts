@@ -1,7 +1,5 @@
 // GitHub projects portfolio · mirrors the profile README grouping.
-// 5 categories, 18 projects. Descriptions adapted verbatim from
-// github.com/toolazytoname/toolazytoname profile README.
-// Stars are a manual snapshot — update periodically.
+// Stars are a manual snapshot — update periodically. Hide 0 in UI.
 
 export type ProjectCategory =
   | 'mobile-lab'
@@ -20,6 +18,8 @@ export type Project = {
   demo?: string;
   stars: number;
   image?: string;
+  featured?: boolean;
+  summary?: string;
   status: 'shipped' | 'wip';
 };
 
@@ -28,24 +28,24 @@ export const categoryMeta: Record<
   { label: string; sublabel: string }
 > = {
   'mobile-lab': {
-    label: 'Mobile Lab & On-Device AI',
+    label: '手机实验室 & 端侧 AI',
     sublabel: '把一台 OnePlus 8T 变成 AI 可控的开放手机实验室。',
   },
   agents: {
-    label: 'Agents & Automation',
-    sublabel: '自动化的个人 agent、额度看板和中继部署。',
+    label: 'Agent & 自动化',
+    sublabel: '个人 agent、额度看板和中继部署。',
   },
   infra: {
-    label: 'Infra & Ops Skills',
-    sublabel: '家庭服务器、代理诊断、微信小程序 CI/CD 的运维工具。',
+    label: '基础设施 & 运维',
+    sublabel: '家庭服务器、代理诊断、微信小程序 CI/CD。',
   },
   standalone: {
-    label: 'Standalone Projects',
-    sublabel: '能独立用的产品 —— 节拍器、自媒体管线、量化系统。',
+    label: '独立产品',
+    sublabel: '能单独用的东西：节拍器、自媒体管线、量化系统。',
   },
   'legacy-ios': {
     label: 'Legacy iOS',
-    sublabel: '老本行时期的开源工具，微信导出、Xcode 辅助、Flutter。',
+    sublabel: '老本行时期的开源：微信导出、Xcode 辅助、Flutter。',
   },
 };
 
@@ -61,7 +61,10 @@ export const projects: Project[] = [
     repo: 'https://github.com/toolazytoname/oneplus-8t-mobile-lab',
     demo: 'https://toolazytoname.github.io/oneplus-8t-mobile-lab/',
     stars: 0,
-    image: 'https://raw.githubusercontent.com/toolazytoname/oneplus-8t-mobile-lab/main/docs/assets/oneplus8t-field-guide/mobile-lab-ecosystem-v2.png',
+    image:
+      'https://raw.githubusercontent.com/toolazytoname/oneplus-8t-mobile-lab/main/docs/assets/oneplus8t-field-guide/mobile-lab-ecosystem-v2.png',
+    featured: true,
+    summary: '一台 OnePlus 8T 上的刷机、真机自动化、安全实验与端侧 AI 工作台。',
     status: 'wip',
   },
   {
@@ -73,7 +76,9 @@ export const projects: Project[] = [
     language: 'Shell',
     repo: 'https://github.com/toolazytoname/android-ai-stack',
     stars: 0,
-    image: 'https://raw.githubusercontent.com/toolazytoname/android-ai-stack/main/docs/assets/android-ai-stack-overview.png',
+    image:
+      'https://raw.githubusercontent.com/toolazytoname/android-ai-stack/main/docs/assets/android-ai-stack-overview.png',
+    summary: 'Termux + Kali PRoot 上的本机 AI 工具链：在手机上跑 coding agent。',
     status: 'wip',
   },
   {
@@ -85,7 +90,9 @@ export const projects: Project[] = [
     language: 'Java',
     repo: 'https://github.com/toolazytoname/xiaohei-phone-agent',
     stars: 0,
-    image: 'https://raw.githubusercontent.com/toolazytoname/xiaohei-phone-agent/main/docs/assets/xiaohei-phone-agent-overview.png',
+    image:
+      'https://raw.githubusercontent.com/toolazytoname/xiaohei-phone-agent/main/docs/assets/xiaohei-phone-agent-overview.png',
+    summary: '本地优先的 Android 手机助手：语音 → 意图 → 可观察的操作。',
     status: 'wip',
   },
   {
@@ -97,6 +104,7 @@ export const projects: Project[] = [
     language: 'Shell',
     repo: 'https://github.com/toolazytoname/pocket-pentest',
     stars: 0,
+    summary: '授权场景下的随身渗透 / CTF 工具包：Magisk + Termux/PRoot Kali。',
     status: 'wip',
   },
   {
@@ -108,6 +116,7 @@ export const projects: Project[] = [
     language: null,
     repo: 'https://github.com/toolazytoname/android-device-test',
     stars: 0,
+    summary: '真机 Android 测试技能：ADB、uiautomator2、PerfDog，分清真假失败。',
     status: 'wip',
   },
 
@@ -121,6 +130,8 @@ export const projects: Project[] = [
     language: 'HTML',
     repo: 'https://github.com/toolazytoname/GridGo',
     demo: 'https://beta.gridgo.weichao.studio/',
+    featured: true,
+    summary: '以日历为中心的个人 Agent 管家：一个格子，一件事情。',
     stars: 0,
     status: 'wip',
   },
@@ -133,7 +144,9 @@ export const projects: Project[] = [
     language: 'Python',
     repo: 'https://github.com/toolazytoname/llm-quota-watchdog',
     stars: 0,
-    image: 'https://raw.githubusercontent.com/toolazytoname/llm-quota-watchdog/main/docs/screenshot.png',
+    image:
+      'https://raw.githubusercontent.com/toolazytoname/llm-quota-watchdog/main/docs/screenshot.png',
+    summary: '多个 LLM coding plan 额度的看板与推送提醒，纯标准库、无数据库。',
     status: 'shipped',
   },
   {
@@ -145,6 +158,7 @@ export const projects: Project[] = [
     language: 'TypeScript',
     repo: 'https://github.com/toolazytoname/happy-relay-deploy',
     stars: 0,
+    summary: '自托管 Happy relay：用手机远程驱动 Claude Code，默认仅 Tailnet。',
     status: 'shipped',
   },
 
@@ -158,6 +172,8 @@ export const projects: Project[] = [
     language: 'Go',
     repo: 'https://github.com/toolazytoname/lodge',
     demo: 'https://lodge.weichao.studio',
+    featured: true,
+    summary: '用一个 Go 二进制看清服务器上运行的服务、暴露入口与加密凭据。',
     stars: 0,
     status: 'shipped',
   },
@@ -170,6 +186,7 @@ export const projects: Project[] = [
     language: null,
     repo: 'https://github.com/toolazytoname/home-nas-skill',
     stars: 0,
+    summary: '家庭 NAS 搭建与运维手册：媒体管线、备份，以及国内网络坑点。',
     status: 'shipped',
   },
   {
@@ -181,6 +198,7 @@ export const projects: Project[] = [
     language: 'Shell',
     repo: 'https://github.com/toolazytoname/reality-handshake',
     stars: 0,
+    summary: '诊断 VLESS+Reality / XTLS 握手失败，并把新客户端接到现有服务器。',
     status: 'shipped',
   },
   {
@@ -192,6 +210,7 @@ export const projects: Project[] = [
     language: 'Shell',
     repo: 'https://github.com/toolazytoname/wechat-mp-devops',
     stars: 0,
+    summary: '微信小程序 CI/CD 与运维手册，封装成可直接用的 skill。',
     status: 'shipped',
   },
 
@@ -207,6 +226,8 @@ export const projects: Project[] = [
     demo: 'https://jpq.weichao.studio',
     stars: 0,
     image: 'https://raw.githubusercontent.com/toolazytoname/metronome/main/images/bunny.png',
+    featured: true,
+    summary: '打开浏览器就能用的节拍器，支持童声数拍、强弱拍与多种拍号。',
     status: 'shipped',
   },
   {
@@ -218,7 +239,9 @@ export const projects: Project[] = [
     language: 'Python',
     repo: 'https://github.com/toolazytoname/MediaForge',
     stars: 0,
-    image: 'https://raw.githubusercontent.com/toolazytoname/MediaForge/main/docs/samples/xhs_card_sample-001.png',
+    image:
+      'https://raw.githubusercontent.com/toolazytoname/MediaForge/main/docs/samples/xhs_card_sample-001.png',
+    summary: 'AI 自媒体管线：选题 → 创作 → 质量门禁 → 人工复核 → 多平台发布。',
     status: 'wip',
   },
   {
@@ -230,6 +253,7 @@ export const projects: Project[] = [
     language: 'Python',
     repo: 'https://github.com/toolazytoname/Sentinel',
     stars: 2,
+    summary: '长期投资者的加密货币量化系统：纪律优先，LLM 只研究 / 复核 / 否决，不下单。',
     status: 'wip',
   },
 
@@ -242,17 +266,18 @@ export const projects: Project[] = [
     language: 'Objective-C',
     repo: 'https://github.com/toolazytoname/WeChatExport',
     stars: 14,
+    summary: '导出 iOS 微信聊天记录。',
     status: 'shipped',
   },
   {
     name: 'FDTops',
     title: 'FDTops',
-    description:
-      'Batch add/replace class-name prefixes \u2014 an Xcode helper.',
+    description: 'Batch add/replace class-name prefixes \u2014 an Xcode helper.',
     category: 'legacy-ios',
     language: 'Python',
     repo: 'https://github.com/toolazytoname/FDTops',
     stars: 7,
+    summary: '批量增加 / 替换 Objective-C 类名前缀的 Xcode 辅助工具。',
     status: 'shipped',
   },
   {
@@ -263,6 +288,7 @@ export const projects: Project[] = [
     language: 'Objective-C',
     repo: 'https://github.com/toolazytoname/BPFlutter',
     stars: 3,
+    summary: 'iOS 工程集成 Flutter 的指南与示例。',
     status: 'shipped',
   },
 ];

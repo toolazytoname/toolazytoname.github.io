@@ -2,6 +2,13 @@
 import { nowEntries } from '@data/now';
 
 const sorted = [...nowEntries].sort((a, b) => a.date.localeCompare(b.date));
+
+const tagLabel: Record<string, string> = {
+  work: '工作',
+  life: '生活',
+  travel: '出行',
+  'open-source': '开源',
+};
 ---
 
 <ol class="timeline" reversed>
@@ -10,12 +17,12 @@ const sorted = [...nowEntries].sort((a, b) => a.date.localeCompare(b.date));
       <li class="timeline__item reveal" style={`--i: ${i};`}>
         <div class="timeline__dot" aria-hidden="true" />
         <div class="timeline__content">
-          <p class="timeline__date eyebrow">{entry.date}</p>
-          <h3 class="timeline__title serif">{entry.title}</h3>
+          <p class="timeline__date">{entry.date}</p>
+          <h3 class="timeline__title">{entry.title}</h3>
           <p class="timeline__body">{entry.body}</p>
           {entry.tag && (
             <span class={`timeline__tag timeline__tag--${entry.tag}`}>
-              {entry.tag}
+              {tagLabel[entry.tag] ?? entry.tag}
             </span>
           )}
         </div>
@@ -38,13 +45,13 @@ const sorted = [...nowEntries].sort((a, b) => a.date.localeCompare(b.date));
     top: 8px;
     bottom: 8px;
     width: 1px;
-    background: var(--color-warm-border);
+    background: var(--color-border);
   }
   .timeline__item {
     position: relative;
     padding-left: var(--s-10);
-    padding-bottom: var(--s-10);
-    transition-delay: calc(var(--i, 0) * 120ms);
+    padding-bottom: var(--s-8);
+    transition-delay: calc(var(--i, 0) * 80ms);
   }
   .timeline__item:last-child {
     padding-bottom: 0;
@@ -56,28 +63,32 @@ const sorted = [...nowEntries].sort((a, b) => a.date.localeCompare(b.date));
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: var(--color-parchment);
-    border: 2px solid var(--color-terracotta);
-    box-shadow: 0 0 0 4px var(--color-parchment);
+    background: var(--color-bg);
+    border: 2px solid var(--color-accent);
+    box-shadow: 0 0 0 4px var(--color-bg-pale);
   }
   .timeline__content {
-    background: var(--color-ivory);
-    border: 1px solid var(--color-warm-border);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
     border-radius: var(--r-lg);
     padding: var(--s-5) var(--s-6);
   }
   .timeline__date {
     margin: 0 0 var(--s-2);
-    color: var(--color-warm-text-dim);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-text-dim);
   }
   .timeline__title {
-    font-size: 22px;
+    font-size: 20px;
+    font-weight: 500;
     margin: 0 0 var(--s-3);
-    color: var(--color-warm-text);
+    color: var(--color-text);
+    letter-spacing: -0.01em;
   }
   .timeline__body {
     margin: 0;
-    color: var(--color-warm-text-muted);
+    color: var(--color-text-muted);
     line-height: 1.65;
     font-size: 15px;
   }
@@ -86,26 +97,24 @@ const sorted = [...nowEntries].sort((a, b) => a.date.localeCompare(b.date));
     margin-top: var(--s-3);
     font-size: 11px;
     padding: 2px 10px;
-    border-radius: 980px;
-    background: var(--color-warm-sand);
-    color: var(--color-warm-text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
+    border-radius: var(--r-sm);
+    background: var(--color-bg-subtle);
+    color: var(--color-text-muted);
   }
   .timeline__tag--work {
-    background: rgba(201, 100, 66, 0.15);
-    color: var(--color-terracotta);
+    background: var(--color-accent-pale);
+    color: var(--color-accent-dark);
   }
   .timeline__tag--life {
-    background: rgba(217, 119, 87, 0.15);
-    color: #a64f30;
+    background: var(--color-bg-muted);
+    color: var(--color-text-muted);
   }
   .timeline__tag--travel {
-    background: rgba(201, 100, 66, 0.12);
-    color: var(--color-coral);
+    background: var(--color-accent-pale);
+    color: var(--color-accent-dark);
   }
   .timeline__tag--open-source {
-    background: rgba(138, 111, 90, 0.15);
-    color: #6b5a47;
+    background: var(--color-bg-muted);
+    color: var(--color-text);
   }
 </style>

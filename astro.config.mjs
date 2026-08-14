@@ -34,8 +34,16 @@ export default defineConfig({
         '@styles': '/src/styles',
       },
     },
-    ssr: {
-      noExternal: ['three'],
+    // Rolldown prebundle was resolving jsx-dev-runtime to the production
+    // build where jsxDEV is void 0, which emptied every React island.
+    optimizeDeps: {
+      exclude: [
+        'react',
+        'react-dom',
+        'react-dom/client',
+        'react/jsx-runtime',
+        'react/jsx-dev-runtime',
+      ],
     },
   },
 });

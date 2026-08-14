@@ -10,9 +10,11 @@ interface Props {
   seo?: Seo;
   /** Extra JSON-LD objects to merge into the graph */
   jsonLdExtra?: Record<string, unknown> | Record<string, unknown>[];
+  /** Show floating chatbot (home / about / now only) */
+  chatbot?: boolean;
 }
 
-const { seo, jsonLdExtra } = Astro.props;
+const { seo, jsonLdExtra, chatbot = false } = Astro.props;
 const title = seo?.title
   ? `${seo.title} · ${SITE.name}`
   : `${SITE.name} — ${SITE.description.split('。')[0]}`;
@@ -113,7 +115,7 @@ if (jsonLdExtra) {
     </main>
 
     <Footer />
-    <Chatbot client:idle />
+    {chatbot && <Chatbot client:only="react" />}
 
     <noscript>
       <style>
@@ -128,23 +130,36 @@ if (jsonLdExtra) {
     </noscript>
 
     <script>
-      // Reveal-on-scroll observer — single global instance, no deps.
+      // Reveal-on-scroll — mark in-view items first, then opt into hiding the rest.
       const els = document.querySelectorAll<HTMLElement>('.reveal');
-      if ('IntersectionObserver' in window && els.length) {
+      const markVisible = (el: Element) => el.classList.add('is-visible');
+
+      if (!els.length) {
+        // nothing
+      } else if (!('IntersectionObserver' in window)) {
+        els.forEach(markVisible);
+      } else {
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        els.forEach((el) => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < vh * 0.92 && rect.bottom > 0) markVisible(el);
+        });
+        document.documentElement.classList.add('reveal-ready');
+
         const io = new IntersectionObserver(
           (entries) => {
             for (const e of entries) {
               if (e.isIntersecting) {
-                e.target.classList.add('is-visible');
+                markVisible(e.target);
                 io.unobserve(e.target);
               }
             }
           },
-          { rootMargin: '0px 0px -10% 0px', threshold: 0.08 },
+          { rootMargin: '0px 0px -8% 0px', threshold: 0.05 },
         );
-        els.forEach((el) => io.observe(el));
-      } else {
-        els.forEach((el) => el.classList.add('is-visible'));
+        els.forEach((el) => {
+          if (!el.classList.contains('is-visible')) io.observe(el);
+        });
       }
     </script>
 

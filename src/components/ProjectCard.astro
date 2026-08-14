@@ -15,112 +15,192 @@ const LANG_COLORS: Record<string, string> = {
 interface Props {
   project: Project;
   index: number;
+  featured?: boolean;
 }
 
-const { project, index } = Astro.props;
+const { project, index, featured = false } = Astro.props;
 const dotColor = project.language ? LANG_COLORS[project.language] : null;
+const blurb = project.summary ?? project.description;
 ---
 
-<article class="proj-card reveal" style={`--i: ${index};`}>
-  {project.image && (
-    <a href={project.repo} class="proj-card__image-link" target="_blank" rel="noopener">
-      <img
-        src={project.image}
-        alt=""
-        class="proj-card__image"
-        loading="lazy"
-        decoding="async"
-      />
-    </a>
-  )}
+<article
+  class:list={['proj-card', featured && 'proj-card--featured', 'reveal']}
+  style={`--i: ${index};`}
+>
+  {
+    featured && project.image && (
+      <a
+        href={project.demo ?? project.repo}
+        class="proj-card__media"
+        target="_blank"
+        rel="noopener"
+        tabindex="-1"
+        aria-hidden="true"
+      >
+        <img src={project.image} alt="" loading="lazy" width="640" height="360" />
+      </a>
+    )
+  }
 
-  <div class="proj-card__body">
-    <div class="proj-card__head">
-      <span class="proj-card__title-row">
-        {project.language && (
+  <div class="proj-card__main">
+    <div class="proj-card__title-row">
+      {
+        project.language && (
           <span
             class="proj-card__dot"
             style={dotColor ? `background:${dotColor};` : ''}
             title={project.language}
             aria-hidden="true"
-          ></span>
-        )}
-        <span class="proj-card__name">{project.title}</span>
-      </span>
-      <span class="proj-card__meta">
-        <span class={`proj-card__status proj-card__status--${project.status}`}>
-          {project.status}
-        </span>
-        {project.stars > 0 && (
+          />
+        )
+      }
+      <h3 class="proj-card__name">{project.title}</h3>
+      {
+        project.stars > 0 && (
           <span class="proj-card__stars">★ {project.stars}</span>
-        )}
-      </span>
+        )
+      }
     </div>
 
-    <p class="proj-card__desc">{project.description}</p>
+    {featured && <p class="proj-card__desc">{blurb}</p>}
+  </div>
 
-    <div class="proj-card__footer">
-      {project.language && <span class="proj-card__lang">{project.language}</span>}
-      <span class="proj-card__links">
-        {project.demo && (
-          <a href={project.demo} class="proj-card__action" target="_blank" rel="noopener">主站 →</a>
-        )}
-        <a href={project.repo} class="proj-card__action proj-card__action--repo" target="_blank" rel="noopener">GitHub →</a>
-      </span>
-    </div>
+  <div class="proj-card__aside">
+    {
+      featured && (
+        <span class={`proj-card__status proj-card__status--${project.status}`}>
+          {project.status === 'shipped' ? '已上线' : '进行中'}
+        </span>
+      )
+    }
+    {project.language && <span class="proj-card__lang">{project.language}</span>}
+    <span class="proj-card__links">
+      {
+        project.demo && (
+          <a href={project.demo} class="proj-card__action" target="_blank" rel="noopener">
+            主站
+          </a>
+        )
+      }
+      <a
+        href={project.repo}
+        class="proj-card__action proj-card__action--repo"
+        target="_blank"
+        rel="noopener"
+        aria-label={`${project.title} GitHub`}
+      >
+        GitHub ↗
+      </a>
+    </span>
   </div>
 </article>
 
 <style>
   .proj-card {
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    align-items: stretch;
-    min-height: 126px;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--s-4);
+    min-height: 54px;
+    padding: var(--s-2) var(--s-3);
     border-radius: var(--r-md);
-    background: var(--color-bg);
-    overflow: hidden;
-    border: 1px solid transparent;
-    transition: border-color var(--t-fast) var(--ease-out),
-      background var(--t-fast) var(--ease-out);
+    transition: background var(--t-fast) var(--ease-out);
   }
   .proj-card:hover {
-    border-color: var(--color-border);
     background: var(--color-bg-soft);
   }
-
-  .proj-card__image-link {
-    display: block;
-    width: 148px;
-    min-height: 100%;
-    text-decoration: none;
-    overflow: hidden;
-    background: var(--color-dark-bg);
+  .proj-card--featured {
+    grid-template-columns: 140px minmax(0, 1fr) auto;
+    align-items: stretch;
+    min-height: 0;
+    padding: var(--s-4);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
   }
-  .proj-card__image {
+  .proj-card--featured:not(:has(.proj-card__media)) {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .proj-card--featured:hover {
+    border-color: var(--color-accent);
+  }
+  .proj-card__media {
+    display: block;
+    border-radius: var(--r-md);
+    overflow: hidden;
+    background: var(--color-bg-subtle);
+    align-self: stretch;
+  }
+  .proj-card__media img {
     width: 100%;
     height: 100%;
-    min-height: 126px;
+    min-height: 96px;
     object-fit: cover;
-    transition: transform var(--t-slow) var(--ease-out);
   }
-  .proj-card:hover .proj-card__image {
-    transform: scale(1.04);
+  .proj-card__main {
+    min-width: 0;
   }
-
-  .proj-card__meta {
+  .proj-card__title-row {
     display: flex;
     align-items: center;
     gap: var(--s-2);
-    flex-shrink: 0;
+    min-width: 0;
   }
-
+  .proj-card__dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    flex: 0 0 auto;
+    background: var(--color-text-dim);
+  }
+  .proj-card__name {
+    min-width: 0;
+    margin: 0;
+    overflow: hidden;
+    color: var(--color-text);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.35;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: color var(--t-fast) var(--ease-out);
+  }
+  .proj-card--featured .proj-card__name {
+    font-size: 17px;
+    white-space: normal;
+  }
+  .proj-card:hover .proj-card__name {
+    color: var(--color-accent);
+  }
+  .proj-card__stars,
+  .proj-card__lang {
+    flex: 0 0 auto;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-text-dim);
+  }
+  .proj-card__desc {
+    max-width: 46ch;
+    margin: var(--s-2) 0 0;
+    color: var(--color-text-muted);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .proj-card__aside {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--s-3);
+  }
+  .proj-card--featured .proj-card__aside {
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
   .proj-card__status {
-    font-size: 10px;
     padding: 3px 8px;
     border-radius: var(--r-sm);
+    font-size: 10px;
     font-weight: 600;
-    text-transform: uppercase;
     letter-spacing: 0.4px;
   }
   .proj-card__status--shipped {
@@ -131,88 +211,16 @@ const dotColor = project.language ? LANG_COLORS[project.language] : null;
     background: var(--color-bg-muted);
     color: var(--color-text-muted);
   }
-
-  .proj-card__body {
-    min-width: 0;
-    padding: var(--s-3) var(--s-4);
-    display: flex;
-    flex-direction: column;
-  }
-
-  .proj-card__head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--s-2);
-    margin-bottom: var(--s-1);
-  }
-  .proj-card__title-row {
-    display: flex;
-    align-items: center;
-    gap: var(--s-2);
-    min-width: 0;
-  }
-  .proj-card__dot {
-    display: inline-block;
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    background: var(--color-text-dim);
-  }
-  .proj-card__name {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--color-text);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    transition: color var(--t-fast) var(--ease-out);
-  }
-  .proj-card:hover .proj-card__name {
-    color: var(--color-accent);
-  }
-  .proj-card__stars {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--color-text-dim);
-    flex-shrink: 0;
-  }
-
-  .proj-card__desc {
-    font-size: 13px;
-    line-height: 1.45;
-    color: var(--color-text-muted);
-    margin: 0 0 auto;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .proj-card__footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--s-2);
-    padding-top: var(--s-2);
-  }
-  .proj-card__lang {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--color-text-dim);
-  }
   .proj-card__links {
     display: flex;
     gap: var(--s-3);
   }
   .proj-card__action {
-    display: inline-flex;
+    color: var(--color-accent);
     font-size: 12px;
     font-weight: 500;
-    color: var(--color-accent);
     text-decoration: none;
+    white-space: nowrap;
   }
   .proj-card__action:hover {
     text-decoration: underline;
@@ -222,34 +230,35 @@ const dotColor = project.language ? LANG_COLORS[project.language] : null;
     color: var(--color-text-dim);
   }
 
-  @media (max-width: 760px) {
-    .proj-card {
-      min-height: 112px;
+  @media (max-width: 720px) {
+    .proj-card--featured {
+      grid-template-columns: 1fr;
+      gap: var(--s-3);
     }
-    .proj-card__image-link {
-      width: 104px;
+    .proj-card__media img {
+      min-height: 140px;
     }
-    .proj-card__image {
-      min-height: 112px;
-    }
-    .proj-card__body {
-      padding: var(--s-3);
-    }
-    .proj-card__status {
-      display: none;
+    .proj-card--featured .proj-card__aside {
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      flex-wrap: wrap;
     }
   }
 
-  @media (max-width: 420px) {
-    .proj-card__image-link {
-      width: 88px;
+  @media (max-width: 620px) {
+    .proj-card {
+      gap: var(--s-2);
+      padding-inline: 0;
     }
-    .proj-card__name {
-      font-size: 15px;
+    .proj-card--featured {
+      padding: var(--s-4);
+    }
+    .proj-card__lang {
+      display: none;
     }
     .proj-card__desc {
-      -webkit-line-clamp: 2;
-      line-clamp: 2;
+      font-size: 13px;
     }
   }
 </style>

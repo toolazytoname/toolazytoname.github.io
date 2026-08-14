@@ -3,30 +3,17 @@
 
 <section class="hero" id="hero">
   <div class="container container-narrow hero__inner">
-    <h1 class="hero__sr-only">lazy，独立开发者</h1>
-
-    <div class="hero__terminal">
-      <div class="terminal__bar">
-        <span class="terminal__dot"></span>
-        <span class="terminal__dot"></span>
-        <span class="terminal__dot"></span>
-        <span class="terminal__title">whoami.sh</span>
-      </div>
-      <pre class="terminal__body"><code><span class="terminal__prompt">$</span> whoami
-<span class="terminal__out">ex-big-tech / indie-dev</span>
-
-<span class="terminal__prompt">$</span> ls skills/
-<span class="terminal__out">swift/  llvm/  typescript/  ai/</span>
-
-<span class="terminal__prompt">$</span> cat status.txt
-<span class="terminal__out">building tools with AI</span>
-<span class="terminal__out">skiing · climbing · diving</span></code></pre>
-    </div>
-
+    <p class="hero__name">lazy</p>
+    <h1 class="hero__title">
+      做过 Swift 编译器、LLVM 后端。<br />
+      现在做独立开发者，用 AI 造自己想要的工具。
+    </h1>
+    <p class="hero__lede">
+      手机实验室、个人 Agent、基础设施 —— 还有偶尔出门滑雪、潜水、攀岩。
+    </p>
     <div class="hero__ctas">
-      <a href="#posts" class="btn btn--primary">读文章</a>
-      <a href="/projects/" class="btn btn--ghost">看项目</a>
-      <a href="/about/" class="btn btn--ghost">关于我</a>
+      <a href="/projects/" class="btn btn--primary">看项目</a>
+      <a href="#posts" class="btn btn--ghost">读文章</a>
     </div>
   </div>
 </section>
@@ -40,71 +27,29 @@
     max-width: 680px;
   }
 
-  .hero__sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
+  .hero__name {
+    margin: 0 0 var(--s-4);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--color-text-muted);
   }
 
-  /* Terminal code block */
-  .hero__terminal {
-    background: var(--color-dark-bg);
-    border-radius: var(--r-lg);
-    overflow: hidden;
-    margin-bottom: var(--s-6);
-    border: 1px solid var(--color-dark-border);
+  .hero__title {
+    margin: 0 0 var(--s-5);
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
   }
-  .terminal__bar {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 10px 14px;
-    background: var(--color-dark-bg-soft);
-    border-bottom: 1px solid var(--color-dark-border);
-  }
-  .terminal__dot {
-    width: 11px;
-    height: 11px;
-    border-radius: 50%;
-    background: var(--color-dark-border);
-  }
-  .terminal__dot:nth-child(1) {
-    background: #ff5f57;
-  }
-  .terminal__dot:nth-child(2) {
-    background: #febc2e;
-  }
-  .terminal__dot:nth-child(3) {
-    background: #28c840;
-  }
-  .terminal__title {
-    margin-left: auto;
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--color-dark-text-dim);
-  }
-  .terminal__body {
-    margin: 0;
-    padding: var(--s-4) var(--s-5);
-    font-family: var(--font-mono);
-    font-size: 13px;
-    line-height: 1.7;
-    color: var(--color-dark-text-muted);
-    overflow-x: auto;
-  }
-  .terminal__prompt {
-    color: var(--color-accent);
-    font-weight: 600;
-    margin-right: 6px;
-  }
-  .terminal__out {
-    color: var(--color-dark-text);
+
+  .hero__lede {
+    margin: 0 0 var(--s-8);
+    max-width: 42ch;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--color-text-muted);
   }
 
   .hero__ctas {
@@ -121,7 +66,8 @@
     border-radius: var(--r-md);
     font-size: 15px;
     font-weight: 500;
-    transition: transform var(--t-fast) var(--ease-out),
+    transition:
+      transform var(--t-fast) var(--ease-out),
       background var(--t-fast) var(--ease-out),
       border-color var(--t-fast) var(--ease-out);
   }
@@ -149,7 +95,11 @@
   }
 
   @media (max-width: 600px) {
-    .hero { padding: var(--s-10) 0 var(--s-8); }
-    .terminal__body { font-size: 12px; }
+    .hero {
+      padding: var(--s-10) 0 var(--s-8);
+    }
+    .hero__title br {
+      display: none;
+    }
   }
 </style>

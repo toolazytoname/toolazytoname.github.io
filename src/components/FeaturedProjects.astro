@@ -1,0 +1,182 @@
+---
+import { projects } from '@data/projects';
+
+const featured = projects.filter((p) => p.featured);
+---
+
+<section class="home-projects" aria-labelledby="home-projects-title">
+  <div class="container container-narrow">
+    <header class="home-projects__head reveal">
+      <h2 class="home-projects__title" id="home-projects-title">在做的事</h2>
+      <p class="home-projects__lede">几件还在推进、也愿意给人用的东西。</p>
+    </header>
+
+    <ul class="home-projects__list">
+      {
+        featured.map((project, i) => (
+          <li class="home-projects__item reveal" style={`--i: ${i};`}>
+            <a
+              href={project.demo ?? project.repo}
+              class:list={['home-projects__card', !project.image && 'home-projects__card--text']}
+              target="_blank"
+              rel="noopener"
+            >
+              {project.image && (
+                <img
+                  src={project.image}
+                  alt=""
+                  class="home-projects__img"
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  width="640"
+                  height="360"
+                />
+              )}
+              <div class="home-projects__body">
+                <div class="home-projects__meta">
+                  <h3 class="home-projects__name">{project.title}</h3>
+                  <span class={`home-projects__status home-projects__status--${project.status}`}>
+                    {project.status === 'shipped' ? '已上线' : '进行中'}
+                  </span>
+                </div>
+                <p class="home-projects__summary">
+                  {project.summary ?? project.description}
+                </p>
+              </div>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="home-projects__more reveal">
+      <a href="/projects/" class="home-projects__more-link">
+        全部 {projects.length} 个项目 →
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .home-projects {
+    padding: var(--s-16) 0 var(--s-8);
+  }
+  .home-projects__head {
+    margin-bottom: var(--s-8);
+  }
+  .home-projects__title {
+    margin: 0 0 var(--s-3);
+    font-size: clamp(28px, 3.5vw, 40px);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--color-text);
+  }
+  .home-projects__lede {
+    margin: 0;
+    font-size: 17px;
+    color: var(--color-text-muted);
+  }
+  .home-projects__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+  }
+  .home-projects__card {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: var(--s-5);
+    padding: var(--s-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--r-lg);
+    background: var(--color-bg);
+    text-decoration: none;
+    transition:
+      border-color var(--t-fast) var(--ease-out),
+      background var(--t-fast) var(--ease-out);
+  }
+  .home-projects__card--text {
+    grid-template-columns: 1fr;
+  }
+  .home-projects__card:hover {
+    text-decoration: none;
+    border-color: var(--color-accent);
+    background: var(--color-bg-soft);
+  }
+  .home-projects__img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: var(--r-md);
+    background: var(--color-bg-subtle);
+  }
+  .home-projects__body {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--s-2);
+  }
+  .home-projects__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+    flex-wrap: wrap;
+  }
+  .home-projects__name {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--color-text);
+  }
+  .home-projects__card:hover .home-projects__name {
+    color: var(--color-accent);
+  }
+  .home-projects__status {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 2px 8px;
+    border-radius: var(--r-sm);
+  }
+  .home-projects__status--shipped {
+    background: var(--color-accent-pale);
+    color: var(--color-accent-dark);
+  }
+  .home-projects__status--wip {
+    background: var(--color-bg-muted);
+    color: var(--color-text-muted);
+  }
+  .home-projects__summary {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--color-text-muted);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .home-projects__more {
+    margin-top: var(--s-6);
+    text-align: center;
+  }
+  .home-projects__more-link {
+    font-size: 15px;
+    color: var(--color-text-muted);
+  }
+  .home-projects__more-link:hover {
+    color: var(--color-accent);
+  }
+
+  @media (max-width: 600px) {
+    .home-projects__card {
+      grid-template-columns: 1fr;
+      gap: var(--s-3);
+    }
+    .home-projects__img {
+      height: 140px;
+    }
+  }
+</style>

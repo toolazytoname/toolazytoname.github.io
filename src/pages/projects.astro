@@ -13,28 +13,40 @@ const categories: ProjectCategory[] = [
   'standalone',
   'legacy-ios',
 ];
+const featuredProjects = projects.filter((project) => project.featured);
 ---
 
 <BaseLayout
   seo={{
     title: 'Projects',
-    description: '18 个开源项目 —— 手机 AI Agent、自动化工具、基础设施、独立产品、老 iOS。',
+    description: `${projects.length} 个开源项目：手机 AI Agent、自动化工具、基础设施、独立产品、老 iOS。`,
   }}
 >
   <section class="projects-page">
     <div class="container">
       <header class="projects-page__head reveal">
-        <p class="eyebrow">Projects · 项目</p>
         <h1 class="projects-page__title">{projects.length} 个开源项目</h1>
         <p class="projects-page__lede">
           从编译器到手机 AI Agent —— 我造的工具，都在这。
         </p>
       </header>
 
+      <section class="projects-featured" aria-labelledby="featured-projects">
+        <h2 class="projects-featured__title" id="featured-projects">代表项目</h2>
+        <div class="projects-featured__grid">
+          {
+            featuredProjects.map((project, index) => (
+              <ProjectCard project={project} index={index} featured />
+            ))
+          }
+        </div>
+      </section>
+
       {
         categories.map((cat) => {
           const items = projects.filter((p) => p.category === cat);
           const meta = categoryMeta[cat];
+          if (items.length === 0) return null;
           return (
             <section class="projects-group">
               <header class="projects-group__head reveal">
@@ -68,7 +80,7 @@ const categories: ProjectCategory[] = [
     line-height: 1.1;
     letter-spacing: -0.02em;
     color: var(--color-text);
-    margin: var(--s-3) 0 var(--s-4);
+    margin: 0 0 var(--s-4);
   }
   .projects-page__lede {
     color: var(--color-text-muted);
@@ -78,7 +90,7 @@ const categories: ProjectCategory[] = [
   }
 
   .projects-group {
-    margin-bottom: var(--s-10);
+    margin-bottom: var(--s-8);
   }
   .projects-group:last-child {
     margin-bottom: 0;
@@ -106,10 +118,25 @@ const categories: ProjectCategory[] = [
   }
 
   .projects-group__list {
+    display: flex;
+    flex-direction: column;
+  }
+  .projects-group__list :global(.proj-card + .proj-card) {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .projects-featured {
+    margin-bottom: var(--s-12);
+  }
+  .projects-featured__title {
+    margin: 0 0 var(--s-4);
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .projects-featured__grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--s-3);
-    align-items: start;
   }
 
   @media (max-width: 760px) {
@@ -122,15 +149,17 @@ const categories: ProjectCategory[] = [
     .projects-group {
       margin-bottom: var(--s-8);
     }
+    .projects-featured {
+      margin-bottom: var(--s-10);
+    }
+    .projects-featured__grid {
+      grid-template-columns: 1fr;
+    }
     .projects-group__head {
       display: block;
     }
     .projects-group__title {
       margin-bottom: var(--s-1);
-    }
-    .projects-group__list {
-      grid-template-columns: 1fr;
-      gap: var(--s-2);
     }
   }
 </style>
