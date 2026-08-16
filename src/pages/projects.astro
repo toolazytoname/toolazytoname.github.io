@@ -4,7 +4,9 @@ export const prerender = true;
 
 import BaseLayout from '@layouts/BaseLayout.astro';
 import ProjectCard from '@components/ProjectCard.astro';
+import PersonalCard from '@components/PersonalCard.astro';
 import { projects, categoryMeta, getFeaturedProjects, type ProjectCategory } from '@data/projects';
+import { personalTools } from '@data/personal';
 
 const categories: ProjectCategory[] = [
   'mobile-lab',
@@ -41,6 +43,22 @@ const featuredProjects = getFeaturedProjects();
           }
         </div>
       </section>
+
+      {
+        personalTools.length > 0 && (
+          <section class="projects-group" id="personal" aria-labelledby="personal-tools">
+            <header class="projects-group__head reveal">
+              <h2 class="projects-group__title" id="personal-tools">自用</h2>
+              <p class="projects-group__sub">自己在跑的东西，点开方便。不是对外产品。</p>
+            </header>
+            <div class="projects-group__list">
+              {personalTools.map((tool, i) => (
+                <PersonalCard tool={tool} index={i} />
+              ))}
+            </div>
+          </section>
+        )
+      }
 
       {
         categories.map((cat) => {
@@ -121,7 +139,8 @@ const featuredProjects = getFeaturedProjects();
     display: flex;
     flex-direction: column;
   }
-  .projects-group__list :global(.proj-card + .proj-card) {
+  .projects-group__list :global(.proj-card + .proj-card),
+  .projects-group__list :global(.personal-card + .personal-card) {
     border-top: 1px solid var(--color-border);
   }
 

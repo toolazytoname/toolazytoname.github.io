@@ -5,6 +5,7 @@ import { findStaticReply, knowledge } from '../../data/knowledge';
 import { projects, categoryMeta, getFeaturedProjects } from '../../data/projects';
 import type { ProjectCategory } from '../../data/projects';
 import { nowEntries } from '../../data/now';
+import { personalTools } from '../../data/personal';
 
 describe('knowledge base', () => {
   it('has at least 10 entries', () => {
@@ -69,6 +70,15 @@ describe('projects', () => {
     }
     for (const p of projects.filter((p) => p.featured)) {
       expect(p.status).toBe('shipped');
+    }
+  });
+
+  it('personal tools stay out of featured', () => {
+    const featuredNames = getFeaturedProjects().map((p) => p.name);
+    for (const tool of personalTools) {
+      expect(tool.title.length).toBeGreaterThan(0);
+      expect(tool.url).toMatch(/^https:\/\//);
+      expect(featuredNames).not.toContain(tool.name);
     }
   });
 

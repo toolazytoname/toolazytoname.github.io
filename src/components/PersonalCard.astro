@@ -1,0 +1,87 @@
+---
+import type { PersonalTool } from '@data/personal';
+
+interface Props {
+  tool: PersonalTool;
+  index: number;
+}
+
+const { tool, index } = Astro.props;
+---
+
+<article class="personal-card reveal" style={`--i: ${index};`}>
+  <div class="personal-card__main">
+    <h3 class="personal-card__name">{tool.title}</h3>
+    <p class="personal-card__summary">{tool.summary}</p>
+  </div>
+  <a
+    href={tool.url}
+    class="personal-card__open"
+    target="_blank"
+    rel="noopener"
+  >
+    打开 ↗
+  </a>
+</article>
+
+<style>
+  .personal-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--s-4);
+    min-height: 54px;
+    padding: var(--s-2) var(--s-3);
+    border-radius: var(--r-md);
+    transition: background var(--t-fast) var(--ease-out);
+  }
+  .personal-card:hover {
+    background: var(--color-bg-soft);
+  }
+  .personal-card__main {
+    min-width: 0;
+  }
+  .personal-card__name {
+    margin: 0;
+    overflow: hidden;
+    color: var(--color-text);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.35;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .personal-card:hover .personal-card__name {
+    color: var(--color-accent);
+  }
+  .personal-card__summary {
+    margin: 2px 0 0;
+    overflow: hidden;
+    color: var(--color-text-muted);
+    font-size: 13px;
+    line-height: 1.45;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .personal-card__open {
+    flex: 0 0 auto;
+    color: var(--color-accent);
+    font-size: 12px;
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .personal-card__open:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  @media (max-width: 620px) {
+    .personal-card {
+      padding-inline: 0;
+    }
+    .personal-card__summary {
+      white-space: normal;
+    }
+  }
+</style>
