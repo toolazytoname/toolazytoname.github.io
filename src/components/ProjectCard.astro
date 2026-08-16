@@ -11,25 +11,33 @@ const LANG_COLORS: Record<string, string> = {
   HTML: '#e34c26',
   TypeScript: '#3178C6',
   JavaScript: '#f1e05a',
+  Rust: '#dea584',
 };
 
 interface Props {
   project: Project;
   index: number;
   featured?: boolean;
+  comingSoon?: boolean;
 }
 
-const { project, index, featured = false } = Astro.props;
+const { project, index, featured = false, comingSoon = false } = Astro.props;
+const showPanel = featured || comingSoon;
 const dotColor = project.language ? LANG_COLORS[project.language] : null;
 const blurb = project.summary ?? project.description;
 ---
 
 <article
-  class:list={['proj-card', featured && 'proj-card--featured', 'reveal']}
+  class:list={[
+    'proj-card',
+    showPanel && 'proj-card--featured',
+    comingSoon && 'proj-card--soon',
+    'reveal',
+  ]}
   style={`--i: ${index};`}
 >
   {
-    featured && project.image && (
+    showPanel && project.image && (
       <a
         href={project.demo ?? project.repo}
         class="proj-card__media"
@@ -63,20 +71,22 @@ const blurb = project.summary ?? project.description;
       }
     </div>
 
-    {featured && <p class="proj-card__desc">{blurb}</p>}
+    {showPanel && <p class="proj-card__desc">{blurb}</p>}
   </div>
 
   <div class="proj-card__aside">
     {
-      featured && (
-        <span class={`proj-card__status proj-card__status--${project.status}`}>
-          {project.status === 'shipped' ? '已上线' : '进行中'}
+      showPanel && (
+        <span
+          class={`proj-card__status proj-card__status--${comingSoon ? 'soon' : project.status}`}
+        >
+          {comingSoon ? '敬请期待' : project.status === 'shipped' ? '已上线' : '进行中'}
         </span>
       )
     }
     {project.language && <span class="proj-card__lang">{project.language}</span>}
     {
-      featured && project.wechat && (
+      featured && !comingSoon && project.wechat && (
         <WechatQr src={project.wechat.qr} name={project.wechat.name} variant="tile" />
       )
     }
@@ -84,12 +94,12 @@ const blurb = project.summary ?? project.description;
       {
         project.demo && (
           <a href={project.demo} class="proj-card__action" target="_blank" rel="noopener">
-            主站
+            {comingSoon ? '预览' : '主站'}
           </a>
         )
       }
       {
-        !featured && project.wechat && (
+        !showPanel && project.wechat && (
           <WechatQr src={project.wechat.qr} name={project.wechat.name} variant="compact" />
         )
       }
@@ -222,9 +232,13 @@ const blurb = project.summary ?? project.description;
     background: var(--color-accent-pale);
     color: var(--color-accent-dark);
   }
-  .proj-card__status--wip {
+  .proj-card__status--wip,
+  .proj-card__status--soon {
     background: var(--color-bg-muted);
     color: var(--color-text-muted);
+  }
+  .proj-card--soon {
+    border-style: dashed;
   }
   .proj-card__links {
     display: flex;

@@ -5,7 +5,14 @@ export const prerender = true;
 import BaseLayout from '@layouts/BaseLayout.astro';
 import ProjectCard from '@components/ProjectCard.astro';
 import PersonalCard from '@components/PersonalCard.astro';
-import { projects, categoryMeta, getFeaturedProjects, type ProjectCategory } from '@data/projects';
+import {
+  projects,
+  categoryMeta,
+  getFeaturedProjects,
+  getComingSoonProjects,
+  isComingSoon,
+  type ProjectCategory,
+} from '@data/projects';
 import { personalTools } from '@data/personal';
 
 const categories: ProjectCategory[] = [
@@ -16,6 +23,7 @@ const categories: ProjectCategory[] = [
   'legacy-ios',
 ];
 const featuredProjects = getFeaturedProjects();
+const comingSoonProjects = getComingSoonProjects();
 ---
 
 <BaseLayout
@@ -45,6 +53,20 @@ const featuredProjects = getFeaturedProjects();
       </section>
 
       {
+        comingSoonProjects.length > 0 && (
+          <section class="projects-featured" id="coming-soon" aria-labelledby="coming-soon-title">
+            <h2 class="projects-featured__title" id="coming-soon-title">敬请期待</h2>
+            <p class="projects-featured__lede">还在做，仓库可以看，产品还没到能给人用的程度。</p>
+            <div class="projects-featured__grid">
+              {comingSoonProjects.map((project, index) => (
+                <ProjectCard project={project} index={index} comingSoon />
+              ))}
+            </div>
+          </section>
+        )
+      }
+
+      {
         personalTools.length > 0 && (
           <section class="projects-group" id="personal" aria-labelledby="personal-tools">
             <header class="projects-group__head reveal">
@@ -62,7 +84,7 @@ const featuredProjects = getFeaturedProjects();
 
       {
         categories.map((cat) => {
-          const items = projects.filter((p) => p.category === cat);
+          const items = projects.filter((p) => p.category === cat && !isComingSoon(p.name));
           const meta = categoryMeta[cat];
           if (items.length === 0) return null;
           return (
@@ -148,9 +170,14 @@ const featuredProjects = getFeaturedProjects();
     margin-bottom: var(--s-12);
   }
   .projects-featured__title {
-    margin: 0 0 var(--s-4);
+    margin: 0 0 var(--s-2);
     font-size: 18px;
     font-weight: 500;
+  }
+  .projects-featured__lede {
+    margin: 0 0 var(--s-4);
+    font-size: 13px;
+    color: var(--color-text-dim);
   }
   .projects-featured__grid {
     display: grid;

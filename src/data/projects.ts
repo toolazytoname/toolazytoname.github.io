@@ -31,18 +31,43 @@ export type Project = {
 const FEATURED_ORDER = [
   'AquaSight',
   'llm-quota-watchdog',
-  'lodge',
+  'web3_learning',
   'metronome',
 ];
 
+/** 敬请期待：点名正在做、单独成区的产品。 */
+const COMING_SOON_ORDER = [
+  'MediaForge',
+  'xiaohei-phone-agent',
+  'gridgo-art-studio',
+  'gridgo-pet-school',
+  'lodge',
+];
+
+function sortByOrder(list: Project[], order: string[]): Project[] {
+  return [...list].sort((a, b) => {
+    const ia = order.indexOf(a.name);
+    const ib = order.indexOf(b.name);
+    return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
+  });
+}
+
 export function getFeaturedProjects(): Project[] {
-  return projects
-    .filter((project) => project.featured && project.status === 'shipped')
-    .sort((a, b) => {
-      const ia = FEATURED_ORDER.indexOf(a.name);
-      const ib = FEATURED_ORDER.indexOf(b.name);
-      return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
-    });
+  return sortByOrder(
+    projects.filter((project) => project.featured && project.status === 'shipped'),
+    FEATURED_ORDER,
+  );
+}
+
+export function getComingSoonProjects(): Project[] {
+  return sortByOrder(
+    projects.filter((project) => COMING_SOON_ORDER.includes(project.name)),
+    COMING_SOON_ORDER,
+  );
+}
+
+export function isComingSoon(name: string): boolean {
+  return COMING_SOON_ORDER.includes(name);
 }
 
 export const categoryMeta: Record<
@@ -63,7 +88,7 @@ export const categoryMeta: Record<
   },
   standalone: {
     label: '独立产品',
-    sublabel: '能单独用的东西：新闻雷达、节拍器、自媒体管线、量化系统。',
+    sublabel: '能单独用的东西：新闻雷达、节拍器、Web3 课、量化系统。',
   },
   'legacy-ios': {
     label: 'Legacy iOS',
@@ -194,10 +219,9 @@ export const projects: Project[] = [
     language: 'Go',
     repo: 'https://github.com/toolazytoname/lodge',
     demo: 'https://lodge.weichao.studio',
-    featured: true,
     summary: '用一个 Go 二进制看清服务器上运行的服务、暴露入口与加密凭据。',
     stars: 0,
-    status: 'shipped',
+    status: 'wip',
   },
   {
     name: 'home-nas-skill',
@@ -270,6 +294,57 @@ export const projects: Project[] = [
       name: '小兔头节拍器',
     },
     status: 'shipped',
+  },
+  {
+    name: 'web3_learning',
+    title: 'Web3 Learning OS',
+    description:
+      'Four interactive Web3 courses in the browser: encode calldata, walk EVM calls, practice wallet safety, and replay common contract bugs. Progress stays local.',
+    category: 'standalone',
+    language: 'TypeScript',
+    repo: 'https://github.com/toolazytoname/web3_learning',
+    demo: 'https://web3.weichao.studio',
+    featured: true,
+    stars: 0,
+    image: '/projects/web3-learning.png',
+    summary: '浏览器里就能学的 Web3 课：图、实验、测验，从拆 EVM 交易开始。',
+    status: 'shipped',
+  },
+  {
+    name: 'plutus-rustus',
+    title: 'Plutus Rustus',
+    description:
+      'A Rust Bitcoin wallet collider: sequential EC walk, batched inversion, SIMD hash160. Packaged as goldpan with a one-line install.',
+    category: 'standalone',
+    language: 'Rust',
+    repo: 'https://github.com/toolazytoname/plutus-rustus',
+    stars: 0,
+    summary: 'Rust 写的 Bitcoin 地址碰撞器，一键安装，本机跑。',
+    status: 'shipped',
+  },
+  {
+    name: 'gridgo-art-studio',
+    title: '拾光造像 · Luma Atelier',
+    description:
+      'An online multimedia studio for stills and video: generate, edit, compose, and bill per job with immutable quotes. Staging MVP, mock providers only.',
+    category: 'standalone',
+    language: 'TypeScript',
+    repo: 'https://github.com/toolazytoname/gridgo-art-studio',
+    stars: 0,
+    summary: '面向摄影与内容团队的线上多媒体工作室。还在搭，敬请期待。',
+    status: 'wip',
+  },
+  {
+    name: 'gridgo-pet-school',
+    title: '芽伴星球 · Sproutly',
+    description:
+      'A classroom pet that grows when kids show up and finish practice. Teachers set rewards and watch class progress. Staging MVP, no real student PII.',
+    category: 'standalone',
+    language: null,
+    repo: 'https://github.com/toolazytoname/gridgo-pet-school',
+    stars: 0,
+    summary: '学校和教培用的电子宠物激励。孩子完成任务，宠物一起长大。',
+    status: 'wip',
   },
   {
     name: 'MediaForge',

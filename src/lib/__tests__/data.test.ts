@@ -2,7 +2,12 @@
 
 import { describe, it, expect } from 'vitest';
 import { findStaticReply, knowledge } from '../../data/knowledge';
-import { projects, categoryMeta, getFeaturedProjects } from '../../data/projects';
+import {
+  projects,
+  categoryMeta,
+  getFeaturedProjects,
+  getComingSoonProjects,
+} from '../../data/projects';
 import type { ProjectCategory } from '../../data/projects';
 import { nowEntries } from '../../data/now';
 import { personalTools } from '../../data/personal';
@@ -61,16 +66,32 @@ describe('projects', () => {
 
   it('featured projects are shipped products only', () => {
     const featured = getFeaturedProjects();
-    expect(featured.length).toBeGreaterThan(0);
     expect(featured.map((p) => p.name)).toEqual(
-      expect.arrayContaining(['llm-quota-watchdog', 'AquaSight']),
+      expect.arrayContaining(['llm-quota-watchdog', 'AquaSight', 'web3_learning']),
     );
+    expect(featured.map((p) => p.name)).not.toContain('lodge');
     for (const p of featured) {
       expect(p.status).toBe('shipped');
     }
     for (const p of projects.filter((p) => p.featured)) {
       expect(p.status).toBe('shipped');
     }
+  });
+
+  it('coming soon section holds the named wip products', () => {
+    const soon = getComingSoonProjects();
+    expect(soon.map((p) => p.name)).toEqual([
+      'MediaForge',
+      'xiaohei-phone-agent',
+      'gridgo-art-studio',
+      'gridgo-pet-school',
+      'lodge',
+    ]);
+    for (const p of soon) {
+      expect(p.status).toBe('wip');
+    }
+    expect(projects.find((p) => p.name === 'web3_learning')?.status).toBe('shipped');
+    expect(projects.find((p) => p.name === 'plutus-rustus')?.status).toBe('shipped');
   });
 
   it('personal tools stay out of featured', () => {

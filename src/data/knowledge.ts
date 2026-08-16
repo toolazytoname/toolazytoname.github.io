@@ -25,7 +25,7 @@ export const knowledge: KnowledgeEntry[] = [
     id: 'projects',
     keywords: ['产品', '作品', '项目', 'project', 'projects', '作品集', 'works', 'product'],
     reply:
-      '完整列表在 /projects 页。几件代表作：\n\n手机实验室：oneplus-8t-mobile-lab / android-ai-stack / xiaohei-phone-agent\nAgent：GridGo、llm-quota-watchdog\n基础设施：Lodge、home-nas-skill\n独立产品：鸭先知 AquaSight、小兔头节拍器、MediaForge、Sentinel\n老 iOS：WeChatExport、FDTops、BPFlutter\n\n/projects#personal 是自用区，自己在跑的面板，不对外。',
+      '完整列表在 /projects 页。\n\n已上线：鸭先知 AquaSight、LLM Quota Watchdog、Web3 Learning OS、小兔头节拍器、Plutus Rustus\n敬请期待：MediaForge、xiaohei-phone-agent、拾光造像、芽伴星球、Lodge\n自用：/projects#personal\n其余开源按分类列在下面。',
     source: 'projects',
   },
   {
