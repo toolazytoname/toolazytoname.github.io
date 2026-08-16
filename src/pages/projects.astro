@@ -4,7 +4,7 @@ export const prerender = true;
 
 import BaseLayout from '@layouts/BaseLayout.astro';
 import ProjectCard from '@components/ProjectCard.astro';
-import { projects, categoryMeta, type ProjectCategory } from '@data/projects';
+import { projects, categoryMeta, getFeaturedProjects, type ProjectCategory } from '@data/projects';
 
 const categories: ProjectCategory[] = [
   'mobile-lab',
@@ -13,7 +13,7 @@ const categories: ProjectCategory[] = [
   'standalone',
   'legacy-ios',
 ];
-const featuredProjects = projects.filter((project) => project.featured);
+const featuredProjects = getFeaturedProjects();
 ---
 
 <BaseLayout

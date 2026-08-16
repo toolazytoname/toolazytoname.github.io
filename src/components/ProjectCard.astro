@@ -1,5 +1,6 @@
 ---
 import type { Project } from '@data/projects';
+import WechatQr from '@components/WechatQr.astro';
 
 const LANG_COLORS: Record<string, string> = {
   Go: '#00ADD8',
@@ -74,12 +75,22 @@ const blurb = project.summary ?? project.description;
       )
     }
     {project.language && <span class="proj-card__lang">{project.language}</span>}
+    {
+      featured && project.wechat && (
+        <WechatQr src={project.wechat.qr} name={project.wechat.name} variant="tile" />
+      )
+    }
     <span class="proj-card__links">
       {
         project.demo && (
           <a href={project.demo} class="proj-card__action" target="_blank" rel="noopener">
             主站
           </a>
+        )
+      }
+      {
+        !featured && project.wechat && (
+          <WechatQr src={project.wechat.qr} name={project.wechat.name} variant="compact" />
         )
       }
       <a
@@ -195,6 +206,10 @@ const blurb = project.summary ?? project.description;
     flex-direction: column;
     align-items: flex-end;
     justify-content: space-between;
+    gap: var(--s-2);
+  }
+  .proj-card--featured .proj-card__aside :global(.wx-qr--tile) {
+    margin-block: var(--s-1);
   }
   .proj-card__status {
     padding: 3px 8px;
@@ -243,6 +258,12 @@ const blurb = project.summary ?? project.description;
       align-items: center;
       justify-content: flex-start;
       flex-wrap: wrap;
+    }
+    .proj-card--featured .proj-card__aside :global(.wx-qr--tile) {
+      order: 10;
+      width: 100%;
+      align-items: flex-start;
+      margin: var(--s-2) 0 0;
     }
   }
 

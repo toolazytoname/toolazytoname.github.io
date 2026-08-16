@@ -2,7 +2,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { findStaticReply, knowledge } from '../../data/knowledge';
-import { projects, categoryMeta } from '../../data/projects';
+import { projects, categoryMeta, getFeaturedProjects } from '../../data/projects';
 import type { ProjectCategory } from '../../data/projects';
 import { nowEntries } from '../../data/now';
 
@@ -55,6 +55,27 @@ describe('projects', () => {
       expect(p.title.length).toBeGreaterThan(0);
       expect(p.description.length).toBeGreaterThan(0);
       expect(p.repo).toMatch(/^https:\/\/github\.com\//);
+    }
+  });
+
+  it('featured projects are shipped products only', () => {
+    const featured = getFeaturedProjects();
+    expect(featured.length).toBeGreaterThan(0);
+    expect(featured.map((p) => p.name)).toContain('llm-quota-watchdog');
+    for (const p of featured) {
+      expect(p.status).toBe('shipped');
+    }
+    for (const p of projects.filter((p) => p.featured)) {
+      expect(p.status).toBe('shipped');
+    }
+  });
+
+  it('wechat qr projects have a local image path', () => {
+    for (const p of projects) {
+      if (p.wechat) {
+        expect(p.wechat.qr).toMatch(/^\//);
+        expect(p.wechat.name.length).toBeGreaterThan(0);
+      }
     }
   });
 });

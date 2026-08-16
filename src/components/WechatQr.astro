@@ -1,0 +1,102 @@
+---
+interface Props {
+  src: string;
+  name: string;
+  /** compact: 链接 + 弹出二维码；tile: 直接露出小码 */
+  variant?: 'compact' | 'tile';
+}
+
+const { src, name, variant = 'compact' } = Astro.props;
+const alt = `微信扫码打开${name}小程序`;
+---
+
+{
+  variant === 'tile' ? (
+    <figure class="wx-qr wx-qr--tile">
+      <img src={src} alt={alt} width="104" height="104" />
+      <figcaption>微信小程序</figcaption>
+    </figure>
+  ) : (
+    <details class="wx-qr wx-qr--compact">
+      <summary class="wx-qr__trigger">小程序</summary>
+      <div class="wx-qr__pop">
+        <img src={src} alt={alt} width="148" height="148" />
+        <p>微信扫一扫 · {name}</p>
+      </div>
+    </details>
+  )
+}
+
+<style>
+  .wx-qr--tile {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    flex: 0 0 auto;
+  }
+  .wx-qr--tile img {
+    width: 104px;
+    height: 104px;
+    object-fit: contain;
+    border-radius: var(--r-sm);
+    background: #fff;
+  }
+  .wx-qr--tile figcaption {
+    font-size: 11px;
+    color: var(--color-text-dim);
+    letter-spacing: 0.02em;
+  }
+
+  .wx-qr--compact {
+    position: relative;
+    display: inline-block;
+  }
+  .wx-qr__trigger {
+    list-style: none;
+    cursor: pointer;
+    color: var(--color-accent);
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .wx-qr__trigger::-webkit-details-marker {
+    display: none;
+  }
+  .wx-qr__trigger::marker {
+    content: '';
+  }
+  .wx-qr__trigger:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .wx-qr--compact[open] .wx-qr__trigger {
+    color: var(--color-accent-dark);
+  }
+  .wx-qr__pop {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+    z-index: 20;
+    padding: 10px 10px 8px;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--r-md);
+    box-shadow: 0 8px 24px rgb(0 0 0 / 8%);
+    text-align: center;
+  }
+  .wx-qr__pop img {
+    display: block;
+    width: 148px;
+    height: 148px;
+    object-fit: contain;
+    background: #fff;
+  }
+  .wx-qr__pop p {
+    margin: 6px 0 0;
+    font-size: 11px;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+  }
+</style>

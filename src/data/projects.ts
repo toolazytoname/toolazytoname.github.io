@@ -21,7 +21,16 @@ export type Project = {
   featured?: boolean;
   summary?: string;
   status: 'shipped' | 'wip';
+  wechat?: {
+    qr: string;
+    name: string;
+  };
 };
+
+/** 代表项目：只放已上线的产品，顺序即展示顺序。 */
+export function getFeaturedProjects(): Project[] {
+  return projects.filter((project) => project.featured && project.status === 'shipped');
+}
 
 export const categoryMeta: Record<
   ProjectCategory,
@@ -63,7 +72,6 @@ export const projects: Project[] = [
     stars: 0,
     image:
       'https://raw.githubusercontent.com/toolazytoname/oneplus-8t-mobile-lab/main/docs/assets/oneplus8t-field-guide/mobile-lab-ecosystem-v2.png',
-    featured: true,
     summary: '一台 OnePlus 8T 上的刷机、真机自动化、安全实验与端侧 AI 工作台。',
     status: 'wip',
   },
@@ -130,7 +138,6 @@ export const projects: Project[] = [
     language: 'HTML',
     repo: 'https://github.com/toolazytoname/GridGo',
     demo: 'https://beta.gridgo.weichao.studio/',
-    featured: true,
     summary: '以日历为中心的个人 Agent 管家：一个格子，一件事情。',
     stars: 0,
     status: 'wip',
@@ -144,6 +151,7 @@ export const projects: Project[] = [
     language: 'Python',
     repo: 'https://github.com/toolazytoname/llm-quota-watchdog',
     demo: 'https://quota.weichao.studio',
+    featured: true,
     stars: 0,
     image:
       'https://raw.githubusercontent.com/toolazytoname/llm-quota-watchdog/main/docs/screenshot.png',
@@ -228,7 +236,11 @@ export const projects: Project[] = [
     stars: 0,
     image: 'https://raw.githubusercontent.com/toolazytoname/metronome/main/images/bunny.png',
     featured: true,
-    summary: '打开浏览器就能用的节拍器，支持童声数拍、强弱拍与多种拍号。',
+    summary: '打开浏览器就能用的节拍器，也有微信小程序。支持童声数拍、强弱拍与多种拍号。',
+    wechat: {
+      qr: '/projects/metronome-wechat-miniapp.png',
+      name: '小兔头节拍器',
+    },
     status: 'shipped',
   },
   {

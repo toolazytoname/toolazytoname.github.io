@@ -1,48 +1,60 @@
 ---
-import { projects } from '@data/projects';
+import { projects, getFeaturedProjects } from '@data/projects';
+import WechatQr from '@components/WechatQr.astro';
 
-const featured = projects.filter((p) => p.featured);
+const featured = getFeaturedProjects();
 ---
 
 <section class="home-projects" aria-labelledby="home-projects-title">
   <div class="container container-narrow">
     <header class="home-projects__head reveal">
       <h2 class="home-projects__title" id="home-projects-title">在做的事</h2>
-      <p class="home-projects__lede">几件还在推进、也愿意给人用的东西。</p>
+      <p class="home-projects__lede">已经上线、打开就能用的几件产品。</p>
     </header>
 
     <ul class="home-projects__list">
       {
         featured.map((project, i) => (
           <li class="home-projects__item reveal" style={`--i: ${i};`}>
-            <a
-              href={project.demo ?? project.repo}
-              class:list={['home-projects__card', !project.image && 'home-projects__card--text']}
-              target="_blank"
-              rel="noopener"
+            <article
+              class:list={[
+                'home-projects__card',
+                !project.image && 'home-projects__card--text',
+                project.wechat && 'home-projects__card--qr',
+              ]}
             >
-              {project.image && (
-                <img
-                  src={project.image}
-                  alt=""
-                  class="home-projects__img"
-                  loading={i === 0 ? 'eager' : 'lazy'}
-                  width="640"
-                  height="360"
-                />
-              )}
-              <div class="home-projects__body">
-                <div class="home-projects__meta">
-                  <h3 class="home-projects__name">{project.title}</h3>
-                  <span class={`home-projects__status home-projects__status--${project.status}`}>
-                    {project.status === 'shipped' ? '已上线' : '进行中'}
-                  </span>
+              <a
+                href={project.demo ?? project.repo}
+                class="home-projects__link"
+                target="_blank"
+                rel="noopener"
+              >
+                {project.image && (
+                  <img
+                    src={project.image}
+                    alt=""
+                    class="home-projects__img"
+                    loading={i === 0 ? 'eager' : 'lazy'}
+                    width="640"
+                    height="360"
+                  />
+                )}
+                <div class="home-projects__body">
+                  <div class="home-projects__meta">
+                    <h3 class="home-projects__name">{project.title}</h3>
+                    <span class={`home-projects__status home-projects__status--${project.status}`}>
+                      {project.status === 'shipped' ? '已上线' : '进行中'}
+                    </span>
+                  </div>
+                  <p class="home-projects__summary">
+                    {project.summary ?? project.description}
+                  </p>
                 </div>
-                <p class="home-projects__summary">
-                  {project.summary ?? project.description}
-                </p>
-              </div>
-            </a>
+              </a>
+              {project.wechat && (
+                <WechatQr src={project.wechat.qr} name={project.wechat.name} variant="tile" />
+              )}
+            </article>
           </li>
         ))
       }
@@ -85,22 +97,32 @@ const featured = projects.filter((p) => p.featured);
   }
   .home-projects__card {
     display: grid;
-    grid-template-columns: 160px 1fr;
-    gap: var(--s-5);
+    grid-template-columns: 1fr;
+    align-items: stretch;
+    gap: var(--s-4);
     padding: var(--s-4);
     border: 1px solid var(--color-border);
     border-radius: var(--r-lg);
     background: var(--color-bg);
-    text-decoration: none;
     transition:
       border-color var(--t-fast) var(--ease-out),
       background var(--t-fast) var(--ease-out);
   }
-  .home-projects__card--text {
+  .home-projects__card--qr {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .home-projects__link {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: var(--s-5);
+    min-width: 0;
+    text-decoration: none;
+    color: inherit;
+  }
+  .home-projects__card--text .home-projects__link {
     grid-template-columns: 1fr;
   }
   .home-projects__card:hover {
-    text-decoration: none;
     border-color: var(--color-accent);
     background: var(--color-bg-soft);
   }
@@ -132,6 +154,10 @@ const featured = projects.filter((p) => p.featured);
   }
   .home-projects__card:hover .home-projects__name {
     color: var(--color-accent);
+  }
+  .home-projects__card :global(.wx-qr--tile) {
+    align-self: center;
+    padding-right: 4px;
   }
   .home-projects__status {
     font-size: 11px;
@@ -171,12 +197,19 @@ const featured = projects.filter((p) => p.featured);
   }
 
   @media (max-width: 600px) {
-    .home-projects__card {
+    .home-projects__card,
+    .home-projects__card--qr {
       grid-template-columns: 1fr;
       gap: var(--s-3);
     }
+    .home-projects__link {
+      grid-template-columns: 1fr;
+    }
     .home-projects__img {
       height: 140px;
+    }
+    .home-projects__card :global(.wx-qr--tile) {
+      align-self: flex-start;
     }
   }
 </style>
