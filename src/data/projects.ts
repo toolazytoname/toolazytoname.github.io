@@ -143,6 +143,7 @@ export const projects: Project[] = [
     category: 'agents',
     language: 'Python',
     repo: 'https://github.com/toolazytoname/llm-quota-watchdog',
+    demo: 'https://quota.weichao.studio',
     stars: 0,
     image:
       'https://raw.githubusercontent.com/toolazytoname/llm-quota-watchdog/main/docs/screenshot.png',
