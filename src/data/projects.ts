@@ -286,7 +286,7 @@ export const projects: Project[] = [
     repo: 'https://github.com/toolazytoname/metronome',
     demo: 'https://jpq.weichao.studio',
     stars: 0,
-    image: 'https://raw.githubusercontent.com/toolazytoname/metronome/main/images/bunny.png',
+    image: '/projects/metronome-wechat-miniapp.png',
     featured: true,
     summary: '打开浏览器就能用的节拍器，也有微信小程序。支持童声数拍、强弱拍与多种拍号。',
     wechat: {

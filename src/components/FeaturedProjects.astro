@@ -20,7 +20,9 @@ const featured = getFeaturedProjects();
               class:list={[
                 'home-projects__card',
                 !project.image && 'home-projects__card--text',
-                project.wechat && 'home-projects__card--qr',
+                project.wechat &&
+                  project.image !== project.wechat.qr &&
+                  'home-projects__card--qr',
               ]}
             >
               <a
@@ -32,8 +34,17 @@ const featured = getFeaturedProjects();
                 {project.image && (
                   <img
                     src={project.image}
-                    alt=""
-                    class="home-projects__img"
+                    alt={
+                      project.wechat && project.image === project.wechat.qr
+                        ? `微信扫码打开${project.wechat.name}小程序`
+                        : ''
+                    }
+                    class:list={[
+                      'home-projects__img',
+                      project.wechat &&
+                        project.image === project.wechat.qr &&
+                        'home-projects__img--qr',
+                    ]}
                     loading={i === 0 ? 'eager' : 'lazy'}
                     width="640"
                     height="360"
@@ -51,7 +62,7 @@ const featured = getFeaturedProjects();
                   </p>
                 </div>
               </a>
-              {project.wechat && (
+              {project.wechat && project.image !== project.wechat.qr && (
                 <WechatQr src={project.wechat.qr} name={project.wechat.name} variant="tile" />
               )}
             </article>
@@ -119,6 +130,9 @@ const featured = getFeaturedProjects();
     text-decoration: none;
     color: inherit;
   }
+  .home-projects__link:has(.home-projects__img--qr) {
+    grid-template-columns: 104px 1fr;
+  }
   .home-projects__card--text .home-projects__link {
     grid-template-columns: 1fr;
   }
@@ -132,6 +146,11 @@ const featured = getFeaturedProjects();
     object-fit: cover;
     border-radius: var(--r-md);
     background: var(--color-bg-subtle);
+  }
+  .home-projects__img--qr {
+    height: 104px;
+    object-fit: contain;
+    background: #fff;
   }
   .home-projects__body {
     min-width: 0;
@@ -202,11 +221,16 @@ const featured = getFeaturedProjects();
       grid-template-columns: 1fr;
       gap: var(--s-3);
     }
-    .home-projects__link {
+    .home-projects__link,
+    .home-projects__link:has(.home-projects__img--qr) {
       grid-template-columns: 1fr;
     }
     .home-projects__img {
       height: 140px;
+    }
+    .home-projects__img--qr {
+      width: 104px;
+      height: 104px;
     }
     .home-projects__card :global(.wx-qr--tile) {
       align-self: flex-start;
