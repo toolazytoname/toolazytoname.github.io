@@ -61,7 +61,9 @@ describe('projects', () => {
   it('featured projects are shipped products only', () => {
     const featured = getFeaturedProjects();
     expect(featured.length).toBeGreaterThan(0);
-    expect(featured.map((p) => p.name)).toContain('llm-quota-watchdog');
+    expect(featured.map((p) => p.name)).toEqual(
+      expect.arrayContaining(['llm-quota-watchdog', 'AquaSight']),
+    );
     for (const p of featured) {
       expect(p.status).toBe('shipped');
     }

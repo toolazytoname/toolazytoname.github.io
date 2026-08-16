@@ -27,9 +27,22 @@ export type Project = {
   };
 };
 
-/** 代表项目：只放已上线的产品，顺序即展示顺序。 */
+/** 代表项目：只放已上线的产品。新上线的排前面。 */
+const FEATURED_ORDER = [
+  'AquaSight',
+  'llm-quota-watchdog',
+  'lodge',
+  'metronome',
+];
+
 export function getFeaturedProjects(): Project[] {
-  return projects.filter((project) => project.featured && project.status === 'shipped');
+  return projects
+    .filter((project) => project.featured && project.status === 'shipped')
+    .sort((a, b) => {
+      const ia = FEATURED_ORDER.indexOf(a.name);
+      const ib = FEATURED_ORDER.indexOf(b.name);
+      return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
+    });
 }
 
 export const categoryMeta: Record<
@@ -50,7 +63,7 @@ export const categoryMeta: Record<
   },
   standalone: {
     label: '独立产品',
-    sublabel: '能单独用的东西：节拍器、自媒体管线、量化系统。',
+    sublabel: '能单独用的东西：新闻雷达、节拍器、自媒体管线、量化系统。',
   },
   'legacy-ios': {
     label: 'Legacy iOS',
@@ -224,6 +237,21 @@ export const projects: Project[] = [
   },
 
   // ===== Standalone Projects =====
+  {
+    name: 'AquaSight',
+    title: '鸭先知 · AquaSight',
+    description:
+      'A personal news radar: pull tech, hot search, and world sources, cluster them, pin breaking stories to the top, and push Bark alerts. Daily digest on a static GitHub Pages board.',
+    category: 'standalone',
+    language: 'JavaScript',
+    repo: 'https://github.com/toolazytoname/AquaSight',
+    demo: 'https://toolazytoname.github.io/AquaSight/',
+    featured: true,
+    stars: 0,
+    image: '/projects/aquasight.png',
+    summary: '春江水暖，破圈置顶。聚合科技、热搜与世界新闻，破圈事件推送到 Bark。',
+    status: 'shipped',
+  },
   {
     name: 'metronome',
     title: '小兔头节拍器',

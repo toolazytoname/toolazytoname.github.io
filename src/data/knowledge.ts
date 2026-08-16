@@ -25,7 +25,7 @@ export const knowledge: KnowledgeEntry[] = [
     id: 'projects',
     keywords: ['产品', '作品', '项目', 'project', 'projects', '作品集', 'works', 'product'],
     reply:
-      '完整列表在 /projects 页。几件代表作：\n\n手机实验室：oneplus-8t-mobile-lab / android-ai-stack / xiaohei-phone-agent\nAgent：GridGo、llm-quota-watchdog\n基础设施：Lodge、home-nas-skill\n独立产品：小兔头节拍器、MediaForge、Sentinel\n老 iOS：WeChatExport、FDTops、BPFlutter',
+      '完整列表在 /projects 页。几件代表作：\n\n手机实验室：oneplus-8t-mobile-lab / android-ai-stack / xiaohei-phone-agent\nAgent：GridGo、llm-quota-watchdog\n基础设施：Lodge、home-nas-skill\n独立产品：鸭先知 AquaSight、小兔头节拍器、MediaForge、Sentinel\n老 iOS：WeChatExport、FDTops、BPFlutter',
     source: 'projects',
   },
   {
