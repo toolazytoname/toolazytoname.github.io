@@ -306,7 +306,6 @@ export const projects: Project[] = [
     demo: 'https://web3.weichao.studio',
     featured: true,
     stars: 0,
-    image: '/projects/web3-learning.png',
     summary: '浏览器里就能学的 Web3 课：图、实验、测验，从拆 EVM 交易开始。',
     status: 'shipped',
   },
