@@ -45,6 +45,9 @@ const COMING_SOON_ORDER = [
   'lodge',
 ];
 
+/** 练手：能看、别当产品推。不上首页代表项目。 */
+const PRACTICE_ORDER = ['plutus-rustus'];
+
 function sortByOrder(list: Project[], order: string[]): Project[] {
   return [...list].sort((a, b) => {
     const ia = order.indexOf(a.name);
@@ -69,6 +72,17 @@ export function getComingSoonProjects(): Project[] {
 
 export function isComingSoon(name: string): boolean {
   return COMING_SOON_ORDER.includes(name);
+}
+
+export function getPracticeProjects(): Project[] {
+  return sortByOrder(
+    projects.filter((project) => PRACTICE_ORDER.includes(project.name)),
+    PRACTICE_ORDER,
+  );
+}
+
+export function isPractice(name: string): boolean {
+  return PRACTICE_ORDER.includes(name);
 }
 
 export const categoryMeta: Record<
@@ -317,12 +331,13 @@ export const projects: Project[] = [
     name: 'plutus-rustus',
     title: 'Plutus Rustus',
     description:
-      'A Rust Bitcoin wallet collider: sequential EC walk, batched inversion, SIMD hash160. Packaged as goldpan with a one-line install.',
+      'A Rust performance lab that walks secp256k1: sequential EC walk, batched inversion, SIMD hash160. Expected value is ~zero; the point is the hot path. Packaged as goldpan.',
     category: 'standalone',
     language: 'Rust',
     repo: 'https://github.com/toolazytoname/plutus-rustus',
     stars: 0,
-    summary: 'Rust 写的 Bitcoin 地址碰撞器，一键安装，本机跑。',
+    image: '/projects/plutus-rustus.jpg',
+    summary: 'Rust 性能练手：顺序走 secp256k1、批量求逆、SIMD hash160。期望收益约等于零，图的是热路径。',
     status: 'shipped',
   },
   {
