@@ -29,6 +29,7 @@ export type Project = {
 
 /** 代表项目：只放已上线的产品。新上线的排前面。 */
 const FEATURED_ORDER = [
+  'home-nas-skill',
   'AquaSight',
   'llm-quota-watchdog',
   'web3_learning',
@@ -225,14 +226,18 @@ export const projects: Project[] = [
   },
   {
     name: 'home-nas-skill',
-    title: 'Home NAS Skill',
+    title: 'Home NAS',
     description:
-      'Home NAS build & ops playbook: full media pipeline (Prowlarr\u2192Sonarr/Radarr\u2192qB\u2192Bazarr\u2192Jellyfin), Immich, Navidrome, backups \u2014 with all the China-network and weak-CPU gotchas baked in.',
+      'Turn a leftover x86 box into a family media center: *arr \u2192 Jellyfin, Immich, music and books. A Claude Skill with the China-network and weak-CPU 1080p-direct-play gotchas already written down.',
     category: 'infra',
     language: null,
     repo: 'https://github.com/toolazytoname/home-nas-skill',
+    featured: true,
     stars: 0,
-    summary: '家庭 NAS 搭建与运维手册：媒体管线、备份，以及国内网络坑点。',
+    image:
+      'https://raw.githubusercontent.com/toolazytoname/home-nas-skill/initial-release/docs/images/hero.jpg',
+    summary:
+      '把闲置小主机搭成全自动家庭媒体中心：Jellyfin、Immich、大陆镜像和弱 CPU 1080p 直放的实战手册。',
     status: 'shipped',
   },
   {

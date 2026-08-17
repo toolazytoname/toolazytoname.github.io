@@ -25,7 +25,7 @@ export const knowledge: KnowledgeEntry[] = [
     id: 'projects',
     keywords: ['产品', '作品', '项目', 'project', 'projects', '作品集', 'works', 'product'],
     reply:
-      '完整列表在 /projects 页。\n\n已上线：鸭先知 AquaSight、LLM Quota Watchdog、Web3 Learning OS、小兔头节拍器、Plutus Rustus\n敬请期待：MediaForge、xiaohei-phone-agent、拾光造像、芽伴星球、Lodge\n自用：/projects#personal\n其余开源按分类列在下面。',
+      '完整列表在 /projects 页。\n\n已上线：Home NAS、鸭先知 AquaSight、LLM Quota Watchdog、Web3 Learning OS、小兔头节拍器、Plutus Rustus\n敬请期待：MediaForge、xiaohei-phone-agent、拾光造像、芽伴星球、Lodge\n自用：/projects#personal\n其余开源按分类列在下面。',
     source: 'projects',
   },
   {

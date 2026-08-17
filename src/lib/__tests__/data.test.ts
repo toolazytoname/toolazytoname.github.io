@@ -73,8 +73,14 @@ describe('projects', () => {
   it('featured projects are shipped products only', () => {
     const featured = getFeaturedProjects();
     expect(featured.map((p) => p.name)).toEqual(
-      expect.arrayContaining(['llm-quota-watchdog', 'AquaSight', 'web3_learning']),
+      expect.arrayContaining([
+        'home-nas-skill',
+        'llm-quota-watchdog',
+        'AquaSight',
+        'web3_learning',
+      ]),
     );
+    expect(featured[0]?.name).toBe('home-nas-skill');
     expect(featured.map((p) => p.name)).not.toContain('lodge');
     for (const p of featured) {
       expect(p.status).toBe('shipped');
