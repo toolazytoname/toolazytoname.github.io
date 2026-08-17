@@ -3,8 +3,9 @@
  *
  * Behavior:
  *   1. FAB opens the panel.
- *   2. POST to /api/chat with the full conversation.
- *   3. On any network / server error → fall back to local static matcher.
+ *   2. Keyword hits answer instantly from the local knowledge base.
+ *   3. Anything else POSTs to /api/chat. Empty / redirected / hung
+ *      responses fall back to the same static matcher.
  *   4. Show a small status pill indicating which source answered.
  *
  * Mounted via createPortal(document.body) so fixed positioning is never
@@ -22,6 +23,11 @@ type Msg = {
   source?: 'agnes' | 'static' | 'fallback';
 };
 
+type ChatPayload = {
+  reply?: unknown;
+  source?: Msg['source'];
+};
+
 const SUGGESTIONS = [
   '介绍下你自己',
   '有哪些项目',
@@ -29,14 +35,16 @@ const SUGGESTIONS = [
   '户外运动',
 ];
 
+const API_TIMEOUT_MS = 8000;
+
 const sourceLabel = (s?: Msg['source']) => {
   switch (s) {
     case 'agnes':
-      return 'Agnes';
+      return 'AI';
     case 'static':
-      return 'static';
+      return '';
     case 'fallback':
-      return 'fallback';
+      return '';
     default:
       return '';
   }
@@ -46,6 +54,41 @@ function localStaticReply(input: string): string {
   const entry = findStaticReply(input);
   if (entry) return entry.reply;
   return '这个问题我不知道。换个问法试试 —— 比如"有哪些项目"、"最近在干嘛"、"滑雪"。';
+}
+
+function parseChatPayload(data: ChatPayload): { reply: string; source?: Msg['source'] } | null {
+  if (typeof data?.reply !== 'string') return null;
+  const reply = data.reply.trim();
+  if (!reply) return null;
+  return { reply, source: data.source };
+}
+
+async function requestChatReply(messages: Msg[], signal: AbortSignal): Promise<{ reply: string; source?: Msg['source'] }> {
+  const res = await fetch('/api/chat/', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({
+      messages: messages.map(({ role, content }) => ({ role, content })),
+    }),
+    signal,
+    // A 301/302/308 (apex→www, trailing-slash) can turn this POST into a
+    // GET. The GET handler returns {ok:true} with no `reply`, which used
+    // to render as an empty gray bubble. Fail the fetch instead.
+    redirect: 'error',
+  });
+
+  if (!res.ok) throw new Error(`http ${res.status}`);
+
+  let data: ChatPayload;
+  try {
+    data = await res.json();
+  } catch {
+    throw new Error('invalid json');
+  }
+
+  const parsed = parseChatPayload(data);
+  if (!parsed) throw new Error('empty reply');
+  return parsed;
 }
 
 export default function Chatbot() {
@@ -60,12 +103,14 @@ export default function Chatbot() {
   ]);
   const [busy, setBusy] = useState(false);
   const scrollerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const requestId = useRef(0);
 
   useEffect(() => {
     if (scrollerRef.current) {
       scrollerRef.current.scrollTop = scrollerRef.current.scrollHeight;
     }
-  }, [messages, open]);
+  }, [messages, open, busy]);
 
   useEffect(() => {
     if (!open) return;
@@ -73,7 +118,11 @@ export default function Chatbot() {
       if (e.key === 'Escape') setOpen(false);
     };
     window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
+    const focusId = window.setTimeout(() => inputRef.current?.focus(), 40);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      window.clearTimeout(focusId);
+    };
   }, [open]);
 
   async function send(text: string) {
@@ -82,36 +131,40 @@ export default function Chatbot() {
     setInput('');
     const next: Msg[] = [...messages, { role: 'user', content: trimmed }];
     setMessages(next);
+
+    // Known questions answer locally — never wait on /api/chat for these.
+    const instant = findStaticReply(trimmed);
+    if (instant) {
+      setMessages([
+        ...next,
+        { role: 'assistant', content: instant.reply, source: 'static' },
+      ]);
+      return;
+    }
+
+    const id = ++requestId.current;
     setBusy(true);
 
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 12000);
+    const timeoutId = window.setTimeout(() => controller.abort(), API_TIMEOUT_MS);
 
     try {
-      const res = await fetch('/api/chat/', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({
-          messages: next.map(({ role, content }) => ({ role, content })),
-        }),
-        signal: controller.signal,
-      });
-
-      if (!res.ok) throw new Error(`http ${res.status}`);
-      const data: { reply: string; source?: Msg['source'] } = await res.json();
+      const data = await requestChatReply(next, controller.signal);
+      if (id !== requestId.current) return;
       setMessages([
         ...next,
         { role: 'assistant', content: data.reply, source: data.source },
       ]);
     } catch (err) {
+      if (id !== requestId.current) return;
       console.warn('[chatbot] api failed, using static fallback:', err);
       setMessages([
         ...next,
         { role: 'assistant', content: localStaticReply(trimmed), source: 'static' },
       ]);
     } finally {
-      clearTimeout(timeoutId);
-      setBusy(false);
+      window.clearTimeout(timeoutId);
+      if (id === requestId.current) setBusy(false);
     }
   }
 
@@ -144,11 +197,12 @@ export default function Chatbot() {
         role="dialog"
         aria-label="AI 聊天助手"
         aria-hidden={!open}
+        inert={!open}
       >
         <header className="chat-panel__head">
           <div>
             <p className="chat-panel__title">lazy · AI 助手</p>
-            <p className="chat-panel__sub">Agnes + 静态兜底</p>
+            <p className="chat-panel__sub">问项目、近况、户外</p>
           </div>
           <button
             type="button"
@@ -167,18 +221,27 @@ export default function Chatbot() {
           </button>
         </header>
 
-        <div className="chat-panel__scroll" ref={scrollerRef}>
+        <div
+          className="chat-panel__scroll"
+          ref={scrollerRef}
+          role="log"
+          aria-live="polite"
+          aria-relevant="additions"
+        >
           {messages.map((m, i) => (
             <div key={i} className={`chat-msg chat-msg--${m.role}`}>
               <div className="chat-msg__bubble">{m.content}</div>
-              {m.role === 'assistant' && m.source && i > 0 && (
+              {m.role === 'assistant' && sourceLabel(m.source) && i > 0 && (
                 <p className="chat-msg__meta">{sourceLabel(m.source)}</p>
               )}
             </div>
           ))}
           {busy && (
             <div className="chat-msg chat-msg--assistant">
-              <div className="chat-msg__bubble chat-msg__bubble--typing">
+              <div
+                className="chat-msg__bubble chat-msg__bubble--typing"
+                aria-label="正在回复"
+              >
                 <span /><span /><span />
               </div>
             </div>
@@ -209,6 +272,7 @@ export default function Chatbot() {
           }}
         >
           <input
+            ref={inputRef}
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}

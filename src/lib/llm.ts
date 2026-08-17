@@ -65,16 +65,29 @@ export async function chat(messages: ChatMessage[]): Promise<ChatResult> {
     ...history,
   ];
 
-  // 1. Try Agnes-2.0-flash.
+  // 1. Try Agnes-2.0-flash. Hard-cap the wait so a hung upstream cannot
+  // pin the serverless invocation or the browser typing indicator.
   try {
     const agnes = getAgnes();
     if (agnes) {
-      const completion = await agnes.chat.completions.create({
-        model: 'agnes-2.0-flash',
-        messages: fullMessages,
-        max_tokens: 1024,
-        temperature: 0.7,
-      });
+      const completion = await Promise.race([
+        agnes.chat.completions.create(
+          {
+            model: 'agnes-2.0-flash',
+            messages: fullMessages,
+            max_tokens: 1024,
+            temperature: 0.7,
+          },
+          { timeout: LLM_TIMEOUT, maxRetries: 0 },
+        ),
+        new Promise<never>((_, reject) => {
+          const timer = setTimeout(() => reject(new Error('agnes timeout')), LLM_TIMEOUT);
+          // Attach to the rejection path only; the winning promise's
+          // finally in chat() is not available here, so unref if possible
+          // so a warm serverless isolate is not kept alive by the timer.
+          timer.unref?.();
+        }),
+      ]);
       const reply = completion.choices[0]?.message?.content;
       if (reply && reply.trim().length > 0) {
         return { reply: reply.trim(), source: 'agnes' };

@@ -22,6 +22,12 @@ describe('knowledge base', () => {
     expect(reply?.id).toBe('about');
   });
 
+  it('findStaticReply matches the homepage intro chip', () => {
+    const reply = findStaticReply('介绍下你自己');
+    expect(reply?.id).toBe('about');
+    expect(reply?.reply.length).toBeGreaterThan(0);
+  });
+
   it('findStaticReply returns null for unrelated query', () => {
     const reply = findStaticReply('asdfghjkl zzz no keywords here');
     expect(reply).toBeNull();

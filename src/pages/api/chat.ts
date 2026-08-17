@@ -68,12 +68,14 @@ export const POST: APIRoute = async ({ request }) => {
     );
   } catch (err) {
     console.error('[api/chat] unexpected error', err);
-    // Even on total failure, return a usable static reply — never break the UI.
+    // Even on total failure, return a usable static reply as 200 — a 500
+    // used to make the client throw and render an empty bubble if parsing
+    // then failed. Always give the UI a `reply` string.
     const last = [...messages].reverse().find((m) => m.role === 'user');
     const fallback = last ? staticReply(last.content) : { reply: '出错了。', source: 'static' as const };
     return new Response(
       JSON.stringify({ ...fallback, error: 'internal', remaining: limit.remaining }),
-      { status: 500, headers: { 'content-type': 'application/json' } },
+      { status: 200, headers: { 'content-type': 'application/json' } },
     );
   }
 };
