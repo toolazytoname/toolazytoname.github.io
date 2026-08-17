@@ -234,8 +234,7 @@ export const projects: Project[] = [
     repo: 'https://github.com/toolazytoname/home-nas-skill',
     featured: true,
     stars: 0,
-    image:
-      'https://raw.githubusercontent.com/toolazytoname/home-nas-skill/initial-release/docs/images/hero.jpg',
+    image: '/projects/home-nas.png',
     summary:
       '把闲置小主机搭成全自动家庭媒体中心：Jellyfin、Immich、大陆镜像和弱 CPU 1080p 直放的实战手册。',
     status: 'shipped',
