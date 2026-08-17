@@ -10,9 +10,7 @@ import {
   categoryMeta,
   getFeaturedProjects,
   getComingSoonProjects,
-  getPracticeProjects,
   isComingSoon,
-  isPractice,
   type ProjectCategory,
 } from '@data/projects';
 import { personalTools } from '@data/personal';
@@ -26,7 +24,6 @@ const categories: ProjectCategory[] = [
 ];
 const featuredProjects = getFeaturedProjects();
 const comingSoonProjects = getComingSoonProjects();
-const practiceProjects = getPracticeProjects();
 ---
 
 <BaseLayout
@@ -45,7 +42,7 @@ const practiceProjects = getPracticeProjects();
       </header>
 
       <section class="projects-featured" aria-labelledby="featured-projects">
-        <h2 class="projects-featured__title" id="featured-projects">代表项目</h2>
+        <h2 class="projects-featured__title" id="featured-projects">上线项目</h2>
         <div class="projects-featured__grid">
           {
             featuredProjects.map((project, index) => (
@@ -54,20 +51,6 @@ const practiceProjects = getPracticeProjects();
           }
         </div>
       </section>
-
-      {
-        practiceProjects.length > 0 && (
-          <section class="projects-featured" id="practice" aria-labelledby="practice-title">
-            <h2 class="projects-featured__title" id="practice-title">练手</h2>
-            <p class="projects-featured__lede">不是产品。为了把一条热路径写快一点。</p>
-            <div class="projects-featured__grid">
-              {practiceProjects.map((project, index) => (
-                <ProjectCard project={project} index={index} featured />
-              ))}
-            </div>
-          </section>
-        )
-      }
 
       {
         comingSoonProjects.length > 0 && (
@@ -101,9 +84,7 @@ const practiceProjects = getPracticeProjects();
 
       {
         categories.map((cat) => {
-          const items = projects.filter(
-            (p) => p.category === cat && !isComingSoon(p.name) && !isPractice(p.name),
-          );
+          const items = projects.filter((p) => p.category === cat && !isComingSoon(p.name));
           const meta = categoryMeta[cat];
           if (items.length === 0) return null;
           return (

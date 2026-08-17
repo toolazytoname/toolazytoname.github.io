@@ -27,13 +27,14 @@ export type Project = {
   };
 };
 
-/** 代表项目：只放已上线的产品。新上线的排前面。 */
+/** 上线项目。新产品在前，练手放最后。 */
 const FEATURED_ORDER = [
   'home-nas-skill',
   'AquaSight',
   'llm-quota-watchdog',
   'web3_learning',
   'metronome',
+  'plutus-rustus',
 ];
 
 /** 敬请期待：点名正在做、单独成区的产品。 */
@@ -44,9 +45,6 @@ const COMING_SOON_ORDER = [
   'gridgo-pet-school',
   'lodge',
 ];
-
-/** 练手：能看、别当产品推。不上首页代表项目。 */
-const PRACTICE_ORDER = ['plutus-rustus'];
 
 function sortByOrder(list: Project[], order: string[]): Project[] {
   return [...list].sort((a, b) => {
@@ -72,17 +70,6 @@ export function getComingSoonProjects(): Project[] {
 
 export function isComingSoon(name: string): boolean {
   return COMING_SOON_ORDER.includes(name);
-}
-
-export function getPracticeProjects(): Project[] {
-  return sortByOrder(
-    projects.filter((project) => PRACTICE_ORDER.includes(project.name)),
-    PRACTICE_ORDER,
-  );
-}
-
-export function isPractice(name: string): boolean {
-  return PRACTICE_ORDER.includes(name);
 }
 
 export const categoryMeta: Record<
@@ -335,6 +322,7 @@ export const projects: Project[] = [
     category: 'standalone',
     language: 'Rust',
     repo: 'https://github.com/toolazytoname/plutus-rustus',
+    featured: true,
     stars: 0,
     image: '/projects/plutus-rustus.jpg',
     summary: 'Rust 性能练手：顺序走 secp256k1、批量求逆、SIMD hash160。期望收益约等于零，图的是热路径。',

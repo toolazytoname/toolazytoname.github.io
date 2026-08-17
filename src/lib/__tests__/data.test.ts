@@ -7,7 +7,6 @@ import {
   categoryMeta,
   getFeaturedProjects,
   getComingSoonProjects,
-  getPracticeProjects,
 } from '../../data/projects';
 import type { ProjectCategory } from '../../data/projects';
 import { nowEntries } from '../../data/now';
@@ -105,13 +104,7 @@ describe('projects', () => {
     }
     expect(projects.find((p) => p.name === 'web3_learning')?.status).toBe('shipped');
     expect(projects.find((p) => p.name === 'plutus-rustus')?.status).toBe('shipped');
-  });
-
-  it('practice section holds the learning labs, not the homepage showcase', () => {
-    const practice = getPracticeProjects();
-    expect(practice.map((p) => p.name)).toEqual(['plutus-rustus']);
-    expect(getFeaturedProjects().map((p) => p.name)).not.toContain('plutus-rustus');
-    expect(getComingSoonProjects().map((p) => p.name)).not.toContain('plutus-rustus');
+    expect(getFeaturedProjects().at(-1)?.name).toBe('plutus-rustus');
   });
 
   it('personal tools stay out of featured', () => {
