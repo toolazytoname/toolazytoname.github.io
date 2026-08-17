@@ -27,14 +27,13 @@ export type Project = {
   };
 };
 
-/** 上线项目。新产品在前，练手放最后。 */
+/** 上线项目。新产品在前。 */
 const FEATURED_ORDER = [
   'home-nas-skill',
   'AquaSight',
   'llm-quota-watchdog',
   'web3_learning',
   'metronome',
-  'plutus-rustus',
 ];
 
 /** 敬请期待：点名正在做、单独成区的产品。 */
@@ -312,20 +311,6 @@ export const projects: Project[] = [
     featured: true,
     stars: 0,
     summary: '浏览器里就能学的 Web3 课：图、实验、测验，从拆 EVM 交易开始。',
-    status: 'shipped',
-  },
-  {
-    name: 'plutus-rustus',
-    title: 'Plutus Rustus',
-    description:
-      'A Rust performance lab that walks secp256k1: sequential EC walk, batched inversion, SIMD hash160. Expected value is ~zero; the point is the hot path. Packaged as goldpan.',
-    category: 'standalone',
-    language: 'Rust',
-    repo: 'https://github.com/toolazytoname/plutus-rustus',
-    featured: true,
-    stars: 0,
-    image: '/projects/plutus-rustus.jpg',
-    summary: 'Rust 性能练手：顺序走 secp256k1、批量求逆、SIMD hash160。期望收益约等于零，图的是热路径。',
     status: 'shipped',
   },
   {

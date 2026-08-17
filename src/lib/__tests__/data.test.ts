@@ -103,8 +103,8 @@ describe('projects', () => {
       expect(p.status).toBe('wip');
     }
     expect(projects.find((p) => p.name === 'web3_learning')?.status).toBe('shipped');
-    expect(projects.find((p) => p.name === 'plutus-rustus')?.status).toBe('shipped');
-    expect(getFeaturedProjects().at(-1)?.name).toBe('plutus-rustus');
+    expect(projects.find((p) => p.name === 'plutus-rustus')).toBeUndefined();
+    expect(getFeaturedProjects().map((p) => p.name)).not.toContain('plutus-rustus');
   });
 
   it('personal tools stay out of featured', () => {
