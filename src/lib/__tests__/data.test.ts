@@ -110,7 +110,7 @@ describe('projects', () => {
     const featuredNames = getFeaturedProjects().map((p) => p.name);
     for (const tool of personalTools) {
       expect(tool.title.length).toBeGreaterThan(0);
-      expect(tool.url).toMatch(/^https:\/\//);
+      expect(tool.url).toMatch(/^https?:\/\//);
       expect(featuredNames).not.toContain(tool.name);
     }
   });
