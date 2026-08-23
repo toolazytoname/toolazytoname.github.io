@@ -10,6 +10,12 @@ export type PersonalTool = {
 
 export const personalTools: PersonalTool[] = [
   {
+    name: 'dsh',
+    title: 'DeepSeek Harness',
+    summary: '自己在跑的 dsh web，电脑和手机同一套会话。',
+    url: 'https://bytebunny.tail7b8be9.ts.net:10000/',
+  },
+  {
     name: 'nas-hp',
     title: 'Home NAS',
     summary: '家里的媒体中心，局域网打开 http://hp。',
