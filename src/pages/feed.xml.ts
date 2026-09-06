@@ -4,9 +4,8 @@ import type { APIRoute } from 'astro';
 import { SITE } from '@lib/seo';
 import { postSlug } from '@lib/permalink';
 
-// Pre-render at build time so /posts.xml ships as a static asset
-// and gets served from Vercel's CDN cache instead of cold-starting
-// a serverless function on every RSS reader poll.
+// Legacy Jekyll/Hux URL. Same document as /posts.xml so old subscribers
+// keep receiving updates without depending on a redirect hop.
 export const prerender = true;
 
 export const GET: APIRoute = async () => {

@@ -37,9 +37,14 @@ export function postSlug(id: string, data: PostPermalinkData): string {
     .filter(Boolean)
     .join('/');
 
-  // Strip leading "YYYY-MM-DD-" from the glob id (filename stem) so the URL
-  // slug matches the original Jekyll `slug` field verbatim.
-  const fnameSlug = id.length > 11 ? id.substring(11) : id;
+  return `${catPath}/${year}/${month}/${day}/${filenameSlug(id)}`;
+}
 
-  return `${catPath}/${year}/${month}/${day}/${fnameSlug}`;
+/** Strip a leading date prefix from the collection id / filename stem. */
+export function filenameSlug(id: string): string {
+  // Prefer a real YYYY-M-D / YYYY-MM-DD prefix so `2024-04-2-2024-okr`
+  // becomes `2024-okr` instead of the previous `substring(11)` result `024-okr`.
+  const matched = id.match(/^\d{4}-\d{1,2}-\d{1,2}-(.+)$/);
+  if (matched?.[1]) return matched[1];
+  return id.length > 11 ? id.substring(11) : id;
 }

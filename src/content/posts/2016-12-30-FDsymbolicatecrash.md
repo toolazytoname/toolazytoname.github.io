@@ -4,6 +4,8 @@ date: 2016-12-30T19:50:32+08:00
 categories: FDSDK
 tags:
   - FDSDK
+summary: "把 symbolicatecrash 做成可复用的定制流程。"
+
 ---
 
 定制symbolicatecrash
@@ -14,13 +16,13 @@ tags:
 * [1 待完善](#TODO)
 
 
-# 0 前言<a name="preface"></a>
+# 0 前言<a id="preface" name="preface"></a>
 
 因为同事经常手工命令行解析日志，比较费劲。所以我写了这个脚本可以很大程度上提升他的工作效率，简单封装了一下symbolicatecrash。
 [源码](https://github.com/toolazytoname/FDsymbolicatecrash)
 
 
-# 1 待完善<a name="TODO"></a>
+# 1 待完善<a id="TODO" name="TODO"></a>
 
 1. 对于解析不出来的日志文件，可以再调用atos，逐行解析能解析的内容
 2. 可以比较一下dSYM文件的uuid和crash文件的uuid，如果发现不一样，可以做一个提示。

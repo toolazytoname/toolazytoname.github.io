@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Migrate Jekyll _posts/ → Astro src/content/posts/.
+"""HISTORICAL one-shot migration. Do not run as a regular tool.
+
+Paths below are from the original author's machine. Reuse only after
+parameterizing SOURCE/TARGET and confirming the overwrite policy.
+
+Migrate Jekyll _posts/ → Astro src/content/posts/.
 
 Source: /Users/lazy/Code/crack/sell/notes/migration-source-2026-07-12/_posts/*.markdown
 Target: /Users/lazy/Code/crack/toolazytoname.github.io/src/content/posts/*.md

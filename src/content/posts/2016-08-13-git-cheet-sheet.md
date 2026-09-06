@@ -5,6 +5,8 @@ categories: tool
 tags:
   - 自制工具
   - Git
+summary: "Git 常用命令和工作流的速查表，配了一张思维导图。"
+
 ---
 
 **目录**
@@ -14,7 +16,7 @@ tags:
 3. [Git工作流规范](#workflow)
 
 
-# 1 文章来由<a name="background"></a>
+# 1 文章来由<a id="background" name="background"></a>
 
 
 关于版本控制系统，刚毕业那会儿因为在.Net 平台开发，用的是TFS，后来接触了SVN，一直都是GUI操作，因为GitHub的关系，用了点Git，也没感觉，瞎用呗。直到去年进现在的公司，才开始在公司项目中使用Git，后知后觉，相见恨晚，迅速转粉，而且是脑残粉。简直好用到爆。
@@ -23,7 +25,7 @@ tags:
 
 [原书链接](https://git-scm.com/book/en/v2)
 
-# 2 思维导图<a name="map"></a>
+# 2 思维导图<a id="map" name="map"></a>
 
 一开始用MindNode编写，然后用FreeMind导出成HTML。
 
@@ -31,7 +33,11 @@ tags:
 跳转到新页面查看。
 
 
-<iframe src="/posts-legacy/Git-Cheet-Sheet/freemind.html" width="100%" height="100%" ></iframe>
+<iframe src="/posts-legacy/Git-Cheet-Sheet/freemind.html" width="100%" height="480" title="Git 思维导图"></iframe>
+
+# 3 Git工作流规范<a id="workflow" name="workflow"></a>
+
+当时整理的工作流后来单独写成了 [Git工作流规范整理](/git/2019/08/09/git-workflow/)。
 
 
 

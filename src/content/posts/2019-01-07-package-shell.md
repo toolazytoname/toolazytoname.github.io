@@ -5,6 +5,8 @@ categories: iOS
 tags:
   - 打包
   - iOS
+summary: "不用 Jenkins、用 shell 完成 iOS 打包、签名和上传。"
+
 ---
 
 这是打包系列 
@@ -230,7 +232,7 @@ sudo chown -R XXX XXXXXX
 
 未将定时任务和脚本 结合。某几个特殊的库，每次更新都会导致pod update 定时执行失败，手动命令行执行没有这个问题。
 
-已规避，参看上一篇文章[《iOS自动打包》](/ios/2018/12/27/package/l) 最后。
+已规避，参看上一篇文章[《iOS自动打包》](/ios/2018/12/27/package-jekins/) 最后。
 
 # fastlane
 

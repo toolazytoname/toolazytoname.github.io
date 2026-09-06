@@ -5,6 +5,8 @@ categories: iOS
 tags:
   - iOS
   - 组件化
+summary: "私有 Pod 实践里踩过的版本、源和 lint 坑。"
+
 ---
 
 
@@ -168,7 +170,7 @@ spec.pod_target_xcconfig = { 'OTHER_LDFLAGS' => '-lObjC' }
 
 代码如下
 
-~~~Ruby
+~~~rb
   s.resource_bundle = { 'BPBaseFuncLib' => 'BPBaseFuncLib/Assets/*' }
   s.subspec 'OCR' do |ss|
     ss.source_files = 'BPBaseFuncLib/Classes/OCR/*','BPBaseFuncLib/Classes/BPBaseFuncBundle/*'

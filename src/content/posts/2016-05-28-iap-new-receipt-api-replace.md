@@ -4,6 +4,8 @@ date: 2016-05-28T14:18:32+08:00
 categories: iOS
 tags:
   - iOS
+summary: "对比 transaction.transactionReceipt 与读取本地 App Receipt 两种取回方式，以及换成新 API 时服务端要改的解析。"
+
 ---
 
 **目录**
@@ -23,17 +25,17 @@ tags:
 项目一直用的是老的API，年前曾经替换成新的API，用如下的写法，但是会有偶发的问题，所以目前生产环境上用的还是老的API。苹果已经不建议使用了。为了尽早替换成新的API，彩琴做了一番研究，找了一下为啥用新的API，会偶发购买失败的原因。代码如下：可以看到做了版本控制。    
 ![Code Shot](/posts-legacy/snip20160528_0.png)
 
-<a name="result"></a>结论
+<a id="result" name="result"></a>结论
 ===
 1. 发现其实 transaction.transactionReceipt通过这种方式老的API接口获取API，只能获取当前一个回执单。但是如果用新的API获取，读取本地的文件，就可以拿到当前帐号历史上的购买信息。能看出有563次购买记录。
 2. 如果要替换新的API，那么服务器对于返回字段的解析，也需要配合修改。苹果校验接口返回数据的格式变了。
 
 第二个结论很明显，只要对比一下数据就能知道结果。主要剖析一下第一个结论的来龙去脉。
 
-<a name="old"></a>旧
+<a id="old" name="old"></a>旧
 ===
 
-<a name="oldRequest"></a>请求
+<a id="oldRequest" name="oldRequest"></a>请求
 ----
 旧的API请求数据 NSData  transaction.transactionReceipt，通过UTF8编码，转换成一个明文JSON。可以看出，包含了这一次请求的数据。
 
@@ -50,7 +52,7 @@ tags:
 ~~~
 
 
-<a name="oldResponse"></a>返回
+<a id="oldResponse" name="oldResponse"></a>返回
 ----
 
 
@@ -77,10 +79,10 @@ tags:
 }
 ~~~
 
-<a name="new"></a>新
+<a id="new" name="new"></a>新
 ===
 
-<a name="newRequest"></a>请求
+<a id="newRequest" name="newRequest"></a>请求
 ----
 新的API请求，是获取本地存储的一个文件，然后进行base64编码   
 能看出两次购买，这个文件的大小是累加的，    
@@ -93,7 +95,7 @@ tags:
 费了好久才把这个文件解析了，解析过程在最下方。
 
 
-<a name="newResponse"></a>返回
+<a id="newResponse" name="newResponse"></a>返回
 ----
 
 ![Result Shot](/posts-legacy/snip20160528_1.png)
@@ -134,7 +136,7 @@ The in-app purchase receipt for a non-consumable product, auto-renewable subscri
 ~~~
 
 
-<a name="sandboxReceiptParse"></a>sandboxReceipt文件解析
+<a id="sandboxReceiptParse" name="sandboxReceiptParse"></a>sandboxReceipt文件解析
 ===
 从上文看出确实是包含了所有的购买信息。  
 很好奇，这个文件是神马玩意，直接用UTF8解码也解码不了。 放狗搜了一下，再次拜服谷歌。找到一篇objc.io 上面的文章[receipt validation](https://www.objc.io/issues/17-security/receipt-validation/) 。  
@@ -144,7 +146,7 @@ The in-app purchase receipt for a non-consumable product, auto-renewable subscri
 
 我把代码上传了：[toolazytoname/ReceiptValidation](https://github.com/toolazytoname/ReceiptValidation)
 
-<a name="question"></a>疑惑
+<a id="question" name="question"></a>疑惑
 ===
 consumable product or non-renewing subscription 一旦finish 了就会被删除， non-consumable product, auto-renewable subscription, or free subscription 会留着，但是我看product_id 有好多都是54，也没看，有没有别的，历史上的54应该是,被删了才是，怎么会有这么多。新建的帐号，也是有这么多54吗？
 有人和我遇到了[一样的问题](https://forums.developer.apple.com/thread/45419?q=appStoreReceiptURL)

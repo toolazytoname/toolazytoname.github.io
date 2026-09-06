@@ -4,6 +4,8 @@ date: 2017-06-16T19:44:32+08:00
 categories: hack your life
 tags:
   - hack your life
+summary: "整理一批黑客/资产搜索引擎，方便做授权排查。"
+
 ---
 
 

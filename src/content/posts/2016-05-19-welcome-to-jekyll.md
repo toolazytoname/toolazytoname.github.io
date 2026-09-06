@@ -4,6 +4,8 @@ date: 2016-05-19T17:27:32+08:00
 categories: hack your life
 tags:
   - hack your life
+summary: "用 Jekyll 和 GitHub Pages 搭个人站的流程记录，覆盖仓库配置和本地预览。"
+
 ---
 
 网上有些教程写得很细，比如[how-to-build-a-blog](http://cnfeat.com/blog/2014/05/10/how-to-build-a-blog/) 和[build-github-blog-page-08](http://www.pchou.info/ssgithubPage/2014-07-04-build-github-blog-page-08.html)

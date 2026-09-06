@@ -4,6 +4,8 @@ date: 2016-07-27T16:51:32+08:00
 categories: FDSDK
 tags:
   - FDSDK
+summary: "用 KVO 盯住 UIApplication 属性，查出是谁改了 idleTimerDisabled。"
+
 ---
 
 因为项目中集成了各个部门的不同模块，有一次调试偶发的bug，发现设备屏幕自动变暗了，明明设置了[UIApplication sharedApplication].idleTimerDisabled 这个属性了，猜测是集成的哪个别的部门的模块动了这个属性。

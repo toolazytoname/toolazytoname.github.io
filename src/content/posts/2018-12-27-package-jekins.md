@@ -5,6 +5,8 @@ categories: iOS
 tags:
   - 打包
   - iOS
+summary: "用 Jenkins 做 iOS 自动打包的第一版流程。"
+
 ---
 
 

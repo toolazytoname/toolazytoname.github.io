@@ -25,9 +25,9 @@ function readingTime(body: string): number {
 
 const readMin = readingTime(entry.body ?? '');
 
-// TOC headings: h2 and h3 only, with slugs derived from id.
+// TOC: h2–h4 after remark shifts leftover markdown h1 trees down one level.
 const tocHeadings = headings
-  .filter((h) => h.depth === 2 || h.depth === 3)
+  .filter((h) => h.depth >= 2 && h.depth <= 4)
   .map((h) => ({
     depth: h.depth,
     slug: h.slug,

@@ -4,6 +4,8 @@ date: 2016-08-13T21:53:32+08:00
 categories: hack your life
 tags:
   - hack your life
+summary: "在 macOS 上快速搭 FTP / SFTP，方便临时传文件。"
+
 ---
 
 
@@ -16,7 +18,7 @@ tags:
 5. [Reference](#reference)
 
 
-1 为什么会想要搭建一个FTP服务器<a name="why"></a>
+1 为什么会想要搭建一个FTP服务器<a id="why" name="why"></a>
 ===
 
 电脑的硬盘里面有些刚下的高清电影，有的时候在iPad上看，拷到设备上看太low了，于是就打算搭建一个服务器，然后在手机上就用带FTP功能的视频客户端去访问就可以了。目前来看，这套方案体验还是不错的。
@@ -26,7 +28,7 @@ tags:
 我的方案是 Mac（FTP）＋iOS（nPlayer）。期待用上自己做的播放器客户端。
 
 
-2 Start the FTP Server<a name="FTP"></a>
+2 Start the FTP Server<a id="FTP" name="FTP"></a>
 ===
 直接使用终端输入这行命令即可。
 
@@ -41,7 +43,7 @@ ftp localhost
 ~~~
 
 
-3 Enabling the SFTP Server <a name="SFTP"></a>
+3 Enabling the SFTP Server <a id="SFTP" name="SFTP"></a>
 ===
 
 出于安全考虑，用SFTP也很简单。如下图，只要进设置共享页面，打开远程登录就可以了，勾选了之后，就打开了SSH和SFTP。
@@ -56,7 +58,7 @@ ftp localhost
 sftp localhost
 ~~~
 
-4 Disable FTP or SFTP Server <a name="disable"></a>
+4 Disable FTP or SFTP Server <a id="disable" name="disable"></a>
 ===
 
 
@@ -70,7 +72,7 @@ sudo -s launchctl unload -w /System/Library/LaunchDaemons/ftp.plist
 
 
 
-5 Reference<a name="reference"></a>
+5 Reference<a id="reference" name="reference"></a>
 ===
 
 完全参考这篇

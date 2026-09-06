@@ -5,6 +5,8 @@ categories: python
 tags:
   - Python
   - 爬虫
+summary: "用 Scrapy 写第一个爬虫时的入门记录。"
+
 ---
 
 

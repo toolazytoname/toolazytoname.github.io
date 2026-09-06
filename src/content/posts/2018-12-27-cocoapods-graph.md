@@ -5,6 +5,8 @@ categories: iOS
 tags:
   - iOS
   - 组件化
+summary: "把 CocoaPods 依赖导出成图，看清谁拖了谁。"
+
 ---
 
 

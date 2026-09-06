@@ -5,6 +5,8 @@ categories: iOS
 tags:
   - iOS
   - Flutter
+summary: "把 Flutter 嵌进已有 iOS 工程的第一次尝试。"
+
 ---
 
 
@@ -28,13 +30,13 @@ Two current demonstrations of this are the platform_view and flutter_view exampl
 
 看了才发现，Google官方对这一点支持的不太友好，能实现，但过程极度不优雅。国内有几篇文章都分享了如何优雅集成，
 
-* [闲鱼flutter混合工程持续集成最佳实践]([**https://www.yuque.com/xytech/flutter/pfoy9x**](https://www.yuque.com/xytech/flutter/pfoy9x))
+* [闲鱼flutter混合工程持续集成最佳实践](https://www.yuque.com/xytech/flutter/pfoy9x)
 
 * [Now直播iOS Flutter混合工程实践](https://juejin.im/post/5b6cea3c6fb9a04fca3ca608)
 
 * [使用Flutter之后，我们的CPU占用率降了50%](https://mp.weixin.qq.com/s/NtwHJLwMigNG-SSr9DDDIQ)
 
-* [从零搭建 iOS Native Flutter 混合工程 ]([**https://juejin.im/post/5c3ae5ef518825242165c5ca**](https://juejin.im/post/5c3ae5ef518825242165c5ca))
+* [从零搭建 iOS Native Flutter 混合工程](https://juejin.im/post/5c3ae5ef518825242165c5ca)
   * 这篇比较详细，还发了打包脚本的源码
 
 

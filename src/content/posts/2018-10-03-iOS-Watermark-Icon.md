@@ -6,6 +6,8 @@ tags:
   - iOS
   - 自制工具
   - Shell
+summary: "给 Debug / AdHoc 包的 App Icon 自动加水印。"
+
 ---
 
 

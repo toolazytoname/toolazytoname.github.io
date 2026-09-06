@@ -4,6 +4,8 @@ date: 2018-10-03T18:19:32+08:00
 categories: iOS
 tags:
   - iOS
+summary: "在开发机上模拟 iOS 定位，方便调试基于位置的功能。"
+
 ---
 
 

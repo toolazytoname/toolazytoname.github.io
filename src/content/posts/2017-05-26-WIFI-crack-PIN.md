@@ -4,6 +4,8 @@ date: 2017-05-26T11:55:32+08:00
 categories: hack your life
 tags:
   - hack your life
+summary: "WPS PIN 攻击的学习记录，只适用于自己的实验网络。"
+
 ---
 
 
@@ -113,7 +115,7 @@ waiting for beacon from
 
 
 
-# 5 参考<a name="reference"></a>
+# 5 参考<a id="reference" name="reference"></a>
 
 
    1. [无线安全专题_破解篇02--kali破解pin码](http://www.cnblogs.com/qiyeboy/p/5825525.html)

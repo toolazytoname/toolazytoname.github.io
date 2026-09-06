@@ -4,6 +4,8 @@ date: 2016-08-17T14:58:32+08:00
 categories: iOS
 tags:
   - iOS
+summary: "顺着 hit-test 和事件分发把 UIKit 响应者链走一遍。"
+
 ---
 
 一直以为以为对于手势，自己还是比较了解的，谁知道干起活来，也会有卡壳的时候。所以记录一下。
@@ -21,17 +23,17 @@ tags:
 * [Reference](#reference)
 
 
-遇到的问题<a name="question"></a>
+遇到的问题<a id="question" name="question"></a>
 ===
 
 
-问题一：在动画中不响应手势<a name="question1"></a>
+问题一：在动画中不响应手势<a id="question1" name="question1"></a>
 ----
 
 因为我想要在弹幕上面加手势，弹幕本身是有一个animation，加上去以后，发现手势不响应。
 
 
-问题一的解决思路<a name="solve1"></a>
+问题一的解决思路<a id="solve1" name="solve1"></a>
 ----
 
 
@@ -72,7 +74,7 @@ The reason the interactions are not working is that essentially the UIImageView 
 
 
 
-问题二 :点击事件的传递<a name="questiion2"></a>
+问题二 :点击事件的传递<a id="questiion2" name="questiion2"></a>
 ----
 假设
 view 的层级如此，A上C上，都加了Tap手势。有的时候，我想要在C上面响应，不想让Tap事件传到A上，有的时候，又想让C直接处理了。
@@ -99,7 +101,7 @@ view 的层级如此，A上C上，都加了Tap手势。有的时候，我想要�
 
 
 
-问题二的解决思路<a name="solve2"></a>
+问题二的解决思路<a id="solve2" name="solve2"></a>
 ----
 
 
@@ -120,10 +122,10 @@ view 的层级如此，A上C上，都加了Tap手势。有的时候，我想要�
 
 
 
-收获<a name="harvest"></a>
+收获<a id="harvest" name="harvest"></a>
 ====
 
-工具<a name="tool"></a>
+工具<a id="tool" name="tool"></a>
 -----
 
 
@@ -132,7 +134,7 @@ view 的层级如此，A上C上，都加了Tap手势。有的时候，我想要�
 [FDResponderChainDebug](
 https://github.com/toolazytoname/FDResponderChainDebug)
 
-概念<a name="konwledge"></a>
+概念<a id="konwledge" name="konwledge"></a>
 ----
 
 熟悉各个view层级间的，hitTest 方法和pointInside方法的调用顺序，可以reset 到这个提交节点098a6ea82a6b66e12c433e83642d802231712045，观察。

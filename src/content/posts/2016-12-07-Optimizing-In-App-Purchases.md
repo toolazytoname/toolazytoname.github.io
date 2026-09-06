@@ -4,6 +4,8 @@ date: 2016-12-07T13:27:32+08:00
 categories: iOS
 tags:
   - iOS
+summary: "排查 iOS 内购掉单，补上收据校验和补单路径。"
+
 ---
 
 IAP掉单优化。
@@ -20,12 +22,12 @@ IAP掉单优化。
 * [7 Reference](#reference)
 
 
-# 0 前言<a name="preface"></a>
+# 0 前言<a id="preface" name="preface"></a>
 
-公司的IAP做得不太好，上次也写了一篇相关的文章[《IAP回执单新API》](/ios/2016/05/28/iap-new-receipt-api-replace.html)。做苹果的IAP很容易会有掉单的情况发生，我认为微信淘宝支付很大程度上考验的是微信淘宝的技术水平，IAP考验的是咱们自己开发团队的能力，包括到服务端团队和客户端团队。
+公司的IAP做得不太好，上次也写了一篇相关的文章[《IAP回执单新API》](/ios/2016/05/28/iap-new-receipt-api-replace/)。做苹果的IAP很容易会有掉单的情况发生，我认为微信淘宝支付很大程度上考验的是微信淘宝的技术水平，IAP考验的是咱们自己开发团队的能力，包括到服务端团队和客户端团队。
 
 
-# 1 总体策略<a name="strategy"></a>
+# 1 总体策略<a id="strategy" name="strategy"></a>
 
 
 
@@ -41,7 +43,7 @@ IAP掉单优化。
 ~~~
 
 
-# 2 客户端<a name="client"></a>
+# 2 客户端<a id="client" name="client"></a>
 
 1. 替换成新的API
 2. 把finishTransaction移到交验接口成功的回掉里面去。（未做）
@@ -52,11 +54,11 @@ IAP掉单优化。
 NSData *transactionReceipt = [NSData dataWithContentsOfURL:[[NSBundle mainBundle] appStoreReceiptURL]];
 ~~~
 
-# 3 服务端
+# 3 服务端<a id="server" name="server"></a>
 
 1. 兼容新的API。
     1. 当利用App Receipt来验证IAP订单时，我们需要验证的是在App Reciept中所包含的IAP receipt列表（in_app节点）。与iOS 7.0之前的方式相比，这种方式的明显区别是：它包含一个IAP receipt列表而不是仅仅一个IAP receipt。这使它本身带有某种程度的自动修复的特性。如果用户某次支付没有被正确完成也没有后续被成功恢复，那么当他在同一个手机设备上产生下一次支付行为时，App Receipt中就会包含前后两次支付的IAP receipt，这就能让上次失败的订单一并恢复。
-    2. 之前也换过新的API，之所以不用等原因是，有一个测试账号，有五六百条记录，苹果会返回异常信息。详细可以参考上一篇文章[《IAP回执单新API》](/ios/2016/05/28/iap-new-receipt-api-replace.html)。一般会员也不会产生如此多的购买记录。
+    2. 之前也换过新的API，之所以不用等原因是，有一个测试账号，有五六百条记录，苹果会返回异常信息。详细可以参考上一篇文章[《IAP回执单新API》](/ios/2016/05/28/iap-new-receipt-api-replace/)。一般会员也不会产生如此多的购买记录。
 2. 关于退款的订单。
     1. 用户退款的订单有可能依然在App Receipt中出现，因此App服务器实现验证的时候需要能够识别出已经被退款的订单。被退款订单的唯一标识是：它带有一个[cancellation_date字段](https://developer.apple.com/library/content/releasenotes/General/ValidateAppStoreReceipt/Chapters/ReceiptFields.html#//apple_ref/doc/uid/TP40010573-CH106-SW1)。
 3. App客户端和App服务器之间的通信通道要加密。
@@ -80,7 +82,7 @@ NSData *transactionReceipt = [NSData dataWithContentsOfURL:[[NSBundle mainBundle
 
 
 
-# 4 计算掉单率<a name="calculate"></a>
+# 4 计算掉单率<a id="calculate" name="calculate"></a>
 1. 最好是用销量来统计，而不是销售额。
 2. 分子，用服务端访问苹果服务器，回执单上解析结果的时间。
 3. 分母，一定时间范围内苹果的销量。从报表获取https://reportingitc.apple.com/autoingestion.tft。
@@ -89,7 +91,7 @@ NSData *transactionReceipt = [NSData dataWithContentsOfURL:[[NSBundle mainBundle
 这样，分子，分母都是来自苹果，之前，统计的时候，分子的时间参考的是公司后台服务器鉴权成功的时间。所以会出现大于1的情况，太扯了。
 
 
-# 5 报表<a name="reporter"></a>
+# 5 报表<a id="reporter" name="reporter"></a>
 
 苹果文档[Official Reporter tool from Apple](https://help.apple.com/itc/appsreporterguide/)
 
@@ -121,7 +123,7 @@ NSData *transactionReceipt = [NSData dataWithContentsOfURL:[[NSBundle mainBundle
 
 
 
-# 6 疑惑<a name="question"></a>
+# 6 疑惑<a id="question" name="question"></a>
 
 ## 1 能否关联
 用户拿到的信息和开发拿到的信息能否关联起来？？？以应对投诉时去区分这个用户是否是恶意投诉
@@ -154,5 +156,5 @@ NSData *transactionReceipt = [NSData dataWithContentsOfURL:[[NSBundle mainBundle
 
 
 
-# 7 参考<a name="reference"></a>
+# 7 参考<a id="reference" name="reference"></a>
    1. 这篇文章写得很好给了我很大的启发[苹果IAP开发中的那些坑和掉单问题](http://zhangtielei.com/posts/blog-iap.html)

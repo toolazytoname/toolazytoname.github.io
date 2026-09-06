@@ -5,6 +5,8 @@ categories: iOS
 tags:
   - iOS
   - 组件化
+summary: "把组件打成二进制 Pod，换编译速度。"
+
 ---
 
 
@@ -213,7 +215,7 @@ rm -rf Pods/BPRCycleScrollView
 
 ## 问题3
 
-[9 Ways You Can Avoid ObjC Xcode Preprocessor Macros]([**https://qualitycoding.org/xcode-preprocessor-macros/**](https://qualitycoding.org/xcode-preprocessor-macros/))
+[9 Ways You Can Avoid ObjC Xcode Preprocessor Macros](https://qualitycoding.org/xcode-preprocessor-macros/)
 
 除了条件编译，其它的宏都可以被替换掉，详情参见博文。这里面还附赠一个脚本，亲测有效，很好使。
 

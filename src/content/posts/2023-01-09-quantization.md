@@ -5,6 +5,8 @@ categories: life
 tags:
   - 理财
   - hack your life
+summary: "从零搭一套自己用的量化交易流水线，记录数据、回测和坑。"
+
 ---
 
 原本假期打算有点突破，当前的进展不是完全符合自己的预期。

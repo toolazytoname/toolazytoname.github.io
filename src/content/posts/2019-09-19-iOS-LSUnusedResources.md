@@ -5,6 +5,8 @@ categories: iOS
 tags:
   - iOS优化
   - 自制工具
+summary: "定制删除无用图片的工具，少误删业务资源。"
+
 ---
 
 

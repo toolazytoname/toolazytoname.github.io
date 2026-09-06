@@ -10,6 +10,9 @@
  * TODO: bundle a CJK font locally for reliable offline builds.
  */
 
+import { existsSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import satori from 'satori';
 import type { SatoriOptions } from 'satori';
 import { Resvg } from '@resvg/resvg-js';
@@ -34,7 +37,7 @@ async function loadFonts(): Promise<SatoriOptions['fonts']> {
   try {
     const cssUrl =
       'https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap';
-    const cssRes = await fetch(cssUrl);
+    const cssRes = await fetch(cssUrl, { signal: AbortSignal.timeout(5000) });
     if (!cssRes.ok) throw new Error(`Font CSS ${cssRes.status}`);
     const css = await cssRes.text();
 
@@ -50,7 +53,7 @@ async function loadFonts(): Promise<SatoriOptions['fonts']> {
     }
 
     for (const u of urlSet) {
-      const r = await fetch(u);
+      const r = await fetch(u, { signal: AbortSignal.timeout(5000) });
       if (r.ok) {
         const buf = await r.arrayBuffer();
         fonts.push({
@@ -79,7 +82,7 @@ async function loadFonts(): Promise<SatoriOptions['fonts']> {
   try {
     const cjkUrl =
       'https://fonts.gstatic.com/s/notosanssc/v36/k3kCo84MPvpLmixcA63oeAL7Iqp5IZJF9bmaG9_FnYxNbPzS5HE.ttf';
-    const cjkRes = await fetch(cjkUrl);
+    const cjkRes = await fetch(cjkUrl, { signal: AbortSignal.timeout(8000) });
     if (cjkRes.ok) {
       fonts.push({
         name: 'Noto Sans SC',
@@ -92,14 +95,29 @@ async function loadFonts(): Promise<SatoriOptions['fonts']> {
     console.warn('[og] Failed to load Noto Sans SC, CJK may not render:', e);
   }
 
-  if (fonts.length === 0) {
-    throw new Error(
-      '[og] No fonts loaded — OG image generation impossible',
-    );
-  }
-
   _fonts = fonts;
   return fonts;
+}
+
+function defaultOgPng(): Buffer {
+  const candidates = [
+    fileURLToPath(new URL('../../../public/og-default.png', import.meta.url)),
+    join(process.cwd(), 'public/og-default.png'),
+    join(process.cwd(), 'dist/client/og-default.png'),
+  ];
+  for (const p of candidates) {
+    if (existsSync(p)) return readFileSync(p);
+  }
+  throw new Error('[og] default PNG missing');
+}
+
+function ogPngResponse(buf: Buffer): Response {
+  return new Response(buf.buffer as ArrayBuffer, {
+    headers: {
+      'Content-Type': 'image/png',
+      'Cache-Control': 'public, max-age=86400, stale-while-revalidate=604800',
+    },
+  });
 }
 
 // ---------------------------------------------------------------------------
@@ -126,6 +144,10 @@ export async function GET({ params }: { params: { slug?: string } }) {
       : new Date(entry.data.date).toISOString().slice(0, 10);
 
   const fonts = await loadFonts();
+  if (fonts.length === 0) {
+    console.warn('[og] no fonts loaded, serving default PNG');
+    return ogPngResponse(defaultOgPng());
+  }
 
   // Adaptive font size based on title length
   const len = title.length;
@@ -151,7 +173,7 @@ export async function GET({ params }: { params: { slug?: string } }) {
             style: {
               width: 1200,
               height: 4,
-              backgroundColor: '#0ea5e9',
+              backgroundColor: '#0369a1',
             },
           },
         },
@@ -163,7 +185,7 @@ export async function GET({ params }: { params: { slug?: string } }) {
               display: 'flex',
               padding: '48px 60px 0',
               fontSize: 16,
-              color: '#0ea5e9',
+              color: '#38bdf8',
               fontFamily: FONT_FAMILY,
             },
             children: 'lazy \u00B7 weichao.ren',
@@ -216,19 +238,16 @@ export async function GET({ params }: { params: { slug?: string } }) {
     },
   };
 
-  const svg = await satori(element, {
-    width: 1200,
-    height: 630,
-    fonts: fonts as SatoriOptions['fonts'],
-  });
-
-  const resvg = new Resvg(svg);
-  const pngBuf = resvg.render().asPng();
-
-  return new Response(pngBuf.buffer as ArrayBuffer, {
-    headers: {
-      'Content-Type': 'image/png',
-      'Cache-Control': 'public, max-age=31536000, immutable',
-    },
-  });
+  try {
+    const svg = await satori(element, {
+      width: 1200,
+      height: 630,
+      fonts: fonts as SatoriOptions['fonts'],
+    });
+    const resvg = new Resvg(svg);
+    return ogPngResponse(Buffer.from(resvg.render().asPng()));
+  } catch (err) {
+    console.warn('[og] render failed, serving default PNG', err);
+    return ogPngResponse(defaultOgPng());
+  }
 }

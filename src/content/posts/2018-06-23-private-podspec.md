@@ -5,6 +5,8 @@ categories: iOS
 tags:
   - iOS
   - 组件化
+summary: "用 CocoaPods 建私有 podspec 仓库的步骤。"
+
 ---
 
 iOS组件化系列
@@ -91,13 +93,13 @@ $ pod lib lint --sources='https://github.com/toolazytoname/Specs.git,https://git
 
 ## 创建Pod所对应的podspec文件
 
-```she
+```shell
 $ pod spec create PodTestLibrary git@coding.net:wtlucky/podTestLibrary.git
 ```
 
 本地测试配置好的podspec文件是否可用。
 
-```ruby
+```rb
 platform :ios, '7.0'
 
 pod 'PodTestLibrary', :path => '~/code/Cocoapods/podTest/PodTestLibrary'      # 指定路径
@@ -128,7 +130,7 @@ $ pod repo remove FDSpecs
 
 The location from where the library should be retrieved.
 
-```ruby
+```rb
 #Specifying a Git source with a tag. This is how most OSS Podspecs work.
 spec.source = { :git => 'https://github.com/AFNetworking/AFNetworking.git',
                 :tag => spec.version.to_s }
@@ -207,7 +209,7 @@ s.prefix_header_contents = '#import "YCAdditions.h"','#import "MJExtension.h"','
 
 这是普通青年的用法
 
-~~~Objective-C
+~~~objc
 [JSPatch startWithAppKey:@"YOU_GUESS"];
 #ifdef DEBUG
 [JSPatch setupDevelopment];
@@ -217,7 +219,7 @@ s.prefix_header_contents = '#import "YCAdditions.h"','#import "MJExtension.h"','
 
 这是文艺青年的用法
 
-~~~Ruby
+~~~rb
 Pod::Spec.new do |s|
 
   #设置 podspec 的默认 subspec
@@ -259,7 +261,7 @@ pod 'YOUR_SPEC', :subspecs => ['IDFA', 'IDFB']
 
 随着组件化的铺开，当我们打算创建一个新App的时候，自然而然地就会复用指之前的模块和代码。当一个组件需要同时支持两个上层App， 两个App所需要的逻辑有所差异，我们会把一个库划分为两个子库。例如
 
-```ruby
+```rb
 s.default_subspec = 'Pay'
 s.subspec 'Pay' do |pay|
       pay.source_files = 'BitAutoPlusHomeLib/Classes/**/*'
@@ -300,7 +302,7 @@ s.subspec 'Pay' do |pay|
 
 ### pod
 
-```ruby
+```rb
 #you will want to use the latest version of a Pod. If this is the case, simply omit the version requirements.
 pod 'SSZipArchive'
 #you may want to freeze to a specific version of a Pod, in which case you can specify that version number

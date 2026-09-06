@@ -4,6 +4,8 @@ date: 2017-08-07T15:32:32+08:00
 categories: hack your life
 tags:
   - hack your life
+summary: "树莓派开箱、系统和当时想跑的服务。"
+
 ---
 
 

@@ -5,6 +5,8 @@ categories: Python
 tags:
   - 自制工具
   - Python
+summary: "批量改图片尺寸的脚本，给资源整理用。"
+
 ---
 
 

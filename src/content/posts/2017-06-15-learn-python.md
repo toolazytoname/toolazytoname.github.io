@@ -4,6 +4,8 @@ date: 2017-06-15T17:50:32+08:00
 categories: python
 tags:
   - Python
+summary: "开始系统学 Python 时留下的路径和书单。"
+
 ---
 
 

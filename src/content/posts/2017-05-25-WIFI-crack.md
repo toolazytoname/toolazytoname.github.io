@@ -4,6 +4,8 @@ date: 2017-05-25T16:17:32+08:00
 categories: hack your life
 tags:
   - hack your life
+summary: "用 aircrack-ng 做授权环境下的 Wi-Fi 密码学习笔记。"
+
 ---
 
 
@@ -135,7 +137,7 @@ Parallels tools 是有多难安。我一路披荆斩棘，解决了一个又一�
 
 
 
-# 5 参考<a name="reference"></a>
+# 5 参考<a id="reference" name="reference"></a>
 
 
    1. [装在虚拟机里的 kali linux上如何挂载无线网卡

@@ -5,6 +5,8 @@ categories: iOS
 tags:
   - iOS
   - 源码阅读
+summary: "顺着 @synchronized 看 runtime 锁是怎么实现的。"
+
 ---
 
 

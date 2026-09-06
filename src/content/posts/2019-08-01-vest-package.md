@@ -5,6 +5,8 @@ categories: iOS
 tags:
   - iOS
   - 自制工具
+summary: "调研 iOS 马甲包的源码混淆思路，最终没有上线。"
+
 ---
 
 
@@ -25,7 +27,7 @@ tags:
 
 # 技术层面
 
-基本上参考 [自动翻新专家(WHC_ConfuseSoftware)](https://github.com/netyouli/WHC_ConfuseSoftware) 就很完美了，可惜是闭源的。也有无私的同学贡献了一个开源的工具[iOS 马甲应用工具](https://github.com/klaus01/KLGenerateSpamCode)，回想起我之前用Python 写过一个批量更改类名前缀的脚本[使用脚本批量重命名Objective-C类](//ios/2018/07/09/FDTops/ )，有了这个，那个的功能就有点弱爆了。
+基本上参考 [自动翻新专家(WHC_ConfuseSoftware)](https://github.com/netyouli/WHC_ConfuseSoftware) 就很完美了，可惜是闭源的。也有无私的同学贡献了一个开源的工具[iOS 马甲应用工具](https://github.com/klaus01/KLGenerateSpamCode)，回想起我之前用Python 写过一个批量更改类名前缀的脚本[使用脚本批量重命名Objective-C类](/ios/2018/07/09/FDTops/)，有了这个，那个的功能就有点弱爆了。
 
 下面列一下，需要从源码层面做哪些修改
 

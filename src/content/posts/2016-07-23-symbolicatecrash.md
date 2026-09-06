@@ -4,6 +4,8 @@ date: 2016-07-23T11:27:32+08:00
 categories: iOS
 tags:
   - iOS
+summary: "用 symbolicatecrash 和 atos 把 iOS crash 还原成可读的函数名。"
+
 ---
 老生常谈，拾人牙慧，只是自己做个记录，方便以后查询。
 
@@ -26,7 +28,7 @@ tags:
 * [Reference](#reference)
 
 
-步骤一 find<a name="find"></a>
+步骤一 find<a id="find" name="find"></a>
 ===
 
 因为不同的Xcode版本这个工具的位置经常会变，所以用下面这个命令来寻找
@@ -44,14 +46,14 @@ tags:
 
 学会find命令，不变应万变。
 
-步骤二 设置DEVELOPER_DIR<a name="set"></a>
+步骤二 设置DEVELOPER_DIR<a id="set" name="set"></a>
 ===
 ~~~
 export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer
 ~~~
 
 
-步骤三 使用symbolicatecrash<a name="use"></a>
+步骤三 使用symbolicatecrash<a id="use" name="use"></a>
 ===
 .app, .crash, .dSYM, symbolicatecrash
 把这四个文件放到一个文件夹内，执行
@@ -68,7 +70,7 @@ export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer
  ./symbolicatecrash original.crash AppName.app > app.crash
 ~~~
 
-步骤四 使用atos<a name="atos"></a>
+步骤四 使用atos<a id="atos" name="atos"></a>
 ===
 用了上面的方法，可能只是部分符号化了。有的时候，需要手工解析一下。
 
@@ -107,15 +109,16 @@ atos -arch arm64 -o AppName.app.dSYM/Contents/Resources/DWARF/AppName -l 0x1000a
 ~~~
 
 
-Others<a name="others"></a>
+<a id="others"></a>
+其他
 ===
 为什么会写这篇文章，原因是我用symbolicatecrash，一直不能得到想要的结果。继续深入了解了一下，原来是没有把.app .dSYM 和 .crash 对应上。
 
-UUID的概念<a name="UUID"></a>
+UUID的概念<a id="UUID" name="UUID"></a>
 ----
 这里先介绍一个概念：UUID 。什么是UUID？每一个可执行程序都有一个build UUID来唯一标识。Crash日志包含发生crash的这个应用（app）的 build UUID以及crash发生的时候，应用加载的所有库文件的[build UUID]。
 
-App的UUID<a name="AppUUID"></a>
+App的UUID<a id="AppUUID" name="AppUUID"></a>
 ----
 
 ~~~
@@ -124,7 +127,7 @@ UUID: 7E78F43B-9659-304F-B77D-102EE2520FB6 (armv7) AppName.app/AppName
 UUID: 50AD720C-A916-3F53-B233-2099A2D7D306 (arm64) AppName.app/AppName
 ~~~
 
-dSYM文件中的UUID<a name="dSYMUUID">
+dSYM文件中的UUID<a id="dSYMUUID" name="dSYMUUID"></a>
 ----
 
 ~~~
@@ -141,7 +144,7 @@ dwarfdump --uuid AppName.app.dSYM
 ~~~
 
 
-Crash文件中的UUID<a name="crashUUID"></a>
+Crash文件中的UUID<a id="crashUUID" name="crashUUID"></a>
 ----
 
 ~~~
@@ -151,7 +154,7 @@ grep "uuid" app.crash
 
 注意这三个50AD720C-A916-3F53-B233-2099A2D7D306是可以对应起来的
 
-dSYM是什么鬼<a name="dSYM"></a>
+dSYM是什么鬼<a id="dSYM" name="dSYM"></a>
 ----
 [定性认知](http://stackoverflow.com/questions/22460058/how-is-a-dsym-file-created)
 摘抄如下，说得很好：
@@ -210,7 +213,7 @@ They are useful for re-symbolicating your crash reports. With a stripped binary,
 ~~~
 
 
-如何寻找dSYM<a name="finddSYM"></a>
+如何寻找dSYM<a id="finddSYM" name="finddSYM"></a>
 ----
 
 用一下方法，如果本地有这个文件，就可以通过UUID找到。
@@ -264,7 +267,7 @@ mdfind "com_apple_xcode_dsym_uuids == *"
 ~~~
 
 
-频繁唤醒异常crash文件<a name="wakeup"></a>
+频繁唤醒异常crash文件<a id="wakeup" name="wakeup"></a>
 ----
 关于这种异常，苹果[官方文档](https://developer.apple.com/library/content/technotes/tn2151/_index.html#//apple_ref/doc/uid/DTS40008184-CH1-STACKTRACE) 中有明确说明是Typically, this is caused by thread-to-thread communication
 
@@ -281,7 +284,7 @@ Typically, this is caused by thread-to-thread communication (generally using pef
 
 项目名字已经批量替换成AppName，就这异常文件还能解析出来，着实让我很惊讶。
 
-内存占用过多的crash文件<a name="memory"></a>
+内存占用过多的crash文件<a id="memory" name="memory"></a>
 ----
 苹果[官方文档](https://developer.apple.com/library/content/technotes/tn2151/_index.html#//apple_ref/doc/uid/DTS40008184-CH1-STACKTRACE) 也有详细说明。
 乍一看就是两个json。
@@ -319,7 +322,7 @@ This table lists all running processes, including system daemons, at the time th
 4. 有一些第三方工具，例如(FBAllocationTracker/FBMemoryProfiler/FBRetainCycleDetector)，MSLeakHunter，[MLeaksFinder](http://wereadteam.github.io/2016/02/22/MLeaksFinder/)，PLeakSniffer等等
 
 
-内存分类<a name="memorytype"></a>
+内存分类<a id="memorytype" name="memorytype"></a>
 ----
 我看别人的博客写着
 

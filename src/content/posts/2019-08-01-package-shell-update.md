@@ -5,6 +5,8 @@ categories: iOS
 tags:
   - iOS
   - 打包
+summary: "iOS 脚本打包的升级版：补上证书、描述文件和常见失败。"
+
 ---
 
 

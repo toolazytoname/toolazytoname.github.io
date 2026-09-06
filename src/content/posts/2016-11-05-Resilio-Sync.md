@@ -4,6 +4,8 @@ date: 2016-11-05T11:14:32+08:00
 categories: tool
 tags:
   - tool
+summary: "整理当时觉得好用的 Resilio Sync 资源与用法。"
+
 ---
 
 **目录**
@@ -11,9 +13,9 @@ tags:
 * [简介](#introduction)
 * [资源链接](#linkResources)
 * [授人以渔](#learnFishing)
-* [资源](#resource)
+* [资源](#linkResources)
 
-<a name="introduction"></a> 简介
+<a id="introduction" name="introduction"></a> 简介
 ===
 
 推荐一款很好用的软件：Resilio Sync ，一般来说下载1.4.111版本就可以了，具体原因你懂的。
@@ -30,14 +32,14 @@ f3b3095d5b7021157ada032040144e715621585864e979ba53a4697be8918ae3 | Linux/btsync_
 1c7df900e4a64d7f349605b3406c183399fb09a6b96278ae04817e2fcce0acf4 | MacOS/BTSync-1.4.111.dmg
 c29133157b30ffbfb940a1c24da658779a35ed3e50b69c21b3d911a66434aa6f | Android/android-google-release-1.4.65.apk
 
-<a name="linkResources"></a>资源链接
+<a id="linkResources" name="linkResources"></a><a id="resource"></a>资源链接
 ===
 
 1. [btsynckeys.com](http://btsynckeys.com)
 2. [www.reddit.com](https://www.reddit.com/r/BTsynckeys/)
 
 
-<a name="learnFishing"></a>授人以渔
+<a id="learnFishing" name="learnFishing"></a>授人以渔
 ===
 
 1. Google

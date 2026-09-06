@@ -4,6 +4,8 @@ date: 2016-12-08T16:35:32+08:00
 categories: hack your life
 tags:
   - hack your life
+summary: "记录一次 Wii U 破解实验，方便以后复现步骤。"
+
 ---
 
 WiiU 破解。
@@ -23,18 +25,18 @@ WiiU 破解。
 * [6 Reference](#reference)
 
 
-# 0 前言<a name="preface"></a>
+# 0 前言<a id="preface" name="preface"></a>
 
 好几年前买了个Wii U，一直积灰，没怎么玩儿。从小就喜欢玩游戏，小时候玩得老开心了，隔壁就是游戏厅，现在当码农和我喜欢玩儿游戏也有关系，毕业后就不怎么玩儿了。无意间发现Wii U已经破解了，并且不用实体盘，以前仅仅是破解了wii模式。貌似销量还出现了一个小高潮。废寝忘食看了好多相关的文章，应该能玩起来了，流程也简单。简单梳理一下。
 
 
-# 1 原理<a name="underTheHood"></a>
+# 1 原理<a id="underTheHood" name="underTheHood"></a>
 
 
 
 首先说一下当前的破解方式的简单的原理，破解第一步就是利用浏览器的kernel漏洞，访问漏洞网页，激活该漏洞，使得用户可以用到user land的内存区域。第二步就是也是访问网页加载各种自制程序了，包括一些wup installer 伪装等软件。当然最重要的就是运行wiiu的备份游戏的工具loadiine GX2（最近的图形界面版，非早期的loadiine 文字版）。当然由于网页漏洞程序的进化，现在已经可以做到点击网页网址直接加载hbl或者GX2程序了。关于WiiU.91wii.com的使用方法在后面，和下面的过程是一样一样，说一下目前最新的对个人用户来说方便运行游戏的方法
 
-# 2 想玩的游戏<a name="games"></a>
+# 2 想玩的游戏<a id="games" name="games"></a>
 
 | 中文名  | 英文名  | 是否已下载 | titleID |
 |:------------- |:---------------:| -------------:| -------------:|
@@ -56,9 +58,9 @@ WiiU 破解。
 
 
 
-# 3 用wup方式安装<a name="wup"></a>
+# 3 用wup方式安装<a id="wup" name="wup"></a>
 
-## 1 限制<a name="wupLimit"></a>
+## 1 限制<a id="wupLimit" name="wupLimit"></a>
 
 1. 不能跨区，即欧版只能玩欧版的
 2. 一次只能安装一个游戏
@@ -66,7 +68,7 @@ WiiU 破解。
 4. 为了让您的HDD被识别，您可能需要使用分割USB电缆
 5. 得有ticket才行
 
-## 2 好处<a name="wupBenefit"></a>
+## 2 好处<a id="wupBenefit" name="wupBenefit"></a>
 
 1. 游戏支持在线联机
 2. 购买DLC和更新工作正常
@@ -75,7 +77,7 @@ WiiU 破解。
 5. 移动这个游戏到USB外部存储设备
 
 
-## 3 事先准备<a name="wupPrepare"></a>
+## 3 事先准备<a id="wupPrepare" name="wupPrepare"></a>
 
 ### 1 硬盘
 硬盘，最好Y线。（我觉得没啥必要，因为反只能装一个，如果内部存储空间够，没必要挂个硬盘）
@@ -123,7 +125,7 @@ Pack HBL,然后在里面放Pack HBL包http://pan.baidu.com/s/1hrW2at2 ，把wiiu
 
 
 
-## 4 过程<a name="wupProcess"></a>
+## 4 过程<a id="wupProcess" name="wupProcess"></a>
 1. 把硬盘插到wiiu上，供电线插到下面，会提示格式化，等待格式化好（可以不插）
 2. 打开wiiu浏览器访问 wiiu.91wii.com
 3. WebExploits for 5.5.1
@@ -136,7 +138,7 @@ Pack HBL,然后在里面放Pack HBL包http://pan.baidu.com/s/1hrW2at2 ，把wiiu
 
 备注：现在玩游戏就好像直接从eshop买的数字版游戏一样，所以会检查你是不是最新版本，马车8是要你升级的，直接点升级就好了，和正版一样很方便，也可以联机没有问题（失败就多点几次，不行挂vpn）
 
-# 4 GX2的方式安装<a name="GX2"></a>
+# 4 GX2的方式安装<a id="GX2" name="GX2"></a>
 1. 放好Loadiine GX2格式的游戏
 2. 放好程序破解包(破解程序包更多内容往下面看)。
 3. 访问破解网址
@@ -149,7 +151,7 @@ Pack HBL,然后在里面放Pack HBL包http://pan.baidu.com/s/1hrW2at2 ，把wiiu
 [整理一下当前的WiiU用Loadiine GX2玩备份游戏的破解方式的过程 支持5.5.x](http://www.91wii.com/thread-69775-1-1.html)
 
 
-# 5 疑惑<a name="question"></a>
+# 5 疑惑<a id="question" name="question"></a>
 
 1. 怎么把内部存储里面的拷贝出来？是不是下次就不用安装了，直接可以拷进去就好了
 2.  JNUSTool-MOD这个工具不太会用搜索功能，Title site我看老版本没有这个字段设置，新版本有了。可以下一个之前的版本看看。
@@ -157,7 +159,7 @@ Pack HBL,然后在里面放Pack HBL包http://pan.baidu.com/s/1hrW2at2 ，把wiiu
 4. 主要是想玩儿《零》，但是没有欧版的ticket，需要跨区。
 
 
-# 6 参考<a name="reference"></a>
+# 6 参考<a id="reference" name="reference"></a>
 0. [主要的信息只要从这里看就好了，大多数工具信息都是从这里看的 ](http://www.91wii.com/forum-117-1.html)
 1. [WIIU伪装教程 WUP Installer使用教程](http://www.paopaoche.net/tv/100192.html)
 2. [具体 ID 可以到这个网站查](https://wiiu.titlekeys.com/)  

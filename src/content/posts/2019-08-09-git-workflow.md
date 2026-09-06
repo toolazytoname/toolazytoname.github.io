@@ -4,6 +4,8 @@ date: 2019-08-09T09:39:32+08:00
 categories: Git
 tags:
   - Git
+summary: "整理当时团队用的 Git 分支和提交约定。"
+
 ---
 
 

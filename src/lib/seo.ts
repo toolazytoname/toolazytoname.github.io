@@ -1,10 +1,18 @@
 // SEO helpers — used by every page.
 
+function siteUrl(): string {
+  const raw = (import.meta.env.PUBLIC_SITE_URL as string | undefined)?.trim();
+  // Production currently 308s apex → www; keep canonical/OG/sitemap on the
+  // host that actually serves the page unless PUBLIC_SITE_URL overrides it.
+  const fallback = 'https://www.weichao.ren';
+  return (raw && raw.length > 0 ? raw : fallback).replace(/\/$/, '');
+}
+
 export const SITE = {
-  name: 'lazy',
-  url: 'https://weichao.ren',
+  name: '韦超 · lazy',
+  url: siteUrl(),
   description:
-    'lazy 的个人站。做过 Swift 编译器、LLVM 后端、隐私检测相关工作。现在做独立开发者，用 AI 造自己想要的工具。',
+    '韦超（lazy）的个人站。做过 Swift 编译器、LLVM 后端、隐私检测相关工作。现在做独立开发者，用 AI 造自己想要的工具。',
   author: 'lazy',
   twitter: '@toolazytoname',
 };
@@ -22,7 +30,7 @@ export type Seo = {
 };
 
 export function fullTitle(title?: string): string {
-  if (!title) return `${SITE.name} — ${SITE.description.split('。')[0]}`;
+  if (!title) return SITE.name;
   return `${title} · ${SITE.name}`;
 }
 

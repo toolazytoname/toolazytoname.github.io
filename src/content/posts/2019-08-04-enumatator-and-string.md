@@ -5,6 +5,8 @@ categories: iOS
 tags:
   - iOS
   - 编程技巧
+summary: "Objective-C 枚举和字符串互转的几种写法。"
+
 ---
 
 
