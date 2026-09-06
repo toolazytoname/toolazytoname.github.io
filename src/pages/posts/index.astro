@@ -42,10 +42,6 @@ function primaryCat(p: (typeof all)[number]) {
 function dateStr(p: (typeof all)[number]) {
   return p.data.date.toISOString().slice(0, 10);
 }
-
-function monthDay(p: (typeof all)[number]) {
-  return `${String(p.data.date.getMonth() + 1).padStart(2, '0')}/${String(p.data.date.getDate()).padStart(2, '0')}`;
-}
 ---
 
 <BaseLayout
@@ -95,12 +91,8 @@ function monthDay(p: (typeof all)[number]) {
                   data-tags={(p.data.tags.join(' ') ?? '').toLowerCase()}
                 >
                   <a href={`/${slugFor(p)}/`} class="post-item__link">
-                    {p.data.cover ? (
+                    {p.data.cover && (
                       <img src={p.data.cover} alt="" class="post-item__thumb post-item__thumb--img" loading="lazy" />
-                    ) : (
-                      <div class="post-item__thumb post-item__thumb--fallback">
-                        <span>{monthDay(p)}</span>
-                      </div>
                     )}
                     <div class="post-item__body">
                       <div class="post-item__meta">
@@ -332,11 +324,12 @@ function monthDay(p: (typeof all)[number]) {
   .post-item__thumb--fallback {
     display: grid;
     place-items: center;
-    background: linear-gradient(135deg, var(--color-accent), var(--color-accent-soft));
+    background: var(--color-bg-subtle);
+    border: 1px solid var(--color-border);
     font-family: var(--font-mono);
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--color-accent-contrast);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-muted);
   }
 
   .post-item__body {
@@ -352,7 +345,7 @@ function monthDay(p: (typeof all)[number]) {
   }
 
   .post-item__cat {
-    font-size: 11px;
+    font-size: 12px;
     padding: 2px 8px;
     border-radius: 980px;
     text-transform: uppercase;

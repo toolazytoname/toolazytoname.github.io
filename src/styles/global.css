@@ -1,5 +1,6 @@
 /* =========================================================
-   Design tokens — locked, never inline
+   Design tokens — shared visual values live here.
+   Data-driven colors and animation indexes may use local CSS variables.
    Black & white base + sky-blue accent for emphasis.
    ========================================================= */
 
@@ -17,7 +18,7 @@
   --color-ink-muted: #404040;
   --color-text: #0a0a0a;
   --color-text-muted: #525252;
-  --color-text-dim: #a3a3a3;
+  --color-text-dim: #6b6b6b;
 
   /* Borders / dividers */
   --color-border: #e5e5e5;
@@ -28,15 +29,15 @@
   --color-dark-bg-soft: #171717;
   --color-dark-border: #262626;
   --color-dark-text: #fafafa;
-  --color-dark-text-muted: #a3a3a3;
-  --color-dark-text-dim: #737373;
+  --color-dark-text-muted: #d4d4d4;
+  --color-dark-text-dim: #a3a3a3;
 
-  /* Accent — sky blue. Used for buttons, active states, highlights,
-     card borders, and the hero code block. The single brand color. */
-  --color-accent: #0ea5e9;
-  --color-accent-soft: #38bdf8;
+  /* Accent — sky blue. Buttons and small text use a darker stop so
+     white-on-blue and blue-on-pale meet WCAG AA (4.5:1). */
+  --color-accent: #0369a1;
+  --color-accent-soft: #0284c7;
   --color-accent-pale: #e0f2fe;
-  --color-accent-dark: #0284c7;
+  --color-accent-dark: #075985;
   --color-accent-contrast: #ffffff;
   --color-link: #0a0a0a;
 
@@ -133,6 +134,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 72px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -298,13 +300,18 @@ html.reveal-ready .reveal:not(.is-visible) {
   display: grid;
   place-items: center;
   z-index: calc(var(--z-fab) + 1);
-  box-shadow: 0 8px 24px rgba(14, 165, 233, 0.35);
+  box-shadow: 0 8px 24px rgba(3, 105, 161, 0.35);
   transition: transform var(--t-fast) var(--ease-out),
     opacity var(--t-fast),
     visibility var(--t-fast);
 }
 .chat-fab:hover {
   transform: scale(1.06);
+}
+.chat-fab:disabled {
+  opacity: 0.6;
+  cursor: wait;
+  transform: none;
 }
 .chat-fab.is-hidden {
   opacity: 0;
@@ -356,8 +363,8 @@ html.reveal-ready .reveal:not(.is-visible) {
 }
 .chat-panel__sub {
   margin: 2px 0 0;
-  font-size: 11px;
-  color: var(--color-text-dim);
+  font-size: 13px;
+  color: var(--color-text-muted);
 }
 .chat-panel__close {
   width: 32px;
@@ -397,10 +404,19 @@ html.reveal-ready .reveal:not(.is-visible) {
 .chat-msg__bubble {
   padding: 10px 14px;
   border-radius: 16px;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.55;
   white-space: pre-wrap;
   word-wrap: break-word;
+}
+.chat-msg__bubble a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.chat-msg__bubble--error {
+  background: #fef2f2;
+  color: #991b1b;
 }
 .chat-msg--user .chat-msg__bubble {
   background: var(--color-accent);
@@ -449,8 +465,16 @@ html.reveal-ready .reveal:not(.is-visible) {
 
 .chat-msg__meta {
   margin: 4px 0 0;
-  font-size: 10px;
-  color: var(--color-text-dim);
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+.chat-msg__retry {
+  margin-top: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .chat-panel__suggestions {
@@ -479,11 +503,12 @@ html.reveal-ready .reveal:not(.is-visible) {
 }
 .chat-panel__form input {
   flex: 1;
+  min-width: 0;
   padding: 10px 14px;
   background: var(--color-bg-subtle);
   border: 1px solid transparent;
   border-radius: var(--r-md);
-  font-size: 14px;
+  font-size: 16px;
   color: var(--color-text);
   font-family: inherit;
   transition: border-color 150ms, background 150ms;
@@ -494,6 +519,7 @@ html.reveal-ready .reveal:not(.is-visible) {
   outline: none;
 }
 .chat-panel__form button {
+  flex: 0 0 40px;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -509,6 +535,11 @@ html.reveal-ready .reveal:not(.is-visible) {
 }
 .chat-panel__form button:not(:disabled):hover {
   background: var(--color-accent-dark);
+}
+.chat-panel__hint {
+  margin: 0 16px 12px;
+  font-size: 13px;
+  color: #991b1b;
 }
 
 @media (max-width: 600px) {
@@ -538,8 +569,9 @@ html.reveal-ready .reveal:not(.is-visible) {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+  html.reveal-ready .reveal:not(.is-visible),
   .reveal {
-    opacity: 1;
-    transform: none;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

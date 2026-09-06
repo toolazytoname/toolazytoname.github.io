@@ -20,6 +20,11 @@ export type Project = {
   image?: string;
   featured?: boolean;
   summary?: string;
+  caseStudy?: {
+    problem: string;
+    outcome: string;
+    contribution: string;
+  };
   status: 'shipped' | 'wip';
   wechat?: {
     qr: string;
@@ -57,6 +62,18 @@ export function getFeaturedProjects(): Project[] {
   return sortByOrder(
     projects.filter((project) => project.featured && project.status === 'shipped'),
     FEATURED_ORDER,
+  );
+}
+
+/** Homepage only: 2–3 current products with readable screenshots. */
+const HOME_FEATURED_ORDER = ['home-nas-skill', 'AquaSight', 'metronome'];
+
+export function getHomeFeaturedProjects(): Project[] {
+  return sortByOrder(
+    projects.filter(
+      (project) => HOME_FEATURED_ORDER.includes(project.name) && project.status === 'shipped',
+    ),
+    HOME_FEATURED_ORDER,
   );
 }
 
@@ -109,8 +126,7 @@ export const projects: Project[] = [
     repo: 'https://github.com/toolazytoname/oneplus-8t-mobile-lab',
     demo: 'https://toolazytoname.github.io/oneplus-8t-mobile-lab/',
     stars: 0,
-    image:
-      'https://raw.githubusercontent.com/toolazytoname/oneplus-8t-mobile-lab/main/docs/assets/oneplus8t-field-guide/mobile-lab-ecosystem-v2.png',
+    image: '/projects/hosted/oneplus-8t-lab.webp',
     summary: '一台 OnePlus 8T 上的刷机、真机自动化、安全实验与端侧 AI 工作台。',
     status: 'wip',
   },
@@ -123,8 +139,7 @@ export const projects: Project[] = [
     language: 'Shell',
     repo: 'https://github.com/toolazytoname/android-ai-stack',
     stars: 0,
-    image:
-      'https://raw.githubusercontent.com/toolazytoname/android-ai-stack/main/docs/assets/android-ai-stack-overview.png',
+    image: '/projects/hosted/android-ai-stack.webp',
     summary: 'Termux + Kali PRoot 上的本机 AI 工具链：在手机上跑 coding agent。',
     status: 'wip',
   },
@@ -137,8 +152,7 @@ export const projects: Project[] = [
     language: 'Java',
     repo: 'https://github.com/toolazytoname/xiaohei-phone-agent',
     stars: 0,
-    image:
-      'https://raw.githubusercontent.com/toolazytoname/xiaohei-phone-agent/main/docs/assets/xiaohei-phone-agent-overview.png',
+    image: '/projects/hosted/xiaohei-phone-agent.webp',
     summary: '本地优先的 Android 手机助手：语音 → 意图 → 可观察的操作。',
     status: 'wip',
   },
@@ -192,8 +206,7 @@ export const projects: Project[] = [
     demo: 'https://quota.weichao.studio',
     featured: true,
     stars: 0,
-    image:
-      'https://raw.githubusercontent.com/toolazytoname/llm-quota-watchdog/main/docs/screenshot.png',
+    image: '/projects/hosted/llm-quota-watchdog.webp',
     summary: '多个 LLM coding plan 额度的看板与推送提醒，纯标准库、无数据库。',
     status: 'shipped',
   },
@@ -237,6 +250,11 @@ export const projects: Project[] = [
     image: '/projects/home-nas.png',
     summary:
       '把闲置小主机搭成全自动家庭媒体中心：Jellyfin、Immich、大陆镜像和弱 CPU 1080p 直放的实战手册。',
+    caseStudy: {
+      problem: '家里有闲置 x86 小主机，想看片和存照片，又不想对着一堆英文教程试错。',
+      outcome: 'Jellyfin + Immich 能在家里直接播 1080p，大陆镜像和弱 CPU 的坑写进了手册。',
+      contribution: '把实际装机步骤收成一份可复用的 Claude Skill，仓库公开。',
+    },
     status: 'shipped',
   },
   {
@@ -278,6 +296,11 @@ export const projects: Project[] = [
     stars: 0,
     image: '/projects/aquasight.png',
     summary: '春江水暖，破圈置顶。聚合科技、热搜与世界新闻，破圈事件推送到 Bark。',
+    caseStudy: {
+      problem: '科技、热搜和世界新闻散落各处，破圈事件容易漏掉。',
+      outcome: '静态 GitHub Pages 看板每天出摘要，破圈新闻会推到 Bark。',
+      contribution: '自己写了聚合、聚类和置顶规则，源码和看板都公开。',
+    },
     status: 'shipped',
   },
   {
@@ -293,6 +316,11 @@ export const projects: Project[] = [
     image: '/projects/metronome-wechat-miniapp.png',
     featured: true,
     summary: '打开浏览器就能用的节拍器，也有微信小程序。支持童声数拍、强弱拍与多种拍号。',
+    caseStudy: {
+      problem: '练琴和跳舞需要一个打开就能用的节拍器，不想先装 App。',
+      outcome: '浏览器和微信小程序都能用，支持童声数拍、强弱拍和多种拍号。',
+      contribution: '产品、交互和发布都是自己做的，小程序可以扫码进入。',
+    },
     wechat: {
       qr: '/projects/metronome-wechat-miniapp.png',
       name: '小兔头节拍器',
@@ -347,7 +375,7 @@ export const projects: Project[] = [
     repo: 'https://github.com/toolazytoname/MediaForge',
     stars: 0,
     image:
-      'https://raw.githubusercontent.com/toolazytoname/MediaForge/main/docs/samples/xhs_card_sample-001.png',
+      '/projects/hosted/mediaforge.webp',
     summary: 'AI 自媒体管线：选题 → 创作 → 质量门禁 → 人工复核 → 多平台发布。',
     status: 'wip',
   },

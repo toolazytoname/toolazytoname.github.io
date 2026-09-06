@@ -4,7 +4,6 @@ export const prerender = true;
 
 import BaseLayout from '@layouts/BaseLayout.astro';
 import ProjectCard from '@components/ProjectCard.astro';
-import PersonalCard from '@components/PersonalCard.astro';
 import {
   projects,
   categoryMeta,
@@ -13,7 +12,7 @@ import {
   isComingSoon,
   type ProjectCategory,
 } from '@data/projects';
-import { personalTools } from '@data/personal';
+
 
 const categories: ProjectCategory[] = [
   'mobile-lab',
@@ -67,24 +66,10 @@ const comingSoonProjects = getComingSoonProjects();
       }
 
       {
-        personalTools.length > 0 && (
-          <section class="projects-group" id="personal" aria-labelledby="personal-tools">
-            <header class="projects-group__head reveal">
-              <h2 class="projects-group__title" id="personal-tools">自用</h2>
-              <p class="projects-group__sub">自己在跑的东西，点开方便。不是对外产品。</p>
-            </header>
-            <div class="projects-group__list">
-              {personalTools.map((tool, i) => (
-                <PersonalCard tool={tool} index={i} />
-              ))}
-            </div>
-          </section>
-        )
-      }
-
-      {
         categories.map((cat) => {
-          const items = projects.filter((p) => p.category === cat && !isComingSoon(p.name));
+          const items = projects.filter(
+            (p) => p.category === cat && !isComingSoon(p.name) && !p.featured,
+          );
           const meta = categoryMeta[cat];
           if (items.length === 0) return null;
           return (
@@ -184,6 +169,12 @@ const comingSoonProjects = getComingSoonProjects();
     grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: start;
     gap: var(--s-3);
+  }
+
+  @media (max-width: 900px) {
+    .projects-featured__grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   @media (max-width: 760px) {

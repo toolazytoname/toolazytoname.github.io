@@ -1,10 +1,10 @@
 ---
 const links = [
-  { href: '/', label: 'Home' },
-  { href: '/projects/', label: 'Projects' },
-  { href: '/posts/', label: 'Posts' },
-  { href: '/now/', label: 'Now' },
-  { href: '/about/', label: 'About' },
+  { href: '/', label: '首页' },
+  { href: '/projects/', label: '项目' },
+  { href: '/posts/', label: '文章' },
+  { href: '/now/', label: '近况' },
+  { href: '/about/', label: '关于' },
 ];
 
 const path = Astro.url.pathname;
@@ -15,7 +15,7 @@ const isActive = (href: string) =>
 <header class="nav" data-nav>
   <div class="nav__inner container-wide">
     <a href="/" class="nav__brand" aria-label="首页">
-      <span class="nav__brand-mark">lazy</span>
+      <span class="nav__brand-mark">韦超 · lazy</span>
       <span class="nav__brand-en">weichao.ren</span>
     </a>
 
@@ -180,6 +180,13 @@ const isActive = (href: string) =>
 <script>
   const toggle = document.querySelector<HTMLButtonElement>('[data-nav-toggle]');
   const mobile = document.querySelector<HTMLElement>('[data-nav-mobile]');
+
+  function closeMenu() {
+    toggle?.setAttribute('aria-expanded', 'false');
+    toggle?.setAttribute('aria-label', '打开菜单');
+    if (mobile) mobile.hidden = true;
+  }
+
   if (toggle && mobile) {
     toggle.addEventListener('click', () => {
       const open = toggle.getAttribute('aria-expanded') === 'true';
@@ -190,9 +197,13 @@ const isActive = (href: string) =>
   }
 
   mobile?.querySelectorAll('a').forEach((a: HTMLAnchorElement) =>
-    a.addEventListener('click', () => {
-      toggle?.setAttribute('aria-expanded', 'false');
-      if (mobile) mobile.hidden = true;
-    }),
+    a.addEventListener('click', closeMenu),
   );
+
+  window.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (e.key !== 'Escape') return;
+    if (toggle?.getAttribute('aria-expanded') !== 'true') return;
+    closeMenu();
+    toggle?.focus();
+  });
 </script>

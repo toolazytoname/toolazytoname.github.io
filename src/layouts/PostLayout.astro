@@ -47,7 +47,7 @@ const ogImagePath = `/og${postSlugStr}.png`;
     <div class="post-page__layout container">
       <!-- Main column -->
       <div class="post-page__main">
-        <div class="post container-narrow">
+        <div class="post">
           <header class="post__header reveal">
             <p class="eyebrow">{primaryCat}</p>
             <h1 class="post__title">{entry.data.title}</h1>
@@ -69,7 +69,13 @@ const ogImagePath = `/og${postSlugStr}.png`;
             {entry.data.summary && <p class="post__summary">{entry.data.summary}</p>}
           </header>
 
-          <div class="post__body prose reveal">
+          {headings.length >= 3 && (
+            <div class="post__toc-mobile">
+              <TableOfContents headings={headings} variant="mobile" />
+            </div>
+          )}
+
+          <div class="post__body prose">
             <slot />
           </div>
 
@@ -118,7 +124,7 @@ const ogImagePath = `/og${postSlugStr}.png`;
       {headings.length >= 3 && (
         <aside class="post-page__sidebar">
           <div class="post-page__toc">
-            <TableOfContents headings={headings} />
+            <TableOfContents headings={headings} variant="desktop" />
           </div>
         </aside>
       )}
@@ -160,6 +166,22 @@ const ogImagePath = `/og${postSlugStr}.png`;
     /* Post header */
     .post {
       max-width: var(--max-w-narrow);
+      margin-inline: auto;
+    }
+
+    .post__toc-mobile {
+      display: block;
+      margin: 0 0 var(--s-8);
+      padding: var(--s-3) var(--s-4);
+      border: 1px solid var(--color-border);
+      border-radius: var(--r-md);
+      background: var(--color-bg);
+    }
+
+    @media (min-width: 1024px) {
+      .post__toc-mobile {
+        display: none;
+      }
     }
 
     .post__header {
@@ -209,7 +231,13 @@ const ogImagePath = `/og${postSlugStr}.png`;
       color: var(--color-text);
     }
 
-    /* Markdown h1 inside body → visually demoted to h2 level */
+    /* Markdown h1 inside body is also demoted in the remark pipeline. */
+    .post__body :global(h1),
+    .post__body :global(h2),
+    .post__body :global(h3) {
+      scroll-margin-top: 72px;
+    }
+
     .post__body :global(h1) {
       font-size: 26px;
       font-weight: 500;
@@ -244,6 +272,8 @@ const ogImagePath = `/og${postSlugStr}.png`;
       color: var(--color-link);
       text-decoration: underline;
       text-underline-offset: 3px;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .post__body :global(blockquote) {
@@ -262,6 +292,8 @@ const ogImagePath = `/og${postSlugStr}.png`;
       background: var(--color-bg-subtle);
       padding: 2px 6px;
       border-radius: 4px;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .post__body :global(pre) {
@@ -295,6 +327,14 @@ const ogImagePath = `/og${postSlugStr}.png`;
     .post__body :global(img) {
       border-radius: var(--r-lg);
       margin: var(--s-6) 0;
+      height: auto;
+    }
+
+    .post__body :global(table) {
+      display: block;
+      width: 100%;
+      overflow-x: auto;
+      margin: var(--s-4) 0;
     }
 
     /* Footer navigation */

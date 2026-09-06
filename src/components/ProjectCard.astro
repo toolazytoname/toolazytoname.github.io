@@ -83,49 +83,68 @@ const blurb = project.summary ?? project.description;
       }
     </div>
 
-    {showPanel && <p class="proj-card__desc">{blurb}</p>}
-  </div>
+    {blurb && (
+      <p class:list={['proj-card__desc', !showPanel && 'proj-card__desc--row']}>{blurb}</p>
+    )}
+    {showPanel && project.caseStudy && (
+      <p class="proj-card__case">{project.caseStudy.contribution}</p>
+    )}
 
-  <div class="proj-card__aside">
-    {
-      showPanel && (
+    {showPanel && (
+      <div class="proj-card__aside">
         <span
           class={`proj-card__status proj-card__status--${comingSoon ? 'soon' : project.status}`}
         >
           {comingSoon ? '敬请期待' : project.status === 'shipped' ? '已上线' : '进行中'}
         </span>
-      )
-    }
-    {project.language && <span class="proj-card__lang">{project.language}</span>}
-    {
-      featured && !comingSoon && project.wechat && !qrAsImage && (
-        <WechatQr src={project.wechat.qr} name={project.wechat.name} variant="tile" />
-      )
-    }
-    <span class="proj-card__links">
-      {
-        project.demo && (
-          <a href={project.demo} class="proj-card__action" target="_blank" rel="noopener">
-            {comingSoon ? '预览' : '主站'}
+        {project.language && <span class="proj-card__lang">{project.language}</span>}
+        {featured && !comingSoon && project.wechat && !qrAsImage && (
+          <WechatQr src={project.wechat.qr} name={project.wechat.name} variant="tile" />
+        )}
+        <span class="proj-card__links">
+          {project.demo && (
+            <a href={project.demo} class="proj-card__action" target="_blank" rel="noopener">
+              {comingSoon ? '预览' : '主站'}
+            </a>
+          )}
+          <a
+            href={project.repo}
+            class="proj-card__action proj-card__action--repo"
+            target="_blank"
+            rel="noopener"
+            aria-label={`${project.title} GitHub`}
+          >
+            GitHub ↗
           </a>
-        )
-      }
-      {
-        !showPanel && project.wechat && (
-          <WechatQr src={project.wechat.qr} name={project.wechat.name} variant="compact" />
-        )
-      }
-      <a
-        href={project.repo}
-        class="proj-card__action proj-card__action--repo"
-        target="_blank"
-        rel="noopener"
-        aria-label={`${project.title} GitHub`}
-      >
-        GitHub ↗
-      </a>
-    </span>
+        </span>
+      </div>
+    )}
   </div>
+
+  {!showPanel && (
+    <div class="proj-card__aside">
+      {project.language && <span class="proj-card__lang">{project.language}</span>}
+      <span class="proj-card__links">
+        {project.demo && (
+          <a href={project.demo} class="proj-card__action" target="_blank" rel="noopener">
+            主站
+          </a>
+        )}
+        {project.wechat && (
+          <WechatQr src={project.wechat.qr} name={project.wechat.name} variant="compact" />
+        )}
+        <a
+          href={project.repo}
+          class="proj-card__action proj-card__action--repo"
+          target="_blank"
+          rel="noopener"
+          aria-label={`${project.title} GitHub`}
+        >
+          GitHub ↗
+        </a>
+      </span>
+    </div>
+  )}
 </article>
 
 <style>
@@ -143,7 +162,7 @@ const blurb = project.summary ?? project.description;
     background: var(--color-bg-soft);
   }
   .proj-card--featured {
-    grid-template-columns: 140px minmax(0, 1fr) auto;
+    grid-template-columns: 180px minmax(0, 1fr);
     align-items: start;
     min-height: 0;
     padding: var(--s-4);
@@ -151,15 +170,15 @@ const blurb = project.summary ?? project.description;
     border: 1px solid var(--color-border);
   }
   .proj-card--featured:not(:has(.proj-card__media)) {
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1fr);
   }
   .proj-card--featured:hover {
     border-color: var(--color-accent);
   }
   .proj-card__media {
     display: block;
-    width: 140px;
-    height: 88px;
+    width: 180px;
+    height: 120px;
     border-radius: var(--r-md);
     overflow: hidden;
     background: var(--color-bg-subtle);
@@ -171,7 +190,7 @@ const blurb = project.summary ?? project.description;
     object-fit: cover;
   }
   .proj-card--featured:has(.proj-card__media--qr) {
-    grid-template-columns: 104px minmax(0, 1fr) auto;
+    grid-template-columns: 104px minmax(0, 1fr);
   }
   .proj-card__media--qr {
     width: 104px;
@@ -213,6 +232,8 @@ const blurb = project.summary ?? project.description;
   .proj-card--featured .proj-card__name {
     font-size: 17px;
     white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
   }
   .proj-card:hover .proj-card__name {
     color: var(--color-accent);
@@ -221,8 +242,8 @@ const blurb = project.summary ?? project.description;
   .proj-card__lang {
     flex: 0 0 auto;
     font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--color-text-dim);
+    font-size: 12px;
+    color: var(--color-text-muted);
   }
   .proj-card__desc {
     max-width: 46ch;
@@ -231,6 +252,20 @@ const blurb = project.summary ?? project.description;
     font-size: 14px;
     line-height: 1.55;
   }
+  .proj-card__desc--row {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 13px;
+  }
+  .proj-card__case {
+    max-width: 46ch;
+    margin: var(--s-2) 0 0;
+    color: var(--color-text);
+    font-size: 13px;
+    line-height: 1.5;
+  }
   .proj-card__aside {
     display: flex;
     align-items: center;
@@ -238,18 +273,22 @@ const blurb = project.summary ?? project.description;
     gap: var(--s-3);
   }
   .proj-card--featured .proj-card__aside {
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: var(--s-2);
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--s-2) var(--s-3);
+    margin-top: var(--s-3);
   }
   .proj-card--featured .proj-card__aside :global(.wx-qr--tile) {
     margin-block: var(--s-1);
+    width: 100%;
+    align-items: flex-start;
   }
   .proj-card__status {
     padding: 3px 8px;
     border-radius: var(--r-sm);
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.4px;
   }
@@ -271,7 +310,7 @@ const blurb = project.summary ?? project.description;
   }
   .proj-card__action {
     color: var(--color-accent);
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 500;
     text-decoration: none;
     white-space: nowrap;
@@ -281,7 +320,7 @@ const blurb = project.summary ?? project.description;
     text-underline-offset: 3px;
   }
   .proj-card__action--repo {
-    color: var(--color-text-dim);
+    color: var(--color-text-muted);
   }
 
   @media (max-width: 720px) {

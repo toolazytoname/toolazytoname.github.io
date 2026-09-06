@@ -7,37 +7,38 @@ interface TocItem {
 
 interface Props {
   headings: TocItem[];
+  variant?: 'mobile' | 'desktop';
 }
 
-const { headings } = Astro.props;
+const { headings, variant = 'desktop' } = Astro.props;
 
 // Only render TOC for 3+ headings
 if (headings.length < 3) return;
 ---
 
-<nav class="toc" aria-label="目录">
-  <p class="toc__title">目录</p>
+<nav class:list={['toc', `toc--${variant}`]} aria-label="目录">
+  {variant === 'desktop' && <p class="toc__title">目录</p>}
 
-  <!-- Mobile: collapsible details -->
-  <details class="toc__details">
-    <summary class="toc__summary">展开目录</summary>
-    <ol class="toc__list">
+  {variant === 'mobile' ? (
+    <details class="toc__details">
+      <summary class="toc__summary">本文目录</summary>
+      <ol class="toc__list">
+        {headings.map((h) => (
+          <li class={`toc__item toc__item--${h.depth}`}>
+            <a href={`#${h.slug}`}>{h.text}</a>
+          </li>
+        ))}
+      </ol>
+    </details>
+  ) : (
+    <ol class="toc__list toc__list--desktop">
       {headings.map((h) => (
         <li class={`toc__item toc__item--${h.depth}`}>
-          <a href={`#${h.slug}`}>{h.text}</a>
+          <a href={`#${h.slug}`} data-toc-link>{h.text}</a>
         </li>
       ))}
     </ol>
-  </details>
-
-  <!-- Desktop: sticky sidebar -->
-  <ol class="toc__list toc__list--desktop">
-    {headings.map((h) => (
-      <li class={`toc__item toc__item--${h.depth}`}>
-        <a href={`#${h.slug}`} data-toc-link>{h.text}</a>
-      </li>
-    ))}
-  </ol>
+  )}
 </nav>
 
 <style>
@@ -52,6 +53,10 @@ if (headings.length < 3) return;
     letter-spacing: 0.4px;
     color: var(--color-text-dim);
     margin: 0 0 var(--s-4);
+  }
+
+  .toc--mobile .toc__title {
+    display: none;
   }
 
   /* Mobile details */
@@ -112,23 +117,15 @@ if (headings.length < 3) return;
     font-weight: 500;
   }
 
-  /* Desktop sidebar */
   .toc__list--desktop {
-    display: none;
+    display: block;
+    position: sticky;
+    top: var(--s-20);
+    max-height: calc(100vh - var(--s-24));
+    overflow-y: auto;
   }
 
   @media (min-width: 1024px) {
-    .toc__details {
-      display: none;
-    }
-
-    .toc__list--desktop {
-      display: block;
-      position: sticky;
-      top: var(--s-20);
-      max-height: calc(100vh - var(--s-24));
-      overflow-y: auto;
-    }
 
     .toc__list--desktop a {
       font-size: 13px;

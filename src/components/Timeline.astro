@@ -1,7 +1,7 @@
 ---
 import { nowEntries } from '@data/now';
 
-const sorted = [...nowEntries].sort((a, b) => a.date.localeCompare(b.date));
+const sorted = [...nowEntries].sort((a, b) => b.date.localeCompare(a.date));
 
 const tagLabel: Record<string, string> = {
   work: '工作',

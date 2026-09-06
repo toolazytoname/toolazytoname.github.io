@@ -3,9 +3,9 @@ export const prerender = true;
 
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Timeline from '@components/Timeline.astro';
-import { nowEntries } from '@data/now';
+import { getLatestNowEntry } from '@data/now';
 
-const latest = nowEntries[nowEntries.length - 1];
+const latest = getLatestNowEntry();
 ---
 
 <BaseLayout
@@ -22,8 +22,9 @@ const latest = nowEntries[nowEntries.length - 1];
       <header class="now-page__head reveal">
         <h1 class="now-page__title">Now</h1>
         <p class="now-page__lede">
-          最近在忙什么、想什么。按月更新，不追求完整，只求诚实。
+          最近在忙什么、想什么。最新在上面，不追求完整，只求诚实。
         </p>
+        {latest && <p class="now-page__updated">最近更新：{latest.date}</p>}
       </header>
 
       <Timeline />
@@ -60,6 +61,12 @@ const latest = nowEntries[nowEntries.length - 1];
     max-width: 42ch;
     font-size: 17px;
     line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+  .now-page__updated {
+    margin: var(--s-3) 0 0;
+    font-family: var(--font-mono);
+    font-size: 13px;
     color: var(--color-text-muted);
   }
   .now-page__note {

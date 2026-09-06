@@ -34,17 +34,12 @@ const totalCount = allPosts.length;
           month: '2-digit',
           day: '2-digit',
         });
-        const monthDay = `${String(post.data.date.getMonth() + 1).padStart(2, '0')}/${String(post.data.date.getDate()).padStart(2, '0')}`;
 
         return (
           <li class="post-feed__item reveal" style={`--i: ${i};`}>
             <a href={`/${slug}/`} class="post-feed__link">
-              {post.data.cover ? (
+              {post.data.cover && (
                 <img src={post.data.cover} alt="" class="post-feed__thumb post-feed__thumb--img" loading="lazy" />
-              ) : (
-                <div class="post-feed__thumb post-feed__thumb--fallback">
-                  <span class="post-feed__thumb-date">{monthDay}</span>
-                </div>
               )}
               <div class="post-feed__content">
                 <time class="post-feed__date" datetime={post.data.date.toISOString()}>
@@ -123,13 +118,14 @@ const totalCount = allPosts.length;
   .post-feed__thumb--fallback {
     display: grid;
     place-items: center;
-    background: linear-gradient(135deg, var(--color-accent), var(--color-accent-soft));
+    background: var(--color-bg-subtle);
+    border: 1px solid var(--color-border);
   }
   .post-feed__thumb-date {
     font-family: var(--font-mono);
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--color-accent-contrast);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-muted);
     letter-spacing: -0.02em;
   }
 

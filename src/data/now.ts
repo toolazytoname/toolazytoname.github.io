@@ -1,6 +1,5 @@
 // /now — what I'm focused on right now.
-// Two-line timeline; oldest at top, newest at bottom.
-// Entries MUST be in ascending date order — consumers assume that.
+// Prefer appending newest last when editing. Readers sort by date.
 
 export type NowEntry = {
   id: string;
@@ -36,3 +35,7 @@ export const nowEntries: NowEntry[] = [
     tag: 'work',
   },
 ];
+
+export function getLatestNowEntry(entries: NowEntry[] = nowEntries): NowEntry | undefined {
+  return [...entries].sort((a, b) => a.date.localeCompare(b.date)).at(-1);
+}
