@@ -107,12 +107,19 @@ describe('projects', () => {
     }
   });
 
-  it('homepage featured is a short, screenshot-backed subset', () => {
-    expect(getHomeFeaturedProjects().map((p) => p.name)).toEqual([
+  it('homepage featured is three current products', () => {
+    const home = getHomeFeaturedProjects();
+    expect(home.map((p) => p.name)).toEqual([
       'home-nas-skill',
       'AquaSight',
       'metronome',
     ]);
+    for (const p of home) {
+      if (p.image && p.wechat) {
+        expect(p.image).not.toBe(p.wechat.qr);
+      }
+    }
+    expect(home.find((p) => p.name === 'metronome')?.image).toBeUndefined();
   });
 
   it('coming soon section holds the named wip products', () => {

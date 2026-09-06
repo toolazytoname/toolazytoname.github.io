@@ -23,7 +23,8 @@ interface Props {
 
 const { project, index, featured = false, comingSoon = false } = Astro.props;
 const showPanel = featured || comingSoon;
-const qrAsImage = Boolean(project.wechat && project.image === project.wechat.qr);
+const productImage =
+  project.image && project.image !== project.wechat?.qr ? project.image : undefined;
 const dotColor = project.language ? LANG_COLORS[project.language] : null;
 const blurb = project.summary ?? project.description;
 ---
@@ -38,28 +39,17 @@ const blurb = project.summary ?? project.description;
   style={`--i: ${index};`}
 >
   {
-    showPanel && project.image && (
-      qrAsImage ? (
-        <figure class="proj-card__media proj-card__media--qr">
-          <img
-            src={project.image}
-            alt={`微信扫码打开${project.wechat?.name ?? project.title}小程序`}
-            width="104"
-            height="104"
-          />
-        </figure>
-      ) : (
-        <a
-          href={project.demo ?? project.repo}
-          class="proj-card__media"
-          target="_blank"
-          rel="noopener"
-          tabindex="-1"
-          aria-hidden="true"
-        >
-          <img src={project.image} alt="" loading="lazy" width="640" height="360" />
-        </a>
-      )
+    showPanel && productImage && (
+      <a
+        href={project.demo ?? project.repo}
+        class="proj-card__media"
+        target="_blank"
+        rel="noopener"
+        tabindex="-1"
+        aria-hidden="true"
+      >
+        <img src={productImage} alt="" loading="lazy" width="640" height="360" />
+      </a>
     )
   }
 
@@ -98,7 +88,7 @@ const blurb = project.summary ?? project.description;
           {comingSoon ? '敬请期待' : project.status === 'shipped' ? '已上线' : '进行中'}
         </span>
         {project.language && <span class="proj-card__lang">{project.language}</span>}
-        {featured && !comingSoon && project.wechat && !qrAsImage && (
+        {featured && !comingSoon && project.wechat && (
           <WechatQr src={project.wechat.qr} name={project.wechat.name} variant="tile" />
         )}
         <span class="proj-card__links">
@@ -188,18 +178,6 @@ const blurb = project.summary ?? project.description;
     width: 100%;
     height: 100%;
     object-fit: cover;
-  }
-  .proj-card--featured:has(.proj-card__media--qr) {
-    grid-template-columns: 104px minmax(0, 1fr);
-  }
-  .proj-card__media--qr {
-    width: 104px;
-    height: 104px;
-    margin: 0;
-    background: #fff;
-  }
-  .proj-card__media--qr img {
-    object-fit: contain;
   }
   .proj-card__main {
     min-width: 0;
@@ -324,18 +302,13 @@ const blurb = project.summary ?? project.description;
   }
 
   @media (max-width: 720px) {
-    .proj-card--featured,
-    .proj-card--featured:has(.proj-card__media--qr) {
+    .proj-card--featured {
       grid-template-columns: 1fr;
       gap: var(--s-3);
     }
     .proj-card__media {
       width: 100%;
       height: 140px;
-    }
-    .proj-card__media--qr {
-      width: 104px;
-      height: 104px;
     }
     .proj-card--featured .proj-card__aside {
       flex-direction: row;

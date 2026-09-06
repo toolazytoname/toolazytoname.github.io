@@ -115,19 +115,6 @@ const totalCount = allPosts.length;
   .post-feed__thumb--img {
     object-fit: cover;
   }
-  .post-feed__thumb--fallback {
-    display: grid;
-    place-items: center;
-    background: var(--color-bg-subtle);
-    border: 1px solid var(--color-border);
-  }
-  .post-feed__thumb-date {
-    font-family: var(--font-mono);
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--color-text-muted);
-    letter-spacing: -0.02em;
-  }
 
   .post-feed__content {
     flex: 1;
@@ -173,6 +160,5 @@ const totalCount = allPosts.length;
 
   @media (max-width: 480px) {
     .post-feed__thumb { width: 60px; height: 60px; }
-    .post-feed__thumb-date { font-size: 13px; }
   }
 </style>
