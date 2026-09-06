@@ -68,6 +68,7 @@ Agnes 是可选项，不是部署前置条件。
 6. **Node.js Version**: 22.x
 7. 环境变量可选：`AGNES_API_KEY`、`PUBLIC_SITE_URL`（默认 `https://www.weichao.ren`）
 8. Deploy。无 key 时构建应成功，聊天走静态问答。
+9. GitHub Actions 的 `CI` 工作流不会自动拦住 Vercel。若要求检查通过才上生产，在 Vercel Git 设置里打开等待 GitHub check 的开关；详见 [DEPLOY.md](./DEPLOY.md) §1.4。
 
 ### 失败排查
 

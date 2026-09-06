@@ -36,6 +36,17 @@ Vercel 项目 → **Settings → Environment Variables**：
 3. 添加 `weichao.ren`，并把它重定向到 `www.weichao.ren`（与当前线上 308 方向一致）
 4. 页面 canonical、OG、sitemap、RSS 都使用 `PUBLIC_SITE_URL` / 默认 www 主机
 
+### 1.4 GitHub CI 不是默认发布门禁
+
+仓库里的 GitHub Actions（`.github/workflows/ci.yml`）会在 `master` 推送和 PR 上跑 `npm run ci`（test + build + URL 校验）。Vercel 部署是另一条线：它只执行 `vercel.json` 里的 `npm ci` 和 `npm run build`，**默认不会等 GitHub 检查通过**。
+
+如果要求「CI 不通过不发布」，需要在 Vercel 项目里单独打开：
+
+1. **Settings → Git → Ignored Build Step** 或 Deployment Protection
+2. 把 Production 部署设为等待 GitHub `CI / check` 通过，或只允许成功的 workflow 触发生产部署
+
+本仓库看不到线上 Vercel 开关的实际状态。发布前请在 Vercel 控制台确认一次，不要只凭仓库配置假设已经门禁。
+
 ---
 
 ## 2. DNS 配置
