@@ -1,0 +1,48 @@
+[
+  {
+    "width": 1440,
+    "first": {
+      "disabled": false,
+      "busy": null,
+      "label": "打开聊天助手（加载失败，点击重试）",
+      "requestCount": 1
+    },
+    "urls": [
+      "http://127.0.0.1:4324/_astro/mount-chat.B1BQZ8R2.js",
+      "http://127.0.0.1:4324/_astro/mount-chat.B1BQZ8R2.js?retry=1788696352052"
+    ],
+    "responses": [
+      {
+        "url": "http://127.0.0.1:4324/_astro/mount-chat.B1BQZ8R2.js?retry=1788696352052",
+        "status": 200
+      }
+    ],
+    "panels": 1,
+    "entryRemoved": true,
+    "reply": "完整列表在 /projects/ 页。\n\n上线：Home NAS、鸭先知 AquaSight、LLM Quota Watchdog、Web3 Learning OS、小兔头节拍器\n敬请期待：MediaForge、xiaohei-phone-agent、拾光造像、芽伴星球、Lodge\n其余开源按分类列在下面。",
+    "errors": []
+  },
+  {
+    "width": 390,
+    "first": {
+      "disabled": false,
+      "busy": null,
+      "label": "打开聊天助手（加载失败，点击重试）",
+      "requestCount": 1
+    },
+    "urls": [
+      "http://127.0.0.1:4324/_astro/mount-chat.B1BQZ8R2.js",
+      "http://127.0.0.1:4324/_astro/mount-chat.B1BQZ8R2.js?retry=1788696353369"
+    ],
+    "responses": [
+      {
+        "url": "http://127.0.0.1:4324/_astro/mount-chat.B1BQZ8R2.js?retry=1788696353369",
+        "status": 200
+      }
+    ],
+    "panels": 1,
+    "entryRemoved": true,
+    "reply": "完整列表在 /projects/ 页。\n\n上线：Home NAS、鸭先知 AquaSight、LLM Quota Watchdog、Web3 Learning OS、小兔头节拍器\n敬请期待：MediaForge、xiaohei-phone-agent、拾光造像、芽伴星球、Lodge\n其余开源按分类列在下面。",
+    "errors": []
+  }
+]

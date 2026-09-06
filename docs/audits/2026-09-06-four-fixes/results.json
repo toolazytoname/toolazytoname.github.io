@@ -1,0 +1,52 @@
+{
+  "load": [
+    {
+      "width": 1440,
+      "first": {
+        "loads": 1,
+        "disabled": false,
+        "label": "打开聊天助手（加载失败，点击重试）"
+      },
+      "second": {
+        "loads": 1,
+        "panels": 0,
+        "buttons": 1,
+        "disabled": false,
+        "errors": []
+      }
+    },
+    {
+      "width": 390,
+      "first": {
+        "loads": 1,
+        "disabled": false,
+        "label": "打开聊天助手（加载失败，点击重试）"
+      },
+      "second": {
+        "loads": 1,
+        "panels": 0,
+        "buttons": 1,
+        "disabled": false,
+        "errors": []
+      }
+    }
+  ],
+  "retry": {
+    "afterSuccess": {
+      "retryButtons": 0,
+      "users": [
+        "苹果甲",
+        "有哪些项目"
+      ]
+    },
+    "afterTrailingRetry": {
+      "retryButtons": 0,
+      "users": [
+        "苹果甲",
+        "有哪些项目",
+        "苹果乙"
+      ],
+      "requests": 3
+    }
+  }
+}

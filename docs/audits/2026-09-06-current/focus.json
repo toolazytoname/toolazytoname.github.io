@@ -1,0 +1,7 @@
+{
+  "before": "chat-panel__scroll",
+  "after": {
+    "tag": "INPUT",
+    "label": "输入消息"
+  }
+}

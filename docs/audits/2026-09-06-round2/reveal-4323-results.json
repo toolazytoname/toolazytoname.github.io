@@ -1,0 +1,866 @@
+[
+  {
+    "port": "4323",
+    "mode": "wheel",
+    "states": [
+      {
+        "y": 0,
+        "top": 630.515625,
+        "height": 29261,
+        "width": 272,
+        "cls": "post__body prose reveal",
+        "opacity": "0",
+        "io": [
+          {
+            "y": 0,
+            "cls": "post__body prose reveal",
+            "isIntersecting": false,
+            "ratio": 0,
+            "top": 606.515625,
+            "height": 29261.453125,
+            "root": {
+              "x": 0,
+              "y": 0,
+              "width": 320,
+              "height": 523,
+              "top": 0,
+              "right": 320,
+              "bottom": 523,
+              "left": 0
+            },
+            "intersection": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "options": {
+              "rootMargin": "0px 0px -8% 0px",
+              "threshold": 0.05
+            }
+          }
+        ]
+      },
+      {
+        "y": 250,
+        "top": 380.515625,
+        "height": 29261,
+        "width": 272,
+        "cls": "post__body prose reveal",
+        "opacity": "0",
+        "io": [
+          {
+            "y": 0,
+            "cls": "post__body prose reveal",
+            "isIntersecting": false,
+            "ratio": 0,
+            "top": 606.515625,
+            "height": 29261.453125,
+            "root": {
+              "x": 0,
+              "y": 0,
+              "width": 320,
+              "height": 523,
+              "top": 0,
+              "right": 320,
+              "bottom": 523,
+              "left": 0
+            },
+            "intersection": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "options": {
+              "rootMargin": "0px 0px -8% 0px",
+              "threshold": 0.05
+            }
+          }
+        ]
+      },
+      {
+        "y": 500,
+        "top": 130.515625,
+        "height": 29261,
+        "width": 272,
+        "cls": "post__body prose reveal",
+        "opacity": "0",
+        "io": [
+          {
+            "y": 0,
+            "cls": "post__body prose reveal",
+            "isIntersecting": false,
+            "ratio": 0,
+            "top": 606.515625,
+            "height": 29261.453125,
+            "root": {
+              "x": 0,
+              "y": 0,
+              "width": 320,
+              "height": 523,
+              "top": 0,
+              "right": 320,
+              "bottom": 523,
+              "left": 0
+            },
+            "intersection": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "options": {
+              "rootMargin": "0px 0px -8% 0px",
+              "threshold": 0.05
+            }
+          }
+        ]
+      },
+      {
+        "y": 750,
+        "top": -119.484375,
+        "height": 29261,
+        "width": 272,
+        "cls": "post__body prose reveal",
+        "opacity": "0",
+        "io": [
+          {
+            "y": 0,
+            "cls": "post__body prose reveal",
+            "isIntersecting": false,
+            "ratio": 0,
+            "top": 606.515625,
+            "height": 29261.453125,
+            "root": {
+              "x": 0,
+              "y": 0,
+              "width": 320,
+              "height": 523,
+              "top": 0,
+              "right": 320,
+              "bottom": 523,
+              "left": 0
+            },
+            "intersection": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "options": {
+              "rootMargin": "0px 0px -8% 0px",
+              "threshold": 0.05
+            }
+          }
+        ]
+      },
+      {
+        "y": 1000,
+        "top": -369.484375,
+        "height": 29261,
+        "width": 272,
+        "cls": "post__body prose reveal",
+        "opacity": "0",
+        "io": [
+          {
+            "y": 0,
+            "cls": "post__body prose reveal",
+            "isIntersecting": false,
+            "ratio": 0,
+            "top": 606.515625,
+            "height": 29261.453125,
+            "root": {
+              "x": 0,
+              "y": 0,
+              "width": 320,
+              "height": 523,
+              "top": 0,
+              "right": 320,
+              "bottom": 523,
+              "left": 0
+            },
+            "intersection": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "options": {
+              "rootMargin": "0px 0px -8% 0px",
+              "threshold": 0.05
+            }
+          }
+        ]
+      },
+      {
+        "y": 1250,
+        "top": -619.484375,
+        "height": 29261,
+        "width": 272,
+        "cls": "post__body prose reveal",
+        "opacity": "0",
+        "io": [
+          {
+            "y": 0,
+            "cls": "post__body prose reveal",
+            "isIntersecting": false,
+            "ratio": 0,
+            "top": 606.515625,
+            "height": 29261.453125,
+            "root": {
+              "x": 0,
+              "y": 0,
+              "width": 320,
+              "height": 523,
+              "top": 0,
+              "right": 320,
+              "bottom": 523,
+              "left": 0
+            },
+            "intersection": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "options": {
+              "rootMargin": "0px 0px -8% 0px",
+              "threshold": 0.05
+            }
+          }
+        ]
+      },
+      {
+        "y": 1500,
+        "top": -869.484375,
+        "height": 29261,
+        "width": 272,
+        "cls": "post__body prose reveal",
+        "opacity": "0",
+        "io": [
+          {
+            "y": 0,
+            "cls": "post__body prose reveal",
+            "isIntersecting": false,
+            "ratio": 0,
+            "top": 606.515625,
+            "height": 29261.453125,
+            "root": {
+              "x": 0,
+              "y": 0,
+              "width": 320,
+              "height": 523,
+              "top": 0,
+              "right": 320,
+              "bottom": 523,
+              "left": 0
+            },
+            "intersection": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "options": {
+              "rootMargin": "0px 0px -8% 0px",
+              "threshold": 0.05
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "port": "4323",
+    "mode": "jump",
+    "states": [
+      {
+        "y": 0,
+        "top": 630.515625,
+        "height": 29261,
+        "width": 272,
+        "cls": "post__body prose reveal",
+        "opacity": "0",
+        "io": [
+          {
+            "y": 0,
+            "cls": "post__body prose reveal",
+            "isIntersecting": false,
+            "ratio": 0,
+            "top": 606.515625,
+            "height": 29261.453125,
+            "root": {
+              "x": 0,
+              "y": 0,
+              "width": 320,
+              "height": 523,
+              "top": 0,
+              "right": 320,
+              "bottom": 523,
+              "left": 0
+            },
+            "intersection": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "options": {
+              "rootMargin": "0px 0px -8% 0px",
+              "threshold": 0.05
+            }
+          }
+        ]
+      },
+      {
+        "y": 559,
+        "top": 71.515625,
+        "height": 29261,
+        "width": 272,
+        "cls": "post__body prose reveal",
+        "opacity": "0",
+        "io": [
+          {
+            "y": 0,
+            "cls": "post__body prose reveal",
+            "isIntersecting": false,
+            "ratio": 0,
+            "top": 606.515625,
+            "height": 29261.453125,
+            "root": {
+              "x": 0,
+              "y": 0,
+              "width": 320,
+              "height": 523,
+              "top": 0,
+              "right": 320,
+              "bottom": 523,
+              "left": 0
+            },
+            "intersection": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "options": {
+              "rootMargin": "0px 0px -8% 0px",
+              "threshold": 0.05
+            }
+          }
+        ]
+      },
+      {
+        "y": 1209,
+        "top": -578.484375,
+        "height": 29261,
+        "width": 272,
+        "cls": "post__body prose reveal",
+        "opacity": "0",
+        "io": [
+          {
+            "y": 0,
+            "cls": "post__body prose reveal",
+            "isIntersecting": false,
+            "ratio": 0,
+            "top": 606.515625,
+            "height": 29261.453125,
+            "root": {
+              "x": 0,
+              "y": 0,
+              "width": 320,
+              "height": 523,
+              "top": 0,
+              "right": 320,
+              "bottom": 523,
+              "left": 0
+            },
+            "intersection": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "options": {
+              "rootMargin": "0px 0px -8% 0px",
+              "threshold": 0.05
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "port": "4323",
+    "mode": "toc",
+    "states": [
+      {
+        "y": 0,
+        "top": 630.515625,
+        "height": 29261,
+        "width": 272,
+        "cls": "post__body prose reveal",
+        "opacity": "0",
+        "io": [
+          {
+            "y": 0,
+            "cls": "post__body prose reveal",
+            "isIntersecting": false,
+            "ratio": 0,
+            "top": 606.515625,
+            "height": 29261.453125,
+            "root": {
+              "x": 0,
+              "y": 0,
+              "width": 320,
+              "height": 523,
+              "top": 0,
+              "right": 320,
+              "bottom": 523,
+              "left": 0
+            },
+            "intersection": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "options": {
+              "rootMargin": "0px 0px -8% 0px",
+              "threshold": 0.05
+            }
+          }
+        ]
+      },
+      {
+        "y": 29184,
+        "top": -28466.484375,
+        "height": 29261,
+        "width": 272,
+        "cls": "post__body prose reveal",
+        "opacity": "0",
+        "io": [
+          {
+            "y": 0,
+            "cls": "post__body prose reveal",
+            "isIntersecting": false,
+            "ratio": 0,
+            "top": 606.515625,
+            "height": 29261.453125,
+            "root": {
+              "x": 0,
+              "y": 0,
+              "width": 320,
+              "height": 523,
+              "top": 0,
+              "right": 320,
+              "bottom": 523,
+              "left": 0
+            },
+            "intersection": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "options": {
+              "rootMargin": "0px 0px -8% 0px",
+              "threshold": 0.05
+            }
+          }
+        ]
+      },
+      {
+        "y": 29643,
+        "top": -28925.484375,
+        "height": 29261,
+        "width": 272,
+        "cls": "post__body prose reveal",
+        "opacity": "0",
+        "io": [
+          {
+            "y": 0,
+            "cls": "post__body prose reveal",
+            "isIntersecting": false,
+            "ratio": 0,
+            "top": 606.515625,
+            "height": 29261.453125,
+            "root": {
+              "x": 0,
+              "y": 0,
+              "width": 320,
+              "height": 523,
+              "top": 0,
+              "right": 320,
+              "bottom": 523,
+              "left": 0
+            },
+            "intersection": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "options": {
+              "rootMargin": "0px 0px -8% 0px",
+              "threshold": 0.05
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "port": "4323",
+    "mode": "reduce",
+    "states": [
+      {
+        "y": 0,
+        "top": 630.515625,
+        "height": 29261,
+        "width": 272,
+        "cls": "post__body prose reveal",
+        "opacity": "0",
+        "io": [
+          {
+            "y": 0,
+            "cls": "post__body prose reveal",
+            "isIntersecting": false,
+            "ratio": 0,
+            "top": 606.515625,
+            "height": 29261.453125,
+            "root": {
+              "x": 0,
+              "y": 0,
+              "width": 320,
+              "height": 523,
+              "top": 0,
+              "right": 320,
+              "bottom": 523,
+              "left": 0
+            },
+            "intersection": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "options": {
+              "rootMargin": "0px 0px -8% 0px",
+              "threshold": 0.05
+            }
+          }
+        ]
+      },
+      {
+        "y": 250,
+        "top": 380.515625,
+        "height": 29261,
+        "width": 272,
+        "cls": "post__body prose reveal",
+        "opacity": "0",
+        "io": [
+          {
+            "y": 0,
+            "cls": "post__body prose reveal",
+            "isIntersecting": false,
+            "ratio": 0,
+            "top": 606.515625,
+            "height": 29261.453125,
+            "root": {
+              "x": 0,
+              "y": 0,
+              "width": 320,
+              "height": 523,
+              "top": 0,
+              "right": 320,
+              "bottom": 523,
+              "left": 0
+            },
+            "intersection": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "options": {
+              "rootMargin": "0px 0px -8% 0px",
+              "threshold": 0.05
+            }
+          }
+        ]
+      },
+      {
+        "y": 500,
+        "top": 130.515625,
+        "height": 29261,
+        "width": 272,
+        "cls": "post__body prose reveal",
+        "opacity": "0",
+        "io": [
+          {
+            "y": 0,
+            "cls": "post__body prose reveal",
+            "isIntersecting": false,
+            "ratio": 0,
+            "top": 606.515625,
+            "height": 29261.453125,
+            "root": {
+              "x": 0,
+              "y": 0,
+              "width": 320,
+              "height": 523,
+              "top": 0,
+              "right": 320,
+              "bottom": 523,
+              "left": 0
+            },
+            "intersection": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "options": {
+              "rootMargin": "0px 0px -8% 0px",
+              "threshold": 0.05
+            }
+          }
+        ]
+      },
+      {
+        "y": 750,
+        "top": -119.484375,
+        "height": 29261,
+        "width": 272,
+        "cls": "post__body prose reveal",
+        "opacity": "0",
+        "io": [
+          {
+            "y": 0,
+            "cls": "post__body prose reveal",
+            "isIntersecting": false,
+            "ratio": 0,
+            "top": 606.515625,
+            "height": 29261.453125,
+            "root": {
+              "x": 0,
+              "y": 0,
+              "width": 320,
+              "height": 523,
+              "top": 0,
+              "right": 320,
+              "bottom": 523,
+              "left": 0
+            },
+            "intersection": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "options": {
+              "rootMargin": "0px 0px -8% 0px",
+              "threshold": 0.05
+            }
+          }
+        ]
+      },
+      {
+        "y": 1000,
+        "top": -369.484375,
+        "height": 29261,
+        "width": 272,
+        "cls": "post__body prose reveal",
+        "opacity": "0",
+        "io": [
+          {
+            "y": 0,
+            "cls": "post__body prose reveal",
+            "isIntersecting": false,
+            "ratio": 0,
+            "top": 606.515625,
+            "height": 29261.453125,
+            "root": {
+              "x": 0,
+              "y": 0,
+              "width": 320,
+              "height": 523,
+              "top": 0,
+              "right": 320,
+              "bottom": 523,
+              "left": 0
+            },
+            "intersection": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "options": {
+              "rootMargin": "0px 0px -8% 0px",
+              "threshold": 0.05
+            }
+          }
+        ]
+      },
+      {
+        "y": 1250,
+        "top": -619.484375,
+        "height": 29261,
+        "width": 272,
+        "cls": "post__body prose reveal",
+        "opacity": "0",
+        "io": [
+          {
+            "y": 0,
+            "cls": "post__body prose reveal",
+            "isIntersecting": false,
+            "ratio": 0,
+            "top": 606.515625,
+            "height": 29261.453125,
+            "root": {
+              "x": 0,
+              "y": 0,
+              "width": 320,
+              "height": 523,
+              "top": 0,
+              "right": 320,
+              "bottom": 523,
+              "left": 0
+            },
+            "intersection": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "options": {
+              "rootMargin": "0px 0px -8% 0px",
+              "threshold": 0.05
+            }
+          }
+        ]
+      },
+      {
+        "y": 1500,
+        "top": -869.484375,
+        "height": 29261,
+        "width": 272,
+        "cls": "post__body prose reveal",
+        "opacity": "0",
+        "io": [
+          {
+            "y": 0,
+            "cls": "post__body prose reveal",
+            "isIntersecting": false,
+            "ratio": 0,
+            "top": 606.515625,
+            "height": 29261.453125,
+            "root": {
+              "x": 0,
+              "y": 0,
+              "width": 320,
+              "height": 523,
+              "top": 0,
+              "right": 320,
+              "bottom": 523,
+              "left": 0
+            },
+            "intersection": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "options": {
+              "rootMargin": "0px 0px -8% 0px",
+              "threshold": 0.05
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

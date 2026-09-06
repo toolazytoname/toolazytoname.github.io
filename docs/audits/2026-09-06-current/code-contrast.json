@@ -1,0 +1,13 @@
+{
+  "text": "//  Aspects.h",
+  "color": "rgb(106, 115, 125)",
+  "background": "rgb(36, 41, 46)",
+  "violations": [
+    [
+      {
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.04 (foreground color: #6a737d, background color: #24292e, font size: 9.7pt (12.88px), font weight: normal). Expected contrast ratio of 4.5:1",
+        "html": "<span style=\"color:#6A737D\">//  Aspects.h</span>"
+      }
+    ]
+  ]
+}

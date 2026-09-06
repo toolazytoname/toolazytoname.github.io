@@ -8,12 +8,13 @@
 2. 点 **Add New → Project**
 3. 选 `toolazytoname/toolazytoname.github.io` 仓库
 4. **Framework Preset**: Astro（自动检测）
-5. **Root Directory**: `production` ← 代码在子目录
-6. **Build Command**: 留空（默认 `astro build`）
-7. **Output Directory**: 留空（默认 `dist`）
-8. 点 **Deploy**
+5. **Root Directory**: `./`（代码在仓库根目录，没有 `production` 子目录）
+6. **Build Command**: `npm run build`（即 `astro check && astro build`）
+7. **Install Command**: `npm ci`
+8. **Node.js Version**: 22.x
+9. 点 **Deploy**
 
-第一次部署会失败（因为还没设环境变量），正常。先进下一步。
+无 `AGNES_API_KEY` 时构建应成功。聊天走本地关键词 / 兜底，不会因为缺 key 而失败。
 
 ### 1.2 配置环境变量
 
@@ -21,29 +22,29 @@ Vercel 项目 → **Settings → Environment Variables**：
 
 | Name | Value | Environment |
 |---|---|---|
-| `AGNES_API_KEY` | 你的 Agnes key | Production / Preview / Development |
-| `DEEPSEEK_API_KEY` | 你的 DeepSeek key | Production / Preview / Development |
+| `AGNES_API_KEY` | 你的 Agnes key（可选） | Production / Preview / Development |
+| `PUBLIC_SITE_URL` | `https://www.weichao.ren`（可选，默认就是这个） | Production / Preview / Development |
 
-点 **Save**，然后去 **Deployments** 重新部署一次。
+不要再配置 `DEEPSEEK_API_KEY`，当前代码不使用 DeepSeek。
+
+点 **Save**。若是后加的变量，去 **Deployments** 重新部署一次。
 
 ### 1.3 配置自定义域名
 
 1. Vercel 项目 → **Settings → Domains**
-2. 输入 `weichao.ren` → 点 **Add**
-3. Vercel 会给你 DNS 记录，下面会用到
-4. 同样添加 `www.weichao.ren`（重定向到根）
+2. 添加 `www.weichao.ren` 作为主域
+3. 添加 `weichao.ren`，并把它重定向到 `www.weichao.ren`（与当前线上 308 方向一致）
+4. 页面 canonical、OG、sitemap、RSS 都使用 `PUBLIC_SITE_URL` / 默认 www 主机
 
 ---
 
 ## 2. DNS 配置
 
-### 2.1 你的域名注册商
+### 2.1 域名注册商
 
-如果你用阿里云 / 腾讯云 / Cloudflare / Namecheap，都一样。进去域名解析设置。
+阿里云 / 腾讯云 / Cloudflare / Namecheap 均可。进入域名解析设置。
 
 ### 2.2 添加记录
-
-Vercel 给你的通常是这些记录类型：
 
 #### 根域名 `weichao.ren`
 
@@ -52,8 +53,7 @@ Vercel 给你的通常是这些记录类型：
 | A | @ | `76.76.21.21` |
 | 或 CNAME | @ | `cname.vercel-dns.com` ← **Cloudflare 专用** |
 
-> 如果你的 DNS 服务商不支持根域名 CNAME（阿里云 DNS 不支持），
-> 用 A 记录指向 `76.76.21.21`。
+> 如果 DNS 服务商不支持根域名 CNAME（阿里云 DNS 不支持），用 A 记录指向 `76.76.21.21`。
 
 #### `www` 子域名
 
@@ -63,39 +63,28 @@ Vercel 给你的通常是这些记录类型：
 
 ### 2.3 Cloudflare（如果用）
 
-**推荐用 Cloudflare**，因为：
-
-- 免费 SSL
-- 免费 CDN 缓存
-- 支持根域名 CNAME（更灵活）
-
-步骤：
-
 1. 在 Cloudflare 添加站点 `weichao.ren`
-2. 改域名的 nameservers 为 Cloudflare 提供的（去你原注册商改）
-3. 等几分钟生效
-4. 在 Cloudflare DNS 添加：
-   - CNAME `@` → `cname.vercel-dns.com`（**记得打开代理**橙色的云）
+2. 改域名的 nameservers 为 Cloudflare 提供的
+3. DNS：
+   - CNAME `@` → `cname.vercel-dns.com`
    - CNAME `www` → `cname.vercel-dns.com`
-5. 在 Vercel 添加域名，按提示配
+4. 在 Vercel 添加域名，按提示配
 
 ### 2.4 等待生效
 
-DNS 传播需要 5-60 分钟。Vercel 会在域名生效后自动签发 SSL 证书。
-
-可以在 https://dnschecker.org 检查 `weichao.ren` 的解析是否生效。
+DNS 传播通常 5–60 分钟。Vercel 会在域名生效后自动签发 SSL。可在 https://dnschecker.org 检查解析。
 
 ---
 
-## 3. 关闭旧站
+## 3. 旧 github.io 地址
 
-新站稳定后（建议观察一周），再去关闭 GitHub Pages：
+自定义域切到 Vercel 之后，**不要假设关掉 GitHub Pages 也没关系**。仓库里仍有指向 `toolazytoname.github.io` 的历史外链和项目 demo。
 
-1. GitHub 仓库 → Settings → Pages
-2. Source 选 "None"
-3. 保存
+保留策略：
 
-旧站 `toolazytoname.github.io` 会返回 404，访问 `weichao.ren` 自动到新站。
+1. GitHub Pages 继续为 `toolazytoname.github.io` 提供按路径可访问的入口（至少项目文档和旧外链）。
+2. 个人站正文走 `www.weichao.ren`。
+3. 只有确认没有任何需要保留的 github.io 路径之后，才关闭 Pages。
 
 ---
 
@@ -103,44 +92,49 @@ DNS 传播需要 5-60 分钟。Vercel 会在域名生效后自动签发 SSL 证�
 
 部署完后验证：
 
-- [ ] https://weichao.ren 能打开，看到 Hero
-- [ ] 3D 地球渲染，4 个点（橘 / 蓝 / 绿 / 黄）可见
-- [ ] 拖动地球能旋转
-- [ ] 点击点能弹 Lightbox
-- [ ] 右下角 FAB 能打开聊天助手
-- [ ] 聊天发消息能看到回复 + 来源标签（🟢 Agnes / 🟡 DeepSeek / ⚪ static）
-- [ ] /posts /now /about /colophon 都能访问
-- [ ] 移动端打开正常（Chrome DevTools → Toggle Device Toolbar）
-- [ ] Lighthouse Performance ≥ 85
-- [ ] sitemap-index.xml 存在
-- [ ] /posts.xml RSS 可订阅
+- [ ] https://www.weichao.ren 能打开，姓名和一句定位在首屏
+- [ ] https://weichao.ren 308 到 www
+- [ ] `/projects/`、`/posts/`、`/now/`、`/about/` 都能打开
+- [ ] 768px 宽时项目卡片标题不被挤成竖列
+- [ ] 手机文章页能看到「本文目录」，长文可跳转
+- [ ] 右下角 FAB 打开聊天；「有哪些项目」有静态回答；乱 JSON 不会 500
+- [ ] Escape 关闭聊天后焦点回到按钮；移动菜单 Escape 可关
+- [ ] `/posts.xml` 和 `/feed.xml` 都能订阅
+- [ ] `sitemap-index.xml` 存在
+- [ ] 文章分享图 PNG 正常（中文标题抽查一篇）
 
 ---
 
 ## 5. 回滚
 
-如果新站出问题，最快的回滚方式：
+优先用已有的稳定 Vercel 部署回滚：
 
-1. DNS 改回原 A 记录指向 GitHub Pages 的 IP
-   - GitHub Pages A：`185.199.108.153` / `185.199.109.153` / `185.199.110.153` / `185.199.111.153`
-   - 或保留 Vercel 同时启用 GitHub Pages
-2. Vercel → Deployments → 选上一个稳定版本 → 点 "Promote to Production"
+1. Vercel → Deployments → 选上一个稳定版本 → **Promote to Production**
+
+只有在确认 GitHub Pages 仍能提供可接受的旧站时，才把 DNS 改回 GitHub Pages：
+
+- GitHub Pages A：`185.199.108.153` / `185.199.109.153` / `185.199.110.153` / `185.199.111.153`
+
+不要把「改回旧 DNS」当成一定可用的快速回滚。
 
 ---
 
 ## 6. 常见问题
 
 **Q: Vercel 域名添加后显示 "Invalid Configuration"？**
-A: DNS 没生效。等几分钟，或检查记录值是否正确。
+A: DNS 没生效。等几分钟，或检查记录值。
 
 **Q: SSL 证书一直没签发？**
-A: Vercel 自动用 Let's Encrypt。如果失败，确认 DNS 已经指向 Vercel 后点 Retry。
+A: 确认 DNS 已指向 Vercel 后在域名设置里点 Retry。
 
-**Q: /api/chat 返回 500？**
-A: 检查 Vercel Functions 日志。常见原因：API key 没设 / 余额用尽 / 跨区域调用超时。
+**Q: `/api/chat` 返回 400？**
+A: 请求体不合法。合法形状是 `{ messages: [{ role, content }] }`，role 为 user/assistant/system，content 为字符串。
+
+**Q: `/api/chat` 返回 429？**
+A: 单实例内存限流，每 IP 每小时 60 次。前端应显示可重试，而不是「我不知道」。
 
 **Q: 旧博客文章怎么搬？**
-A: 旧 Jekyll post 在 `toolazytoname.github.io/_posts/` 下，拷过来改 frontmatter，放到 `src/content/{life,craft}/`。
+A: 已经迁到 `src/content/posts/`。`scripts/migrate-posts.py` 是一次性历史脚本，不要当常规工具跑。
 
 **Q: 怎么加新文章？**
-A: 新建 `src/content/life/2026-XX-XX-xxx.md`，frontmatter 写 `title` / `date` / `summary` / `tags`。会自动出现在 /posts。
+A: 新建 `src/content/posts/YYYY-MM-DD-slug.md`，frontmatter 写 `title` / `date` / `categories` / `tags` / `summary`。会自动出现在 `/posts/`。

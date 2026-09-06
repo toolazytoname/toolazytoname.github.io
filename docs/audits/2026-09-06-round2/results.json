@@ -1,0 +1,371 @@
+{
+  "results": [
+    {
+      "route": "/",
+      "status": 200,
+      "title": "lazy — lazy 的个人站",
+      "h1": [
+        "独立开发者，用 AI 造自己想要的工具。"
+      ],
+      "canonical": "https://www.weichao.ren/",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "broken": [],
+      "hiddenReveals": [],
+      "squeezed": [],
+      "overflow": [],
+      "audit": [],
+      "errors": []
+    },
+    {
+      "route": "/projects/",
+      "status": 200,
+      "title": "Projects · lazy",
+      "h1": [
+        "22 个开源项目"
+      ],
+      "canonical": "https://www.weichao.ren/projects/",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "broken": [],
+      "hiddenReveals": [],
+      "squeezed": [],
+      "overflow": [],
+      "audit": [],
+      "errors": []
+    },
+    {
+      "route": "/posts/",
+      "status": 200,
+      "title": "Posts · lazy",
+      "h1": [
+        "61 篇"
+      ],
+      "canonical": "https://www.weichao.ren/posts/",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "broken": [],
+      "hiddenReveals": [],
+      "squeezed": [],
+      "overflow": [],
+      "audit": [],
+      "errors": []
+    },
+    {
+      "route": "/about/",
+      "status": 200,
+      "title": "About · lazy",
+      "h1": [
+        "关于我"
+      ],
+      "canonical": "https://www.weichao.ren/about/",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "broken": [],
+      "hiddenReveals": [],
+      "squeezed": [],
+      "overflow": [],
+      "audit": [],
+      "errors": []
+    },
+    {
+      "route": "/now/",
+      "status": 200,
+      "title": "Now · lazy",
+      "h1": [
+        "Now"
+      ],
+      "canonical": "https://www.weichao.ren/now/",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "broken": [],
+      "hiddenReveals": [],
+      "squeezed": [],
+      "overflow": [],
+      "audit": [],
+      "errors": []
+    },
+    {
+      "route": "/",
+      "status": 200,
+      "title": "lazy — lazy 的个人站",
+      "h1": [
+        "独立开发者，用 AI 造自己想要的工具。"
+      ],
+      "canonical": "https://www.weichao.ren/",
+      "width": 768,
+      "scrollWidth": 768,
+      "broken": [],
+      "hiddenReveals": [],
+      "squeezed": [],
+      "overflow": [],
+      "audit": [],
+      "errors": []
+    },
+    {
+      "route": "/projects/",
+      "status": 200,
+      "title": "Projects · lazy",
+      "h1": [
+        "22 个开源项目"
+      ],
+      "canonical": "https://www.weichao.ren/projects/",
+      "width": 768,
+      "scrollWidth": 768,
+      "broken": [],
+      "hiddenReveals": [],
+      "squeezed": [],
+      "overflow": [],
+      "audit": [],
+      "errors": []
+    },
+    {
+      "route": "/posts/",
+      "status": 200,
+      "title": "Posts · lazy",
+      "h1": [
+        "61 篇"
+      ],
+      "canonical": "https://www.weichao.ren/posts/",
+      "width": 768,
+      "scrollWidth": 768,
+      "broken": [],
+      "hiddenReveals": [],
+      "squeezed": [],
+      "overflow": [],
+      "audit": [],
+      "errors": []
+    },
+    {
+      "route": "/about/",
+      "status": 200,
+      "title": "About · lazy",
+      "h1": [
+        "关于我"
+      ],
+      "canonical": "https://www.weichao.ren/about/",
+      "width": 768,
+      "scrollWidth": 768,
+      "broken": [],
+      "hiddenReveals": [],
+      "squeezed": [],
+      "overflow": [],
+      "audit": [],
+      "errors": []
+    },
+    {
+      "route": "/now/",
+      "status": 200,
+      "title": "Now · lazy",
+      "h1": [
+        "Now"
+      ],
+      "canonical": "https://www.weichao.ren/now/",
+      "width": 768,
+      "scrollWidth": 768,
+      "broken": [],
+      "hiddenReveals": [],
+      "squeezed": [],
+      "overflow": [],
+      "audit": [],
+      "errors": []
+    },
+    {
+      "route": "/",
+      "status": 200,
+      "title": "lazy — lazy 的个人站",
+      "h1": [
+        "独立开发者，用 AI 造自己想要的工具。"
+      ],
+      "canonical": "https://www.weichao.ren/",
+      "width": 390,
+      "scrollWidth": 390,
+      "broken": [],
+      "hiddenReveals": [],
+      "squeezed": [],
+      "overflow": [],
+      "audit": [],
+      "errors": []
+    },
+    {
+      "route": "/projects/",
+      "status": 200,
+      "title": "Projects · lazy",
+      "h1": [
+        "22 个开源项目"
+      ],
+      "canonical": "https://www.weichao.ren/projects/",
+      "width": 390,
+      "scrollWidth": 390,
+      "broken": [],
+      "hiddenReveals": [],
+      "squeezed": [],
+      "overflow": [],
+      "audit": [],
+      "errors": []
+    },
+    {
+      "route": "/posts/",
+      "status": 200,
+      "title": "Posts · lazy",
+      "h1": [
+        "61 篇"
+      ],
+      "canonical": "https://www.weichao.ren/posts/",
+      "width": 390,
+      "scrollWidth": 390,
+      "broken": [],
+      "hiddenReveals": [],
+      "squeezed": [],
+      "overflow": [],
+      "audit": [],
+      "errors": []
+    },
+    {
+      "route": "/about/",
+      "status": 200,
+      "title": "About · lazy",
+      "h1": [
+        "关于我"
+      ],
+      "canonical": "https://www.weichao.ren/about/",
+      "width": 390,
+      "scrollWidth": 390,
+      "broken": [],
+      "hiddenReveals": [],
+      "squeezed": [],
+      "overflow": [],
+      "audit": [],
+      "errors": []
+    },
+    {
+      "route": "/now/",
+      "status": 200,
+      "title": "Now · lazy",
+      "h1": [
+        "Now"
+      ],
+      "canonical": "https://www.weichao.ren/now/",
+      "width": 390,
+      "scrollWidth": 390,
+      "broken": [],
+      "hiddenReveals": [],
+      "squeezed": [],
+      "overflow": [],
+      "audit": [],
+      "errors": []
+    }
+  ],
+  "articles": [
+    {
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "initial": {
+        "opacity": "0.000374056",
+        "top": 630.5066528320312,
+        "height": 29261
+      },
+      "after": {
+        "opacity": "0",
+        "top": 71.515625,
+        "height": 29261
+      },
+      "toc": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 667
+      },
+      "initial": {
+        "opacity": "1",
+        "top": 540.9375,
+        "height": 29204
+      },
+      "after": {
+        "opacity": "1",
+        "top": 71.9375,
+        "height": 29204
+      },
+      "toc": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "initial": {
+        "opacity": "1",
+        "top": 540.9375,
+        "height": 29204
+      },
+      "after": {
+        "opacity": "1",
+        "top": 71.9375,
+        "height": 29204
+      },
+      "toc": true
+    },
+    {
+      "viewport": {
+        "width": 768,
+        "height": 600
+      },
+      "initial": {
+        "opacity": "1",
+        "top": 515.875,
+        "height": 29117
+      },
+      "after": {
+        "opacity": "1",
+        "top": 71.875,
+        "height": 29117
+      },
+      "toc": true
+    }
+  ],
+  "nav": [
+    {
+      "cls": "nav__brand",
+      "rect": {
+        "x": 24,
+        "y": 12.796875,
+        "width": 190.390625,
+        "height": 30.390625,
+        "top": 12.796875,
+        "right": 214.390625,
+        "bottom": 43.1875,
+        "left": 24
+      }
+    },
+    {
+      "cls": "nav__links",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      }
+    },
+    {
+      "cls": "nav__toggle",
+      "rect": {
+        "x": 256,
+        "y": 8,
+        "width": 40,
+        "height": 40,
+        "top": 8,
+        "right": 296,
+        "bottom": 48,
+        "left": 256
+      }
+    }
+  ],
+  "chatAxe": []
+}
