@@ -1,7 +1,7 @@
 // Static knowledge base for the AI chatbot.
-// The chatbot tries the LLM first, falls back to static keyword match.
-// This file is the SINGLE SOURCE OF TRUTH — both the server (llm.ts)
-// and the client (Chatbot.tsx) import from here. Edit this file only.
+// Matching runs FIRST (client and server); the LLM is only used when no
+// keyword entry scores high enough. This file is the SINGLE SOURCE OF TRUTH
+// — both llm.ts and Chatbot.tsx import from here. Edit this file only.
 //
 // This file MUST stay human-readable — it's also the system prompt seed
 // (the whole array gets stringified into the LLM system prompt in llm.ts).
@@ -16,30 +16,30 @@ export type KnowledgeEntry = {
 export const knowledge: KnowledgeEntry[] = [
   {
     id: 'about',
-    keywords: ['你是谁', 'who are you', 'about', '介绍', 'lazy', '你是'],
+    keywords: ['你是谁', 'who are you', 'about', '介绍', 'lazy', '你是', '你自己'],
     reply:
       '我是 lazy，weichao.ren 的主人。\n\n前大厂 iOS 基础架构工程师，做过 Swift 编译缓存和 LLVM 隐私检测。15 年 iOS。\n\n现在是持滑雪 / 攀岩 / 游泳教练证的独立开发者，用 AI 造自己想要的工具。\n\n喜欢滑雪、潜水、攀岩、公路旅行。',
     source: 'about',
   },
   {
     id: 'projects',
-    keywords: ['产品', '作品', '项目', 'project', 'projects', '作品集', 'works', 'product'],
+    keywords: ['产品', '作品', '项目', 'project', 'projects', '作品集', 'works', 'product', '你的项目', '有哪些项目', '介绍项目'],
     reply:
-      '完整列表在 /projects 页。\n\n上线：Home NAS、鸭先知 AquaSight、LLM Quota Watchdog、Web3 Learning OS、小兔头节拍器\n敬请期待：MediaForge、xiaohei-phone-agent、拾光造像、芽伴星球、Lodge\n自用：/projects#personal（DeepSeek Harness、家里的 NAS、Token 中转）\n其余开源按分类列在下面。',
+      '完整列表在 /projects/ 页。\n\n上线：Home NAS、鸭先知 AquaSight、LLM Quota Watchdog、Web3 Learning OS、小兔头节拍器\n敬请期待：MediaForge、xiaohei-phone-agent、拾光造像、芽伴星球、Lodge\n其余开源按分类列在下面。',
     source: 'projects',
   },
   {
     id: 'contact',
     keywords: ['联系', 'contact', '邮箱', 'email', '怎么找你', 'twitter', 'x', 'github'],
     reply:
-      '最稳的方式是邮件：lazywc@gmail.com\n\nGitHub: @toolazytoname\nX / Twitter: @toolazytoname（不活跃，主互动在 GitHub）',
+      '最稳的方式是邮件：lazywc@gmail.com\n\nGitHub: https://github.com/toolazytoname\nX / Twitter: https://x.com/toolazytoname\n（不活跃，主互动在 GitHub）',
     source: 'contact',
   },
   {
     id: 'now',
     keywords: ['now', '最近', '最近在干嘛', '你在做什么', '当下', '近况'],
     reply:
-      '按月更新在 /now。最近大概是：\n\n1. 把 OnePlus 8T 做成 AI 可控的手机实验室\n2. 维护节拍器、Lodge、GridGo\n3. 把个人站身份对齐到现在在做的事（旧文先放着，新文章慢慢写）',
+      '按月更新在 /now/。最近大概是：\n\n1. 把 OnePlus 8T 做成 AI 可控的手机实验室\n2. 维护节拍器、Lodge、GridGo\n3. 把个人站身份对齐到现在在做的事（旧文先放着，新文章慢慢写）',
     source: 'now',
   },
   {
@@ -53,7 +53,7 @@ export const knowledge: KnowledgeEntry[] = [
     id: 'openSource',
     keywords: ['开源', 'open source', 'github', 'github 项目', 'repo', '仓库'],
     reply:
-      'GitHub: @toolazytoname。\n\n最活跃的方向是 Android AI 手机实验室。有星的老项目：WeChatExport、FDTops、BPFlutter。\n\n完整列表在 /projects。',
+      'GitHub: https://github.com/toolazytoname\n\n最活跃的方向是 Android AI 手机实验室。有星的老项目：WeChatExport、FDTops、BPFlutter。\n\n完整列表在 /projects/。',
     source: 'openSource',
   },
   {
@@ -91,16 +91,46 @@ export const knowledge: KnowledgeEntry[] = [
   },
 ];
 
-// Naive keyword matcher — used as fallback when LLM is unavailable.
-// Shared by the server (llm.ts) and the client (Chatbot.tsx) so there's
-// exactly ONE copy of the data and ONE matching function.
+// Keyword matcher — used before the LLM, and as a client-side instant path.
+// Shared by llm.ts and Chatbot.tsx so there's exactly ONE copy of the data
+// and ONE matching function.
+//
+// Scoring: sum of matched keyword lengths. Short Latin tokens (hi, x, …)
+// require a word boundary so "Linux" does not hit contact, and "this" does
+// not hit greeting. Longer / more specific keywords beat generic ones, so
+// "介绍你的项目" prefers projects over about.
+
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function keywordScore(input: string, kw: string): number {
+  const k = kw.toLowerCase();
+  if (!k) return 0;
+  const latinShort = /^[a-z0-9]{1,3}$/i.test(kw);
+  if (latinShort) {
+    const re = new RegExp(`(^|[^a-z0-9])${escapeRegExp(k)}([^a-z0-9]|$)`, 'i');
+    return re.test(input) ? k.length + 2 : 0;
+  }
+  if (/^[\u4e00-\u9fff]$/.test(kw)) {
+    const re = new RegExp(`(^|[^\\u4e00-\\u9fff])${escapeRegExp(k)}([^\\u4e00-\\u9fff]|$)`);
+    return re.test(input) ? 2 : 0;
+  }
+  return input.includes(k) ? k.length : 0;
+}
+
 export function findStaticReply(input: string): KnowledgeEntry | null {
   const lower = input.toLowerCase().trim();
   if (!lower) return null;
+  let best: { entry: KnowledgeEntry; score: number } | null = null;
   for (const entry of knowledge) {
-    if (entry.keywords.some((kw) => lower.includes(kw.toLowerCase()))) {
-      return entry;
+    let score = 0;
+    for (const kw of entry.keywords) {
+      score += keywordScore(lower, kw);
+    }
+    if (score > 0 && (!best || score > best.score)) {
+      best = { entry, score };
     }
   }
-  return null;
+  return best?.entry ?? null;
 }

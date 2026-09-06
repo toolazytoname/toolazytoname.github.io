@@ -3,7 +3,10 @@
 // Response: { reply: string, source: 'agnes'|'static', remaining?: number }
 
 import type { APIRoute } from 'astro';
-import { chat, staticReply, type ChatMessage, type ChatResult } from '@lib/llm';
+import { chat, type ChatResult } from '@lib/llm';
+import { findStaticReply } from '@data/knowledge';
+import { parseChatRequest } from '@lib/chat-request';
+import { readLimitedText } from '@lib/read-body';
 import { rateLimit, clientIp } from '@lib/rate-limit';
 
 export const prerender = false;
@@ -28,9 +31,20 @@ export const POST: APIRoute = async ({ request }) => {
     );
   }
 
-  let body: { messages?: ChatMessage[]; context?: string };
+  let raw: unknown;
   try {
-    body = await request.json();
+    const limited = await readLimitedText(request);
+    if (!limited.ok) {
+      return new Response(
+        JSON.stringify({
+          reply: limited.reply,
+          source: 'static' as const,
+          error: limited.error,
+        }),
+        { status: limited.status, headers: { 'content-type': 'application/json' } },
+      );
+    }
+    raw = JSON.parse(limited.text) as unknown;
   } catch {
     return new Response(
       JSON.stringify({ reply: '请求格式不对。', source: 'static' as const, error: 'bad_json' }),
@@ -38,26 +52,34 @@ export const POST: APIRoute = async ({ request }) => {
     );
   }
 
-  const messages = Array.isArray(body.messages) ? body.messages : [];
-  if (messages.length === 0) {
+  const parsed = parseChatRequest(raw);
+  if (!parsed.ok) {
     return new Response(
-      JSON.stringify({ reply: '说点什么吧 :)', source: 'static' as const }),
-      { status: 400, headers: { 'content-type': 'application/json' } },
+      JSON.stringify({
+        reply: parsed.reply,
+        source: 'static' as const,
+        error: parsed.error,
+      }),
+      { status: parsed.status, headers: { 'content-type': 'application/json' } },
     );
   }
 
+  const messages = parsed.data.messages;
+
   try {
     const result: ChatResult = await chat(messages);
-    // If LLM layer gave us the generic "both unavailable" message, try the
-    // static matcher one more time — keyword matches feel much more useful
-    // than the blanket fallback.
     let final: ChatResult = result;
     if (result.source === 'fallback') {
       const last = [...messages].reverse().find((m) => m.role === 'user');
-      if (last) {
-        const sr = staticReply(last.content);
-        if (sr.source === 'static') final = sr;
-      }
+      const hit = last ? findStaticReply(last.content) : null;
+      if (hit) final = { reply: hit.reply, source: 'static' };
+    }
+    if (final.source === 'error') {
+      const status = final.error === 'upstream_timeout' ? 504 : 502;
+      return new Response(
+        JSON.stringify({ ...final, remaining: limit.remaining }),
+        { status, headers: { 'content-type': 'application/json' } },
+      );
     }
     return new Response(
       JSON.stringify({ ...final, remaining: limit.remaining }),
@@ -68,14 +90,14 @@ export const POST: APIRoute = async ({ request }) => {
     );
   } catch (err) {
     console.error('[api/chat] unexpected error', err);
-    // Even on total failure, return a usable static reply as 200 — a 500
-    // used to make the client throw and render an empty bubble if parsing
-    // then failed. Always give the UI a `reply` string.
-    const last = [...messages].reverse().find((m) => m.role === 'user');
-    const fallback = last ? staticReply(last.content) : { reply: '出错了。', source: 'static' as const };
     return new Response(
-      JSON.stringify({ ...fallback, error: 'internal', remaining: limit.remaining }),
-      { status: 200, headers: { 'content-type': 'application/json' } },
+      JSON.stringify({
+        reply: '服务出错了，请再试一次。',
+        source: 'error' as const,
+        error: 'internal',
+        remaining: limit.remaining,
+      }),
+      { status: 500, headers: { 'content-type': 'application/json' } },
     );
   }
 };

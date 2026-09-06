@@ -11,9 +11,28 @@ export type ChatMessage = {
 
 export type ChatResult = {
   reply: string;
-  source: 'agnes' | 'static' | 'fallback';
+  source: 'agnes' | 'static' | 'fallback' | 'error';
   error?: string;
 };
+
+export function llmUnavailableResult(
+  configured: boolean,
+  reason: 'timeout' | 'failed' | 'empty' | 'no match' = 'no match',
+): ChatResult {
+  if (configured && reason !== 'no match') {
+    return {
+      reply: '模型暂时连不上。可以再试一次，或问「有哪些项目」这类我能直接答的。',
+      source: 'error',
+      error: reason === 'timeout' ? 'upstream_timeout' : 'upstream_failed',
+    };
+  }
+  return {
+    reply:
+      '这个问题我暂时答不上来。试试问"有哪些项目"、"最近在干嘛"、"户外运动"这些我能答的。',
+    source: 'fallback',
+    error: 'no match',
+  };
+}
 
 const SYSTEM_PROMPT = `你是 lazy 个人站 weichao.ren 上的 AI 助手。站主授权你以他的第一人称回答访客的问题。
 
@@ -51,7 +70,6 @@ export async function chat(messages: ChatMessage[]): Promise<ChatResult> {
     .slice(-10);
 
   // 0. Keyword match FIRST — instant, no network, always available.
-  // Handles 90% of questions without an LLM round-trip.
   const lastUser = [...history].reverse().find((m) => m.role === 'user');
   if (lastUser) {
     const staticHit = findStaticReply(lastUser.content);
@@ -95,15 +113,16 @@ export async function chat(messages: ChatMessage[]): Promise<ChatResult> {
     }
   } catch (err) {
     console.warn('[llm] agnes failed:', err);
+    const timedOut =
+      err instanceof Error && /timeout/i.test(err.message);
+    return llmUnavailableResult(true, timedOut ? 'timeout' : 'failed');
   }
 
-  // 2. No keyword hit + no LLM → generic fallback.
-  return {
-    reply:
-      '这个问题我暂时答不上来。试试问"有哪些项目"、"最近在干嘛"、"户外运动"这些我能答的。',
-    source: 'fallback',
-    error: 'no match',
-  };
+  if (agnesKey) {
+    return llmUnavailableResult(true, 'empty');
+  }
+
+  return llmUnavailableResult(false);
 }
 
 // Static matcher — exported for the client-side fallback (Chatbot.tsx).

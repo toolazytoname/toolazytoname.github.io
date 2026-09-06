@@ -3,7 +3,6 @@ import '../styles/global.css';
 import Nav from '@components/Nav.astro';
 import Footer from '@components/Footer.astro';
 import ScrollProgress from '@components/ScrollProgress.astro';
-import Chatbot from '@components/Chatbot';
 import { SITE, type Seo, websiteJsonLd, articleJsonLd } from '@lib/seo';
 
 interface Props {
@@ -15,11 +14,9 @@ interface Props {
 }
 
 const { seo, jsonLdExtra, chatbot = false } = Astro.props;
-const title = seo?.title
-  ? `${seo.title} · ${SITE.name}`
-  : `${SITE.name} — ${SITE.description.split('。')[0]}`;
+const title = seo?.title ? `${seo.title} · ${SITE.name}` : SITE.name;
 const description = seo?.description ?? SITE.description;
-const ogImage = new URL(seo?.image ?? '/og-default.svg', SITE.url).toString();
+const ogImage = new URL(seo?.image ?? '/og-default.png', SITE.url).toString();
 const canonical = new URL(Astro.url.pathname, SITE.url).toString();
 
 // JSON-LD: always include WebSite+Person, merge article if applicable
@@ -97,8 +94,9 @@ if (jsonLdExtra) {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="alternate" type="application/rss+xml" title={SITE.name} href="/posts.xml" />
+    <link rel="alternate" type="application/rss+xml" title={`${SITE.name} (legacy)`} href="/feed.xml" />
 
-    <meta name="theme-color" content="#0ea5e9" />
+    <meta name="theme-color" content="#0369a1" />
 
     <!-- Preconnect for photo domain (if added later) -->
     <meta name="robots" content="index,follow" />
@@ -115,7 +113,60 @@ if (jsonLdExtra) {
     </main>
 
     <Footer />
-    {chatbot && <Chatbot client:only="react" />}
+    {chatbot && (
+      <>
+        <div id="chat-host"></div>
+        <button type="button" class="chat-fab" data-chat-load aria-label="打开聊天助手">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          </svg>
+        </button>
+        <script>
+          import { cacheBustedUrl, moduleUrlFromError } from '../lib/dynamic-import-retry';
+
+          const btn = document.querySelector<HTMLButtonElement>('[data-chat-load]');
+          let lastError: unknown;
+
+          async function loadMountChat() {
+            const failedUrl = lastError ? moduleUrlFromError(lastError) : null;
+            if (failedUrl) {
+              return import(/* @vite-ignore */ cacheBustedUrl(failedUrl));
+            }
+            return import('../components/mount-chat.ts');
+          }
+
+          if (btn) {
+            btn.addEventListener('click', async () => {
+              if (btn.disabled) return;
+              if (btn.dataset.chatReload === '1') {
+                location.reload();
+                return;
+              }
+              btn.disabled = true;
+              btn.setAttribute('aria-busy', 'true');
+              try {
+                const { mountChat } = await loadMountChat();
+                const host = document.getElementById('chat-host');
+                if (!host) throw new Error('chat-host missing');
+                mountChat(host);
+                btn.remove();
+              } catch (err) {
+                lastError = err;
+                console.warn('[chat] failed to load, click to retry', err);
+                btn.disabled = false;
+                btn.removeAttribute('aria-busy');
+                if (moduleUrlFromError(err)) {
+                  btn.setAttribute('aria-label', '打开聊天助手（加载失败，点击重试）');
+                } else {
+                  btn.dataset.chatReload = '1';
+                  btn.setAttribute('aria-label', '聊天加载失败，点击刷新页面重试');
+                }
+              }
+            });
+          }
+        </script>
+      </>
+    )}
 
     <noscript>
       <style>
@@ -155,7 +206,9 @@ if (jsonLdExtra) {
               }
             }
           },
-          { rootMargin: '0px 0px -8% 0px', threshold: 0.05 },
+          // threshold 0: a tall block whose first pixel crosses the viewport
+          // still counts. 0.05 hid article-length elements on short screens.
+          { rootMargin: '0px 0px -8% 0px', threshold: 0 },
         );
         els.forEach((el) => {
           if (!el.classList.contains('is-visible')) io.observe(el);

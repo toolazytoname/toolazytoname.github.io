@@ -1,31 +1,30 @@
 /**
  * Chatbot — floating AI assistant.
  *
- * Behavior:
- *   1. FAB opens the panel.
- *   2. Keyword hits answer instantly from the local knowledge base.
- *   3. Anything else POSTs to /api/chat. Empty / redirected / hung
- *      responses fall back to the same static matcher.
- *   4. Show a small status pill indicating which source answered.
- *
- * Mounted via createPortal(document.body) so fixed positioning is never
- * trapped by astro-island (display:contents / zero-box hacks).
- * Styles live in global.css.
+ * Keyword hits answer locally. Anything else POSTs to /api/chat.
+ * Timeouts, 429s and upstream failures stay errors, not "I don't know".
  */
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { findStaticReply } from '@data/knowledge';
+import { MAX_CONTENT_LENGTH } from '@lib/chat-request';
+import { budgetChatMessages } from '@lib/chat-budget';
+import { historyBeforeRetry, lastRetryIndex } from '@lib/chat-retry';
 
 type Msg = {
+  id: number;
   role: 'user' | 'assistant';
   content: string;
-  source?: 'agnes' | 'static' | 'fallback';
+  source?: 'agnes' | 'static' | 'fallback' | 'error';
+  retryable?: boolean;
+  retryText?: string;
 };
 
 type ChatPayload = {
   reply?: unknown;
   source?: Msg['source'];
+  error?: unknown;
 };
 
 const SUGGESTIONS = [
@@ -35,26 +34,17 @@ const SUGGESTIONS = [
   '户外运动',
 ];
 
-const API_TIMEOUT_MS = 8000;
-
+const API_TIMEOUT_MS = 12000;
 const sourceLabel = (s?: Msg['source']) => {
   switch (s) {
     case 'agnes':
       return 'AI';
-    case 'static':
-      return '';
-    case 'fallback':
-      return '';
+    case 'error':
+      return '出错了';
     default:
       return '';
   }
 };
-
-function localStaticReply(input: string): string {
-  const entry = findStaticReply(input);
-  if (entry) return entry.reply;
-  return '这个问题我不知道。换个问法试试 —— 比如"有哪些项目"、"最近在干嘛"、"滑雪"。';
-}
 
 function parseChatPayload(data: ChatPayload): { reply: string; source?: Msg['source'] } | null {
   if (typeof data?.reply !== 'string') return null;
@@ -63,39 +53,122 @@ function parseChatPayload(data: ChatPayload): { reply: string; source?: Msg['sou
   return { reply, source: data.source };
 }
 
-async function requestChatReply(messages: Msg[], signal: AbortSignal): Promise<{ reply: string; source?: Msg['source'] }> {
+type ChatOutcome =
+  | { ok: true; reply: string; source?: Msg['source'] }
+  | { ok: false; reply: string; retryable: boolean };
+
+async function requestChatReply(
+  messages: Msg[],
+  signal: AbortSignal,
+  retriedBudget = false,
+): Promise<ChatOutcome> {
   const res = await fetch('/api/chat/', {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({
-      messages: messages.map(({ role, content }) => ({ role, content })),
-    }),
+    body: JSON.stringify({ messages: budgetChatMessages(messages) }),
     signal,
-    // A 301/302/308 (apex→www, trailing-slash) can turn this POST into a
-    // GET. The GET handler returns {ok:true} with no `reply`, which used
-    // to render as an empty gray bubble. Fail the fetch instead.
     redirect: 'error',
   });
 
-  if (!res.ok) throw new Error(`http ${res.status}`);
-
-  let data: ChatPayload;
+  let data: ChatPayload | null = null;
   try {
-    data = await res.json();
+    data = (await res.json()) as ChatPayload;
   } catch {
-    throw new Error('invalid json');
+    data = null;
   }
 
-  const parsed = parseChatPayload(data);
-  if (!parsed) throw new Error('empty reply');
-  return parsed;
+  if (res.status === 413 && !retriedBudget) {
+    const lastUser = [...messages].reverse().find((m) => m.role === 'user');
+    if (lastUser) {
+      return requestChatReply(
+        [{ id: lastUser.id, role: 'user', content: lastUser.content }],
+        signal,
+        true,
+      );
+    }
+  }
+
+  if (res.status === 429) {
+    const parsed = data ? parseChatPayload(data) : null;
+    return {
+      ok: false,
+      reply: parsed?.reply ?? '请求太快了，过会儿再问。',
+      retryable: true,
+    };
+  }
+
+  if (!res.ok) {
+    const parsed = data ? parseChatPayload(data) : null;
+    return {
+      ok: false,
+      reply: parsed?.reply ?? '服务暂时不可用，请再试一次。',
+      retryable: true,
+    };
+  }
+
+  const parsed = data ? parseChatPayload(data) : null;
+  if (!parsed) {
+    return { ok: false, reply: '服务返回了空回复，请再试一次。', retryable: true };
+  }
+  return { ok: true, reply: parsed.reply, source: parsed.source };
 }
 
-export default function Chatbot() {
-  const [open, setOpen] = useState(false);
+function stripUrl(raw: string): string {
+  return raw.replace(/[.,;:!?。，、；：！？)\]}）】》"'”’]+$/u, '');
+}
+
+function ChatText({ text }: { text: string }) {
+  const nodes: ReactNode[] = [];
+  const re =
+    /(https?:\/\/[^\s\u3000-\u303F\uFF00-\uFFEF<>"']+)|(\/(?:projects|now|about|posts)[a-z0-9#/_-]*)|([A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,})/gi;
+  let last = 0;
+  let match: RegExpExecArray | null;
+  let key = 0;
+  while ((match = re.exec(text))) {
+    if (match.index > last) nodes.push(text.slice(last, match.index));
+    const [full, url, path, email] = match;
+    if (url) {
+      const href = stripUrl(url);
+      const consumed = href.length;
+      const rest = url.slice(consumed);
+      nodes.push(
+        <a key={key++} href={href} target="_blank" rel="noopener">
+          {href}
+        </a>,
+      );
+      if (rest) nodes.push(rest);
+      last = match.index + full.length;
+      continue;
+    }
+    if (email) {
+      nodes.push(
+        <a key={key++} href={`mailto:${email}`}>
+          {email}
+        </a>,
+      );
+    } else if (path) {
+      const href = path.endsWith('/') || path.includes('#') ? path : `${path}/`;
+      nodes.push(
+        <a key={key++} href={href}>
+          {path}
+        </a>,
+      );
+    } else {
+      nodes.push(full);
+    }
+    last = match.index + full.length;
+  }
+  if (last < text.length) nodes.push(text.slice(last));
+  return <>{nodes}</>;
+}
+
+export default function Chatbot({ startOpen = false }: { startOpen?: boolean }) {
+  const [open, setOpen] = useState(startOpen);
   const [input, setInput] = useState('');
+  const [limitHint, setLimitHint] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([
     {
+      id: 0,
       role: 'assistant',
       content: '你好，我是 lazy 的 AI 助手。问我关于我、最近在做什么都行 :)',
       source: 'static',
@@ -104,7 +177,11 @@ export default function Chatbot() {
   const [busy, setBusy] = useState(false);
   const scrollerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const fabRef = useRef<HTMLButtonElement>(null);
+  const nextId = useRef(1);
   const requestId = useRef(0);
+
+  const lastRetryableIndex = lastRetryIndex(messages);
 
   useEffect(() => {
     if (scrollerRef.current) {
@@ -115,7 +192,7 @@ export default function Chatbot() {
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setOpen(false);
+      if (e.key === 'Escape') closePanel();
     };
     window.addEventListener('keydown', onKey);
     const focusId = window.setTimeout(() => inputRef.current?.focus(), 40);
@@ -125,19 +202,34 @@ export default function Chatbot() {
     };
   }, [open]);
 
-  async function send(text: string) {
+  function closePanel() {
+    setOpen(false);
+    window.setTimeout(() => fabRef.current?.focus(), 40);
+  }
+
+  function allocId() {
+    const id = nextId.current;
+    nextId.current += 1;
+    return id;
+  }
+
+  async function send(text: string, history: Msg[] = messages) {
     const trimmed = text.trim();
     if (!trimmed || busy) return;
+    if (trimmed.length > MAX_CONTENT_LENGTH) {
+      setLimitHint(true);
+      return;
+    }
+    setLimitHint(false);
     setInput('');
-    const next: Msg[] = [...messages, { role: 'user', content: trimmed }];
+    const next: Msg[] = [...history, { id: allocId(), role: 'user', content: trimmed }];
     setMessages(next);
 
-    // Known questions answer locally — never wait on /api/chat for these.
     const instant = findStaticReply(trimmed);
     if (instant) {
       setMessages([
         ...next,
-        { role: 'assistant', content: instant.reply, source: 'static' },
+        { id: allocId(), role: 'assistant', content: instant.reply, source: 'static' },
       ]);
       return;
     }
@@ -151,27 +243,66 @@ export default function Chatbot() {
     try {
       const data = await requestChatReply(next, controller.signal);
       if (id !== requestId.current) return;
-      setMessages([
-        ...next,
-        { role: 'assistant', content: data.reply, source: data.source },
-      ]);
+      if (data.ok) {
+        setMessages([
+          ...next,
+          { id: allocId(), role: 'assistant', content: data.reply, source: data.source },
+        ]);
+      } else {
+        setMessages([
+          ...next,
+          {
+            id: allocId(),
+            role: 'assistant',
+            content: data.reply,
+            source: 'error',
+            retryable: data.retryable,
+            retryText: trimmed,
+          },
+        ]);
+      }
     } catch (err) {
       if (id !== requestId.current) return;
-      console.warn('[chatbot] api failed, using static fallback:', err);
+      const timedOut = err instanceof DOMException && err.name === 'AbortError';
+      console.warn('[chatbot] api failed:', err);
       setMessages([
         ...next,
-        { role: 'assistant', content: localStaticReply(trimmed), source: 'static' },
+        {
+          id: allocId(),
+          role: 'assistant',
+          content: timedOut
+            ? '这次请求超时了。可以再试一次，或换个更具体的问题。'
+            : '暂时连不上服务。检查网络后再试。',
+          source: 'error',
+          retryable: true,
+          retryText: trimmed,
+        },
       ]);
     } finally {
       window.clearTimeout(timeoutId);
-      if (id === requestId.current) setBusy(false);
+      if (id === requestId.current) {
+        setBusy(false);
+        const active = document.activeElement;
+        if (active === document.body || active === inputRef.current) {
+          window.setTimeout(() => inputRef.current?.focus(), 0);
+        }
+      }
     }
+  }
+
+  function retryAt(index: number) {
+    if (busy) return;
+    const prepared = historyBeforeRetry(messages, index);
+    if (!prepared) return;
+    setMessages(prepared.history);
+    void send(prepared.text, prepared.history);
   }
 
   return createPortal(
     <div className="chat-root">
       <button
         type="button"
+        ref={fabRef}
         className={`chat-fab${open ? ' is-hidden' : ''}`}
         onClick={() => setOpen(true)}
         aria-label="打开聊天助手"
@@ -207,7 +338,7 @@ export default function Chatbot() {
           <button
             type="button"
             className="chat-panel__close"
-            onClick={() => setOpen(false)}
+            onClick={closePanel}
             aria-label="关闭"
           >
             <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
@@ -225,14 +356,29 @@ export default function Chatbot() {
           className="chat-panel__scroll"
           ref={scrollerRef}
           role="log"
+          tabIndex={0}
           aria-live="polite"
           aria-relevant="additions"
         >
           {messages.map((m, i) => (
-            <div key={i} className={`chat-msg chat-msg--${m.role}`}>
-              <div className="chat-msg__bubble">{m.content}</div>
+            <div key={m.id} className={`chat-msg chat-msg--${m.role}`}>
+              <div
+                className={`chat-msg__bubble${m.source === 'error' ? ' chat-msg__bubble--error' : ''}`}
+              >
+                <ChatText text={m.content} />
+              </div>
               {m.role === 'assistant' && sourceLabel(m.source) && i > 0 && (
                 <p className="chat-msg__meta">{sourceLabel(m.source)}</p>
+              )}
+              {m.retryable && i === lastRetryableIndex && (
+                <button
+                  type="button"
+                  className="chat-msg__retry"
+                  onClick={() => retryAt(i)}
+                  disabled={busy}
+                >
+                  重试
+                </button>
               )}
             </div>
           ))}
@@ -275,10 +421,14 @@ export default function Chatbot() {
             ref={inputRef}
             type="text"
             value={input}
-            onChange={(e) => setInput(e.target.value)}
+            maxLength={MAX_CONTENT_LENGTH}
+            onChange={(e) => {
+              setInput(e.target.value);
+              if (e.target.value.length <= MAX_CONTENT_LENGTH) setLimitHint(false);
+            }}
             placeholder="问点什么..."
             aria-label="输入消息"
-            disabled={busy}
+            readOnly={busy}
           />
           <button type="submit" disabled={busy || !input.trim()} aria-label="发送">
             <svg
@@ -296,6 +446,9 @@ export default function Chatbot() {
             </svg>
           </button>
         </form>
+        {limitHint && (
+          <p className="chat-panel__hint">单条消息最多 {MAX_CONTENT_LENGTH} 字，缩短后再发。</p>
+        )}
       </div>
     </div>,
     document.body,

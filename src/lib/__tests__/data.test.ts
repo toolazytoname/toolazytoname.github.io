@@ -6,10 +6,11 @@ import {
   projects,
   categoryMeta,
   getFeaturedProjects,
+  getHomeFeaturedProjects,
   getComingSoonProjects,
 } from '../../data/projects';
 import type { ProjectCategory } from '../../data/projects';
-import { nowEntries } from '../../data/now';
+import { nowEntries, getLatestNowEntry } from '../../data/now';
 import { personalTools } from '../../data/personal';
 
 describe('knowledge base', () => {
@@ -36,6 +37,22 @@ describe('knowledge base', () => {
   it('findStaticReply is case-insensitive', () => {
     const reply = findStaticReply('HELLO');
     expect(reply).not.toBeNull();
+  });
+
+  it('does not treat Linux as a contact match for the letter x', () => {
+    expect(findStaticReply('Linux')).toBeNull();
+  });
+
+  it('does not treat "this" as a greeting', () => {
+    expect(findStaticReply('this')).toBeNull();
+  });
+
+  it('prefers projects when asked to introduce the projects', () => {
+    expect(findStaticReply('介绍你的项目')?.id).toBe('projects');
+  });
+
+  it('does not treat 证书 as a book match', () => {
+    expect(findStaticReply('有什么证书')).toBeNull();
   });
 
   it('every entry has non-empty keywords and reply', () => {
@@ -90,6 +107,14 @@ describe('projects', () => {
     }
   });
 
+  it('homepage featured is a short, screenshot-backed subset', () => {
+    expect(getHomeFeaturedProjects().map((p) => p.name)).toEqual([
+      'home-nas-skill',
+      'AquaSight',
+      'metronome',
+    ]);
+  });
+
   it('coming soon section holds the named wip products', () => {
     const soon = getComingSoonProjects();
     expect(soon.map((p) => p.name)).toEqual([
@@ -127,10 +152,13 @@ describe('projects', () => {
 });
 
 describe('now entries', () => {
-  it('is sorted chronologically (oldest first)', () => {
-    const dates = nowEntries.map((e) => e.date);
-    const sorted = [...dates].sort();
-    expect(dates).toEqual(sorted);
+  it('getLatestNowEntry uses the newest date even if storage is shuffled', () => {
+    const shuffled = [nowEntries[2], nowEntries[0], nowEntries[1]].filter(
+      (e): e is (typeof nowEntries)[number] => e != null,
+    );
+    expect(getLatestNowEntry(shuffled)?.date).toBe(
+      [...nowEntries].sort((a, b) => a.date.localeCompare(b.date)).at(-1)?.date,
+    );
   });
 
   it('every entry has date, title, body', () => {
