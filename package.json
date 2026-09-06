@@ -2,17 +2,23 @@
   "name": "weichao-ren",
   "type": "module",
   "version": "1.0.0",
-  "description": "weichao.ren — personal site rebuilt on Astro 5 + Vercel",
+  "description": "weichao.ren — personal site rebuilt on Astro 7 + Vercel",
   "private": true,
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "packageManager": "npm@10.9.4",
   "scripts": {
     "dev": "astro dev --host 127.0.0.1 --port 4321",
     "start": "astro dev --host 127.0.0.1 --port 4321",
     "build": "astro check && astro build",
-    "preview": "astro preview --port 4321",
+    "preview": "node -e \"console.error('The Vercel adapter does not support astro preview. Use npm run dev or npx vercel dev.'); process.exit(1)\"",
     "astro": "astro",
     "typecheck": "astro check",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "verify:urls": "python3 scripts/test_verify_urls.py && python3 scripts/verify-urls.py",
+    "ci": "npm test && npm run build && npm run verify:urls"
   },
   "dependencies": {
     "@astrojs/mdx": "^7.0.5",
@@ -33,7 +39,7 @@
     "vitest": "^4.1.9"
   },
   "overrides": {
-    "fast-uri": "3.1.5",
+    "fast-uri": "3.1.6",
     "fast-xml-parser": "5.10.1",
     "path-to-regexp": "6.3.0",
     "sharp": "0.35.0",

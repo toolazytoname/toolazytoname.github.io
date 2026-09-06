@@ -23,6 +23,10 @@ pnpm-debug.log*
 .DS_Store
 *.swp
 
+# python
+scripts/__pycache__/
+*.pyc
+
 # typescript
 *.tsbuildinfo
 # Legacy Jekyll residue (do not track)

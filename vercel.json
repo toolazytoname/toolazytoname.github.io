@@ -1,12 +1,19 @@
 {
-  "buildCommand": "astro build",
+  "buildCommand": "npm run build",
+  "installCommand": "npm ci",
   "outputDirectory": "dist",
   "framework": null,
   "headers": [
     {
-      "source": "/(.*)\\.(jpg|jpeg|png|webp|avif)",
+      "source": "/_astro/(.*)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/(.*)\\.(jpg|jpeg|png|webp|avif|svg)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }
       ]
     },
     {
@@ -15,6 +22,10 @@
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
     }
+  ],
+  "redirects": [
+    { "source": "/life/2024/04/02/024-okr", "destination": "/life/2024/04/02/2024-okr/", "permanent": true },
+    { "source": "/life/2024/04/02/024-okr/", "destination": "/life/2024/04/02/2024-okr/", "permanent": true }
   ],
   "cleanUrls": true
 }
