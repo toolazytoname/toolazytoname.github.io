@@ -14,7 +14,7 @@ lazy 的个人站。**Astro 7 + Vercel + TypeScript strict**。
 - **React 19** — AI 聊天助手交互岛
 - **Vercel** — 托管 + Serverless Functions + CDN
 - **TypeScript** — strict 模式，路径别名 `@components / @data / @lib`
-- **Agnes-2.0-flash** — 聊天在关键词未命中时的可选上游
+- **OpenAI-compatible API** — 可选 OpenRouter 免费模型、自建网关或原 Agnes；结合站点资料与对话历史回答
 
 Node **>= 22.12.0**，见 `package.json` `engines` 和 `.nvmrc`。
 
@@ -28,10 +28,10 @@ npm ci
 
 # 2. 准备环境变量（可选）
 cp .env.example .env
-# AGNES_API_KEY 只在要用模型时才需要；不填则提供有限的站点问答
+# 模型 Key 只在要用实时对话时才需要；不填则提供有限的站点问答
 
 # 3. 开发服务器
-npm run dev
+NODE_OPTIONS=--env-file=.env npm run dev
 # → http://127.0.0.1:4321
 
 # 4. 测试 + 生产构建
@@ -41,16 +41,27 @@ npm run build
 
 `npm run build` 等于 `astro check && astro build`。类型错误必须让构建失败。
 
+聊天在运行时读取 `process.env`；上述 Node 参数让本地开发也加载 `.env`。不使用模型、也未创建 `.env` 时可直接 `npm run dev`。Vercel 使用项目中配置的服务端环境变量。
+
 当前 `@astrojs/vercel` 适配器不支持 `astro preview`。本地验证用 `npm run dev`；生产行为用 Vercel 部署或 `npx vercel dev`。完整检查：`npm run ci`。
 
 ---
 
-## 获取 API Key
+## 配置聊天模型
 
-Agnes 是可选项，不是部署前置条件。
+模型是可选项，不是部署前置条件。推荐先试 OpenRouter 免费模型：
 
-1. 打开 [wiki.agnes-ai.com/en/docs/tokenplan.md](https://wiki.agnes-ai.com/en/docs/tokenplan.md)
-2. 创建 API key，填到 `.env` 的 `AGNES_API_KEY`
+1. 在 [OpenRouter](https://openrouter.ai/settings/keys) 创建 Key，填入服务端的 `OPENROUTER_API_KEY`。
+2. 设置 `CHAT_PROVIDER=openrouter`。默认依次尝试 `google/gemma-4-31b-it:free`、`openrouter/free`；可用 `OPENROUTER_MODELS` 调整，逗号分隔，最多 3 个。
+3. 发布后实测“介绍下你自己 → 你这个网站是用什么做的 → 你着牛头不对马嘴啊”，确认身份、网站技术栈和纠错均正确，并记录耗时。测试通过仅代表接入逻辑正确，不代表真实回答质量已验收。
+
+OpenRouter 配置只接受 `:free` 模型或 `openrouter/free`，请求另带输入、输出及每次请求价格上限 0；不会失败后调用付费模型或 Agnes。网关负责候选模型切换，所有候选共享本站 12 秒期限。`openrouter/free` 随机选择可用免费模型，回答风格与质量可能变化。默认模型在 2026-09-07 的官方目录中可用且输入/输出价格为 0，尚需使用自己的 Key 实测。
+
+按 [OpenRouter FAQ](https://openrouter.ai/docs/faq)（2026-09-07 核对），未购买至少 $10 额度的账户，免费模型合计限 50 次/天；购买后为 1,000 次/天。免费模型仍可能限流、排队或下线，不提供本站可用性保证。
+
+也可以接 [FreeLLMAPI](https://github.com/tashfeenahmed/freellmapi) 这类自建网关：设置 `CHAT_PROVIDER=compatible`、`LLM_BASE_URL=https://你的网关/v1`、`LLM_API_KEY` 和网关支持的 `LLM_MODEL`。它需要单独运行并配置供应商 Key；免费路由与预算由网关管理，本站无法替任意兼容网关保证零费用。公网地址必须 HTTPS，HTTP 仅限本机开发；Vercel 上的 localhost 不会指向你的电脑。FreeLLMAPI 作者将项目定位为个人实验，不建议把免费额度当作稳定生产服务。
+
+未设置 `CHAT_PROVIDER` 时，有 OpenRouter Key 就选 OpenRouter，否则沿用 `AGNES_API_KEY`。显式选择供应商后，缺 Key 或配置错误不会偷偷改用另一家。所有 Key 仅配置在服务端。
 
 每条消息都会连同历史发送到服务端。有 key 时优先调用模型，根据本站资料和上下文回答；无 key 时仅匹配完整的常见问题，不把包含关键词的自由对话替换成模板。模型失败时，能明确匹配的问答会标注为备用答复，其余问题保留可重试错误，不会因此导致构建失败。
 
@@ -68,7 +79,7 @@ Agnes 是可选项，不是部署前置条件。
 4. **Framework**: Astro
 5. **Build Command / Install Command**: 以 `vercel.json` 为准（`npm run build` / `npm ci`）
 6. **Node.js Version**: 22.x
-7. 环境变量可选：`AGNES_API_KEY`、`PUBLIC_SITE_URL`（默认 `https://www.weichao.ren`）
+7. 环境变量：按上文配置可选聊天模型；`PUBLIC_SITE_URL` 默认 `https://www.weichao.ren`
 8. Deploy。无 key 时构建应成功，聊天走静态问答。
 9. GitHub Actions 的 `CI` 工作流不会自动拦住 Vercel。若要求检查通过才上生产，在 Vercel Git 设置里打开等待 GitHub check 的开关；详见 [DEPLOY.md](./DEPLOY.md) §1.4。
 
@@ -79,7 +90,7 @@ Agnes 是可选项，不是部署前置条件。
 | `npm ci` 失败 | 锁文件与 package.json 不同步，或 Node 版本过低 | 确认 Node 22；在干净目录重跑 `npm ci`，不要用 legacy peer deps 绕过 |
 | `astro check` 失败 | 类型错误 | 修类型后再发布。部署入口就是 `npm run build` |
 | 主页 404 | Root Directory 配错 | 设为仓库根目录 `./` |
-| 聊天只回答站点问答 | 没设 `AGNES_API_KEY`，或模型调用失败 | 检查服务端配置与日志；有 key 的自由对话应调用模型 |
+| 聊天只回答站点问答 | 没设所选模型的 Key，或模型调用失败 | 检查 `CHAT_PROVIDER`、对应 Key 与日志；`invalid_config` 表示配置有误 |
 
 域名、DNS、回滚见 [DEPLOY.md](./DEPLOY.md)。
 

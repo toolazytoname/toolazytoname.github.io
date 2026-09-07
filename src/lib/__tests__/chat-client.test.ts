@@ -6,7 +6,7 @@ const history = [
   { role: 'assistant' as const, content: '历史主力：Swift / Objective-C / LLVM' },
   { role: 'user' as const, content: '你着牛头不对马嘴啊' },
 ];
-const success = () => Response.json({ reply: '本站用 Astro + React，部署在 Vercel。', source: 'agnes' });
+const success = () => Response.json({ reply: '本站用 Astro + React，部署在 Vercel。', source: 'ai' });
 const fetchMock = vi.fn<typeof fetch>();
 
 beforeEach(() => { fetchMock.mockReset(); vi.stubGlobal('fetch', fetchMock); vi.spyOn(console, 'warn').mockImplementation(() => {}); });

@@ -1,4 +1,5 @@
 import OpenAI from 'openai';
+import { getLlmConfig } from './llm-config';
 import { knowledge, findStaticReply } from '@data/knowledge';
 import { getLatestNowEntry } from '@data/now';
 import { getFeaturedProjects, getComingSoonProjects } from '@data/projects';
@@ -10,7 +11,7 @@ export type ChatMessage = {
 
 export type ChatResult = {
   reply: string;
-  source: 'agnes' | 'static' | 'fallback' | 'error';
+  source: 'ai' | 'agnes' | 'static' | 'fallback' | 'error';
   error?: string;
 };
 
@@ -60,8 +61,16 @@ export async function chat(messages: ChatMessage[]): Promise<ChatResult> {
   const history = messages.filter(m => m.role === 'user' || m.role === 'assistant').slice(-20);
   const lastUser = [...history].reverse().find(m => m.role === 'user');
   const faq = lastUser ? findStaticReply(lastUser.content) : null;
-  const key = process.env.AGNES_API_KEY;
-  if (!key) {
+  let config: ReturnType<typeof getLlmConfig>;
+  try {
+    config = getLlmConfig();
+  } catch {
+    console.warn('[chat] invalid_config');
+    return faq
+      ? { reply: `实时回答暂时不可用。站点已有的资料是：\n\n${faq.reply}`, source: 'fallback' }
+      : { ...llmUnavailableResult(true, 'failed'), error: 'model_config_invalid' };
+  }
+  if (!config) {
     return faq ? { reply: faq.reply, source: 'static' } : llmUnavailableResult(false);
   }
 
@@ -69,19 +78,19 @@ export async function chat(messages: ChatMessage[]): Promise<ChatResult> {
   const timer = setTimeout(() => controller.abort(), LLM_TIMEOUT);
   let reason: 'timeout' | 'failed' | 'empty' = 'failed';
   try {
-    const client = new OpenAI({ apiKey: key, baseURL: 'https://apihub.agnes-ai.com/v1', maxRetries: 0, timeout: LLM_TIMEOUT });
+    const client = new OpenAI({ apiKey: config.apiKey, baseURL: config.baseURL, maxRetries: 0, timeout: LLM_TIMEOUT });
     const completion = await client.chat.completions.create(
-      { model: 'agnes-2.0-flash', messages: [{ role: 'system', content: systemPrompt() }, ...history], max_tokens: 1024, temperature: 0.3 },
+      { model: config.model, ...config.routing, messages: [{ role: 'system', content: systemPrompt() }, ...history], max_tokens: 1024, temperature: 0.3 },
       { signal: controller.signal },
     );
     const reply = completion.choices?.[0]?.message?.content;
-    if (typeof reply === 'string' && reply.trim()) return { reply: reply.trim(), source: 'agnes' };
+    if (typeof reply === 'string' && reply.trim()) return { reply: reply.trim(), source: config.provider === 'agnes' ? 'agnes' : 'ai' };
     reason = 'empty';
-    console.warn('[chat] upstream_empty');
+    console.warn('[chat] upstream_empty', { provider: config.provider });
   } catch (error) {
     reason = controller.signal.aborted || (error instanceof Error && /timeout/i.test(error.name)) ? 'timeout' : 'failed';
     // Provider error objects can contain request data; only log diagnostic metadata.
-    console.warn('[chat] upstream_failed', { reason, status: error instanceof OpenAI.APIError ? error.status : undefined });
+    console.warn('[chat] upstream_failed', { provider: config.provider, reason, status: error instanceof OpenAI.APIError ? error.status : undefined });
   } finally {
     clearTimeout(timer);
   }

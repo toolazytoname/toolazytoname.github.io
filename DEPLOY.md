@@ -14,7 +14,7 @@
 8. **Node.js Version**: 22.x
 9. 点 **Deploy**
 
-无 `AGNES_API_KEY` 时构建应成功。聊天通过服务端提供有限的完整问题匹配，未匹配时明确说明实时对话未开启。有 key 时，所有问题优先结合上下文调用模型；失败才使用明确匹配的站点资料兜底。
+无模型 Key 时构建应成功。未指定供应商且无 Key 时，聊天通过服务端提供有限的完整问题匹配，未匹配时明确说明实时对话未开启。有 key 时，所有问题优先结合上下文调用模型；失败才使用明确匹配的站点资料兜底。
 
 ### 1.2 配置环境变量
 
@@ -22,10 +22,22 @@ Vercel 项目 → **Settings → Environment Variables**：
 
 | Name | Value | Environment |
 |---|---|---|
-| `AGNES_API_KEY` | 你的 Agnes key（可选） | Production / Preview / Development |
+| `CHAT_PROVIDER` | `openrouter` / `compatible` / `agnes`；留空时优先有 Key 的 OpenRouter，否则 Agnes | Production / Preview / Development |
+| `OPENROUTER_API_KEY` | OpenRouter Key；只在服务端使用 | Production / Preview / Development |
+| `OPENROUTER_MODELS` | 可选，默认 `google/gemma-4-31b-it:free,openrouter/free`；最多 3 个免费候选 | Production / Preview / Development |
+| `LLM_BASE_URL` | `compatible` 模式的 HTTPS 网关地址，包含 `/v1` | Production / Preview / Development |
+| `LLM_API_KEY` | `compatible` 模式的网关 Key | Production / Preview / Development |
+| `LLM_MODEL` | `compatible` 模式下网关支持的模型或路由名 | Production / Preview / Development |
+| `AGNES_API_KEY` | 原 Agnes key（可选，保留兼容） | Production / Preview / Development |
 | `PUBLIC_SITE_URL` | `https://www.weichao.ren`（可选，默认就是这个） | Production / Preview / Development |
 
 不要再配置 `DEEPSEEK_API_KEY`，当前代码不使用 DeepSeek。
+
+切换免费模型：设置 `CHAT_PROVIDER=openrouter` 和 `OPENROUTER_API_KEY` 后重新部署。模型候选限制为 `:free` 或 `openrouter/free`，并带零价格上限；路由切换共享 12 秒期限，失败不会回退到 Agnes。显式供应商缺 Key、付费模型 ID 或无效网关地址会记录 `invalid_config`，不发送请求；有精确站点问答时提供标注兜底，否则返回 `model_config_invalid`。
+
+OpenRouter 未购买至少 $10 额度的账户，免费模型总额度为 50 次/天（2026-09-07 核对 [官方 FAQ](https://openrouter.ai/docs/faq)）；所有访客共享这份额度，不能把站点的访客限流当成供应商配额。额度耗尽、模型下线和排队仍会导致失败。自建 FreeLLMAPI 须在独立服务运行，配置自己的供应商 Key 和免费路由，再通过 `compatible` 接入；其计费约束由网关负责。
+
+验收必须包含真实多轮对话：自我介绍、询问本站架构、指出答非所问、未知站主事实。检查返回 `source: ai`（`fallback` 不是模型成功）、答案内容和耗时；同时检查限流、空回复和超时后的提示。没有新供应商 Key 时，只能验证接入与降级，不能宣称已切换上线或改善模型质量。
 
 点 **Save**。若是后加的变量，去 **Deployments** 重新部署一次。
 

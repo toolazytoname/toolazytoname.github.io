@@ -13,12 +13,12 @@ async function post(body: unknown) {
 
 describe('chat API contract', () => {
   it('returns a noncached model answer and a diagnostic request ID', async () => {
-    chat.mockResolvedValue({ reply: 'Astro + React on Vercel', source: 'agnes' });
+    chat.mockResolvedValue({ reply: 'Astro + React on Vercel', source: 'ai' });
     const response = await post({ messages: [{ role: 'user', content: '网站用什么做的' }] });
     expect(response.status).toBe(200);
     expect(response.headers.get('cache-control')).toBe('no-store');
     expect(response.headers.get('x-chat-request-id')).toMatch(/^[0-9a-f-]{36}$/);
-    expect(await response.json()).toMatchObject({ reply: 'Astro + React on Vercel', source: 'agnes' });
+    expect(await response.json()).toMatchObject({ reply: 'Astro + React on Vercel', source: 'ai' });
   });
 
   it.each([['upstream_empty', 502], ['upstream_timeout', 504]])('preserves %s as a JSON error', async (error, status) => {

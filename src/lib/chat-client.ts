@@ -1,6 +1,6 @@
 import { budgetChatMessages, type WireMessage } from './chat-budget';
 
-type ReplySource = 'agnes' | 'static' | 'fallback';
+type ReplySource = 'ai' | 'agnes' | 'static' | 'fallback';
 export type ChatOutcome =
   | { ok: true; reply: string; source: ReplySource }
   | { ok: false; reply: string; retryable: boolean };
@@ -9,7 +9,7 @@ function parsePayload(value: unknown): { reply: string; source: ReplySource | 'e
   if (!value || typeof value !== 'object') return null;
   const data = value as Record<string, unknown>;
   if (typeof data.reply !== 'string' || !data.reply.trim()) return null;
-  if (!['agnes', 'static', 'fallback', 'error'].includes(String(data.source))) return null;
+  if (!['ai', 'agnes', 'static', 'fallback', 'error'].includes(String(data.source))) return null;
   return { reply: data.reply.trim(), source: data.source as ReplySource | 'error' };
 }
 

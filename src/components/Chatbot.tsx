@@ -15,7 +15,7 @@ type Msg = {
   id: number;
   role: 'user' | 'assistant';
   content: string;
-  source?: 'agnes' | 'static' | 'fallback' | 'error';
+  source?: 'ai' | 'agnes' | 'static' | 'fallback' | 'error';
   retryable?: boolean;
   retryText?: string;
 };
@@ -30,6 +30,7 @@ const SUGGESTIONS = [
 const API_TIMEOUT_MS = 18000;
 const sourceLabel = (s?: Msg['source']) => {
   switch (s) {
+    case 'ai':
     case 'agnes':
       return 'AI';
     case 'error':

@@ -7,7 +7,13 @@ vi.mock('openai', () => ({ default: class {
   chat = { completions: { create: generate } };
 } }));
 
-beforeEach(() => { generate.mockReset(); vi.stubEnv('AGNES_API_KEY', 'test-only'); vi.spyOn(console, 'warn').mockImplementation(() => {}); });
+beforeEach(() => {
+  generate.mockReset();
+  vi.stubEnv('CHAT_PROVIDER', '');
+  vi.stubEnv('OPENROUTER_API_KEY', '');
+  vi.stubEnv('AGNES_API_KEY', 'test-only');
+  vi.spyOn(console, 'warn').mockImplementation(() => {});
+});
 afterEach(() => { vi.unstubAllEnvs(); vi.restoreAllMocks(); vi.useRealTimers(); });
 
 describe('contextual site answers', () => {
