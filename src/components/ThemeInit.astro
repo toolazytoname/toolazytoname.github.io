@@ -1,0 +1,39 @@
+<!-- Resolve the saved preference before the body paints, including on navigation. -->
+<script is:inline>
+  (() => {
+    const storageKey = 'site-theme';
+    const root = document.documentElement;
+    const system = window.matchMedia('(prefers-color-scheme: dark)');
+    const validTheme = (value) => value === 'light' || value === 'dark' ? value : null;
+    let preference = null;
+    try { preference = validTheme(localStorage.getItem(storageKey)); } catch {}
+
+    function applyTheme() {
+      const theme = preference || (system.matches ? 'dark' : 'light');
+      root.dataset.theme = theme;
+      root.classList.add('theme-ready');
+      document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#121212' : '#fafafa');
+      const button = document.querySelector('[data-theme-toggle]');
+      const label = theme === 'dark' ? '切换到日间模式' : '切换到夜间模式';
+      button?.setAttribute('aria-pressed', String(theme === 'dark'));
+      button?.setAttribute('title', label);
+      const tooltip = button?.querySelector('[data-theme-label]');
+      if (tooltip) tooltip.textContent = label;
+    }
+
+    applyTheme();
+    document.addEventListener('DOMContentLoaded', applyTheme, { once: true });
+    document.addEventListener('click', (event) => {
+      if (!(event.target instanceof Element) || !event.target.closest('[data-theme-toggle]')) return;
+      preference = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      try { localStorage.setItem(storageKey, preference); } catch {}
+      applyTheme();
+    });
+    system.addEventListener('change', () => { if (!preference) applyTheme(); });
+    window.addEventListener('storage', (event) => {
+      if (event.key !== storageKey && event.key !== null) return;
+      preference = validTheme(event.newValue);
+      applyTheme();
+    });
+  })();
+</script>

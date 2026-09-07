@@ -3,6 +3,7 @@ import '../styles/global.css';
 import Nav from '@components/Nav.astro';
 import Footer from '@components/Footer.astro';
 import ScrollProgress from '@components/ScrollProgress.astro';
+import ThemeInit from '@components/ThemeInit.astro';
 import { SITE, type Seo, websiteJsonLd, articleJsonLd } from '@lib/seo';
 
 interface Props {
@@ -56,6 +57,8 @@ if (jsonLdExtra) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#fafafa" />
+    <ThemeInit />
 
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -95,8 +98,6 @@ if (jsonLdExtra) {
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="alternate" type="application/rss+xml" title={SITE.name} href="/posts.xml" />
     <link rel="alternate" type="application/rss+xml" title={`${SITE.name} (legacy)`} href="/feed.xml" />
-
-    <meta name="theme-color" content="#0369a1" />
 
     <!-- Preconnect for photo domain (if added later) -->
     <meta name="robots" content="index,follow" />

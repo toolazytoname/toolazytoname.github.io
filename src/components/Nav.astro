@@ -1,4 +1,6 @@
 ---
+import { Moon, Sun } from '@lucide/astro';
+
 const links = [
   { href: '/', label: '首页' },
   { href: '/projects/', label: '项目' },
@@ -33,15 +35,22 @@ const isActive = (href: string) =>
       }
     </nav>
 
-    <button
-      type="button"
-      class="nav__toggle"
-      aria-label="打开菜单"
-      aria-expanded="false"
-      data-nav-toggle
-    >
-      <span></span><span></span>
-    </button>
+    <div class="nav__actions">
+      <button type="button" class="nav__theme" data-theme-toggle aria-label="夜间模式" aria-pressed="false" title="切换到夜间模式">
+        <Moon class="nav__moon" size={20} stroke-width={1.75} aria-hidden="true" />
+        <Sun class="nav__sun" size={20} stroke-width={1.75} aria-hidden="true" />
+        <span class="nav__theme-tip" data-theme-label aria-hidden="true">切换到夜间模式</span>
+      </button>
+      <button
+        type="button"
+        class="nav__toggle"
+        aria-label="打开菜单"
+        aria-expanded="false"
+        data-nav-toggle
+      >
+        <span></span><span></span>
+      </button>
+    </div>
   </div>
 
   <div class="nav__mobile" data-nav-mobile hidden>
@@ -63,7 +72,7 @@ const isActive = (href: string) =>
     position: sticky;
     top: 0;
     z-index: var(--z-nav);
-    background: rgba(255, 255, 255, 0.78);
+    background: var(--color-nav-bg);
     backdrop-filter: saturate(180%) blur(20px);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
     border-bottom: 1px solid var(--color-border);
@@ -97,6 +106,8 @@ const isActive = (href: string) =>
   .nav__links {
     display: flex;
     gap: var(--s-5);
+    margin-left: auto;
+    margin-right: var(--s-5);
   }
   .nav__link {
     color: var(--color-text-muted);
@@ -121,6 +132,45 @@ const isActive = (href: string) =>
     height: 2px;
     background: var(--color-accent);
     border-radius: 2px;
+  }
+
+  .nav__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--s-1);
+  }
+  .nav__theme {
+    display: none;
+    position: relative;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+    border-radius: var(--r-md);
+    color: var(--color-text-muted);
+  }
+  :global(.theme-ready) .nav__theme { display: grid; }
+  .nav__theme:hover { background: var(--color-bg-muted); color: var(--color-text); }
+  .nav__theme :global(.nav__sun) { display: none; }
+  :global([data-theme='dark']) .nav__theme :global(.nav__moon) { display: none; }
+  :global([data-theme='dark']) .nav__theme :global(.nav__sun) { display: block; }
+  .nav__theme-tip {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    padding: 6px 10px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--r-sm);
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-size: 12px;
+    white-space: nowrap;
+    pointer-events: none;
+    visibility: hidden;
+  }
+  .nav__theme:focus-visible .nav__theme-tip { visibility: visible; }
+  @media (hover: hover) {
+    .nav__theme:hover .nav__theme-tip { visibility: visible; }
   }
 
   .nav__toggle {

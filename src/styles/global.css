@@ -5,12 +5,16 @@
    ========================================================= */
 
 :root {
+  color-scheme: light;
   /* Neutral surfaces (light theme) */
   --color-bg: #ffffff;
   --color-bg-pale: #fafafa;
   --color-bg-subtle: #f5f5f5;
   --color-bg-soft: #f5f5f5;
   --color-bg-muted: #eeeeee;
+  --color-nav-bg: rgba(255, 255, 255, 0.78);
+  --color-error-bg: #fef2f2;
+  --color-error-text: #991b1b;
 
   /* Ink (text) */
   --color-ink: #0a0a0a;
@@ -120,6 +124,32 @@
   /* Above page chrome; below Astro’s own dev toolbar (~999999). */
   --z-fab: 10000;
   --z-lightbox: 900;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --color-bg: #1a1a1a;
+  --color-bg-pale: #121212;
+  --color-bg-subtle: #242424;
+  --color-bg-soft: #202020;
+  --color-bg-muted: #303030;
+  --color-nav-bg: rgba(18, 18, 18, 0.88);
+  --color-ink: #e8e8e8;
+  --color-ink-soft: #d4d4d4;
+  --color-ink-muted: #bdbdbd;
+  --color-text: #e8e8e8;
+  --color-text-muted: #b5b5b5;
+  --color-text-dim: #a0a0a0;
+  --color-border: #333333;
+  --color-border-strong: #525252;
+  --color-accent: #7dd3fc;
+  --color-accent-soft: #38bdf8;
+  --color-accent-pale: #18303d;
+  --color-accent-dark: #bae6fd;
+  --color-accent-contrast: #08202c;
+  --color-link: #e8e8e8;
+  --color-error-bg: #3b1d21;
+  --color-error-text: #fca5a5;
 }
 
 /* =========================================================
@@ -414,10 +444,6 @@ html.reveal-ready .reveal:not(.is-visible) {
   text-decoration: underline;
   text-underline-offset: 2px;
 }
-.chat-msg__bubble--error {
-  background: #fef2f2;
-  color: #991b1b;
-}
 .chat-msg--user .chat-msg__bubble {
   background: var(--color-accent);
   color: var(--color-accent-contrast);
@@ -427,6 +453,10 @@ html.reveal-ready .reveal:not(.is-visible) {
   background: var(--color-bg-subtle);
   color: var(--color-text);
   border-bottom-left-radius: 4px;
+}
+.chat-msg--assistant .chat-msg__bubble--error {
+  background: var(--color-error-bg);
+  color: var(--color-error-text);
 }
 .chat-msg__bubble--typing {
   display: inline-flex;
@@ -539,7 +569,7 @@ html.reveal-ready .reveal:not(.is-visible) {
 .chat-panel__hint {
   margin: 0 16px 12px;
   font-size: 13px;
-  color: #991b1b;
+  color: var(--color-error-text);
 }
 
 @media (max-width: 600px) {

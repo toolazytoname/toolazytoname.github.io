@@ -120,6 +120,8 @@ OpenRouter 配置只接受 `:free` 模型或 `openrouter/free`，请求另带输
 
 ## 内容
 
+导航右侧的太阳/月亮按钮切换日间、夜间模式。首次访问跟随系统，手动选择保存在浏览器 `localStorage` 的 `site-theme` 中，刷新、跨页和同源标签页保持一致；存储不可用时仍可切换当前页面。颜色统一维护在 `src/styles/global.css`，首屏主题由 `ThemeInit.astro` 在正文渲染前设置。图片、二维码和代码高亮保留原色。
+
 历史文章在 `src/content/posts/`。新增文章也放这里，frontmatter 需要：
 
 ```yaml
