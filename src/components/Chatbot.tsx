@@ -27,7 +27,7 @@ const SUGGESTIONS = [
   '户外运动',
 ];
 
-const API_TIMEOUT_MS = 12000;
+const API_TIMEOUT_MS = 18000;
 const sourceLabel = (s?: Msg['source']) => {
   switch (s) {
     case 'agnes':

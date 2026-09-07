@@ -68,7 +68,7 @@ describe('contextual site answers', () => {
       options.signal.addEventListener('abort', () => reject(new Error('aborted')));
     }));
     const pending = chat([{ role: 'user', content: '为什么这样设计' }]);
-    await vi.advanceTimersByTimeAsync(8000);
+    await vi.advanceTimersByTimeAsync(12000);
     expect(await pending).toMatchObject({ source: 'error', error: 'upstream_timeout' });
     expect(vi.getTimerCount()).toBe(0);
   });

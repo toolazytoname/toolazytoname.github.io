@@ -37,6 +37,7 @@ function systemPrompt(): string {
   return `你是 weichao.ren 的 AI 站点助手，不是站主 lazy 本人。不要自称站主或以自己的口吻声称拥有他的经历和证书。
 
 回答要求：
+- 称呼自己为“本站助手”，除非用户明确询问底层模型，否则无需介绍模型供应商或品牌。
 - 用简体中文，简短自然，先直接回答当前问题，再补必要细节。
 - 根据整段对话理解追问。用户指出答非所问时，回看上一问，承认并纠正；不能确定时只问一个具体的澄清问题，不要重复之前的模板。
 - 区分“这个网站怎么实现”和“站主会什么技术”；前者只回答本站架构，不要罗列站主的语言、编辑器和经历。
@@ -53,7 +54,7 @@ ${knowledge.map(k => `[${k.id}]\n${k.reply}`).join('\n\n')}
 尚在进行的项目：${getComingSoonProjects().map(p => p.title).join('、')}`;
 }
 
-const LLM_TIMEOUT = 8000;
+const LLM_TIMEOUT = 12000;
 
 export async function chat(messages: ChatMessage[]): Promise<ChatResult> {
   const history = messages.filter(m => m.role === 'user' || m.role === 'assistant').slice(-20);

@@ -132,7 +132,7 @@ DNS 传播通常 5–60 分钟。Vercel 会在域名生效后自动签发 SSL。
 
 ## 6. 常见问题
 
-聊天异常排查：先查看 `/api/chat/` 的响应状态、Content-Type 和 `x-chat-request-id`。HTML 502 表示网关链路异常，不等于模型空回复；`upstream_empty` 才表示模型没有返回有效文本。应用响应均设置 `Cache-Control: no-store`，GET 返回 405。浏览器对网关或格式异常最多恢复一次，共用 12 秒期限；服务端模型请求 8 秒后中止。有 key 时每条消息都会调用模型，发布前应检查供应商额度与费用预算。
+聊天异常排查：先查看 `/api/chat/` 的响应状态、Content-Type 和 `x-chat-request-id`。HTML 502 表示网关链路异常，不等于模型空回复；`upstream_empty` 才表示模型没有返回有效文本。应用响应均设置 `Cache-Control: no-store`，GET 返回 405。浏览器对网关或格式异常最多恢复一次，共用 18 秒期限；服务端模型请求 12 秒后中止。有 key 时每条消息都会调用模型，发布前应检查供应商额度与费用预算。
 
 **Q: Vercel 域名添加后显示 "Invalid Configuration"？**
 A: DNS 没生效。等几分钟，或检查记录值。
