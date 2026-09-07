@@ -4,14 +4,13 @@
 
 import type { APIRoute } from 'astro';
 import { chat, type ChatResult } from '@lib/llm';
-import { findStaticReply } from '@data/knowledge';
 import { parseChatRequest } from '@lib/chat-request';
 import { readLimitedText } from '@lib/read-body';
 import { rateLimit, clientIp } from '@lib/rate-limit';
 
 export const prerender = false;
 
-export const POST: APIRoute = async ({ request }) => {
+const handlePost: APIRoute = async ({ request }) => {
   const ip = clientIp(request.headers);
   const limit = rateLimit(ip);
   if (!limit.allowed) {
@@ -68,12 +67,7 @@ export const POST: APIRoute = async ({ request }) => {
 
   try {
     const result: ChatResult = await chat(messages);
-    let final: ChatResult = result;
-    if (result.source === 'fallback') {
-      const last = [...messages].reverse().find((m) => m.role === 'user');
-      const hit = last ? findStaticReply(last.content) : null;
-      if (hit) final = { reply: hit.reply, source: 'static' };
-    }
+    const final: ChatResult = result;
     if (final.source === 'error') {
       const status = final.error === 'upstream_timeout' ? 504 : 502;
       return new Response(
@@ -89,7 +83,7 @@ export const POST: APIRoute = async ({ request }) => {
       },
     );
   } catch (err) {
-    console.error('[api/chat] unexpected error', err);
+    console.error('[api/chat] unexpected error', { name: err instanceof Error ? err.name : 'unknown' });
     return new Response(
       JSON.stringify({
         reply: '服务出错了，请再试一次。',
@@ -102,11 +96,21 @@ export const POST: APIRoute = async ({ request }) => {
   }
 };
 
+export const POST: APIRoute = async (context) => {
+  const requestId = crypto.randomUUID();
+  const response = await handlePost(context);
+  response.headers.set('cache-control', 'no-store');
+  response.headers.set('x-chat-request-id', requestId);
+  if (response.status >= 500) console.warn('[chat] request_failed', { requestId, status: response.status });
+  return response;
+};
+
 export const GET: APIRoute = () =>
   new Response(
     JSON.stringify({
-      ok: true,
-      hint: 'POST { messages: [{role, content}] } to this endpoint.',
+      reply: '请通过聊天输入框发送问题。',
+      source: 'error',
+      error: 'method_not_allowed',
     }),
-    { status: 200, headers: { 'content-type': 'application/json' } },
+    { status: 405, headers: { 'content-type': 'application/json', allow: 'POST', 'cache-control': 'no-store' } },
   );

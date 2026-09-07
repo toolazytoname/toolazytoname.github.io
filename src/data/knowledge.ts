@@ -1,14 +1,13 @@
 // Static knowledge base for the AI chatbot.
-// Matching runs FIRST (client and server); the LLM is only used when no
-// keyword entry scores high enough. This file is the SINGLE SOURCE OF TRUTH
-// — both llm.ts and Chatbot.tsx import from here. Edit this file only.
+// Server-side grounding and exact FAQ fallback when the model is unavailable.
+// Free-form conversation must not be intercepted by substring matches.
 //
 // This file MUST stay human-readable — it's also the system prompt seed
 // (the whole array gets stringified into the LLM system prompt in llm.ts).
 
 export type KnowledgeEntry = {
   id: string;
-  keywords: string[]; // lowercase, any match
+  keywords: string[]; // complete question/topic aliases, case-insensitive
   reply: string;
   source?: string;
 };
@@ -16,14 +15,14 @@ export type KnowledgeEntry = {
 export const knowledge: KnowledgeEntry[] = [
   {
     id: 'about',
-    keywords: ['你是谁', 'who are you', 'about', '介绍', 'lazy', '你是', '你自己'],
+    keywords: ['你是谁', 'who are you', 'about', '介绍下你自己', '介绍一下你自己', '介绍 lazy', 'lazy 是谁'],
     reply:
-      '我是 lazy，weichao.ren 的主人。\n\n前大厂 iOS 基础架构工程师，做过 Swift 编译缓存和 LLVM 隐私检测。15 年 iOS。\n\n现在是持滑雪 / 攀岩 / 游泳教练证的独立开发者，用 AI 造自己想要的工具。\n\n喜欢滑雪、潜水、攀岩、公路旅行。',
+      '我是本站的 AI 助手，帮助你了解 lazy 的公开资料。lazy 是独立开发者，做过 iOS 基础架构、Swift 编译缓存和 LLVM 隐私检测，现在用 AI 做自己的工具。详细介绍在 /about/。',
     source: 'about',
   },
   {
     id: 'projects',
-    keywords: ['产品', '作品', '项目', 'project', 'projects', '作品集', 'works', 'product', '你的项目', '有哪些项目', '介绍项目'],
+    keywords: ['产品', '作品', '项目', 'project', 'projects', '作品集', 'works', 'product', '你的项目', '有哪些项目', '介绍项目', '介绍你的项目'],
     reply:
       '完整列表在 /projects/ 页。\n\n上线：Home NAS、鸭先知 AquaSight、LLM Quota Watchdog、Web3 Learning OS、小兔头节拍器\n敬请期待：MediaForge、xiaohei-phone-agent、拾光造像、芽伴星球、Lodge\n其余开源按分类列在下面。',
     source: 'projects',
@@ -44,7 +43,7 @@ export const knowledge: KnowledgeEntry[] = [
   },
   {
     id: 'sport',
-    keywords: ['运动', '户外', 'sport', '滑雪', 'ski', '潜水', 'dive', '攀岩', 'climb', '游泳', '旅行'],
+    keywords: ['运动', '户外', '户外运动', 'sport', '滑雪', 'ski', '潜水', 'dive', '攀岩', 'climb', '游泳', '旅行'],
     reply:
       '户外 + 水上：\n\n滑雪（双板 + 单板）— 阿勒泰 / 长白山 / 崇礼，持社会体育指导员证\n攀岩 — 阳朔朝圣，持指导员证\n游泳 — 持社会体育指导员证\n潜水 — PADI AOW\n公路旅行 — 独库 / 318 / G7',
     source: 'sport',
@@ -71,8 +70,15 @@ export const knowledge: KnowledgeEntry[] = [
     source: 'book',
   },
   {
+    id: 'site',
+    keywords: ['这个网站', '网站技术栈', '本站技术栈', '网站是怎么做的', '这个网站怎么做的', '你这个网站是用什么做的', '这个网站用什么做的', '这个网站用什么技术', 'what is this website built with'],
+    reply:
+      '这个网站用 Astro 7 + TypeScript 构建，部署在 Vercel。文章等内容页预渲染成 HTML，聊天交互用 React 19 按需加载。问答接口在服务端调用模型，密钥不进入浏览器。源码：https://github.com/toolazytoname/toolazytoname.github.io',
+    source: 'README',
+  },
+  {
     id: 'tech',
-    keywords: ['tech', '技术栈', '用什么', '语言', 'language', 'swift', 'llvm'],
+    keywords: ['tech', '技术栈', '你的技术栈是什么', '你用什么技术栈', '语言', 'language', 'swift', 'llvm'],
     reply:
       '历史主力：Swift / Objective-C / LLVM（15 年 iOS / 编译）\n现在用：TypeScript / Python / Go / Astro / Vercel / Claude Code\n\n编辑器：Neovim + LazyVim\nAI：Claude Code 是主菜，agent harness 自己写来用',
     source: 'tech',
@@ -80,7 +86,7 @@ export const knowledge: KnowledgeEntry[] = [
   {
     id: 'greeting',
     keywords: ['你好', 'hi', 'hello', 'hey', '在吗', '在么'],
-    reply: '在的。问什么都行 —— 关于我、我的项目、最近在干什么、户外运动。',
+    reply: '你好。可以聊 lazy 的项目、近况，或者这个网站。',
     source: 'greeting',
   },
   {
@@ -91,46 +97,12 @@ export const knowledge: KnowledgeEntry[] = [
   },
 ];
 
-// Keyword matcher — used before the LLM, and as a client-side instant path.
-// Shared by llm.ts and Chatbot.tsx so there's exactly ONE copy of the data
-// and ONE matching function.
-//
-// Scoring: sum of matched keyword lengths. Short Latin tokens (hi, x, …)
-// require a word boundary so "Linux" does not hit contact, and "this" does
-// not hit greeting. Longer / more specific keywords beat generic ones, so
-// "介绍你的项目" prefers projects over about.
-
-function escapeRegExp(value: string): string {
-  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-
-function keywordScore(input: string, kw: string): number {
-  const k = kw.toLowerCase();
-  if (!k) return 0;
-  const latinShort = /^[a-z0-9]{1,3}$/i.test(kw);
-  if (latinShort) {
-    const re = new RegExp(`(^|[^a-z0-9])${escapeRegExp(k)}([^a-z0-9]|$)`, 'i');
-    return re.test(input) ? k.length + 2 : 0;
-  }
-  if (/^[\u4e00-\u9fff]$/.test(kw)) {
-    const re = new RegExp(`(^|[^\\u4e00-\\u9fff])${escapeRegExp(k)}([^\\u4e00-\\u9fff]|$)`);
-    return re.test(input) ? 2 : 0;
-  }
-  return input.includes(k) ? k.length : 0;
+function normalizeQuestion(input: string): string {
+  return input.toLowerCase().trim().replace(/[?？!！。]+$/u, '').replace(/\s+/g, ' ');
 }
 
 export function findStaticReply(input: string): KnowledgeEntry | null {
-  const lower = input.toLowerCase().trim();
-  if (!lower) return null;
-  let best: { entry: KnowledgeEntry; score: number } | null = null;
-  for (const entry of knowledge) {
-    let score = 0;
-    for (const kw of entry.keywords) {
-      score += keywordScore(lower, kw);
-    }
-    if (score > 0 && (!best || score > best.score)) {
-      best = { entry, score };
-    }
-  }
-  return best?.entry ?? null;
+  const question = normalizeQuestion(input);
+  if (!question) return null;
+  return knowledge.find(entry => entry.keywords.some(alias => normalizeQuestion(alias) === question)) ?? null;
 }

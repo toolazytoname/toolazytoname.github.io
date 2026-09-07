@@ -28,7 +28,7 @@ npm ci
 
 # 2. 准备环境变量（可选）
 cp .env.example .env
-# AGNES_API_KEY 只在要用模型时才需要；不填则走静态问答
+# AGNES_API_KEY 只在要用模型时才需要；不填则提供有限的站点问答
 
 # 3. 开发服务器
 npm run dev
@@ -52,7 +52,9 @@ Agnes 是可选项，不是部署前置条件。
 1. 打开 [wiki.agnes-ai.com/en/docs/tokenplan.md](https://wiki.agnes-ai.com/en/docs/tokenplan.md)
 2. 创建 API key，填到 `.env` 的 `AGNES_API_KEY`
 
-不填 key 也可以：聊天先走本地关键词，未命中时返回明确兜底，不会因此导致构建失败。
+每条消息都会连同历史发送到服务端。有 key 时优先调用模型，根据本站资料和上下文回答；无 key 时仅匹配完整的常见问题，不把包含关键词的自由对话替换成模板。模型失败时，能明确匹配的问答会标注为备用答复，其余问题保留可重试错误，不会因此导致构建失败。
+
+本站架构资料维护在 `src/data/knowledge.ts`；模型同时读取项目与最新近况数据。遇到网关 HTML 或无效 JSON，前端最多自动重试一次，总等待仍限制在 12 秒内；有效的模型错误不会自动重复调用模型。服务端日志仅记录错误类型、状态和请求 ID，不记录对话正文。
 
 ---
 
@@ -77,7 +79,7 @@ Agnes 是可选项，不是部署前置条件。
 | `npm ci` 失败 | 锁文件与 package.json 不同步，或 Node 版本过低 | 确认 Node 22；在干净目录重跑 `npm ci`，不要用 legacy peer deps 绕过 |
 | `astro check` 失败 | 类型错误 | 修类型后再发布。部署入口就是 `npm run build` |
 | 主页 404 | Root Directory 配错 | 设为仓库根目录 `./` |
-| 聊天只回答静态内容 | 没设 `AGNES_API_KEY`，或问题被关键词命中 | 这是预期降级，不是 offline |
+| 聊天只回答站点问答 | 没设 `AGNES_API_KEY`，或模型调用失败 | 检查服务端配置与日志；有 key 的自由对话应调用模型 |
 
 域名、DNS、回滚见 [DEPLOY.md](./DEPLOY.md)。
 

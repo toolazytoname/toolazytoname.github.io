@@ -34,6 +34,15 @@ describe('knowledge base', () => {
     expect(reply).toBeNull();
   });
 
+  it('distinguishes this website from the personal technology stack', () => {
+    expect(findStaticReply('你这个网站是用什么做的？')?.id).toBe('site');
+    expect(findStaticReply('你的技术栈是什么')?.id).toBe('tech');
+  });
+
+  it.each(['你着牛头不对马嘴啊', '你的项目为什么不用 React', '用什么', '介绍一下 Astro 的缺点', '你最近说的项目和之前的有什么区别'])('does not replace a free-form question with a keyword template: %s', input => {
+    expect(findStaticReply(input)).toBeNull();
+  });
+
   it('findStaticReply is case-insensitive', () => {
     const reply = findStaticReply('HELLO');
     expect(reply).not.toBeNull();

@@ -1,15 +1,14 @@
 /**
  * Chatbot — floating AI assistant.
  *
- * Keyword hits answer locally. Anything else POSTs to /api/chat.
+ * Send every question with history to the server for contextual answers.
  * Timeouts, 429s and upstream failures stay errors, not "I don't know".
  */
 
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
-import { findStaticReply } from '@data/knowledge';
 import { MAX_CONTENT_LENGTH } from '@lib/chat-request';
-import { budgetChatMessages } from '@lib/chat-budget';
+import { requestChatReply } from '@lib/chat-client';
 import { historyBeforeRetry, lastRetryIndex } from '@lib/chat-retry';
 
 type Msg = {
@@ -19,12 +18,6 @@ type Msg = {
   source?: 'agnes' | 'static' | 'fallback' | 'error';
   retryable?: boolean;
   retryText?: string;
-};
-
-type ChatPayload = {
-  reply?: unknown;
-  source?: Msg['source'];
-  error?: unknown;
 };
 
 const SUGGESTIONS = [
@@ -41,77 +34,14 @@ const sourceLabel = (s?: Msg['source']) => {
       return 'AI';
     case 'error':
       return '出错了';
+    case 'static':
+      return '站点问答';
+    case 'fallback':
+      return '备用答复';
     default:
       return '';
   }
 };
-
-function parseChatPayload(data: ChatPayload): { reply: string; source?: Msg['source'] } | null {
-  if (typeof data?.reply !== 'string') return null;
-  const reply = data.reply.trim();
-  if (!reply) return null;
-  return { reply, source: data.source };
-}
-
-type ChatOutcome =
-  | { ok: true; reply: string; source?: Msg['source'] }
-  | { ok: false; reply: string; retryable: boolean };
-
-async function requestChatReply(
-  messages: Msg[],
-  signal: AbortSignal,
-  retriedBudget = false,
-): Promise<ChatOutcome> {
-  const res = await fetch('/api/chat/', {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ messages: budgetChatMessages(messages) }),
-    signal,
-    redirect: 'error',
-  });
-
-  let data: ChatPayload | null = null;
-  try {
-    data = (await res.json()) as ChatPayload;
-  } catch {
-    data = null;
-  }
-
-  if (res.status === 413 && !retriedBudget) {
-    const lastUser = [...messages].reverse().find((m) => m.role === 'user');
-    if (lastUser) {
-      return requestChatReply(
-        [{ id: lastUser.id, role: 'user', content: lastUser.content }],
-        signal,
-        true,
-      );
-    }
-  }
-
-  if (res.status === 429) {
-    const parsed = data ? parseChatPayload(data) : null;
-    return {
-      ok: false,
-      reply: parsed?.reply ?? '请求太快了，过会儿再问。',
-      retryable: true,
-    };
-  }
-
-  if (!res.ok) {
-    const parsed = data ? parseChatPayload(data) : null;
-    return {
-      ok: false,
-      reply: parsed?.reply ?? '服务暂时不可用，请再试一次。',
-      retryable: true,
-    };
-  }
-
-  const parsed = data ? parseChatPayload(data) : null;
-  if (!parsed) {
-    return { ok: false, reply: '服务返回了空回复，请再试一次。', retryable: true };
-  }
-  return { ok: true, reply: parsed.reply, source: parsed.source };
-}
 
 function stripUrl(raw: string): string {
   return raw.replace(/[.,;:!?。，、；：！？)\]}）】》"'”’]+$/u, '');
@@ -170,7 +100,7 @@ export default function Chatbot({ startOpen = false }: { startOpen?: boolean }) 
     {
       id: 0,
       role: 'assistant',
-      content: '你好，我是 lazy 的 AI 助手。问我关于我、最近在做什么都行 :)',
+      content: '你好，我是本站的 AI 助手。可以聊 lazy 的项目、近况，或者这个网站。',
       source: 'static',
     },
   ]);
@@ -224,15 +154,6 @@ export default function Chatbot({ startOpen = false }: { startOpen?: boolean }) 
     setInput('');
     const next: Msg[] = [...history, { id: allocId(), role: 'user', content: trimmed }];
     setMessages(next);
-
-    const instant = findStaticReply(trimmed);
-    if (instant) {
-      setMessages([
-        ...next,
-        { id: allocId(), role: 'assistant', content: instant.reply, source: 'static' },
-      ]);
-      return;
-    }
 
     const id = ++requestId.current;
     setBusy(true);
