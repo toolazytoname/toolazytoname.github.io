@@ -1,6 +1,6 @@
 # weichao.ren · 重建
 
-韦超（lazy / 小兔头）的个人站。**Astro 7 + Vercel + TypeScript strict**。
+lazy 的个人站。**Astro 7 + Vercel + TypeScript strict**。
 
 旧站：[toolazytoname.github.io](https://toolazytoname.github.io)（Jekyll）
 

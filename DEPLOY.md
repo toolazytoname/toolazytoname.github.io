@@ -103,7 +103,7 @@ DNS 传播通常 5–60 分钟。Vercel 会在域名生效后自动签发 SSL。
 
 部署完后验证：
 
-- [ ] https://www.weichao.ren 能打开，姓名和一句定位在首屏
+- [ ] https://www.weichao.ren 能打开，网名和一句定位在首屏
 - [ ] https://weichao.ren 308 到 www
 - [ ] `/projects/`、`/posts/`、`/now/`、`/about/` 都能打开
 - [ ] 768px 宽时项目卡片标题不被挤成竖列
