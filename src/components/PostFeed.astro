@@ -63,10 +63,11 @@ const totalCount = allPosts.length;
 </section>
 
 <style>
-  .post-feed { padding: var(--s-16) 0 var(--s-12); }
-  .post-feed__head { margin-bottom: var(--s-8); }
+  .post-feed { padding: var(--s-10) 0; }
+  .post-feed > .container { max-width: var(--max-w-home); }
+  .post-feed__head { margin-bottom: var(--s-5); }
   .post-feed__title {
-    font-size: clamp(28px, 3.5vw, 40px);
+    font-size: clamp(24px, 3vw, 28px);
     font-weight: 500;
     line-height: 1.15;
     margin: 0 0 var(--s-3);
@@ -84,13 +85,15 @@ const totalCount = allPosts.length;
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: var(--s-3);
+    gap: 0;
   }
+  .post-feed__item { border-bottom: 1px solid var(--color-border); }
+  .post-feed__item:first-child { border-top: 1px solid var(--color-border); }
   .post-feed__link {
     display: flex;
     gap: var(--s-4);
-    padding: var(--s-4);
-    border-radius: var(--r-lg);
+    padding: var(--s-5) 0;
+    background-image: none;
     text-decoration: none;
     transition: color var(--t-fast) var(--ease-out),
       background var(--t-fast) var(--ease-out);
@@ -119,7 +122,12 @@ const totalCount = allPosts.length;
   .post-feed__content {
     flex: 1;
     min-width: 0;
+    display: grid;
+    grid-template-columns: 110px minmax(0, 1fr);
+    column-gap: var(--s-5);
+    align-items: baseline;
   }
+  .post-feed__summary { grid-column: 2; }
   .post-feed__date {
     display: block;
     font-size: 13px;
@@ -145,7 +153,7 @@ const totalCount = allPosts.length;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  .post-feed__more { margin-top: var(--s-8); text-align: center; }
+  .post-feed__more { margin-top: var(--s-6); text-align: left; }
   .post-feed__more-link {
     font-size: 15px;
     color: var(--color-text-muted);
@@ -159,6 +167,8 @@ const totalCount = allPosts.length;
   }
 
   @media (max-width: 480px) {
+    .post-feed__content { grid-template-columns: 1fr; }
+    .post-feed__summary { grid-column: 1; }
     .post-feed__thumb { width: 60px; height: 60px; }
   }
 </style>

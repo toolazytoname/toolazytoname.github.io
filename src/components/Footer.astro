@@ -7,7 +7,7 @@ const year = new Date().getFullYear();
 <footer class="footer">
   <div class="container">
     <div class="footer__grid">
-      <div>
+      <div class="footer__identity">
         <p class="footer__brand">lazy</p>
         <p class="footer__tag">weichao.ren</p>
       </div>
@@ -34,7 +34,7 @@ const year = new Date().getFullYear();
         </a>
       </nav>
 
-      <div class="footer__col">
+      <div class="footer__col footer__subscribe">
         <p class="footer__heading">订阅</p>
         <p class="footer__copy">有新文章时走 RSS，没有邮件列表。</p>
         <a href="/posts.xml" class="footer__btn">
@@ -51,8 +51,8 @@ const year = new Date().getFullYear();
 
 <style>
   .footer {
-    margin-top: var(--s-16);
-    padding: var(--s-12) 0 var(--s-8);
+    margin-top: var(--s-8);
+    padding: var(--s-10) 0 var(--s-6);
     border-top: 1px solid var(--color-border);
     background: var(--color-bg);
     color: var(--color-text);
@@ -63,11 +63,12 @@ const year = new Date().getFullYear();
     gap: var(--s-10);
     padding-bottom: var(--s-10);
   }
+  .footer > .container { max-width: var(--max-w-home); }
   .footer__brand {
     font-size: 22px;
     font-weight: 500;
     margin: 0 0 var(--s-2);
-    color: var(--color-text);
+    color: var(--color-accent);
   }
   .footer__tag {
     color: var(--color-text-muted);
@@ -93,6 +94,7 @@ const year = new Date().getFullYear();
     gap: 8px;
     color: var(--color-text-muted);
     font-size: 14px;
+    min-height: 28px;
     transition: color var(--t-fast);
   }
   .footer__col a:hover {
@@ -135,8 +137,8 @@ const year = new Date().getFullYear();
     }
   }
   @media (max-width: 480px) {
-    .footer__grid {
-      grid-template-columns: 1fr;
-    }
+    .footer__identity,
+    .footer__subscribe { grid-column: 1 / -1; }
+    .footer__grid { gap: var(--s-6); }
   }
 </style>

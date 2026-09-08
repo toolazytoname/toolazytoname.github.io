@@ -108,6 +108,8 @@
   /* Layout */
   --max-w: 1200px;
   --max-w-narrow: 720px;
+  --max-w-home: 880px;
+  --shadow-floating: 0 4px 20px rgb(0 0 0 / 10%);
   --max-w-wide: 1440px;
 
   /* Motion */
@@ -322,21 +324,23 @@ html.reveal-ready .reveal:not(.is-visible) {
   right: max(20px, env(safe-area-inset-right, 0px));
   /* Clear safe area; keep clear of Astro bottom toolbar in local dev. */
   bottom: max(72px, env(safe-area-inset-bottom, 0px) + 20px);
-  width: 56px;
-  height: 56px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  background: var(--color-accent);
-  color: var(--color-accent-contrast);
+  background: var(--color-bg);
+  color: var(--color-accent);
+  border: 1px solid var(--color-border-strong);
   display: grid;
   place-items: center;
   z-index: calc(var(--z-fab) + 1);
-  box-shadow: 0 8px 24px rgba(3, 105, 161, 0.35);
+  box-shadow: var(--shadow-floating);
   transition: transform var(--t-fast) var(--ease-out),
     opacity var(--t-fast),
     visibility var(--t-fast);
 }
 .chat-fab:hover {
-  transform: scale(1.06);
+  transform: translateY(-2px);
+  border-color: var(--color-accent);
 }
 .chat-fab:disabled {
   opacity: 0.6;

@@ -9,7 +9,7 @@ const featured = getHomeFeaturedProjects();
   <div class="container container-narrow">
     <header class="home-projects__head reveal">
       <h2 class="home-projects__title" id="home-projects-title">在做的事</h2>
-      <p class="home-projects__lede">已经上线、打开就能用的几件产品。</p>
+      <p class="home-projects__lede">从自己的需要出发，做成可以分享的工具。</p>
     </header>
 
     <ul class="home-projects__list">
@@ -22,6 +22,7 @@ const featured = getHomeFeaturedProjects();
             <article
               class:list={[
                 'home-projects__card',
+                i === 0 && 'home-projects__card--lead',
                 !productImage && 'home-projects__card--text',
                 project.wechat && 'home-projects__card--qr',
               ]}
@@ -88,32 +89,34 @@ const featured = getHomeFeaturedProjects();
 
 <style>
   .home-projects {
-    padding: var(--s-16) 0 var(--s-8);
+    padding: var(--s-6) 0 var(--s-8);
   }
+  .home-projects > .container { max-width: var(--max-w-home); }
   .home-projects__head {
-    margin-bottom: var(--s-8);
+    margin-bottom: var(--s-5);
   }
   .home-projects__title {
     margin: 0 0 var(--s-3);
-    font-size: clamp(28px, 3.5vw, 40px);
+    font-size: clamp(24px, 3vw, 28px);
     font-weight: 500;
     letter-spacing: -0.01em;
     color: var(--color-text);
   }
   .home-projects__lede {
     margin: 0;
-    font-size: 17px;
+    font-size: 15px;
     color: var(--color-text-muted);
   }
   .home-projects__list {
     list-style: none;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--s-4);
   }
   .home-projects__card {
+    height: 100%;
     display: grid;
     grid-template-columns: 1fr;
     align-items: stretch;
@@ -127,16 +130,23 @@ const featured = getHomeFeaturedProjects();
       background var(--t-fast) var(--ease-out);
   }
   .home-projects__card--qr {
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1fr);
   }
   .home-projects__link {
     display: grid;
-    grid-template-columns: 240px 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: var(--s-5);
     min-width: 0;
     text-decoration: none;
     color: inherit;
+    background-image: none;
   }
+  .home-projects__item:first-child { grid-column: 1 / -1; }
+  .home-projects__item { min-width: 0; }
+  .home-projects__card--lead .home-projects__link { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); }
+  .home-projects__card--lead { padding: var(--s-5); }
+  .home-projects__card--lead .home-projects__name { font-size: 23px; }
+  .home-projects__card--lead .home-projects__summary { font-size: 15px; line-height: 1.7; }
   .home-projects__link:has(.home-projects__img--qr) {
     grid-template-columns: 104px 1fr;
   }
@@ -149,8 +159,9 @@ const featured = getHomeFeaturedProjects();
   }
   .home-projects__img {
     width: 100%;
-    height: 180px;
-    object-fit: cover;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: contain;
     border-radius: var(--r-md);
     background: var(--color-bg-subtle);
   }
@@ -229,7 +240,7 @@ const featured = getHomeFeaturedProjects();
   }
   .home-projects__more {
     margin-top: var(--s-6);
-    text-align: center;
+    text-align: left;
   }
   .home-projects__more-link {
     font-size: 15px;
@@ -240,6 +251,9 @@ const featured = getHomeFeaturedProjects();
   }
 
   @media (max-width: 600px) {
+    .home-projects__list { grid-template-columns: 1fr; }
+    .home-projects__card--lead { padding: var(--s-4); }
+    .home-projects__card--lead .home-projects__link { grid-template-columns: 1fr; }
     .home-projects__card,
     .home-projects__card--qr {
       grid-template-columns: 1fr;
@@ -250,7 +264,7 @@ const featured = getHomeFeaturedProjects();
       grid-template-columns: 1fr;
     }
     .home-projects__img {
-      height: 200px;
+      height: auto;
     }
     .home-projects__img--qr {
       width: 104px;

@@ -31,17 +31,18 @@ import PostFeed from '@components/PostFeed.astro';
 
 <style>
   .closing {
-    padding: var(--s-20) 0 var(--s-16);
+    padding: var(--s-8) 0 var(--s-12);
     color: var(--color-text);
-    text-align: center;
+    text-align: left;
   }
   .closing__inner {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    max-width: var(--max-w-home);
   }
   .closing__title {
-    font-size: clamp(28px, 4vw, 40px);
+    font-size: clamp(24px, 3vw, 28px);
     margin: 0 0 var(--s-4);
     font-weight: 500;
     letter-spacing: -0.02em;
