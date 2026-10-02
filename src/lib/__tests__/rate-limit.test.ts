@@ -2,7 +2,7 @@
 // We can't easily test Vercel-bound middleware, but the bucket logic is pure.
 
 import { describe, it, expect, beforeEach } from 'vitest';
-import { rateLimit, clientIp } from '../rate-limit';
+import { rateLimit, clientIp, createRateLimiter, quotaIp } from '../rate-limit';
 
 describe('rate-limit', () => {
   beforeEach(() => {
@@ -59,5 +59,44 @@ describe('clientIp', () => {
   it('falls back to anonymous when no headers', () => {
     const h = new Headers();
     expect(clientIp(h)).toBe('anonymous');
+  });
+});
+describe('bounded rate limiter', () => {
+  it('resets exactly at the window boundary', () => {
+    let time = 0;
+    const limiter = createRateLimiter({ limit: 1, windowMs: 100, now: () => time });
+    expect(limiter('a').allowed).toBe(true);
+    expect(limiter('a').allowed).toBe(false);
+    time = 100;
+    expect(limiter('a').allowed).toBe(true);
+  });
+  it('fails closed at capacity without evicting active clients', () => {
+    let time = 0;
+    const limiter = createRateLimiter({ limit: 1, maxBuckets: 2, windowMs: 100, now: () => time });
+    limiter('a'); limiter('b');
+    expect(limiter('c').allowed).toBe(false);
+    expect(limiter('a').allowed).toBe(false);
+    time = 100;
+    expect(limiter('c').allowed).toBe(true);
+  });
+  it('accepts IPv6 but does not store arbitrary header text', () => {
+    expect(clientIp(new Headers({ 'x-forwarded-for': '2001:db8::1' }))).toBe('2001:db8:0:0::/64');
+    expect(clientIp(new Headers({ 'x-forwarded-for': 'invalid'.repeat(100) }))).toBe('anonymous');
+  });
+});
+
+
+describe('visitor quota identity', () => {
+  it('groups IPv6 privacy addresses and equivalent encodings by /64', () => {
+    expect(quotaIp('2001:db8::1')).toBe(quotaIp('2001:0DB8:0000:0000:ffff:abcd:1234:5678'));
+    expect(quotaIp('2001:db8:1::1')).not.toBe(quotaIp('2001:db8:2::1'));
+  });
+  it('does not grant another quota for IPv4-mapped IPv6', () => {
+    expect(quotaIp('::ffff:192.0.2.1')).toBe(quotaIp('192.0.2.1'));
+    expect(quotaIp('::ffff:c000:201')).toBe('192.0.2.1');
+  });
+  it('rejects zone identifiers and arbitrary input', () => {
+    expect(quotaIp('fe80::1%eth0')).toBe('anonymous');
+    expect(quotaIp('not-an-ip')).toBe('anonymous');
   });
 });

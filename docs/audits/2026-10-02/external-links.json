@@ -1,0 +1,4217 @@
+{
+  "checkedAt": "2026-10-02T10:34:37.423879+00:00",
+  "uniqueUrls": 413,
+  "summary": {
+    "reachable": 250,
+    "broken": 58,
+    "indeterminate": 105
+  },
+  "results": [
+    {
+      "url": "http://91wii.com/thread-73373-1-1.html",
+      "finalUrl": "https://91wii.com/thread-73373-1-1.html",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 6788,
+      "pages": [
+        "hack/your/life/2016/12/08/WiiU-crack/index.html"
+      ]
+    },
+    {
+      "url": "http://alias.co",
+      "finalUrl": "https://alias.co/",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 3179,
+      "pages": [
+        "posts-legacy/Git-Cheet-Sheet/freemind.html"
+      ]
+    },
+    {
+      "url": "http://arondight.me/2016/02/17/%E4%BD%BF%E7%94%A8SSH%E5%8F%8D%E5%90%91%E9%9A%A7%E9%81%93%E8%BF%9B%E8%A1%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/",
+      "finalUrl": "https://arondight.me/2016/02/17/%E4%BD%BF%E7%94%A8SSH%E5%8F%8D%E5%90%91%E9%9A%A7%E9%81%93%E8%BF%9B%E8%A1%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 3067,
+      "pages": [
+        "hack/your/life/2017/08/07/Raspberry-Pi/index.html"
+      ]
+    },
+    {
+      "url": "http://bbs.duowan.com/thread-44512267-1-1.html",
+      "finalUrl": "http://bbs.duowan.com/thread-44512267-1-1.html",
+      "status": 502,
+      "classification": "indeterminate",
+      "elapsedMs": 1055,
+      "pages": [
+        "hack/your/life/2016/12/08/WiiU-crack/index.html"
+      ]
+    },
+    {
+      "url": "http://bbs.iosre.com/t/topic/3199",
+      "classification": "indeterminate",
+      "error": "URLError",
+      "elapsedMs": 988,
+      "pages": [
+        "hack/your/life/2016/11/25/Wechat-Export/index.html"
+      ]
+    },
+    {
+      "url": "http://blog.csdn.net/teng_ontheway/article/details/47023119",
+      "finalUrl": "https://blog.csdn.net:443/teng_ontheway/article/details/47023119",
+      "status": 521,
+      "classification": "indeterminate",
+      "elapsedMs": 2181,
+      "pages": [
+        "ios/2016/12/07/Optimizing-In-App-Purchases/index.html"
+      ]
+    },
+    {
+      "url": "http://blog.devtang.com/2014/05/25/use-cocoapod-to-manage-ios-lib-dependency/",
+      "finalUrl": "https://blog.devtang.com/2014/05/25/use-cocoapod-to-manage-ios-lib-dependency/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1809,
+      "pages": [
+        "ios/2018/06/23/private-podspec/index.html"
+      ]
+    },
+    {
+      "url": "http://blog.wtlucky.com/blog/2015/02/26/create-private-podspec/",
+      "finalUrl": "http://blog.wtlucky.com/blog/2015/02/26/create-private-podspec/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 2370,
+      "pages": [
+        "ios/2018/06/23/private-podspec/index.html"
+      ]
+    },
+    {
+      "url": "http://btsynckeys.com",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 606,
+      "pages": [
+        "tool/2016/11/05/Resilio-Sync/index.html"
+      ]
+    },
+    {
+      "url": "http://bynomial.com/blog/?p=74",
+      "finalUrl": "http://bynomial.com/blog/?p=74",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 3622,
+      "pages": [
+        "ios/2016/08/17/ResponderChain/index.html"
+      ]
+    },
+    {
+      "url": "http://c.biancheng.net/view/2751.html",
+      "finalUrl": "https://m.biancheng.net/view/2751.html",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 4164,
+      "pages": [
+        "ios/2019/08/01/package-shell-update/index.html"
+      ]
+    },
+    {
+      "url": "http://chengandpeng.github.io/2016/05/13/wiiuhack/",
+      "finalUrl": "http://chengandpeng.github.io/2016/05/13/wiiuhack/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1048,
+      "pages": [
+        "hack/your/life/2016/12/08/WiiU-crack/index.html"
+      ]
+    },
+    {
+      "url": "http://cnfeat.com/blog/2014/05/10/how-to-build-a-blog/",
+      "finalUrl": "https://www.cnfeat.com/blog/2014/05/10/how-to-build-a-blog/",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 6557,
+      "pages": [
+        "hack/your/life/2016/05/19/welcome-to-jekyll/index.html"
+      ]
+    },
+    {
+      "url": "http://codingdict.com/article/22000",
+      "finalUrl": "http://codingdict.com/article/22000",
+      "status": 444,
+      "classification": "indeterminate",
+      "elapsedMs": 3005,
+      "pages": [
+        "ios/2019/02/14/flutter-Get-Started/index.html"
+      ]
+    },
+    {
+      "url": "http://corotata.com/2015/11/17/2015-11-17-OC%E6%9E%9A%E4%B8%BE%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%83%B3%E6%B3%95/",
+      "finalUrl": "http://corotata.com/2015/11/17/2015-11-17-OC%E6%9E%9A%E4%B8%BE%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%83%B3%E6%B3%95/",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 1882,
+      "pages": [
+        "ios/2019/08/04/enumatator-and-string/index.html"
+      ]
+    },
+    {
+      "url": "http://detail.zol.com.cn/series/31/223/param_23100_0_1.html",
+      "finalUrl": "https://detail.zol.com.cn/series/31/223/param_23100_0_1.html",
+      "status": 503,
+      "classification": "indeterminate",
+      "elapsedMs": 3371,
+      "pages": [
+        "ios/2019/11/01/Gen10-NAS/index.html"
+      ]
+    },
+    {
+      "url": "http://down.tech.sina.com.cn/page/43589.html",
+      "finalUrl": "http://down.tech.sina.com.cn/page/43589.html",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 2229,
+      "pages": [
+        "hack/your/life/2016/12/08/WiiU-crack/index.html"
+      ]
+    },
+    {
+      "url": "http://elinux.org/RPi_SD_cards",
+      "finalUrl": "https://elinux.org/RPi_SD_cards",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 3767,
+      "pages": [
+        "hack/your/life/2017/08/07/Raspberry-Pi/index.html"
+      ]
+    },
+    {
+      "url": "http://evilcos.me/security_skill_tree_basic/index.html",
+      "finalUrl": "https://evilcos.me/security_skill_tree_basic/index.html",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 2046,
+      "pages": [
+        "hack/your/life/2017/06/16/Hacker-Search-Engines/index.html"
+      ]
+    },
+    {
+      "url": "http://gitlab.companydomain.com/WP/Mobile/IOS/BPCarModelLib.git",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 604,
+      "pages": [
+        "ios/2018/12/27/package-jekins/index.html"
+      ]
+    },
+    {
+      "url": "http://gitlab.companydomain.com/WP/Mobile/IOS/BPCarServiceLib.git",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 5,
+      "pages": [
+        "ios/2018/12/27/package-jekins/index.html"
+      ]
+    },
+    {
+      "url": "http://gitlab.companydomain.com/WP/Mobile/IOS/BPFlutter.git",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 2,
+      "pages": [
+        "ios/2018/12/27/package-jekins/index.html"
+      ]
+    },
+    {
+      "url": "http://gitlab.companydomain.com/WP/Mobile/IOS/BPKCommumityLib.git",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 1,
+      "pages": [
+        "ios/2018/12/27/package-jekins/index.html"
+      ]
+    },
+    {
+      "url": "http://gitlab.companydomain.com/WP/Mobile/IOS/BPLogininLib.git",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 2,
+      "pages": [
+        "ios/2018/12/27/package-jekins/index.html"
+      ]
+    },
+    {
+      "url": "http://gitlab.companydomain.com/WP/Mobile/IOS/BPMessageCenterLib.git",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 4,
+      "pages": [
+        "ios/2018/12/27/package-jekins/index.html"
+      ]
+    },
+    {
+      "url": "http://gitlab.companydomain.com/WP/Mobile/IOS/BPNewsLib.git",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 7,
+      "pages": [
+        "ios/2018/12/27/package-jekins/index.html"
+      ]
+    },
+    {
+      "url": "http://gitlab.companydomain.com/WP/Mobile/IOS/BPPersonalCenterLib.git",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 2,
+      "pages": [
+        "ios/2018/12/27/package-jekins/index.html"
+      ]
+    },
+    {
+      "url": "http://gitlab.companydomain.com/WP/Mobile/IOS/BPPushLib.git",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 4,
+      "pages": [
+        "ios/2018/12/27/package-jekins/index.html"
+      ]
+    },
+    {
+      "url": "http://gitlab.companydomain.com/WP/Mobile/IOS/BPSearchLib.git",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 1,
+      "pages": [
+        "ios/2018/12/27/package-jekins/index.html"
+      ]
+    },
+    {
+      "url": "http://gitlab.companydomain.com/WP/Mobile/IOS/BPTaocheLib.git",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 1,
+      "pages": [
+        "ios/2018/12/27/package-jekins/index.html"
+      ]
+    },
+    {
+      "url": "http://gitlab.companydomain.com/WP/Mobile/IOS/BPVShortLib.git",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 0,
+      "pages": [
+        "ios/2018/12/27/package-jekins/index.html"
+      ]
+    },
+    {
+      "url": "http://gitlab.companydomain.com/WP/Mobile/IOS/BPWelfareLib",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 0,
+      "pages": [
+        "ios/2018/12/27/package-jekins/index.html"
+      ]
+    },
+    {
+      "url": "http://gitlab.companydomain.com/WP/Mobile/IOS/BPYCommentLib.git",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 1,
+      "pages": [
+        "ios/2018/12/27/package-jekins/index.html"
+      ]
+    },
+    {
+      "url": "http://grams7enufi7jmdl.onion/helix",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 0,
+      "pages": [
+        "hack/your/life/2017/06/16/learn-BitCoin/index.html"
+      ]
+    },
+    {
+      "url": "http://gw.iripplechina.com/course/",
+      "classification": "indeterminate",
+      "error": "TimeoutError",
+      "elapsedMs": 8847,
+      "pages": [
+        "hack/your/life/2017/06/16/learn-BitCoin/index.html"
+      ]
+    },
+    {
+      "url": "http://home.bdqn.cn/thread-116827-1-1.html",
+      "finalUrl": "http://www.bdqn.cn/index/error",
+      "status": 403,
+      "classification": "indeterminate",
+      "elapsedMs": 1949,
+      "pages": [
+        "ios/2019/08/01/vest-package/index.html"
+      ]
+    },
+    {
+      "url": "http://jianshu.com/p/77b6869d648e",
+      "finalUrl": "https://www.jianshu.com/p/77b6869d648e",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1591,
+      "pages": [
+        "ios/2019/08/01/vest-package/index.html"
+      ]
+    },
+    {
+      "url": "http://json.parser.online.fr",
+      "finalUrl": "http://json.parser.online.fr",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1211,
+      "pages": [
+        "tool/2016/08/08/json-parser-online/index.html"
+      ]
+    },
+    {
+      "url": "http://kb.parallels.com/en/113394",
+      "finalUrl": "http://kb.parallels.com/en/113394",
+      "status": 400,
+      "classification": "indeterminate",
+      "elapsedMs": 3339,
+      "pages": [
+        "hack/your/life/2017/05/25/WIFI-crack/index.html"
+      ]
+    },
+    {
+      "url": "http://linuxwireless.org/",
+      "classification": "indeterminate",
+      "error": "ValueError",
+      "elapsedMs": 616,
+      "pages": [
+        "hack/your/life/2017/05/26/MDK3-Documentation/index.html"
+      ]
+    },
+    {
+      "url": "http://littleroach110.net/2018/05/30/Personal-NAS-Server.html",
+      "finalUrl": "http://littleroach110.net/2018/05/30/Personal-NAS-Server.html",
+      "status": 403,
+      "classification": "indeterminate",
+      "elapsedMs": 3139,
+      "pages": [
+        "ios/2019/11/01/Gen10-NAS/index.html"
+      ]
+    },
+    {
+      "url": "http://martiancraft.com/blog/2014/09/vector-images-xcode6/",
+      "finalUrl": "http://martiancraft.com/blog/2014/09/vector-images-xcode6/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1713,
+      "pages": [
+        "ios/2019/09/19/iOS-App-thin/index.html"
+      ]
+    },
+    {
+      "url": "http://merowing.info/2013/03/overlaying-application-version-on-top-of-your-icon/",
+      "finalUrl": "https://merowing.info/2013/03/overlaying-application-version-on-top-of-your-icon/",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 2750,
+      "pages": [
+        "ios/2018/10/03/iOS-Watermark-Icon/index.html"
+      ]
+    },
+    {
+      "url": "http://mirrors.ustc.edu.cn/kali",
+      "finalUrl": "http://mirrors.ustc.edu.cn/kali/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1743,
+      "pages": [
+        "hack/your/life/2017/05/25/WIFI-crack/index.html"
+      ]
+    },
+    {
+      "url": "http://mp.weixin.qq.com/s/yRsH0mgcWkqQwJcCL9VnmA",
+      "finalUrl": "https://mp.weixin.qq.com/mp/wappoc_appmsgcaptcha?poc_token=HPSHv2qjJt3zJ2FbFcdunyqgZdtgxNRSMMgKZKz2&target_url=https%3A%2F%2Fmp.weixin.qq.com%2Fs%2FyRsH0mgcWkqQwJcCL9VnmA",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1078,
+      "pages": [
+        "python/2017/06/08/scrapy-Example/index.html"
+      ]
+    },
+    {
+      "url": "http://mp.weixin.qq.com/s?__biz=MzA3NTEzMTUwNA==&mid=210457598&idx=1&sn=5b700b7e2f07ddf77a5bf09b4ea98bec&scene=18",
+      "finalUrl": "https://mp.weixin.qq.com/mp/wappoc_appmsgcaptcha?poc_token=HPSHv2qjyCoLOLS1p6JW-jlF3wMv9v8pI1r7xJ3D&target_url=https%3A%2F%2Fmp.weixin.qq.com%2Fs%3F__biz%3DMzA3NTEzMTUwNA%3D%3D%26mid%3D210457598%26idx%3D1%26sn%3D5b700b7e2f07ddf77a5bf09b4ea98bec%26scene%3D18",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 859,
+      "pages": [
+        "hack/your/life/2016/05/29/wall/index.html"
+      ]
+    },
+    {
+      "url": "http://news.cntv.cn/2014/03/27/VIDE1395889399816869.shtml",
+      "finalUrl": "http://news.cntv.cn/2014/03/27/VIDE1395889399816869.shtml",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1001,
+      "pages": [
+        "hack/your/life/2017/06/16/Hacker-Search-Engines/index.html"
+      ]
+    },
+    {
+      "url": "http://osxdaily.com/2011/09/29/start-an-ftp-or-sftp-server-in-mac-os-x-lion/",
+      "finalUrl": "https://osxdaily.com/2011/09/29/start-an-ftp-or-sftp-server-in-mac-os-x-lion/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 2847,
+      "pages": [
+        "hack/your/life/2016/08/13/start-an-ftp-or-sftp-server-in-mac-os/index.html"
+      ]
+    },
+    {
+      "url": "http://pan.baidu.com/s/1cMLqdo",
+      "finalUrl": "http://pan.baidu.com/s/1cMLqdo",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1916,
+      "pages": [
+        "hack/your/life/2016/12/08/WiiU-crack/index.html"
+      ]
+    },
+    {
+      "url": "http://pan.baidu.com/s/1hrW2at2",
+      "finalUrl": "http://pan.baidu.com/s/1hrW2at2",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1903,
+      "pages": [
+        "hack/your/life/2016/12/08/WiiU-crack/index.html"
+      ]
+    },
+    {
+      "url": "http://ryantang.me/blog/2013/12/07/ios-event-dispatch-1/",
+      "classification": "indeterminate",
+      "error": "TimeoutError",
+      "elapsedMs": 14372,
+      "pages": [
+        "ios/2016/08/17/ResponderChain/index.html"
+      ]
+    },
+    {
+      "url": "http://rykap.com/about/",
+      "finalUrl": "https://www.rykap.com/about/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 5818,
+      "pages": [
+        "ios/2019/08/10/source-synchronized/index.html"
+      ]
+    },
+    {
+      "url": "http://rykap.com/objective-c/2015/05/09/synchronized.html",
+      "finalUrl": "https://www.rykap.com/objective-c/2015/05/09/synchronized.html",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 5604,
+      "pages": [
+        "ios/2019/08/10/source-synchronized/index.html"
+      ]
+    },
+    {
+      "url": "http://smnh.me/hit-testing-in-ios/",
+      "finalUrl": "https://smnh.me/hit-testing-in-ios",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 4102,
+      "pages": [
+        "ios/2016/08/17/ResponderChain/index.html"
+      ]
+    },
+    {
+      "url": "http://stackoverflow.com/questions/22460058/how-is-a-dsym-file-created",
+      "finalUrl": "https://stackoverflow.com/questions/22460058/how-is-a-dsym-file-created",
+      "status": 403,
+      "classification": "indeterminate",
+      "elapsedMs": 5119,
+      "pages": [
+        "ios/2016/07/23/symbolicatecrash/index.html"
+      ]
+    },
+    {
+      "url": "http://stackoverflow.com/questions/4961386/event-handling-for-ios-how-hittestwithevent-and-pointinsidewithevent-are-r",
+      "finalUrl": "https://stackoverflow.com/questions/4961386/event-handling-for-ios-how-hittestwithevent-and-pointinsidewithevent-are-r",
+      "status": 403,
+      "classification": "indeterminate",
+      "elapsedMs": 4699,
+      "pages": [
+        "ios/2016/08/17/ResponderChain/index.html"
+      ]
+    },
+    {
+      "url": "http://stackoverflow.com/questions/8346100/uibutton-cant-be-touched-while-animated-with-uiview-animatewithduration/8346178",
+      "finalUrl": "https://stackoverflow.com/questions/8346100/uibutton-cant-be-touched-while-animated-with-uiview-animatewithduration/8346178",
+      "status": 403,
+      "classification": "indeterminate",
+      "elapsedMs": 5612,
+      "pages": [
+        "ios/2016/08/17/ResponderChain/index.html"
+      ]
+    },
+    {
+      "url": "http://stackoverflow.com/questions/9523981/uiviewanimationoptionallowuserinteraction-not-working",
+      "finalUrl": "https://stackoverflow.com/questions/9523981/uiviewanimationoptionallowuserinteraction-not-working",
+      "status": 403,
+      "classification": "indeterminate",
+      "elapsedMs": 3927,
+      "pages": [
+        "ios/2016/08/17/ResponderChain/index.html"
+      ]
+    },
+    {
+      "url": "http://tldp.org/LDP/abs/html/",
+      "finalUrl": "https://tldp.org/LDP/abs/html/",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 2930,
+      "pages": [
+        "hack/your/life/2016/07/04/HackCloudDrive/index.html"
+      ]
+    },
+    {
+      "url": "http://username.github.io",
+      "finalUrl": "http://username.github.io",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 1156,
+      "pages": [
+        "hack/your/life/2016/05/19/welcome-to-jekyll/index.html"
+      ]
+    },
+    {
+      "url": "http://useyourloaf.com/blog/using-a-launch-screen-storyboard/",
+      "finalUrl": "https://useyourloaf.com/blog/using-a-launch-screen-storyboard/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 2371,
+      "pages": [
+        "ios/2019/09/19/iOS-App-thin/index.html"
+      ]
+    },
+    {
+      "url": "http://wereadteam.github.io/2016/02/22/MLeaksFinder/",
+      "finalUrl": "http://wereadteam.github.io/2016/02/22/MLeaksFinder/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1028,
+      "pages": [
+        "ios/2016/07/23/symbolicatecrash/index.html"
+      ]
+    },
+    {
+      "url": "http://wiiu.91wii.com/index540-551.html",
+      "finalUrl": "http://wiiu.91wii.com/index540-551.html",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 3403,
+      "pages": [
+        "hack/your/life/2016/12/08/WiiU-crack/index.html"
+      ]
+    },
+    {
+      "url": "http://www.8btc.com/bitcoin-story",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 927,
+      "pages": [
+        "hack/your/life/2017/06/16/learn-BitCoin/index.html"
+      ]
+    },
+    {
+      "url": "http://www.8btc.com/wiki/bitcoin-a-peer-to-peer-electronic-cash-system",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 780,
+      "pages": [
+        "hack/your/life/2017/06/16/learn-BitCoin/index.html"
+      ]
+    },
+    {
+      "url": "http://www.8btc.com/wiki/bitcoin-basic-concepts",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 780,
+      "pages": [
+        "hack/your/life/2017/06/16/learn-BitCoin/index.html"
+      ]
+    },
+    {
+      "url": "http://www.8btc.com/wiki/bitcoin-technical-principles",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 4,
+      "pages": [
+        "hack/your/life/2017/06/16/learn-BitCoin/index.html"
+      ]
+    },
+    {
+      "url": "http://www.8btc.com/wiki/bitcoin-wallet-safe-use-perfect-backup",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 9,
+      "pages": [
+        "hack/your/life/2017/06/16/learn-BitCoin/index.html"
+      ]
+    },
+    {
+      "url": "http://www.8btc.com/wiki/questions-answers",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 9,
+      "pages": [
+        "hack/your/life/2017/06/16/learn-BitCoin/index.html"
+      ]
+    },
+    {
+      "url": "http://www.8btc.com/wiki/term",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 15,
+      "pages": [
+        "hack/your/life/2017/06/16/learn-BitCoin/index.html"
+      ]
+    },
+    {
+      "url": "http://www.91wii.com/forum-117-1.html",
+      "finalUrl": "https://www.91wii.com/forum-117-1.html",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 6531,
+      "pages": [
+        "hack/your/life/2016/12/08/WiiU-crack/index.html"
+      ]
+    },
+    {
+      "url": "http://www.91wii.com/thread-69775-1-1.html",
+      "finalUrl": "https://www.91wii.com/thread-69775-1-1.html",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 6335,
+      "pages": [
+        "hack/your/life/2016/12/08/WiiU-crack/index.html"
+      ]
+    },
+    {
+      "url": "http://www.91wii.com/thread-73242-1-1.html",
+      "finalUrl": "https://www.91wii.com/thread-73242-1-1.html",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 5822,
+      "pages": [
+        "hack/your/life/2016/12/08/WiiU-crack/index.html"
+      ]
+    },
+    {
+      "url": "http://www.91wii.com/thread-73242-1-2.html",
+      "finalUrl": "https://www.91wii.com/thread-73242-1-2.html",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 5849,
+      "pages": [
+        "hack/your/life/2016/12/08/WiiU-crack/index.html"
+      ]
+    },
+    {
+      "url": "http://www.91wii.com/thread-73247-1-1.html",
+      "finalUrl": "https://www.91wii.com/thread-73247-1-1.html",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 4492,
+      "pages": [
+        "hack/your/life/2016/12/08/WiiU-crack/index.html"
+      ]
+    },
+    {
+      "url": "http://www.91wii.com/thread-73798-1-6.html",
+      "finalUrl": "https://www.91wii.com/thread-73798-1-6.html",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 5919,
+      "pages": [
+        "hack/your/life/2016/12/08/WiiU-crack/index.html"
+      ]
+    },
+    {
+      "url": "http://www.91wii.com/thread-73817-1-1.html",
+      "finalUrl": "https://www.91wii.com/thread-73817-1-1.html",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 4342,
+      "pages": [
+        "hack/your/life/2016/12/08/WiiU-crack/index.html"
+      ]
+    },
+    {
+      "url": "http://www.91wii.com/thread-73827-1-6.html",
+      "finalUrl": "https://www.91wii.com/thread-73827-1-6.html",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 4556,
+      "pages": [
+        "hack/your/life/2016/12/08/WiiU-crack/index.html"
+      ]
+    },
+    {
+      "url": "http://www.91wii.com/thread-73937-1-1.html",
+      "finalUrl": "https://www.91wii.com/thread-73937-1-1.html",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 5329,
+      "pages": [
+        "hack/your/life/2016/12/08/WiiU-crack/index.html"
+      ]
+    },
+    {
+      "url": "http://www.91wii.com/thread-74146-1-1.html",
+      "finalUrl": "https://www.91wii.com/thread-74146-1-1.html",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 5509,
+      "pages": [
+        "hack/your/life/2016/12/08/WiiU-crack/index.html"
+      ]
+    },
+    {
+      "url": "http://www.aircrack-ng.org/",
+      "finalUrl": "http://www.aircrack-ng.org/",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1005,
+      "pages": [
+        "hack/your/life/2017/05/26/MDK3-Documentation/index.html"
+      ]
+    },
+    {
+      "url": "http://www.aircrack-ng.org/doku.php?id=airmon-ng",
+      "finalUrl": "http://www.aircrack-ng.org/doku.php?id=airmon-ng",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 472,
+      "pages": [
+        "hack/your/life/2017/05/26/MDK3-Documentation/index.html"
+      ]
+    },
+    {
+      "url": "http://www.aircrack-ng.org/doku.php?id=compat-wireless",
+      "finalUrl": "http://www.aircrack-ng.org/doku.php?id=compat-wireless",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 510,
+      "pages": [
+        "hack/your/life/2017/05/26/MDK3-Documentation/index.html"
+      ]
+    },
+    {
+      "url": "http://www.aircrack-ng.org/doku.php?id=compatibility_drivers",
+      "finalUrl": "http://www.aircrack-ng.org/doku.php?id=compatibility_drivers",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1557,
+      "pages": [
+        "hack/your/life/2017/05/26/MDK3-Documentation/index.html"
+      ]
+    },
+    {
+      "url": "http://www.baidu.com",
+      "finalUrl": "http://www.baidu.com",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 731,
+      "pages": [
+        "hack/your/life/2017/05/16/newifi/index.html"
+      ]
+    },
+    {
+      "url": "http://www.bbc.com/news/technology-23693460",
+      "finalUrl": "https://www.bbc.com/news/technology-23693460",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 19118,
+      "pages": [
+        "hack/your/life/2017/06/16/Hacker-Search-Engines/index.html"
+      ]
+    },
+    {
+      "url": "http://www.cloudchou.com/work/post-983.html",
+      "finalUrl": "https://www.hugedomains.com/domain_profile.cfm?d=cloudchou.com",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 3325,
+      "pages": [
+        "hack/your/life/2017/05/16/newifi/index.html"
+      ]
+    },
+    {
+      "url": "http://www.cnblogs.com/cxun/p/4338643.html",
+      "finalUrl": "https://www.cnblogs.com/cxun/p/4338643.html",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1636,
+      "pages": [
+        "hack/your/life/2016/11/25/Wechat-Export/index.html"
+      ]
+    },
+    {
+      "url": "http://www.cnblogs.com/qiyeboy/p/5825525.html",
+      "finalUrl": "https://www.cnblogs.com/qiyeboy/p/5825525.html",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1003,
+      "pages": [
+        "hack/your/life/2017/05/26/WIFI-crack-PIN/index.html"
+      ]
+    },
+    {
+      "url": "http://www.cnblogs.com/smileEvday/p/Crash1.html",
+      "finalUrl": "https://www.cnblogs.com/smileEvday/p/Crash1.html",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 656,
+      "pages": [
+        "ios/2016/07/23/symbolicatecrash/index.html"
+      ]
+    },
+    {
+      "url": "http://www.cocoachina.com/articles/7327",
+      "classification": "indeterminate",
+      "error": "RemoteDisconnected",
+      "elapsedMs": 5667,
+      "pages": [
+        "ios/2019/09/19/iOS-App-thin/index.html"
+      ]
+    },
+    {
+      "url": "http://www.cocoachina.com/industry/20140514/8418.html",
+      "classification": "indeterminate",
+      "error": "RemoteDisconnected",
+      "elapsedMs": 5648,
+      "pages": [
+        "ios/2016/07/23/symbolicatecrash/index.html"
+      ]
+    },
+    {
+      "url": "http://www.csdn.net/article/2015-08-04/2825369",
+      "finalUrl": "https://www.csdn.net:443/article/2015-08-04/2825369",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 2351,
+      "pages": [
+        "ios/2016/07/23/symbolicatecrash/index.html"
+      ]
+    },
+    {
+      "url": "http://www.diveintopython3.net",
+      "finalUrl": "https://diveintopython3.net/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 7292,
+      "pages": [
+        "python/2017/06/08/scrapy-Example/index.html"
+      ]
+    },
+    {
+      "url": "http://www.diveintopython3.net/index.html",
+      "finalUrl": "https://diveintopython3.net/index.html",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 5109,
+      "pages": [
+        "python/2017/06/15/learn-python/index.html"
+      ]
+    },
+    {
+      "url": "http://www.freebuf.com/articles/web/90887.html",
+      "finalUrl": "https://www.freebuf.com/blank",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 2480,
+      "pages": [
+        "hack/your/life/2017/06/16/Hacker-Search-Engines/index.html"
+      ]
+    },
+    {
+      "url": "http://www.freebuf.com/news/89285.html",
+      "finalUrl": "https://www.freebuf.com/blank",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 513,
+      "pages": [
+        "hack/your/life/2017/06/16/Hacker-Search-Engines/index.html"
+      ]
+    },
+    {
+      "url": "http://www.ibm.com/developerworks/cn/linux/l-cn-sshforward/index.html",
+      "finalUrl": "https://developer.ibm.com/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 5329,
+      "pages": [
+        "hack/your/life/2016/05/29/wall/index.html"
+      ]
+    },
+    {
+      "url": "http://www.imagemagick.org/script/convert.php",
+      "finalUrl": "https://imagemagick.org/script/convert.php/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 2803,
+      "pages": [
+        "ios/2018/10/03/iOS-Watermark-Icon/index.html"
+      ]
+    },
+    {
+      "url": "http://www.kb.cert.org/vuls/id/800094",
+      "finalUrl": "https://www.kb.cert.org/vuls/id/800094",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1573,
+      "pages": [
+        "hack/your/life/2017/06/16/Hacker-Search-Engines/index.html"
+      ]
+    },
+    {
+      "url": "http://www.paopaoche.net/tv/100192.html",
+      "finalUrl": "http://www.paopaoche.net/tv/100192.html",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 2091,
+      "pages": [
+        "hack/your/life/2016/12/08/WiiU-crack/index.html"
+      ]
+    },
+    {
+      "url": "http://www.paopaoche.net/tv/100197.html",
+      "finalUrl": "http://www.paopaoche.net/tv/100197.html",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 1633,
+      "pages": [
+        "hack/your/life/2016/12/08/WiiU-crack/index.html"
+      ]
+    },
+    {
+      "url": "http://www.paopaoche.net/tv/110162.html",
+      "finalUrl": "http://www.paopaoche.net/tv/110162.html",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 1053,
+      "pages": [
+        "hack/your/life/2016/12/08/WiiU-crack/index.html"
+      ]
+    },
+    {
+      "url": "http://www.pchou.info/ssgithubPage/2014-07-04-build-github-blog-page-08.html",
+      "classification": "indeterminate",
+      "error": "RemoteDisconnected",
+      "elapsedMs": 3401,
+      "pages": [
+        "hack/your/life/2016/05/19/welcome-to-jekyll/index.html"
+      ]
+    },
+    {
+      "url": "http://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html",
+      "finalUrl": "http://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1546,
+      "pages": [
+        "ios/2019/11/01/Gen10-NAS/index.html"
+      ]
+    },
+    {
+      "url": "http://www.tangshuang.net/2689.html",
+      "finalUrl": "https://www.tangshuang.net/2689",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 2875,
+      "pages": [
+        "hack/your/life/2017/06/16/learn-BitCoin/index.html"
+      ]
+    },
+    {
+      "url": "http://www.tangshuang.net/2691.html",
+      "finalUrl": "https://www.tangshuang.net/2691",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 2875,
+      "pages": [
+        "hack/your/life/2017/06/16/learn-BitCoin/index.html"
+      ]
+    },
+    {
+      "url": "http://www.tutorialspoint.com/unix/unix-shell.htm",
+      "finalUrl": "http://www.tutorialspoint.com/unix/unix-shell.htm",
+      "status": 403,
+      "classification": "indeterminate",
+      "elapsedMs": 1856,
+      "pages": [
+        "hack/your/life/2016/07/04/HackCloudDrive/index.html"
+      ]
+    },
+    {
+      "url": "http://www.vpsdaquan.cn/%E6%96%B0%E6%89%8B%E6%95%99%E7%A8%8B%E5%85%AD%EF%BC%9A%E5%8D%81%E5%88%86%E9%92%9F%E6%90%AD%E5%BB%BAshadowsocks%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E6%9C%8D%E5%8A%A1%E5%99%A8.html",
+      "finalUrl": "http://www.vpsdaquan.cn/%E6%96%B0%E6%89%8B%E6%95%99%E7%A8%8B%E5%85%AD%EF%BC%9A%E5%8D%81%E5%88%86%E9%92%9F%E6%90%AD%E5%BB%BAshadowsocks%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E6%9C%8D%E5%8A%A1%E5%99%A8.html",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 18144,
+      "pages": [
+        "hack/your/life/2016/05/29/wall/index.html"
+      ]
+    },
+    {
+      "url": "http://www.vuln.cn/2674",
+      "finalUrl": "https://www.vuln.cn/2674",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 3436,
+      "pages": [
+        "hack/your/life/2017/05/25/WIFI-crack/index.html"
+      ]
+    },
+    {
+      "url": "http://www.vuln.cn/2683",
+      "finalUrl": "https://www.vuln.cn/2683",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 3521,
+      "pages": [
+        "hack/your/life/2017/05/25/WIFI-crack/index.html"
+      ]
+    },
+    {
+      "url": "http://www.youtube.com",
+      "classification": "indeterminate",
+      "error": "ValueError",
+      "elapsedMs": 530,
+      "pages": [
+        "hack/your/life/2017/05/16/newifi/index.html"
+      ]
+    },
+    {
+      "url": "http://xiaix.me/shodan-xin-shou-ru-keng-zhi-nan/",
+      "finalUrl": "https://runtushare.net/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 3297,
+      "pages": [
+        "hack/your/life/2017/06/16/Hacker-Search-Engines/index.html"
+      ]
+    },
+    {
+      "url": "http://yejinxin.github.io/scripts-to-traverse-folder-recursively/",
+      "finalUrl": "http://yejinxin.github.io/scripts-to-traverse-folder-recursively/",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 1152,
+      "pages": [
+        "hack/your/life/2016/07/04/HackCloudDrive/index.html"
+      ]
+    },
+    {
+      "url": "http://yulingtianxia.com/blog/2015/11/01/More-than-you-want-to-know-about-synchronized/",
+      "finalUrl": "http://yulingtianxia.com/blog/2015/11/01/More-than-you-want-to-know-about-synchronized/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1058,
+      "pages": [
+        "ios/2019/08/10/source-synchronized/index.html"
+      ]
+    },
+    {
+      "url": "http://zhangtielei.com/posts/blog-iap.html",
+      "finalUrl": "https://zhangtielei.com/posts/blog-iap.html",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1753,
+      "pages": [
+        "ios/2016/12/07/Optimizing-In-App-Purchases/index.html"
+      ]
+    },
+    {
+      "url": "http://zhoulingyu.com/2017/04/04/iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC/",
+      "finalUrl": "http://zhoulingyu.com/2017/04/04/iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC/",
+      "status": 502,
+      "classification": "indeterminate",
+      "elapsedMs": 1666,
+      "pages": [
+        "ios/2018/10/03/iOS-Watermark-Icon/index.html"
+      ]
+    },
+    {
+      "url": "https://10minutemail.com/",
+      "finalUrl": "https://10minutemail.com/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1322,
+      "pages": [
+        "hack/your/life/2017/06/16/Hacker-Search-Engines/index.html"
+      ]
+    },
+    {
+      "url": "https://7labs.io/mobile/iphone/change-gps-location.html",
+      "finalUrl": "https://7labs.io/mobile/iphone/change-gps-location.html",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 4966,
+      "pages": [
+        "ios/2018/10/03/iOS-Location-Spoofing/index.html"
+      ]
+    },
+    {
+      "url": "https://app.ens.domains/",
+      "finalUrl": "https://app.ens.domains/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1258,
+      "pages": [
+        "life/2024/04/02/2024-okr/index.html"
+      ]
+    },
+    {
+      "url": "https://arganzheng.iteye.com/blog/1174470",
+      "finalUrl": "https://www.iteye.com/blog/arganzheng-1174470",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 2647,
+      "pages": [
+        "ios/2019/08/01/package-shell-update/index.html"
+      ]
+    },
+    {
+      "url": "https://beta.gridgo.weichao.studio/",
+      "finalUrl": "https://beta.gridgo.weichao.studio/",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 5969,
+      "pages": [
+        "projects/index.html"
+      ]
+    },
+    {
+      "url": "https://beta.openai.com/account/api-keys",
+      "finalUrl": "https://beta.openai.com/account/api-keys",
+      "status": 403,
+      "classification": "indeterminate",
+      "elapsedMs": 1885,
+      "pages": [
+        "tool/2023/01/25/chatgpt/index.html"
+      ]
+    },
+    {
+      "url": "https://bitcointalk.org/index.php",
+      "classification": "indeterminate",
+      "error": "ValueError",
+      "elapsedMs": 527,
+      "pages": [
+        "hack/your/life/2017/06/16/learn-BitCoin/index.html"
+      ]
+    },
+    {
+      "url": "https://blockchainbdgpzk.onion/taint/yourbitcoinaddress",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 28,
+      "pages": [
+        "hack/your/life/2017/06/16/learn-BitCoin/index.html"
+      ]
+    },
+    {
+      "url": "https://blog.15cm.net/2018/03/24/gen10-nas-record-hardware-system/",
+      "finalUrl": "https://blog.15cm.net/2018/03/24/gen10-nas-record-hardware-system/",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 2799,
+      "pages": [
+        "ios/2019/11/01/Gen10-NAS/index.html"
+      ]
+    },
+    {
+      "url": "https://blog.51cto.com/atong/1912179",
+      "finalUrl": "https://blog.51cto.com/atong/1912179",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 688,
+      "pages": [
+        "ios/2019/08/01/package-shell-update/index.html"
+      ]
+    },
+    {
+      "url": "https://blog.csdn.net/aa13058219642/article/details/88622216",
+      "finalUrl": "https://blog.csdn.net/aa13058219642/article/details/88622216",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 2070,
+      "pages": [
+        "ios/2019/11/01/Gen10-NAS/index.html"
+      ]
+    },
+    {
+      "url": "https://blog.gocy.tech/2017/09/12/DetectingUselessCodeWithClang-p1/",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 567,
+      "pages": [
+        "ios/2019/09/19/iOS-App-thin/index.html"
+      ]
+    },
+    {
+      "url": "https://blog.lutty.me/code/openwrt/2014-10/owss-fq-guide-linux-tool.html",
+      "finalUrl": "https://blog.lutty.me/code/openwrt/2014-10/owss-fq-guide-linux-tool.html",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 2413,
+      "pages": [
+        "hack/your/life/2017/05/16/newifi/index.html"
+      ]
+    },
+    {
+      "url": "https://book.flutterchina.club/",
+      "finalUrl": "https://book.flutterchina.club/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 4208,
+      "pages": [
+        "ios/2019/02/14/flutter-Get-Started/index.html"
+      ]
+    },
+    {
+      "url": "https://bter.com",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 757,
+      "pages": [
+        "hack/your/life/2017/06/16/learn-BitCoin/index.html"
+      ]
+    },
+    {
+      "url": "https://caijinglong.github.io/json2dart/index_ch.html",
+      "finalUrl": "https://caijinglong.github.io/json2dart/index_ch.html",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1062,
+      "pages": [
+        "ios/2019/02/14/flutter-Get-Started/index.html"
+      ]
+    },
+    {
+      "url": "https://chat.openai.com/auth/login",
+      "finalUrl": "https://chatgpt.com/auth/login",
+      "status": 403,
+      "classification": "indeterminate",
+      "elapsedMs": 37089,
+      "pages": [
+        "tool/2023/01/25/chatgpt/index.html"
+      ]
+    },
+    {
+      "url": "https://chat.openai.com/chat",
+      "finalUrl": "https://chatgpt.com/chat",
+      "status": 403,
+      "classification": "indeterminate",
+      "elapsedMs": 36348,
+      "pages": [
+        "tool/2023/01/25/chatgpt/index.html"
+      ]
+    },
+    {
+      "url": "https://chatgpt.sbaliyun.com/",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 754,
+      "pages": [
+        "tool/2023/01/25/chatgpt/index.html"
+      ]
+    },
+    {
+      "url": "https://chrome.google.com/webstore/detail/chatgpt-for-google/jgjaeacdkonaoafenlfkkkmbaopkbilf",
+      "finalUrl": "https://chromewebstore.google.com/detail/empty-title/jgjaeacdkonaoafenlfkkkmbaopkbilf",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 101800,
+      "pages": [
+        "tool/2023/01/25/chatgpt/index.html"
+      ]
+    },
+    {
+      "url": "https://cocoapods.org",
+      "finalUrl": "https://cocoapods.org",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1156,
+      "pages": [
+        "ios/2018/07/04/private-podspec-FAQ/index.html"
+      ]
+    },
+    {
+      "url": "https://coinhive.com/dashboard",
+      "finalUrl": "https://coinhive.com/dashboard",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 1888,
+      "pages": [
+        "hack/your/life/2017/06/16/learn-BitCoin/index.html"
+      ]
+    },
+    {
+      "url": "https://coinmarketcap.com/",
+      "classification": "indeterminate",
+      "error": "ValueError",
+      "elapsedMs": 540,
+      "pages": [
+        "tool/2023/01/27/web3/index.html"
+      ]
+    },
+    {
+      "url": "https://cokebar.info/archives/962",
+      "finalUrl": "https://cokebar.info/archives/962",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 2486,
+      "pages": [
+        "hack/your/life/2017/05/16/newifi/index.html"
+      ]
+    },
+    {
+      "url": "https://coldnew.github.io/70c5ffb9/",
+      "finalUrl": "https://coldnew.github.io/70c5ffb9/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1094,
+      "pages": [
+        "hack/your/life/2017/08/07/Raspberry-Pi/index.html"
+      ]
+    },
+    {
+      "url": "https://defichain-dobby.com/",
+      "classification": "indeterminate",
+      "error": "URLError",
+      "elapsedMs": 2912,
+      "pages": [
+        "tool/2023/01/27/web3/index.html"
+      ]
+    },
+    {
+      "url": "https://defillama.com/",
+      "classification": "indeterminate",
+      "error": "ValueError",
+      "elapsedMs": 529,
+      "pages": [
+        "tool/2023/01/27/web3/index.html"
+      ]
+    },
+    {
+      "url": "https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/Multithreading/ThreadSafety/ThreadSafety.html",
+      "finalUrl": "https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/Multithreading/ThreadSafety/ThreadSafety.html",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1324,
+      "pages": [
+        "ios/2019/08/10/source-synchronized/index.html"
+      ]
+    },
+    {
+      "url": "https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtTypeEncodings.html",
+      "finalUrl": "https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtTypeEncodings.html",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 351,
+      "pages": [
+        "ios/2019/08/10/source-Aspects/index.html"
+      ]
+    },
+    {
+      "url": "https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html",
+      "finalUrl": "https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 427,
+      "pages": [
+        "ios/2019/01/07/package-shell/index.html"
+      ]
+    },
+    {
+      "url": "https://developer.apple.com/library/archive/qa/qa1490/_index.html",
+      "finalUrl": "https://developer.apple.com/library/archive/qa/qa1490/_index.html",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 624,
+      "pages": [
+        "ios/2019/08/05/YYKit-source/index.html"
+      ]
+    },
+    {
+      "url": "https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/MemoryMgmt.html",
+      "finalUrl": "https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/MemoryMgmt.html",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 984,
+      "pages": [
+        "ios/2016/07/23/symbolicatecrash/index.html"
+      ]
+    },
+    {
+      "url": "https://developer.apple.com/library/content/documentation/DeveloperTools/Conceptual/InstrumentsUserGuide/CommonMemoryProblems.html",
+      "finalUrl": "https://help.apple.com/instruments/mac/current/",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 3384,
+      "pages": [
+        "ios/2016/07/23/symbolicatecrash/index.html"
+      ]
+    },
+    {
+      "url": "https://developer.apple.com/library/content/documentation/DeveloperTools/Conceptual/InstrumentsUserGuide/FindingAbandonedMemory.html",
+      "finalUrl": "https://help.apple.com/instruments/mac/current/",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 2487,
+      "pages": [
+        "ios/2016/07/23/symbolicatecrash/index.html"
+      ]
+    },
+    {
+      "url": "https://developer.apple.com/library/content/releasenotes/General/ValidateAppStoreReceipt/Chapters/ReceiptFields.html",
+      "finalUrl": "https://developer.apple.com/library/archive/releasenotes/General/ValidateAppStoreReceipt/Chapters/ReceiptFields.html",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 690,
+      "pages": [
+        "ios/2016/12/07/Optimizing-In-App-Purchases/index.html"
+      ]
+    },
+    {
+      "url": "https://developer.apple.com/library/content/technotes/tn2151/_index.html",
+      "finalUrl": "https://developer.apple.com/documentation/xcode/diagnosing-issues-using-crash-reports-and-device-logs",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1793,
+      "pages": [
+        "ios/2016/07/23/symbolicatecrash/index.html"
+      ]
+    },
+    {
+      "url": "https://developer.apple.com/library/ios/documentation/EventHandling/Conceptual/EventHandlingiPhoneOS/GestureRecognizer_basics/GestureRecognizer_basics.html",
+      "finalUrl": "https://developer.apple.com/documentation/uikit/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1980,
+      "pages": [
+        "ios/2016/08/17/ResponderChain/index.html"
+      ]
+    },
+    {
+      "url": "https://developer.apple.com/library/ios/releasenotes/General/ValidateAppStoreReceipt/Chapters/ReceiptFields.html",
+      "finalUrl": "https://developer.apple.com/library/archive/releasenotes/General/ValidateAppStoreReceipt/Chapters/ReceiptFields.html",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1181,
+      "pages": [
+        "ios/2016/05/28/iap-new-receipt-api-replace/index.html"
+      ]
+    },
+    {
+      "url": "https://developer.apple.com/library/ios/releasenotes/General/ValidateAppStoreReceipt/Chapters/ValidateLocally.html",
+      "finalUrl": "https://developer.apple.com/documentation/appstorereceipts/validating-receipts-on-the-device",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 2811,
+      "pages": [
+        "ios/2016/05/28/iap-new-receipt-api-replace/index.html"
+      ]
+    },
+    {
+      "url": "https://developer.apple.com/library/ios/releasenotes/General/ValidateAppStoreReceipt/Chapters/ValidateRemotely.html",
+      "finalUrl": "https://developer.apple.com/documentation/storekit/in-app_purchase/original_api_for_in-app_purchase/validating_receipts_with_the_app_store",
+      "status": 301,
+      "classification": "indeterminate",
+      "elapsedMs": 6366,
+      "pages": [
+        "ios/2016/05/28/iap-new-receipt-api-replace/index.html"
+      ]
+    },
+    {
+      "url": "https://developer.apple.com/library/ios/technotes/tn2151/_index.html",
+      "finalUrl": "https://developer.apple.com/documentation/xcode/diagnosing-issues-using-crash-reports-and-device-logs",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1968,
+      "pages": [
+        "ios/2016/07/23/symbolicatecrash/index.html"
+      ]
+    },
+    {
+      "url": "https://developer.apple.com/library/ios/technotes/tn2413/_index.html",
+      "finalUrl": "https://developer.apple.com/library/archive/technotes/tn2413/_index.html",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1909,
+      "pages": [
+        "ios/2016/05/28/iap-new-receipt-api-replace/index.html"
+      ]
+    },
+    {
+      "url": "https://doc.scrapy.org/en/latest/index.html",
+      "finalUrl": "https://doc.scrapy.org/en/latest/index.html",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1419,
+      "pages": [
+        "python/2017/06/08/scrapy-Example/index.html"
+      ]
+    },
+    {
+      "url": "https://doc.scrapy.org/en/latest/intro/install.html%EF%BC%8C%E7%9B%B4%E6%8E%A5pip",
+      "finalUrl": "https://doc.scrapy.org/en/latest/intro/install.html%EF%BC%8C%E7%9B%B4%E6%8E%A5pip",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 1436,
+      "pages": [
+        "python/2017/06/08/scrapy-Example/index.html"
+      ]
+    },
+    {
+      "url": "https://docs.docker.com/install/linux/docker-ce/centos/",
+      "finalUrl": "https://docs.docker.com/engine/install/centos/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1182,
+      "pages": [
+        "ios/2019/11/01/Gen10-NAS/index.html"
+      ]
+    },
+    {
+      "url": "https://docs.fastlane.tools",
+      "finalUrl": "https://docs.fastlane.tools",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1436,
+      "pages": [
+        "ios/2019/01/07/package-shell/index.html"
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/tutorial/",
+      "finalUrl": "https://docs.python.org/3/tutorial/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 956,
+      "pages": [
+        "python/2017/06/08/scrapy-Example/index.html"
+      ]
+    },
+    {
+      "url": "https://docs.swift.org/swift-book/LanguageGuide/Enumerations.html",
+      "finalUrl": "https://docs.swift.org/swift-book/LanguageGuide/Enumerations.html",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1268,
+      "pages": [
+        "ios/2019/08/04/enumatator-and-string/index.html"
+      ]
+    },
+    {
+      "url": "https://downloads.raspberrypi.org/raspbian_latest",
+      "finalUrl": "https://downloads.raspberrypi.org/raspbian/images/raspbian-2020-02-14/2020-02-13-raspbian-buster.zip",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 3251,
+      "pages": [
+        "hack/your/life/2017/08/07/Raspberry-Pi/index.html"
+      ]
+    },
+    {
+      "url": "https://en.minergate.com/internal",
+      "classification": "indeterminate",
+      "error": "ValueError",
+      "elapsedMs": 534,
+      "pages": [
+        "hack/your/life/2017/06/16/learn-BitCoin/index.html"
+      ]
+    },
+    {
+      "url": "https://etherscan.io/tx/0xb9ad589a163a1c0129f1e288ef603e4824331aa32c6e8229be0fcfb235695965",
+      "finalUrl": "https://etherscan.io/tx/0xb9ad589a163a1c0129f1e288ef603e4824331aa32c6e8229be0fcfb235695965",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 10108,
+      "pages": [
+        "tool/2023/01/27/web3/index.html"
+      ]
+    },
+    {
+      "url": "https://faucets.chain.link/",
+      "finalUrl": "https://faucets.chain.link/",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1274,
+      "pages": [
+        "tool/2023/01/27/web3/index.html"
+      ]
+    },
+    {
+      "url": "https://flutter-io.cn",
+      "finalUrl": "https://flutter-io.cn",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1419,
+      "pages": [
+        "ios/2019/02/14/flutter-Get-Started/index.html"
+      ]
+    },
+    {
+      "url": "https://flutter.io/community/china",
+      "finalUrl": "https://docs.flutter.dev/community/china",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 4378,
+      "pages": [
+        "ios/2019/02/14/flutter-Get-Started/index.html"
+      ]
+    },
+    {
+      "url": "https://flutter.io/docs/get-started/codelab",
+      "finalUrl": "https://docs.flutter.dev/learn/pathway",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 4076,
+      "pages": [
+        "ios/2019/02/14/flutter-Get-Started/index.html"
+      ]
+    },
+    {
+      "url": "https://flutterchina.club/",
+      "classification": "indeterminate",
+      "error": "URLError",
+      "elapsedMs": 4060,
+      "pages": [
+        "ios/2019/02/14/flutter-Get-Started/index.html"
+      ]
+    },
+    {
+      "url": "https://fofa.so",
+      "finalUrl": "https://fofa.so",
+      "status": 403,
+      "classification": "indeterminate",
+      "elapsedMs": 1859,
+      "pages": [
+        "hack/your/life/2017/06/16/Hacker-Search-Engines/index.html"
+      ]
+    },
+    {
+      "url": "https://forums.developer.apple.com/thread/45419?q=appStoreReceiptURL",
+      "finalUrl": "https://developer.apple.com/forums/verify-human/verify.html?next=/forums/thread/45419?q=appStoreReceiptURL",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 2842,
+      "pages": [
+        "ios/2016/05/28/iap-new-receipt-api-replace/index.html"
+      ]
+    },
+    {
+      "url": "https://git-scm.com/book/en/v2",
+      "finalUrl": "https://git-scm.com/book/en/v2",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1218,
+      "pages": [
+        "tool/2016/08/13/git-cheet-sheet/index.html"
+      ]
+    },
+    {
+      "url": "https://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows",
+      "finalUrl": "https://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 715,
+      "pages": [
+        "git/2019/08/09/git-workflow/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/CocoaPods/CocoaPods/issues/5854",
+      "finalUrl": "https://github.com/CocoaPods/CocoaPods/issues/5854",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 3607,
+      "pages": [
+        "ios/2018/07/04/private-podspec-FAQ/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/Drakkar-Software/OctoBot",
+      "finalUrl": "https://github.com/Drakkar-Software/OctoBot",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 3827,
+      "pages": [
+        "tool/2023/01/27/web3/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/JohnWong/IconFont",
+      "finalUrl": "https://github.com/JohnWong/IconFont",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 4159,
+      "pages": [
+        "ios/2019/09/19/iOS-App-thin/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/OffcierCia/DeFi-Developer-Road-Map/blob/main/translations/README_cn.md",
+      "finalUrl": "https://github.com/OffcierCia/DeFi-Developer-Road-Map/blob/main/translations/README_cn.md",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1911,
+      "pages": [
+        "tool/2023/01/27/web3/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/Olmectron/JNUSTool/releases",
+      "finalUrl": "https://github.com/Olmectron/JNUSTool/releases",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1885,
+      "pages": [
+        "hack/your/life/2016/12/08/WiiU-crack/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/PlexPt/awesome-chatgpt-prompts-zh",
+      "finalUrl": "https://github.com/PlexPt/awesome-chatgpt-prompts-zh",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1605,
+      "pages": [
+        "tool/2023/01/25/chatgpt/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs",
+      "finalUrl": "https://github.com/SunWeb3Sec/DeFiHackLabs",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1493,
+      "pages": [
+        "tool/2023/01/27/web3/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/achillean/shodan-python",
+      "finalUrl": "https://github.com/achillean/shodan-python",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1481,
+      "pages": [
+        "hack/your/life/2017/06/16/Hacker-Search-Engines/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/alexzielenski/ThemeEngine",
+      "finalUrl": "https://github.com/alexzielenski/ThemeEngine",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 3677,
+      "pages": [
+        "ios/2019/09/19/iOS-App-thin/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/ccxt/ccxt",
+      "finalUrl": "https://github.com/ccxt/ccxt",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1666,
+      "pages": [
+        "tool/2023/01/27/web3/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/ccyanxyz/uniswap-arbitrage-analysis",
+      "finalUrl": "https://github.com/ccyanxyz/uniswap-arbitrage-analysis",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1267,
+      "pages": [
+        "tool/2023/01/27/web3/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/dblock/fui",
+      "finalUrl": "https://github.com/dblock/fui",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1572,
+      "pages": [
+        "ios/2019/09/19/iOS-App-thin/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/facebook/fishhook",
+      "finalUrl": "https://github.com/facebook/fishhook",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1373,
+      "pages": [
+        "ios/2019/09/25/iOS-Mach-O/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/flutter/flutter/issues/14821",
+      "finalUrl": "https://github.com/flutter/flutter/issues/14821",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1784,
+      "pages": [
+        "ios/2019/02/14/flutter-Get-Started/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/flutter/flutter/issues/26212",
+      "finalUrl": "https://github.com/flutter/flutter/issues/26212",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1578,
+      "pages": [
+        "ios/2019/02/14/flutter-Get-Started/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/flutter/flutter/issues/27071",
+      "finalUrl": "https://github.com/flutter/flutter/issues/27071",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 2640,
+      "pages": [
+        "ios/2019/02/14/flutter-Get-Started/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/flutter/flutter/issues/27216",
+      "finalUrl": "https://github.com/flutter/flutter/issues/27216",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1904,
+      "pages": [
+        "ios/2019/02/14/flutter-Get-Started/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/flutter/flutter/issues/30834",
+      "finalUrl": "https://github.com/flutter/flutter/issues/30834",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1773,
+      "pages": [
+        "ios/2019/02/14/flutter-Get-Started/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/flutter/flutter/tree/master/examples/flutter_view",
+      "finalUrl": "https://github.com/flutter/flutter/tree/master/examples/flutter_view",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1498,
+      "pages": [
+        "ios/2019/02/14/flutter-Get-Started/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/flutter/flutter/tree/master/examples/platform_view",
+      "finalUrl": "https://github.com/flutter/flutter/tree/master/examples/platform_view",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1219,
+      "pages": [
+        "ios/2019/02/14/flutter-Get-Started/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/flutter/flutter/wiki/Add-Flutter-to-existing-apps",
+      "finalUrl": "https://github.com/flutter/flutter/wiki/Add-Flutter-to-existing-apps",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1474,
+      "pages": [
+        "ios/2019/02/14/flutter-Get-Started/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/freqtrade/freqtrade",
+      "finalUrl": "https://github.com/freqtrade/freqtrade",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 2232,
+      "pages": [
+        "tool/2023/01/27/web3/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/fuergaosi233/wechat-chatgpt",
+      "finalUrl": "https://github.com/fuergaosi233/wechat-chatgpt",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1261,
+      "pages": [
+        "tool/2023/01/25/chatgpt/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/huanfeng/NUS_Downloader_Net",
+      "finalUrl": "https://github.com/huanfeng/NUS_Downloader_Net",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1494,
+      "pages": [
+        "hack/your/life/2016/12/08/WiiU-crack/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/hummingbot/hummingbot",
+      "finalUrl": "https://github.com/hummingbot/hummingbot",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1455,
+      "pages": [
+        "tool/2023/01/27/web3/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/ibireme/YYKit",
+      "finalUrl": "https://github.com/ibireme/YYKit",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1351,
+      "pages": [
+        "ios/2019/08/05/YYKit-source/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/javerianadeem/selenium_metamask_automation",
+      "finalUrl": "https://github.com/javerianadeem/selenium_metamask_automation",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1388,
+      "pages": [
+        "tool/2023/01/27/web3/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/kangwang1988/XcodeZombieCode",
+      "finalUrl": "https://github.com/kangwang1988/XcodeZombieCode",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1467,
+      "pages": [
+        "ios/2019/09/19/iOS-App-thin/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/kepuna/archiveScript",
+      "finalUrl": "https://github.com/kepuna/archiveScript",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1581,
+      "pages": [
+        "ios/2018/12/27/package-jekins/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/klaus01/KLGenerateSpamCode",
+      "finalUrl": "https://github.com/klaus01/KLGenerateSpamCode",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1513,
+      "pages": [
+        "ios/2019/08/01/vest-package/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/krzysztofzablocki/Bootstrap",
+      "finalUrl": "https://github.com/krzysztofzablocki/Bootstrap",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1448,
+      "pages": [
+        "ios/2018/10/03/iOS-Watermark-Icon/index.html",
+        "ios/2019/08/01/cocoapods-binary/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/kuegi/defichain_maxi/tree/main",
+      "finalUrl": "https://github.com/kuegi/defichain_maxi/tree/main",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1636,
+      "pages": [
+        "tool/2023/01/27/web3/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/lencx/ChatGPT",
+      "finalUrl": "https://github.com/lencx/ChatGPT",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1228,
+      "pages": [
+        "tool/2023/01/25/chatgpt/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/ma6174/blog/issues/7",
+      "finalUrl": "https://github.com/ma6174/blog/issues/7",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1664,
+      "pages": [
+        "hack/your/life/2017/08/07/Raspberry-Pi/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/maximedrn/opensea-automatic-bulk-upload-and-sale",
+      "finalUrl": "https://github.com/maximedrn/opensea-automatic-bulk-upload-and-sale",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1456,
+      "pages": [
+        "tool/2023/01/27/web3/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/ming1016/SMCheckProject.git",
+      "finalUrl": "https://github.com/ming1016/SMCheckProject",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 2707,
+      "pages": [
+        "ios/2019/09/19/iOS-App-thin/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/netyouli/WHC_ConfuseSoftware",
+      "finalUrl": "https://github.com/netyouli/WHC_ConfuseSoftware",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1508,
+      "pages": [
+        "ios/2019/08/01/vest-package/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/scadastrangelove/SCADAPASS",
+      "finalUrl": "https://github.com/scadastrangelove/SCADAPASS",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1543,
+      "pages": [
+        "hack/your/life/2017/06/16/Hacker-Search-Engines/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/segiddins/cocoapods-dependencies",
+      "finalUrl": "https://github.com/segiddins/cocoapods-dependencies",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1605,
+      "pages": [
+        "ios/2018/12/27/cocoapods-graph/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/shadowsocks/openwrt-shadowsocks/issues/106",
+      "finalUrl": "https://github.com/shadowsocks/openwrt-shadowsocks/issues/106",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 2297,
+      "pages": [
+        "hack/your/life/2017/05/16/newifi/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/shadowsocks/shadowsocks/tree/master",
+      "finalUrl": "https://github.com/shadowsocks/shadowsocks/tree/master",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1499,
+      "pages": [
+        "hack/your/life/2016/05/29/wall/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/stackhou/AutoPacking-iOS",
+      "finalUrl": "https://github.com/hoaye/AutoPacking-iOS",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 2594,
+      "pages": [
+        "ios/2018/12/27/package-jekins/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/steipete/Aspects/",
+      "finalUrl": "https://github.com/steipete/Aspects/",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1596,
+      "pages": [
+        "ios/2019/08/10/source-Aspects/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/steventroughtonsmith/cartool",
+      "finalUrl": "https://github.com/steventroughtonsmith/cartool",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1383,
+      "pages": [
+        "ios/2019/09/19/iOS-App-thin/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname",
+      "finalUrl": "https://github.com/toolazytoname",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1374,
+      "pages": [
+        "index.html",
+        "404.html",
+        "posts/index.html",
+        "projects/index.html",
+        "about/index.html",
+        "now/index.html",
+        "tool/2016/08/13/git-cheet-sheet/index.html",
+        "tool/2016/08/08/json-parser-online/index.html",
+        "tool/2016/11/05/Resilio-Sync/index.html",
+        "tool/2023/01/25/chatgpt/index.html",
+        "tool/2023/01/27/web3/index.html",
+        "tool/2024/02/27/AI-learning/index.html",
+        "tool/2024/04/30/2024-ssh-tunnel/index.html",
+        "git/2019/08/08/Git-lose-weight/index.html",
+        "git/2019/08/09/git-workflow/index.html",
+        "ios/2016/12/07/Optimizing-In-App-Purchases/index.html",
+        "ios/2016/08/17/ResponderChain/index.html",
+        "ios/2016/07/23/symbolicatecrash/index.html",
+        "ios/2016/05/28/iap-new-receipt-api-replace/index.html",
+        "ios/2018/12/27/cocoapods-graph/index.html",
+        "ios/2018/12/27/package-jekins/index.html",
+        "ios/2018/06/23/private-podspec/index.html",
+        "ios/2018/07/13/FDPodBot/index.html",
+        "ios/2018/07/09/FDTops/index.html",
+        "ios/2018/07/04/private-podspec-FAQ/index.html",
+        "ios/2018/10/03/iOS-Watermark-Icon/index.html",
+        "ios/2018/10/03/iOS-Location-Spoofing/index.html",
+        "ios/2019/01/07/package-shell/index.html",
+        "ios/2019/08/01/package-shell-update/index.html",
+        "ios/2019/08/01/vest-package/index.html",
+        "ios/2019/08/01/cocoapods-binary/index.html",
+        "ios/2019/08/10/source-synchronized/index.html",
+        "ios/2019/08/10/source-Aspects/index.html",
+        "ios/2019/08/05/YYKit-source/index.html",
+        "ios/2019/08/04/enumatator-and-string/index.html",
+        "ios/2019/09/25/iOS-runtime-unused-class-detect/index.html",
+        "ios/2019/09/25/iOS-Mach-O/index.html",
+        "ios/2019/09/19/iOS-App-thin/index.html",
+        "ios/2019/09/19/iOS-LSUnusedResources/index.html",
+        "ios/2019/11/01/Gen10-NAS/index.html",
+        "ios/2019/02/14/flutter-Get-Started/index.html",
+        "life/2017/01/10/2017plan/index.html",
+        "life/2023/01/08/book-list/index.html",
+        "life/2023/01/08/movie-sheet-recommended-for-daughter/index.html",
+        "life/2023/01/21/2023-okr/index.html",
+        "life/2023/01/21/sushi/index.html",
+        "life/2023/01/26/quantization/index.html",
+        "life/2024/04/02/2024-okr/index.html",
+        "hack/your/life/2016/12/08/WiiU-crack/index.html",
+        "hack/your/life/2016/08/13/start-an-ftp-or-sftp-server-in-mac-os/index.html",
+        "hack/your/life/2016/07/04/HackCloudDrive/index.html",
+        "hack/your/life/2016/11/25/Wechat-Export/index.html",
+        "hack/your/life/2016/05/19/welcome-to-jekyll/index.html",
+        "hack/your/life/2016/05/29/wall/index.html",
+        "hack/your/life/2017/06/16/Hacker-Search-Engines/index.html",
+        "hack/your/life/2017/06/16/learn-GPG/index.html",
+        "hack/your/life/2017/06/16/learn-BitCoin/index.html",
+        "hack/your/life/2017/08/07/Raspberry-Pi/index.html",
+        "hack/your/life/2017/05/25/WIFI-crack/index.html",
+        "hack/your/life/2017/05/26/WIFI-crack-PIN/index.html",
+        "hack/your/life/2017/05/26/MDK3-Documentation/index.html",
+        "hack/your/life/2017/05/16/newifi/index.html",
+        "python/2019/08/15/resize-image/index.html",
+        "python/2017/06/15/learn-python/index.html",
+        "python/2017/06/08/scrapy-Example/index.html",
+        "fdsdk/2016/12/30/FDsymbolicatecrash/index.html",
+        "fdsdk/2016/07/27/FDDebugObserver/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/AquaSight",
+      "finalUrl": "https://github.com/toolazytoname/AquaSight",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1713,
+      "pages": [
+        "projects/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/BPFlutter",
+      "finalUrl": "https://github.com/toolazytoname/BPFlutter",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1543,
+      "pages": [
+        "projects/index.html",
+        "ios/2019/02/14/flutter-Get-Started/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/ChatGPTSpeaker",
+      "finalUrl": "https://github.com/toolazytoname/ChatGPTSpeaker",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 2092,
+      "pages": [
+        "tool/2023/01/25/chatgpt/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/FDCache",
+      "finalUrl": "https://github.com/toolazytoname/FDCache",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 2158,
+      "pages": [
+        "posts-legacy/Git-Cheet-Sheet/freemind.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/FDDebugObserver",
+      "finalUrl": "https://github.com/toolazytoname/FDDebugObserver",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 2203,
+      "pages": [
+        "posts-legacy/Git-Cheet-Sheet/freemind.html",
+        "fdsdk/2016/07/27/FDDebugObserver/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/FDDebugObserver/blob/master/README.md",
+      "finalUrl": "https://github.com/toolazytoname/FDDebugObserver/blob/master/README.md",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 2071,
+      "pages": [
+        "fdsdk/2016/07/27/FDDebugObserver/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/FDKit/blob/master/FDKit/Classes/Utility/IsInitial/FDIsInitialDump.mm",
+      "finalUrl": "https://github.com/toolazytoname/FDKit/blob/master/FDKit/Classes/Utility/IsInitial/FDIsInitialDump.mm",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 2130,
+      "pages": [
+        "ios/2019/09/25/iOS-runtime-unused-class-detect/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/FDKit/blob/master/FDKit/Classes/Utility/LocationCoordinate/FDLocationCoordinateUtil.h",
+      "finalUrl": "https://github.com/toolazytoname/FDKit/blob/master/FDKit/Classes/Utility/LocationCoordinate/FDLocationCoordinateUtil.h",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 2137,
+      "pages": [
+        "ios/2018/10/03/iOS-Location-Spoofing/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/FDPodBot",
+      "finalUrl": "https://github.com/toolazytoname/FDPodBot",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 1989,
+      "pages": [
+        "ios/2018/07/13/FDPodBot/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/FDRepoPush",
+      "finalUrl": "https://github.com/toolazytoname/FDRepoPush",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 1952,
+      "pages": [
+        "ios/2018/07/04/private-podspec-FAQ/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/FDResponderChainDebug",
+      "finalUrl": "https://github.com/toolazytoname/FDResponderChainDebug",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 2041,
+      "pages": [
+        "ios/2016/08/17/ResponderChain/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/FDTops",
+      "finalUrl": "https://github.com/toolazytoname/FDTops",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1527,
+      "pages": [
+        "projects/index.html",
+        "ios/2018/07/09/FDTops/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/FDsymbolicatecrash",
+      "finalUrl": "https://github.com/toolazytoname/FDsymbolicatecrash",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 2051,
+      "pages": [
+        "fdsdk/2016/12/30/FDsymbolicatecrash/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/GridGo",
+      "finalUrl": "https://github.com/toolazytoname/GridGo",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 2127,
+      "pages": [
+        "projects/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/HackCloudDrive",
+      "finalUrl": "https://github.com/toolazytoname/HackCloudDrive",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 2303,
+      "pages": [
+        "hack/your/life/2016/07/04/HackCloudDrive/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/HackCloudDrive/blob/master/README.md",
+      "finalUrl": "https://github.com/toolazytoname/HackCloudDrive/blob/master/README.md",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 2177,
+      "pages": [
+        "hack/your/life/2016/07/04/HackCloudDrive/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/LSUnusedResources",
+      "finalUrl": "https://github.com/toolazytoname/LSUnusedResources",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 2152,
+      "pages": [
+        "ios/2019/09/19/iOS-LSUnusedResources/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/LinkMap",
+      "finalUrl": "https://github.com/toolazytoname/LinkMap",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 2102,
+      "pages": [
+        "ios/2019/09/19/iOS-App-thin/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/MediaForge",
+      "finalUrl": "https://github.com/toolazytoname/MediaForge",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1633,
+      "pages": [
+        "projects/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/ReceiptValidation",
+      "finalUrl": "https://github.com/toolazytoname/ReceiptValidation",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 2315,
+      "pages": [
+        "ios/2016/05/28/iap-new-receipt-api-replace/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/ResizerImage",
+      "finalUrl": "https://github.com/toolazytoname/ResizerImage",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 2115,
+      "pages": [
+        "python/2019/08/15/resize-image/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/SameCodeFinder",
+      "finalUrl": "https://github.com/toolazytoname/SameCodeFinder",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 2005,
+      "pages": [
+        "ios/2019/09/19/iOS-App-thin/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/Sentinel",
+      "finalUrl": "https://github.com/toolazytoname/Sentinel",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 2019,
+      "pages": [
+        "projects/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/Specs",
+      "finalUrl": "https://github.com/toolazytoname/Specs",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 2888,
+      "pages": [
+        "ios/2018/06/23/private-podspec/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/WeChatExport",
+      "finalUrl": "https://github.com/toolazytoname/WeChatExport",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1843,
+      "pages": [
+        "projects/index.html",
+        "hack/your/life/2016/11/25/Wechat-Export/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/android-ai-stack",
+      "finalUrl": "https://github.com/toolazytoname/android-ai-stack",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1875,
+      "pages": [
+        "projects/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/android-device-test",
+      "finalUrl": "https://github.com/toolazytoname/android-device-test",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1437,
+      "pages": [
+        "projects/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/crawlers",
+      "finalUrl": "https://github.com/toolazytoname/crawlers",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 2127,
+      "pages": [
+        "python/2017/06/08/scrapy-Example/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/gridgo-art-studio",
+      "finalUrl": "https://github.com/toolazytoname/gridgo-art-studio",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 2223,
+      "pages": [
+        "projects/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/gridgo-pet-school",
+      "finalUrl": "https://github.com/toolazytoname/gridgo-pet-school",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 2153,
+      "pages": [
+        "projects/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/happy-relay-deploy",
+      "finalUrl": "https://github.com/toolazytoname/happy-relay-deploy",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1567,
+      "pages": [
+        "projects/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/home-nas-skill",
+      "finalUrl": "https://github.com/toolazytoname/home-nas-skill",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1691,
+      "pages": [
+        "index.html",
+        "projects/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/llm-quota-watchdog",
+      "finalUrl": "https://github.com/toolazytoname/llm-quota-watchdog",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 2009,
+      "pages": [
+        "projects/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/lodge",
+      "finalUrl": "https://github.com/toolazytoname/lodge",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1730,
+      "pages": [
+        "projects/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/metronome",
+      "finalUrl": "https://github.com/toolazytoname/metronome",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1615,
+      "pages": [
+        "projects/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/oneplus-8t-mobile-lab",
+      "finalUrl": "https://github.com/toolazytoname/oneplus-8t-mobile-lab",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 2085,
+      "pages": [
+        "projects/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/pocket-pentest",
+      "finalUrl": "https://github.com/toolazytoname/pocket-pentest",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1596,
+      "pages": [
+        "projects/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/reality-handshake",
+      "finalUrl": "https://github.com/toolazytoname/reality-handshake",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1915,
+      "pages": [
+        "projects/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/web3_learning",
+      "finalUrl": "https://github.com/toolazytoname/web3_learning",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1649,
+      "pages": [
+        "projects/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/wechat-mp-devops",
+      "finalUrl": "https://github.com/toolazytoname/wechat-mp-devops",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1475,
+      "pages": [
+        "projects/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/toolazytoname/xiaohei-phone-agent",
+      "finalUrl": "https://github.com/toolazytoname/xiaohei-phone-agent",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1633,
+      "pages": [
+        "projects/index.html"
+      ]
+    },
+    {
+      "url": "https://github.com/tpruvot/cpuminer-multi",
+      "finalUrl": "https://github.com/tpruvot/cpuminer-multi",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 2553,
+      "pages": [
+        "hack/your/life/2017/06/16/learn-BitCoin/index.html"
+      ]
+    },
+    {
+      "url": "https://goerli-faucet.pk910.de/",
+      "finalUrl": "https://goerli-faucet.pk910.de/",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 5304,
+      "pages": [
+        "tool/2023/01/27/web3/index.html"
+      ]
+    },
+    {
+      "url": "https://gpgtools.org",
+      "finalUrl": "https://gpgtools.org",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1370,
+      "pages": [
+        "hack/your/life/2017/06/16/learn-GPG/index.html"
+      ]
+    },
+    {
+      "url": "https://gpgtools.tenderapp.com/kb/how-to/first-steps-where-do-i-start-where-do-i-begin-setup-gpgtools-create-a-new-key-your-first-encrypted-mail",
+      "finalUrl": "https://gpgtools.tenderapp.com/kb/how-to/first-steps-where-do-i-start-where-do-i-begin-setup-gpgtools-create-a-new-key-your-first-encrypted-email",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 4948,
+      "pages": [
+        "hack/your/life/2017/06/16/learn-GPG/index.html"
+      ]
+    },
+    {
+      "url": "https://gpgtools.tenderapp.com/kb/how-to/watch-screencast",
+      "finalUrl": "https://gpgtools.tenderapp.com/kb/how-to/watch-screencast",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 2091,
+      "pages": [
+        "hack/your/life/2017/06/16/learn-GPG/index.html"
+      ]
+    },
+    {
+      "url": "https://guides.cocoapods.org/syntax/podfile.html",
+      "finalUrl": "https://guides.cocoapods.org/syntax/podfile.html",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1443,
+      "pages": [
+        "ios/2018/06/23/private-podspec/index.html"
+      ]
+    },
+    {
+      "url": "https://guides.cocoapods.org/syntax/podspec.html",
+      "finalUrl": "https://guides.cocoapods.org/syntax/podspec.html",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1051,
+      "pages": [
+        "ios/2018/06/23/private-podspec/index.html"
+      ]
+    },
+    {
+      "url": "https://guides.cocoapods.org/using/pod-install-vs-update.html",
+      "finalUrl": "https://guides.cocoapods.org/using/pod-install-vs-update.html",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 749,
+      "pages": [
+        "ios/2018/07/04/private-podspec-FAQ/index.html"
+      ]
+    },
+    {
+      "url": "https://halfrost.com/ios_aspect/",
+      "classification": "indeterminate",
+      "error": "URLError",
+      "elapsedMs": 1043,
+      "pages": [
+        "ios/2019/08/10/source-Aspects/index.html"
+      ]
+    },
+    {
+      "url": "https://help.apple.com/itc/appsreporterguide/",
+      "finalUrl": "https://help.apple.com/itc/appsreporterguide/",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1272,
+      "pages": [
+        "ios/2016/12/07/Optimizing-In-App-Purchases/index.html"
+      ]
+    },
+    {
+      "url": "https://help.apple.com/itc/transporteruserguide/?spm=a2c4e.11153940.blogcont701385.7.6aea4101STSXaY",
+      "finalUrl": "https://help.apple.com/itc/transporteruserguide/?spm=a2c4e.11153940.blogcont701385.7.6aea4101STSXaY",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 896,
+      "pages": [
+        "ios/2019/01/07/package-shell/index.html"
+      ]
+    },
+    {
+      "url": "https://help.resilio.com/hc/en-us/articles/206178924-Installing-Sync-package-on-Linux",
+      "finalUrl": "https://help.resilio.com/hc/en-us/articles/206178924-Installing-Sync-package-on-Linux",
+      "status": 403,
+      "classification": "indeterminate",
+      "elapsedMs": 18553,
+      "pages": [
+        "hack/your/life/2017/08/07/Raspberry-Pi/index.html"
+      ]
+    },
+    {
+      "url": "https://help.resilio.com/hc/en-us/articles/210587126-Cannot-connect-to-trackers",
+      "finalUrl": "https://help.resilio.com/hc/en-us/articles/210587126-Cannot-connect-to-trackers",
+      "status": 403,
+      "classification": "indeterminate",
+      "elapsedMs": 18238,
+      "pages": [
+        "hack/your/life/2017/08/07/Raspberry-Pi/index.html"
+      ]
+    },
+    {
+      "url": "https://hub.docker.com/r/linuxserver/radarr",
+      "finalUrl": "https://hub.docker.com/r/linuxserver/radarr",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 9599,
+      "pages": [
+        "ios/2019/11/01/Gen10-NAS/index.html"
+      ]
+    },
+    {
+      "url": "https://hub.docker.com/r/linuxserver/sabnzbd",
+      "finalUrl": "https://hub.docker.com/r/linuxserver/sabnzbd",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 9064,
+      "pages": [
+        "ios/2019/11/01/Gen10-NAS/index.html"
+      ]
+    },
+    {
+      "url": "https://hub.docker.com/r/linuxserver/sonarr",
+      "finalUrl": "https://hub.docker.com/r/linuxserver/sonarr",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 9083,
+      "pages": [
+        "ios/2019/11/01/Gen10-NAS/index.html"
+      ]
+    },
+    {
+      "url": "https://hub.docker.com/r/linuxserver/transmission",
+      "finalUrl": "https://hub.docker.com/r/linuxserver/transmission",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 9099,
+      "pages": [
+        "ios/2019/11/01/Gen10-NAS/index.html"
+      ]
+    },
+    {
+      "url": "https://huggingface.co/spaces/stabilityai/stable-diffusion",
+      "finalUrl": "https://huggingface.co/spaces/stabilityai/stable-diffusion",
+      "status": 401,
+      "classification": "indeterminate",
+      "elapsedMs": 18353,
+      "pages": [
+        "tool/2023/01/25/chatgpt/index.html"
+      ]
+    },
+    {
+      "url": "https://imageoptim.com/mac",
+      "finalUrl": "https://imageoptim.com/mac",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1389,
+      "pages": [
+        "ios/2019/09/19/iOS-App-thin/index.html"
+      ]
+    },
+    {
+      "url": "https://jamesbachini.com/dex-arbitrage/",
+      "classification": "indeterminate",
+      "error": "TimeoutError",
+      "elapsedMs": 9236,
+      "pages": [
+        "tool/2023/01/27/web3/index.html"
+      ]
+    },
+    {
+      "url": "https://jpq.weichao.studio",
+      "finalUrl": "https://jpq.weichao.studio",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 2126,
+      "pages": [
+        "index.html",
+        "projects/index.html"
+      ]
+    },
+    {
+      "url": "https://juejin.im/entry/5833b464da2f600061cbf107",
+      "finalUrl": "https://juejin.cn/post/6844903454343725064",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 7248,
+      "pages": [
+        "ios/2018/06/23/private-podspec/index.html"
+      ]
+    },
+    {
+      "url": "https://juejin.im/post/5a32120f51882575d42f6609",
+      "finalUrl": "https://juejin.cn/post/6844903529560145934",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 6774,
+      "pages": [
+        "ios/2018/10/03/iOS-Watermark-Icon/index.html"
+      ]
+    },
+    {
+      "url": "https://juejin.im/post/5b6cea3c6fb9a04fca3ca608",
+      "finalUrl": "https://juejin.cn/post/6844903654386827277",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 5069,
+      "pages": [
+        "ios/2019/02/14/flutter-Get-Started/index.html"
+      ]
+    },
+    {
+      "url": "https://juejin.im/post/5c3ae5ef518825242165c5ca",
+      "finalUrl": "https://juejin.cn/post/6844903760376889352",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 4397,
+      "pages": [
+        "ios/2019/02/14/flutter-Get-Started/index.html"
+      ]
+    },
+    {
+      "url": "https://juejin.im/post/5cbec5fb5188250aa21919d0",
+      "finalUrl": "https://juejin.cn/post/6844903829075574792",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1766,
+      "pages": [
+        "ios/2019/08/01/cocoapods-binary/index.html"
+      ]
+    },
+    {
+      "url": "https://lbs.amap.com/console/show/picker",
+      "finalUrl": "https://lbs.amap.com/tools/picker",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1552,
+      "pages": [
+        "ios/2018/10/03/iOS-Location-Spoofing/index.html"
+      ]
+    },
+    {
+      "url": "https://lexica.art/",
+      "finalUrl": "https://lexica.art/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 9742,
+      "pages": [
+        "tool/2023/01/25/chatgpt/index.html"
+      ]
+    },
+    {
+      "url": "https://link.juejin.im/?target=https%3A%2F%2Fgithub.com%2FCocoaPods%2Fcocoapods-packager",
+      "finalUrl": "https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2FCocoaPods%2Fcocoapods-packager",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 4566,
+      "pages": [
+        "ios/2019/08/01/cocoapods-binary/index.html"
+      ]
+    },
+    {
+      "url": "https://link.juejin.im/?target=https%3A%2F%2Fgithub.com%2Fleavez%2Fcocoapods-binary",
+      "finalUrl": "https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Fleavez%2Fcocoapods-binary",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 3006,
+      "pages": [
+        "ios/2019/08/01/cocoapods-binary/index.html"
+      ]
+    },
+    {
+      "url": "https://link.juejin.im/?target=https%3A%2F%2Fgithub.com%2FtripleCC%2Fcocoapods-bin",
+      "finalUrl": "https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2FtripleCC%2Fcocoapods-bin",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 2826,
+      "pages": [
+        "ios/2019/08/01/cocoapods-binary/index.html"
+      ]
+    },
+    {
+      "url": "https://link.zhihu.com/?target=http%3A//www.webmin.com/",
+      "finalUrl": "https://link.zhihu.com/?target=http%3A//www.webmin.com/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 858,
+      "pages": [
+        "ios/2019/11/01/Gen10-NAS/index.html"
+      ]
+    },
+    {
+      "url": "https://link.zhihu.com/?target=http%3A//zone.wooyun.org/content/9551",
+      "finalUrl": "https://link.zhihu.com/?target=http%3A//zone.wooyun.org/content/9551",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 329,
+      "pages": [
+        "hack/your/life/2017/06/16/Hacker-Search-Engines/index.html"
+      ]
+    },
+    {
+      "url": "https://link.zhihu.com/?target=https%3A//aria2.github.io/",
+      "finalUrl": "https://link.zhihu.com/?target=https%3A//aria2.github.io/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 236,
+      "pages": [
+        "ios/2019/11/01/Gen10-NAS/index.html"
+      ]
+    },
+    {
+      "url": "https://link.zhihu.com/?target=https%3A//cockpit-project.org/",
+      "finalUrl": "https://link.zhihu.com/?target=https%3A//cockpit-project.org/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 363,
+      "pages": [
+        "ios/2019/11/01/Gen10-NAS/index.html"
+      ]
+    },
+    {
+      "url": "https://link.zhihu.com/?target=https%3A//emby.media/",
+      "finalUrl": "https://link.zhihu.com/?target=https%3A//emby.media/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 303,
+      "pages": [
+        "ios/2019/11/01/Gen10-NAS/index.html"
+      ]
+    },
+    {
+      "url": "https://link.zhihu.com/?target=https%3A//github.com/itgoyo/Aria2",
+      "finalUrl": "https://link.zhihu.com/?target=https%3A//github.com/itgoyo/Aria2",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 289,
+      "pages": [
+        "ios/2019/11/01/Gen10-NAS/index.html"
+      ]
+    },
+    {
+      "url": "https://link.zhihu.com/?target=https%3A//github.com/mayswind/AriaNg",
+      "finalUrl": "https://link.zhihu.com/?target=https%3A//github.com/mayswind/AriaNg",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 281,
+      "pages": [
+        "ios/2019/11/01/Gen10-NAS/index.html"
+      ]
+    },
+    {
+      "url": "https://link.zhihu.com/?target=https%3A//jellyfin.github.io/",
+      "finalUrl": "https://link.zhihu.com/?target=https%3A//jellyfin.github.io/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 276,
+      "pages": [
+        "ios/2019/11/01/Gen10-NAS/index.html"
+      ]
+    },
+    {
+      "url": "https://link.zhihu.com/?target=https%3A//jumpdesktop.com/",
+      "finalUrl": "https://link.zhihu.com/?target=https%3A//jumpdesktop.com/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 262,
+      "pages": [
+        "ios/2019/11/01/Gen10-NAS/index.html"
+      ]
+    },
+    {
+      "url": "https://link.zhihu.com/?target=https%3A//kodi.tv/",
+      "finalUrl": "https://link.zhihu.com/?target=https%3A//kodi.tv/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 270,
+      "pages": [
+        "ios/2019/11/01/Gen10-NAS/index.html"
+      ]
+    },
+    {
+      "url": "https://link.zhihu.com/?target=https%3A//nextcloud.com/",
+      "finalUrl": "https://link.zhihu.com/?target=https%3A//nextcloud.com/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 258,
+      "pages": [
+        "ios/2019/11/01/Gen10-NAS/index.html"
+      ]
+    },
+    {
+      "url": "https://link.zhihu.com/?target=https%3A//www.plex.tv/",
+      "finalUrl": "https://link.zhihu.com/?target=https%3A//www.plex.tv/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 339,
+      "pages": [
+        "ios/2019/11/01/Gen10-NAS/index.html"
+      ]
+    },
+    {
+      "url": "https://link.zhihu.com/?target=https%3A//www.seafile.com/",
+      "finalUrl": "https://link.zhihu.com/?target=https%3A//www.seafile.com/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 321,
+      "pages": [
+        "ios/2019/11/01/Gen10-NAS/index.html"
+      ]
+    },
+    {
+      "url": "https://link.zhihu.com/?target=https%3A//www.utorrent.com/intl/zh/",
+      "finalUrl": "https://link.zhihu.com/?target=https%3A//www.utorrent.com/intl/zh/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 400,
+      "pages": [
+        "ios/2019/11/01/Gen10-NAS/index.html"
+      ]
+    },
+    {
+      "url": "https://link.zhihu.com/?target=https%3A//www.virtualbox.org/",
+      "finalUrl": "https://link.zhihu.com/?target=https%3A//www.virtualbox.org/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 349,
+      "pages": [
+        "ios/2019/11/01/Gen10-NAS/index.html"
+      ]
+    },
+    {
+      "url": "https://linux.cn/article-4742-1.html",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 1126,
+      "pages": [
+        "hack/your/life/2017/06/16/learn-BitCoin/index.html"
+      ]
+    },
+    {
+      "url": "https://localbitcoins.com/",
+      "classification": "indeterminate",
+      "error": "ValueError",
+      "elapsedMs": 540,
+      "pages": [
+        "hack/your/life/2017/06/16/learn-BitCoin/index.html"
+      ]
+    },
+    {
+      "url": "https://lodge.weichao.studio",
+      "finalUrl": "https://lodge.weichao.studio",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 3195,
+      "pages": [
+        "projects/index.html"
+      ]
+    },
+    {
+      "url": "https://maltego.shodan.io",
+      "classification": "indeterminate",
+      "error": "URLError",
+      "elapsedMs": 8584,
+      "pages": [
+        "hack/your/life/2017/06/16/Hacker-Search-Engines/index.html"
+      ]
+    },
+    {
+      "url": "https://marcinszalek.pl/flutter/infinite-dynamic-listview/",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 30001,
+      "pages": [
+        "ios/2019/02/14/flutter-Get-Started/index.html"
+      ]
+    },
+    {
+      "url": "https://marketplace.visualstudio.com/items?itemName=WhenSunset.chatgpt-china",
+      "finalUrl": "https://marketplace.visualstudio.com/items?itemName=WhenSunset.chatgpt-china",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 1675,
+      "pages": [
+        "tool/2023/01/25/chatgpt/index.html"
+      ]
+    },
+    {
+      "url": "https://media.blackhat.com/us-13/US-13-Heffner-Exploiting-Network-Surveillance-Cameras-Like-A-Hollywood-Hacker-Slides.pdf",
+      "finalUrl": "https://media.blackhat.com/us-13/US-13-Heffner-Exploiting-Network-Surveillance-Cameras-Like-A-Hollywood-Hacker-Slides.pdf",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1416,
+      "pages": [
+        "hack/your/life/2017/06/16/Hacker-Search-Engines/index.html"
+      ]
+    },
+    {
+      "url": "https://mp.weixin.qq.com/s/8F8jDf59zLx_vI_88ONCIw",
+      "finalUrl": "https://mp.weixin.qq.com/mp/wappoc_appmsgcaptcha?poc_token=HIqIv2qjUuQ7AXotNZIjilyvPG5JmQm9LsmO-YUa&target_url=https%3A%2F%2Fmp.weixin.qq.com%2Fs%2F8F8jDf59zLx_vI_88ONCIw",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 409,
+      "pages": [
+        "python/2017/06/08/scrapy-Example/index.html"
+      ]
+    },
+    {
+      "url": "https://mp.weixin.qq.com/s/N95afABrhlajeHlxMxZMsg",
+      "finalUrl": "https://mp.weixin.qq.com/mp/wappoc_appmsgcaptcha?poc_token=HIqIv2qjxXd-bIVMn5OHfY1JNrzt2IIjVHzN5zcx&target_url=https%3A%2F%2Fmp.weixin.qq.com%2Fs%2FN95afABrhlajeHlxMxZMsg",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 345,
+      "pages": [
+        "python/2017/06/08/scrapy-Example/index.html"
+      ]
+    },
+    {
+      "url": "https://mp.weixin.qq.com/s/NtwHJLwMigNG-SSr9DDDIQ",
+      "finalUrl": "https://mp.weixin.qq.com/mp/wappoc_appmsgcaptcha?poc_token=HIqIv2qjNVjarDlvnAjvmownZ2RY25cL9EySLQkF&target_url=https%3A%2F%2Fmp.weixin.qq.com%2Fs%2FNtwHJLwMigNG-SSr9DDDIQ",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 388,
+      "pages": [
+        "ios/2019/02/14/flutter-Get-Started/index.html"
+      ]
+    },
+    {
+      "url": "https://mp.weixin.qq.com/s/pEgoQ2LaYdQckwUycH-tWg",
+      "finalUrl": "https://mp.weixin.qq.com/mp/wappoc_appmsgcaptcha?poc_token=HIqIv2qjwhUcSNSj_kAQn_r0uAEk30iquZEjRtXI&target_url=https%3A%2F%2Fmp.weixin.qq.com%2Fs%2FpEgoQ2LaYdQckwUycH-tWg",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 434,
+      "pages": [
+        "hack/your/life/2017/06/16/learn-BitCoin/index.html"
+      ]
+    },
+    {
+      "url": "https://mp.weixin.qq.com/s/tdt0TQtGpiT_LcHkTXLa7A",
+      "finalUrl": "https://mp.weixin.qq.com/mp/wappoc_appmsgcaptcha?poc_token=HIqIv2qjxoEopVZLHt0j1vMEsLjLu72FaG6_vosf&target_url=https%3A%2F%2Fmp.weixin.qq.com%2Fs%2Ftdt0TQtGpiT_LcHkTXLa7A",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 437,
+      "pages": [
+        "python/2017/06/08/scrapy-Example/index.html"
+      ]
+    },
+    {
+      "url": "https://mp.weixin.qq.com/s?__biz=MzAwNDY1ODY2OQ==&mid=207986417&idx=1&sn=77ea7d8e4f8ab7b59111e78c86ccfe66&3rd=MzA3MDU4NTYzMw==&scene=6",
+      "finalUrl": "https://mp.weixin.qq.com/mp/wappoc_appmsgcaptcha?poc_token=HIqIv2qjzQAABNpPB0WTbDYnz-QEjp0oILcP4PBt&target_url=https%3A%2F%2Fmp.weixin.qq.com%2Fs%3F__biz%3DMzAwNDY1ODY2OQ%3D%3D%26mid%3D207986417%26idx%3D1%26sn%3D77ea7d8e4f8ab7b59111e78c86ccfe66%263rd%3DMzA3MDU4NTYzMw%3D%3D%26scene%3D6",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 353,
+      "pages": [
+        "ios/2019/09/19/iOS-App-thin/index.html"
+      ]
+    },
+    {
+      "url": "https://mp.weixin.qq.com/s?__biz=MzIxNDE4MzA4OQ==&mid=2651025755&idx=1&sn=f42dee60ec66510ca2575301d9611b49&chksm=8c5cac85bb2b2593996258241a96a6448eb2c1682d300b6d02f068936171e202deab86c16db1&scene=21",
+      "finalUrl": "https://mp.weixin.qq.com/mp/wappoc_appmsgcaptcha?poc_token=HIuIv2qjmYS3tIzPCmodC2YA6sgkBUL35VOxQPaR&target_url=https%3A%2F%2Fmp.weixin.qq.com%2Fs%3F__biz%3DMzIxNDE4MzA4OQ%3D%3D%26mid%3D2651025755%26idx%3D1%26sn%3Df42dee60ec66510ca2575301d9611b49%26chksm%3D8c5cac85bb2b2593996258241a96a6448eb2c1682d300b6d02f068936171e202deab86c16db1%26scene%3D21",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 509,
+      "pages": [
+        "python/2017/06/08/scrapy-Example/index.html"
+      ]
+    },
+    {
+      "url": "https://mp.weixin.qq.com/s?__biz=MzUxMzcxMzE5Ng==&mid=2247488360&idx=1&sn=94fba30a87d0f9bc0b9ff94d3fed3386&source=41",
+      "finalUrl": "https://mp.weixin.qq.com/mp/wappoc_appmsgcaptcha?poc_token=HIuIv2qjpvphBrPFxWXUpBS8HDXwumlOChaGWNRD&target_url=https%3A%2F%2Fmp.weixin.qq.com%2Fs%3F__biz%3DMzUxMzcxMzE5Ng%3D%3D%26mid%3D2247488360%26idx%3D1%26sn%3D94fba30a87d0f9bc0b9ff94d3fed3386%26source%3D41",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 371,
+      "pages": [
+        "ios/2019/09/19/iOS-App-thin/index.html"
+      ]
+    },
+    {
+      "url": "https://natural-wilderness-81a.notion.site/ae190fb2da6e4c30a3c720bfce2cd8e0?v=3fb735d1b4f44899a7fccaaec8e55fca",
+      "finalUrl": "https://natural-wilderness-81a.notion.site/ae190fb2da6e4c30a3c720bfce2cd8e0?v=3fb735d1b4f44899a7fccaaec8e55fca",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1962,
+      "pages": [
+        "tool/2023/01/27/web3/index.html"
+      ]
+    },
+    {
+      "url": "https://nownownow.com/",
+      "finalUrl": "https://nownownow.com/",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1742,
+      "pages": [
+        "now/index.html"
+      ]
+    },
+    {
+      "url": "https://opensource.apple.com/source/objc4/objc4-646/runtime/objc-sync.mm",
+      "finalUrl": "https://opensource.apple.com/source/objc4/objc4-646/runtime/objc-sync.mm",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 1818,
+      "pages": [
+        "ios/2019/08/10/source-synchronized/index.html"
+      ]
+    },
+    {
+      "url": "https://pages.github.com",
+      "finalUrl": "https://pages.github.com",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 885,
+      "pages": [
+        "hack/your/life/2016/05/19/welcome-to-jekyll/index.html"
+      ]
+    },
+    {
+      "url": "https://pan.baidu.com/s/1eSEHh1g",
+      "finalUrl": "https://pan.baidu.com/share/init?surl=eSEHh1g",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1807,
+      "pages": [
+        "hack/your/life/2017/05/25/WIFI-crack/index.html"
+      ]
+    },
+    {
+      "url": "https://pentest-tools.com/information-gathering/google-hacking",
+      "finalUrl": "https://pentest-tools.com/information-gathering/google-hacking",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 3032,
+      "pages": [
+        "hack/your/life/2017/06/16/Hacker-Search-Engines/index.html"
+      ]
+    },
+    {
+      "url": "https://pic1.zhimg.com/50/v2-e6875425ef6370a620d6fcf111feb77f_hd.jpg",
+      "finalUrl": "https://pic1.zhimg.com/50/v2-e6875425ef6370a620d6fcf111feb77f_hd.jpg",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 992,
+      "pages": [
+        "ios/2019/11/01/Gen10-NAS/index.html"
+      ]
+    },
+    {
+      "url": "https://program-think.blogspot.com/2017/08/GFW-Resilio-Sync.html",
+      "finalUrl": "https://program-think.blogspot.com/2017/08/GFW-Resilio-Sync.html",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 10439,
+      "pages": [
+        "tool/2016/11/05/Resilio-Sync/index.html"
+      ]
+    },
+    {
+      "url": "https://pub.dartlang.org/flutter/packages?q=json",
+      "finalUrl": "https://pub.dev/packages?q=sdk%3Aflutter+json",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 2505,
+      "pages": [
+        "ios/2019/02/14/flutter-Get-Started/index.html"
+      ]
+    },
+    {
+      "url": "https://pypi.org/project/cocoapods-graph/",
+      "finalUrl": "https://pypi.org/project/cocoapods-graph/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1178,
+      "pages": [
+        "ios/2018/12/27/cocoapods-graph/index.html"
+      ]
+    },
+    {
+      "url": "https://qualitycoding.org/xcode-preprocessor-macros/",
+      "finalUrl": "https://qualitycoding.org/xcode-preprocessor-macros/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1759,
+      "pages": [
+        "ios/2019/08/01/cocoapods-binary/index.html"
+      ]
+    },
+    {
+      "url": "https://quota.weichao.studio",
+      "finalUrl": "https://quota.weichao.studio",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 2936,
+      "pages": [
+        "projects/index.html"
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/toolazytoname/FDRepoPush/master/lose_weight.sh",
+      "classification": "indeterminate",
+      "error": "URLError",
+      "elapsedMs": 97,
+      "pages": [
+        "git/2019/08/08/Git-lose-weight/index.html"
+      ]
+    },
+    {
+      "url": "https://reportingitc.apple.com/autoingestion.tft%E3%80%82",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 563,
+      "pages": [
+        "ios/2016/12/07/Optimizing-In-App-Purchases/index.html"
+      ]
+    },
+    {
+      "url": "https://segmentfault.com/q/1010000012705430",
+      "finalUrl": "https://segmentfault.com/q/1010000012705430",
+      "status": 468,
+      "classification": "indeterminate",
+      "elapsedMs": 991,
+      "pages": [
+        "ios/2018/06/23/private-podspec/index.html"
+      ]
+    },
+    {
+      "url": "https://shapeshift.io/",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 630,
+      "pages": [
+        "hack/your/life/2017/06/16/learn-BitCoin/index.html"
+      ]
+    },
+    {
+      "url": "https://sms-activate.org/cn",
+      "finalUrl": "https://sms-activate.org/cn",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1278,
+      "pages": [
+        "tool/2023/01/25/chatgpt/index.html"
+      ]
+    },
+    {
+      "url": "https://softwaredownload.gitbooks.io/openwrt-fanqiang/ebook/03.7.html",
+      "finalUrl": "https://softwaredownload.gitbooks.io/openwrt-fanqiang/content/ebook/03.7.html",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 3568,
+      "pages": [
+        "hack/your/life/2017/05/16/newifi/index.html"
+      ]
+    },
+    {
+      "url": "https://stackoverflow.com/questions/16645726/ios-sdks-renaming-a-lot-of-classes",
+      "finalUrl": "https://stackoverflow.com/questions/16645726/ios-sdks-renaming-a-lot-of-classes",
+      "status": 403,
+      "classification": "indeterminate",
+      "elapsedMs": 3135,
+      "pages": [
+        "ios/2018/07/09/FDTops/index.html"
+      ]
+    },
+    {
+      "url": "https://stackoverflow.com/questions/29241458/cocoapods-specify-podspec-xcconfig-value-for-debug-only?noredirect=1",
+      "finalUrl": "https://stackoverflow.com/questions/29241458/cocoapods-specify-podspec-xcconfig-value-for-debug-only?noredirect=1",
+      "status": 403,
+      "classification": "indeterminate",
+      "elapsedMs": 2434,
+      "pages": [
+        "ios/2019/08/01/cocoapods-binary/index.html"
+      ]
+    },
+    {
+      "url": "https://stackoverflow.com/questions/67699/how-to-clone-all-remote-branches-in-git",
+      "finalUrl": "https://stackoverflow.com/questions/67699/how-to-clone-all-remote-branches-in-git",
+      "status": 403,
+      "classification": "indeterminate",
+      "elapsedMs": 2472,
+      "pages": [
+        "git/2019/08/08/Git-lose-weight/index.html"
+      ]
+    },
+    {
+      "url": "https://svn.mdk3.aircrack-ng.org/mdk3/docs/Documentation_incomplete.html",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 905,
+      "pages": [
+        "hack/your/life/2017/05/26/MDK3-Documentation/index.html"
+      ]
+    },
+    {
+      "url": "https://tech.meituan.com/2018/06/29/ios-multiterminal-reuse.html",
+      "finalUrl": "https://tech.meituan.com/2018/06/29/ios-multiterminal-reuse.html",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 2567,
+      "pages": [
+        "ios/2019/08/01/cocoapods-binary/index.html"
+      ]
+    },
+    {
+      "url": "https://toolazytoname.github.io/AquaSight/",
+      "finalUrl": "https://toolazytoname.github.io/AquaSight/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1340,
+      "pages": [
+        "index.html",
+        "projects/index.html"
+      ]
+    },
+    {
+      "url": "https://toolazytoname.github.io/oneplus-8t-mobile-lab/",
+      "finalUrl": "https://toolazytoname.github.io/oneplus-8t-mobile-lab/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 985,
+      "pages": [
+        "projects/index.html"
+      ]
+    },
+    {
+      "url": "https://totalbitcoin.org/guide-on-how-to-buy-bitcoin/?data2=abmg12k&data2=abmg07b",
+      "finalUrl": "https://totalbitcoin.org/guide-on-how-to-buy-bitcoin/?data2=abmg12k&data2=abmg07b",
+      "status": 526,
+      "classification": "indeterminate",
+      "elapsedMs": 2500,
+      "pages": [
+        "hack/your/life/2017/06/16/learn-BitCoin/index.html"
+      ]
+    },
+    {
+      "url": "https://twitter.com/share?text=Every+time+you+use+the+preprocessor%2C+what+you+see+isn%27t+what+you+compile.&via=qcoding&related=qcoding&url=https://qualitycoding.org/xcode-preprocessor-macros/",
+      "classification": "indeterminate",
+      "error": "ValueError",
+      "elapsedMs": 535,
+      "pages": [
+        "ios/2019/08/01/cocoapods-binary/index.html"
+      ]
+    },
+    {
+      "url": "https://waytoagi.feishu.cn/wiki/QPe5w5g7UisbEkkow8XcDmOpn8e",
+      "finalUrl": "https://waytoagi.feishu.cn/wiki/QPe5w5g7UisbEkkow8XcDmOpn8e?login_redirect_times=1",
+      "status": 302,
+      "classification": "indeterminate",
+      "elapsedMs": 7202,
+      "pages": [
+        "life/2024/04/02/2024-okr/index.html"
+      ]
+    },
+    {
+      "url": "https://web3.weichao.studio",
+      "finalUrl": "https://web3.weichao.studio",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 3689,
+      "pages": [
+        "projects/index.html"
+      ]
+    },
+    {
+      "url": "https://weichao.site",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 888,
+      "pages": [
+        "tool/2024/02/27/AI-learning/index.html"
+      ]
+    },
+    {
+      "url": "https://weichao.studio",
+      "finalUrl": "https://weichao.studio",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 3108,
+      "pages": [
+        "tool/2024/02/27/AI-learning/index.html"
+      ]
+    },
+    {
+      "url": "https://wiiu.titlekeys.com/",
+      "classification": "indeterminate",
+      "error": "RemoteDisconnected",
+      "elapsedMs": 3615,
+      "pages": [
+        "hack/your/life/2016/12/08/WiiU-crack/index.html"
+      ]
+    },
+    {
+      "url": "https://wiki.centos.org/HowTos/InstallFromUSBkey",
+      "finalUrl": "https://wiki.centos.org/HowTos(2f)InstallFromUSBkey.html",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1916,
+      "pages": [
+        "ios/2019/11/01/Gen10-NAS/index.html"
+      ]
+    },
+    {
+      "url": "https://www.alienvault.com/blogs/labs-research/kilerrat-taking-over-where-njrat-remote-access-trojan-left-off",
+      "finalUrl": "https://cybersecurity.att.com/blogs/labs-research/kilerrat-taking-over-where-njrat-remote-access-trojan-left-off",
+      "status": 403,
+      "classification": "indeterminate",
+      "elapsedMs": 11702,
+      "pages": [
+        "hack/your/life/2017/06/16/Hacker-Search-Engines/index.html"
+      ]
+    },
+    {
+      "url": "https://www.bilibili.com/video/BV1a3411X7g5?p=1&vd_source=fff14ac913ea9cdee56699d64abfd3ee",
+      "finalUrl": "https://www.bilibili.com/video/BV1a3411X7g5/?p=1&vd_source=fff14ac913ea9cdee56699d64abfd3ee",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1013,
+      "pages": [
+        "life/2023/01/21/sushi/index.html"
+      ]
+    },
+    {
+      "url": "https://www.bilibili.com/video/BV1px4y1M79x/?spm_id_from=333.337.search-card.all.click&vd_source=fff14ac913ea9cdee56699d64abfd3ee",
+      "finalUrl": "https://www.bilibili.com/video/BV1px4y1M79x/?spm_id_from=333.337.search-card.all.click&vd_source=fff14ac913ea9cdee56699d64abfd3ee",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 534,
+      "pages": [
+        "tool/2023/01/25/chatgpt/index.html"
+      ]
+    },
+    {
+      "url": "https://www.bilibili.com/video/BV1rN4y1c7ox/?spm_id_from=333.999.0.0&vd_source=fff14ac913ea9cdee56699d64abfd3ee",
+      "finalUrl": "https://www.bilibili.com/video/BV1rN4y1c7ox/?spm_id_from=333.999.0.0&vd_source=fff14ac913ea9cdee56699d64abfd3ee",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 218,
+      "pages": [
+        "life/2023/01/21/sushi/index.html"
+      ]
+    },
+    {
+      "url": "https://www.bitstamp.net/",
+      "classification": "indeterminate",
+      "error": "ValueError",
+      "elapsedMs": 540,
+      "pages": [
+        "hack/your/life/2017/06/16/learn-BitCoin/index.html"
+      ]
+    },
+    {
+      "url": "https://www.cnblogs.com/flying_bat/archive/2008/01/18/1044693.html",
+      "finalUrl": "https://www.cnblogs.com/flying_bat/archive/2008/01/18/1044693.html",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 810,
+      "pages": [
+        "ios/2019/08/05/YYKit-source/index.html"
+      ]
+    },
+    {
+      "url": "https://www.cnblogs.com/lout/p/6111739.html",
+      "finalUrl": "https://www.cnblogs.com/lout/p/6111739.html",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 501,
+      "pages": [
+        "git/2019/08/08/Git-lose-weight/index.html"
+      ]
+    },
+    {
+      "url": "https://www.cnblogs.com/sherlockhomles/p/3837113.html",
+      "finalUrl": "https://www.cnblogs.com/sherlockhomles/p/3837113.html",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 283,
+      "pages": [
+        "git/2019/08/08/Git-lose-weight/index.html"
+      ]
+    },
+    {
+      "url": "https://www.cnblogs.com/shines77/p/3460274.html",
+      "finalUrl": "https://www.cnblogs.com/shines77/p/3460274.html",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 284,
+      "pages": [
+        "git/2019/08/08/Git-lose-weight/index.html"
+      ]
+    },
+    {
+      "url": "https://www.coingecko.com",
+      "classification": "indeterminate",
+      "error": "ValueError",
+      "elapsedMs": 540,
+      "pages": [
+        "tool/2023/01/27/web3/index.html"
+      ]
+    },
+    {
+      "url": "https://www.dartlang.org/tools/dartpad",
+      "finalUrl": "https://dart.dev/tools/dartpad",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 3221,
+      "pages": [
+        "ios/2019/02/14/flutter-Get-Started/index.html"
+      ]
+    },
+    {
+      "url": "https://www.deepdotweb.com/2016/09/11/5-hacker-friendly-search-engines-must-use/",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 725,
+      "pages": [
+        "hack/your/life/2017/06/16/Hacker-Search-Engines/index.html"
+      ]
+    },
+    {
+      "url": "https://www.defcon.org/images/defcon-18/dc-18-presentations/Schearer/DEFCON-18-Schearer-SHODAN.pdf",
+      "classification": "indeterminate",
+      "error": "ConnectionResetError",
+      "elapsedMs": 2872,
+      "pages": [
+        "hack/your/life/2017/06/16/Hacker-Search-Engines/index.html"
+      ]
+    },
+    {
+      "url": "https://www.emergentmind.com",
+      "finalUrl": "https://www.emergentmind.com",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1591,
+      "pages": [
+        "tool/2023/01/25/chatgpt/index.html"
+      ]
+    },
+    {
+      "url": "https://www.exploit-db.com/docs/33859.pdf",
+      "finalUrl": "https://www.exploit-db.com/docs/33859.pdf",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 3451,
+      "pages": [
+        "hack/your/life/2017/06/16/Hacker-Search-Engines/index.html"
+      ]
+    },
+    {
+      "url": "https://www.exploit-db.com/google-hacking-database/",
+      "finalUrl": "https://www.exploit-db.com/google-hacking-database",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 2402,
+      "pages": [
+        "hack/your/life/2017/06/16/Hacker-Search-Engines/index.html"
+      ]
+    },
+    {
+      "url": "https://www.gnupg.org/download/index.html?data2=abmg07b",
+      "finalUrl": "https://www.gnupg.org/download/index.html?data2=abmg07b",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1598,
+      "pages": [
+        "hack/your/life/2017/06/16/learn-GPG/index.html"
+      ]
+    },
+    {
+      "url": "https://www.gnupg.org/gph/en/manual.html",
+      "finalUrl": "https://www.gnupg.org/gph/en/manual.html",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1382,
+      "pages": [
+        "hack/your/life/2017/06/16/learn-GPG/index.html"
+      ]
+    },
+    {
+      "url": "https://www.godaddy.com",
+      "finalUrl": "https://www.godaddy.com",
+      "status": 403,
+      "classification": "indeterminate",
+      "elapsedMs": 18702,
+      "pages": [
+        "hack/your/life/2016/05/19/welcome-to-jekyll/index.html"
+      ]
+    },
+    {
+      "url": "https://www.google.com/",
+      "classification": "indeterminate",
+      "error": "ValueError",
+      "elapsedMs": 519,
+      "pages": [
+        "ios/2018/07/04/private-podspec-FAQ/index.html"
+      ]
+    },
+    {
+      "url": "https://www.hpe.com/cn/zh/product-catalog/servers/proliant-servers/pip.hpe-proliant-microserver-gen10.1009955118.html",
+      "classification": "indeterminate",
+      "error": "TimeoutError",
+      "elapsedMs": 9001,
+      "pages": [
+        "ios/2019/11/01/Gen10-NAS/index.html"
+      ]
+    },
+    {
+      "url": "https://www.ibm.com/developerworks/cn/linux/l-cn-nohup/index.html",
+      "finalUrl": "https://developer.ibm.com/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 3705,
+      "pages": [
+        "hack/your/life/2017/06/16/learn-BitCoin/index.html"
+      ]
+    },
+    {
+      "url": "https://www.jianshu.com/p/5338bc626eaf",
+      "finalUrl": "https://www.jianshu.com/p/5338bc626eaf",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 716,
+      "pages": [
+        "ios/2019/08/01/cocoapods-binary/index.html"
+      ]
+    },
+    {
+      "url": "https://www.jianshu.com/p/5e221c5f5a6a",
+      "finalUrl": "https://www.jianshu.com/p/5e221c5f5a6a",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 88,
+      "pages": [
+        "ios/2018/10/03/iOS-Location-Spoofing/index.html"
+      ]
+    },
+    {
+      "url": "https://www.jianshu.com/p/74db5638f34f",
+      "finalUrl": "https://www.jianshu.com/p/74db5638f34f",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 95,
+      "pages": [
+        "ios/2019/09/25/iOS-runtime-unused-class-detect/index.html"
+      ]
+    },
+    {
+      "url": "https://www.jianshu.com/p/a53480ad0364",
+      "finalUrl": "https://www.jianshu.com/p/a53480ad0364",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 87,
+      "pages": [
+        "ios/2019/09/19/iOS-App-thin/index.html"
+      ]
+    },
+    {
+      "url": "https://www.jianshu.com/p/d92a987203b1",
+      "finalUrl": "https://www.jianshu.com/p/d92a987203b1",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 83,
+      "pages": [
+        "ios/2018/06/23/private-podspec/index.html"
+      ]
+    },
+    {
+      "url": "https://www.jianshu.com/p/df21c51668f1",
+      "finalUrl": "https://www.jianshu.com/p/df21c51668f1",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 174,
+      "pages": [
+        "ios/2018/10/03/iOS-Watermark-Icon/index.html"
+      ]
+    },
+    {
+      "url": "https://www.kali.org/downloads/",
+      "finalUrl": "https://www.kali.org/get-kali/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 2377,
+      "pages": [
+        "hack/your/life/2017/05/25/WIFI-crack/index.html"
+      ]
+    },
+    {
+      "url": "https://www.objc.io/issues/17-security/receipt-validation/",
+      "finalUrl": "https://www.objc.io/issues/17-security/receipt-validation/",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 3365,
+      "pages": [
+        "ios/2016/05/28/iap-new-receipt-api-replace/index.html"
+      ]
+    },
+    {
+      "url": "https://www.punkspider.org",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 736,
+      "pages": [
+        "hack/your/life/2017/06/16/Hacker-Search-Engines/index.html"
+      ]
+    },
+    {
+      "url": "https://www.pwnieexpress.com/blog/wps-cracking-with-reaver",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 640,
+      "pages": [
+        "hack/your/life/2017/05/26/WIFI-crack-PIN/index.html"
+      ]
+    },
+    {
+      "url": "https://www.raspberrypi.org/documentation/installation/installing-images/README.md",
+      "finalUrl": "https://www.raspberrypi.com/documentation/installation/installing-images/README.md",
+      "status": 403,
+      "classification": "indeterminate",
+      "elapsedMs": 4097,
+      "pages": [
+        "hack/your/life/2017/08/07/Raspberry-Pi/index.html"
+      ]
+    },
+    {
+      "url": "https://www.raywenderlich.com/69365/audio-tutorial-ios-file-data-formats-2014-edition",
+      "finalUrl": "https://www.kodeco.com/2434-audio-tutorial-for-ios-file-and-data-formats-2014-edition",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 8932,
+      "pages": [
+        "hack/your/life/2016/11/25/Wechat-Export/index.html"
+      ]
+    },
+    {
+      "url": "https://www.raywenderlich.com/69367/audio-tutorial-ios-converting-recording-2014-edition",
+      "finalUrl": "https://www.kodeco.com/2432-audio-tutorial-for-ios-converting-and-recording-2014-edition",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 8596,
+      "pages": [
+        "hack/your/life/2016/11/25/Wechat-Export/index.html"
+      ]
+    },
+    {
+      "url": "https://www.reddit.com/r/BTsynckeys/",
+      "classification": "indeterminate",
+      "error": "ValueError",
+      "elapsedMs": 519,
+      "pages": [
+        "tool/2016/11/05/Resilio-Sync/index.html"
+      ]
+    },
+    {
+      "url": "https://www.sans.org/security-resources/GoogleCheatSheet.pdf",
+      "finalUrl": "https://www.sans.org/posters/google-hacking-and-defense-cheat-sheet",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 3212,
+      "pages": [
+        "hack/your/life/2017/06/16/Hacker-Search-Engines/index.html"
+      ]
+    },
+    {
+      "url": "https://www.shodan.io",
+      "finalUrl": "https://www.shodan.io",
+      "status": 206,
+      "classification": "reachable",
+      "elapsedMs": 1222,
+      "pages": [
+        "hack/your/life/2017/06/16/Hacker-Search-Engines/index.html"
+      ]
+    },
+    {
+      "url": "https://www.slideshare.net/TonyLin31/shodanio-70219922",
+      "finalUrl": "https://www.slideshare.net/slideshow/shodanio-70219922/70219922",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 19436,
+      "pages": [
+        "hack/your/life/2017/06/16/Hacker-Search-Engines/index.html"
+      ]
+    },
+    {
+      "url": "https://www.twice9.com/356.html",
+      "finalUrl": "https://twice9.com/356.html",
+      "status": 404,
+      "classification": "broken",
+      "elapsedMs": 6317,
+      "pages": [
+        "hack/your/life/2017/06/16/learn-BitCoin/index.html"
+      ]
+    },
+    {
+      "url": "https://www.vault-maxi.live/faq",
+      "classification": "indeterminate",
+      "error": "gaierror",
+      "elapsedMs": 612,
+      "pages": [
+        "tool/2023/01/27/web3/index.html"
+      ]
+    },
+    {
+      "url": "https://www.yuque.com/xytech/flutter/pfoy9x",
+      "finalUrl": "https://www.yuque.com/xytech/flutter/pfoy9x",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 1837,
+      "pages": [
+        "ios/2019/02/14/flutter-Get-Started/index.html"
+      ]
+    },
+    {
+      "url": "https://www.zhihu.com/question/20581392",
+      "finalUrl": "https://www.zhihu.com/question/20581392",
+      "status": 403,
+      "classification": "indeterminate",
+      "elapsedMs": 903,
+      "pages": [
+        "hack/your/life/2016/08/13/start-an-ftp-or-sftp-server-in-mac-os/index.html"
+      ]
+    },
+    {
+      "url": "https://www.zhihu.com/question/21359049/answer/588579088",
+      "finalUrl": "https://www.zhihu.com/question/21359049/answer/588579088",
+      "status": 403,
+      "classification": "indeterminate",
+      "elapsedMs": 514,
+      "pages": [
+        "ios/2019/11/01/Gen10-NAS/index.html"
+      ]
+    },
+    {
+      "url": "https://www.zhihu.com/question/23082057/answer/23888551?utm_source=weibo&utm_medium=weibo_share&utm_content=share_answer&utm_campaign=share_button",
+      "finalUrl": "https://www.zhihu.com/question/23082057/answer/23888551?utm_source=weibo&utm_medium=weibo_share&utm_content=share_answer&utm_campaign=share_button",
+      "status": 403,
+      "classification": "indeterminate",
+      "elapsedMs": 502,
+      "pages": [
+        "hack/your/life/2017/06/16/Hacker-Search-Engines/index.html"
+      ]
+    },
+    {
+      "url": "https://www.zhihu.com/question/40871402",
+      "finalUrl": "https://www.zhihu.com/question/40871402",
+      "status": 403,
+      "classification": "indeterminate",
+      "elapsedMs": 235,
+      "pages": [
+        "hack/your/life/2017/05/25/WIFI-crack/index.html"
+      ]
+    },
+    {
+      "url": "https://www.zhihu.com/topic/19577498",
+      "finalUrl": "https://www.zhihu.com/topic/19577498/hot",
+      "status": 403,
+      "classification": "indeterminate",
+      "elapsedMs": 594,
+      "pages": [
+        "python/2017/06/08/scrapy-Example/index.html"
+      ]
+    },
+    {
+      "url": "https://www.zoomeye.org",
+      "finalUrl": "https://www.zoomeye.org",
+      "status": 521,
+      "classification": "indeterminate",
+      "elapsedMs": 1391,
+      "pages": [
+        "hack/your/life/2017/06/16/Hacker-Search-Engines/index.html"
+      ]
+    },
+    {
+      "url": "https://www.zybuluo.com/MicroCai/note/66142",
+      "finalUrl": "https://www.zybuluo.com/MicroCai/note/66142",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 2236,
+      "pages": [
+        "ios/2016/08/17/ResponderChain/index.html"
+      ]
+    },
+    {
+      "url": "https://x.com/toolazytoname",
+      "finalUrl": "https://x.com/toolazytoname",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 2568,
+      "pages": [
+        "index.html",
+        "404.html",
+        "posts/index.html",
+        "projects/index.html",
+        "about/index.html",
+        "now/index.html",
+        "tool/2016/08/13/git-cheet-sheet/index.html",
+        "tool/2016/08/08/json-parser-online/index.html",
+        "tool/2016/11/05/Resilio-Sync/index.html",
+        "tool/2023/01/25/chatgpt/index.html",
+        "tool/2023/01/27/web3/index.html",
+        "tool/2024/02/27/AI-learning/index.html",
+        "tool/2024/04/30/2024-ssh-tunnel/index.html",
+        "git/2019/08/08/Git-lose-weight/index.html",
+        "git/2019/08/09/git-workflow/index.html",
+        "ios/2016/12/07/Optimizing-In-App-Purchases/index.html",
+        "ios/2016/08/17/ResponderChain/index.html",
+        "ios/2016/07/23/symbolicatecrash/index.html",
+        "ios/2016/05/28/iap-new-receipt-api-replace/index.html",
+        "ios/2018/12/27/cocoapods-graph/index.html",
+        "ios/2018/12/27/package-jekins/index.html",
+        "ios/2018/06/23/private-podspec/index.html",
+        "ios/2018/07/13/FDPodBot/index.html",
+        "ios/2018/07/09/FDTops/index.html",
+        "ios/2018/07/04/private-podspec-FAQ/index.html",
+        "ios/2018/10/03/iOS-Watermark-Icon/index.html",
+        "ios/2018/10/03/iOS-Location-Spoofing/index.html",
+        "ios/2019/01/07/package-shell/index.html",
+        "ios/2019/08/01/package-shell-update/index.html",
+        "ios/2019/08/01/vest-package/index.html",
+        "ios/2019/08/01/cocoapods-binary/index.html",
+        "ios/2019/08/10/source-synchronized/index.html",
+        "ios/2019/08/10/source-Aspects/index.html",
+        "ios/2019/08/05/YYKit-source/index.html",
+        "ios/2019/08/04/enumatator-and-string/index.html",
+        "ios/2019/09/25/iOS-runtime-unused-class-detect/index.html",
+        "ios/2019/09/25/iOS-Mach-O/index.html",
+        "ios/2019/09/19/iOS-App-thin/index.html",
+        "ios/2019/09/19/iOS-LSUnusedResources/index.html",
+        "ios/2019/11/01/Gen10-NAS/index.html",
+        "ios/2019/02/14/flutter-Get-Started/index.html",
+        "life/2017/01/10/2017plan/index.html",
+        "life/2023/01/08/book-list/index.html",
+        "life/2023/01/08/movie-sheet-recommended-for-daughter/index.html",
+        "life/2023/01/21/2023-okr/index.html",
+        "life/2023/01/21/sushi/index.html",
+        "life/2023/01/26/quantization/index.html",
+        "life/2024/04/02/2024-okr/index.html",
+        "hack/your/life/2016/12/08/WiiU-crack/index.html",
+        "hack/your/life/2016/08/13/start-an-ftp-or-sftp-server-in-mac-os/index.html",
+        "hack/your/life/2016/07/04/HackCloudDrive/index.html",
+        "hack/your/life/2016/11/25/Wechat-Export/index.html",
+        "hack/your/life/2016/05/19/welcome-to-jekyll/index.html",
+        "hack/your/life/2016/05/29/wall/index.html",
+        "hack/your/life/2017/06/16/Hacker-Search-Engines/index.html",
+        "hack/your/life/2017/06/16/learn-GPG/index.html",
+        "hack/your/life/2017/06/16/learn-BitCoin/index.html",
+        "hack/your/life/2017/08/07/Raspberry-Pi/index.html",
+        "hack/your/life/2017/05/25/WIFI-crack/index.html",
+        "hack/your/life/2017/05/26/WIFI-crack-PIN/index.html",
+        "hack/your/life/2017/05/26/MDK3-Documentation/index.html",
+        "hack/your/life/2017/05/16/newifi/index.html",
+        "python/2019/08/15/resize-image/index.html",
+        "python/2017/06/15/learn-python/index.html",
+        "python/2017/06/08/scrapy-Example/index.html",
+        "fdsdk/2016/12/30/FDsymbolicatecrash/index.html",
+        "fdsdk/2016/07/27/FDDebugObserver/index.html"
+      ]
+    },
+    {
+      "url": "https://yq.aliyun.com/articles/701385?spm=a2c4e.11155435.0.0.4bfd6186xVSLrw",
+      "finalUrl": "https://developer.aliyun.com/article/701385",
+      "status": 200,
+      "classification": "reachable",
+      "elapsedMs": 3215,
+      "pages": [
+        "ios/2019/01/07/package-shell/index.html"
+      ]
+    },
+    {
+      "url": "https://zh.wikipedia.org/wiki/%E8%8B%8F%E8%BD%BC",
+      "classification": "indeterminate",
+      "error": "ValueError",
+      "elapsedMs": 531,
+      "pages": [
+        "life/2023/01/21/sushi/index.html"
+      ]
+    },
+    {
+      "url": "https://zhuanlan.zhihu.com/p/21783890",
+      "finalUrl": "https://zhuanlan.zhihu.com/p/21783890",
+      "status": 403,
+      "classification": "indeterminate",
+      "elapsedMs": 784,
+      "pages": [
+        "hack/your/life/2016/11/25/Wechat-Export/index.html"
+      ]
+    },
+    {
+      "url": "https://zhuanlan.zhihu.com/p/22474033",
+      "finalUrl": "https://zhuanlan.zhihu.com/p/22474033",
+      "status": 403,
+      "classification": "indeterminate",
+      "elapsedMs": 598,
+      "pages": [
+        "hack/your/life/2016/11/25/Wechat-Export/index.html"
+      ]
+    },
+    {
+      "url": "https://zhuanlan.zhihu.com/p/53260098",
+      "finalUrl": "https://zhuanlan.zhihu.com/p/53260098",
+      "status": 403,
+      "classification": "indeterminate",
+      "elapsedMs": 229,
+      "pages": [
+        "ios/2019/11/01/Gen10-NAS/index.html"
+      ]
+    },
+    {
+      "url": "https://zhuanlan.zhihu.com/p/53396745",
+      "finalUrl": "https://zhuanlan.zhihu.com/p/53396745",
+      "status": 403,
+      "classification": "indeterminate",
+      "elapsedMs": 137,
+      "pages": [
+        "ios/2019/08/01/vest-package/index.html"
+      ]
+    }
+  ],
+  "note": "Availability only, not factual validation or safety endorsement. Historical content not modified. DNS can change between validation and connection; run only on trusted built content."
+}

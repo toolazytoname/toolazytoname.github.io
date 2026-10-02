@@ -1,0 +1,11 @@
+{
+  "base": "https://toolazytoname-github-n83jn61kr-toolazytonames-projects.vercel.app",
+  "synthetic": true,
+  "calls": 1,
+  "durationMs": 8108,
+  "ok": true,
+  "status": 200,
+  "source": "ai",
+  "error": null,
+  "reply": "这个网站使用 Astro 7 + TypeScript 构建，部署在 Vercel 上，聊天交互部分按需加载 React 19。"
+}

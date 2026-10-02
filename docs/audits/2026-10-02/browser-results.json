@@ -1,0 +1,328 @@
+{
+  "date": "2026-10-02",
+  "source": "Recorded from T3 collaborative browser evaluation outputs against built dist/client, served on localhost:4322",
+  "axeVersion": "4.13.0",
+  "tags": [
+    "wcag2a",
+    "wcag2aa",
+    "wcag21aa",
+    "wcag22aa"
+  ],
+  "method": "Visible same-origin frames at explicit CSS viewport widths; wait for fonts and finite animations. Not real-device testing.",
+  "results": [
+    {
+      "path": "/",
+      "width": 320,
+      "theme": "light",
+      "horizontalOverflow": false,
+      "failedLoadedImages": [],
+      "violations": [],
+      "manualReview": [
+        "color-contrast"
+      ]
+    },
+    {
+      "path": "/",
+      "width": 768,
+      "theme": "light",
+      "horizontalOverflow": false,
+      "failedLoadedImages": [],
+      "violations": [],
+      "manualReview": [
+        "color-contrast"
+      ]
+    },
+    {
+      "path": "/",
+      "width": 1440,
+      "theme": "light",
+      "horizontalOverflow": false,
+      "failedLoadedImages": [],
+      "violations": [],
+      "manualReview": [
+        "color-contrast"
+      ]
+    },
+    {
+      "path": "/projects/",
+      "width": 320,
+      "theme": "light",
+      "horizontalOverflow": false,
+      "failedLoadedImages": [],
+      "violations": [],
+      "manualReview": [
+        "color-contrast"
+      ]
+    },
+    {
+      "path": "/projects/",
+      "width": 768,
+      "theme": "light",
+      "horizontalOverflow": false,
+      "failedLoadedImages": [],
+      "violations": [],
+      "manualReview": [
+        "color-contrast"
+      ]
+    },
+    {
+      "path": "/projects/",
+      "width": 1440,
+      "theme": "light",
+      "horizontalOverflow": false,
+      "failedLoadedImages": [],
+      "violations": [],
+      "manualReview": [
+        "color-contrast"
+      ]
+    },
+    {
+      "path": "/posts/",
+      "width": 320,
+      "theme": "light",
+      "horizontalOverflow": false,
+      "failedLoadedImages": [],
+      "violations": [],
+      "manualReview": [
+        "color-contrast"
+      ]
+    },
+    {
+      "path": "/posts/",
+      "width": 768,
+      "theme": "light",
+      "horizontalOverflow": false,
+      "failedLoadedImages": [],
+      "violations": [],
+      "manualReview": [
+        "color-contrast"
+      ]
+    },
+    {
+      "path": "/posts/",
+      "width": 1440,
+      "theme": "light",
+      "horizontalOverflow": false,
+      "failedLoadedImages": [],
+      "violations": [],
+      "manualReview": [
+        "color-contrast"
+      ]
+    },
+    {
+      "path": "/about/",
+      "width": 390,
+      "theme": "light",
+      "horizontalOverflow": false,
+      "failedLoadedImages": [],
+      "violations": [],
+      "manualReview": [
+        "color-contrast"
+      ]
+    },
+    {
+      "path": "/about/",
+      "width": 768,
+      "theme": "light",
+      "horizontalOverflow": false,
+      "failedLoadedImages": [],
+      "violations": [],
+      "manualReview": [
+        "color-contrast"
+      ]
+    },
+    {
+      "path": "/about/",
+      "width": 1440,
+      "theme": "light",
+      "horizontalOverflow": false,
+      "failedLoadedImages": [],
+      "violations": [],
+      "manualReview": [
+        "color-contrast"
+      ]
+    },
+    {
+      "path": "/now/",
+      "width": 390,
+      "theme": "light",
+      "horizontalOverflow": false,
+      "failedLoadedImages": [],
+      "violations": [],
+      "manualReview": [
+        "color-contrast"
+      ]
+    },
+    {
+      "path": "/now/",
+      "width": 768,
+      "theme": "light",
+      "horizontalOverflow": false,
+      "failedLoadedImages": [],
+      "violations": [],
+      "manualReview": [
+        "color-contrast"
+      ]
+    },
+    {
+      "path": "/now/",
+      "width": 1440,
+      "theme": "light",
+      "horizontalOverflow": false,
+      "failedLoadedImages": [],
+      "violations": [],
+      "manualReview": [
+        "color-contrast"
+      ]
+    },
+    {
+      "path": "/tool/2024/04/30/2024-ssh-tunnel/",
+      "width": 390,
+      "theme": "light",
+      "horizontalOverflow": false,
+      "failedLoadedImages": [],
+      "violations": [],
+      "manualReview": [
+        "color-contrast"
+      ]
+    },
+    {
+      "path": "/tool/2024/04/30/2024-ssh-tunnel/",
+      "width": 768,
+      "theme": "light",
+      "horizontalOverflow": false,
+      "failedLoadedImages": [],
+      "violations": [],
+      "manualReview": [
+        "color-contrast"
+      ]
+    },
+    {
+      "path": "/tool/2024/04/30/2024-ssh-tunnel/",
+      "width": 1440,
+      "theme": "light",
+      "horizontalOverflow": false,
+      "failedLoadedImages": [],
+      "violations": [],
+      "manualReview": [
+        "color-contrast"
+      ]
+    },
+    {
+      "path": "/404.html",
+      "width": 390,
+      "theme": "light",
+      "horizontalOverflow": false,
+      "failedLoadedImages": [],
+      "violations": [],
+      "manualReview": [
+        "color-contrast"
+      ]
+    },
+    {
+      "path": "/404.html",
+      "width": 768,
+      "theme": "light",
+      "horizontalOverflow": false,
+      "failedLoadedImages": [],
+      "violations": [],
+      "manualReview": [
+        "color-contrast"
+      ]
+    },
+    {
+      "path": "/404.html",
+      "width": 1440,
+      "theme": "light",
+      "horizontalOverflow": false,
+      "failedLoadedImages": [],
+      "violations": [],
+      "manualReview": [
+        "color-contrast"
+      ]
+    },
+    {
+      "path": "/posts/",
+      "width": 390,
+      "theme": "dark",
+      "horizontalOverflow": false,
+      "failedLoadedImages": [],
+      "violations": [],
+      "manualReview": [
+        "color-contrast"
+      ]
+    },
+    {
+      "path": "/posts/",
+      "width": 1440,
+      "theme": "dark",
+      "horizontalOverflow": false,
+      "failedLoadedImages": [],
+      "violations": [],
+      "manualReview": [
+        "color-contrast"
+      ]
+    },
+    {
+      "path": "/projects/",
+      "width": 390,
+      "theme": "dark",
+      "horizontalOverflow": false,
+      "failedLoadedImages": [],
+      "violations": [],
+      "manualReview": [
+        "color-contrast"
+      ]
+    },
+    {
+      "path": "/projects/",
+      "width": 1440,
+      "theme": "dark",
+      "horizontalOverflow": false,
+      "failedLoadedImages": [],
+      "violations": [],
+      "manualReview": [
+        "color-contrast"
+      ]
+    },
+    {
+      "path": "/tool/2024/04/30/2024-ssh-tunnel/",
+      "width": 390,
+      "theme": "dark",
+      "horizontalOverflow": false,
+      "failedLoadedImages": [],
+      "violations": [],
+      "manualReview": [
+        "color-contrast"
+      ]
+    },
+    {
+      "path": "/tool/2024/04/30/2024-ssh-tunnel/",
+      "width": 1440,
+      "theme": "dark",
+      "horizontalOverflow": false,
+      "failedLoadedImages": [],
+      "violations": [],
+      "manualReview": [
+        "color-contrast"
+      ]
+    }
+  ],
+  "functionalChecks": {
+    "archiveSummarySearch": "资源 returns 4 / 61",
+    "archiveCategoryIntersection": "资源 + ios returns 2 / 61",
+    "archiveReload": "URL state restored",
+    "archiveReset": "61 / 61; query params removed; search focused",
+    "mobileMenuEscape": "menu hidden; toggle focused",
+    "skipLinkEnter": "main focused; #main hash",
+    "chatDev": "opens and receives unconfigured static FAQ",
+    "chatProduction": "opens; input focused; no refresh runtime",
+    "chatEscape": "panel inert/hidden; FAB focused"
+  },
+  "limitations": [
+    "color-contrast manual review still required",
+    "No screen reader or real device run",
+    "Shared preview document.hasFocus() is false: native :focus-visible appearance not fully verified",
+    "No deployed HTTP headers or real model calls"
+  ]
+}

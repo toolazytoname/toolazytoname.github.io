@@ -18,7 +18,8 @@ export async function requestChatReply(
   signal: AbortSignal,
 ): Promise<ChatOutcome> {
   let wire = budgetChatMessages(messages);
-  // One recovery attempt shares the caller's deadline, including body reads.
+  // Only retry an explicit 413 rejection with a smaller body. Network/proxy
+  // failures are ambiguous: replaying a POST may pay for the same generation twice.
   for (let attempt = 0; attempt < 2; attempt++) {
     signal.throwIfAborted();
     let res: Response;
@@ -33,7 +34,6 @@ export async function requestChatReply(
       });
     } catch (error) {
       signal.throwIfAborted();
-      if (attempt === 0) continue;
       throw error;
     }
 
@@ -53,7 +53,6 @@ export async function requestChatReply(
         contentType: res.headers.get('content-type'),
         requestId: res.headers.get('x-chat-request-id'),
       });
-      if (attempt === 0 && (res.ok || [502, 503, 504].includes(res.status))) continue;
     }
 
     return {
@@ -61,7 +60,7 @@ export async function requestChatReply(
       reply: parsed?.reply ?? (res.status === 429
         ? '请求太快了，过会儿再问。'
         : '这次没能连上问答服务。可以稍后重试，或直接查看 /projects/、/now/ 和 /about/。'),
-      retryable: res.status === 429 || res.status >= 500 || res.ok,
+      retryable: res.status === 408 || res.status === 429 || res.status >= 500 || res.ok,
     };
   }
   throw new Error('Chat recovery exhausted');

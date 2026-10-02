@@ -2,6 +2,7 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { postSlug } from '@lib/permalink';
+import { normalizeSearch } from '@lib/post-search';
 
 export const prerender = true;
 
@@ -15,7 +16,7 @@ for (const p of all) {
   const cats = Array.isArray(p.data.categories) ? p.data.categories : [p.data.categories];
   cats.forEach((c) => {
     const label = c.toString().trim();
-    const key = label.toLowerCase();
+    const key = normalizeSearch(label);
     if (key && !categoryLabels.has(key)) categoryLabels.set(key, label);
   });
 }
@@ -24,7 +25,7 @@ const categories = [...categoryLabels.entries()].sort(([, a], [, b]) => a.locale
 // Group posts by year
 const byYear = new Map<number, typeof all>();
 for (const p of all) {
-  const y = p.data.date.getFullYear();
+  const y = p.data.date.getUTCFullYear();
   if (!byYear.has(y)) byYear.set(y, []);
   byYear.get(y)!.push(p);
 }
@@ -60,39 +61,50 @@ function dateStr(p: (typeof all)[number]) {
       </header>
 
       <!-- Filters -->
-      <div class="posts-page__filters reveal">
+      <div class="posts-page__filters reveal" data-post-filters hidden>
         <label class="posts-page__search-label" for="post-search">搜索文章</label>
         <input
           type="search"
           class="posts-page__search"
-          placeholder="搜索标题…"
+          placeholder="搜索标题、摘要、标签…"
+          maxlength="200"
+          aria-controls="post-results"
+          autocomplete="off"
           id="post-search"
           data-post-search
         />
-        <div class="posts-page__chips" data-post-chips>
-          <button class="chip chip--active" data-filter="all">全部</button>
+        <div class="posts-page__chips" role="group" aria-label="按分类筛选" data-post-chips>
+          <button type="button" class="chip chip--active" data-filter="all" aria-pressed="true">全部</button>
           {categories.map(([key, label]) => (
-            <button class="chip" data-filter={key}>{label}</button>
+            <button type="button" class="chip" data-filter={key} aria-pressed="false">{label}</button>
           ))}
         </div>
       </div>
 
+      <div class="posts-page__results-bar">
+        <p role="status" aria-live="polite" aria-atomic="true" data-post-status>共 {all.length} 篇文章</p>
+        <button type="button" class="posts-page__reset" data-post-reset hidden>清除筛选</button>
+      </div>
+
       <!-- Post list grouped by year -->
-      <div class="posts-page__list" data-post-list>
+      <div class="posts-page__list" id="post-results" data-post-list>
         {years.map((year) => (
           <section class="year-section" data-year={year}>
-            <h2 class="year-section__title">{year} · {byYear.get(year)!.length} 篇</h2>
+            <h2 class="year-section__title" data-year-title>{year} · {byYear.get(year)!.length} 篇</h2>
             <ol class="year-section__list">
               {byYear.get(year)!.map((p) => (
                 <li
                   class="post-item"
-                  data-title={p.data.title.toLowerCase()}
-                  data-category={primaryCat(p).toLowerCase()}
-                  data-tags={(p.data.tags.join(' ') ?? '').toLowerCase()}
+                  data-search={JSON.stringify({
+                    title: p.data.title,
+                    summary: p.data.summary,
+                    categories: Array.isArray(p.data.categories) ? p.data.categories : [p.data.categories],
+                    tags: p.data.tags,
+                  })}
                 >
                   <a href={`/${slugFor(p)}/`} class="post-item__link">
                     {p.data.cover && (
-                      <img src={p.data.cover} alt="" class="post-item__thumb post-item__thumb--img" loading="lazy" />
+                      <img src={p.data.cover} alt="" class="post-item__thumb post-item__thumb--img" loading="lazy" decoding="async" width="80" height="80" />
                     )}
                     <div class="post-item__body">
                       <div class="post-item__meta">
@@ -112,62 +124,83 @@ function dateStr(p: (typeof all)[number]) {
 
       <!-- Empty state -->
       <p class="posts-page__empty" data-post-empty hidden>
-        没有匹配的文章。
+        没有匹配的文章。试试更短的关键词，或清除筛选查看全部。
       </p>
     </div>
   </section>
 </BaseLayout>
 
 <script>
-  function initPostFilters() {
-    const search = document.querySelector<HTMLInputElement>('[data-post-search]');
-    const chips = document.querySelectorAll<HTMLElement>('[data-filter]');
-    const items = document.querySelectorAll<HTMLElement>('.post-item');
-    const yearSections = document.querySelectorAll<HTMLElement>('.year-section');
-    const empty = document.querySelector<HTMLElement>('[data-post-empty]');
+  import { matchesPost, readPostFilters, writePostFilters, type PostSearchEntry } from '@lib/post-search';
 
-    if (!search || !items.length) return;
+  const search = document.querySelector<HTMLInputElement>('[data-post-search]');
+  const chips = [...document.querySelectorAll<HTMLButtonElement>('[data-filter]')];
+  const items = [...document.querySelectorAll<HTMLElement>('.post-item')].map((element) => ({
+    element, entry: JSON.parse(element.dataset.search!) as PostSearchEntry,
+  }));
+  const sections = [...document.querySelectorAll<HTMLElement>('.year-section')];
+  const empty = document.querySelector<HTMLElement>('[data-post-empty]');
+  const status = document.querySelector<HTMLElement>('[data-post-status]');
+  const reset = document.querySelector<HTMLButtonElement>('[data-post-reset]');
 
-    let activeCategory = 'all';
+  if (search && status && reset && empty) {
+    document.querySelector<HTMLElement>('[data-post-filters]')!.hidden = false;
+    const categories = chips.map((chip) => chip.dataset.filter!);
+    let filters = readPostFilters(new URLSearchParams(location.search), categories);
+    let composing = false;
 
-    function apply() {
-      const q = search!.value.trim().toLowerCase();
+    function apply(syncUrl = true) {
       let visible = 0;
-
-      items.forEach((item) => {
-        const title = item.dataset.title ?? '';
-        const cat = item.dataset.category ?? '';
-        const tags = item.dataset.tags ?? '';
-        const matchesSearch = !q || title.includes(q) || tags.includes(q) || cat.includes(q);
-        const matchesCat = activeCategory === 'all' || cat === activeCategory;
-        const show = matchesSearch && matchesCat;
-        item.hidden = !show;
-        if (show) visible++;
+      items.forEach(({ element, entry }) => {
+        element.hidden = !matchesPost(entry, filters);
+        if (!element.hidden) visible++;
       });
-
-      // Hide empty year sections
-      yearSections.forEach((sec) => {
-        const visItems = sec.querySelectorAll<HTMLElement>('.post-item:not([hidden])');
-        sec.hidden = visItems.length === 0;
+      sections.forEach((section) => {
+        const count = section.querySelectorAll('.post-item:not([hidden])').length;
+        section.hidden = count === 0;
+        section.querySelector('[data-year-title]')!.textContent = `${section.dataset.year} · ${count} 篇`;
       });
-
-      if (empty) empty.hidden = visible > 0;
+      chips.forEach((chip) => {
+        const active = chip.dataset.filter === filters.category;
+        chip.classList.toggle('chip--active', active);
+        chip.setAttribute('aria-pressed', String(active));
+      });
+      empty!.hidden = visible > 0;
+      status!.textContent = `显示 ${visible} / ${items.length} 篇文章`;
+      reset!.hidden = !filters.query && filters.category === 'all';
+      if (syncUrl) {
+        // Filtering should not add one history entry per keystroke.
+        history.replaceState(history.state, '', writePostFilters(new URL(location.href), filters));
+      }
     }
 
-    search.addEventListener('input', apply);
-
-    chips.forEach((chip) => {
-      chip.addEventListener('click', () => {
-        activeCategory = chip.dataset.filter ?? 'all';
-        chips.forEach((c) => c.classList.remove('chip--active'));
-        chip.classList.add('chip--active');
-        apply();
-      });
+    function restore() {
+      filters = readPostFilters(new URLSearchParams(location.search), categories);
+      search!.value = filters.query;
+      apply(false);
+    }
+    function onInput() {
+      if (composing) return;
+      filters.query = search!.value;
+      apply();
+    }
+    search.addEventListener('compositionstart', () => { composing = true; });
+    search.addEventListener('compositionend', () => { composing = false; onInput(); });
+    search.addEventListener('input', onInput);
+    chips.forEach((chip) => chip.addEventListener('click', () => {
+      filters.category = chip.dataset.filter!;
+      apply();
+    }));
+    reset.addEventListener('click', () => {
+      filters = { query: '', category: 'all' };
+      search.value = '';
+      apply();
+      search.focus();
     });
+    window.addEventListener('popstate', restore);
+    window.addEventListener('pageshow', restore);
+    restore();
   }
-
-  document.addEventListener('astro:after-swap', initPostFilters);
-  initPostFilters();
 </script>
 
 <style>
@@ -196,7 +229,7 @@ function dateStr(p: (typeof all)[number]) {
 
   /* Filters */
   .posts-page__filters {
-    margin-bottom: var(--s-10);
+    margin-bottom: var(--s-4);
     display: flex;
     flex-direction: column;
     gap: var(--s-4);
@@ -211,7 +244,6 @@ function dateStr(p: (typeof all)[number]) {
     border-radius: var(--r-md);
     background: var(--color-bg);
     color: var(--color-text);
-    outline: none;
     transition: border-color var(--t-fast) var(--ease-out);
   }
   .posts-page__search-label {
@@ -242,7 +274,8 @@ function dateStr(p: (typeof all)[number]) {
 
   .chip {
     font-size: 13px;
-    padding: 4px 12px;
+    padding: 8px 14px;
+    min-height: var(--touch-target);
     border-radius: 980px;
     border: 1px solid var(--color-border);
     background: var(--color-bg);
@@ -266,6 +299,26 @@ function dateStr(p: (typeof all)[number]) {
     background: var(--color-accent-dark);
     color: var(--color-accent-contrast);
     border-color: var(--color-accent-dark);
+  }
+
+  .posts-page__results-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-4);
+    min-height: var(--touch-target);
+    margin-bottom: var(--s-8);
+    font-size: 14px;
+    color: var(--color-text-muted);
+  }
+  .posts-page__results-bar p { margin: 0; }
+  .posts-page__reset {
+    min-height: var(--touch-target);
+    color: var(--color-accent);
+    font-size: inherit;
+    flex-shrink: 0;
+    text-decoration: underline;
+    text-underline-offset: 4px;
   }
 
   /* Year sections */

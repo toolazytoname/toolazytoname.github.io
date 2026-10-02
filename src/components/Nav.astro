@@ -16,7 +16,7 @@ const isActive = (href: string) =>
 
 <header class="nav" data-nav>
   <div class="nav__inner container-wide">
-    <a href="/" class="nav__brand" aria-label="首页">
+    <a href="/" class="nav__brand">
       <span class="nav__brand-mark">lazy</span>
       <span class="nav__brand-en">weichao.ren</span>
     </a>
@@ -46,6 +46,7 @@ const isActive = (href: string) =>
         class="nav__toggle"
         aria-label="打开菜单"
         aria-expanded="false"
+        aria-controls="mobile-navigation"
         data-nav-toggle
       >
         <span></span><span></span>
@@ -53,7 +54,7 @@ const isActive = (href: string) =>
     </div>
   </div>
 
-  <div class="nav__mobile" data-nav-mobile hidden>
+  <nav class="nav__mobile" id="mobile-navigation" aria-label="手机导航" data-nav-mobile hidden>
     {
       links.map((l) => (
         <a
@@ -65,7 +66,7 @@ const isActive = (href: string) =>
         </a>
       ))
     }
-  </div>
+  </nav>
 </header>
 
 <style>

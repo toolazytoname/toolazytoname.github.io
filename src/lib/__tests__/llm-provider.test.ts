@@ -1,5 +1,8 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { chat } from '../llm';
+// Provider contract tests isolate admission policy; production/Vercel env must
+// not turn these mocked HTTP tests into real shared-store integration tests.
+vi.mock('../model-guard', () => ({ reserveModel: async () => ({ allowed: true, release: async () => {} }) }));
 import { getLlmConfig } from '../llm-config';
 
 const transport = vi.hoisted(() => vi.fn());

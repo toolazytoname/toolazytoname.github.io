@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-02",
+  "deploymentId": "dpl_Le1yA7WEVuakvnnf3joKNJURdKDR",
+  "productionOrigin": "https://www.weichao.ren",
+  "deploymentUrl": "https://toolazytoname-github-n83jn61kr-toolazytonames-projects.vercel.app",
+  "previousProduction": "https://toolazytoname-github-m3l60ijyj-toolazytonames-projects.vercel.app",
+  "provider": "compatible",
+  "model": "free",
+  "protectionMode": "direct",
+  "browserChat": {
+    "synthetic": true,
+    "sourceLabel": "AI",
+    "reply": "这个网站用 Astro 7 + TypeScript 构建，部署在 Vercel，聊天交互按需加载 React 19，问答接口在服务端调用模型。",
+    "overflow": false,
+    "screenshot": "production-live-chat-mobile.png"
+  },
+  "knownNonblockingIssue": "Cloudflare injected analytics beacon blocked by script CSP; page and live chat functional. No policy loosened for analytics."
+}

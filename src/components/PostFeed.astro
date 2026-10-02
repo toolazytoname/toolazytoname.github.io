@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import { postSlug } from '@lib/permalink';
+import { postDateLabel } from '@lib/post-date';
 
 interface Props {
   limit?: number;
@@ -29,17 +30,13 @@ const totalCount = allPosts.length;
         const slug = postSlug(post.id, post.data);
         // Only show authored summaries — body fallback often pulls markdown junk.
         const summary = post.data.summary?.trim() || '';
-        const dateStr = post.data.date.toLocaleDateString('zh-CN', {
-          year: 'numeric',
-          month: '2-digit',
-          day: '2-digit',
-        });
+        const dateStr = postDateLabel(post.data.date);
 
         return (
           <li class="post-feed__item reveal" style={`--i: ${i};`}>
             <a href={`/${slug}/`} class="post-feed__link">
               {post.data.cover && (
-                <img src={post.data.cover} alt="" class="post-feed__thumb post-feed__thumb--img" loading="lazy" />
+                <img src={post.data.cover} alt="" class="post-feed__thumb post-feed__thumb--img" loading="lazy" decoding="async" width="80" height="80" />
               )}
               <div class="post-feed__content">
                 <time class="post-feed__date" datetime={post.data.date.toISOString()}>

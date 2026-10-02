@@ -4,7 +4,7 @@ import Nav from '@components/Nav.astro';
 import Footer from '@components/Footer.astro';
 import ScrollProgress from '@components/ScrollProgress.astro';
 import ThemeInit from '@components/ThemeInit.astro';
-import { SITE, type Seo, websiteJsonLd, articleJsonLd } from '@lib/seo';
+import { SITE, type Seo, websiteJsonLd, articleJsonLd, serializeJsonLd } from '@lib/seo';
 
 interface Props {
   seo?: Seo;
@@ -62,10 +62,10 @@ if (jsonLdExtra) {
 
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {!seo?.noindex && <link rel="canonical" href={canonical} />}
 
     <!-- JSON-LD structured data -->
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLdOutput)} />
+    <script is:inline type="application/ld+json" set:html={serializeJsonLd(jsonLdOutput)} />
 
     <!-- Open Graph -->
     <meta property="og:type" content={seo?.type ?? 'website'} />
@@ -100,7 +100,7 @@ if (jsonLdExtra) {
     <link rel="alternate" type="application/rss+xml" title={`${SITE.name} (legacy)`} href="/feed.xml" />
 
     <!-- Preconnect for photo domain (if added later) -->
-    <meta name="robots" content="index,follow" />
+    <meta name="robots" content={seo?.noindex ? 'noindex,follow' : 'index,follow'} />
   </head>
 
   <body>
@@ -109,7 +109,7 @@ if (jsonLdExtra) {
     <ScrollProgress />
     <Nav />
 
-    <main id="main">
+    <main id="main" tabindex="-1">
       <slot />
     </main>
 
@@ -129,6 +129,10 @@ if (jsonLdExtra) {
           let lastError: unknown;
 
           async function loadMountChat() {
+            // This manually mounted island does not run Astro's before-hydration
+            // hook. Install the official Fast Refresh preamble before TSX loads.
+            // Vite removes this development-only import from production output.
+            if (import.meta.env.DEV) await import('@vitejs/plugin-react/preamble');
             const failedUrl = lastError ? moduleUrlFromError(lastError) : null;
             if (failedUrl) {
               return import(/* @vite-ignore */ cacheBustedUrl(failedUrl));
@@ -219,18 +223,20 @@ if (jsonLdExtra) {
 
     <style>
       .skip-link {
-        position: absolute;
-        top: -40px;
+        position: fixed;
+        top: 0;
+        transform: translateY(calc(-100% - 4px));
         left: 12px;
         background: var(--color-ink);
         color: var(--color-ivory);
         padding: 8px 12px;
         border-radius: var(--r-md);
         z-index: 10000;
-        transition: top 0.2s;
+        transition: transform var(--t-fast) var(--ease-out);
       }
       .skip-link:focus {
         top: 12px;
+        transform: translateY(0);
       }
     </style>
   </body>

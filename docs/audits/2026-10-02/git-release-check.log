@@ -1,0 +1,173 @@
+
+> weichao-ren@1.0.0 release:check
+> npm run audit:deps && npm run ci
+
+
+> weichao-ren@1.0.0 audit:deps
+> npm audit --registry=https://registry.npmjs.org --audit-level=high
+
+found 0 vulnerabilities
+
+> weichao-ren@1.0.0 ci
+> npm test && npm run build && npm run verify:urls && npm run verify:site
+
+
+> weichao-ren@1.0.0 test
+> vitest run
+
+
+ RUN  v4.1.11 /Users/lazy/Code/crack/toolazytoname.github.io
+
+
+ Test Files  17 passed (17)
+      Tests  166 passed (166)
+   Start at  06:30:33
+   Duration  956ms (transform 662ms, setup 0ms, import 1.52s, tests 485ms, environment 2ms)
+
+
+> weichao-ren@1.0.0 build
+> astro check && astro build
+
+06:30:37 [content] Syncing content
+06:30:37 [content] Synced content
+06:30:37 [types] Generated 535ms
+06:30:37 [check] Getting diagnostics for Astro files in /Users/lazy/Code/crack/toolazytoname.github.io...
+Result (80 files):
+- 0 errors
+- 0 warnings
+- 0 hints
+
+06:30:44 [WARN] [config] Shiki syntax highlighting uses inline styles that are not compatible with Content Security Policy (CSP). Consider using Prism syntax highlighting instead, or disable CSP if Shiki is required.
+06:30:44 [WARN] [csp] `security.csp.scriptDirective` defines `script-src` resources ('self') as well as `script-src-attr` resources or hashes. Because `script-src-attr` override `script-src` for their scope (browsers do not fall back), those `script-src` resources will not apply there. Add them to the corresponding `kind` if needed.
+06:30:44 [WARN] [csp] `security.csp.styleDirective` defines `style-src` resources ('self') as well as `style-src-attr` resources or hashes. Because `style-src-attr` override `style-src` for their scope (browsers do not fall back), those `style-src` resources will not apply there. Add them to the corresponding `kind` if needed.
+06:30:44 [content] Syncing content
+06:30:44 [content] Synced content
+06:30:44 [types] Generated 365ms
+06:30:44 [build] output: "server"
+06:30:44 [build] mode: "server"
+06:30:44 [build] directory: /Users/lazy/Code/crack/toolazytoname.github.io/dist/
+06:30:44 [build] adapter: @astrojs/vercel
+06:30:44 [build] Collecting build info...
+06:30:44 [build] ✓ Completed in 486ms.
+06:30:44 [build] Building server entrypoints...
+06:30:45 [vite] ✓ built in 533ms
+06:30:45 [vite] ✓ built in 184ms
+06:30:45 [vite] ✓ built in 183ms
+
+ prerendering static routes
+06:30:45   ├─ /404.html (+14ms)
+06:30:45   ├─ /about/index.html (+3ms)
+06:30:45   ├─ /feed.xml (+88ms)
+06:30:45   ├─ /now/index.html (+3ms)
+06:30:45   ├─ /posts/index.html (+5ms)
+06:30:45   ├─ /posts.xml (+4ms)
+06:30:45   ├─ /projects/index.html (+5ms)
+06:30:45   ├─ /robots.txt (+3ms)
+06:30:45   ├─ /index.html (+12ms)
+06:30:45   ├─ /hack/your/life/2016/05/19/welcome-to-jekyll/index.html (+34ms)
+06:30:45   ├─ /ios/2016/05/28/iap-new-receipt-api-replace/index.html (+3ms)
+06:30:45   ├─ /hack/your/life/2016/05/29/wall/index.html (+3ms)
+06:30:45   ├─ /hack/your/life/2016/07/04/HackCloudDrive/index.html (+2ms)
+06:30:45   ├─ /ios/2016/07/23/symbolicatecrash/index.html (+2ms)
+06:30:45   ├─ /fdsdk/2016/07/27/FDDebugObserver/index.html (+1ms)
+06:30:45   ├─ /tool/2016/08/08/json-parser-online/index.html (+2ms)
+06:30:45   ├─ /tool/2016/08/13/git-cheet-sheet/index.html (+1ms)
+06:30:45   ├─ /hack/your/life/2016/08/13/start-an-ftp-or-sftp-server-in-mac-os/index.html (+2ms)
+06:30:45   ├─ /ios/2016/08/17/ResponderChain/index.html (+1ms)
+06:30:45   ├─ /tool/2016/11/05/Resilio-Sync/index.html (+2ms)
+06:30:45   ├─ /hack/your/life/2016/11/25/Wechat-Export/index.html (+2ms)
+06:30:45   ├─ /ios/2016/12/07/Optimizing-In-App-Purchases/index.html (+2ms)
+06:30:45   ├─ /hack/your/life/2016/12/08/WiiU-crack/index.html (+1ms)
+06:30:45   ├─ /fdsdk/2016/12/30/FDsymbolicatecrash/index.html (+1ms)
+06:30:45   ├─ /life/2017/01/10/2017plan/index.html (+1ms)
+06:30:45   ├─ /hack/your/life/2017/05/16/newifi/index.html (+1ms)
+06:30:45   ├─ /hack/your/life/2017/05/25/WIFI-crack/index.html (+1ms)
+06:30:45   ├─ /hack/your/life/2017/05/26/WIFI-crack-PIN/index.html (+1ms)
+06:30:45   ├─ /hack/your/life/2017/05/26/MDK3-Documentation/index.html (+1ms)
+06:30:45   ├─ /python/2017/06/08/scrapy-Example/index.html (+2ms)
+06:30:45   ├─ /python/2017/06/15/learn-python/index.html (+2ms)
+06:30:45   ├─ /hack/your/life/2017/06/16/learn-GPG/index.html (+2ms)
+06:30:45   ├─ /hack/your/life/2017/06/16/learn-BitCoin/index.html (+3ms)
+06:30:45   ├─ /hack/your/life/2017/06/16/Hacker-Search-Engines/index.html (+2ms)
+06:30:45   ├─ /hack/your/life/2017/08/07/Raspberry-Pi/index.html (+1ms)
+06:30:45   ├─ /ios/2018/06/23/private-podspec/index.html (+2ms)
+06:30:45   ├─ /ios/2018/07/04/private-podspec-FAQ/index.html (+2ms)
+06:30:45   ├─ /ios/2018/07/09/FDTops/index.html (+1ms)
+06:30:45   ├─ /ios/2018/07/13/FDPodBot/index.html (+1ms)
+06:30:45   ├─ /ios/2018/10/03/iOS-Location-Spoofing/index.html (+1ms)
+06:30:45   ├─ /ios/2018/10/03/iOS-Watermark-Icon/index.html (+1ms)
+06:30:45   ├─ /ios/2018/12/27/cocoapods-graph/index.html (+2ms)
+06:30:45   ├─ /ios/2018/12/27/package-jekins/index.html (+2ms)
+06:30:45   ├─ /ios/2019/01/07/package-shell/index.html (+2ms)
+06:30:45   ├─ /ios/2019/02/14/flutter-Get-Started/index.html (+2ms)
+06:30:45   ├─ /ios/2019/08/01/cocoapods-binary/index.html (+2ms)
+06:30:45   ├─ /ios/2019/08/01/package-shell-update/index.html (+1ms)
+06:30:45   ├─ /ios/2019/08/01/vest-package/index.html (+1ms)
+06:30:45   ├─ /ios/2019/08/04/enumatator-and-string/index.html (+1ms)
+06:30:45   ├─ /ios/2019/08/05/YYKit-source/index.html (+1ms)
+06:30:45   ├─ /git/2019/08/08/Git-lose-weight/index.html (+2ms)
+06:30:45   ├─ /git/2019/08/09/git-workflow/index.html (+1ms)
+06:30:45   ├─ /ios/2019/08/10/source-Aspects/index.html (+4ms)
+06:30:45   ├─ /ios/2019/08/10/source-synchronized/index.html (+2ms)
+06:30:45   ├─ /python/2019/08/15/resize-image/index.html (+2ms)
+06:30:45   ├─ /ios/2019/09/19/iOS-App-thin/index.html (+1ms)
+06:30:45   ├─ /ios/2019/09/19/iOS-LSUnusedResources/index.html (+1ms)
+06:30:45   ├─ /ios/2019/09/25/iOS-Mach-O/index.html (+1ms)
+06:30:45   ├─ /ios/2019/09/25/iOS-runtime-unused-class-detect/index.html (+1ms)
+06:30:45   ├─ /ios/2019/11/01/Gen10-NAS/index.html (+1ms)
+06:30:45   ├─ /life/2023/01/08/movie-sheet-recommended-for-daughter/index.html (+1ms)
+06:30:45   ├─ /life/2023/01/08/book-list/index.html (+2ms)
+06:30:45   ├─ /life/2023/01/26/quantization/index.html (+1ms)
+06:30:45   ├─ /life/2023/01/21/2023-okr/index.html (+2ms)
+06:30:45   ├─ /life/2023/01/21/sushi/index.html (+1ms)
+06:30:45   ├─ /tool/2023/01/25/chatgpt/index.html (+1ms)
+06:30:45   ├─ /tool/2023/01/27/web3/index.html (+1ms)
+06:30:45   ├─ /tool/2024/02/27/AI-learning/index.html (+1ms)
+06:30:45   ├─ /life/2024/04/02/2024-okr/index.html (+1ms)
+06:30:45   ├─ /tool/2024/04/30/2024-ssh-tunnel/index.html (+1ms)
+06:30:45 ✓ Completed in 302ms.
+
+ generating optimized images
+06:30:45   ▶ /_astro/home-nas.TWvq211s_Z1lxnBd.webp (reused cache entry) (+1ms) (1/6)
+06:30:45   ▶ /_astro/aquasight.CXrZGWgJ_ZEAbg3.webp (reused cache entry) (+1ms) (2/6)
+06:30:45   ▶ /_astro/aquasight.CXrZGWgJ_ZIKzXV.webp (reused cache entry) (+1ms) (3/6)
+06:30:45   ▶ /_astro/home-nas.TWvq211s_Z2do8Lk.webp (reused cache entry) (+1ms) (4/6)
+06:30:45   ▶ /_astro/aquasight.CXrZGWgJ_Z2aPbF5.webp (reused cache entry) (+1ms) (5/6)
+06:30:45   ▶ /_astro/home-nas.TWvq211s_Z1jJGr9.webp (reused cache entry) (+1ms) (6/6)
+06:30:45 ✓ Completed in 3ms.
+
+06:30:45 [build] Rearranging server assets...
+06:30:45 [build] ✓ Completed in 1.24s.
+06:30:45 [@astrojs/vercel] Bundling function ../../../../dist/server/entry.mjs
+06:30:47 [@astrojs/sitemap] `sitemap-index.xml` created at `dist/client`
+06:30:47 [@astrojs/vercel] Copying static files to .vercel/output/static
+06:30:47 [build] Server built in 3.16s
+06:30:47 [build] Complete!
+
+> weichao-ren@1.0.0 verify:urls
+> python3 scripts/test_verify_urls.py && python3 scripts/verify-urls.py
+
+verify-urls helpers: ok
+Posts dir: /Users/lazy/Code/crack/toolazytoname.github.io/src/content/posts
+Total posts: 61
+Unique URLs: 61
+Frozen pages: 61
+Redirects: 1
+Dist check: yes
+Failed: 0
+
+> weichao-ren@1.0.0 verify:site
+> python3 -m unittest discover -s scripts -p "test_*.py" && python3 scripts/verify-site.py
+
+....................
+----------------------------------------------------------------------
+Ran 20 tests in 0.013s
+
+OK
+{
+  "html_pages": 71,
+  "legacy_semantic_exemptions": 4,
+  "local_references": 3827,
+  "total_js_gzip_bytes": 65203,
+  "errors": []
+}

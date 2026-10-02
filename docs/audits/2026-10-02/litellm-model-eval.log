@@ -1,0 +1,12 @@
+
+> weichao-ren@1.0.0 eval:model
+> vitest run --config scripts/model-eval.config.ts
+
+
+ RUN  v4.1.11 /Users/lazy/Code/crack/toolazytoname.github.io
+
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  05:39:41
+   Duration  12.70s (transform 62ms, setup 0ms, import 201ms, tests 12.33s, environment 0ms)

@@ -5,6 +5,12 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel';
 import { loadEnv } from 'vite';
+import { unified } from '@astrojs/markdown-remark';
+import rehypeRaw from 'rehype-raw';
+import { readFileSync } from 'node:fs';
+const linkHealth = JSON.parse(readFileSync(new URL('./src/data/external-link-health.json', import.meta.url), 'utf8'));
+const normalizeExternal = (/** @type {string} */ value) => { try { const u = new URL(value); u.hash = ''; return u.href; } catch { return value; } };
+const unavailableLinks = new Map(Object.entries(linkHealth).map(([url, value]) => [normalizeExternal(url), value]));
 
 /** @param {any} node @param {(n: any) => void} visit */
 function walk(node, visit) {
@@ -46,6 +52,41 @@ function rehypeLazyContentImages() {
   };
 }
 
+// Keep historical Markdown immutable, but do not ship mixed-content embeds.
+function rehypeSafeEmbeds() {
+  /** @param {any} tree */
+  return (tree) => {
+    walk(tree, (node) => {
+      if (node?.type !== 'element' || node.tagName !== 'iframe') return;
+      const src = node.properties?.src;
+      if (typeof src === 'string' && src.startsWith('http://')) {
+        node.tagName = 'a';
+        node.properties = { href: src, target: '_blank', rel: ['noopener', 'noreferrer'] };
+        node.children = [{ type: 'text', value: '打开历史外部工具（新窗口；外部站点可能已失效）' }];
+      } else {
+        node.properties ??= {};
+        node.properties.title ||= '嵌入内容';
+        node.properties.loading ||= 'lazy';
+      }
+    });
+  };
+}
+
+// Availability annotations are compiled from a dated audit snapshot, never
+// written back into immutable historical Markdown or silently replaced URLs.
+function rehypeExternalLinkHealth() {
+  /** @param {any} tree */
+  return (tree) => walk(tree, (node) => {
+    if (node?.type !== 'element' || node.tagName !== 'a' || typeof node.properties?.href !== 'string') return;
+    const health = unavailableLinks.get(normalizeExternal(node.properties.href));
+    if (!health) return;
+    node.children ??= [];
+    node.children.push({ type: 'element', tagName: 'small', properties: { className: ['external-link-note'] }, children: [
+      { type: 'text', value: `（历史链接：${health.checkedAt} 检测返回 ${health.status}）` },
+    ] });
+  });
+}
+
 function rehypeNameToId() {
   /** @param {any} tree */
   return (tree) => {
@@ -73,10 +114,24 @@ export default defineConfig({
   // 百度/GSC both have those indexed. Switching to 'never' would cause a
   // 301-storm on every old link after cutover.
   trailingSlash: 'always',
+  security: {
+    csp: {
+      directives: [
+        "default-src 'self'", "base-uri 'self'", "object-src 'none'",
+        "connect-src 'self'", "img-src 'self' https: data:",
+        "font-src 'self'", "frame-src 'self'", "form-action 'self'",
+      ],
+      scriptDirective: { resources: ["'self'", { kind: 'attribute', resource: "'none'" }] },
+      // React and progress animations set style attributes; executable inline
+      // handlers stay forbidden. Astro hashes the generated script/style tags.
+      styleDirective: { resources: ["'self'", { kind: 'attribute', resource: "'unsafe-inline'" }] },
+    },
+  },
   output: 'server',
   adapter: vercel({
     webAnalytics: { enabled: false },
-    imageService: true,
+    // Prerender responsive screenshots with Astro/Sharp, not a runtime image proxy.
+    imageService: false,
   }),
   markdown: {
     shikiConfig: {
@@ -84,14 +139,18 @@ export default defineConfig({
       // keeps syntax colors and meets 4.5:1 for comment text.
       theme: 'github-dark-high-contrast',
     },
-    remarkPlugins: [remarkNormalizeHeadings],
-    rehypePlugins: [rehypeLazyContentImages, rehypeNameToId],
+    processor: unified({
+      remarkPlugins: [remarkNormalizeHeadings],
+      rehypePlugins: [rehypeRaw, rehypeLazyContentImages, rehypeNameToId, rehypeSafeEmbeds, rehypeExternalLinkHealth],
+    }),
   },
   redirects: {
     '/life/2024/04/02/024-okr': '/life/2024/04/02/2024-okr',
   },
   integrations: [
-    react(),
+    // Astro passes an explicit exclusion list to plugin-react; retain the
+    // plugin's node_modules exclusion so Fast Refresh never rewrites React.
+    react({ exclude: [/\/node_modules\//] }),
     mdx(),
     sitemap({
       filter: (page) => !page.includes('/404'),
@@ -107,16 +166,6 @@ export default defineConfig({
         '@styles': '/src/styles',
       },
     },
-    // Rolldown prebundle was resolving jsx-dev-runtime to the production
-    // build where jsxDEV is void 0, which emptied every React island.
-    optimizeDeps: {
-      exclude: [
-        'react',
-        'react-dom',
-        'react-dom/client',
-        'react/jsx-runtime',
-        'react/jsx-dev-runtime',
-      ],
-    },
+
   },
 });

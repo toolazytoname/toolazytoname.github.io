@@ -1,0 +1,8 @@
+{
+  "checkedConfiguredSecretValues": 1,
+  "publicTextFiles": 89,
+  "publicLeaks": [],
+  "evidenceTextFiles": 25,
+  "evidenceLeaks": [],
+  "scope": "current configured values only; not a git-history/general secret audit"
+}

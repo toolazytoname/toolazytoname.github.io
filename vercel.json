@@ -1,31 +1,82 @@
 {
-  "buildCommand": "npm run build",
+  "buildCommand": "npm run release:check",
   "installCommand": "npm ci",
   "outputDirectory": "dist",
   "framework": null,
   "headers": [
     {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "base-uri 'self'; object-src 'none'; frame-ancestors 'self'"
+        }
+      ]
+    },
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    },
+    {
       "source": "/_astro/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/(.*)\\.(jpg|jpeg|png|webp|avif|svg)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
+        }
       ]
     },
     {
       "source": "/fonts/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     }
   ],
   "redirects": [
-    { "source": "/life/2024/04/02/024-okr", "destination": "/life/2024/04/02/2024-okr/", "permanent": true },
-    { "source": "/life/2024/04/02/024-okr/", "destination": "/life/2024/04/02/2024-okr/", "permanent": true }
+    {
+      "source": "/life/2024/04/02/024-okr",
+      "destination": "/life/2024/04/02/2024-okr/",
+      "permanent": true
+    },
+    {
+      "source": "/life/2024/04/02/024-okr/",
+      "destination": "/life/2024/04/02/2024-okr/",
+      "permanent": true
+    }
   ],
   "cleanUrls": true
 }

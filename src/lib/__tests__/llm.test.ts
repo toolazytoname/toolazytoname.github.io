@@ -2,6 +2,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { chat } from '../llm';
 
 const generate = vi.hoisted(() => vi.fn());
+const reserve = vi.hoisted(() => vi.fn());
+vi.mock('../model-guard', () => ({ reserveModel: reserve }));
 vi.mock('openai', () => ({ default: class {
   static APIError = class extends Error {};
   chat = { completions: { create: generate } };
@@ -9,6 +11,7 @@ vi.mock('openai', () => ({ default: class {
 
 beforeEach(() => {
   generate.mockReset();
+  reserve.mockReset().mockResolvedValue({ allowed: true, release: vi.fn().mockResolvedValue(undefined) });
   vi.stubEnv('CHAT_PROVIDER', '');
   vi.stubEnv('OPENROUTER_API_KEY', '');
   vi.stubEnv('AGNES_API_KEY', 'test-only');
@@ -77,5 +80,30 @@ describe('contextual site answers', () => {
     await vi.advanceTimersByTimeAsync(12000);
     expect(await pending).toMatchObject({ source: 'error', error: 'upstream_timeout' });
     expect(vi.getTimerCount()).toBe(0);
+  });
+});
+
+
+describe('model admission and cleanup', () => {
+  it('never invokes the provider when shared protection is unavailable', async () => {
+    reserve.mockResolvedValue({ allowed: false, error: 'model_protection_unavailable', retryAfter: 30 });
+    expect(await chat([{ role: 'user', content: '为什么这样设计' }], 'test-ip')).toMatchObject({ source: 'error', error: 'model_protection_unavailable', retryAfter: 30 });
+    expect(reserve).toHaveBeenCalledWith('test-ip');
+    expect(generate).not.toHaveBeenCalled();
+  });
+  it('keeps precise FAQs available when the budget is exhausted', async () => {
+    reserve.mockResolvedValue({ allowed: false, error: 'model_budget', retryAfter: 60 });
+    const result = await chat([{ role: 'user', content: '你这个网站是用什么做的' }]);
+    expect(result).toMatchObject({ source: 'fallback', error: 'model_budget' });
+    expect(result.reply).toContain('Astro');
+    expect(generate).not.toHaveBeenCalled();
+  });
+  it.each([true, false])('releases reservation after success/failure: %s', async success => {
+    const release = vi.fn().mockResolvedValue(undefined);
+    reserve.mockResolvedValue({ allowed: true, release });
+    if (success) generate.mockResolvedValue({ choices: [{ message: { content: '回答' } }] });
+    else generate.mockRejectedValue(new Error('network'));
+    await chat([{ role: 'user', content: '你好' }]);
+    expect(release).toHaveBeenCalledTimes(1);
   });
 });

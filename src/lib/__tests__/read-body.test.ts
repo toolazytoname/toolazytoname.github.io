@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi, afterEach } from 'vitest';
 import { MAX_BODY_BYTES } from '../chat-request';
 import { readLimitedText } from '../read-body';
 import { llmUnavailableResult } from '../llm';
@@ -52,5 +52,32 @@ describe('llmUnavailableResult', () => {
   it('falls back without pretending to be a static hit when no key', () => {
     const result = llmUnavailableResult(false);
     expect(result.source).toBe('fallback');
+  });
+});
+
+describe('body read deadlines and encoding', () => {
+  afterEach(() => vi.useRealTimers());
+  it('rejects a declared oversized body without waiting for chunks', async () => {
+    const result = await readLimitedText(requestFrom('', { headers: { 'content-length': String(MAX_BODY_BYTES + 1) } }));
+    expect(result).toMatchObject({ ok: false, status: 413 });
+  });
+  it('stops a stalled stream, even if cancellation does not resolve', async () => {
+    vi.useFakeTimers();
+    const cancel = vi.fn(() => new Promise<void>(() => {}));
+    const request = { headers: new Headers(), body: new ReadableStream({ cancel }) } as Request;
+    const pending = readLimitedText(request, 100, 1000);
+    await vi.advanceTimersByTimeAsync(1000);
+    expect(await pending).toMatchObject({ ok: false, status: 408 });
+    expect(cancel).toHaveBeenCalledOnce();
+    expect(vi.getTimerCount()).toBe(0);
+  });
+  it('clears the deadline after successful reads', async () => {
+    vi.useFakeTimers();
+    await readLimitedText(requestFrom('hello'));
+    expect(vi.getTimerCount()).toBe(0);
+  });
+  it('rejects invalid UTF-8 instead of silently changing message content', async () => {
+    const request = new Request('https://example.test', { method: 'POST', body: new Uint8Array([0xff]) });
+    await expect(readLimitedText(request)).rejects.toThrow();
   });
 });

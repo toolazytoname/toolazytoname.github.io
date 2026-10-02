@@ -1,0 +1,6 @@
+{
+  "scope": "Current configured model-key values in built public text assets; not a general secret scanner",
+  "configuredKeyCount": 1,
+  "textFilesScanned": 76,
+  "leaks": []
+}

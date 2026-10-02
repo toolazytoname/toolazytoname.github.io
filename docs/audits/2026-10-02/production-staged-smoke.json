@@ -1,0 +1,113 @@
+{
+  "checkedAt": "2026-10-02T13:06:59.278Z",
+  "origin": "https://toolazytoname-github-n83jn61kr-toolazytonames-projects.vercel.app",
+  "ok": true,
+  "noValidModelRequests": true,
+  "results": [
+    {
+      "path": "/",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 5037,
+      "errors": []
+    },
+    {
+      "path": "/projects/",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 4056,
+      "errors": []
+    },
+    {
+      "path": "/posts/",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 4555,
+      "errors": []
+    },
+    {
+      "path": "/about/",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 4362,
+      "errors": []
+    },
+    {
+      "path": "/now/",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 5939,
+      "errors": []
+    },
+    {
+      "path": "/tool/2024/04/30/2024-ssh-tunnel/",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 5072,
+      "errors": []
+    },
+    {
+      "path": "/life/2024/04/02/2024-okr/",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 4299,
+      "errors": []
+    },
+    {
+      "path": "/__release-smoke-missing-page__/",
+      "method": "GET",
+      "status": 404,
+      "durationMs": 4723,
+      "errors": []
+    },
+    {
+      "path": "/life/2024/04/02/024-okr/",
+      "method": "GET",
+      "status": 308,
+      "durationMs": 3834,
+      "errors": []
+    },
+    {
+      "path": "/feed.xml",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 5434,
+      "errors": []
+    },
+    {
+      "path": "/posts.xml",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 5992,
+      "errors": []
+    },
+    {
+      "path": "/sitemap-index.xml",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 4816,
+      "errors": []
+    },
+    {
+      "path": "/api/chat/",
+      "method": "GET",
+      "status": 405,
+      "durationMs": 4396,
+      "errors": []
+    },
+    {
+      "path": "/api/chat/",
+      "method": "POST",
+      "status": 400,
+      "durationMs": 3854,
+      "errors": []
+    },
+    {
+      "path": "/api/chat/",
+      "method": "POST",
+      "status": 413,
+      "durationMs": 5285,
+      "errors": []
+    }
+  ]
+}

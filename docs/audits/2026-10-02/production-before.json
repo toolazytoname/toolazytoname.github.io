@@ -1,0 +1,170 @@
+{
+  "checkedAt": "2026-10-02T10:34:06.324Z",
+  "origin": "https://www.weichao.ren",
+  "ok": false,
+  "noModelCalls": true,
+  "results": [
+    {
+      "path": "/",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 1584,
+      "errors": [
+        "missing nosniff",
+        "missing SAMEORIGIN",
+        "missing frame-ancestors",
+        "missing hashed script CSP"
+      ]
+    },
+    {
+      "path": "/projects/",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 414,
+      "errors": [
+        "missing nosniff",
+        "missing SAMEORIGIN",
+        "missing frame-ancestors",
+        "missing hashed script CSP"
+      ]
+    },
+    {
+      "path": "/posts/",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 367,
+      "errors": [
+        "missing nosniff",
+        "missing SAMEORIGIN",
+        "missing frame-ancestors",
+        "missing hashed script CSP"
+      ]
+    },
+    {
+      "path": "/about/",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 218,
+      "errors": [
+        "missing nosniff",
+        "missing SAMEORIGIN",
+        "missing frame-ancestors",
+        "missing hashed script CSP"
+      ]
+    },
+    {
+      "path": "/now/",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 571,
+      "errors": [
+        "missing nosniff",
+        "missing SAMEORIGIN",
+        "missing frame-ancestors",
+        "missing hashed script CSP"
+      ]
+    },
+    {
+      "path": "/tool/2024/04/30/2024-ssh-tunnel/",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 343,
+      "errors": [
+        "missing nosniff",
+        "missing SAMEORIGIN",
+        "missing frame-ancestors",
+        "missing hashed script CSP"
+      ]
+    },
+    {
+      "path": "/__release-smoke-missing-page__/",
+      "method": "GET",
+      "status": 404,
+      "durationMs": 392,
+      "errors": [
+        "missing nosniff",
+        "missing SAMEORIGIN",
+        "missing frame-ancestors",
+        "missing hashed script CSP",
+        "404 lacks noindex"
+      ]
+    },
+    {
+      "path": "/life/2024/04/02/024-okr/",
+      "method": "GET",
+      "status": 308,
+      "durationMs": 197,
+      "errors": [
+        "missing nosniff",
+        "missing SAMEORIGIN",
+        "missing frame-ancestors"
+      ]
+    },
+    {
+      "path": "/feed.xml",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 1384,
+      "errors": [
+        "missing nosniff",
+        "missing SAMEORIGIN",
+        "missing frame-ancestors"
+      ]
+    },
+    {
+      "path": "/posts.xml",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 374,
+      "errors": [
+        "missing nosniff",
+        "missing SAMEORIGIN",
+        "missing frame-ancestors"
+      ]
+    },
+    {
+      "path": "/sitemap-index.xml",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 316,
+      "errors": [
+        "missing nosniff",
+        "missing SAMEORIGIN",
+        "missing frame-ancestors"
+      ]
+    },
+    {
+      "path": "/api/chat/",
+      "method": "GET",
+      "status": 405,
+      "durationMs": 1164,
+      "errors": [
+        "missing nosniff",
+        "missing SAMEORIGIN",
+        "missing frame-ancestors"
+      ]
+    },
+    {
+      "path": "/api/chat/",
+      "method": "POST",
+      "status": 400,
+      "durationMs": 301,
+      "errors": [
+        "missing nosniff",
+        "missing SAMEORIGIN",
+        "missing frame-ancestors"
+      ]
+    },
+    {
+      "path": "/api/chat/",
+      "method": "POST",
+      "status": 413,
+      "durationMs": 804,
+      "errors": [
+        "missing nosniff",
+        "missing SAMEORIGIN",
+        "missing frame-ancestors"
+      ]
+    }
+  ]
+}

@@ -5,7 +5,7 @@
  * Timeouts, 429s and upstream failures stay errors, not "I don't know".
  */
 
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { MAX_CONTENT_LENGTH } from '@lib/chat-request';
 import { requestChatReply } from '@lib/chat-client';
@@ -111,6 +111,14 @@ export default function Chatbot({ startOpen = false }: { startOpen?: boolean }) 
   const fabRef = useRef<HTMLButtonElement>(null);
   const nextId = useRef(1);
   const requestId = useRef(0);
+  const pendingRequest = useRef<AbortController | null>(null);
+  const composing = useRef(false);
+  const hasOpened = useRef(false);
+
+  useEffect(() => () => {
+    requestId.current++;
+    pendingRequest.current?.abort();
+  }, []);
 
   const lastRetryableIndex = lastRetryIndex(messages);
 
@@ -120,22 +128,30 @@ export default function Chatbot({ startOpen = false }: { startOpen?: boolean }) 
     }
   }, [messages, open, busy]);
 
+  // Restore focus after React commits visibility; timers race with rendering
+  // and are throttled in background tabs.
+  useLayoutEffect(() => {
+    if (open) {
+      hasOpened.current = true;
+      inputRef.current?.focus();
+    } else if (hasOpened.current) {
+      fabRef.current?.focus();
+    }
+  }, [open]);
+
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') closePanel();
     };
     window.addEventListener('keydown', onKey);
-    const focusId = window.setTimeout(() => inputRef.current?.focus(), 40);
     return () => {
       window.removeEventListener('keydown', onKey);
-      window.clearTimeout(focusId);
     };
   }, [open]);
 
   function closePanel() {
     setOpen(false);
-    window.setTimeout(() => fabRef.current?.focus(), 40);
   }
 
   function allocId() {
@@ -146,13 +162,14 @@ export default function Chatbot({ startOpen = false }: { startOpen?: boolean }) 
 
   async function send(text: string, history: Msg[] = messages) {
     const trimmed = text.trim();
-    if (!trimmed || busy) return;
+    if (!trimmed || busy || pendingRequest.current) return;
     if (trimmed.length > MAX_CONTENT_LENGTH) {
       setLimitHint(true);
       return;
     }
     setLimitHint(false);
     setInput('');
+    inputRef.current?.focus();
     const next: Msg[] = [...history, { id: allocId(), role: 'user', content: trimmed }];
     setMessages(next);
 
@@ -160,6 +177,7 @@ export default function Chatbot({ startOpen = false }: { startOpen?: boolean }) 
     setBusy(true);
 
     const controller = new AbortController();
+    pendingRequest.current = controller;
     const timeoutId = window.setTimeout(() => controller.abort(), API_TIMEOUT_MS);
 
     try {
@@ -204,10 +222,7 @@ export default function Chatbot({ startOpen = false }: { startOpen?: boolean }) 
       window.clearTimeout(timeoutId);
       if (id === requestId.current) {
         setBusy(false);
-        const active = document.activeElement;
-        if (active === document.body || active === inputRef.current) {
-          window.setTimeout(() => inputRef.current?.focus(), 0);
-        }
+        pendingRequest.current = null;
       }
     }
   }
@@ -336,7 +351,7 @@ export default function Chatbot({ startOpen = false }: { startOpen?: boolean }) 
           className="chat-panel__form"
           onSubmit={(e) => {
             e.preventDefault();
-            send(input);
+            if (!composing.current) send(input);
           }}
         >
           <input
@@ -344,6 +359,12 @@ export default function Chatbot({ startOpen = false }: { startOpen?: boolean }) 
             type="text"
             value={input}
             maxLength={MAX_CONTENT_LENGTH}
+            onCompositionStart={() => { composing.current = true; }}
+            onCompositionEnd={() => { composing.current = false; }}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter' && (event.nativeEvent.isComposing || composing.current)) event.preventDefault();
+            }}
+            aria-describedby="chat-privacy"
             onChange={(e) => {
               setInput(e.target.value);
               if (e.target.value.length <= MAX_CONTENT_LENGTH) setLimitHint(false);
@@ -368,6 +389,9 @@ export default function Chatbot({ startOpen = false }: { startOpen?: boolean }) 
             </svg>
           </button>
         </form>
+        <p className="chat-panel__privacy" id="chat-privacy">
+          消息会发送至本站服务；启用 AI 时也会发送至模型供应商。请勿输入敏感信息。
+        </p>
         {limitHint && (
           <p className="chat-panel__hint">单条消息最多 {MAX_CONTENT_LENGTH} 字，缩短后再发。</p>
         )}

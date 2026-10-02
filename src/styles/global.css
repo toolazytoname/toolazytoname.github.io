@@ -105,6 +105,8 @@
   --r-pill: 4px; /* micro-rounded — pill shape (980px) reserved for chips/tags */
   --r-circle: 50%;
 
+  --touch-target: 44px;
+
   /* Layout */
   --max-w: 1200px;
   --max-w-narrow: 720px;
@@ -163,6 +165,8 @@
 *::after {
   box-sizing: border-box;
 }
+
+[hidden]:not([hidden="until-found"]) { display: none !important; }
 
 html {
   scroll-behavior: smooth;
@@ -335,8 +339,7 @@ html.reveal-ready .reveal:not(.is-visible) {
   z-index: calc(var(--z-fab) + 1);
   box-shadow: var(--shadow-floating);
   transition: transform var(--t-fast) var(--ease-out),
-    opacity var(--t-fast),
-    visibility var(--t-fast);
+    opacity var(--t-fast);
 }
 .chat-fab:hover {
   transform: translateY(-2px);
@@ -372,8 +375,7 @@ html.reveal-ready .reveal:not(.is-visible) {
   transform: translateY(12px) scale(0.98);
   pointer-events: none;
   transition: opacity 220ms var(--ease-out),
-    transform 220ms var(--ease-out),
-    visibility 220ms;
+    transform 220ms var(--ease-out);
 }
 .chat-panel.is-open {
   opacity: 1;
@@ -609,3 +611,55 @@ html.reveal-ready .reveal:not(.is-visible) {
     transform: none !important;
   }
 }
+
+.chat-panel__privacy {
+  margin: 0;
+  padding: 0 var(--s-4) var(--s-3);
+  color: var(--color-text-muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* Printed articles should remain readable regardless of saved color theme. */
+@media print {
+  :root, :root[data-theme='dark'] {
+    color-scheme: light;
+    --color-bg: #fff;
+    --color-bg-pale: #fff;
+    --color-bg-subtle: #fff;
+    --color-bg-soft: #fff;
+    --color-bg-muted: #fff;
+    --color-ink: #000;
+    --color-ink-soft: #000;
+    --color-ink-muted: #333;
+    --color-accent: #000;
+    --color-accent-dark: #000;
+    --color-text: #000;
+    --color-text-muted: #333;
+    --color-text-dim: #444;
+    --color-link: #000;
+  }
+  .nav, footer, .chat-root, .chat-fab, .scroll-progress,
+  .skip-link, .post-page__sidebar, .post__toc-mobile, .post__nav, .post__related {
+    display: none !important;
+  }
+  @page { margin: 16mm; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  body { font-size: 11pt; background: #fff; }
+  html.reveal-ready .reveal:not(.is-visible), .reveal { opacity: 1 !important; transform: none !important; }
+  .chat-panel, [data-chat-root], .copy-btn { display: none !important; }
+  .post-page__layout { display: block !important; padding-block: 0 !important; }
+  .post { max-width: none !important; }
+  pre { white-space: pre-wrap !important; overflow-wrap: anywhere; }
+  pre, pre code, pre span { color: #000 !important; background: transparent !important; text-shadow: none !important; }
+  h1, h2, h3 { break-after: avoid; }
+  img, figure { break-inside: avoid; }
+}
+
+/* Dated availability information; does not imply project shutdown. */
+.external-link-note, .project-link-unavailable {
+  color: var(--color-text-muted);
+  font-size: 0.8em;
+  line-height: 1.6;
+}
+.external-link-note { margin-inline-start: 0.35em; }

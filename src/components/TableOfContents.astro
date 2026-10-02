@@ -77,6 +77,8 @@ if (headings.length < 3) return;
     font-size: 12px;
   }
 
+  .toc__details[open] .toc__summary::before { content: '▾ '; }
+
   .toc__list {
     list-style: none;
     padding: 0;
@@ -169,6 +171,8 @@ if (headings.length < 3) return;
             links.forEach((a) => {
               const match = a.getAttribute('href') === `#${id}`;
               a.classList.toggle('is-active', match);
+              if (match) a.setAttribute('aria-current', 'location');
+              else a.removeAttribute('aria-current');
             });
           }
         }

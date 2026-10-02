@@ -19,11 +19,11 @@ describe('chat transport recovery', () => {
     ['empty JSON', () => Response.json({})],
     ['wrong route JSON', () => Response.json({ ok: true, hint: 'POST here' })],
     ['blank reply', () => Response.json({ reply: '  ', source: 'agnes' })],
-  ])('recovers once from %s without dropping conversation', async (_, response) => {
+  ])('offers manual recovery from %s without replaying a potentially billed request', async (_, response) => {
     fetchMock.mockResolvedValueOnce(response()).mockResolvedValueOnce(success());
     const result = await requestChatReply(history, new AbortController().signal);
-    expect(result.ok).toBe(true);
-    expect(fetchMock).toHaveBeenCalledTimes(2);
+    expect(result).toMatchObject({ ok: false, retryable: true });
+    expect(fetchMock).toHaveBeenCalledTimes(1);
     for (const [, init] of fetchMock.mock.calls) {
       expect(JSON.parse(String(init?.body)).messages).toEqual(history);
       expect(init?.method).toBe('POST');
@@ -37,7 +37,7 @@ describe('chat transport recovery', () => {
     expect(result).toMatchObject({ ok: false, retryable: true });
     expect(result.reply).toContain('问答服务');
     expect(result.reply).not.toContain('空回复');
-    expect(fetchMock).toHaveBeenCalledTimes(2);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
     expect(JSON.stringify(vi.mocked(console.warn).mock.calls)).not.toContain(history[0]!.content);
   });
 
@@ -65,4 +65,16 @@ describe('chat transport recovery', () => {
     await expect(requestChatReply(history, controller.signal)).rejects.toMatchObject({ name: 'AbortError' });
     expect(fetchMock).toHaveBeenCalledTimes(1);
   });
+});
+
+it('offers a manual retry after request-body timeout without automatic replay', async () => {
+  fetchMock.mockResolvedValue(Response.json({ reply: '请求接收超时，请重试。', source: 'static', error: 'request_timeout' }, { status: 408 }));
+  expect(await requestChatReply(history, new AbortController().signal)).toMatchObject({ ok: false, retryable: true });
+  expect(fetchMock).toHaveBeenCalledTimes(1);
+});
+
+it('does not replay a network failure that may have already reached the provider', async () => {
+  fetchMock.mockRejectedValue(new TypeError('network failure'));
+  await expect(requestChatReply(history, new AbortController().signal)).rejects.toThrow('network failure');
+  expect(fetchMock).toHaveBeenCalledTimes(1);
 });

@@ -1,0 +1,113 @@
+{
+  "checkedAt": "2026-10-02T13:07:53.657Z",
+  "origin": "https://www.weichao.ren",
+  "ok": true,
+  "noValidModelRequests": true,
+  "results": [
+    {
+      "path": "/",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 3630,
+      "errors": []
+    },
+    {
+      "path": "/projects/",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 499,
+      "errors": []
+    },
+    {
+      "path": "/posts/",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 478,
+      "errors": []
+    },
+    {
+      "path": "/about/",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 738,
+      "errors": []
+    },
+    {
+      "path": "/now/",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 441,
+      "errors": []
+    },
+    {
+      "path": "/tool/2024/04/30/2024-ssh-tunnel/",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 377,
+      "errors": []
+    },
+    {
+      "path": "/life/2024/04/02/2024-okr/",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 345,
+      "errors": []
+    },
+    {
+      "path": "/__release-smoke-missing-page__/",
+      "method": "GET",
+      "status": 404,
+      "durationMs": 360,
+      "errors": []
+    },
+    {
+      "path": "/life/2024/04/02/024-okr/",
+      "method": "GET",
+      "status": 308,
+      "durationMs": 226,
+      "errors": []
+    },
+    {
+      "path": "/feed.xml",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 826,
+      "errors": []
+    },
+    {
+      "path": "/posts.xml",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 533,
+      "errors": []
+    },
+    {
+      "path": "/sitemap-index.xml",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 963,
+      "errors": []
+    },
+    {
+      "path": "/api/chat/",
+      "method": "GET",
+      "status": 405,
+      "durationMs": 359,
+      "errors": []
+    },
+    {
+      "path": "/api/chat/",
+      "method": "POST",
+      "status": 400,
+      "durationMs": 386,
+      "errors": []
+    },
+    {
+      "path": "/api/chat/",
+      "method": "POST",
+      "status": 413,
+      "durationMs": 833,
+      "errors": []
+    }
+  ]
+}

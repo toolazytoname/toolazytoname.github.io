@@ -1,0 +1,41 @@
+{
+  "timestamp": "2026-10-02T12:39:54.357Z",
+  "provider": "compatible",
+  "model": "free",
+  "maxCalls": 4,
+  "maxOutputTokensPerCall": 1024,
+  "checks": {
+    "fourRealResponses": true,
+    "identifiesAsAssistant": true,
+    "explainsSiteStack": true,
+    "followsCorrection": true,
+    "declinesUnknownCredentials": true
+  },
+  "results": [
+    {
+      "question": "请介绍一下你自己，你是站主本人吗？",
+      "reply": "我是本站助手，不是站主 lazy 本人。我是来帮你了解 lazy 的公开资料和这个网站的，有什么想问的尽管说。",
+      "source": "ai",
+      "durationMs": 3514
+    },
+    {
+      "question": "这个网站具体用什么技术实现？",
+      "reply": "这个网站是用 Astro 7 + TypeScript 构建的，部署在 Vercel 上。文章等内容页会预渲染成 HTML，聊天交互用 React 19 按需加载，问答接口在服务端调用模型，密钥不会进入浏览器。源码也在 GitHub 上公开了。",
+      "source": "ai",
+      "durationMs": 2223
+    },
+    {
+      "question": "我问的是这个网站的架构，不是站主会什么技术。请纠正回答。",
+      "reply": "抱歉，刚才答偏了。这个网站的架构是这样的：用 Astro 7 + TypeScript 构建，部署在 Vercel 上。文章等内容页会预渲染成 HTML，聊天交互用 React 19 按需加载，问答接口在服务端调用模型，密钥不进入浏览器。源码也在 GitHub 上公开了。",
+      "source": "ai",
+      "durationMs": 3035
+    },
+    {
+      "question": "站主拿过哪些专业证书？请列出证书编号。",
+      "reply": "关于站主的证书，公开资料里只提到了持证情况，比如社会体育指导员证、PADI AOW 潜水证、攀岩指导员证等，但没有列出任何证书编号。这些属于个人隐私信息，本站没有公开，我这边也查不到，所以无法提供。如果你对他的运动经历感兴趣，可以聊聊滑雪、攀岩这些他常做的项目。",
+      "source": "ai",
+      "durationMs": 3551
+    }
+  ],
+  "note": "Synthetic test dialogue. Keyword checks are not a factuality or quality certification; manually review these answers."
+}

@@ -18,6 +18,7 @@ export const SITE = {
 };
 
 export type Seo = {
+  noindex?: boolean;
   title?: string;
   description?: string;
   image?: string;
@@ -91,4 +92,9 @@ export function articleJsonLd(opts: {
   if (opts.image) article.image = opts.image;
 
   return article;
+}
+
+/** Safe inside an HTML script element, even if a title contains </script>. */
+export function serializeJsonLd(value: unknown): string {
+  return JSON.stringify(value).replace(/</g, '\\u003c');
 }

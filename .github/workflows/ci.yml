@@ -5,20 +5,30 @@ on:
     branches: [master]
   pull_request:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   check:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version-file: .nvmrc
           cache: npm
       - name: Install
         run: npm ci
-      - name: Test
-        run: npm test
-      - name: Build
-        run: npm run build
-      - name: Verify permalinks
-        run: npm run verify:urls
+      - name: Dependency security
+        run: npm run audit:deps
+      - name: Test, build, and verify published output
+        run: npm run ci
+      - name: Install isolated integration-test backend
+        run: sudo apt-get update && sudo apt-get install -y redis-server redis-tools
+      - name: Atomic shared model quotas
+        run: npm run verify:guard

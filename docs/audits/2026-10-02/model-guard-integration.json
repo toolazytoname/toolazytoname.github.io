@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "backend": "isolated real Redis over Unix socket",
+  "checks": [
+    "40 concurrent admissions capped at 3",
+    "release",
+    "crash expiry",
+    "30 concurrent daily reservations capped at 7",
+    "monthly budget",
+    "per-IP quota",
+    "window reset",
+    "rejections not billed"
+  ]
+}

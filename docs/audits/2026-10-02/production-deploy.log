@@ -1,0 +1,221 @@
+Retrieving project…
+Deploying toolazytonames-projects/toolazytoname-github-io
+Uploading [--------------------] (0.0B/254.7KB)
+Uploading [=====---------------] (64.0KB/254.7KB)
+Uploading [==========----------] (139.8KB/254.7KB)
+Uploading [================----] (203.8KB/254.7KB)
+Uploading [====================] (254.7KB/254.7KB)
+Inspect: https://vercel.com/toolazytonames-projects/toolazytoname-github-io/Le1yA7WEVuakvnnf3joKNJURdKDR [11s]
+Production: https://toolazytoname-github-n83jn61kr-toolazytonames-projects.vercel.app [11s]
+Building...
+Building...
+Building: Running build in Washington, D.C., USA (East) – iad1
+Building: Build machine configuration: 2 cores, 8 GB
+Building: Retrieving list of deployment files...
+Building: Downloading 522 deployment files...
+Building: Skipping build cache since Node.js version changed from "24.x" to "22.x"
+Building: Running "vercel build"
+Building: Vercel CLI 62.1.0
+Building: Running "install" command: `npm ci`...
+Building: npm warn deprecated node-domexception@1.0.0: Use your platform's native DOMException instead
+Building: added 621 packages, and audited 622 packages in 13s
+Building: 229 packages are looking for funding
+Building: run `npm fund` for details
+Building: found 0 vulnerabilities
+Building: > weichao-ren@1.0.0 release:check
+Building: > npm run audit:deps && npm run ci
+Building: > weichao-ren@1.0.0 audit:deps
+Building: > npm audit --registry=https://registry.npmjs.org --audit-level=high
+Building: found 0 vulnerabilities
+Building: > weichao-ren@1.0.0 ci
+Building: > npm test && npm run build && npm run verify:urls && npm run verify:site
+Building: > weichao-ren@1.0.0 test
+Building: > vitest run
+Building: RUN  v4.1.11 /vercel/path0
+Building: ✓ src/lib/__tests__/llm-provider.test.ts (22 tests) 93ms
+Building: ✓ src/lib/__tests__/data.test.ts (26 tests) 38ms
+Building: ✓ src/lib/__tests__/llm.test.ts (11 tests) 33ms
+Building: ✓ src/lib/__tests__/chat-client.test.ts (14 tests) 107ms
+Building: ✓ src/lib/__tests__/chat-api.test.ts (17 tests) 112ms
+Building: ✓ src/lib/__tests__/model-guard.test.ts (22 tests) 103ms
+Building: ✓ src/lib/__tests__/rate-limit.test.ts (13 tests) 95ms
+Building: ✓ src/lib/__tests__/read-body.test.ts (9 tests) 69ms
+Building: ✓ src/lib/__tests__/chat-request.test.ts (9 tests) 7ms
+Building: ✓ src/lib/__tests__/post-search.test.ts (5 tests) 11ms
+Building: ✓ src/lib/__tests__/deployment.test.ts (3 tests) 11ms
+Building: ✓ src/lib/__tests__/chat-budget.test.ts (3 tests) 8ms
+Building: ✓ src/lib/__tests__/chat-retry.test.ts (3 tests) 6ms
+Building: ✓ src/lib/__tests__/permalink.test.ts (4 tests) 5ms
+Building: ✓ src/lib/__tests__/dynamic-import-retry.test.ts (3 tests) 8ms
+Building: ✓ src/lib/__tests__/seo.test.ts (1 test) 5ms
+Building: ✓ src/lib/__tests__/post-date.test.ts (1 test) 3ms
+Building: Test Files  17 passed (17)
+Building: Tests  166 passed (166)
+Building: Start at  13:04:31
+Building: Duration  5.43s (transform 438ms, setup 0ms, import 1.09s, tests 713ms, environment 3ms)
+Building: > weichao-ren@1.0.0 build
+Building: > astro check && astro build
+Building: 13:04:40 [content] Syncing content
+Building: 13:04:44 [content] Synced content
+Building: 13:04:44 [types] Generated 5.32s
+Building: 13:04:44 [check] Getting diagnostics for Astro files in /vercel/path0...
+Building: Result (79 files):
+Building: - 0 errors
+Building: - 0 warnings
+Building: - 0 hints
+Building: 13:04:57 [WARN] [config] Shiki syntax highlighting uses inline styles that are not compatible with Content Security Policy (CSP). Consider using Prism syntax highlighting instead, or disable CSP if Shiki is required.
+Building: 13:04:57 [WARN] [csp] `security.csp.scriptDirective` defines `script-src` resources ('self') as well as `script-src-attr` resources or hashes. Because `script-src-attr` override `script-src` for their scope (browsers do not fall back), those `script-src` resources will not apply there. Add them to the corresponding `kind` if needed.
+Building: 13:04:57 [WARN] [csp] `security.csp.styleDirective` defines `style-src` resources ('self') as well as `style-src-attr` resources or hashes. Because `style-src-attr` override `style-src` for their scope (browsers do not fall back), those `style-src` resources will not apply there. Add them to the corresponding `kind` if needed.
+Building: 13:04:59 [content] Syncing content
+Building: 13:04:59 [content] Synced content
+Building: 13:04:59 [types] Generated 1.18s
+Building: 13:04:59 [build] output: "server"
+Building: 13:04:59 [build] mode: "server"
+Building: 13:04:59 [build] directory: /vercel/path0/dist/
+Building: 13:04:59 [build] adapter: @astrojs/vercel
+Building: 13:04:59 [build] Collecting build info...
+Building: 13:04:59 [build] ✓ Completed in 1.33s.
+Building: 13:04:59 [build] Building server entrypoints...
+Building: 13:05:01 [vite] ✓ built in 1.69s
+Building: 13:05:01 [vite] ✓ built in 619ms
+Building: 13:05:02 [vite] ✓ built in 363ms
+Building: prerendering static routes
+Building: 13:05:02   ├─ /404.html (+28ms)
+Building: 13:05:02   ├─ /about/index.html (+7ms)
+Building: 13:05:02   ├─ /feed.xml (+157ms)
+Building: 13:05:02   ├─ /now/index.html (+35ms)
+Building: 13:05:02   ├─ /posts/index.html (+189ms)
+Building: 13:05:02   ├─ /posts.xml (+10ms)
+Building: 13:05:02   ├─ /projects/index.html (+21ms)
+Building: 13:05:02   ├─ /robots.txt (+3ms)
+Building: 13:05:02   ├─ /index.html (+20ms)
+Building: 13:05:02   ├─ /hack/your/life/2016/05/19/welcome-to-jekyll/index.html (+11ms)
+Building: 13:05:02   ├─ /ios/2016/05/28/iap-new-receipt-api-replace/index.html (+6ms)
+Building: 13:05:02   ├─ /hack/your/life/2016/05/29/wall/index.html (+6ms)
+Building: 13:05:02   ├─ /hack/your/life/2016/07/04/HackCloudDrive/index.html (+4ms)
+Building: 13:05:02   ├─ /ios/2016/07/23/symbolicatecrash/index.html (+5ms)
+Building: 13:05:02   ├─ /fdsdk/2016/07/27/FDDebugObserver/index.html (+4ms)
+Building: 13:05:02   ├─ /tool/2016/08/08/json-parser-online/index.html (+5ms)
+Building: 13:05:02   ├─ /tool/2016/08/13/git-cheet-sheet/index.html (+6ms)
+Building: 13:05:02   ├─ /hack/your/life/2016/08/13/start-an-ftp-or-sftp-server-in-mac-os/index.html (+15ms)
+Building: 13:05:02   ├─ /ios/2016/08/17/ResponderChain/index.html (+5ms)
+Building: 13:05:02   ├─ /tool/2016/11/05/Resilio-Sync/index.html (+6ms)
+Building: 13:05:02   ├─ /hack/your/life/2016/11/25/Wechat-Export/index.html (+6ms)
+Building: 13:05:02   ├─ /ios/2016/12/07/Optimizing-In-App-Purchases/index.html (+4ms)
+Building: 13:05:02   ├─ /hack/your/life/2016/12/08/WiiU-crack/index.html (+5ms)
+Building: 13:05:02   ├─ /fdsdk/2016/12/30/FDsymbolicatecrash/index.html (+3ms)
+Building: 13:05:02   ├─ /life/2017/01/10/2017plan/index.html (+5ms)
+Building: 13:05:02   ├─ /hack/your/life/2017/05/16/newifi/index.html (+8ms)
+Building: 13:05:02   ├─ /hack/your/life/2017/05/25/WIFI-crack/index.html (+6ms)
+Building: 13:05:02   ├─ /hack/your/life/2017/05/26/WIFI-crack-PIN/index.html (+4ms)
+Building: 13:05:02   ├─ /hack/your/life/2017/05/26/MDK3-Documentation/index.html (+5ms)
+Building: 13:05:02   ├─ /python/2017/06/08/scrapy-Example/index.html (+5ms)
+Building: 13:05:02   ├─ /python/2017/06/15/learn-python/index.html (+4ms)
+Building: 13:05:02   ├─ /hack/your/life/2017/06/16/learn-GPG/index.html (+4ms)
+Building: 13:05:02   ├─ /hack/your/life/2017/06/16/learn-BitCoin/index.html (+3ms)
+Building: 13:05:02   ├─ /hack/your/life/2017/06/16/Hacker-Search-Engines/index.html (+3ms)
+Building: 13:05:02   ├─ /hack/your/life/2017/08/07/Raspberry-Pi/index.html (+3ms)
+Building: 13:05:02   ├─ /ios/2018/06/23/private-podspec/index.html (+5ms)
+Building: 13:05:02   ├─ /ios/2018/07/04/private-podspec-FAQ/index.html (+12ms)
+Building: 13:05:02   ├─ /ios/2018/07/09/FDTops/index.html (+4ms)
+Building: 13:05:02   ├─ /ios/2018/07/13/FDPodBot/index.html (+3ms)
+Building: 13:05:02   ├─ /ios/2018/10/03/iOS-Location-Spoofing/index.html (+6ms)
+Building: 13:05:02   ├─ /ios/2018/10/03/iOS-Watermark-Icon/index.html (+3ms)
+Building: 13:05:02   ├─ /ios/2018/12/27/cocoapods-graph/index.html (+3ms)
+Building: 13:05:02   ├─ /ios/2018/12/27/package-jekins/index.html (+3ms)
+Building: 13:05:02   ├─ /ios/2019/01/07/package-shell/index.html (+17ms)
+Building: 13:05:02   ├─ /ios/2019/02/14/flutter-Get-Started/index.html (+5ms)
+Building: 13:05:02   ├─ /ios/2019/08/01/cocoapods-binary/index.html (+17ms)
+Building: 13:05:02   ├─ /ios/2019/08/01/package-shell-update/index.html (+5ms)
+Building: 13:05:02   ├─ /ios/2019/08/01/vest-package/index.html (+4ms)
+Building: 13:05:02   ├─ /ios/2019/08/04/enumatator-and-string/index.html (+4ms)
+Building: 13:05:02   ├─ /ios/2019/08/05/YYKit-source/index.html (+4ms)
+Building: 13:05:02   ├─ /git/2019/08/08/Git-lose-weight/index.html (+12ms)
+Building: 13:05:02   ├─ /git/2019/08/09/git-workflow/index.html (+5ms)
+Building: 13:05:02   ├─ /ios/2019/08/10/source-Aspects/index.html (+7ms)
+Building: 13:05:02   ├─ /ios/2019/08/10/source-synchronized/index.html (+5ms)
+Building: 13:05:02   ├─ /python/2019/08/15/resize-image/index.html (+5ms)
+Building: 13:05:02   ├─ /ios/2019/09/19/iOS-App-thin/index.html (+4ms)
+Building: 13:05:02   ├─ /ios/2019/09/19/iOS-LSUnusedResources/index.html (+4ms)
+Building: 13:05:02   ├─ /ios/2019/09/25/iOS-Mach-O/index.html (+4ms)
+Building: 13:05:02   ├─ /ios/2019/09/25/iOS-runtime-unused-class-detect/index.html (+4ms)
+Building: 13:05:02   ├─ /ios/2019/11/01/Gen10-NAS/index.html (+4ms)
+Building: 13:05:02   ├─ /life/2023/01/08/movie-sheet-recommended-for-daughter/index.html (+4ms)
+Building: 13:05:02   ├─ /life/2023/01/08/book-list/index.html (+3ms)
+Building: 13:05:02   ├─ /life/2023/01/26/quantization/index.html (+4ms)
+Building: 13:05:02   ├─ /life/2023/01/21/2023-okr/index.html (+4ms)
+Building: 13:05:02   ├─ /life/2023/01/21/sushi/index.html (+4ms)
+Building: 13:05:02   ├─ /tool/2023/01/25/chatgpt/index.html (+7ms)
+Building: 13:05:02   ├─ /tool/2023/01/27/web3/index.html (+5ms)
+Building: 13:05:02   ├─ /tool/2024/02/27/AI-learning/index.html (+9ms)
+Building: 13:05:02   ├─ /life/2024/04/02/2024-okr/index.html (+4ms)
+Building: 13:05:02   ├─ /tool/2024/04/30/2024-ssh-tunnel/index.html (+4ms)
+Building: 13:05:02 ✓ Completed in 910ms.
+Building: generating optimized images
+Building: 13:05:03   ▶ /_astro/aquasight.CXrZGWgJ_ZEAbg3.webp (before: 27kB, after: 3kB) (+76ms) (1/6)
+Building: 13:05:03   ▶ /_astro/home-nas.TWvq211s_Z1lxnBd.webp (before: 61kB, after: 8kB) (+85ms) (2/6)
+Building: 13:05:03   ▶ /_astro/aquasight.CXrZGWgJ_ZIKzXV.webp (before: 27kB, after: 8kB) (+56ms) (3/6)
+Building: 13:05:03   ▶ /_astro/home-nas.TWvq211s_Z2do8Lk.webp (before: 61kB, after: 22kB) (+56ms) (4/6)
+Building: 13:05:03   ▶ /_astro/aquasight.CXrZGWgJ_Z2aPbF5.webp (before: 27kB, after: 16kB) (+83ms) (5/6)
+Building: 13:05:03   ▶ /_astro/home-nas.TWvq211s_Z1jJGr9.webp (before: 61kB, after: 38kB) (+124ms) (6/6)
+Building: 13:05:03 ✓ Completed in 269ms.
+Building: 13:05:03 [build] Rearranging server assets...
+Building: 13:05:03 [build] ✓ Completed in 3.96s.
+Building: 13:05:03 [@astrojs/vercel] Bundling function ../../../../dist/server/entry.mjs
+Building: 13:05:06 [build] Waiting for integration "@astrojs/vercel", hook "astro:build:done"...
+Building: 13:05:06 [@astrojs/sitemap] `sitemap-index.xml` created at `dist/client`
+Building: 13:05:06 [@astrojs/vercel] Copying static files to .vercel/output/static
+Building: 13:05:07 [build] Server built in 9.11s
+Building: 13:05:07 [build] Complete!
+Building: > weichao-ren@1.0.0 verify:urls
+Building: > python3 scripts/test_verify_urls.py && python3 scripts/verify-urls.py
+Building: verify-urls helpers: ok
+Building: Posts dir: /vercel/path0/src/content/posts
+Building: Total posts: 61
+Building: Unique URLs: 61
+Building: Frozen pages: 61
+Building: Redirects: 1
+Building: Dist check: yes
+Building: Failed: 0
+Building: > weichao-ren@1.0.0 verify:site
+Building: > python3 -m unittest discover -s scripts -p "test_*.py" && python3 scripts/verify-site.py
+Building: ....................
+Building: ----------------------------------------------------------------------
+Building: Ran 20 tests in 0.018s
+Building: OK
+Building: {
+Building: "html_pages": 71,
+Building: "legacy_semantic_exemptions": 4,
+Building: "local_references": 3827,
+Building: "total_js_gzip_bytes": 65203,
+Building: "errors": []
+Building: }
+Building: Build Completed in /vercel/output [56s]
+Building: Deploying outputs...
+Building: Deployment completed
+Building: Creating build cache...
+Production: https://toolazytoname-github-n83jn61kr-toolazytonames-projects.vercel.app [1m]
+Completing...
+Aliased: https://toolazytoname-github-io-toolazytonames-projects.vercel.app [1m]
+{
+  "status": "ok",
+  "deployment": {
+    "id": "dpl_Le1yA7WEVuakvnnf3joKNJURdKDR",
+    "url": "https://toolazytoname-github-n83jn61kr-toolazytonames-projects.vercel.app",
+    "inspectorUrl": "https://vercel.com/toolazytonames-projects/toolazytoname-github-io/Le1yA7WEVuakvnnf3joKNJURdKDR",
+    "readyState": "READY",
+    "target": "production",
+    "deploymentApiUrl": "https://api.vercel.com/v13/deployments/dpl_Le1yA7WEVuakvnnf3joKNJURdKDR"
+  },
+  "message": "Deployment toolazytoname-github-n83jn61kr-toolazytonames-projects.vercel.app ready.",
+  "next": [
+    {
+      "command": "vercel inspect toolazytoname-github-n83jn61kr-toolazytonames-projects.vercel.app",
+      "when": "Inspect deployment"
+    },
+    {
+      "command": "vercel deploy --prod",
+      "when": "Promote to production"
+    }
+  ]
+}

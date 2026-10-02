@@ -1,4 +1,5 @@
 ---
+import { unavailableLink } from '@lib/external-link-health';
 import type { Project } from '@data/projects';
 import WechatQr from '@components/WechatQr.astro';
 
@@ -26,6 +27,10 @@ const showPanel = featured || comingSoon;
 const productImage =
   project.image && project.image !== project.wechat?.qr ? project.image : undefined;
 const dotColor = project.language ? LANG_COLORS[project.language] : null;
+const demoHealth = unavailableLink(project.demo);
+const repoHealth = unavailableLink(project.repo);
+const mediaUrl = project.demo && !demoHealth ? project.demo : !repoHealth ? project.repo : undefined;
+const MediaTag = mediaUrl ? 'a' : 'div';
 const blurb = project.summary ?? project.description;
 ---
 
@@ -40,8 +45,8 @@ const blurb = project.summary ?? project.description;
 >
   {
     showPanel && productImage && (
-      <a
-        href={project.demo ?? project.repo}
+      <MediaTag
+        href={mediaUrl}
         class="proj-card__media"
         target="_blank"
         rel="noopener"
@@ -49,7 +54,7 @@ const blurb = project.summary ?? project.description;
         aria-hidden="true"
       >
         <img src={productImage} alt="" loading="lazy" width="640" height="360" />
-      </a>
+      </MediaTag>
     )
   }
 
@@ -92,12 +97,13 @@ const blurb = project.summary ?? project.description;
           <WechatQr src={project.wechat.qr} name={project.wechat.name} variant="tile" />
         )}
         <span class="proj-card__links">
-          {project.demo && (
+          {demoHealth && <span class="project-link-unavailable" title={`${demoHealth.checkedAt} 检测返回 ${demoHealth.status}`}>演示暂不可用</span>}
+          {project.demo && !demoHealth && (
             <a href={project.demo} class="proj-card__action" target="_blank" rel="noopener">
               {comingSoon ? '预览' : '主站'}
             </a>
           )}
-          <a
+          {!repoHealth ? (<a
             href={project.repo}
             class="proj-card__action proj-card__action--repo"
             target="_blank"
@@ -105,7 +111,7 @@ const blurb = project.summary ?? project.description;
             aria-label={`${project.title} GitHub`}
           >
             GitHub ↗
-          </a>
+          </a>) : (<span class="project-link-unavailable" title={`公开访问于 ${repoHealth.checkedAt} 返回 ${repoHealth.status}；可能为私有仓库或链接变动`}>GitHub 暂不可用</span>)}
         </span>
       </div>
     )}
@@ -115,7 +121,8 @@ const blurb = project.summary ?? project.description;
     <div class="proj-card__aside">
       {project.language && <span class="proj-card__lang">{project.language}</span>}
       <span class="proj-card__links">
-        {project.demo && (
+          {demoHealth && <span class="project-link-unavailable" title={`${demoHealth.checkedAt} 检测返回 ${demoHealth.status}`}>演示暂不可用</span>}
+        {project.demo && !demoHealth && (
           <a href={project.demo} class="proj-card__action" target="_blank" rel="noopener">
             主站
           </a>
@@ -123,7 +130,7 @@ const blurb = project.summary ?? project.description;
         {project.wechat && (
           <WechatQr src={project.wechat.qr} name={project.wechat.name} variant="compact" />
         )}
-        <a
+        {!repoHealth ? (<a
           href={project.repo}
           class="proj-card__action proj-card__action--repo"
           target="_blank"
@@ -131,7 +138,7 @@ const blurb = project.summary ?? project.description;
           aria-label={`${project.title} GitHub`}
         >
           GitHub ↗
-        </a>
+        </a>) : (<span class="project-link-unavailable" title={`公开访问于 ${repoHealth.checkedAt} 返回 ${repoHealth.status}；可能为私有仓库或链接变动`}>GitHub 暂不可用</span>)}
       </span>
     </div>
   )}

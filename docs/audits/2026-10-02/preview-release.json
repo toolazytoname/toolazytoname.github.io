@@ -1,0 +1,195 @@
+{
+  "checkedAt": "2026-10-02T10:43:41.063Z",
+  "origin": "https://toolazytoname-github-bgqufrde4-toolazytonames-projects.vercel.app",
+  "ok": false,
+  "noModelCalls": true,
+  "results": [
+    {
+      "path": "/",
+      "method": "GET",
+      "status": 302,
+      "durationMs": 2045,
+      "errors": [
+        "expected 200 got 302",
+        "missing nosniff",
+        "missing SAMEORIGIN",
+        "missing frame-ancestors",
+        "not HTML",
+        "missing hashed script CSP"
+      ]
+    },
+    {
+      "path": "/projects/",
+      "method": "GET",
+      "status": 302,
+      "durationMs": 1409,
+      "errors": [
+        "expected 200 got 302",
+        "missing nosniff",
+        "missing SAMEORIGIN",
+        "missing frame-ancestors",
+        "not HTML",
+        "missing hashed script CSP"
+      ]
+    },
+    {
+      "path": "/posts/",
+      "method": "GET",
+      "status": 302,
+      "durationMs": 306,
+      "errors": [
+        "expected 200 got 302",
+        "missing nosniff",
+        "missing SAMEORIGIN",
+        "missing frame-ancestors",
+        "not HTML",
+        "missing hashed script CSP"
+      ]
+    },
+    {
+      "path": "/about/",
+      "method": "GET",
+      "status": 302,
+      "durationMs": 319,
+      "errors": [
+        "expected 200 got 302",
+        "missing nosniff",
+        "missing SAMEORIGIN",
+        "missing frame-ancestors",
+        "not HTML",
+        "missing hashed script CSP"
+      ]
+    },
+    {
+      "path": "/now/",
+      "method": "GET",
+      "status": 302,
+      "durationMs": 245,
+      "errors": [
+        "expected 200 got 302",
+        "missing nosniff",
+        "missing SAMEORIGIN",
+        "missing frame-ancestors",
+        "not HTML",
+        "missing hashed script CSP"
+      ]
+    },
+    {
+      "path": "/tool/2024/04/30/2024-ssh-tunnel/",
+      "method": "GET",
+      "status": 302,
+      "durationMs": 209,
+      "errors": [
+        "expected 200 got 302",
+        "missing nosniff",
+        "missing SAMEORIGIN",
+        "missing frame-ancestors",
+        "not HTML",
+        "missing hashed script CSP"
+      ]
+    },
+    {
+      "path": "/__release-smoke-missing-page__/",
+      "method": "GET",
+      "status": 302,
+      "durationMs": 208,
+      "errors": [
+        "expected 404 got 302",
+        "missing nosniff",
+        "missing SAMEORIGIN",
+        "missing frame-ancestors",
+        "not HTML",
+        "missing hashed script CSP",
+        "404 lacks noindex"
+      ]
+    },
+    {
+      "path": "/life/2024/04/02/024-okr/",
+      "method": "GET",
+      "status": 302,
+      "durationMs": 213,
+      "errors": [
+        "expected 301/308 got 302",
+        "missing nosniff",
+        "missing SAMEORIGIN",
+        "missing frame-ancestors",
+        "historical redirect target wrong"
+      ]
+    },
+    {
+      "path": "/feed.xml",
+      "method": "GET",
+      "status": 302,
+      "durationMs": 220,
+      "errors": [
+        "expected 200 got 302",
+        "missing nosniff",
+        "missing SAMEORIGIN",
+        "missing frame-ancestors"
+      ]
+    },
+    {
+      "path": "/posts.xml",
+      "method": "GET",
+      "status": 302,
+      "durationMs": 209,
+      "errors": [
+        "expected 200 got 302",
+        "missing nosniff",
+        "missing SAMEORIGIN",
+        "missing frame-ancestors"
+      ]
+    },
+    {
+      "path": "/sitemap-index.xml",
+      "method": "GET",
+      "status": 302,
+      "durationMs": 230,
+      "errors": [
+        "expected 200 got 302",
+        "missing nosniff",
+        "missing SAMEORIGIN",
+        "missing frame-ancestors"
+      ]
+    },
+    {
+      "path": "/api/chat/",
+      "method": "GET",
+      "status": 302,
+      "durationMs": 219,
+      "errors": [
+        "expected 405 got 302",
+        "missing nosniff",
+        "missing SAMEORIGIN",
+        "missing frame-ancestors",
+        "API not JSON",
+        "unparseable JSON",
+        "missing Allow POST"
+      ]
+    },
+    {
+      "path": "/api/chat/",
+      "method": "POST",
+      "status": 401,
+      "durationMs": 223,
+      "errors": [
+        "expected 400 got 401",
+        "missing nosniff",
+        "missing SAMEORIGIN",
+        "missing frame-ancestors"
+      ]
+    },
+    {
+      "path": "/api/chat/",
+      "method": "POST",
+      "status": 401,
+      "durationMs": 593,
+      "errors": [
+        "expected 413 got 401",
+        "missing nosniff",
+        "missing SAMEORIGIN",
+        "missing frame-ancestors"
+      ]
+    }
+  ]
+}

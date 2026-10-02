@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-10-02T10:28:50.008Z",
+  "provider": "agnes",
+  "model": "agnes-2.0-flash",
+  "maxCalls": 4,
+  "maxOutputTokensPerCall": 1024,
+  "checks": {
+    "fourRealResponses": false,
+    "identifiesAsAssistant": true,
+    "explainsSiteStack": false,
+    "followsCorrection": false,
+    "declinesUnknownCredentials": false
+  },
+  "results": [
+    {
+      "question": "请介绍一下你自己，你是站主本人吗？",
+      "reply": "我是本站助手，不是站主 lazy 本人。\n\n我帮你了解 lazy 的公开资料，比如他的项目、近况、技术栈等。有什么想了解的可以问我。",
+      "source": "agnes",
+      "durationMs": 3092
+    },
+    {
+      "question": "这个网站具体用什么技术实现？",
+      "reply": "这次没能取得回答。可以稍后重试，或直接查看 /projects/、/now/ 和 /about/。",
+      "source": "error",
+      "error": "upstream_failed",
+      "durationMs": 391
+    }
+  ],
+  "note": "Synthetic test dialogue. Keyword checks are not a factuality or quality certification; manually review these answers."
+}

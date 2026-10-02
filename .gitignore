@@ -32,3 +32,6 @@ scripts/__pycache__/
 # Legacy Jekyll residue (do not track)
 _site/
 .jekyll-cache/
+
+# Temporary audit output (curated evidence is stored under docs/audits)
+.audit/

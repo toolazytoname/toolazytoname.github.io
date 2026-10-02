@@ -1,0 +1,5 @@
+
+> weichao-ren@1.0.0 audit:deps
+> npm audit --registry=https://registry.npmjs.org --audit-level=high
+
+found 0 vulnerabilities

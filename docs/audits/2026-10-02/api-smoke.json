@@ -1,0 +1,89 @@
+[
+  {
+    "name": "method GET",
+    "status": 405,
+    "expected": 405,
+    "pass": true,
+    "cache": "no-store",
+    "source": "error",
+    "error": "method_not_allowed"
+  },
+  {
+    "name": "method PUT, same origin",
+    "status": 405,
+    "expected": 405,
+    "pass": true,
+    "cache": "no-store",
+    "source": "error",
+    "error": "method_not_allowed"
+  },
+  {
+    "name": "framework cross-site form guard",
+    "status": 403,
+    "expected": 403,
+    "pass": true,
+    "cache": null
+  },
+  {
+    "name": "unsupported content type, same origin",
+    "status": 415,
+    "expected": 415,
+    "pass": true,
+    "cache": "no-store",
+    "source": "error",
+    "error": "unsupported_media_type"
+  },
+  {
+    "name": "cross-origin JSON",
+    "status": 403,
+    "expected": 403,
+    "pass": true,
+    "cache": "no-store",
+    "source": "error",
+    "error": "origin_not_allowed"
+  },
+  {
+    "name": "malformed JSON",
+    "status": 400,
+    "expected": 400,
+    "pass": true,
+    "cache": "no-store",
+    "source": "static",
+    "error": "bad_json"
+  },
+  {
+    "name": "bad message shape",
+    "status": 400,
+    "expected": 400,
+    "pass": true,
+    "cache": "no-store",
+    "source": "static",
+    "error": "invalid_message"
+  },
+  {
+    "name": "oversized UTF8 body",
+    "status": 413,
+    "expected": 413,
+    "pass": true,
+    "cache": "no-store",
+    "source": "static",
+    "error": "payload_too_large"
+  },
+  {
+    "name": "static FAQ",
+    "status": 200,
+    "expected": 200,
+    "pass": true,
+    "cache": "no-store",
+    "source": "static"
+  },
+  {
+    "name": "unconfigured fallback",
+    "status": 200,
+    "expected": 200,
+    "pass": true,
+    "cache": "no-store",
+    "source": "fallback",
+    "error": "model_unconfigured"
+  }
+]

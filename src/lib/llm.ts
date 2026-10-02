@@ -1,4 +1,5 @@
 import OpenAI from 'openai';
+import { reserveModel } from './model-guard';
 import { getLlmConfig } from './llm-config';
 import { knowledge, findStaticReply } from '@data/knowledge';
 import { getLatestNowEntry } from '@data/now';
@@ -13,6 +14,7 @@ export type ChatResult = {
   reply: string;
   source: 'ai' | 'agnes' | 'static' | 'fallback' | 'error';
   error?: string;
+  retryAfter?: number;
 };
 
 export function llmUnavailableResult(
@@ -57,7 +59,7 @@ ${knowledge.map(k => `[${k.id}]\n${k.reply}`).join('\n\n')}
 
 const LLM_TIMEOUT = 12000;
 
-export async function chat(messages: ChatMessage[]): Promise<ChatResult> {
+export async function chat(messages: ChatMessage[], ip = 'anonymous'): Promise<ChatResult> {
   const history = messages.filter(m => m.role === 'user' || m.role === 'assistant').slice(-20);
   const lastUser = [...history].reverse().find(m => m.role === 'user');
   const faq = lastUser ? findStaticReply(lastUser.content) : null;
@@ -74,6 +76,15 @@ export async function chat(messages: ChatMessage[]): Promise<ChatResult> {
     return faq ? { reply: faq.reply, source: 'static' } : llmUnavailableResult(false);
   }
 
+  const lease = await reserveModel(ip);
+  if (!lease.allowed) {
+    const reply = lease.error === 'model_budget'
+      ? '实时问答额度已用完，请稍后再试。'
+      : '实时问答暂时繁忙或未就绪，请稍后再试。';
+    return faq
+      ? { reply: `${reply}站点已有的资料是：\n\n${faq.reply}`, source: 'fallback', error: lease.error, retryAfter: lease.retryAfter }
+      : { reply, source: 'error', error: lease.error, retryAfter: lease.retryAfter };
+  }
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), LLM_TIMEOUT);
   let reason: 'timeout' | 'failed' | 'empty' = 'failed';
@@ -93,6 +104,7 @@ export async function chat(messages: ChatMessage[]): Promise<ChatResult> {
     console.warn('[chat] upstream_failed', { provider: config.provider, reason, status: error instanceof OpenAI.APIError ? error.status : undefined });
   } finally {
     clearTimeout(timer);
+    await lease.release();
   }
 
   if (faq) {

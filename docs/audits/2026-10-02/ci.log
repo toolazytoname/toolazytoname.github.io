@@ -1,0 +1,152 @@
+
+> weichao-ren@1.0.0 ci
+> npm test && npm run build && npm run verify:urls && npm run verify:site
+
+
+> weichao-ren@1.0.0 test
+> vitest run
+
+
+ RUN  v4.1.11 /Users/lazy/Code/crack/toolazytoname.github.io
+
+
+ Test Files  16 passed (16)
+      Tests  132 passed (132)
+   Start at  00:31:53
+   Duration  865ms (transform 599ms, setup 0ms, import 1.22s, tests 453ms, environment 1ms)
+
+
+> weichao-ren@1.0.0 build
+> astro check && astro build
+
+00:31:56 [content] Syncing content
+00:31:58 [content] Synced content
+00:31:58 [types] Generated 1.80s
+00:31:58 [check] Getting diagnostics for Astro files in /Users/lazy/Code/crack/toolazytoname.github.io...
+Result (68 files):
+- 0 errors
+- 0 warnings
+- 0 hints
+
+00:32:05 [content] Syncing content
+00:32:05 [content] Synced content
+00:32:05 [types] Generated 575ms
+00:32:05 [build] output: "server"
+00:32:05 [build] mode: "server"
+00:32:05 [build] directory: /Users/lazy/Code/crack/toolazytoname.github.io/dist/
+00:32:05 [build] adapter: @astrojs/vercel
+00:32:05 [build] Collecting build info...
+00:32:05 [build] ✓ Completed in 720ms.
+00:32:05 [build] Building server entrypoints...
+00:32:07 [vite] ✓ built in 1.17s
+00:32:07 [vite] ✓ built in 223ms
+00:32:07 [vite] ✓ built in 287ms
+
+ prerendering static routes
+00:32:07   ├─ /404.html (+18ms)
+00:32:07   ├─ /about/index.html (+4ms)
+00:32:07   ├─ /feed.xml (+89ms)
+00:32:07   ├─ /now/index.html (+3ms)
+00:32:07   ├─ /posts/index.html (+5ms)
+00:32:07   ├─ /posts.xml (+11ms)
+00:32:07   ├─ /projects/index.html (+6ms)
+00:32:07   ├─ /robots.txt (+2ms)
+00:32:07   ├─ /index.html (+4ms)
+00:32:07   ├─ /hack/your/life/2016/05/19/welcome-to-jekyll/index.html (+3ms)
+00:32:07   ├─ /ios/2016/05/28/iap-new-receipt-api-replace/index.html (+2ms)
+00:32:07   ├─ /hack/your/life/2016/05/29/wall/index.html (+2ms)
+00:32:07   ├─ /hack/your/life/2016/07/04/HackCloudDrive/index.html (+2ms)
+00:32:07   ├─ /ios/2016/07/23/symbolicatecrash/index.html (+2ms)
+00:32:07   ├─ /fdsdk/2016/07/27/FDDebugObserver/index.html (+2ms)
+00:32:07   ├─ /tool/2016/08/08/json-parser-online/index.html (+2ms)
+00:32:07   ├─ /tool/2016/08/13/git-cheet-sheet/index.html (+1ms)
+00:32:07   ├─ /hack/your/life/2016/08/13/start-an-ftp-or-sftp-server-in-mac-os/index.html (+2ms)
+00:32:07   ├─ /ios/2016/08/17/ResponderChain/index.html (+2ms)
+00:32:07   ├─ /tool/2016/11/05/Resilio-Sync/index.html (+1ms)
+00:32:07   ├─ /hack/your/life/2016/11/25/Wechat-Export/index.html (+1ms)
+00:32:07   ├─ /ios/2016/12/07/Optimizing-In-App-Purchases/index.html (+2ms)
+00:32:07   ├─ /hack/your/life/2016/12/08/WiiU-crack/index.html (+2ms)
+00:32:07   ├─ /fdsdk/2016/12/30/FDsymbolicatecrash/index.html (+2ms)
+00:32:07   ├─ /life/2017/01/10/2017plan/index.html (+2ms)
+00:32:07   ├─ /hack/your/life/2017/05/16/newifi/index.html (+1ms)
+00:32:07   ├─ /hack/your/life/2017/05/25/WIFI-crack/index.html (+3ms)
+00:32:07   ├─ /hack/your/life/2017/05/26/WIFI-crack-PIN/index.html (+2ms)
+00:32:07   ├─ /hack/your/life/2017/05/26/MDK3-Documentation/index.html (+1ms)
+00:32:07   ├─ /python/2017/06/08/scrapy-Example/index.html (+1ms)
+00:32:07   ├─ /python/2017/06/15/learn-python/index.html (+2ms)
+00:32:07   ├─ /hack/your/life/2017/06/16/learn-GPG/index.html (+2ms)
+00:32:07   ├─ /hack/your/life/2017/06/16/learn-BitCoin/index.html (+2ms)
+00:32:07   ├─ /hack/your/life/2017/06/16/Hacker-Search-Engines/index.html (+1ms)
+00:32:07   ├─ /hack/your/life/2017/08/07/Raspberry-Pi/index.html (+2ms)
+00:32:07   ├─ /ios/2018/06/23/private-podspec/index.html (+2ms)
+00:32:07   ├─ /ios/2018/07/04/private-podspec-FAQ/index.html (+2ms)
+00:32:07   ├─ /ios/2018/07/09/FDTops/index.html (+2ms)
+00:32:07   ├─ /ios/2018/07/13/FDPodBot/index.html (+2ms)
+00:32:07   ├─ /ios/2018/10/03/iOS-Location-Spoofing/index.html (+1ms)
+00:32:07   ├─ /ios/2018/10/03/iOS-Watermark-Icon/index.html (+1ms)
+00:32:07   ├─ /ios/2018/12/27/cocoapods-graph/index.html (+1ms)
+00:32:07   ├─ /ios/2018/12/27/package-jekins/index.html (+2ms)
+00:32:07   ├─ /ios/2019/01/07/package-shell/index.html (+2ms)
+00:32:07   ├─ /ios/2019/02/14/flutter-Get-Started/index.html (+2ms)
+00:32:07   ├─ /ios/2019/08/01/cocoapods-binary/index.html (+3ms)
+00:32:07   ├─ /ios/2019/08/01/package-shell-update/index.html (+2ms)
+00:32:07   ├─ /ios/2019/08/01/vest-package/index.html (+1ms)
+00:32:07   ├─ /ios/2019/08/04/enumatator-and-string/index.html (+2ms)
+00:32:07   ├─ /ios/2019/08/05/YYKit-source/index.html (+2ms)
+00:32:07   ├─ /git/2019/08/08/Git-lose-weight/index.html (+3ms)
+00:32:07   ├─ /git/2019/08/09/git-workflow/index.html (+2ms)
+00:32:07   ├─ /ios/2019/08/10/source-Aspects/index.html (+3ms)
+00:32:07   ├─ /ios/2019/08/10/source-synchronized/index.html (+2ms)
+00:32:07   ├─ /python/2019/08/15/resize-image/index.html (+2ms)
+00:32:07   ├─ /ios/2019/09/19/iOS-App-thin/index.html (+3ms)
+00:32:07   ├─ /ios/2019/09/19/iOS-LSUnusedResources/index.html (+1ms)
+00:32:07   ├─ /ios/2019/09/25/iOS-Mach-O/index.html (+1ms)
+00:32:07   ├─ /ios/2019/09/25/iOS-runtime-unused-class-detect/index.html (+1ms)
+00:32:07   ├─ /ios/2019/11/01/Gen10-NAS/index.html (+1ms)
+00:32:07   ├─ /life/2023/01/08/movie-sheet-recommended-for-daughter/index.html (+2ms)
+00:32:07   ├─ /life/2023/01/08/book-list/index.html (+1ms)
+00:32:07   ├─ /life/2023/01/26/quantization/index.html (+1ms)
+00:32:07   ├─ /life/2023/01/21/2023-okr/index.html (+1ms)
+00:32:07   ├─ /life/2023/01/21/sushi/index.html (+1ms)
+00:32:07   ├─ /tool/2023/01/25/chatgpt/index.html (+1ms)
+00:32:07   ├─ /tool/2023/01/27/web3/index.html (+2ms)
+00:32:07   ├─ /tool/2024/02/27/AI-learning/index.html (+1ms)
+00:32:07   ├─ /life/2024/04/02/2024-okr/index.html (+1ms)
+00:32:07   ├─ /tool/2024/04/30/2024-ssh-tunnel/index.html (+1ms)
+00:32:07 ✓ Completed in 292ms.
+
+00:32:07 [build] Rearranging server assets...
+00:32:07 [build] ✓ Completed in 2.01s.
+00:32:07 [@astrojs/vercel] Bundling function ../../../../dist/server/entry.mjs
+00:32:08 [@astrojs/sitemap] `sitemap-index.xml` created at `dist/client`
+00:32:08 [@astrojs/vercel] Copying static files to .vercel/output/static
+00:32:09 [build] Server built in 3.98s
+00:32:09 [build] Complete!
+
+> weichao-ren@1.0.0 verify:urls
+> python3 scripts/test_verify_urls.py && python3 scripts/verify-urls.py
+
+verify-urls helpers: ok
+Posts dir: /Users/lazy/Code/crack/toolazytoname.github.io/src/content/posts
+Total posts: 61
+Unique URLs: 61
+Frozen pages: 61
+Redirects: 1
+Dist check: yes
+Failed: 0
+
+> weichao-ren@1.0.0 verify:site
+> python3 -m unittest discover -s scripts -p "test_verify_site.py" && python3 scripts/verify-site.py
+
+...........
+----------------------------------------------------------------------
+Ran 11 tests in 0.011s
+
+OK
+{
+  "html_pages": 71,
+  "legacy_semantic_exemptions": 4,
+  "local_references": 3821,
+  "total_js_gzip_bytes": 65243,
+  "errors": []
+}

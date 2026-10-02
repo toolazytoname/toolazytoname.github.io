@@ -1,7 +1,16 @@
 ---
 import { projects, getHomeFeaturedProjects } from '@data/projects';
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import homeNasImage from '../assets/projects/home-nas.webp';
+import aquasightImage from '../assets/projects/aquasight.webp';
 import WechatQr from '@components/WechatQr.astro';
 
+// Copies of existing public screenshots; originals/old URLs remain untouched.
+const optimizedImages: Record<string, ImageMetadata> = {
+  '/projects/home-nas.png': homeNasImage,
+  '/projects/aquasight.png': aquasightImage,
+};
 const featured = getHomeFeaturedProjects();
 ---
 
@@ -17,6 +26,7 @@ const featured = getHomeFeaturedProjects();
         featured.map((project, i) => {
           const productImage =
             project.image && project.image !== project.wechat?.qr ? project.image : undefined;
+          const optimizedImage = productImage && optimizedImages[productImage];
           return (
           <li class="home-projects__item reveal" style={`--i: ${i};`}>
             <article
@@ -34,7 +44,19 @@ const featured = getHomeFeaturedProjects();
                 rel="noopener"
               >
                 {productImage && (
-                  productImage.endsWith('.png') ? (
+                  optimizedImage ? (
+                    <Image
+                      src={optimizedImage}
+                      alt=""
+                      class="home-projects__img"
+                      width={640}
+                      widths={[360, 640, 960]}
+                      sizes="(max-width: 640px) calc(100vw - 82px), (max-width: 768px) 45vw, 360px"
+                      format="webp"
+                      loading={i === 0 ? 'eager' : 'lazy'}
+                      fetchpriority={i === 0 ? 'high' : 'auto'}
+                    />
+                  ) : productImage.endsWith('.png') ? (
                     <picture>
                       <source type="image/webp" srcset={productImage.replace(/\.png$/, '.webp')} />
                       <img

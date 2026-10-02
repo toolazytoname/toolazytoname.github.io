@@ -1,0 +1,110 @@
+{
+  "checkedAt": "2026-10-02T10:47:02.028Z",
+  "origin": "https://toolazytoname-github-bgqufrde4-toolazytonames-projects.vercel.app",
+  "ok": false,
+  "noModelCalls": true,
+  "results": [
+    {
+      "path": "/",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 5234,
+      "errors": []
+    },
+    {
+      "path": "/projects/",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 3951,
+      "errors": []
+    },
+    {
+      "path": "/posts/",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 3995,
+      "errors": []
+    },
+    {
+      "path": "/about/",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 3708,
+      "errors": []
+    },
+    {
+      "path": "/now/",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 3704,
+      "errors": []
+    },
+    {
+      "path": "/tool/2024/04/30/2024-ssh-tunnel/",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 3664,
+      "errors": []
+    },
+    {
+      "path": "/__release-smoke-missing-page__/",
+      "method": "GET",
+      "status": 404,
+      "durationMs": 3467,
+      "errors": []
+    },
+    {
+      "path": "/life/2024/04/02/024-okr/",
+      "method": "GET",
+      "status": 308,
+      "durationMs": 3583,
+      "errors": [
+        "missing nosniff",
+        "missing SAMEORIGIN",
+        "missing frame-ancestors"
+      ]
+    },
+    {
+      "path": "/feed.xml",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 3520,
+      "errors": []
+    },
+    {
+      "path": "/posts.xml",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 3791,
+      "errors": []
+    },
+    {
+      "path": "/sitemap-index.xml",
+      "method": "GET",
+      "status": 200,
+      "durationMs": 3545,
+      "errors": []
+    },
+    {
+      "path": "/api/chat/",
+      "method": "GET",
+      "status": 405,
+      "durationMs": 4105,
+      "errors": []
+    },
+    {
+      "path": "/api/chat/",
+      "method": "POST",
+      "status": 400,
+      "durationMs": 3418,
+      "errors": []
+    },
+    {
+      "path": "/api/chat/",
+      "method": "POST",
+      "status": 413,
+      "durationMs": 4168,
+      "errors": []
+    }
+  ]
+}
