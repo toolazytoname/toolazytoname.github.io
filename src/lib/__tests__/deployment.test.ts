@@ -26,3 +26,36 @@ it('resolves one compatible Vite for Astro, plugin-react and project config', as
   expect(astro.resolve('vite')).toBe(project.resolve('vite'));
   expect(JSON.parse(readFileSync(project.resolve('vite/package.json'), 'utf8')).version).toMatch(/^8\./);
 });
+
+it('keeps dynamic modules and globbed assets in the server deployment trace', async () => {
+  const { mkdtemp, mkdir, writeFile, rm } = await import('node:fs/promises');
+  const { tmpdir } = await import('node:os');
+  const { join } = await import('node:path');
+  const { nodeFileTrace } = await import('@vercel/nft');
+  const root = await mkdtemp(join(tmpdir(), 'site-deployment-trace-'));
+  try {
+    await mkdir(join(root, 'assets'));
+    await mkdir(join(root, 'handlers'));
+    await writeFile(join(root, 'package.json'), '{"type":"commonjs"}');
+    await writeFile(join(root, 'entry.cjs'), `
+      const fs = require('node:fs');
+      fs.readFileSync(__dirname + '/assets/' + process.env.TRACE_ASSET + '.json');
+      require('./handlers/' + process.env.TRACE_HANDLER + '.js');
+    `);
+    for (const name of ['en', 'zh', '.hidden']) {
+      await writeFile(join(root, 'assets', `${name}.json`), '{}');
+    }
+    for (const name of ['en', 'zh']) {
+      await writeFile(join(root, 'handlers', `${name}.js`), 'module.exports = {};');
+    }
+    await writeFile(join(root, 'assets', 'unused.txt'), 'not a runtime asset');
+    const { fileList, warnings } = await nodeFileTrace([join(root, 'entry.cjs')], { base: root, processCwd: root });
+    expect([...warnings]).toEqual([]);
+    expect([...fileList].sort()).toEqual([
+      'assets/.hidden.json', 'assets/en.json', 'assets/zh.json',
+      'entry.cjs', 'handlers/en.js', 'handlers/zh.js', 'package.json',
+    ]);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
