@@ -1,0 +1,132 @@
+{
+  "auditReportVersion": 2,
+  "vulnerabilities": {
+    "@astrojs/vercel": {
+      "name": "@astrojs/vercel",
+      "severity": "moderate",
+      "isDirect": true,
+      "via": [
+        "@vercel/nft"
+      ],
+      "effects": [],
+      "range": ">=8.1.1",
+      "nodes": [
+        "node_modules/@astrojs/vercel"
+      ],
+      "fixAvailable": {
+        "name": "@astrojs/vercel",
+        "version": "8.1.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@vercel/nft": {
+      "name": "@vercel/nft",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "glob"
+      ],
+      "effects": [
+        "@astrojs/vercel"
+      ],
+      "range": ">=0.29.2",
+      "nodes": [
+        "node_modules/@vercel/nft"
+      ],
+      "fixAvailable": {
+        "name": "@astrojs/vercel",
+        "version": "8.1.0",
+        "isSemVerMajor": true
+      }
+    },
+    "glob": {
+      "name": "glob",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1244013,
+          "name": "glob",
+          "dependency": "glob",
+          "title": "Glob: AbortSignal cancellation bypass allows post-timeout filesystem traversal",
+          "url": "https://github.com/advisories/GHSA-3g3m-2fjr-6pw4",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-400"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": ">=9.0.0 <=14.0.1"
+        },
+        "minimatch"
+      ],
+      "effects": [
+        "@vercel/nft"
+      ],
+      "range": "3.0.0 - 14.0.1",
+      "nodes": [
+        "node_modules/glob"
+      ],
+      "fixAvailable": {
+        "name": "@astrojs/vercel",
+        "version": "8.1.0",
+        "isSemVerMajor": true
+      }
+    },
+    "minimatch": {
+      "name": "minimatch",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1244012,
+          "name": "minimatch",
+          "dependency": "minimatch",
+          "title": "minimatch has potential denial of service via globparts amplification",
+          "url": "https://github.com/advisories/GHSA-g3hv-75wg-m249",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-405"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<11.0.1"
+        }
+      ],
+      "effects": [
+        "glob"
+      ],
+      "range": "<11.0.1",
+      "nodes": [
+        "node_modules/minimatch"
+      ],
+      "fixAvailable": {
+        "name": "@astrojs/vercel",
+        "version": "8.1.0",
+        "isSemVerMajor": true
+      }
+    }
+  },
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 4,
+      "high": 0,
+      "critical": 0,
+      "total": 4
+    },
+    "dependencies": {
+      "prod": 458,
+      "dev": 96,
+      "optional": 102,
+      "peer": 5,
+      "peerOptional": 0,
+      "total": 658
+    }
+  }
+}
