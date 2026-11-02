@@ -62,6 +62,9 @@ Environment: Node 22.23.2, npm 10.9.8, macOS arm64.
 
 ## Remaining items and deployment boundary
 
+The initial repair left the moderate findings below. A subsequent, separately
+validated scoped override resolves them; see [the follow-up assessment](glob-minimatch.md).
+
 The remaining moderate results are two underlying advisories in the build-time
 `@astrojs/vercel -> @vercel/nft -> glob -> minimatch` chain:
 [Glob cancellation](https://github.com/advisories/GHSA-3g3m-2fjr-6pw4) and
@@ -70,10 +73,12 @@ The latest compatible adapter still uses the affected dependency range. npm's
 automatic proposal downgrades the adapter to 8.1.0; that is not a compatible
 repair for this Astro 7 project. No unsupported major override was forced.
 
-The still-open alert [#104](https://github.com/toolazytoname/toolazytoname.github.io/security/dependabot/104)
+At initial inspection, the still-open alert [#104](https://github.com/toolazytoname/toolazytoname.github.io/security/dependabot/104)
 names [GHSA-ch52-4w7c-c8xp](https://github.com/advisories/GHSA-ch52-4w7c-c8xp).
 GitHub's advisory explicitly withdrew it on 2026-10-28 as not a valid
 vulnerability. It was not silently dismissed or described as a patched issue.
+After the initial repair merged, GitHub marked it fixed automatically on
+2026-11-02 at 00:30:12 UTC; no manual dismissal was submitted.
 
 PR #38 originally has a failed Vercel status for deployment
 `dpl_4LNbJDA8J249rwhGYeTZHq6ft8oe`. The repository's configured build command
