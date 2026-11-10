@@ -212,3 +212,7 @@ Astro 页面使用哈希 `script-src` CSP，拒绝未授权内联脚本及事件
 `verify:site` 会检查实际输出的 CSP、内联脚本哈希、链接、语义和 JS 预算。
 
 首页响应式截图使用 `src/assets/projects/` 中的现有截图副本，由 Astro/Sharp 在构建时生成 360/640/960 宽度 WebP；保留 `public/projects/` 原始文件及旧公开地址。无需运行时图片代理。
+
+## 慢慢懂学习书架
+
+导航中的“慢慢懂”链接到 https://read.weichao.ren 。博客用于记录与分享，书架按主题组织持续更新的电子书，目前包含大模型与 Web3 分卷。电脑和手机导航共用同一入口配置。
